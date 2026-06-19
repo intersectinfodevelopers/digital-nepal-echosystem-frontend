@@ -6,6 +6,10 @@ const STEPS = [
   { num: 1, label: "Personal Info" },
   { num: 2, label: "Family Tree" },
   { num: 3, label: "Employment" },
+  { num: 4, label: "Disability" },
+  { num: 5, label: "Education" },
+  { num: 6, label: "Household" },
+  { num: 7, label: "GPS" },
 ];
 
 export function StepIndicator({ currentStep }: StepIndicatorProps) {

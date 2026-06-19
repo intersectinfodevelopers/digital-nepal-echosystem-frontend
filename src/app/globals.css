@@ -16,3 +16,7 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.place-marker {
+  filter: hue-rotate(200deg) saturate(0.6);
+}

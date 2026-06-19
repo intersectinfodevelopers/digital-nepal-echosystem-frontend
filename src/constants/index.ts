@@ -6,7 +6,10 @@ export const SYNC_BADGE: Record<string, string> = {
   failed: "bg-red-100 text-red-800",
 };
 
-export const STEP_LABELS = ["Core Identity", "Family Tree", "Employment"];
+export const STEP_LABELS = [
+  "Core Identity", "Family Tree", "Employment",
+  "Disability", "Education", "Household", "GPS Coordinates",
+];
 
 export const BLOOD_GROUP_LABELS: Record<string, string> = {
   A_POS: "A+",
@@ -143,3 +146,99 @@ export const SKILL_OPTIONS = [
   { value: "hospitality", label: "Hospitality / Tourism" },
   { value: "other", label: "Other Skill" },
 ];
+
+export const DISABILITY_TYPE_LABELS: Record<string, string> = {
+  PHYSICAL: "Physical Disability",
+  VISUAL: "Visual Impairment",
+  HEARING: "Hearing Impairment",
+  SPEECH: "Speech Impairment",
+  INTELLECTUAL: "Intellectual Disability",
+  MENTAL: "Mental / Psychosocial Disability",
+  MULTIPLE: "Multiple Disability",
+  OTHER: "Other",
+};
+
+export const INSTITUTION_TYPE_LABELS: Record<string, string> = {
+  GOVERNMENT: "Government",
+  PRIVATE: "Private",
+  COMMUNITY: "Community",
+  TRUST: "Trust / NGO",
+  OTHER: "Other",
+};
+
+export const HOUSE_TYPE_LABELS: Record<string, string> = {
+  OWNED: "Owned",
+  RENTED: "Rented",
+  GOVERNMENT: "Government Provided",
+  RELATIVE: "Relative's House",
+  OTHER: "Other",
+};
+
+export const CONSTRUCTION_TYPE_LABELS: Record<string, string> = {
+  RCC: "RCC (Reinforced Cement Concrete)",
+  BRICK_MORTAR: "Brick with Mortar",
+  BRICK_MUD: "Brick with Mud",
+  STONE: "Stone",
+  WOOD: "Wood / Timber",
+  MUD: "Mud / Earth",
+  PREFAB: "Prefabricated",
+  OTHER: "Other",
+};
+
+export const ELECTRICITY_SOURCE_LABELS: Record<string, string> = {
+  GRID: "National Grid",
+  SOLAR: "Solar",
+  GENERATOR: "Generator",
+  BIOMASS: "Biomass",
+  MICRO_HYDRO: "Micro Hydro",
+  NONE: "No Electricity",
+  OTHER: "Other",
+};
+
+export const WATER_SOURCE_LABELS: Record<string, string> = {
+  PIPED: "Piped Water Supply",
+  TUBEWELL: "Tubewell / Handpump",
+  WELL: "Well (Open / Covered)",
+  SPRING: "Spring Water",
+  RIVER: "River / Stream",
+  RAINWATER: "Rainwater Harvesting",
+  TANKER: "Tanker / Bottled Water",
+  OTHER: "Other",
+};
+
+export const SANITATION_LABELS: Record<string, string> = {
+  FLUSH_SEWER: "Flush Toilet (Connected to Sewer)",
+  FLUSH_SEPTIC: "Flush Toilet (Septic Tank)",
+  VENTILATED_PIT: "Ventilated Improved Pit Latrine",
+  PIT: "Pit Latrine",
+  PUBLIC: "Public / Community Toilet",
+  NONE: "No Facility / Open Defecation",
+  OTHER: "Other",
+};
+
+export const INTERNET_ACCESS_LABELS: Record<string, string> = {
+  FIBER: "Fiber Optic",
+  DSL: "DSL / ADSL",
+  MOBILE: "Mobile Data (3G/4G/5G)",
+  SATELLITE: "Satellite",
+  NONE: "No Internet Access",
+  OTHER: "Other",
+};
+
+export const POVERTY_CLASS_LABELS: Record<string, string> = {
+  EXTREME_POOR: "Extreme Poor",
+  POOR: "Poor",
+  MIDDLE: "Middle Class",
+  UPPER_MIDDLE: "Upper Middle",
+  RICH: "Rich",
+};
+
+export const SCHOLARSHIP_TYPE_LABELS: Record<string, string> = {
+  GOVERNMENT: "Government Scholarship",
+  PRIVATE: "Private / Institutional",
+  INTERNATIONAL: "International / Foreign",
+  COMMUNITY: "Community / Trust",
+  MERIT_BASED: "Merit-Based",
+  NEED_BASED: "Need-Based",
+  OTHER: "Other",
+};
