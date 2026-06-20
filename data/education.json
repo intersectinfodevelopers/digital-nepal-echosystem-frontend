@@ -48,6 +48,7 @@
     "is_dropout": false,
     "has_scholarship": false
   },
+  {
     "id": "edu-001",
     "citizen_id": "cit-001",
     "level": "SECONDARY_9_10",
