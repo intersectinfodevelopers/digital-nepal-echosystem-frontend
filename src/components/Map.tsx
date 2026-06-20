@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import { MapContainer, TileLayer, Marker, Popup, useMapEvents, useMap } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
@@ -58,10 +58,12 @@ function MapClickHandler({ onClick }: { onClick?: (lat: number, lng: number) => 
 function FlyToCenter({ center }: { center: [number, number] }) {
   const map = useMap();
   const prevRef = useRef(center);
-  if (prevRef.current[0] !== center[0] || prevRef.current[1] !== center[1]) {
-    prevRef.current = center;
-    map.flyTo(center, map.getZoom());
-  }
+  useEffect(() => {
+    if (prevRef.current[0] !== center[0] || prevRef.current[1] !== center[1]) {
+      prevRef.current = center;
+      map.flyTo(center, map.getZoom());
+    }
+  }, [center, map]);
   return null;
 }
 

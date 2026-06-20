@@ -5,7 +5,6 @@ import { useParams } from "next/navigation";
 import Link from "next/link";
 import { ArrowBack } from "@mui/icons-material";
 import { nanoid } from "nanoid";
-
 import citizensData from "../../../../../data/citizens.json";
 import employmentData from "../../../../../data/employment.json";
 import disabilityData from "../../../../../data/disability.json";
