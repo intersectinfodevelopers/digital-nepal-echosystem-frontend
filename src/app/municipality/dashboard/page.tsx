@@ -3,6 +3,7 @@ import editApprovals from "../../../../data/edit-approvals.json";
 import grievances from "../../../../data/grievances.json";
 import syncBatches from "../../../../data/sync-batches.json";
 import wards from "../../../../data/wards.json";
+import Link from "next/link";
 
 export default function MunicipalityDashboardPage() {
   const totalCitizens = citizens.length;
@@ -81,7 +82,56 @@ export default function MunicipalityDashboardPage() {
     },
   ];
 
+  const now = new Date().getTime();
+  const syncHealth = wards.map((ward) => {
+    const wardBatches = syncBatches.filter((batch) => batch.ward_id === ward.id);
+
+    const latestBatch = wardBatches.length > 0 ? wardBatches[wardBatches.length - 1] : null;
+    const pendingRecord = wardBatches.filter((batch) => batch.status === "PENDING").reduce((total, batch) => total + batch.record_count, 0);
+
+    const conflictCount = wardBatches.reduce((total, batch) => total + batch.conflict_count, 0);
+
+    let status = "Healthy";
+    if (conflictCount > 0 || pendingRecord > 0) {
+      status = "CRITICAL";
+    } else {
+      // const hours = latestBatch ? (now - new Date(latestBatch.submitted_at).getTime()) / (1000 * 60 * 60) : 999;
+      // if (hours > 24 ) {
+      //   status = "STALE";
+      // }
+
+      if (!latestBatch) {
+        return {
+          wardId: ward.id,
+          wardName: ward.name_en,
+          lastSync: "-",
+          pendingRecords: pendingRecord,
+          conflictCount,
+          status: "NO DATA",
+        }
+      }
+    }
+    return {
+      wardId: ward.id,
+      wardName: ward.name_en,
+      lastSync: latestBatch ? latestBatch.submitted_at : "-",
+      pendingRecords: pendingRecord,
+      conflictCount,
+      status,
+    }
+  })
+  const conflictAlerts =
+    syncHealth.filter(
+
+      (ward) =>
+
+        ward.conflictCount > 0
+
+    );
+
   return (
+
+
     <main className="p-6">
       <h1 className="text-2xl font-semibold text-white">
         Municipality Dashboard
@@ -164,6 +214,124 @@ export default function MunicipalityDashboardPage() {
             </div>
           ))}
         </div>
+      </section>
+
+      <section className="mt-6 rounded-lg border  border-red-200  bg-red-50  p-5"   >
+        <h2
+          className=" mb-4 text-lg font-semibold  text-red-700">
+          Conflict Alerts
+        </h2>
+
+        {conflictAlerts.length === 0 ? (
+          <p>No unresolved conflicts</p>
+        ) : (
+          <div className="space-y-3">
+            {conflictAlerts.map((ward) => (
+              <div
+                key={ward.wardId}
+                className=" flex items-center justify-between rounded border  bg-white  p-3">
+                <div>
+                  <p className="font-medium">
+                    ⚠ {ward.wardName}
+                  </p>
+
+                  <p className="text-sm text-gray-600">
+                    {ward.conflictCount} unresolved conflicts
+                  </p>
+                </div>
+
+                <Link
+                  href={`/municipality/dashboard/conflicts/${ward.wardId}`}
+                  className="text-blue-600 hover:underline"
+                >
+                  Resolve
+                </Link>
+              </div>
+            ))}
+          </div>
+        )}
+      </section>
+
+      <section className="mt-6 rounded-lg border border-gray-200 bg-white p-5">
+        <h2 className="mb-4 text-lg font-semibold">Sync Health by Ward</h2>
+        <table className="w-full table-auto border-collapse border border-gray-200">
+          <thead>
+            <tr>
+              <th className="border border-gray-200 px-4 py-2 text-left text-sm font-semibold text-gray-900">
+                Ward
+              </th>
+              <th className="border border-gray-200 px-4 py-2 text-left text-sm font-semibold text-gray-900">
+                Last Sync
+              </th>
+              <th className="border border-gray-200 px-4 py-2 text-left text-sm font-semibold text-gray-900">
+                Pending Records
+              </th>
+              <th className="border border-gray-200 px-4 py-2 text-left text-sm font-semibold text-gray-900">
+                Conflicts
+              </th>
+              <th className="border border-gray-200 px-4 py-2 text-left text-sm font-semibold text-gray-900">
+                Status
+              </th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {syncHealth.map((ward) => (
+              <tr
+                key={ward.wardId}
+                className="hover:bg-gray-100"
+              >
+                <td className="border p-2">
+
+                  <Link
+                    href={`/municipality/dashboard/sync-history/${ward.wardId}`}
+                    className="text-blue-600 hover:underline"
+                  >
+                    {ward.wardName}
+                  </Link>
+
+                </td>
+
+                <td className="border p-2">
+                  {ward.lastSync}
+                </td>
+
+                <td className="border p-2">
+                  {ward.pendingRecords}
+                </td>
+
+                <td className="border p-2">
+                  {ward.conflictCount}
+                </td>
+
+                <td className="border p-2">
+
+                  <span
+                    className={
+                      ward.status === "HEALTHY"
+                        ? "text-green-600"
+
+                        : ward.status === "STALE"
+                          ? "text-yellow-600"
+
+                          : ward.status === "NO DATA"
+                            ? "text-gray-600"
+
+                            : "text-red-600"
+                    }
+                  >
+
+                    {ward.status}
+
+                  </span>
+
+                </td>
+
+              </tr>
+            ))}
+          </tbody>
+        </table>
+
       </section>
     </main>
   );
