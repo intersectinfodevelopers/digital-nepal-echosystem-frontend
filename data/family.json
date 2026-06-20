@@ -1,0 +1,42 @@
+[
+  {
+    "citizen_id": "cit-001",
+    "father": { "name_np": "वीर बहादुर थापा", "name_en": "Bir Bahadur Thapa", "citizenship_number": "0101010101" },
+    "mother": { "name_np": "पार्वती थापा", "name_en": "Parvati Thapa", "citizenship_number": "0202020202" },
+    "spouse": { "name_np": "सीता थापा", "name_en": "Sita Thapa", "citizenship_number": "0607080910" },
+    "children": [
+      { "name_np": "आशिष थापा", "name_en": "Ashish Thapa", "citizenship_number": "0303030303" },
+      { "name_np": "आशिका थापा", "name_en": "Ashika Thapa", "citizenship_number": "0404040404" }
+    ]
+  },
+  {
+    "citizen_id": "cit-002",
+    "father": { "name_np": "हरि प्रसाद थापा", "name_en": "Hari Prasad Thapa", "citizenship_number": "0505050505" },
+    "mother": { "name_np": "देवकी थापा", "name_en": "Devaki Thapa", "citizenship_number": "0606060606" },
+    "spouse": { "name_np": "राम बहादुर थापा", "name_en": "Ram Bahadur Thapa", "citizenship_number": "0102030405" },
+    "children": []
+  },
+  {
+    "citizen_id": "cit-003",
+    "father": { "name_np": "तारा प्रसाद अधिकारी", "name_en": "Tara Prasad Adhikari", "citizenship_number": "0707070707" },
+    "mother": { "name_np": "गीता अधिकारी", "name_en": "Gita Adhikari", "citizenship_number": "0808080808" },
+    "spouse": null,
+    "children": [
+      { "name_np": "सन्दीप अधिकारी", "name_en": "Sandeep Adhikari", "citizenship_number": "0909090909" }
+    ]
+  },
+  {
+    "citizen_id": "cit-004",
+    "father": { "name_np": "राम सिंह राई", "name_en": "Ram Singh Rai", "citizenship_number": "1010101010" },
+    "mother": { "name_np": "लक्ष्मी राई", "name_en": "Laxmi Rai", "citizenship_number": "1111111111" },
+    "spouse": null,
+    "children": []
+  },
+  {
+    "citizen_id": "cit-005",
+    "father": { "name_np": "जंग बहादुर कार्की", "name_en": "Jung Bahadur Karki", "citizenship_number": "1212121212" },
+    "mother": { "name_np": "सुशिला कार्की", "name_en": "Sushila Karki", "citizenship_number": "1313131313" },
+    "spouse": null,
+    "children": []
+  }
+]

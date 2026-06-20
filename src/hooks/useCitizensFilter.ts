@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo } from "react";
 import type { Citizen } from "@/types/citizen";
 import citizensStatic from "../../data/citizens.json";
 import { WARD_ID } from "@/constants";
@@ -6,18 +6,15 @@ import { WARD_ID } from "@/constants";
 const STATIC_CITIZENS = citizensStatic as unknown as Citizen[];
 
 export function useCitizensFilter() {
-  const [registered, setRegistered] = useState<Citizen[]>([]);
-
-  useEffect(() => {
+  const [registered] = useState<Citizen[]>(() => {
     try {
       const raw = localStorage.getItem("citizens_registered");
-      if (raw) {
-        setRegistered(JSON.parse(raw) as Citizen[]);
-      }
+      if (raw) return JSON.parse(raw) as Citizen[];
     } catch {
       // ignore
     }
-  }, []);
+    return [];
+  });
 
   const wardCitizens = useMemo(() => {
     return [...STATIC_CITIZENS, ...registered].filter(

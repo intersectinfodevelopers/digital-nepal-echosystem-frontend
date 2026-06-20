@@ -1,0 +1,51 @@
+[
+  {
+    "citizen_id": "cit-001",
+    "level": "PRIMARY",
+    "institution_name": "Shree Bhagwati Primary School",
+    "institution_type": "GOVERNMENT",
+    "study_location": "Bhagwati Tole",
+    "is_dropout": false,
+    "has_scholarship": false
+  },
+  {
+    "citizen_id": "cit-002",
+    "level": "BACHELORS",
+    "institution_name": "Tribhuvan University",
+    "institution_type": "GOVERNMENT",
+    "study_location": "Kathmandu",
+    "is_dropout": false,
+    "has_scholarship": false
+  },
+  {
+    "citizen_id": "cit-003",
+    "level": "HIGHER_SECONDARY",
+    "institution_name": "Shree Bhanu Higher Secondary School",
+    "institution_type": "GOVERNMENT",
+    "study_location": "Bhanu Chowk",
+    "is_dropout": true,
+    "dropout_reason": "Financial constraints",
+    "dropout_date": "1995-03-15",
+    "has_scholarship": false
+  },
+  {
+    "citizen_id": "cit-004",
+    "level": "SECONDARY",
+    "institution_name": "Shree Arubote Secondary School",
+    "institution_type": "COMMUNITY",
+    "study_location": "Arubote",
+    "is_dropout": false,
+    "has_scholarship": true,
+    "scholarship_type": "GOVERNMENT",
+    "scholarship_provider": "Ministry of Education"
+  },
+  {
+    "citizen_id": "cit-005",
+    "level": "MASTERS",
+    "institution_name": "Kathmandu University",
+    "institution_type": "PRIVATE",
+    "study_location": "Dhulikhel",
+    "is_dropout": false,
+    "has_scholarship": false
+  }
+]

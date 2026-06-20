@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useMemo, useCallback, useEffect, useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import type { GpsCoordinates, Citizen } from "@/types/citizen";
 import type { MapMarker } from "@/components/Map";
@@ -60,24 +60,50 @@ type GpsStepProps = {
   ) => void;
 };
 
+const NOMINATIM_URL = "https://nominatim.openstreetmap.org/reverse";
+
+async function reverseGeocode(lat: number, lng: number): Promise<string | null> {
+  const url = `${NOMINATIM_URL}?lat=${lat}&lon=${lng}&format=json&addressdetails=1`;
+  const res = await fetch(url, {
+    headers: { "User-Agent": "DigitalNepalEcosystem/1.0" },
+  });
+  if (!res.ok) return null;
+  const data = await res.json();
+  return data.display_name ?? null;
+}
+
 export function GpsStep({ gps, onChange }: GpsStepProps) {
   const lat = parseFloat(gps.latitude);
   const lng = parseFloat(gps.longitude);
   const hasValidCoords = !isNaN(lat) && !isNaN(lng);
-  const [nearbyPlaces, setNearbyPlaces] = useState<NearbyPlace[]>([]);
+  const nearbyPlaces = useMemo(() => {
+    if (!hasValidCoords) return [];
+    return fetchNearbyPlaces(lat, lng);
+  }, [lat, lng, hasValidCoords]);
+
+  const [resolvedLocation, setResolvedLocation] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const requestIdRef = useRef(0);
 
   useEffect(() => {
-    if (!hasValidCoords) {
-      setNearbyPlaces([]);
-      setLoading(false);
-      return;
-    }
+    if (timerRef.current) clearTimeout(timerRef.current);
+    if (!hasValidCoords) return;
 
-    setLoading(true);
-    const places = fetchNearbyPlaces(lat, lng);
-    setNearbyPlaces(places);
-    setLoading(false);
+    const requestId = ++requestIdRef.current;
+    timerRef.current = setTimeout(async () => {
+      setResolvedLocation(null);
+      setLoading(true);
+      const name = await reverseGeocode(lat, lng);
+      if (requestId === requestIdRef.current) {
+        setResolvedLocation(name);
+        setLoading(false);
+      }
+    }, 500);
+
+    return () => {
+      if (timerRef.current) clearTimeout(timerRef.current);
+    };
   }, [lat, lng, hasValidCoords]);
 
   function handleMapClick(latClick: number, lngClick: number) {
@@ -94,7 +120,13 @@ export function GpsStep({ gps, onChange }: GpsStepProps) {
 
   const markers: MapMarker[] = hasValidCoords
     ? [
-        { lat, lng, label: "Selected Location", type: "selected" },
+        {
+          lat,
+          lng,
+          label: resolvedLocation || "Selected Location",
+          description: `${lat}, ${lng}`,
+          type: "selected",
+        },
         ...nearbyPlaces.map((p) => ({
           lat: p.lat,
           lng: p.lng,
@@ -128,13 +160,13 @@ export function GpsStep({ gps, onChange }: GpsStepProps) {
           />
         </FormRow>
 
-        {gps.place_name && (
+        {(resolvedLocation || gps.place_name) && (
           <div className="mt-3 p-3 bg-emerald-50 border border-emerald-200 rounded-lg">
             <span className="text-xs text-emerald-600 font-medium">
-              SELECTED PLACE
+              LOCATION
             </span>
             <p className="text-sm text-emerald-800 font-semibold mt-0.5">
-              {gps.place_name}
+              {resolvedLocation || gps.place_name}
             </p>
           </div>
         )}
@@ -153,12 +185,14 @@ export function GpsStep({ gps, onChange }: GpsStepProps) {
             />
           </div>
           <p className="text-xs text-gray-400 mt-1">
-            {loading
-              ? "Searching nearby places..."
+            {loading && hasValidCoords
+              ? "Resolving location..."
               : `Click on the map to set coordinates. ${
                   nearbyPlaces.length > 0
                     ? `${nearbyPlaces.length} nearby place(s) found.`
-                    : ""
+                    : resolvedLocation
+                      ? "Location resolved from coordinates."
+                      : ""
                 }`}
           </p>
         </div>

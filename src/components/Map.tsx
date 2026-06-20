@@ -1,6 +1,7 @@
 "use client";
 
-import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from "react-leaflet";
+import { useRef } from "react";
+import { MapContainer, TileLayer, Marker, Popup, useMapEvents, useMap } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 
@@ -54,6 +55,16 @@ function MapClickHandler({ onClick }: { onClick?: (lat: number, lng: number) => 
   return null;
 }
 
+function FlyToCenter({ center }: { center: [number, number] }) {
+  const map = useMap();
+  const prevRef = useRef(center);
+  if (prevRef.current[0] !== center[0] || prevRef.current[1] !== center[1]) {
+    prevRef.current = center;
+    map.flyTo(center, map.getZoom());
+  }
+  return null;
+}
+
 export default function Map({
   center = [26.958, 87.281],
   zoom = 13,
@@ -73,6 +84,7 @@ export default function Map({
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         {onClick && <MapClickHandler onClick={onClick} />}
+        <FlyToCenter center={center} />
         {markers.map((marker, i) => (
           <Marker
             key={i}
