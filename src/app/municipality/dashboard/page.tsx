@@ -82,7 +82,6 @@ export default function MunicipalityDashboardPage() {
     },
   ];
 
-  const now = new Date().getTime();
   const syncHealth = wards.map((ward) => {
     const wardBatches = syncBatches.filter((batch) => batch.ward_id === ward.id);
 

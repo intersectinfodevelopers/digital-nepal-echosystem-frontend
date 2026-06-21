@@ -10,7 +10,9 @@
     "jurisdiction_id": "ward-004",
     "is_active": true,
     "failed_logins": 0,
-    "last_login": "2026-06-08T09:30:00Z"
+    "last_login": "2026-06-08T09:30:00Z",
+    "lat": 26.955,
+    "lng": 87.285
   },
   {
     "id": "user-ward-3",
@@ -23,7 +25,9 @@
     "jurisdiction_id": "ward-003",
     "is_active": true,
     "failed_logins": 0,
-    "last_login": "2026-06-07T10:15:00Z"
+    "last_login": "2026-06-07T10:15:00Z",
+    "lat": 26.948,
+    "lng": 87.272
   },
   {
     "id": "user-ward-5",
@@ -36,7 +40,9 @@
     "jurisdiction_id": "ward-005",
     "is_active": true,
     "failed_logins": 2,
-    "last_login": "2026-06-06T08:45:00Z"
+    "last_login": "2026-06-06T08:45:00Z",
+    "lat": 26.962,
+    "lng": 87.298
   },
   {
     "id": "user-municipality",
@@ -49,7 +55,9 @@
     "jurisdiction_id": "mun-kummayak",
     "is_active": true,
     "failed_logins": 0,
-    "last_login": "2026-06-08T11:20:00Z"
+    "last_login": "2026-06-08T11:20:00Z",
+    "lat": 26.958,
+    "lng": 87.281
   },
   {
     "id": "user-province",
@@ -62,7 +70,9 @@
     "jurisdiction_id": "prov-koshi",
     "is_active": true,
     "failed_logins": 0,
-    "last_login": "2026-06-07T14:00:00Z"
+    "last_login": "2026-06-07T14:00:00Z",
+    "lat": 26.97,
+    "lng": 87.33
   },
   {
     "id": "user-central",
@@ -75,6 +85,8 @@
     "jurisdiction_id": null,
     "is_active": true,
     "failed_logins": 0,
-    "last_login": "2026-06-08T08:00:00Z"
+    "last_login": "2026-06-08T08:00:00Z",
+    "lat": 27.7172,
+    "lng": 85.324
   }
 ]

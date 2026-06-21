@@ -1,23 +1,22 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useMemo } from 'react';
 import { useParams } from 'next/navigation';
 import grievancesData from '../../../../../data/grievances.json';
+
+type Grievance = {
+  tracking_code: string;
+  status: string;
+  filed_at: string;
+};
 
 export default function PublicGrievanceTracking() {
   const params = useParams();
   const trackingCode = params.code as string;
 
-  const [grievance, setGrievance] = useState<any>(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const found = grievancesData.find((g: any) => g.tracking_code === trackingCode);
-    setGrievance(found);
-    setLoading(false);
+  const grievance = useMemo(() => {
+    return (grievancesData as Grievance[]).find((g) => g.tracking_code === trackingCode) || null;
   }, [trackingCode]);
-
-  if (loading) return <div className="min-h-screen flex items-center justify-center">Verifying...</div>;
 
   if (!grievance) {
     return (

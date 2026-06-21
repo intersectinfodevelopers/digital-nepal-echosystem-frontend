@@ -33,6 +33,7 @@ const getBadgeStyles = (type: string) => {
 };
 
 // Formats expressions into human-readable sentences
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const getConditionSummary = (expr: Record<string, any>): string => {
   if (!expr || !expr.field) return "No conditions";
   
@@ -71,10 +72,18 @@ const getConditionSummary = (expr: Record<string, any>): string => {
 
 export default function Page() {
   // Sort ascending: lower number = higher priority
-  const [data, setData] = useState<Rule[]>(() =>
-    [...rulesData].sort((a, b) => a.priority - b.priority) as Rule[]
-  );
-  const [hydrated, setHydrated] = useState(false);
+  const [data, setData] = useState<Rule[]>(() => {
+    const stored = typeof window !== "undefined" ? localStorage.getItem(STORAGE_KEY) : null;
+    if (stored) {
+      try {
+        return (JSON.parse(stored) as Rule[]).sort((a, b) => a.priority - b.priority);
+      } catch {
+        // ignore
+      }
+    }
+    return [...rulesData].sort((a, b) => a.priority - b.priority) as Rule[];
+  });
+  const [hydrated] = useState(() => typeof window !== "undefined");
 
   // Modals state
   const [selectedRule, setSelectedRule] = useState<Rule | null>(null);
@@ -90,20 +99,6 @@ export default function Page() {
     priority: "40",
     is_active: true,
   });
-
-  /* load localStorage after hydration */
-  useEffect(() => {
-    const stored = localStorage.getItem(STORAGE_KEY);
-    if (stored) {
-      try {
-        const parsed = JSON.parse(stored) as Rule[];
-        setData(parsed.sort((a, b) => a.priority - b.priority));
-      } catch (e) {
-        console.error("Failed to parse stored rules", e);
-      }
-    }
-    setHydrated(true);
-  }, []);
 
   /* persist changes */
   useEffect(() => {
@@ -178,7 +173,7 @@ export default function Page() {
         priority: "40",
         is_active: true,
       });
-    } catch (err) {
+    } catch {
       alert("Invalid JSON formatting in Condition Expression or Benefit Value!");
     }
   };

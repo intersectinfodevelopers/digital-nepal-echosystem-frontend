@@ -2,6 +2,9 @@
 
 import { useState } from "react";
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type JsonRecord = Record<string, any>;
+
 import citizens from "../../../../data/citizens.json";
 import wards from "../../../../data/wards.json";
 import grievances from "../../../../data/grievances.json";
@@ -13,12 +16,12 @@ export default function MunicipalitiesPage() {
   const [search, setSearch] = useState("");
   const [sortField, setSortField] = useState("name");
   const [sortOrder, setSortOrder] = useState("asc");
-  const [selectedMunicipality, setSelectedMunicipality] = useState<any>(null);
+  const [selectedMunicipality, setSelectedMunicipality] = useState<JsonRecord | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
 
   const municipalityMap = new Map();
 
-  wards.forEach((ward: any) => {
+  wards.forEach((ward: JsonRecord) => {
     if (!municipalityMap.has(ward.municipality_id)) {
       municipalityMap.set(ward.municipality_id, {
         id: ward.municipality_id,
@@ -28,20 +31,33 @@ export default function MunicipalitiesPage() {
     }
   });
 
-  const municipalities = Array.from(municipalityMap.values()).map(
-    (municipality: any) => {
+  type MunicipalityInfo = {
+    id: string;
+    name: string;
+    type: string;
+    totalCitizens: number;
+    nidVerified: number;
+    pendingApprovals: number;
+    activeGrievances: number;
+    lastSync: string;
+  };
+
+  const municipalities: MunicipalityInfo[] = Array.from(municipalityMap.values()).map(
+    (municipality: JsonRecord) => {
       const municipalityWards = wards.filter(
-        (ward: any) => ward.municipality_id === municipality.id,
+        (ward: JsonRecord) => ward.municipality_id === municipality.id,
       );
 
-      const wardIds = municipalityWards.map((ward: any) => ward.id);
+      const wardIds = municipalityWards.map((ward: JsonRecord) => ward.id);
 
-      const municipalityCitizens = citizens.filter((citizen: any) =>
+      const municipalityCitizens = citizens.filter((citizen: JsonRecord) =>
         wardIds.includes(citizen.ward_id),
       );
 
       return {
-        ...municipality,
+        id: municipality.id,
+        name: municipality.name,
+        type: municipality.type,
 
         totalCitizens: municipalityCitizens.length,
 
@@ -49,24 +65,24 @@ export default function MunicipalitiesPage() {
           municipalityCitizens.length > 0
             ? Math.round(
                 (municipalityCitizens.filter(
-                  (citizen: any) => citizen.nid_verified,
+                  (citizen: JsonRecord) => citizen.nid_verified,
                 ).length /
                   municipalityCitizens.length) *
                   100,
               )
             : 0,
 
-        pendingApprovals: editApprovals.filter((approval: any) =>
+        pendingApprovals: editApprovals.filter((approval: JsonRecord) =>
           wardIds.includes(approval.ward_id),
         ).length,
 
-        activeGrievances: grievances.filter((grievance: any) =>
+        activeGrievances: grievances.filter((grievance: JsonRecord) =>
           wardIds.includes(grievance.ward_id),
         ).length,
 
         lastSync: (() => {
           const municipalitySyncBatches = syncBatches.filter(
-            (batch: any) => batch.municipality_id === municipality.id,
+            (batch: JsonRecord) => batch.municipality_id === municipality.id,
           );
           return municipalitySyncBatches.length > 0
             ? municipalitySyncBatches[municipalitySyncBatches.length - 1]
@@ -118,34 +134,34 @@ export default function MunicipalitiesPage() {
 
   const wardStats = selectedMunicipality
     ? wards
-        .filter((ward: any) => ward.municipality_id === selectedMunicipality.id)
-        .map((ward: any) => {
+        .filter((ward: JsonRecord) => ward.municipality_id === selectedMunicipality.id)
+        .map((ward: JsonRecord) => {
           const wardCitizens = citizens.filter(
-            (citizen: any) => citizen.ward_id === ward.id,
+            (citizen: JsonRecord) => citizen.ward_id === ward.id,
           );
 
           return {
             id: ward.id,
             wardNo: ward.ward_no,
 
-            totalCitizens: citizens.length,
+            totalCitizens: wardCitizens.length,
 
             nidVerified:
-              citizens.length > 0
+              wardCitizens.length > 0
                 ? Math.round(
-                    (citizens.filter((citizen: any) => citizen.nid_verified)
+                    (wardCitizens.filter((citizen: JsonRecord) => citizen.nid_verified)
                       .length /
-                      citizens.length) *
+                      wardCitizens.length) *
                       100,
                   )
                 : 0,
 
             pendingApprovals: editApprovals.filter(
-              (approval: any) => approval.ward_id === ward.id,
+              (approval: JsonRecord) => approval.ward_id === ward.id,
             ).length,
 
             activeGrievances: grievances.filter(
-              (grievance: any) => grievance.ward_id === ward.id,
+              (grievance: JsonRecord) => grievance.ward_id === ward.id,
             ).length,
           };
         })

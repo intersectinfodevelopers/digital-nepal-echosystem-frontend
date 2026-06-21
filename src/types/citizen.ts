@@ -113,6 +113,9 @@ export interface Citizen {
   employment_category?: EmploymentCategory;
   consent_channel: ConsentChannel;
   created_at: string;
+  latitude?: number;
+  longitude?: number;
+  place_name?: string;
 }
 
 export type CitizenList = Citizen[];
@@ -126,6 +129,48 @@ export interface FamilyMember {
   name_en: string;
   citizenship_number: string;
   link_status: LinkStatus;
+}
+
+export interface DisabilityData {
+  disability_type: string;
+  severity_body: number;
+  severity_activity: number;
+  severity_participation: number;
+  certificate_no: string;
+  issuing_hospital: string;
+  certificate_expiry: string;
+}
+
+export interface EducationData {
+  level: string;
+  institution_name: string;
+  institution_type: string;
+  study_location: string;
+  is_dropout: boolean;
+  dropout_reason: string;
+  dropout_date: string;
+  has_scholarship: boolean;
+  scholarship_type: string;
+  scholarship_provider: string;
+}
+
+export interface HouseholdData {
+  house_type: string;
+  construction_type: string;
+  room_count: number;
+  electricity_source: string;
+  water_source: string;
+  sanitation: string;
+  internet_access: string;
+  has_bank_account: boolean;
+  monthly_income_band: string;
+  poverty_class: string;
+}
+
+export interface GpsCoordinates {
+  latitude: string;
+  longitude: string;
+  place_name?: string;
 }
 
 export interface RegistrationFormData {
@@ -151,4 +196,8 @@ export interface RegistrationFormData {
   spouse: FamilyMember | null;
   children: FamilyMember[];
   employment: EmploymentData;
+  disability: DisabilityData;
+  education: EducationData;
+  household: HouseholdData;
+  gps: GpsCoordinates;
 }

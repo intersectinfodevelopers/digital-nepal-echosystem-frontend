@@ -18,7 +18,10 @@
     "is_active": true,
     "sync_status": "synced",
     "created_at": "2026-05-10T09:30:00Z",
-    "employment_category": "FARMER"
+    "employment_category": "FARMER",
+    "latitude": 26.955,
+    "longitude": 87.285,
+    "place_name": "Bhagwati Tole"
   },
   {
     "id": "cit-002",
@@ -39,7 +42,10 @@
     "is_active": true,
     "sync_status": "synced",
     "created_at": "2026-05-12T14:20:00Z",
-    "employment_category": "BUSINESS"
+    "employment_category": "BUSINESS",
+    "latitude": 26.956,
+    "longitude": 87.284,
+    "place_name": "Bhagwati Tole"
   },
   {
     "id": "cit-003",
@@ -60,7 +66,10 @@
     "is_active": true,
     "sync_status": "synced",
     "created_at": "2026-05-28T09:15:00Z",
-    "employment_category": "GOVERNMENT"
+    "employment_category": "GOVERNMENT",
+    "latitude": 26.948,
+    "longitude": 87.272,
+    "place_name": "Bhanu Chowk"
   },
   {
     "id": "cit-004",
@@ -81,7 +90,10 @@
     "is_active": true,
     "sync_status": "pending",
     "created_at": "2026-06-05T11:00:00Z",
-    "employment_category": "PRIVATE"
+    "employment_category": "PRIVATE",
+    "latitude": 26.962,
+    "longitude": 87.298,
+    "place_name": "Arubote"
   },
   {
     "id": "cit-005",
@@ -102,6 +114,9 @@
     "is_active": true,
     "sync_status": "failed",
     "created_at": "2026-06-02T14:45:00Z",
-    "employment_category": "STUDENT"
+    "employment_category": "STUDENT",
+    "latitude": 26.959,
+    "longitude": 87.288,
+    "place_name": "New Road"
   }
 ]
