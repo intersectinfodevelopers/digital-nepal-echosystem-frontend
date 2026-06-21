@@ -15,6 +15,7 @@ type Approval = {
   old_value_json: Record<string, unknown>;
   new_value_json: Record<string, unknown>;
   submitted_at: string;
+  escalated_at?: string;
 };
 
 const LOCAL_STORAGE_KEY = "edit-approvals";
@@ -51,21 +52,6 @@ function getBusinessDaysPending(submittedAt: string) {
   }
 
   return businessDays;
-}
-
-function formatDate(date: string) {
-  return new Date(date).toLocaleDateString("en-GB", {
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-  });
-}
-
-function formatStatus(status: string) {
-  if (status === "PENDING_APPROVAL") return "PENDING";
-  if (status === "CAO_REVIEW") return "CAO REVIEW";
-
-  return status.replaceAll("_", " ");
 }
 
 function getStatusBadgeClass(status: string) {
@@ -123,9 +109,9 @@ export default function MunicipalityApprovalsPage() {
 
       const daysPending = getDaysPending(approval.submitted_at);
       const businessDaysPending = getBusinessDaysPending(approval.submitted_at);
-
-      const isFinalStatus =
-        approval.status === "APPROVED" || approval.status === "REJECTED";
+      const daysSinceEscalation = approval.escalated_at
+        ? getDaysPending(approval.escalated_at)
+        : null;
 
       return {
         id: approval.id,
@@ -136,8 +122,12 @@ export default function MunicipalityApprovalsPage() {
         submittedBy: submitter?.full_name ?? "Unknown User",
         submittedAt: approval.submitted_at,
         daysPending,
+        daysSinceEscalation,
         status: approval.status,
-        isCaoReviewDue: !isFinalStatus && businessDaysPending > 5,
+        isCaoReviewDue:
+          approval.status !== "APPROVED" &&
+          approval.status !== "REJECTED" &&
+          businessDaysPending > 5,
       };
     });
   }, [approvals]);
@@ -149,6 +139,12 @@ export default function MunicipalityApprovalsPage() {
     );
   }, [approvalRows]);
 
+  const allApprovalsCount = pendingApprovalRows.length;
+
+  const caoReviewCount = pendingApprovalRows.filter(
+    (approval) => approval.status === "CAO_REVIEW",
+  ).length;
+
   const fieldOptions = useMemo(() => {
     const fields = pendingApprovalRows.flatMap(
       (approval) => approval.changedFields,
@@ -156,18 +152,13 @@ export default function MunicipalityApprovalsPage() {
     return Array.from(new Set(fields));
   }, [pendingApprovalRows]);
 
-  const filteredApprovals = pendingApprovalRows.filter((approval) => {
-    const matchesWard =
-      selectedWard === "ALL" || approval.wardId === selectedWard;
-
-    const matchesStatus =
-      selectedStatus === "ALL" || approval.status === selectedStatus;
-
-    const matchesField =
-      selectedField === "ALL" || approval.changedFields.includes(selectedField);
-
-    return matchesWard && matchesStatus && matchesField;
-  });
+  const filteredApprovals = pendingApprovalRows.filter(
+    (approval) =>
+      (selectedWard === "ALL" || approval.wardId === selectedWard) &&
+      (selectedStatus === "ALL" || approval.status === selectedStatus) &&
+      (selectedField === "ALL" ||
+        approval.changedFields.includes(selectedField)),
+  );
 
   return (
     <main className="p-6">
@@ -177,6 +168,31 @@ export default function MunicipalityApprovalsPage() {
         <p className="mt-1 text-sm text-black">
           Review citizen data edit requests submitted from ward offices.
         </p>
+      </div>
+      <div className="mt-6 flex gap-2">
+        <button
+          type="button"
+          onClick={() => setSelectedStatus("ALL")}
+          className={`rounded-md px-4 py-2 text-sm font-medium ${
+            selectedStatus === "ALL"
+              ? "bg-blue-600 text-white"
+              : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+          }`}
+        >
+          All Approvals ({allApprovalsCount})
+        </button>
+
+        <button
+          type="button"
+          onClick={() => setSelectedStatus("CAO_REVIEW")}
+          className={`rounded-md px-4 py-2 text-sm font-medium ${
+            selectedStatus === "CAO_REVIEW"
+              ? "bg-orange-600 text-white"
+              : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+          }`}
+        >
+          CAO Review ({caoReviewCount})
+        </button>
       </div>
 
       <section className="mt-6 rounded-lg border border-gray-200 bg-white p-5">
@@ -242,12 +258,19 @@ export default function MunicipalityApprovalsPage() {
       <section className="mt-6 overflow-hidden rounded-lg border border-gray-200 bg-white">
         <div className="border-b border-gray-200 p-5">
           <h2 className="text-lg font-semibold text-gray-900">
-            Citizen Edit Requests
+            {selectedStatus === "CAO_REVIEW"
+              ? "CAO Review Requests"
+              : "Citizen Edit Requests"}
           </h2>
 
           <p className="text-sm text-gray-600">
-            Showing {filteredApprovals.length} of {pendingApprovalRows.length}{" "}
-            pending approval requests.
+            Showing {filteredApprovals.length} of{" "}
+            {selectedStatus === "CAO_REVIEW"
+              ? caoReviewCount
+              : allApprovalsCount}{" "}
+            {selectedStatus === "CAO_REVIEW"
+              ? "CAO review requests."
+              : "pending approval requests."}
           </p>
         </div>
 
@@ -291,7 +314,7 @@ export default function MunicipalityApprovalsPage() {
                   </td>
 
                   <td className="px-4 py-3 text-gray-700">
-                    {formatDate(approval.submittedAt)}
+                    {approval.submittedAt}
                   </td>
 
                   <td className="px-4 py-3 text-gray-700">
@@ -305,12 +328,14 @@ export default function MunicipalityApprovalsPage() {
                           approval.status,
                         )}`}
                       >
-                        {formatStatus(approval.status)}
+                        {approval.status}
                       </span>
 
                       {approval.isCaoReviewDue && (
                         <span className="rounded-full bg-amber-100 px-3 py-1 text-xs font-medium text-amber-700">
-                          CAO REVIEW DUE
+                          {approval.daysSinceEscalation !== null
+                            ? `ESCALATED ${approval.daysSinceEscalation} DAYS AGO`
+                            : "CAO REVIEW DUE"}
                         </span>
                       )}
                     </div>
