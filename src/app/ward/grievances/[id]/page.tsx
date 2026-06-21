@@ -5,16 +5,6 @@ import { useParams, useRouter } from 'next/navigation';
 import grievancesData from '../../../../../data/grievances.json';
 import citizensData from '../../../../../data/citizens.json';
 
-interface Grievance {
-  id: string;
-  tracking_code: string;
-  citizen_id: string;
-  category: string;
-  status: string;
-  filed_at: string;
-  escalation_level?: string;
-}
-
 interface Activity {
   id: string;
   timestamp: string;
@@ -29,22 +19,26 @@ export default function GrievanceDetailPage() {
   const router = useRouter();
   const grievanceId = params.id as string;
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [grievance, setGrievance] = useState<any>(null);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [citizen, setCitizen] = useState<any>(null);
   const [activities, setActivities] = useState<Activity[]>([]);
-  const [newNote, setNewNote] = useState('');
   const [resolutionNote, setResolutionNote] = useState('');
   const [referralReason, setReferralReason] = useState('');
 
   useEffect(() => {
-    const foundGrievance = grievancesData.find((g: any) => g.id === grievanceId);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const foundGrievance = (grievancesData as any[]).find((g: any) => g.id === grievanceId);
     if (foundGrievance) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setGrievance(foundGrievance);
 
-      const foundCitizen = citizensData.find((c: any) => c.id === foundGrievance.citizen_id);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const foundCitizen = (citizensData as any[]).find((c: any) => c.id === foundGrievance.citizen_id);
       setCitizen(foundCitizen);
 
-      // Mock activity timeline
+       
       setActivities([
         {
           id: "act-1",
@@ -132,7 +126,7 @@ export default function GrievanceDetailPage() {
           <div className="bg-white border rounded-2xl p-8">
             <h2 className="text-xl font-semibold mb-6">Activity Timeline</h2>
             <div className="space-y-6">
-              {activities.map((activity, index) => (
+              {activities.map((activity) => (
                 <div key={activity.id} className="flex gap-4">
                   <div className="w-3 h-3 rounded-full bg-blue-600 mt-2 flex-shrink-0" />
                   <div className="flex-1">

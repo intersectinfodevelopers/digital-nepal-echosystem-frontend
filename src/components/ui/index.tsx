@@ -27,3 +27,9 @@ export { StepIndicator } from "./StepIndicator";
 export { SectionCard } from "./SectionCard";
 export { FormRow } from "./FormRow";
 export { FamilyMemberCard } from "./FamilyMemberCard";
+
+// Wizard step components
+export { DisabilityStep } from "../DisabilityStep";
+export { EducationStep } from "../EducationStep";
+export { HouseholdStep } from "../HouseholdStep";
+export { GpsStep } from "../GpsStep";

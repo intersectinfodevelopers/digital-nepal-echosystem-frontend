@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useMemo } from 'react';
 import { useParams } from 'next/navigation';
 import idCardsData from '../../../../data/id-cards.json';
 import citizensData from '../../../../data/citizens.json';
@@ -30,37 +30,22 @@ export default function QrVerifyPage() {
   const params = useParams();
   const qrHash = params.qr_hash as string;
 
-  const [card, setCard] = useState<IdCard | null>(null);
-  const [citizen, setCitizen] = useState<Citizen | null>(null);
-  const [isValid, setIsValid] = useState(false);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const foundCard = idCardsData.find((c: any) => c.qr_hash === qrHash) as IdCard | undefined;
-
-    if (foundCard) {
-      setCard(foundCard);
-
-      const foundCitizen = citizensData.find((c: any) => c.id === foundCard.citizen_id) as Citizen | undefined;
-      setCitizen(foundCitizen || null);
-
-      // Validity check
-      const isExpired = foundCard.expires_at
-        ? new Date(foundCard.expires_at) < new Date()
-        : false;
-
-      const isValidCard =
-        foundCard.status === 'APPROVED' ||
-        foundCard.status === 'COLLECTED' &&
-        !isExpired;
-
-      setIsValid(isValidCard);
-    }
-
-    setLoading(false);
+  const card = useMemo(() => {
+    return (idCardsData as IdCard[]).find((c) => c.qr_hash === qrHash) || null;
   }, [qrHash]);
 
-  if (loading) {
+  const citizen = useMemo(() => {
+    if (!card) return null;
+    return (citizensData as Citizen[]).find((c) => c.id === card.citizen_id) || null;
+  }, [card]);
+
+  const isValid = useMemo(() => {
+    if (!card) return false;
+    const isExpired = card.expires_at ? new Date(card.expires_at) < new Date() : false;
+    return (card.status === 'APPROVED' || card.status === 'COLLECTED') && !isExpired;
+  }, [card]);
+
+  if (!card) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <p className="text-lg">Verifying QR Code...</p>

@@ -5,6 +5,10 @@ import type {
   RegistrationFormData,
   FamilyMember,
   EmploymentData,
+  DisabilityData,
+  EducationData,
+  HouseholdData,
+  GpsCoordinates,
 } from '@/types/citizen';
 import citizensRaw from '../../data/citizens.json';
 import { nanoid } from 'nanoid';
@@ -60,6 +64,56 @@ export function createDefaultEmploymentData(): EmploymentData {
   };
 }
 
+export function createDefaultDisabilityData(): DisabilityData {
+  return {
+    disability_type: '',
+    severity_body: 0,
+    severity_activity: 0,
+    severity_participation: 0,
+    certificate_no: '',
+    issuing_hospital: '',
+    certificate_expiry: '',
+  };
+}
+
+export function createDefaultEducationData(): EducationData {
+  return {
+    level: '',
+    institution_name: '',
+    institution_type: '',
+    study_location: '',
+    is_dropout: false,
+    dropout_reason: '',
+    dropout_date: '',
+    has_scholarship: false,
+    scholarship_type: '',
+    scholarship_provider: '',
+  };
+}
+
+export function createDefaultHouseholdData(): HouseholdData {
+  return {
+    house_type: '',
+    construction_type: '',
+    room_count: 1,
+    electricity_source: '',
+    water_source: '',
+    sanitation: '',
+    internet_access: '',
+    has_bank_account: false,
+    monthly_income_band: '',
+    poverty_class: '',
+  };
+}
+
+export function createDefaultGpsCoordinates(): GpsCoordinates {
+  return {
+    latitude: '',
+    longitude: '',
+    place_name: '',
+  };
+}
+
 export function createDefaultFormData(): RegistrationFormData {
   return {
     name_np: '',
@@ -84,6 +138,10 @@ export function createDefaultFormData(): RegistrationFormData {
     spouse: null,
     children: [],
     employment: createDefaultEmploymentData(),
+    disability: createDefaultDisabilityData(),
+    education: createDefaultEducationData(),
+    household: createDefaultHouseholdData(),
+    gps: createDefaultGpsCoordinates(),
   };
 }
 
@@ -187,8 +245,50 @@ export function useRegistrationForm() {
     }));
   }, []);
 
+  const updateDisabilityField = useCallback(
+    <K extends keyof DisabilityData>(key: K, value: DisabilityData[K]) => {
+      setFormData((prev) => ({
+        ...prev,
+        disability: { ...prev.disability, [key]: value },
+      }));
+    },
+    [],
+  );
+
+  const updateEducationField = useCallback(
+    <K extends keyof EducationData>(key: K, value: EducationData[K]) => {
+      setFormData((prev) => ({
+        ...prev,
+        education: { ...prev.education, [key]: value },
+      }));
+    },
+    [],
+  );
+
+  const updateHouseholdField = useCallback(
+    <K extends keyof HouseholdData>(key: K, value: HouseholdData[K]) => {
+      setFormData((prev) => ({
+        ...prev,
+        household: { ...prev.household, [key]: value },
+      }));
+    },
+    [],
+  );
+
+  const updateGpsField = useCallback(
+    <K extends keyof GpsCoordinates>(key: K, value: GpsCoordinates[K]) => {
+      setFormData((prev) => ({
+        ...prev,
+        gps: { ...prev.gps, [key]: value },
+      }));
+    },
+    [],
+  );
+
+  const MAX_STEP = 7;
+
   const nextStep = useCallback(() => {
-    setStep((s) => Math.min(s + 1, 3));
+    setStep((s) => Math.min(s + 1, MAX_STEP));
   }, []);
 
   const prevStep = useCallback(() => {
@@ -218,6 +318,10 @@ export function useRegistrationForm() {
     removeChild,
     updateConsentTimestamp,
     updateEmploymentField,
+    updateDisabilityField,
+    updateEducationField,
+    updateHouseholdField,
+    updateGpsField,
     nextStep,
     prevStep,
     resetForm,
