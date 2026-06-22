@@ -9,8 +9,6 @@ import { useParams } from "next/navigation";
 
 export default function InitiatePage() {
   const params = useParams();
-
-  const id = params.id as string;
   {
     const handleInitiate = () => {
       alert("ID Card Initiated");

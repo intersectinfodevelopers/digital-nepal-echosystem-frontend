@@ -48,14 +48,16 @@ export default function IdCardDetailPage() {
 
   // Load card and citizen data
   useEffect(() => {
-    const foundCard = idCardsData.find((c: any) => c.id === cardId) as IdCard | undefined;
+    const foundCard = (idCardsData as IdCard[]).find((c) => c.id === cardId);
 
     if (foundCard) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setCard(foundCard);
+       
       setCurrentStatus(foundCard.status);
 
-      const foundCitizen = citizensData.find((c: any) => c.id === foundCard.citizen_id) as Citizen | undefined;
-      setCitizen(foundCitizen || null);
+      const foundCitizen = (citizensData as Citizen[]).find((c) => c.id === foundCard.citizen_id) || null;
+      setCitizen(foundCitizen);
     } else {
       // Fallback
       alert("ID Card not found");
@@ -97,7 +99,7 @@ export default function IdCardDetailPage() {
           <p className="text-gray-500">Card ID: <span className="font-mono">{card.id}</span></p>
         </div>
         <button
-          onClick={() => router.push('/id-cards')}
+          onClick={() => router.push('/ward/id-cards')}
           className="text-gray-600 hover:text-gray-900 flex items-center gap-2"
         >
           ← Back to List

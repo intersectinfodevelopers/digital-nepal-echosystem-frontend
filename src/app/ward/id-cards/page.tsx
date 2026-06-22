@@ -3,6 +3,7 @@
 import { useState} from 'react';
 import idCardsData from '../../../../data/id-cards.json';
 import citizensData from '../../../../data/citizens.json';
+import Link from 'next/link';
 
 interface IdCard {
   id: string;
@@ -168,7 +169,7 @@ export default function IdCardsPage() {
                 </td>
                 <td className="px-6 py-5">
                   <div className="flex gap-4 text-sm">
-                    <button className="text-blue-600 hover:text-blue-700 font-medium">View</button>
+                    <Link href={ `/ward/id-cards/${card.id}`} className="text-blue-600 hover:text-blue-700 font-medium">View</Link>
                     <button className="text-red-600 hover:text-red-700 font-medium">Revoke</button>
                   </div>
                 </td>

@@ -17,12 +17,6 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-
-@media print {
-nav,
-aside,
-button{
-display:none;
-}
-
+.place-marker {
+  filter: hue-rotate(200deg) saturate(0.6);
 }

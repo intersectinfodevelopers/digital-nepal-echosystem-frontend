@@ -1,0 +1,21 @@
+[
+  {
+    "id": "user-municipality",
+    "username": "kummayak.admin",
+    "password": "municipalitypass",
+    "full_name": "Bishnu Maya Kafle",
+    "phone": "9812345610",
+    "email": "admin@kummayak.gov.np",
+    "municipality_id": "mun-08",
+    "municipality_name": "Kummayak Rural Municipality",
+    "district_id": "dist-02",
+    "province_id": "prov-1",
+    "is_active": true,
+    "failed_logins": 0,
+    "locked_until": null,
+    "last_login": "2026-06-18T09:00:00Z",
+    "password_changed_at": "2026-06-01T08:00:00Z",
+    "created_at": "2026-04-01T08:00:00Z",
+    "created_by": "user-province"
+  }
+]

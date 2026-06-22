@@ -20,11 +20,19 @@ export default function ProvinceDashboard() {
         records
       </h2>
 
-      <div className="grid grid-cols-4 gap-4 mt-6">
-        <div>Total Citizens: {stats.TotalCitizens}</div>
-        <div>Total Municipalities: {stats.TotalMunicipalities}</div>
-        <div>Total Wards: {stats.TotalWards}</div>
-        <div>ID Cards Issued: {stats.IdCardsIssued}</div>
+      <div className="grid grid-cols-1 gap-3 mt-6 md:grid-cols-2 lg:grid-cols-4">
+        <div className="border rounded-lg p-3">
+          Total Citizens: {stats.TotalCitizens}
+        </div>
+        <div className="border rounded-lg p-3">
+          Total Municipalities: {stats.TotalMunicipalities}
+        </div>
+        <div className="border rounded-lg p-3">
+          Total Wards: {stats.TotalWards}
+        </div>
+        <div className="border rounded-lg p-3">
+          ID Cards Issued: {stats.IdCardsIssued}
+        </div>
       </div>
 
       <div className="mt-8">

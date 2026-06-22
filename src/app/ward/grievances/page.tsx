@@ -1,8 +1,9 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import grievancesData from '../../../../data/grievances.json';
 import citizensData from '../../../../data/citizens.json';
+import Link from 'next/link';
 
 interface Grievance {
   id: string;
@@ -68,8 +69,6 @@ export default function GrievancesPage() {
   const handleSubmitGrievance = (e: React.FormEvent) => {
     e.preventDefault();
     if (!selectedCitizenId || !category || !description) return;
-
-    const citizen = citizensData.find(c => c.id === selectedCitizenId);
 
     const newGrievance: Grievance = {
       id: `grv-${Date.now()}`,
@@ -165,7 +164,12 @@ export default function GrievancesPage() {
                   </span>
                 </td>
                 <td className="px-6 py-5">
-                  <button className="text-blue-600 hover:underline text-sm font-medium">View</button>
+                  <Link
+                    href={`/ward/grievances/${grievance.id}`}
+                    className="text-blue-600 hover:text-blue-700 hover:underline font-medium text-sm"
+                  >
+                    View Details →
+                  </Link>
                 </td>
               </tr>
             ))}
@@ -189,7 +193,7 @@ export default function GrievancesPage() {
                   className="w-full border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 >
                   <option value="">Select Citizen...</option>
-                  {citizensData.map((citizen: any) => (
+                  {(citizensData as { id: string; name_en: string; name_np: string }[]).map((citizen) => (
                     <option key={citizen.id} value={citizen.id}>
                       {citizen.name_en} — {citizen.name_np}
                     </option>
