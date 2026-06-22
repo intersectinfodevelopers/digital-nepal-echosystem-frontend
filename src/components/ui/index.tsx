@@ -29,3 +29,11 @@ export { Checkbox } from "./Checkbox";
 export { Textarea } from "./Textarea";
 export { DatePicker } from "./DatePicker";
 export { DiffViewer } from "./DiffViewer";
+
+
+
+
+export { DisabilityStep } from "../DisabilityStep";
+export { EducationStep } from "../EducationStep";
+export { HouseholdStep } from "../HouseholdStep";
+export { GpsStep } from "../GpsStep";
