@@ -7,7 +7,13 @@ type AvatarProps = {
 };
 
 export function Avatar({ name, image, size = "md" }: AvatarProps) {
-  const initials = name.slice(0, 2);
+  const initials = name
+    .split(" ")
+    .map((n) => n[0])
+    .join("")
+    .toUpperCase()
+    .slice(0, 2);
+
   const sizeMap = { sm: 32, md: 48, lg: 64 };
   const px = sizeMap[size];
 
@@ -25,7 +31,7 @@ export function Avatar({ name, image, size = "md" }: AvatarProps) {
 
   return (
     <div
-      className={`flex items-center justify-center rounded-full bg-gray-200 text-gray-600 font-semibold`}
+      className="flex items-center justify-center rounded-full bg-gray-200 text-gray-700 font-medium"
       style={{ width: px, height: px, fontSize: px * 0.4 }}
     >
       {initials}
