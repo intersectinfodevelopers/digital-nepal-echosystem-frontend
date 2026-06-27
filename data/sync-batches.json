@@ -1,4 +1,43 @@
 [
-  { "batch_id": "batch-001", "ward_id": "ward-004", "status": "COMPLETED", "record_count": 5, "conflict_count": 1, "submitted_at": "2026-06-07T08:00:00Z", "completed_at": "2026-06-07T08:05:00Z" },
-  { "batch_id": "batch-002", "ward_id": "ward-003", "status": "PROCESSING", "record_count": 2, "conflict_count": 0, "submitted_at": "2026-06-08T09:30:00Z", "completed_at": null }
+  {
+    "batch_id": "batch-001",
+    "device_id": "101",
+    "ward_id": "ward-004",
+    "status": "COMPLETED",
+    "record_count": 5,
+    "conflict_count": 1,
+    "submitted_at": "2026-06-07T08:00:00Z",
+    "completed_at": "2026-06-07T08:05:00Z",
+    "conflicts": [
+      {
+        "id": "conflict-001",
+        "citizen_id": "citizen-001",
+        "created_at": "2026-06-07T08:00:00Z",
+        "resolution_status": "PENDING_REVIEW",
+        "conflict_fields": [
+          {
+            "field_name": "phone",
+            "server_value": "9841000000",
+            "device_value": "9800000000"
+          },
+          {
+            "field_name": "address",
+            "server_value": "Kathmandu",
+            "device_value": "Lalitpur"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "batch_id": "batch-002",
+    "device_id": "102",
+    "ward_id": "ward-003",
+    "status": "PROCESSING",
+    "record_count": 2,
+    "conflict_count": 0,
+    "submitted_at": "2026-06-08T09:30:00Z",
+    "completed_at": null,
+    "conflicts": []
+  }
 ]
