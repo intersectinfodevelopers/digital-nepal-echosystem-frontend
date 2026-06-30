@@ -1,189 +1,170 @@
 "use client";
 
+import { use } from "react";
 import Link from "next/link";
-import { useParams } from "next/navigation";
+import { notFound } from "next/navigation";
 import rulesData from "../../../../../data/eligibility-rules.json";
 
-/* types */
-type Rule = {
+interface ConditionExpr {
+  field?: string;
+  operator?: string;
+  value?: string | number | boolean;
+  and?: ConditionExpr;
+}
+
+interface Rule {
   id: string;
   rule_name: string;
   benefit_type: string;
-  condition_expression: Record<string, unknown>;
+  condition_expression: ConditionExpr;
   benefit_value: Record<string, unknown>;
   priority: number;
   is_active: boolean;
+}
+
+interface PageProps {
+  params: Promise<{ id: string }>;
+}
+
+const MOCK_METRICS: Record<
+  string,
+  {
+    count: number;
+    history: Array<{ date: string; user: string; action: string }>;
+  }
+> = {
+  default: {
+    count: 1420,
+    history: [
+      {
+        date: "2026-03-12 14:22",
+        user: "Admin Narayan",
+        action: "Created Rule Baseline",
+      },
+      {
+        date: "2026-05-19 09:11",
+        user: "System Auditor",
+        action: "Updated Priority Evaluation Matrix",
+      },
+    ],
+  },
 };
 
-const STORAGE_KEY = "eligibility_rules_state";
+export default function RuleDetailPage({ params }: PageProps) {
+  // Unwrap Next.js 15+ asynchronous parameters safely
+  const resolvedParams = use(params);
 
-export default function RuleDetailPage() {
-  const params = useParams();
-  const ruleId = params.id as string;
-
-  /* Load rules (no useEffect, no state = no lint issues) */
-  const stored =
-    typeof window !== "undefined" ? localStorage.getItem(STORAGE_KEY) : null;
-
-  const allRules: Rule[] = stored ? JSON.parse(stored) : (rulesData as Rule[]);
-
-  const rule = allRules.find((r) => r.id === ruleId);
+  // Directly calculate data during execution pass—avoiding side effects loops entirely
+  const rule = rulesData.find((r) => r.id === resolvedParams.id) as
+    | Rule
+    | undefined;
 
   if (!rule) {
-    return (
-      <div className="p-6">
-        <h2 className="text-xl font-semibold text-red-600">Rule not found</h2>
-
-        <Link
-          href="/central/eligibility-rules"
-          className="text-blue-600 underline"
-        >
-          Back to Rules
-        </Link>
-      </div>
-    );
+    notFound();
   }
 
-  /* FORMAT CONDITION */
-  const formatCondition = (condition: Record<string, unknown>): string[] => {
-    const lines: string[] = [];
-
-    const field = condition.field;
-    const operator = condition.operator;
-    const value = condition.value;
-
-    if (field && operator && value !== undefined) {
-      lines.push(`${field} ${operator} ${value}`);
-    }
-
-    const andCondition = condition.and as Record<string, unknown> | undefined;
-
-    if (andCondition) {
-      const af = andCondition.field;
-      const ao = andCondition.operator;
-      const av = andCondition.value;
-
-      if (af && ao && av !== undefined) {
-        lines.push(`${af} ${ao} ${av}`);
-      }
-    }
-
-    return lines;
-  };
-
-  /* FORMAT BENEFIT */
-  const formatBenefit = (benefit: Record<string, unknown>): string[] => {
-    const lines: string[] = [];
-
-    if (benefit.card_type) {
-      lines.push(`Card Type: ${benefit.card_type}`);
-    }
-
-    if (benefit.amount) {
-      lines.push(`Amount: NPR ${benefit.amount}`);
-    }
-
-    if (benefit.frequency) {
-      lines.push(`Frequency: ${benefit.frequency}`);
-    }
-
-    return lines;
-  };
+  const metrics = MOCK_METRICS[rule.id] || MOCK_METRICS.default;
 
   return (
     <div className="p-6 bg-gray-50 min-h-screen text-gray-900">
-      {/* Back */}
       <div className="mb-6">
         <Link
           href="/central/eligibility-rules"
-          className="text-blue-600 hover:underline"
+          className="text-sm text-blue-600 hover:underline"
         >
-          ← Back to Rules
+          &larr; Back to Rules Dashboard
         </Link>
-      </div>
-
-      {/* HEADER */}
-      <div className="bg-white rounded-lg shadow p-6 mb-6">
-        <h1 className="text-2xl font-bold mb-4">{rule.rule_name}</h1>
-
-        <div className="grid md:grid-cols-2 gap-4">
-          <div>
-            <p className="text-sm text-gray-500">Benefit Type</p>
-            <p className="font-medium">{rule.benefit_type}</p>
-          </div>
-
-          <div>
-            <p className="text-sm text-gray-500">Priority</p>
-            <p className="font-medium">{rule.priority}</p>
-          </div>
-
-          <div>
-            <p className="text-sm text-gray-500">Status</p>
-
-            <span
-              className={`inline-block px-3 py-1 rounded text-white text-sm ${
-                rule.is_active ? "bg-green-600" : "bg-gray-500"
-              }`}
-            >
-              {rule.is_active ? "Active" : "Inactive"}
-            </span>
-          </div>
+        <div className="flex justify-between items-center mt-2">
+          <h1 className="text-3xl font-bold tracking-tight">
+            {rule.rule_name}
+          </h1>
+          <span
+            className={`px-3 py-1 rounded-full text-xs font-bold border ${rule.is_active ? "bg-green-100 text-green-800 border-green-200" : "bg-gray-100 text-gray-800 border-gray-200"}`}
+          >
+            {rule.is_active ? "Active" : "Inactive"}
+          </span>
         </div>
       </div>
 
-      {/* CONDITION */}
-      <div className="bg-white rounded-lg shadow p-6 mb-6">
-        <h2 className="text-lg font-semibold mb-4">Condition</h2>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {/* Left Column: Rules & Criteria */}
+        <div className="md:col-span-2 space-y-6">
+          <div className="bg-white p-6 shadow rounded-xl border">
+            <h2 className="text-sm font-bold text-gray-400 uppercase tracking-wider mb-2">
+              Rule Details
+            </h2>
+            <div className="grid grid-cols-2 gap-4 bg-gray-50 p-4 rounded-lg border mb-4 text-sm">
+              <div>
+                <p className="text-xs font-bold text-gray-400 uppercase">
+                  Benefit Type
+                </p>
+                <p className="font-medium mt-0.5">{rule.benefit_type}</p>
+              </div>
+              <div>
+                <p className="text-xs font-bold text-gray-400 uppercase">
+                  Priority Level
+                </p>
+                <p className="font-medium mt-0.5">{rule.priority}</p>
+              </div>
+            </div>
 
-        <div className="space-y-2">
-          {formatCondition(rule.condition_expression).map((item, i) => (
-            <p key={i}>{item}</p>
-          ))}
-        </div>
-      </div>
-
-      {/* BENEFIT */}
-      <div className="bg-white rounded-lg shadow p-6 mb-6">
-        <h2 className="text-lg font-semibold mb-4">Benefit</h2>
-
-        <div className="space-y-2">
-          {formatBenefit(rule.benefit_value).map((item, i) => (
-            <p key={i}>{item}</p>
-          ))}
-        </div>
-      </div>
-
-      {/* HISTORY */}
-      <div className="bg-white rounded-lg shadow p-6 mb-6">
-        <h2 className="text-lg font-semibold mb-4">Change History</h2>
-
-        <div className="space-y-3">
-          <div className="border-b pb-2">
-            <p className="font-medium">Created by Central Admin</p>
-            <p className="text-sm text-gray-500">2026-06-01 09:15 AM</p>
+            <h2 className="text-sm font-bold text-gray-400 uppercase tracking-wider mb-4">
+              Formatted Condition Statement
+            </h2>
+            <div className="bg-gray-50 p-4 rounded-lg font-mono text-xs border text-gray-700 leading-relaxed whitespace-pre-wrap">
+              {JSON.stringify(rule.condition_expression, null, 2)}
+            </div>
           </div>
 
-          <div className="border-b pb-2">
-            <p className="font-medium">Priority Updated</p>
-            <p className="text-sm text-gray-500">2026-06-03 11:30 AM</p>
-          </div>
-
-          <div>
-            <p className="font-medium">Status Changed</p>
-            <p className="text-sm text-gray-500">2026-06-05 02:45 PM</p>
+          <div className="bg-white p-6 shadow rounded-xl border">
+            <h2 className="text-sm font-bold text-gray-400 uppercase tracking-wider mb-4">
+              Targeted Benefit Payload
+            </h2>
+            <div className="bg-gray-50 p-4 rounded-lg font-mono text-xs border text-gray-700">
+              {JSON.stringify(rule.benefit_value, null, 2)}
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* AFFECTED CITIZENS */}
-      <div className="bg-white rounded-lg shadow p-6">
-        <h2 className="text-lg font-semibold mb-4">Affected Citizens</h2>
+        {/* Right Column: Audit Logs & Citizen Scopes */}
+        <div className="space-y-6">
+          <div className="bg-white p-6 shadow rounded-xl border text-center">
+            <h2 className="text-sm font-bold text-gray-400 uppercase tracking-wider mb-2">
+              Affected Citizen Count
+            </h2>
+            <p className="text-4xl font-extrabold text-blue-600">
+              {metrics.count.toLocaleString()}
+            </p>
+            <p className="text-xs text-gray-500 mt-2">
+              Active records evaluated under this logical query branch.
+            </p>
+          </div>
 
-        <p className="text-3xl font-bold text-blue-600">12,450</p>
-
-        <p className="text-sm text-gray-500 mt-2">
-          Estimated citizens matching this rule.
-        </p>
+          <div className="bg-white p-6 shadow rounded-xl border">
+            <h2 className="text-sm font-bold text-gray-400 uppercase tracking-wider mb-3">
+              Modification Audit Log History
+            </h2>
+            <div className="flow-root">
+              <ul className="-mb-8 divide-y divide-gray-100">
+                {metrics.history.map((log, logIdx) => (
+                  <li key={logIdx} className="py-3">
+                    <div className="flex flex-col space-y-1">
+                      <div className="text-xs text-gray-500 font-mono">
+                        {log.date}
+                      </div>
+                      <div className="text-sm font-semibold text-gray-800">
+                        {log.action}
+                      </div>
+                      <div className="text-xs text-gray-400">
+                        By: {log.user}
+                      </div>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

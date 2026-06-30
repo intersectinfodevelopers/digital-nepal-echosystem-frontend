@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 
+import { DiffViewer } from "@/components/ui/DiffViewer";
 import editApprovals from "../../../../../data/edit-approvals.json";
 import citizens from "../../../../../data/citizens.json";
 import users from "../../../../../data/users.json";
@@ -128,6 +129,11 @@ export default function ApprovalDetailPage() {
   const changedFields = Array.from(
     new Set([...Object.keys(oldValues), ...Object.keys(newValues)]),
   );
+  const diffChanges = changedFields.map((field) => ({
+    field,
+    oldValue: oldValues[field],
+    newValue: newValues[field],
+  }));
 
   const currentUserId = "user-municipality";
   const isSelfApproval = approval.submitter_id === currentUserId;
@@ -354,40 +360,8 @@ export default function ApprovalDetailPage() {
           </p>
         </div>
 
-        <div className="overflow-x-auto">
-          <table className="w-full text-left text-sm">
-            <thead className="bg-slate-100">
-              <tr>
-                <th className="px-5 py-3 font-semibold text-slate-700">
-                  Field
-                </th>
-                <th className="px-5 py-3 font-semibold text-slate-700">
-                  Old Value
-                </th>
-                <th className="px-5 py-3 font-semibold text-slate-700">
-                  New Value
-                </th>
-              </tr>
-            </thead>
-
-            <tbody>
-              {changedFields.map((field) => (
-                <tr key={field} className="border-t border-slate-200">
-                  <td className="px-5 py-4 font-medium text-slate-900">
-                    {field}
-                  </td>
-
-                  <td className="px-5 py-4 text-red-600">
-                    {String(oldValues[field] ?? "N/A")}
-                  </td>
-
-                  <td className="px-5 py-4 text-green-600">
-                    {String(newValues[field] ?? "N/A")}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+        <div className="p-5">
+          <DiffViewer changes={diffChanges} />
         </div>
       </section>
 
