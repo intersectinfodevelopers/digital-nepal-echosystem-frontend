@@ -19,6 +19,8 @@ type Approval = {
   submitted_at: string;
   escalated_at?: string;
   rejection_reason?: string;
+  approved_at?: string;
+  rejected_at?: string;
 };
 
 const LOCAL_STORAGE_KEY = "edit-approvals";
@@ -182,6 +184,7 @@ export default function ApprovalDetailPage() {
       return {
         ...item,
         status: "APPROVED",
+        approved_at: new Date().toISOString(),
       };
     });
 
@@ -211,6 +214,7 @@ export default function ApprovalDetailPage() {
       return {
         ...item,
         status: "REJECTED",
+        rejected_at: new Date().toISOString(),
         rejection_reason: rejectionReason.trim(),
       };
     });
