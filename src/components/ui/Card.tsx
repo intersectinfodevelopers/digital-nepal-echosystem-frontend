@@ -17,18 +17,35 @@ export default function Card({
 }: CardProps) {
   return (
     <div
-      className={`bg-white rounded-2xl border border-gray-200 border-l-4 ${accentColor} p-4 ${className}`}
+      className={`
+        w-full
+        rounded-2xl
+        border
+        border-gray-200
+        border-l-4
+        ${accentColor}
+        bg-white
+        p-6
+        shadow-sm
+        transition-all
+        duration-200
+        hover:-translate-y-0.5
+        hover:shadow-lg
+        ${className}
+      `}
     >
       {header && (
-        <div className="mb-3 font-semibold">
+        <div className="mb-5 border-b border-gray-100 pb-4">
           {header}
         </div>
       )}
 
-      <div>{children}</div>
+      <div className="space-y-4">
+        {children}
+      </div>
 
       {footer && (
-        <div className="mt-3">
+        <div className="mt-6 border-t border-gray-100 pt-4">
           {footer}
         </div>
       )}

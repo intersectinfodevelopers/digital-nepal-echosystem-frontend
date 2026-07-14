@@ -22,7 +22,7 @@ function displayValue(value: unknown) {
   }
 
   if (typeof value === "object") {
-    return JSON.stringify(value);
+    return JSON.stringify(value, null, 2);
   }
 
   return String(value);
@@ -30,45 +30,71 @@ function displayValue(value: unknown) {
 
 export function DiffViewer({
   changes,
-  oldLabel = "OLD VALUE",
-  newLabel = "NEW VALUE",
+  oldLabel = "Old Value",
+  newLabel = "New Value",
   emptyMessage = "No differences found.",
   className = "",
 }: DiffViewerProps) {
   if (changes.length === 0) {
     return (
-      <div className={`rounded-xl border p-4 text-sm text-slate-500 ${className}`}>
+      <div
+        className={`
+          rounded-2xl
+          border
+          border-dashed
+          border-gray-300
+          bg-gray-50
+          p-6
+          text-center
+          text-sm
+          text-gray-500
+          ${className}
+        `}
+      >
         {emptyMessage}
       </div>
     );
   }
 
   return (
-    <div className={`space-y-4 ${className}`}>
+    <div className={`space-y-6 ${className}`}>
       {changes.map((change) => (
         <div
           key={change.id ?? change.field}
-          className="border rounded-xl p-4"
+          className="
+            rounded-2xl
+            border
+            border-gray-200
+            bg-white
+            p-6
+            shadow-sm
+          "
         >
-          <h4 className="font-semibold mb-3">
+          <h4 className="mb-5 text-base font-semibold text-gray-900">
             {change.label ?? change.field}
           </h4>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="rounded-lg bg-red-100 p-3">
-              <p className="text-xs font-semibold text-red-700 mb-1">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+            {/* Old Value */}
+            <div className="rounded-xl border border-red-200 bg-red-50 p-4">
+              <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-red-600">
                 {oldLabel}
               </p>
 
-              <p>{displayValue(change.oldValue)}</p>
+              <pre className="whitespace-pre-wrap break-words font-sans text-sm text-gray-700">
+                {displayValue(change.oldValue)}
+              </pre>
             </div>
 
-            <div className="rounded-lg bg-green-100 p-3">
-              <p className="text-xs font-semibold text-green-700 mb-1">
+            {/* New Value */}
+            <div className="rounded-xl border border-green-200 bg-green-50 p-4">
+              <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-green-600">
                 {newLabel}
               </p>
 
-              <p>{displayValue(change.newValue)}</p>
+              <pre className="whitespace-pre-wrap break-words font-sans text-sm text-gray-700">
+                {displayValue(change.newValue)}
+              </pre>
             </div>
           </div>
         </div>
