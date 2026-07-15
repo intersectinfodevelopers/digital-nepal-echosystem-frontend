@@ -23,7 +23,7 @@ export default function LoginPage() {
     setFieldErrors({});
 
     const errors: { username?: string; password?: string } = {};
-    const usernameRegex = /^[a-zA-Z0-9_\.-]+$/; // Explicitly allows dots
+    const usernameRegex = /^[a-zA-Z0-9_\.-]+$/; 
 
     if (!username.trim()) {
       errors.username = "Username is required";
@@ -43,8 +43,6 @@ export default function LoginPage() {
 
     startTransition(async () => {
       try {
-        // Fetch data using standard network requests targeting our mock database layer
-        // When your real backend API is ready later, you will only change this string URL path.
         const res = await fetch("/api/auth/login", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
