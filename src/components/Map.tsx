@@ -1,13 +1,13 @@
 "use client";
 
-import { useRef, useEffect } from "react";
-import { MapContainer, TileLayer, Marker, Popup, useMapEvents, useMap } from "react-leaflet";
+import { useEffect, useRef } from "react";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 
 const defaultIcon = L.icon({
   iconUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
-  iconRetinaUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
+  iconRetinaUrl:
+    "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
   shadowUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
   iconSize: [25, 41],
   iconAnchor: [12, 41],
@@ -17,7 +17,8 @@ const defaultIcon = L.icon({
 
 const placeIcon = L.icon({
   iconUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
-  iconRetinaUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
+  iconRetinaUrl:
+    "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
   shadowUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
   iconSize: [20, 33],
   iconAnchor: [10, 33],
@@ -26,14 +27,15 @@ const placeIcon = L.icon({
   className: "place-marker",
 });
 
-L.Marker.prototype.options.icon = defaultIcon;
-
 export interface MapMarker {
   lat: number;
   lng: number;
   label?: string;
   description?: string;
-  type?: 'selected' | 'place';
+  totalCitizens?: number;
+  totalMunicipalities?: number;
+  topEmploymentCategory?: string;
+  type?: "selected" | "place";
 }
 
 interface MapProps {
@@ -41,30 +43,41 @@ interface MapProps {
   zoom?: number;
   markers?: MapMarker[];
   height?: string;
+  showResetControl?: boolean;
   onClick?: (lat: number, lng: number) => void;
 }
 
-function MapClickHandler({ onClick }: { onClick?: (lat: number, lng: number) => void }) {
-  useMapEvents({
-    click(e) {
-      if (onClick) {
-        onClick(e.latlng.lat, e.latlng.lng);
-      }
-    },
-  });
-  return null;
-}
+function createPopup(marker: MapMarker) {
+  const popup = document.createElement("div");
 
-function FlyToCenter({ center }: { center: [number, number] }) {
-  const map = useMap();
-  const prevRef = useRef(center);
-  useEffect(() => {
-    if (prevRef.current[0] !== center[0] || prevRef.current[1] !== center[1]) {
-      prevRef.current = center;
-      map.flyTo(center, map.getZoom());
+  if (marker.label) {
+    const title = document.createElement("strong");
+    title.textContent = marker.label;
+    popup.appendChild(title);
+  }
+
+  const details = [
+    marker.description,
+    marker.totalCitizens !== undefined
+      ? `Total citizens: ${marker.totalCitizens.toLocaleString()}`
+      : undefined,
+    marker.totalMunicipalities !== undefined
+      ? `Total municipalities: ${marker.totalMunicipalities.toLocaleString()}`
+      : undefined,
+    marker.topEmploymentCategory
+      ? `Top employment: ${marker.topEmploymentCategory}`
+      : undefined,
+  ];
+
+  details.forEach((text) => {
+    if (text) {
+      const line = document.createElement("div");
+      line.textContent = text;
+      popup.appendChild(line);
     }
-  }, [center, map]);
-  return null;
+  });
+
+  return popup;
 }
 
 export default function Map({
@@ -72,43 +85,82 @@ export default function Map({
   zoom = 13,
   markers = [],
   height = "400px",
+  showResetControl = false,
   onClick,
 }: MapProps) {
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const mapRef = useRef<L.Map | null>(null);
+  const markerLayerRef = useRef<L.LayerGroup | null>(null);
+  const onClickRef = useRef(onClick);
+  const initialView = useRef({ center, zoom });
+
+  useEffect(() => {
+    onClickRef.current = onClick;
+  }, [onClick]);
+
+  useEffect(() => {
+    if (!containerRef.current) return;
+
+    const map = L.map(containerRef.current).setView(
+      initialView.current.center,
+      initialView.current.zoom,
+    );
+
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      attribution:
+        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+    }).addTo(map);
+
+    map.on("click", (event) => {
+      onClickRef.current?.(event.latlng.lat, event.latlng.lng);
+    });
+
+    mapRef.current = map;
+    markerLayerRef.current = L.layerGroup().addTo(map);
+
+    return () => {
+      map.remove();
+      mapRef.current = null;
+      markerLayerRef.current = null;
+    };
+  }, []);
+
+  useEffect(() => {
+    mapRef.current?.setView(center, zoom);
+  }, [center, zoom]);
+
+  useEffect(() => {
+    const markerLayer = markerLayerRef.current;
+    if (!markerLayer) return;
+
+    markerLayer.clearLayers();
+
+    markers.forEach((marker) => {
+      const leafletMarker = L.marker([marker.lat, marker.lng], {
+        icon: marker.type === "place" ? placeIcon : defaultIcon,
+      });
+
+      if (marker.label) leafletMarker.bindPopup(createPopup(marker));
+      leafletMarker.addTo(markerLayer);
+    });
+  }, [markers]);
+
+  function resetView() {
+    mapRef.current?.setView(center, zoom);
+  }
+
   return (
-    <div style={{ height, width: "100%" }}>
-      <MapContainer
-        center={center}
-        zoom={zoom}
-        className="h-full w-full rounded-lg"
-      >
-        <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
-        {onClick && <MapClickHandler onClick={onClick} />}
-        <FlyToCenter center={center} />
-        {markers.map((marker, i) => (
-          <Marker
-            key={i}
-            position={[marker.lat, marker.lng]}
-            icon={marker.type === 'place' ? placeIcon : defaultIcon}
-          >
-            {marker.label && (
-              <Popup>
-                <strong>{marker.label}</strong>
-                {marker.description && (
-                  <>
-                    <br />
-                    <span className="text-sm text-gray-600">
-                      {marker.description}
-                    </span>
-                  </>
-                )}
-              </Popup>
-            )}
-          </Marker>
-        ))}
-      </MapContainer>
+    <div className="relative" style={{ height, width: "100%" }}>
+      <div ref={containerRef} className="h-full w-full rounded-lg" />
+      {showResetControl && (
+        <button
+          type="button"
+          onClick={resetView}
+          className="absolute right-3 top-3 z-[1000] rounded bg-white px-3 py-2 text-sm shadow"
+        >
+          Reset view
+        </button>
+      )}
     </div>
   );
 }
