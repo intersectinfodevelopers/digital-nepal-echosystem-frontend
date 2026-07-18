@@ -82,7 +82,7 @@ export default function NationalMapPage() {
     <main className="space-y-4 p-6">
       <h1 className="text-2xl font-bold">National Map</h1>
       <p className="text-gray-600">
-        Province-level overview. Individual citizen locations are not displayed.
+        Province-level overview.                              
       </p>
       <LeafletMap
         center={[28.3949, 84.124]}
