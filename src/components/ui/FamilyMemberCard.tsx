@@ -1,4 +1,5 @@
 import type { FamilyMember } from "@/types/citizen";
+import { InputField } from "./InputField";
 
 type FamilyMemberCardProps = {
   member: FamilyMember;
@@ -11,51 +12,46 @@ export function FamilyMemberCard({
   member,
   onChange,
   onRemove,
-  showRemove,
+  showRemove = false,
 }: FamilyMemberCardProps) {
   return (
-    <div className="border border-gray-200 rounded-lg p-4 relative">
+    <div className="relative rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
       {showRemove && (
         <button
           type="button"
           onClick={onRemove}
-          className="absolute top-2 right-2 text-gray-400 hover:text-red-500 text-sm"
+          className="absolute right-4 top-4 flex h-8 w-8 items-center justify-center rounded-full text-gray-400 transition hover:bg-red-50 hover:text-red-600"
         >
           ✕
         </button>
       )}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-        <div>
-          <label className="block text-xs font-medium text-gray-500 mb-1">
-            Name (Nepali)
-          </label>
-          <input
-            type="text"
-            value={member.name_np}
-            onChange={(e) => onChange({ name_np: e.target.value })}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-        </div>
-        <div>
-          <label className="block text-xs font-medium text-gray-500 mb-1">
-            Name (English)
-          </label>
-          <input
-            type="text"
-            value={member.name_en}
-            onChange={(e) => onChange({ name_en: e.target.value })}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-        </div>
-        <div>
-          <label className="block text-xs font-medium text-gray-500 mb-1">
-            Citizenship Number
-          </label>
-          <input
-            type="text"
+
+      <h3 className="mb-5 text-base font-semibold text-gray-900">
+        Family Member
+      </h3>
+
+      <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
+        <InputField
+          label="Name (Nepali)"
+          value={member.name_np}
+          onChange={(value) => onChange({ name_np: value })}
+          required
+        />
+
+        <InputField
+          label="Name (English)"
+          value={member.name_en}
+          onChange={(value) => onChange({ name_en: value })}
+          required
+        />
+
+        <div className="md:col-span-2">
+          <InputField
+            label="Citizenship Number"
             value={member.citizenship_number}
-            onChange={(e) => onChange({ citizenship_number: e.target.value })}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            onChange={(value) =>
+              onChange({ citizenship_number: value })
+            }
           />
         </div>
       </div>
