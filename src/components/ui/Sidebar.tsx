@@ -1,118 +1,282 @@
 "use client";
 
+import React, { useState, useTransition } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
-interface SidebarItem {
+export interface SidebarItem {
   label: string;
   href: string;
   icon?: React.ReactNode;
 }
 
-interface SidebarProps {
-  items: SidebarItem[];
+export interface SidebarProps {
+  items?: SidebarItem[];
   collapsed?: boolean;
   variant?: "ward" | "municipality" | "province" | "central";
+  userInfo?: {
+    name: string;
+    role: string;
+    avatarUrl?: string;
+  };
 }
 
+// Default items used when no `items` prop is supplied
+export const CENTRAL_NAV_ITEMS: SidebarItem[] = [
+  {
+    label: "Analytics",
+    href: "/central/analytics",
+    icon: (
+      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 19v-6a2 2 0 012-2h2a2 2 0 012 2v6m-6 0h6m2 0h2a2 2 0 002-2v-3a2 2 0 00-2-2h-3m-14 0H3a2 2 0 00-2 2v3a2 2 0 002 2h2m0 0h2a2 2 0 002-2v-3a2 2 0 00-2-2H3z" />
+      </svg>
+    ),
+  },
+  {
+    label: "National Map",
+    href: "/central/national-map",
+    icon: (
+      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+      </svg>
+    ),
+  },
+  {
+    label: "Province Admins",
+    href: "/central/province-admins",
+    icon: (
+      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+      </svg>
+    ),
+  },
+  {
+    label: "Eligibility Rules",
+    href: "/central/eligibility-rules",
+    icon: (
+      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
+      </svg>
+    ),
+  },
+  {
+    label: "Audit Log",
+    href: "/central/audit-log",
+    icon: (
+      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+    ),
+  },
+  {
+    label: "Policy Cards",
+    href: "/central/policy-cards",
+    icon: (
+      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a2 2 0 002-2V8a2 2 0 00-2-2H6a2 2 0 00-2 2v8a2 2 0 002 2z" />
+      </svg>
+    ),
+  },
+  {
+    label: "Dashboard",
+    href: "/central/dashboard",
+    icon: (
+      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+      </svg>
+    ),
+  },
+];
+
 export default function Sidebar({
-  items,
+  items = CENTRAL_NAV_ITEMS,
   collapsed = false,
-  variant = "ward",
+  variant = "central",
+  userInfo = { name: "Admin User", role: "Ministry of ICT" },
 }: SidebarProps) {
   const pathname = usePathname();
+  const router = useRouter();
+  
+  const [isCollapsed, setIsCollapsed] = useState(collapsed);
+  const [isPending, startTransition] = useTransition();
 
-  const accentColors = {
-    ward: "bg-green-500",
-    municipality: "bg-orange-500",
-    province: "bg-blue-500",
-    central: "bg-red-500",
+  // Active status color themes based on portal variant
+  const activeStyles = {
+    ward: "bg-green-600 text-white font-semibold shadow-md",
+    municipality: "bg-orange-600 text-white font-semibold shadow-md",
+    province: "bg-blue-600 text-white font-semibold shadow-md",
+    central: "bg-[#E51C44] text-white font-semibold shadow-md", // Crimson Red
+  };
+
+  // Border accents for the sidebar
+  const accentBorder = {
+    ward: "border-l-4 border-green-500",
+    municipality: "border-l-4 border-orange-500",
+    province: "border-l-4 border-blue-500",
+    central: "border-l-4 border-[#0099FF]", // Sky Blue
+  };
+
+  const handleLogout = () => {
+    startTransition(async () => {
+      try {
+        const res = await fetch("/api/auth/logout", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+        });
+
+        if (res.ok) {
+          router.push("/auth/login");
+          router.refresh();
+        }
+      } catch (err) {
+        console.error("Logout failed:", err);
+      }
+    });
   };
 
   return (
     <aside
+      aria-label="Portal Navigation Sidebar"
       className={`
-        ${collapsed ? "w-20" : "w-64"}
+        relative
+        h-screen
         sticky
         top-0
-        h-screen
-        bg-white
-        border-r
-        border-gray-200
-        shadow-sm
+        flex
+        flex-col
+        justify-between
+        p-4
+        bg-[#0B3067]
+        text-white
+        ${accentBorder[variant]}
+        ${isCollapsed ? "w-20" : "w-64"}
         transition-all
         duration-300
+        select-none
       `}
     >
-      {/* Logo */}
-      <div className="flex h-16 shrink-0 items-center justify-center border-b border-gray-200">
-        {!collapsed ? (
-          <h2 className="text-lg font-bold text-gray-900">
-            Digital Nepal
-          </h2>
-        ) : (
-          <span className="text-xl font-bold text-blue-600">
-            DN
-          </span>
-        )}
+      {/* Floating Toggle Button */}
+      <button
+        onClick={() => setIsCollapsed((prev) => !prev)}
+        aria-label={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
+        className="absolute -right-3 top-6 bg-[#0099FF] text-white p-1 rounded-full shadow-md hover:bg-blue-400 focus:outline-none focus:ring-2 focus:ring-white transition"
+      >
+        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          {isCollapsed ? (
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M9 5l7 7-7 7" />
+          ) : (
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M15 19l-7-7 7-7" />
+          )}
+        </svg>
+      </button>
+
+      {/* Top Header & Links */}
+      <div className="flex flex-col gap-4">
+        {/* Brand / Logo */}
+        <div className="flex items-center gap-3 px-2 py-2 border-b border-white/10 pb-4">
+          <div className="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center text-white shrink-0">
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+            </svg>
+          </div>
+          {!isCollapsed && (
+            <div className="overflow-hidden">
+              <h1 className="text-base font-bold text-white leading-tight truncate">
+                Digital Nepal
+              </h1>
+              <span className="text-[10px] text-[#A0B3D6] font-semibold tracking-wider uppercase">
+                {variant} Authority
+              </span>
+            </div>
+          )}
+        </div>
+
+        {/* User Profile */}
+        <div className="flex items-center gap-3 px-2 py-1">
+          <div className="w-9 h-9 rounded-full bg-white/20 border border-white/30 flex items-center justify-center text-sm font-bold text-white shrink-0 overflow-hidden">
+            {userInfo.avatarUrl ? (
+              <img src={userInfo.avatarUrl} alt="" className="w-full h-full object-cover" />
+            ) : (
+              userInfo.name.charAt(0).toUpperCase()
+            )}
+          </div>
+          {!isCollapsed && (
+            <div className="overflow-hidden">
+              <p className="text-sm font-medium text-white leading-tight truncate">{userInfo.name}</p>
+              <p className="text-xs text-[#A0B3D6] truncate">{userInfo.role}</p>
+            </div>
+          )}
+        </div>
+
+        {/* Navigation Items */}
+        <nav aria-label="Main Navigation" className="space-y-1.5 mt-2">
+          {items.map((item) => {
+            const active = pathname === item.href || (item.href !== '/central/dashboard' && pathname?.startsWith(`${item.href}/`));
+
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                aria-current={active ? "page" : undefined}
+                title={isCollapsed ? item.label : undefined}
+                className={`
+                  flex
+                  items-center
+                  gap-3
+                  rounded-full
+                  px-4
+                  py-2.5
+                  text-sm
+                  font-medium
+                  transition-all
+                  duration-200
+                  focus:outline-none
+                  focus:ring-2
+                  focus:ring-white/50
+                  ${
+                    active
+                      ? activeStyles[variant]
+                      : "text-white/80 hover:bg-white/10 hover:text-white"
+                  }
+                `}
+              >
+                {item.icon && (
+                  <span className="shrink-0 text-lg">
+                    {item.icon}
+                  </span>
+                )}
+
+                {!isCollapsed && (
+                  <span className="truncate">
+                    {item.label}
+                  </span>
+                )}
+              </Link>
+            );
+          })}
+        </nav>
       </div>
 
-      {/* Navigation */}
-      <nav className="space-y-2 overflow-y-auto p-4">
-        {items.map((item) => {
-          const active = pathname === item.href;
-
-          return (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={`
-                relative
-                flex
-                items-center
-                gap-3
-                rounded-xl
-                px-4
-                py-3
-                text-sm
-                transition-colors
-                duration-200
-                ${
-                  active
-                    ? "bg-blue-50 text-blue-700 font-semibold"
-                    : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
-                }
-              `}
-            >
-              {active && (
-                <span
-                  className={`
-                    absolute
-                    left-0
-                    top-2
-                    bottom-2
-                    w-1
-                    rounded-r-full
-                    ${accentColors[variant]}
-                  `}
-                />
-              )}
-
-              {item.icon && (
-                <span className="shrink-0 text-lg">
-                  {item.icon}
-                </span>
-              )}
-
-              {!collapsed && (
-                <span className="truncate">
-                  {item.label}
-                </span>
-              )}
-            </Link>
-          );
-        })}
-      </nav>
+      {/* Footer / Logout Button */}
+      <div className="border-t border-white/10 pt-3">
+        <button
+          onClick={handleLogout}
+          disabled={isPending}
+          aria-label="Log out"
+          title={isCollapsed ? "Logout" : undefined}
+          className="w-full flex items-center gap-3 px-4 py-2.5 rounded-full text-sm font-medium text-white/80 hover:bg-red-500/20 hover:text-red-200 focus:outline-none focus:ring-2 focus:ring-red-400 transition-colors duration-200 disabled:opacity-50"
+        >
+          <svg className={`w-5 h-5 shrink-0 ${isPending ? "animate-spin" : ""}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            {isPending ? (
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 12a8 8 0 018-8v8H4z" />
+            ) : (
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+            )}
+          </svg>
+          {!isCollapsed && <span>{isPending ? "Logging out..." : "Logout"}</span>}
+        </button>
+      </div>
     </aside>
   );
 }
