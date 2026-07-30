@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState, useRef } from "react";
 import L from "leaflet";
 import { MapContainer, GeoJSON, Marker, Popup, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
@@ -8,8 +8,10 @@ import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility
 import "leaflet-defaulticon-compatibility";
 
 import type { MapProps } from "./index";
+import { useMapSelection } from "@/contexts/MapSelectionContext";
 
 // Color palette matching standard province maps
+
 const PROVINCE_COLORS: Record<string, { fill: string; border: string }> = {
   "prov-1": { fill: "#FFC1C1", border: "#E53E3E" }, // Koshi (Pink / Red)
   "1": { fill: "#FFC1C1", border: "#E53E3E" },
@@ -146,14 +148,14 @@ export default function LeafletMap({
   center = [28.3949, 84.124],
   zoom = 7,
   height = "600px",
+  vectorTilesUrl,
 }: MapProps) {
   const [geoJsonData, setGeoJsonData] = useState<any>(null);
-  const [selection, setSelection] = useState<MapSelection>({
-    level: "country",
-    provinceId: null,
-    provinceLabel: null,
-    districtName: null,
-  });
+  const [manifest, setManifest] = useState<any>(null);
+  const { selection, setSelection } = useMapSelection();
+
+  const vectorLayerRef = useRef<any>(null);
+
 
   const selectionLabel = useMemo(() => {
     if (selection.level === "district") {
@@ -168,7 +170,53 @@ export default function LeafletMap({
   }, [selection]);
 
   useEffect(() => {
-    const url = geoJsonUrlForSelection(selection);
+    // If vector tiles are provided, skip per-selection GeoJSON fetches
+    if (vectorTilesUrl) return;
+
+    const resolveUrlFromManifest = () => {
+      if (!manifest) return geoJsonUrlForSelection(selection);
+
+      if (selection.level === "country") {
+        return "/geojson/nepal-provinces.json";
+      }
+
+      if (selection.level === "province" && selection.provinceId) {
+        // prefer manifest entry if present
+        const candidate = manifest.provinces?.find((p: string) => p.includes(`prov-${selection.provinceId}.json`));
+        return candidate ? `/${candidate.replace(/^\//,"")}` : `/geojson/provinces/prov-${selection.provinceId}.json`;
+      }
+
+      if (selection.level === "district" && selection.districtName) {
+        // Normalize province id: manifest keys use `prov-<id>_districts`
+        const provIdRaw = String(selection.provinceId || "").trim();
+        const provBase = provIdRaw.toLowerCase().startsWith('prov-') ? provIdRaw.toLowerCase() : `prov-${provIdRaw}`;
+        const provinceKey = `${provBase}_districts`;
+        const list: string[] = manifest.districts?.[provinceKey] || [];
+
+        const normalize = (s: string) => String(s || '').toLowerCase().replace(/[^a-z0-9]+/g, '');
+        const targetNorm = normalize(selection.districtName || "");
+
+        // try exact slug match first, then fuzzy normalize match
+        let found = list.find((p) => {
+          const name = (p.split('/').pop() || p).replace(/\.json$/i, '');
+          return normalize(name) === targetNorm;
+        });
+
+        if (!found) {
+          // fallback: try contains match (some filenames include extra tokens)
+          found = list.find((p) => {
+            const name = (p.split('/').pop() || p).replace(/\.json$/i, '');
+            return normalize(name).includes(targetNorm) || targetNorm.includes(normalize(name));
+          });
+        }
+
+        if (found) return `/${found.replace(/^\//, "")}`;
+      }
+
+      return geoJsonUrlForSelection(selection);
+    };
+
+    const url = resolveUrlFromManifest();
     let cancelled = false;
 
     setGeoJsonData(null);
@@ -187,6 +235,103 @@ export default function LeafletMap({
       cancelled = true;
     };
   }, [selection]);
+
+  // load manifest once on mount
+  useEffect(() => {
+    let cancelled = false;
+    fetch('/manifest.json')
+      .then((r) => {
+        if (!r.ok) throw new Error('manifest missing');
+        return r.json();
+      })
+      .then((m) => {
+        if (!cancelled) setManifest(m);
+      })
+      .catch(() => {})
+      .finally(() => {});
+    return () => { cancelled = true };
+  }, []);
+
+  // Nested component: add Vector Tile layer using Leaflet.VectorGrid
+  function VectorTileLayer({ url }: { url: string }) {
+    const map = useMap();
+
+    useEffect(() => {
+      if (!url) return;
+
+      const Lany = (L as any);
+      let script: HTMLScriptElement | null = null;
+      let layer: any = null;
+
+      const createLayer = () => {
+        try {
+          const vg = Lany.vectorGrid;
+          if (!vg) return;
+
+          layer = vg.protobuf(url, {
+            interactive: true,
+            vectorTileLayerStyles: {
+              // default style for all tile layers
+              default: (properties: any, zoom: number) => {
+                const name = String(properties?.name || properties?.NAME || "");
+                const hue = Array.from(name).reduce((s: number, c: string) => s + c.charCodeAt(0), 0) % 360;
+                return {
+                  fillColor: `hsl(${hue} 65% 78%)`,
+                  color: `hsl(${hue} 60% 35%)`,
+                  weight: 1,
+                  fillOpacity: 0.45,
+                };
+              },
+            },
+            getFeatureId: (f: any) => f.properties && (f.properties.id || f.properties.ID || f.properties.name),
+          });
+
+          layer.on('click', (e: any) => {
+            try {
+              const prop = e?.layer?.properties || e?.feature?.properties || {};
+              const districtName = prop.DISTRICT || prop.district || prop.name || prop.NAME;
+              // basic behavior: center map on clicked point and update selection to district level
+              if (e && e.latlng) map.panTo(e.latlng);
+              setSelection((current) => ({
+                level: 'district',
+                provinceId: current.provinceId,
+                provinceLabel: current.provinceLabel,
+                districtName: String(districtName || '').trim(),
+              }));
+            } catch (err) {
+              console.error('Vector tile click handler error', err);
+            }
+          });
+
+          layer.addTo(map);
+          vectorLayerRef.current = layer;
+        } catch (err) {
+          console.error('Failed to create vector grid layer', err);
+        }
+      };
+
+      if (!Lany.vectorGrid) {
+        script = document.createElement('script');
+        script.src = 'https://unpkg.com/leaflet.vectorgrid@1.3.0/dist/Leaflet.VectorGrid.bundled.js';
+        script.async = true;
+        script.onload = () => createLayer();
+        script.onerror = () => console.error('Failed to load Leaflet.VectorGrid script');
+        document.body.appendChild(script);
+      } else {
+        createLayer();
+      }
+
+      return () => {
+        try {
+          if (layer && map && map.hasLayer(layer)) map.removeLayer(layer);
+          vectorLayerRef.current = null;
+          if (script && script.parentNode) script.parentNode.removeChild(script);
+        } catch (err) {}
+      };
+    }, [map, url]);
+
+    return null;
+  }
 
   const getDistrictStyle = (feature: any) => {
     const featureKey =
@@ -324,14 +469,20 @@ export default function LeafletMap({
         attributionControl={false}
         className="w-full h-full bg-[#FAFAFA]"
       >
-        <FitGeoJsonBounds data={geoJsonData} />
+        {vectorTilesUrl ? (
+          <VectorTileLayer url={vectorTilesUrl} />
+        ) : (
+          <>
+            <FitGeoJsonBounds data={geoJsonData} />
 
-        {geoJsonData && (
-          <GeoJSON
-            data={geoJsonData}
-            style={getDistrictStyle}
-            onEachFeature={onEachDistrict}
-          />
+            {geoJsonData && (
+              <GeoJSON
+                data={geoJsonData}
+                style={getDistrictStyle}
+                onEachFeature={onEachDistrict}
+              />
+            )}
+          </>
         )}
       </MapContainer>
     </div>

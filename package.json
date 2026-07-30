@@ -3,6 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "setup:geojson": "node scripts/setup-geojson.js",
+    "postinstall": "npm run setup:geojson",
+    "predev": "npm run setup:geojson",
+    "prebuild": "npm run setup:geojson",
     "dev": "next dev --webpack",
     "build": "next build",
     "start": "next start",
@@ -10,7 +14,9 @@
     "format": "prettier --write \"src/**/*.{ts,tsx,json,css,md}\"",
     "type-check": "tsc --noEmit",
     "test": "jest",
-    "analyze": "ANALYZE=true next build"
+    "analyze": "ANALYZE=true next build",
+    "build:tiles": "docker run --rm -v \"${PWD}:/data\" mapbox/tippecanoe tippecanoe -o /data/public/tiles/nepal.mbtiles -Z6 -z14 --drop-smallest-as-needed /data/public/geojson/local-bodies/*.json",
+    "serve-tiles": "npx tileserver-gl-light public/tiles/nepal.mbtiles"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",

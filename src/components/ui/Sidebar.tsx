@@ -3,6 +3,42 @@
 import React, { useState, useTransition } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
+import { useMapSelection } from "@/contexts/MapSelectionContext";
+import districtLocalBodies from "@/constants/districtLocalBodies.json";
+
+// ── Nepal admin hierarchy data ────────────────────────────────────────────────
+
+
+const PROVINCE_HIERARCHY = [
+  {
+    id: "1", label: "Koshi", color: "#E53E3E",
+    districts: ["Bhojpur","Dhankuta","Ilam","Jhapa","Khotang","Morang","Okhaldhunga","Panchthar","Sankhuwasabha","Solukhumbu","Sunsari","Taplejung","Terhathum","Udayapur"],
+  },
+  {
+    id: "2", label: "Madhesh", color: "#8D6E63",
+    districts: ["Bara","Dhanusha","Mahottari","Parsa","Rautahat","Saptari","Sarlahi","Siraha"],
+  },
+  {
+    id: "3", label: "Bagmati", color: "#3182CE",
+    districts: ["Bhaktapur","Chitawan","Dhading","Dolakha","Kabhrepalanchok","Kathmandu","Lalitpur","Makawanpur","Nuwakot","Ramechhap","Rasuwa","Sindhuli","Sindhupalchok"],
+  },
+  {
+    id: "4", label: "Gandaki", color: "#DD6B20",
+    districts: ["Baglung","Gorkha","Kaski","Lamjung","Manang","Mustang","Myagdi","Nawalparasi (East)","Parbat","Syangja","Tanahu"],
+  },
+  {
+    id: "5", label: "Lumbini", color: "#805AD5",
+    districts: ["Arghakhanchi","Banke","Bardiya","Dang","Gulmi","Kapilbastu","Nawalparasi (West)","Palpa","Pyuthan","Rolpa","Rukum (East)","Rupandehi"],
+  },
+  {
+    id: "6", label: "Karnali", color: "#38A169",
+    districts: ["Dailekh","Dolpa","Humla","Jajarkot","Jumla","Kalikot","Mugu","Rukum (West)","Salyan","Surkhet"],
+  },
+  {
+    id: "7", label: "Sudurpashchim", color: "#D53F8C",
+    districts: ["Achham","Baitadi","Bajhang","Bajura","Dadeldhura","Darchula","Doti","Kailali","Kanchanpur"],
+  },
+];
 
 export interface SidebarItem {
   label: string;
@@ -42,6 +78,8 @@ export const CENTRAL_NAV_ITEMS: SidebarItem[] = [
       </svg>
     ),
   },
+  // ── Hierarchy spacer item (handled separately in the component) ──
+  // Province / District / Municipality / Ward items are rendered inline
   {
     label: "Province Admins",
     href: "/central/province-admins",
@@ -97,9 +135,15 @@ export default function Sidebar({
 }: SidebarProps) {
   const pathname = usePathname();
   const router = useRouter();
+  const { selectProvince, selectDistrict } = useMapSelection();
   
   const [isCollapsed, setIsCollapsed] = useState(collapsed);
   const [isPending, startTransition] = useTransition();
+
+  // ── Map hierarchy state ───────────────────────────────────────────────────
+  const [mapExpanded, setMapExpanded] = useState(false);
+  const [expandedProvince, setExpandedProvince] = useState<string | null>(null);
+  const [expandedDistrict, setExpandedDistrict] = useState<string | null>(null);
 
   // Active status color themes based on portal variant
   const activeStyles = {
@@ -210,49 +254,156 @@ export default function Sidebar({
         </div>
 
         {/* Navigation Items */}
-        <nav aria-label="Main Navigation" className="space-y-1.5 mt-2">
+        <nav aria-label="Main Navigation" className="space-y-1 mt-2">
           {items.map((item) => {
+            // Skip the comment-only spacer pseudo-item
+            if (!item.href) return null;
+
             const active = pathname === item.href || (item.href !== '/central/dashboard' && pathname?.startsWith(`${item.href}/`));
+            const isMapItem = item.href === "/central/national-map";
 
             return (
-              <Link
-                key={item.href}
-                href={item.href}
-                aria-current={active ? "page" : undefined}
-                title={isCollapsed ? item.label : undefined}
-                className={`
-                  flex
-                  items-center
-                  gap-3
-                  rounded-full
-                  px-4
-                  py-2.5
-                  text-sm
-                  font-medium
-                  transition-all
-                  duration-200
-                  focus:outline-none
-                  focus:ring-2
-                  focus:ring-white/50
-                  ${
-                    active
-                      ? activeStyles[variant]
-                      : "text-white/80 hover:bg-white/10 hover:text-white"
-                  }
-                `}
-              >
-                {item.icon && (
-                  <span className="shrink-0 text-lg">
-                    {item.icon}
-                  </span>
-                )}
+              <React.Fragment key={item.href}>
+                <button
+                  type="button"
+                  aria-current={active ? "page" : undefined}
+                  title={isCollapsed ? item.label : undefined}
+                  onClick={() => {
+                    if (isMapItem) setMapExpanded((v) => !v);
+                    router.push(item.href);
+                  }}
+                  className={`
+                    w-full flex items-center gap-3 rounded-full px-4 py-2.5 text-sm font-medium
+                    transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white/50 text-left
+                    ${
+                      active
+                        ? activeStyles[variant]
+                        : "text-white/80 hover:bg-white/10 hover:text-white"
+                    }
+                  `}
+                >
+                  {item.icon && <span className="shrink-0 text-lg">{item.icon}</span>}
+                  {!isCollapsed && <span className="flex-1 truncate">{item.label}</span>}
+                  {isMapItem && !isCollapsed && (
+                    <svg
+                      width="14" height="14" viewBox="0 0 24 24" fill="none"
+                      stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"
+                      className={`shrink-0 transition-transform duration-200 ${mapExpanded ? "rotate-90" : ""}`}
+                    >
+                      <path d="M9 18l6-6-6-6" />
+                    </svg>
+                  )}
+                </button>
 
-                {!isCollapsed && (
-                  <span className="truncate">
-                    {item.label}
-                  </span>
+                {/* ── Province / District / Municipality / Ward sub-nav ── */}
+                {isMapItem && !isCollapsed && mapExpanded && (
+                  <div className="ml-3 pl-3 border-l border-white/10 space-y-0.5 pb-1">
+                    {/* Section label */}
+                    <p className="px-3 pt-1.5 pb-0.5 text-[9.5px] font-bold uppercase tracking-widest text-white/30">
+                      Provinces
+                    </p>
+
+                    {PROVINCE_HIERARCHY.map((prov) => (
+                      <div key={prov.id}>
+                        {/* Province row */}
+                        <button
+                          onClick={() => {
+                            setExpandedProvince((cur) => (cur === prov.id ? null : prov.id));
+                            selectProvince(prov.id, prov.label);
+                            if (pathname !== "/central/national-map") {
+                              router.push("/central/national-map");
+                            }
+                          }}
+                          className="w-full flex items-center gap-2 rounded-xl px-3 py-1.5 text-left text-[12.5px] text-white/75 hover:bg-white/10 hover:text-white transition-colors"
+                        >
+                          <span
+                            className="w-2 h-2 rounded-full shrink-0"
+                            style={{ backgroundColor: prov.color }}
+                          />
+                          <span className="flex-1 truncate">{prov.label}</span>
+                          <svg
+                            width="12" height="12" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"
+                            className={`shrink-0 text-white/40 transition-transform duration-150 ${expandedProvince === prov.id ? "rotate-90" : ""}`}
+                          >
+                            <path d="M9 18l6-6-6-6" />
+                          </svg>
+                        </button>
+
+                        {/* Districts */}
+                        {expandedProvince === prov.id && (
+                          <div className="ml-3 pl-2 border-l border-white/10 space-y-0.5 py-0.5">
+                            <p className="px-2 pt-1 pb-0.5 text-[9px] font-bold uppercase tracking-widest text-white/25">Districts</p>
+                            {prov.districts.map((dist) => (
+                              <div key={dist}>
+                                <button
+                                  onClick={() => {
+                                    setExpandedDistrict((cur) => (cur === `${prov.id}:${dist}` ? null : `${prov.id}:${dist}`));
+                                    selectDistrict(prov.id, prov.label, dist);
+                                    if (pathname !== "/central/national-map") {
+                                      router.push("/central/national-map");
+                                    }
+                                  }}
+                                  className="w-full flex items-center gap-2 rounded-lg px-2 py-1 text-left text-[11.5px] text-white/65 hover:bg-white/8 hover:text-white transition-colors"
+                                >
+                                  <span className="w-1.5 h-1.5 rounded-full bg-white/25 shrink-0" />
+                                  <span className="flex-1 truncate">{dist}</span>
+                                  <svg
+                                    width="11" height="11" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"
+                                    className={`shrink-0 text-white/25 transition-transform duration-150 ${expandedDistrict === `${prov.id}:${dist}` ? "rotate-90" : ""}`}
+                                  >
+                                    <path d="M9 18l6-6-6-6" />
+                                  </svg>
+                                </button>
+
+                                {/* Municipality / Rural Municipality list */}
+                                {expandedDistrict === `${prov.id}:${dist}` && (() => {
+                                  const key = dist.toLowerCase().replace(/[^a-z0-9]+/g, '');
+                                  const lbs = (districtLocalBodies as Record<string, { name: string; type: string }[]>)[key] || [];
+
+                                  return (
+                                    <div className="ml-3 pl-2 border-l border-white/10 py-1 space-y-1">
+                                      <p className="px-2 pt-0.5 pb-0.5 text-[9px] font-bold uppercase tracking-widest text-white/40">
+                                        Local Bodies ({lbs.length})
+                                      </p>
+                                      {lbs.length > 0 ? (
+                                        lbs.map((lb) => (
+                                          <div
+                                            key={lb.name}
+                                            className="flex items-center gap-2 rounded px-2 py-1 text-[10.5px] text-white/60 hover:bg-white/5 hover:text-white transition-colors"
+                                          >
+                                            <span
+                                              className={`w-1.5 h-1.5 rounded-full shrink-0 ${
+                                                lb.type.includes("Nagarpalika")
+                                                  ? "bg-blue-400"
+                                                  : "bg-emerald-400"
+                                              }`}
+                                            />
+                                            <span className="flex-1 truncate">{lb.name}</span>
+                                            <span className="text-[9px] text-white/35 shrink-0">
+                                              {lb.type.includes("Nagarpalika") ? "NP" : "GP"}
+                                            </span>
+                                          </div>
+                                        ))
+                                      ) : (
+                                        <div className="px-2 py-1 text-[10px] text-white/40 italic">
+                                          No local bodies found
+                                        </div>
+                                      )}
+                                    </div>
+                                  );
+                                })()}
+                              </div>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    ))}
+
+                  </div>
                 )}
-              </Link>
+              </React.Fragment>
             );
           })}
         </nav>

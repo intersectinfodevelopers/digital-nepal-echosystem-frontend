@@ -17,6 +17,7 @@ export interface MapProps {
   markers?: MapMarker[];
   height?: string;
   showResetControl?: boolean;
+  vectorTilesUrl?: string;
 }
 
 const LeafletMap = dynamic(() => import("./LeafletMap"), {
