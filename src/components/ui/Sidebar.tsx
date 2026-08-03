@@ -472,6 +472,7 @@ export default function Sidebar({
         <div className="flex items-center gap-3 px-2 py-1">
           <div className="w-9 h-9 rounded-full bg-white/20 border border-white/30 flex items-center justify-center text-sm font-bold text-white shrink-0 overflow-hidden">
             {userInfo.avatarUrl ? (
+              // eslint-disable-next-line @next/next/no-img-element
               <img
                 src={userInfo.avatarUrl}
                 alt=""

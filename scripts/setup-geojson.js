@@ -4,6 +4,7 @@
 //  so the app knows which province and district GeoJSON files are available.
  
 
+/* eslint-disable @typescript-eslint/no-require-imports */
 const fs = require('fs');
 const path = require('path');
 

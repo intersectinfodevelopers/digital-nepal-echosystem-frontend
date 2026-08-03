@@ -1,5 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
-
 import React, { useEffect, useMemo, useState, useRef } from "react";
 import L from "leaflet";
 import { MapContainer, GeoJSON, useMap } from "react-leaflet";
@@ -9,7 +9,9 @@ import "leaflet-defaulticon-compatibility";
 import type { MapProps } from "./index";
 import { useMapSelection } from "@/contexts/MapSelectionContext";
 
+// =====================
 // Constants & Types
+// =====================
 const NEPAL_PROVINCES = "/geojson/nepal-provinces.json";
 const MANIFEST_PATH = "/manifest.json";
 
@@ -39,20 +41,18 @@ type SelectionShape = {
   districtName: string | null;
 };
 
+// =====================
 // String / Property Helpers
+// =====================
 const slugify = (v: string) =>
   v
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-+|-+$/g, "");
 
-const str = (v: unknown) =>
-  v === null || v === undefined ? "" : String(v).trim();
+const str = (v: unknown) => (v === null || v === undefined ? "" : String(v).trim());
 
-const propGet = (
-  props: Record<string, unknown> | undefined,
-  ...keys: string[]
-) => {
+const propGet = (props: Record<string, unknown> | undefined, ...keys: string[]) => {
   if (!props) return undefined;
   for (const k of keys) {
     if (props[k] !== undefined && props[k] !== null) return props[k];
@@ -61,26 +61,68 @@ const propGet = (
 };
 
 const resolveProvinceKey = (p?: Record<string, unknown>) =>
-  (
-    str(propGet(p, "id", "Province", "province", "PROVINCE", "FIRST_PROV")) ||
-    undefined
-  )?.toLowerCase();
+  (str(propGet(p, "id", "Province", "province", "PROVINCE", "FIRST_PROV")) || undefined)?.toLowerCase();
 const resolveProvinceId = (p?: Record<string, unknown>) => {
   const v = propGet(p, "id", "Province", "PROVINCE", "province_id", "province");
   return v === undefined ? undefined : str(v);
 };
-const resolveProvinceLabel = (p?: Record<string, unknown>) =>
-  str(
-    propGet(
-      p,
-      "name",
-      "name_en",
-      "PROVINCE_NAME",
-      "province_name",
-      "DISTRICT",
-      "TARGET",
-    ),
-  );
+const resolveProvinceLabel = (p?: Record<string, unknown>) => str(propGet(p, "name", "name_en", "PROVINCE_NAME", "province_name", "DISTRICT", "TARGET"));
+
+// Vector tile layer component (placed at module scope so it's not recreated during render)
+function VectorTileLayer({ url }: { url?: string }) {
+  const map = useMap();
+  const { setSelection } = useMapSelection();
+  const localRef = React.useRef<any>(null);
+
+  useEffect(() => {
+    if (!url) return;
+    const Lany = L as any;
+    let layer: any = null;
+    try {
+      const vg = Lany.vectorGrid;
+      if (!vg) {
+        console.warn("Leaflet.VectorGrid not available; skipping vector tiles.");
+        return;
+      }
+      layer = vg.protobuf(url, {
+        interactive: true,
+        vectorTileLayerStyles: {
+          default: (props: any) => {
+            const name = String(props?.name || props?.NAME || "");
+            const hue = Array.from(name).reduce((s: number, c: string) => s + c.charCodeAt(0), 0) % 360;
+            return { fillColor: `hsl(${hue} 65% 78%)`, color: `hsl(${hue} 60% 35%)`, weight: 1, fillOpacity: 0.45 };
+          },
+        },
+        getFeatureId: (f: any) => f?.properties && (f.properties.id || f.properties.ID || f.properties.name),
+      });
+
+      layer.on("click", (e: any) => {
+        try {
+          const prop = e?.layer?.properties || e?.feature?.properties || {};
+          const districtName = prop.DISTRICT || prop.district || prop.name || prop.NAME;
+          if (e?.latlng) map.panTo(e.latlng);
+          setSelection((cur: any) => ({ level: "district", provinceId: cur.provinceId, provinceLabel: cur.provinceLabel, districtName: String(districtName || "").trim() }));
+        } catch (err) {
+          console.error("Vector tile click error", err);
+        }
+      });
+
+      layer.addTo(map);
+      localRef.current = layer;
+    } catch (err) {
+      console.error("VectorTileLayer creation error", err);
+    }
+
+    return () => {
+      try {
+        if (localRef.current && map && map.hasLayer(localRef.current)) map.removeLayer(localRef.current);
+      } catch {}
+      localRef.current = null;
+    };
+  }, [map, url, setSelection]);
+
+  return null;
+}
 const resolveDistrictName = (p?: Record<string, unknown>) =>
   str(propGet(p, "TARGET", "DISTRICT", "FIRST_DIST", "district", "name"));
 const resolveLocalBodyLabel = (p?: Record<string, unknown>) =>
@@ -172,7 +214,7 @@ function FitGeoJsonBounds({ data }: { data: any }) {
     try {
       const b = L.geoJSON(data).getBounds();
       if (b.isValid()) map.fitBounds(b, { padding: [24, 24] });
-    } catch (err) {
+    } catch {
       // ignore malformed geojson
     }
   }, [data, map]);
@@ -189,7 +231,6 @@ export default function LeafletMap({
   const { selection, setSelection } = useMapSelection();
   const [geoJsonData, setGeoJsonData] = useState<any>(null);
   const [manifest, setManifest] = useState<any>(null);
-  const vectorLayerRef = useRef<any>(null);
   const lastTimedOutRef = useRef<string | null>(null);
 
   const selectionLabel = useMemo(() => {
@@ -227,7 +268,7 @@ export default function LeafletMap({
           }
         }
         setManifest(safe);
-      } catch (err) {
+      } catch {
         // manifest is optional, fail silently
       }
     })();
@@ -306,76 +347,9 @@ export default function LeafletMap({
     };
   }, [selection, manifest, vectorTilesUrl]);
 
-  // Vector tile layer (nested component using Leaflet.VectorGrid if available)
-  function VectorTileLayer({ url }: { url?: string }) {
-    const map = useMap();
-    useEffect(() => {
-      if (!url) return;
-      const Lany = L as any;
-      let layer: any = null;
-      try {
-        const vg = Lany.vectorGrid;
-        if (!vg) {
-          console.warn(
-            "Leaflet.VectorGrid not available; skipping vector tiles.",
-          );
-          return;
-        }
-        layer = vg.protobuf(url, {
-          interactive: true,
-          vectorTileLayerStyles: {
-            default: (props: any) => {
-              const name = String(props?.name || props?.NAME || "");
-              const hue =
-                Array.from(name).reduce(
-                  (s: number, c: string) => s + c.charCodeAt(0),
-                  0,
-                ) % 360;
-              return {
-                fillColor: `hsl(${hue} 65% 78%)`,
-                color: `hsl(${hue} 60% 35%)`,
-                weight: 1,
-                fillOpacity: 0.45,
-              };
-            },
-          },
-          getFeatureId: (f: any) =>
-            f?.properties &&
-            (f.properties.id || f.properties.ID || f.properties.name),
-        });
-
-        layer.on("click", (e: any) => {
-          try {
-            const prop = e?.layer?.properties || e?.feature?.properties || {};
-            const districtName =
-              prop.DISTRICT || prop.district || prop.name || prop.NAME;
-            if (e?.latlng) map.panTo(e.latlng);
-            setSelection((cur) => ({
-              level: "district",
-              provinceId: cur.provinceId,
-              provinceLabel: cur.provinceLabel,
-              districtName: String(districtName || "").trim(),
-            }));
-          } catch (err) {
-            console.error("Vector tile click error", err);
-          }
-        });
-
-        layer.addTo(map);
-        vectorLayerRef.current = layer;
-      } catch (err) {
-        console.error("VectorTileLayer creation error", err);
-      }
-
-      return () => {
-        try {
-          if (layer && map && map.hasLayer(layer)) map.removeLayer(layer);
-        } catch {}
-        vectorLayerRef.current = null;
-      };
-    }, [map, url]);
-    return null;
-  }
+  // Vector tiles are handled by the module-scoped `VectorTileLayer` component
+  // declared near the top of this file. We intentionally avoid declaring
+  // components inside render to preserve stable identities and state.
 
   // Styling & interaction helpers for GeoJSON
   const hash = (s: string) =>

@@ -7,9 +7,12 @@ type RateEntry = { count: number; firstAttempt: number; blockedUntil?: number };
 const RATE_LIMIT_WINDOW_MS = 60_000; // 1 minute
 const RATE_LIMIT_MAX_ATTEMPTS = 5; // allowed attempts per window
 const RATE_LIMIT_BLOCK_MS = 5 * 60_000; // 5 minutes block after exceeding
-const _globalAny: any = globalThis as any;
-if (!_globalAny.__loginRateLimit) _globalAny.__loginRateLimit = new Map<string, RateEntry>();
-const loginRateLimit: Map<string, RateEntry> = _globalAny.__loginRateLimit;
+interface GlobalWithLoginRateLimit {
+  __loginRateLimit?: Map<string, RateEntry>;
+}
+const _global = globalThis as unknown as GlobalWithLoginRateLimit;
+if (!_global.__loginRateLimit) _global.__loginRateLimit = new Map<string, RateEntry>();
+const loginRateLimit: Map<string, RateEntry> = _global.__loginRateLimit as Map<string, RateEntry>;
 
 const getClientIp = (req: Request) => {
   // prefer forwarded header, else unknown
@@ -116,7 +119,9 @@ export async function POST(request: Request) {
     try {
       const ip = getClientIp(request);
       loginRateLimit.delete(ip);
-    } catch {}
+    } catch {
+      // ignore
+    }
 
     // Create a minimal session token (base64 payload). In production use a signed JWT.
     const tokenPayload = {
@@ -148,7 +153,7 @@ export async function POST(request: Request) {
         path: '/',
         maxAge: 60 * 60 * 8, // 8 hours
       });
-    } catch (err) {
+    } catch {
       // Continue without cookie if runtime doesn't support res.cookies
     }
 

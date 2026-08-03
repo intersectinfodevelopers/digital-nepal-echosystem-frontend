@@ -21,7 +21,9 @@ export default function NationalMapPage() {
   useEffect(() => {
     try {
       resetToCountry();
-    } catch (err) {}
+    } catch {
+      // ignore
+    }
   }, [resetToCountry]);
 
   return (
