@@ -201,56 +201,60 @@ export default function MunicipalitiesPage() {
 
       <table className="w-full border border-collapse">
         <thead>
-          <tr>
-            <th
-              className="border p-2 cursor-pointer"
-              onClick={() => handleSort("name")}
-            >
-              Municipality
-            </th>
+            <tr>
+              <th
+                className="border p-2 cursor-pointer"
+                onClick={() => handleSort("name")}
+              >
+                Municipality
+              </th>
 
-            <th
-              className="border p-2 cursor-pointer"
-              onClick={() => handleSort("type")}
-            >
-              Type
-            </th>
+              <th
+                className="border p-2 cursor-pointer"
+                onClick={() => handleSort("type")}
+              >
+                Type
+              </th>
 
-            <th
-              className="border p-2 cursor-pointer"
-              onClick={() => handleSort("totalCitizens")}
-            >
-              Total Citizens
-            </th>
+              <th
+                className="border p-2 cursor-pointer"
+                onClick={() => handleSort("totalCitizens")}
+              >
+                Total Citizens
+              </th>
 
-            <th
-              className="border p-2 cursor-pointer"
-              onClick={() => handleSort("nidVerified")}
-            >
-              NID Verified %
-            </th>
+              <th
+                className="border p-2 cursor-pointer"
+                onClick={() => handleSort("nidVerified")}
+              >
+                NID Verified %
+              </th>
 
-            <th
-              className="border p-2 cursor-pointer"
-              onClick={() => handleSort("pendingApprovals")}
-            >
-              Pending Approvals
-            </th>
+              <th
+                className="border p-2 cursor-pointer"
+                onClick={() => handleSort("pendingApprovals")}
+              >
+                Pending Approvals
+              </th>
 
-            <th
-              className="border p-2 cursor-pointer"
-              onClick={() => handleSort("activeGrievances")}
-            >
-              Active Grievances
-            </th>
+              <th
+                className="border p-2 cursor-pointer"
+                onClick={() => handleSort("activeGrievances")}
+              >
+                Active Grievances
+              </th>
 
-            <th
-              className="border p-2 cursor-pointer"
-              onClick={() => handleSort("lastSync")}
-            >
-              Last Sync
-            </th>
-          </tr>
+              <th
+                className="border p-2 cursor-pointer"
+                onClick={() => handleSort("lastSync")}
+              >
+                Last Sync
+              </th>
+
+              <th className="border p-2">
+                Actions
+              </th>
+            </tr>
         </thead>
 
         <tbody>
@@ -275,12 +279,20 @@ export default function MunicipalitiesPage() {
               <td className="border p-2">{municipality.activeGrievances}</td>
 
               <td className="border p-2">{municipality.lastSync}</td>
+              <td className="border p-2">
+                <button
+                  onClick={() => setSelectedMunicipality(municipality)}
+                  className="text-blue-600 hover:text-blue-800 text-sm font-medium underline"
+                >
+                  View Details
+                </button>
+              </td>
             </tr>
           ))}
 
           {paginatedMunicipalities.length === 0 && (
             <tr>
-              <td colSpan={7} className="border p-4 text-center text-gray-500">
+              <td colSpan={8} className="border p-4 text-center text-gray-500">
                 No municipalities found.
               </td>
             </tr>

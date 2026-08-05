@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
+import { Pagination } from "@/components/ui/Pagination";
 import citizens from "../../../../data/citizens.json";
 import editApprovals from "../../../../data/edit-approvals.json";
 import users from "../../../../data/users.json";
@@ -84,6 +85,8 @@ export default function MunicipalityApprovalsPage() {
   const [selectedWard, setSelectedWard] = useState("ALL");
   const [selectedStatus, setSelectedStatus] = useState("ALL");
   const [selectedField, setSelectedField] = useState("ALL");
+  const [page, setPage] = useState(1);
+  const pageSize = 10;
 
   const [approvals] = useState<Approval[]>(() => {
     if (typeof window === "undefined") {
@@ -169,6 +172,13 @@ export default function MunicipalityApprovalsPage() {
     return matchesWard && matchesStatus && matchesField;
   });
 
+  const totalPages = Math.ceil(filteredApprovals.length / pageSize);
+
+  const paginatedApprovals = useMemo(() => {
+    const start = (page - 1) * pageSize;
+    return filteredApprovals.slice(start, start + pageSize);
+  }, [filteredApprovals, page]);
+
   return (
     <main className="p-6">
       <div>
@@ -188,7 +198,7 @@ export default function MunicipalityApprovalsPage() {
 
             <select
               value={selectedWard}
-              onChange={(event) => setSelectedWard(event.target.value)}
+              onChange={(event) => { setSelectedWard(event.target.value); setPage(1); }}
               className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm text-gray-700 outline-none focus:border-gray-500"
             >
               <option value="ALL">All Wards</option>
@@ -208,7 +218,7 @@ export default function MunicipalityApprovalsPage() {
 
             <select
               value={selectedStatus}
-              onChange={(event) => setSelectedStatus(event.target.value)}
+              onChange={(event) => { setSelectedStatus(event.target.value); setPage(1); }}
               className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm text-gray-700 outline-none focus:border-gray-500"
             >
               <option value="ALL">All Statuses</option>
@@ -224,7 +234,7 @@ export default function MunicipalityApprovalsPage() {
 
             <select
               value={selectedField}
-              onChange={(event) => setSelectedField(event.target.value)}
+              onChange={(event) => { setSelectedField(event.target.value); setPage(1); }}
               className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm text-gray-700 outline-none focus:border-gray-500"
             >
               <option value="ALL">All Fields</option>
@@ -267,7 +277,7 @@ export default function MunicipalityApprovalsPage() {
             </thead>
 
             <tbody className="divide-y divide-gray-200">
-              {filteredApprovals.map((approval) => (
+              {paginatedApprovals.map((approval) => (
                 <tr
                   key={approval.id}
                   className={
@@ -340,6 +350,15 @@ export default function MunicipalityApprovalsPage() {
           </table>
         </div>
       </section>
+
+      <div className="mt-4">
+        <Pagination
+          currentPage={page}
+          totalPages={totalPages || 1}
+          onPageChange={setPage}
+          totalItems={filteredApprovals.length}
+        />
+      </div>
     </main>
   );
 }

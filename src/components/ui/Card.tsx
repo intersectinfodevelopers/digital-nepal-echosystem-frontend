@@ -1,5 +1,4 @@
 import type { ReactNode } from "react";
-
 type CardProps = {
   header?: ReactNode;
   children: ReactNode;
@@ -7,7 +6,6 @@ type CardProps = {
   accentColor?: string;
   className?: string;
 };
-
 export default function Card({
   header,
   children,
@@ -23,10 +21,8 @@ export default function Card({
         <div className="mb-3 font-semibold">
           {header}
         </div>
-      )}
-
-      <div>{children}</div>
-
+      )}  
+      {children}
       {footer && (
         <div className="mt-3">
           {footer}

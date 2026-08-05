@@ -21,13 +21,16 @@ import { Tabs, Modal } from "@/components/ui";
 import { useEligibility } from "@/hooks/useEligibility";
 import { InputField, SelectField, SectionCard } from "@/components/ui";
 
-import { EMPLOYMENT_CATEGORIES, INCOME_BANDS, SEXES, DIGITAL_LITERACIES } from "@/types/citizen";
+import { EMPLOYMENT_CATEGORIES, INCOME_BANDS, SEXES, DIGITAL_LITERACIES, BLOOD_GROUPS, CONSENT_CHANNELS } from "@/types/citizen";
 import {
-  CONSENT_CHANNEL_LABELS, HOUSE_TYPE_LABELS,
-  ELECTRICITY_SOURCE_LABELS, WATER_SOURCE_LABELS,
+  CONSENT_CHANNEL_LABELS, HOUSE_TYPE_LABELS, CONSTRUCTION_TYPE_LABELS,
+  ELECTRICITY_SOURCE_LABELS, WATER_SOURCE_LABELS, SANITATION_LABELS, INTERNET_ACCESS_LABELS,
   POVERTY_CLASS_LABELS, DISABILITY_TYPE_LABELS,
   STUDENT_LEVEL_LABELS, INSTITUTION_TYPE_LABELS, SCHOLARSHIP_TYPE_LABELS,
-  EMPLOYMENT_CATEGORY_LABELS, INCOME_BAND_LABELS,
+  EMPLOYMENT_CATEGORY_LABELS, INCOME_BAND_LABELS, BLOOD_GROUP_LABELS,
+  VISA_TYPE_LABELS, LAND_TYPE_LABELS, IRRIGATION_TYPE_LABELS,
+  REMITTANCE_BAND_LABELS, GOV_GRADE_LABELS, COUNTRY_OPTIONS, SKILL_OPTIONS,
+  RELATIONSHIP_OPTIONS,
 } from "@/constants";
 
 type IDCard = {
@@ -174,7 +177,6 @@ function Toast({ message, onClose }: { message: string; onClose: () => void }) {
     </div>
   );
 }
-
 function IdentityTab({
   citizen,
   onEdit,
@@ -545,9 +547,16 @@ function EditIdentityModal({
     name_en: citizen.name_en,
     dob: citizen.dob,
     sex: citizen.sex,
+    blood_group: (citizen as unknown as Record<string, unknown>).blood_group as string || "",
+    religion: (citizen as unknown as Record<string, unknown>).religion as string || "",
+    ethnicity: (citizen as unknown as Record<string, unknown>).ethnicity as string || "",
+    mother_tongue: (citizen as unknown as Record<string, unknown>).mother_tongue as string || "",
     tole: citizen.tole,
     digital_literacy: citizen.digital_literacy,
     has_smartphone: String(citizen.has_smartphone),
+    nid_number: (citizen as unknown as Record<string, unknown>).nid_number as string || citizen.nid_masked,
+    citizenship_number: citizen.citizenship_number || "",
+    consent_channel: citizen.consent_channel,
   });
 
   const [toast, setToast] = useState("");
@@ -558,9 +567,16 @@ function EditIdentityModal({
       name_en: citizen.name_en,
       dob: citizen.dob,
       sex: citizen.sex,
+      blood_group: (citizen as unknown as Record<string, unknown>).blood_group as string || "",
+      religion: (citizen as unknown as Record<string, unknown>).religion as string || "",
+      ethnicity: (citizen as unknown as Record<string, unknown>).ethnicity as string || "",
+      mother_tongue: (citizen as unknown as Record<string, unknown>).mother_tongue as string || "",
       tole: citizen.tole,
       digital_literacy: citizen.digital_literacy,
       has_smartphone: citizen.has_smartphone,
+      nid_number: (citizen as unknown as Record<string, unknown>).nid_number as string || citizen.nid_masked,
+      citizenship_number: citizen.citizenship_number || "",
+      consent_channel: citizen.consent_channel,
     };
     const newVals: Record<string, unknown> = {
       ...form,
@@ -593,14 +609,21 @@ function EditIdentityModal({
   return (
     <Modal open={open} onClose={onClose} title="Edit Identity Information">
       {toast && <Toast message={toast} onClose={() => setToast("")} />}
-      <div className="space-y-3">
+      <div className="space-y-3 max-h-96 overflow-y-auto">
         <InputField label="Name (Nepali)" value={form.name_np} onChange={(v) => setForm({ ...form, name_np: v })} />
         <InputField label="Name (English)" value={form.name_en} onChange={(v) => setForm({ ...form, name_en: v })} />
         <InputField label="Date of Birth" value={form.dob} onChange={(v) => setForm({ ...form, dob: v })} type="date" />
         <SelectField label="Sex" value={form.sex} onChange={(v) => setForm({ ...form, sex: v })} options={SEXES.map((s) => ({ value: s, label: s }))} />
+        <SelectField label="Blood Group" value={form.blood_group} onChange={(v) => setForm({ ...form, blood_group: v })} options={BLOOD_GROUPS.map((b) => ({ value: b, label: BLOOD_GROUP_LABELS[b] || b }))} />
+        <InputField label="Religion" value={form.religion} onChange={(v) => setForm({ ...form, religion: v })} />
+        <InputField label="Ethnicity" value={form.ethnicity} onChange={(v) => setForm({ ...form, ethnicity: v })} />
+        <InputField label="Mother Tongue" value={form.mother_tongue} onChange={(v) => setForm({ ...form, mother_tongue: v })} />
         <InputField label="Tole" value={form.tole} onChange={(v) => setForm({ ...form, tole: v })} />
         <SelectField label="Digital Literacy" value={form.digital_literacy} onChange={(v) => setForm({ ...form, digital_literacy: v })} options={DIGITAL_LITERACIES.map((d) => ({ value: d, label: d }))} />
         <SelectField label="Has Smartphone" value={form.has_smartphone} onChange={(v) => setForm({ ...form, has_smartphone: v })} options={[{ value: "true", label: "Yes" }, { value: "false", label: "No" }]} />
+        <InputField label="NID Number" value={form.nid_number} onChange={(v) => setForm({ ...form, nid_number: v })} />
+        <InputField label="Citizenship Number" value={form.citizenship_number} onChange={(v) => setForm({ ...form, citizenship_number: v })} />
+        <SelectField label="Consent Channel" value={form.consent_channel} onChange={(v) => setForm({ ...form, consent_channel: v })} options={CONSENT_CHANNELS.map((c) => ({ value: c, label: CONSENT_CHANNEL_LABELS[c] || c }))} />
         <div className="flex justify-end gap-2 pt-3">
           <button onClick={onClose} className="px-4 py-2 text-sm font-medium text-gray-700 rounded-lg border border-gray-300 hover:bg-gray-50">Cancel</button>
           <button onClick={handleSave} className="px-4 py-2 text-sm font-medium text-white rounded-lg bg-blue-600 hover:bg-blue-700">Submit for Approval</button>
@@ -623,9 +646,15 @@ function EditFamilyModal({
 }) {
   const [form, setForm] = useState({
     father_name: family?.father?.name_en || "",
+    father_citizenship: family?.father?.citizenship_number || "",
     mother_name: family?.mother?.name_en || "",
+    mother_citizenship: family?.mother?.citizenship_number || "",
     spouse_name: family?.spouse?.name_en || "",
+    spouse_citizenship: family?.spouse?.citizenship_number || "",
   });
+  const [children, setChildren] = useState<{ name_en: string; citizenship_number: string }[]>(
+    family?.children?.map((c) => ({ name_en: c.name_en, citizenship_number: c.citizenship_number })) || [],
+  );
 
   const [toast, setToast] = useState("");
 
@@ -634,8 +663,13 @@ function EditFamilyModal({
       father_name: family?.father?.name_en || "",
       mother_name: family?.mother?.name_en || "",
       spouse_name: family?.spouse?.name_en || "",
+      children_count: family?.children?.length || 0,
     };
-    const newVals: Record<string, unknown> = { ...form };
+    const newVals: Record<string, unknown> = {
+      ...form,
+      children_count: children.length,
+      children_names: children.map((c) => c.name_en).join(", "),
+    };
     const changed: Record<string, unknown> = {};
     for (const key of Object.keys(newVals)) {
       if (String(oldVals[key]) !== String(newVals[key])) {
@@ -657,13 +691,45 @@ function EditFamilyModal({
     setTimeout(() => { setToast(""); onClose(); }, 1000);
   }
 
+  function addChild() {
+    setChildren([...children, { name_en: "", citizenship_number: "" }]);
+  }
+
+  function updateChild(index: number, field: string, value: string) {
+    const next = [...children];
+    next[index] = { ...next[index], [field]: value };
+    setChildren(next);
+  }
+
+  function removeChild(index: number) {
+    setChildren(children.filter((_, i) => i !== index));
+  }
+
   return (
     <Modal open={open} onClose={onClose} title="Edit Family Information">
       {toast && <Toast message={toast} onClose={() => setToast("")} />}
-      <div className="space-y-3">
+      <div className="space-y-3 max-h-96 overflow-y-auto">
         <InputField label="Father's Name (EN)" value={form.father_name} onChange={(v) => setForm({ ...form, father_name: v })} />
+        <InputField label="Father's Citizenship No." value={form.father_citizenship} onChange={(v) => setForm({ ...form, father_citizenship: v })} />
         <InputField label="Mother's Name (EN)" value={form.mother_name} onChange={(v) => setForm({ ...form, mother_name: v })} />
+        <InputField label="Mother's Citizenship No." value={form.mother_citizenship} onChange={(v) => setForm({ ...form, mother_citizenship: v })} />
         <InputField label="Spouse's Name (EN)" value={form.spouse_name} onChange={(v) => setForm({ ...form, spouse_name: v })} />
+        <InputField label="Spouse's Citizenship No." value={form.spouse_citizenship} onChange={(v) => setForm({ ...form, spouse_citizenship: v })} />
+        <div className="border-t border-gray-200 pt-3">
+          <div className="flex items-center justify-between mb-2">
+            <span className="text-sm font-medium text-gray-700">Children ({children.length})</span>
+            <button onClick={addChild} className="text-xs font-medium text-blue-600 hover:text-blue-800 px-2 py-1 rounded border border-blue-200">+ Add Child</button>
+          </div>
+          {children.map((child, i) => (
+            <div key={i} className="flex gap-2 items-start mb-2 p-2 bg-gray-50 rounded-lg">
+              <div className="flex-1 space-y-1">
+                <InputField label={`Child ${i + 1} Name`} value={child.name_en} onChange={(v) => updateChild(i, "name_en", v)} />
+                <InputField label="Citizenship No." value={child.citizenship_number} onChange={(v) => updateChild(i, "citizenship_number", v)} />
+              </div>
+              <button onClick={() => removeChild(i)} className="mt-6 text-red-500 hover:text-red-700 text-sm">Remove</button>
+            </div>
+          ))}
+        </div>
         <div className="flex justify-end gap-2 pt-3">
           <button onClick={onClose} className="px-4 py-2 text-sm font-medium text-gray-700 rounded-lg border border-gray-300 hover:bg-gray-50">Cancel</button>
           <button onClick={handleSave} className="px-4 py-2 text-sm font-medium text-white rounded-lg bg-blue-600 hover:bg-blue-700">Submit for Approval</button>
@@ -684,22 +750,79 @@ function EditEmploymentModal({
   citizenId: string;
   employment: Record<string, unknown> | null;
 }) {
-  const [form, setForm] = useState({
+  const [form, setForm] = useState<Record<string, string>>({
     category: (employment?.category as string) || "",
     income_band: (employment?.income_band as string) || "",
+    unemployed_duration_months: String((employment as Record<string, unknown>)?.unemployed_duration_months ?? ""),
+    unemployed_skills: ((employment as Record<string, unknown>)?.unemployed_skills as string[])?.join(",") || "",
+    unemployed_office_registered: String(!!(employment as Record<string, unknown>)?.unemployed_office_registered),
+    farmer_land_area_ropani: (employment as Record<string, unknown>)?.farmer_land_area_ropani as string || "",
+    farmer_land_type: (employment as Record<string, unknown>)?.farmer_land_type as string || "",
+    farmer_primary_crop: (employment as Record<string, unknown>)?.farmer_primary_crop as string || "",
+    farmer_irrigation_type: (employment as Record<string, unknown>)?.farmer_irrigation_type as string || "",
+    farmer_agri_loan: String(!!(employment as Record<string, unknown>)?.farmer_agri_loan),
+    foreign_country: (employment as Record<string, unknown>)?.foreign_country as string || "",
+    foreign_visa_type: (employment as Record<string, unknown>)?.foreign_visa_type as string || "",
+    foreign_employer_name: (employment as Record<string, unknown>)?.foreign_employer_name as string || "",
+    foreign_departure_date: (employment as Record<string, unknown>)?.foreign_departure_date as string || "",
+    foreign_expected_return: (employment as Record<string, unknown>)?.foreign_expected_return as string || "",
+    foreign_remittance_band: (employment as Record<string, unknown>)?.foreign_remittance_band as string || "",
+    foreign_doe_registered: String(!!(employment as Record<string, unknown>)?.foreign_doe_registered),
+    gov_ministry: (employment as Record<string, unknown>)?.gov_ministry as string || "",
+    gov_grade: (employment as Record<string, unknown>)?.gov_grade as string || "",
+    gov_posting_district: (employment as Record<string, unknown>)?.gov_posting_district as string || "",
+    gov_service_entry_year: (employment as Record<string, unknown>)?.gov_service_entry_year as string || "",
+    student_institution: (employment as Record<string, unknown>)?.student_institution as string || "",
+    student_level: (employment as Record<string, unknown>)?.student_level as string || "",
+    student_field_of_study: (employment as Record<string, unknown>)?.student_field_of_study as string || "",
+    student_abroad: String(!!(employment as Record<string, unknown>)?.student_abroad),
   });
 
   const [toast, setToast] = useState("");
+  const cat = form.category;
 
   function handleSave() {
     const oldVals: Record<string, unknown> = {
       category: (employment?.category as string) || "",
       income_band: (employment?.income_band as string) || "",
     };
-    const newVals: Record<string, unknown> = { ...form };
+    const newVals: Record<string, unknown> = { category: form.category, income_band: form.income_band };
+    if (cat === "UNEMPLOYED") {
+      newVals.unemployed_duration_months = Number(form.unemployed_duration_months) || 0;
+      newVals.unemployed_skills = form.unemployed_skills ? form.unemployed_skills.split(",") : [];
+      newVals.unemployed_office_registered = form.unemployed_office_registered === "true";
+    }
+    if (cat === "FARMER") {
+      newVals.farmer_land_area_ropani = form.farmer_land_area_ropani;
+      newVals.farmer_land_type = form.farmer_land_type;
+      newVals.farmer_primary_crop = form.farmer_primary_crop;
+      newVals.farmer_irrigation_type = form.farmer_irrigation_type;
+      newVals.farmer_agri_loan = form.farmer_agri_loan === "true";
+    }
+    if (cat === "FOREIGN_ABROAD") {
+      newVals.foreign_country = form.foreign_country;
+      newVals.foreign_visa_type = form.foreign_visa_type;
+      newVals.foreign_employer_name = form.foreign_employer_name;
+      newVals.foreign_departure_date = form.foreign_departure_date;
+      newVals.foreign_expected_return = form.foreign_expected_return;
+      newVals.foreign_remittance_band = form.foreign_remittance_band;
+      newVals.foreign_doe_registered = form.foreign_doe_registered === "true";
+    }
+    if (cat === "GOVERNMENT") {
+      newVals.gov_ministry = form.gov_ministry;
+      newVals.gov_grade = form.gov_grade;
+      newVals.gov_posting_district = form.gov_posting_district;
+      newVals.gov_service_entry_year = form.gov_service_entry_year;
+    }
+    if (cat === "STUDENT") {
+      newVals.student_institution = form.student_institution;
+      newVals.student_level = form.student_level;
+      newVals.student_field_of_study = form.student_field_of_study;
+      newVals.student_abroad = form.student_abroad === "true";
+    }
     const changed: Record<string, unknown> = {};
     for (const key of Object.keys(newVals)) {
-      if (String(oldVals[key]) !== String(newVals[key])) { changed[key] = newVals[key]; }
+      if (String(oldVals[key] ?? "") !== String(newVals[key] ?? "")) { changed[key] = newVals[key]; }
     }
     if (Object.keys(changed).length === 0) { onClose(); return; }
     const entry: ApprovalEntry = {
@@ -708,7 +831,7 @@ function EditEmploymentModal({
       submitter_id: "ward-staff",
       status: "PENDING_APPROVAL",
       old_value_json: oldVals,
-      new_value_json: newVals,
+      new_value_json: changed,
       submitted_at: new Date().toISOString(),
     };
     saveApproval(entry);
@@ -719,7 +842,7 @@ function EditEmploymentModal({
   return (
     <Modal open={open} onClose={onClose} title="Edit Employment Information">
       {toast && <Toast message={toast} onClose={() => setToast("")} />}
-      <div className="space-y-3">
+      <div className="space-y-3 max-h-96 overflow-y-auto">
         <SelectField
           label="Employment Category"
           value={form.category}
@@ -732,6 +855,55 @@ function EditEmploymentModal({
           onChange={(v) => setForm({ ...form, income_band: v })}
           options={INCOME_BANDS.map((b) => ({ value: b, label: INCOME_BAND_LABELS[b] || b }))}
         />
+
+        {cat === "UNEMPLOYED" && (
+          <>
+            <InputField label="Duration (months)" value={form.unemployed_duration_months} onChange={(v) => setForm({ ...form, unemployed_duration_months: v })} type="number" />
+            <InputField label="Skills (comma-separated)" value={form.unemployed_skills} onChange={(v) => setForm({ ...form, unemployed_skills: v })} />
+            <SelectField label="Registered with Employment Office" value={form.unemployed_office_registered} onChange={(v) => setForm({ ...form, unemployed_office_registered: v })} options={[{ value: "true", label: "Yes" }, { value: "false", label: "No" }]} />
+          </>
+        )}
+
+        {cat === "FARMER" && (
+          <>
+            <InputField label="Land Area (Ropani)" value={form.farmer_land_area_ropani} onChange={(v) => setForm({ ...form, farmer_land_area_ropani: v })} />
+            <SelectField label="Land Type" value={form.farmer_land_type} onChange={(v) => setForm({ ...form, farmer_land_type: v })} options={Object.entries(LAND_TYPE_LABELS).map(([v, l]) => ({ value: v, label: l }))} />
+            <InputField label="Primary Crop" value={form.farmer_primary_crop} onChange={(v) => setForm({ ...form, farmer_primary_crop: v })} />
+            <SelectField label="Irrigation Type" value={form.farmer_irrigation_type} onChange={(v) => setForm({ ...form, farmer_irrigation_type: v })} options={Object.entries(IRRIGATION_TYPE_LABELS).map(([v, l]) => ({ value: v, label: l }))} />
+            <SelectField label="Has Agricultural Loan" value={form.farmer_agri_loan} onChange={(v) => setForm({ ...form, farmer_agri_loan: v })} options={[{ value: "true", label: "Yes" }, { value: "false", label: "No" }]} />
+          </>
+        )}
+
+        {cat === "FOREIGN_ABROAD" && (
+          <>
+            <SelectField label="Country" value={form.foreign_country} onChange={(v) => setForm({ ...form, foreign_country: v })} options={COUNTRY_OPTIONS} />
+            <SelectField label="Visa Type" value={form.foreign_visa_type} onChange={(v) => setForm({ ...form, foreign_visa_type: v })} options={Object.entries(VISA_TYPE_LABELS).map(([v, l]) => ({ value: v, label: l }))} />
+            <InputField label="Employer Name" value={form.foreign_employer_name} onChange={(v) => setForm({ ...form, foreign_employer_name: v })} />
+            <InputField label="Departure Date" value={form.foreign_departure_date} onChange={(v) => setForm({ ...form, foreign_departure_date: v })} type="date" />
+            <InputField label="Expected Return" value={form.foreign_expected_return} onChange={(v) => setForm({ ...form, foreign_expected_return: v })} type="date" />
+            <SelectField label="Remittance Band" value={form.foreign_remittance_band} onChange={(v) => setForm({ ...form, foreign_remittance_band: v })} options={Object.entries(REMITTANCE_BAND_LABELS).map(([v, l]) => ({ value: v, label: l }))} />
+            <SelectField label="DOE Registered" value={form.foreign_doe_registered} onChange={(v) => setForm({ ...form, foreign_doe_registered: v })} options={[{ value: "true", label: "Yes" }, { value: "false", label: "No" }]} />
+          </>
+        )}
+
+        {cat === "GOVERNMENT" && (
+          <>
+            <InputField label="Ministry" value={form.gov_ministry} onChange={(v) => setForm({ ...form, gov_ministry: v })} />
+            <SelectField label="Grade" value={form.gov_grade} onChange={(v) => setForm({ ...form, gov_grade: v })} options={Object.entries(GOV_GRADE_LABELS).map(([v, l]) => ({ value: v, label: l }))} />
+            <InputField label="Posting District" value={form.gov_posting_district} onChange={(v) => setForm({ ...form, gov_posting_district: v })} />
+            <InputField label="Service Entry Year" value={form.gov_service_entry_year} onChange={(v) => setForm({ ...form, gov_service_entry_year: v })} />
+          </>
+        )}
+
+        {cat === "STUDENT" && (
+          <>
+            <InputField label="Institution Name" value={form.student_institution} onChange={(v) => setForm({ ...form, student_institution: v })} />
+            <SelectField label="Level" value={form.student_level} onChange={(v) => setForm({ ...form, student_level: v })} options={Object.entries(STUDENT_LEVEL_LABELS).map(([v, l]) => ({ value: v, label: l }))} />
+            <InputField label="Field of Study" value={form.student_field_of_study} onChange={(v) => setForm({ ...form, student_field_of_study: v })} />
+            <SelectField label="Study Abroad" value={form.student_abroad} onChange={(v) => setForm({ ...form, student_abroad: v })} options={[{ value: "true", label: "Yes" }, { value: "false", label: "No" }]} />
+          </>
+        )}
+
         <div className="flex justify-end gap-2 pt-3">
           <button onClick={onClose} className="px-4 py-2 text-sm font-medium text-gray-700 rounded-lg border border-gray-300 hover:bg-gray-50">Cancel</button>
           <button onClick={handleSave} className="px-4 py-2 text-sm font-medium text-white rounded-lg bg-blue-600 hover:bg-blue-700">Submit for Approval</button>
@@ -752,11 +924,17 @@ function EditEducationModal({
   citizenId: string;
   education: Record<string, unknown> | null;
 }) {
-  const [form, setForm] = useState({
+  const [form, setForm] = useState<Record<string, string>>({
     level: (education?.level as string) || "",
     institution_name: (education?.institution_name as string) || "",
     institution_type: (education?.institution_type as string) || "",
     study_location: (education?.study_location as string) || "",
+    is_dropout: String(!!(education as Record<string, unknown>)?.is_dropout),
+    dropout_reason: (education as Record<string, unknown>)?.dropout_reason as string || "",
+    dropout_date: (education as Record<string, unknown>)?.dropout_date as string || "",
+    has_scholarship: String(!!(education as Record<string, unknown>)?.has_scholarship),
+    scholarship_type: (education as Record<string, unknown>)?.scholarship_type as string || "",
+    scholarship_provider: (education as Record<string, unknown>)?.scholarship_provider as string || "",
   });
 
   const [toast, setToast] = useState("");
@@ -766,11 +944,18 @@ function EditEducationModal({
       level: (education?.level as string) || "",
       institution_name: (education?.institution_name as string) || "",
       institution_type: (education?.institution_type as string) || "",
+      study_location: (education?.study_location as string) || "",
+      is_dropout: !!(education as Record<string, unknown>)?.is_dropout,
+      has_scholarship: !!(education as Record<string, unknown>)?.has_scholarship,
     };
-    const newVals: Record<string, unknown> = { ...form };
+    const newVals: Record<string, unknown> = {
+      ...form,
+      is_dropout: form.is_dropout === "true",
+      has_scholarship: form.has_scholarship === "true",
+    };
     const changed: Record<string, unknown> = {};
     for (const key of Object.keys(newVals)) {
-      if (String(oldVals[key]) !== String(newVals[key])) { changed[key] = newVals[key]; }
+      if (String(oldVals[key] ?? "") !== String(newVals[key] ?? "")) { changed[key] = newVals[key]; }
     }
     if (Object.keys(changed).length === 0) { onClose(); return; }
     const entry: ApprovalEntry = {
@@ -779,7 +964,7 @@ function EditEducationModal({
       submitter_id: "ward-staff",
       status: "PENDING_APPROVAL",
       old_value_json: oldVals,
-      new_value_json: newVals,
+      new_value_json: changed,
       submitted_at: new Date().toISOString(),
     };
     saveApproval(entry);
@@ -790,11 +975,25 @@ function EditEducationModal({
   return (
     <Modal open={open} onClose={onClose} title="Edit Education Information">
       {toast && <Toast message={toast} onClose={() => setToast("")} />}
-      <div className="space-y-3">
+      <div className="space-y-3 max-h-96 overflow-y-auto">
         <SelectField label="Education Level" value={form.level} onChange={(v) => setForm({ ...form, level: v })} options={Object.entries(STUDENT_LEVEL_LABELS).map(([v, l]) => ({ value: v, label: l }))} />
         <InputField label="Institution Name" value={form.institution_name} onChange={(v) => setForm({ ...form, institution_name: v })} />
         <SelectField label="Institution Type" value={form.institution_type} onChange={(v) => setForm({ ...form, institution_type: v })} options={Object.entries(INSTITUTION_TYPE_LABELS).map(([v, l]) => ({ value: v, label: l }))} />
         <InputField label="Study Location" value={form.study_location} onChange={(v) => setForm({ ...form, study_location: v })} />
+        <SelectField label="Is Dropout" value={form.is_dropout} onChange={(v) => setForm({ ...form, is_dropout: v })} options={[{ value: "true", label: "Yes" }, { value: "false", label: "No" }]} />
+        {form.is_dropout === "true" && (
+          <>
+            <InputField label="Dropout Reason" value={form.dropout_reason} onChange={(v) => setForm({ ...form, dropout_reason: v })} />
+            <InputField label="Dropout Date" value={form.dropout_date} onChange={(v) => setForm({ ...form, dropout_date: v })} type="date" />
+          </>
+        )}
+        <SelectField label="Has Scholarship" value={form.has_scholarship} onChange={(v) => setForm({ ...form, has_scholarship: v })} options={[{ value: "true", label: "Yes" }, { value: "false", label: "No" }]} />
+        {form.has_scholarship === "true" && (
+          <>
+            <SelectField label="Scholarship Type" value={form.scholarship_type} onChange={(v) => setForm({ ...form, scholarship_type: v })} options={Object.entries(SCHOLARSHIP_TYPE_LABELS).map(([v, l]) => ({ value: v, label: l }))} />
+            <InputField label="Scholarship Provider" value={form.scholarship_provider} onChange={(v) => setForm({ ...form, scholarship_provider: v })} />
+          </>
+        )}
         <div className="flex justify-end gap-2 pt-3">
           <button onClick={onClose} className="px-4 py-2 text-sm font-medium text-gray-700 rounded-lg border border-gray-300 hover:bg-gray-50">Cancel</button>
           <button onClick={handleSave} className="px-4 py-2 text-sm font-medium text-white rounded-lg bg-blue-600 hover:bg-blue-700">Submit for Approval</button>
@@ -904,13 +1103,17 @@ function EditHouseholdModal({
   citizenId: string;
   household: Record<string, unknown> | null;
 }) {
-  const [form, setForm] = useState({
+  const [form, setForm] = useState<Record<string, string>>({
     house_type: (household?.house_type as string) || "",
+    construction_type: (household?.construction_type as string) || "",
     room_count: String((household?.room_count as number) ?? 0),
-    electricity: (household?.electricity as string) || (household?.electricity_source as string) || "",
+    electricity_source: (household?.electricity_source as string) || (household?.electricity as string) || "",
     water_source: (household?.water_source as string) || "",
-    poverty_class: (household?.poverty_class as string) || "",
+    sanitation: (household?.sanitation as string) || "",
+    internet_access: (household?.internet_access as string) || "",
+    has_bank_account: String(!!(household as Record<string, unknown>)?.has_bank_account),
     monthly_income_band: (household?.monthly_income_band as string) || "",
+    poverty_class: (household?.poverty_class as string) || "",
   });
 
   const [toast, setToast] = useState("");
@@ -918,14 +1121,24 @@ function EditHouseholdModal({
   function handleSave() {
     const oldVals: Record<string, unknown> = {
       house_type: (household?.house_type as string) || "",
+      construction_type: (household?.construction_type as string) || "",
       room_count: (household?.room_count as number) ?? 0,
+      electricity_source: (household?.electricity_source as string) || (household?.electricity as string) || "",
       water_source: (household?.water_source as string) || "",
+      sanitation: (household?.sanitation as string) || "",
+      internet_access: (household?.internet_access as string) || "",
+      has_bank_account: !!(household as Record<string, unknown>)?.has_bank_account,
+      monthly_income_band: (household?.monthly_income_band as string) || "",
       poverty_class: (household?.poverty_class as string) || "",
     };
-    const newVals: Record<string, unknown> = { ...form, room_count: Number(form.room_count) };
+    const newVals: Record<string, unknown> = {
+      ...form,
+      room_count: Number(form.room_count),
+      has_bank_account: form.has_bank_account === "true",
+    };
     const changed: Record<string, unknown> = {};
-    for (const key of ["house_type", "room_count", "water_source", "poverty_class"]) {
-      if (String(oldVals[key]) !== String(newVals[key])) { changed[key] = newVals[key]; }
+    for (const key of Object.keys(newVals)) {
+      if (String(oldVals[key] ?? "") !== String(newVals[key] ?? "")) { changed[key] = newVals[key]; }
     }
     if (Object.keys(changed).length === 0) { onClose(); return; }
     const entry: ApprovalEntry = {
@@ -934,7 +1147,7 @@ function EditHouseholdModal({
       submitter_id: "ward-staff",
       status: "PENDING_APPROVAL",
       old_value_json: oldVals,
-      new_value_json: { ...changed },
+      new_value_json: changed,
       submitted_at: new Date().toISOString(),
     };
     saveApproval(entry);
@@ -945,11 +1158,128 @@ function EditHouseholdModal({
   return (
     <Modal open={open} onClose={onClose} title="Edit Household Information">
       {toast && <Toast message={toast} onClose={() => setToast("")} />}
-      <div className="space-y-3">
+      <div className="space-y-3 max-h-96 overflow-y-auto">
         <SelectField label="House Type" value={form.house_type} onChange={(v) => setForm({ ...form, house_type: v })} options={Object.entries(HOUSE_TYPE_LABELS).map(([v, l]) => ({ value: v, label: l }))} />
+        <SelectField label="Construction Type" value={form.construction_type} onChange={(v) => setForm({ ...form, construction_type: v })} options={Object.entries(CONSTRUCTION_TYPE_LABELS).map(([v, l]) => ({ value: v, label: l }))} />
         <InputField label="Room Count" value={form.room_count} onChange={(v) => setForm({ ...form, room_count: v })} type="number" />
+        <SelectField label="Electricity Source" value={form.electricity_source} onChange={(v) => setForm({ ...form, electricity_source: v })} options={Object.entries(ELECTRICITY_SOURCE_LABELS).map(([v, l]) => ({ value: v, label: l }))} />
         <SelectField label="Water Source" value={form.water_source} onChange={(v) => setForm({ ...form, water_source: v })} options={Object.entries(WATER_SOURCE_LABELS).map(([v, l]) => ({ value: v, label: l }))} />
+        <SelectField label="Sanitation" value={form.sanitation} onChange={(v) => setForm({ ...form, sanitation: v })} options={Object.entries(SANITATION_LABELS).map(([v, l]) => ({ value: v, label: l }))} />
+        <SelectField label="Internet Access" value={form.internet_access} onChange={(v) => setForm({ ...form, internet_access: v })} options={Object.entries(INTERNET_ACCESS_LABELS).map(([v, l]) => ({ value: v, label: l }))} />
+        <SelectField label="Has Bank Account" value={form.has_bank_account} onChange={(v) => setForm({ ...form, has_bank_account: v })} options={[{ value: "true", label: "Yes" }, { value: "false", label: "No" }]} />
+        <SelectField label="Monthly Income Band" value={form.monthly_income_band} onChange={(v) => setForm({ ...form, monthly_income_band: v })} options={INCOME_BANDS.map((b) => ({ value: b, label: INCOME_BAND_LABELS[b] || b }))} />
         <SelectField label="Poverty Class" value={form.poverty_class} onChange={(v) => setForm({ ...form, poverty_class: v })} options={Object.entries(POVERTY_CLASS_LABELS).map(([v, l]) => ({ value: v, label: l }))} />
+        <div className="flex justify-end gap-2 pt-3">
+          <button onClick={onClose} className="px-4 py-2 text-sm font-medium text-gray-700 rounded-lg border border-gray-300 hover:bg-gray-50">Cancel</button>
+          <button onClick={handleSave} className="px-4 py-2 text-sm font-medium text-white rounded-lg bg-blue-600 hover:bg-blue-700">Submit for Approval</button>
+        </div>
+      </div>
+    </Modal>
+  );
+}
+
+function EditPhotoModal({
+  open,
+  onClose,
+  citizenId,
+}: {
+  open: boolean;
+  onClose: () => void;
+  citizenId: string;
+}) {
+  const [photo, setPhoto] = useState<string | null>(null);
+  const [toast, setToast] = useState("");
+
+  function handleFileUpload(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (file) {
+      setPhoto(URL.createObjectURL(file));
+    }
+  }
+
+  function handleSave() {
+    if (!photo) { onClose(); return; }
+    const entry: ApprovalEntry = {
+      id: `edit-${nanoid(8)}`,
+      citizen_id: citizenId,
+      submitter_id: "ward-staff",
+      status: "PENDING_APPROVAL",
+      old_value_json: { photo: "(existing)" },
+      new_value_json: { photo: "(new photo uploaded for approval)" },
+      submitted_at: new Date().toISOString(),
+    };
+    saveApproval(entry);
+    setToast("Edit submitted for approval");
+    setTimeout(() => { setToast(""); onClose(); }, 1000);
+  }
+
+  return (
+    <Modal open={open} onClose={onClose} title="Edit Biometric Photo">
+      {toast && <Toast message={toast} onClose={() => setToast("")} />}
+      <div className="space-y-4">
+        {photo ? (
+          <div className="flex flex-col items-center gap-3">
+            <img src={photo} alt="New photo" className="w-48 h-48 object-cover rounded-2xl border-2 border-green-300" />
+            <label className="text-sm font-medium text-blue-600 cursor-pointer hover:text-blue-800">
+              <input type="file" className="hidden" onChange={handleFileUpload} accept="image/*" />
+              Change Photo
+            </label>
+            <button onClick={() => setPhoto(null)} className="text-sm text-red-500 hover:text-red-700">Remove</button>
+          </div>
+        ) : (
+          <label className="flex flex-col items-center justify-center h-48 border-2 border-dashed border-gray-300 rounded-2xl cursor-pointer hover:border-blue-400 hover:bg-blue-50/50">
+            <input type="file" className="hidden" onChange={handleFileUpload} accept="image/*" />
+            <span className="text-sm text-gray-500 font-medium">Click to upload new photo</span>
+          </label>
+        )}
+        <div className="flex justify-end gap-2 pt-3">
+          <button onClick={onClose} className="px-4 py-2 text-sm font-medium text-gray-700 rounded-lg border border-gray-300 hover:bg-gray-50">Cancel</button>
+          <button onClick={handleSave} disabled={!photo} className="px-4 py-2 text-sm font-medium text-white rounded-lg bg-blue-600 hover:bg-blue-700 disabled:bg-gray-300">Submit for Approval</button>
+        </div>
+      </div>
+    </Modal>
+  );
+}
+
+function EditGpsModal({
+  open,
+  onClose,
+  citizenId,
+}: {
+  open: boolean;
+  onClose: () => void;
+  citizenId: string;
+}) {
+  const [form, setForm] = useState({ latitude: "", longitude: "", place_name: "" });
+  const [toast, setToast] = useState("");
+
+  function handleSave() {
+    const changed: Record<string, unknown> = {};
+    if (form.latitude) changed.latitude = form.latitude;
+    if (form.longitude) changed.longitude = form.longitude;
+    if (form.place_name) changed.place_name = form.place_name;
+    if (Object.keys(changed).length === 0) { onClose(); return; }
+    const entry: ApprovalEntry = {
+      id: `edit-${nanoid(8)}`,
+      citizen_id: citizenId,
+      submitter_id: "ward-staff",
+      status: "PENDING_APPROVAL",
+      old_value_json: { latitude: "", longitude: "", place_name: "" },
+      new_value_json: changed,
+      submitted_at: new Date().toISOString(),
+    };
+    saveApproval(entry);
+    setToast("Edit submitted for approval");
+    setTimeout(() => { setToast(""); onClose(); }, 1000);
+  }
+
+  return (
+    <Modal open={open} onClose={onClose} title="Edit GPS Coordinates">
+      {toast && <Toast message={toast} onClose={() => setToast("")} />}
+      <div className="space-y-3">
+        <InputField label="Latitude" value={form.latitude} onChange={(v) => setForm({ ...form, latitude: v })} placeholder="e.g. 27.7172" />
+        <InputField label="Longitude" value={form.longitude} onChange={(v) => setForm({ ...form, longitude: v })} placeholder="e.g. 85.3240" />
+        <InputField label="Place Name" value={form.place_name} onChange={(v) => setForm({ ...form, place_name: v })} />
         <div className="flex justify-end gap-2 pt-3">
           <button onClick={onClose} className="px-4 py-2 text-sm font-medium text-gray-700 rounded-lg border border-gray-300 hover:bg-gray-50">Cancel</button>
           <button onClick={handleSave} className="px-4 py-2 text-sm font-medium text-white rounded-lg bg-blue-600 hover:bg-blue-700">Submit for Approval</button>
@@ -1038,6 +1368,28 @@ export default function CitizenDetailPage() {
       content: <HouseholdTab household={householdRec} onEdit={() => setEditModal("household")} />,
     },
     {
+      label: "Photo",
+      content: (
+        <SectionCard title="Biometric Photo" description="Citizen portrait photo">
+          <SectionHeader title="Portrait" onEdit={() => setEditModal("photo")} />
+          <div className="text-sm text-gray-400 py-4 text-center">
+            Upload or replace the citizen's biometric photo.
+          </div>
+        </SectionCard>
+      ),
+    },
+    {
+      label: "GPS",
+      content: (
+        <SectionCard title="GPS Coordinates" description="Geographic location of residence">
+          <SectionHeader title="Location" onEdit={() => setEditModal("gps")} />
+          <div className="text-sm text-gray-400 py-4 text-center">
+            Update the citizen's GPS coordinates and place name.
+          </div>
+        </SectionCard>
+      ),
+    },
+    {
       label: "ID Cards",
       content: <IDCardsTab cards={idCards} />,
     },
@@ -1104,6 +1456,12 @@ export default function CitizenDetailPage() {
       )}
       {editModal === "household" && (
         <EditHouseholdModal open onClose={() => setEditModal(null)} citizenId={citizen.id} household={householdRec} />
+      )}
+      {editModal === "photo" && (
+        <EditPhotoModal open onClose={() => setEditModal(null)} citizenId={citizen.id} />
+      )}
+      {editModal === "gps" && (
+        <EditGpsModal open onClose={() => setEditModal(null)} citizenId={citizen.id} />
       )}
     </main>
   );

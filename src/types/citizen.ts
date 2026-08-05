@@ -124,11 +124,13 @@ export type LinkStatus = "pending" | "linked";
 
 export interface FamilyMember {
   id: string;
-  relationship: "FATHER" | "MOTHER" | "SPOUSE" | "CHILD";
+  relationship: "FATHER" | "MOTHER" | "SPOUSE" | "CHILD" | "OTHER";
   name_np: string;
   name_en: string;
   citizenship_number: string;
   link_status: LinkStatus;
+  occupation?: string;
+  age?: string;
 }
 
 export interface DisabilityData {
@@ -188,6 +190,8 @@ export interface RegistrationFormData {
   nid_number: string;
   nid_verified: boolean;
   citizenship_number: string;
+  citizenship_front: string | null;
+  citizenship_back: string | null;
   consent_channel: ConsentChannel | "";
   consent_recorded_at: string;
   photo: string | null;

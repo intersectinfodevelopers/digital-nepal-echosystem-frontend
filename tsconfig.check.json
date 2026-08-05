@@ -1,0 +1,17 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "skipLibCheck": true
+  },
+  "include": [
+    "src/app/portal/nid/page.tsx",
+    "src/app/portal/personal/page.tsx",
+    "src/app/portal/family/page.tsx",
+    "src/components/NidStep.tsx",
+    "src/components/PersonalStep.tsx",
+    "src/components/Sidebar.tsx",
+    "src/components/Stepper.tsx",
+    "src/components/layout.tsx"
+  ]
+}

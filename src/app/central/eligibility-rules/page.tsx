@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import Link from "next/link";
+import { Pagination } from "@/components/ui/Pagination";
 import rulesData from "../../../../data/eligibility-rules.json";
 
 /* types */
@@ -89,6 +90,32 @@ export default function Page() {
   const [selectedRule, setSelectedRule] = useState<Rule | null>(null);
   const [showToggleModal, setShowToggleModal] = useState(false);
   const [showCreateModal, setShowCreateModal] = useState(false);
+
+  const [search, setSearch] = useState("");
+  const [benefitTypeFilter, setBenefitTypeFilter] = useState("");
+  const [statusFilter, setStatusFilter] = useState("");
+  const [page, setPage] = useState(1);
+  const pageSize = 10;
+
+  const filteredData = useMemo(() => {
+    return data.filter((rule) => {
+      if (search) {
+        const q = search.toLowerCase();
+        if (!rule.rule_name.toLowerCase().includes(q)) return false;
+      }
+      if (benefitTypeFilter && rule.benefit_type !== benefitTypeFilter) return false;
+      if (statusFilter === "active" && !rule.is_active) return false;
+      if (statusFilter === "inactive" && rule.is_active) return false;
+      return true;
+    });
+  }, [data, search, benefitTypeFilter, statusFilter]);
+
+  const totalPages = Math.ceil(filteredData.length / pageSize);
+
+  const paginatedData = useMemo(() => {
+    const start = (page - 1) * pageSize;
+    return filteredData.slice(start, start + pageSize);
+  }, [filteredData, page]);
 
   // Form state
   const [formData, setFormData] = useState({
@@ -194,6 +221,39 @@ export default function Page() {
         </button>
       </div>
 
+      {/* Filter Bar */}
+      <div className="bg-white shadow rounded-lg p-4 mb-6 flex flex-wrap gap-3 items-center border border-gray-200">
+        <input
+          type="text"
+          value={search}
+          onChange={(e) => { setSearch(e.target.value); setPage(1); }}
+          placeholder="Search by rule name..."
+          className="flex-1 min-w-50 border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+        <select
+          value={benefitTypeFilter}
+          onChange={(e) => { setBenefitTypeFilter(e.target.value); setPage(1); }}
+          className="border border-gray-300 rounded-lg px-3 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+        >
+          <option value="">All Benefit Types</option>
+          <option value="UNEMPLOYMENT_ID">UNEMPLOYMENT_ID</option>
+          <option value="DISABILITY_ID">DISABILITY_ID</option>
+          <option value="SENIOR_CITIZEN">SENIOR_CITIZEN</option>
+          <option value="SINGLE_WOMAN">SINGLE_WOMAN</option>
+          <option value="FOOD_SUBSIDY">FOOD_SUBSIDY</option>
+          <option value="HEALTH_INSURANCE">HEALTH_INSURANCE</option>
+        </select>
+        <select
+          value={statusFilter}
+          onChange={(e) => { setStatusFilter(e.target.value); setPage(1); }}
+          className="border border-gray-300 rounded-lg px-3 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+        >
+          <option value="">All Status</option>
+          <option value="active">Active</option>
+          <option value="inactive">Inactive</option>
+        </select>
+      </div>
+
       {/* TABLE */}
       <div className="bg-white shadow rounded-lg overflow-x-auto border border-gray-200">
         <table className="w-full border-collapse">
@@ -209,7 +269,7 @@ export default function Page() {
           </thead>
 
           <tbody className="divide-y divide-gray-200">
-            {data.map((rule, index) => (
+            {paginatedData.map((rule, index) => (
               <tr key={rule.id} className="hover:bg-gray-50">
                 <td className="p-3 font-medium text-sm">{rule.rule_name}</td>
                 <td className="p-3 text-sm">
@@ -248,6 +308,15 @@ export default function Page() {
             ))}
           </tbody>
         </table>
+      </div>
+
+      <div className="mt-4">
+        <Pagination
+          currentPage={page}
+          totalPages={totalPages || 1}
+          onPageChange={setPage}
+          totalItems={filteredData.length}
+        />
       </div>
 
       {/* CONFIRM TOGGLE STATUS MODAL */}

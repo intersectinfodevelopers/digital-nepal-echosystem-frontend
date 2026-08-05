@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState, useRef } from "react";
+import { Pagination } from "@/components/ui/Pagination";
 
 // Data imports
 import initialProvinceAdmins from "../../../../data/admins/province-admins.json";
@@ -48,6 +49,36 @@ export default function ProvinceAdminsPage() {
   const [reason, setReason] = useState("");
   const [selectedAdminId, setSelectedAdminId] = useState<string | null>(null);
   const [inspectedAdmin, setInspectedAdmin] = useState<ProvinceAdmin | null>(null);
+
+  const [search, setSearch] = useState("");
+  const [statusFilter, setStatusFilter] = useState("");
+  const [page, setPage] = useState(1);
+  const pageSize = 10;
+
+  const filteredAdmins = useMemo(() => {
+    return admins.filter((admin) => {
+      if (search) {
+        const q = search.toLowerCase();
+        if (
+          !admin.full_name.toLowerCase().includes(q) &&
+          !admin.username.toLowerCase().includes(q) &&
+          !admin.province_name.toLowerCase().includes(q)
+        ) {
+          return false;
+        }
+      }
+      if (statusFilter === "active" && !admin.is_active) return false;
+      if (statusFilter === "disabled" && admin.is_active) return false;
+      return true;
+    });
+  }, [admins, search, statusFilter]);
+
+  const totalPages = Math.ceil(filteredAdmins.length / pageSize);
+
+  const paginatedAdmins = useMemo(() => {
+    const start = (page - 1) * pageSize;
+    return filteredAdmins.slice(start, start + pageSize);
+  }, [filteredAdmins, page]);
 
   // COMPUTED SECURITY MATRICES
   const flaggedAccounts = useMemo(() => admins.filter((admin) => admin.failed_logins >= 3), [admins]);
@@ -183,6 +214,26 @@ export default function ProvinceAdminsPage() {
         </form>
       </div>
 
+      {/* Filter Bar */}
+      <div style={{ marginBottom: "20px", display: "flex", gap: "12px", alignItems: "center", padding: "16px", border: "1px solid #eaeaea", borderRadius: "6px", backgroundColor: "#fafafa" }}>
+        <input
+          type="text"
+          value={search}
+          onChange={(e) => { setSearch(e.target.value); setPage(1); }}
+          placeholder="Search by name, username, or province..."
+          style={{ flex: 1, padding: "8px 12px", border: "1px solid #bbb", borderRadius: "4px", fontSize: "14px" }}
+        />
+        <select
+          value={statusFilter}
+          onChange={(e) => { setStatusFilter(e.target.value); setPage(1); }}
+          style={{ padding: "8px 12px", border: "1px solid #bbb", borderRadius: "4px", fontSize: "14px", backgroundColor: "#fff" }}
+        >
+          <option value="">All Status</option>
+          <option value="active">Active</option>
+          <option value="disabled">Disabled</option>
+        </select>
+      </div>
+
       {/* Matrix Information Data Table */}
       <div style={{ marginBottom: "30px" }}>
         <h3 style={{ marginBottom: "12px", fontWeight: "600" }}>Active Province Administrators</h3>
@@ -199,7 +250,7 @@ export default function ProvinceAdminsPage() {
             </tr>
           </thead>
           <tbody>
-            {admins.map((admin) => (
+            {paginatedAdmins.map((admin) => (
               <tr key={admin.id} style={{ backgroundColor: "#fff" }}>
                 <td style={{ border: "1px solid #ccc", padding: "10px" }}>{admin.full_name}</td>
                 <td style={{ border: "1px solid #ccc", padding: "10px" }}>{admin.province_name}</td>
@@ -268,6 +319,14 @@ export default function ProvinceAdminsPage() {
             ))}
           </tbody>
         </table>
+        <div style={{ marginTop: "16px" }}>
+          <Pagination
+            currentPage={page}
+            totalPages={totalPages || 1}
+            onPageChange={setPage}
+            totalItems={filteredAdmins.length}
+          />
+        </div>
       </div>
 
       {/* Anomalies Structural Layout */}
