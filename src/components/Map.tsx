@@ -1,57 +1,166 @@
 "use client";
 
-import React from "react";
-import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
-import { divIcon } from "leaflet";
+import { useEffect, useRef } from "react";
+import L from "leaflet";
 import "leaflet/dist/leaflet.css";
+
+const defaultIcon = L.icon({
+  iconUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
+  iconRetinaUrl:
+    "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
+  shadowUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowSize: [41, 41],
+});
+
+const placeIcon = L.icon({
+  iconUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
+  iconRetinaUrl:
+    "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
+  shadowUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
+  iconSize: [20, 33],
+  iconAnchor: [10, 33],
+  popupAnchor: [1, -28],
+  shadowSize: [33, 33],
+  className: "place-marker",
+});
 
 export interface MapMarker {
   lat: number;
   lng: number;
-  label: string;
-  description: string;
+  label?: string;
+  description?: string;
+  totalCitizens?: number;
+  totalMunicipalities?: number;
+  topEmploymentCategory?: string;
+  type?: "selected" | "place";
 }
 
 interface MapProps {
-  center: [number, number];
-  zoom: number;
-  markers: MapMarker[];
-  height: string;
+  center?: [number, number];
+  zoom?: number;
+  markers?: MapMarker[];
+  height?: string;
+  showResetControl?: boolean;
+  onClick?: (lat: number, lng: number) => void;
 }
 
-const markerIcon = divIcon({
-  className: "",
-  html: `<div style="width:14px;height:14px;background:#C01F38;border:2.5px solid #ffffff;border-radius:9999px;box-shadow:0 2px 8px rgba(15,61,145,0.45);"></div>`,
-  iconSize: [14, 14],
-  iconAnchor: [7, 7],
-  popupAnchor: [0, -8],
-});
+function createPopup(marker: MapMarker) {
+  const popup = document.createElement("div");
 
-export default function Map({ center, zoom, markers, height }: MapProps) {
+  if (marker.label) {
+    const title = document.createElement("strong");
+    title.textContent = marker.label;
+    popup.appendChild(title);
+  }
+
+  const details = [
+    marker.description,
+    marker.totalCitizens !== undefined
+      ? `Total citizens: ${marker.totalCitizens.toLocaleString()}`
+      : undefined,
+    marker.totalMunicipalities !== undefined
+      ? `Total municipalities: ${marker.totalMunicipalities.toLocaleString()}`
+      : undefined,
+    marker.topEmploymentCategory
+      ? `Top employment: ${marker.topEmploymentCategory}`
+      : undefined,
+  ];
+
+  details.forEach((text) => {
+    if (text) {
+      const line = document.createElement("div");
+      line.textContent = text;
+      popup.appendChild(line);
+    }
+  });
+
+  return popup;
+}
+
+export default function Map({
+  center = [26.958, 87.281],
+  zoom = 13,
+  markers = [],
+  height = "400px",
+  showResetControl = false,
+  onClick,
+}: MapProps) {
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const mapRef = useRef<L.Map | null>(null);
+  const markerLayerRef = useRef<L.LayerGroup | null>(null);
+  const onClickRef = useRef(onClick);
+  const initialView = useRef({ center, zoom });
+
+  useEffect(() => {
+    onClickRef.current = onClick;
+  }, [onClick]);
+
+  useEffect(() => {
+    if (!containerRef.current) return;
+
+    const map = L.map(containerRef.current).setView(
+      initialView.current.center,
+      initialView.current.zoom,
+    );
+
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      attribution:
+        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+    }).addTo(map);
+
+    map.on("click", (event) => {
+      onClickRef.current?.(event.latlng.lat, event.latlng.lng);
+    });
+
+    mapRef.current = map;
+    markerLayerRef.current = L.layerGroup().addTo(map);
+
+    return () => {
+      map.remove();
+      mapRef.current = null;
+      markerLayerRef.current = null;
+    };
+  }, []);
+
+  useEffect(() => {
+    mapRef.current?.setView(center, zoom);
+  }, [center, zoom]);
+
+  useEffect(() => {
+    const markerLayer = markerLayerRef.current;
+    if (!markerLayer) return;
+
+    markerLayer.clearLayers();
+
+    markers.forEach((marker) => {
+      const leafletMarker = L.marker([marker.lat, marker.lng], {
+        icon: marker.type === "place" ? placeIcon : defaultIcon,
+      });
+
+      if (marker.label) leafletMarker.bindPopup(createPopup(marker));
+      leafletMarker.addTo(markerLayer);
+    });
+  }, [markers]);
+
+  function resetView() {
+    mapRef.current?.setView(center, zoom);
+  }
+
   return (
-    <MapContainer
-      center={center}
-      zoom={zoom}
-      scrollWheelZoom={false}
-      style={{ height, width: "100%", borderRadius: "16px", zIndex: 0 }}
-    >
-      <TileLayer
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-      />
-      {markers.map((marker) => (
-        <Marker
-          key={`${marker.lat}-${marker.lng}-${marker.label}`}
-          position={[marker.lat, marker.lng]}
-          icon={markerIcon}
+    <div className="relative" style={{ height, width: "100%" }}>
+      <div ref={containerRef} className="h-full w-full rounded-lg" />
+      {showResetControl && (
+        <button
+          type="button"
+          onClick={resetView}
+          className="absolute right-3 top-3 z-[1000] rounded bg-white px-3 py-2 text-sm shadow"
         >
-          <Popup>
-            <strong>{marker.label}</strong>
-            <br />
-            <span>{marker.description}</span>
-          </Popup>
-        </Marker>
-      ))}
-    </MapContainer>
+          Reset view
+        </button>
+      )}
+    </div>
   );
 }

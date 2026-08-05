@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 
+import { DiffViewer } from "@/components/ui/DiffViewer";
 import editApprovals from "../../../../../data/edit-approvals.json";
 import citizens from "../../../../../data/citizens.json";
 import users from "../../../../../data/users.json";
@@ -16,13 +17,51 @@ type Approval = {
   old_value_json: Record<string, unknown>;
   new_value_json: Record<string, unknown>;
   submitted_at: string;
+  escalated_at?: string;
   rejection_reason?: string;
+  approved_at?: string;
+  rejected_at?: string;
 };
 
 const LOCAL_STORAGE_KEY = "edit-approvals";
 
 // Initial data comes from edit-approvals.json.
 const initialApprovals = editApprovals as unknown as Approval[];
+
+function addBusinessDays(dateValue: string, daysToAdd: number) {
+  const date = new Date(dateValue);
+  let addedDays = 0;
+
+  while (addedDays < daysToAdd) {
+    date.setDate(date.getDate() + 1);
+
+    const day = date.getDay();
+    const isSaturday = day === 6;
+    const isSunday = day === 0;
+
+    if (!isSaturday && !isSunday) {
+      addedDays++;
+    }
+  }
+
+  return date.toISOString();
+}
+
+function getStatusLabel(status: string) {
+  if (status === "PENDING_APPROVAL") {
+    return "Pending approval";
+  }
+
+  if (status === "CAO_REVIEW") {
+    return "CAO review";
+  }
+
+  return status
+    .toLowerCase()
+    .split("_")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+}
 
 export default function ApprovalDetailPage() {
   const params = useParams<{ id: string }>();
@@ -92,11 +131,49 @@ export default function ApprovalDetailPage() {
   const changedFields = Array.from(
     new Set([...Object.keys(oldValues), ...Object.keys(newValues)]),
   );
+  const diffChanges = changedFields.map((field) => ({
+    field,
+    oldValue: oldValues[field],
+    newValue: newValues[field],
+  }));
 
   const currentUserId = "user-municipality";
   const isSelfApproval = approval.submitter_id === currentUserId;
   const isFinalStatus =
     approval.status === "APPROVED" || approval.status === "REJECTED";
+  const escalationDate =
+    approval.escalated_at ?? addBusinessDays(approval.submitted_at, 5);
+  const hasReachedEscalation =
+    Boolean(approval.escalated_at) || approval.status === "CAO_REVIEW";
+  const escalationTimeline = [
+    {
+      title: "Submitted",
+      description: `Request submitted by ${submitter?.full_name ?? "Unknown User"}.`,
+      time: approval.submitted_at,
+      isComplete: true,
+    },
+    {
+      title: "Pending 5 days",
+      description: "Municipality review window before CAO escalation.",
+      time: escalationDate,
+      isComplete: hasReachedEscalation,
+    },
+    {
+      title: "Auto-escalated to CAO",
+      description: hasReachedEscalation
+        ? "Request moved to CAO review after the pending window."
+        : "Scheduled if municipality review is not completed in time.",
+      time: hasReachedEscalation ? escalationDate : "Upcoming",
+      isComplete: hasReachedEscalation,
+    },
+    {
+      title: "Current",
+      description: getStatusLabel(approval.status),
+      time: isFinalStatus ? getStatusLabel(approval.status) : "Now",
+      isComplete: true,
+      isCurrent: true,
+    },
+  ];
 
   function handleApproveConfirm() {
     const updatedApprovals = approvals.map((item) => {
@@ -107,6 +184,7 @@ export default function ApprovalDetailPage() {
       return {
         ...item,
         status: "APPROVED",
+        approved_at: new Date().toISOString(),
       };
     });
 
@@ -136,6 +214,7 @@ export default function ApprovalDetailPage() {
       return {
         ...item,
         status: "REJECTED",
+        rejected_at: new Date().toISOString(),
         rejection_reason: rejectionReason.trim(),
       };
     });
@@ -166,20 +245,6 @@ export default function ApprovalDetailPage() {
 
       <section className="mt-6 rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          <div>
-            <p className="text-xs font-semibold uppercase text-slate-500">
-              Approval ID
-            </p>
-            <p className="mt-1 font-medium text-slate-900">{approval.id}</p>
-          </div>
-
-          <div>
-            <p className="text-xs font-semibold uppercase text-slate-500">
-              Status
-            </p>
-            <p className="mt-1 font-medium text-slate-900">{approval.status}</p>
-          </div>
-
           <div>
             <p className="text-xs font-semibold uppercase text-slate-500">
               Citizen
@@ -225,6 +290,70 @@ export default function ApprovalDetailPage() {
         </div>
       </section>
 
+      {hasReachedEscalation && (
+        <section className="mt-8 rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+          <div>
+            <h2 className="text-lg font-semibold text-slate-900">
+              Escalation History
+            </h2>
+            <p className="mt-1 text-sm text-slate-500">
+              Timeline from submission through the five-day review window and
+              CAO escalation.
+            </p>
+          </div>
+
+          <ol className="mt-6 space-y-0">
+            {escalationTimeline.map((item, index) => (
+              <li
+                key={item.title}
+                className="relative flex gap-4 pb-6 last:pb-0"
+              >
+                {index < escalationTimeline.length - 1 && (
+                  <span
+                    aria-hidden="true"
+                    className={`absolute left-[11px] top-7 h-full w-px ${
+                      item.isComplete ? "bg-blue-200" : "bg-slate-200"
+                    }`}
+                  />
+                )}
+
+                <span
+                  className={`relative z-10 mt-1 flex size-6 shrink-0 items-center justify-center rounded-full border text-xs font-semibold ${
+                    item.isCurrent
+                      ? "border-blue-600 bg-blue-600 text-white"
+                      : item.isComplete
+                        ? "border-blue-600 bg-blue-50 text-blue-700"
+                        : "border-slate-300 bg-white text-slate-400"
+                  }`}
+                >
+                  {index + 1}
+                </span>
+
+                <div className="min-w-0 flex-1">
+                  <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
+                    <h3
+                      className={`text-sm font-semibold ${
+                        item.isComplete ? "text-slate-900" : "text-slate-500"
+                      }`}
+                    >
+                      {item.title}
+                    </h3>
+
+                    <p className="text-xs font-medium text-slate-500">
+                      {item.time}
+                    </p>
+                  </div>
+
+                  <p className="mt-1 text-sm text-slate-600">
+                    {item.description}
+                  </p>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </section>
+      )}
+
       <section className="mt-8 rounded-xl border border-slate-200 bg-white shadow-sm">
         <div className="border-b border-slate-200 p-5">
           <h2 className="text-lg font-semibold text-slate-900">
@@ -235,40 +364,8 @@ export default function ApprovalDetailPage() {
           </p>
         </div>
 
-        <div className="overflow-x-auto">
-          <table className="w-full text-left text-sm">
-            <thead className="bg-slate-100">
-              <tr>
-                <th className="px-5 py-3 font-semibold text-slate-700">
-                  Field
-                </th>
-                <th className="px-5 py-3 font-semibold text-slate-700">
-                  Old Value
-                </th>
-                <th className="px-5 py-3 font-semibold text-slate-700">
-                  New Value
-                </th>
-              </tr>
-            </thead>
-
-            <tbody>
-              {changedFields.map((field) => (
-                <tr key={field} className="border-t border-slate-200">
-                  <td className="px-5 py-4 font-medium text-slate-900">
-                    {field}
-                  </td>
-
-                  <td className="px-5 py-4 text-red-600">
-                    {String(oldValues[field] ?? "N/A")}
-                  </td>
-
-                  <td className="px-5 py-4 text-green-600">
-                    {String(newValues[field] ?? "N/A")}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+        <div className="p-5">
+          <DiffViewer changes={diffChanges} />
         </div>
       </section>
 

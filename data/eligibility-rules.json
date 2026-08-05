@@ -1,5 +1,49 @@
 [
-  { "id": "rule-001", "rule_name": "unemployed_age_18", "benefit_type": "UNEMPLOYMENT_ID", "condition_expression": { "field": "employment.category", "operator": "=", "value": "UNEMPLOYED", "and": { "field": "age", "operator": ">=", "value": 18 } }, "benefit_value": { "card_type": "UNEMPLOYMENT" }, "is_active": true, "priority": 10 },
-  { "id": "rule-002", "rule_name": "disability_severity_2_plus", "benefit_type": "DISABILITY_ID", "condition_expression": { "field": "disability.severity_body", "operator": ">=", "value": 2 }, "benefit_value": { "card_type": "DISABILITY" }, "is_active": true, "priority": 20 },
-  { "id": "rule-003", "rule_name": "senior_citizen_70", "benefit_type": "SENIOR_CITIZEN_ALLOWANCE", "condition_expression": { "field": "age", "operator": ">=", "value": 70 }, "benefit_value": { "amount": 4000, "frequency": "monthly" }, "is_active": true, "priority": 30 }
+  {
+    "id": "rule-001",
+    "rule_name": "unemployed_age_18",
+    "benefit_type": "UNEMPLOYMENT_ID",
+    "condition_expression": { "field": "employment.category", "operator": "=", "value": "UNEMPLOYED", "and": { "field": "age", "operator": ">=", "value": 18 } },
+    "benefit_value": { "card_type": "UNEMPLOYMENT" },
+    "is_active": true,
+    "priority": 10,
+    "category": "EMPLOYMENT",
+    "description": "Eligible unemployed adults may not yet be registered for employment support.",
+    "suggested_action": "Coordinate registration with local employment service centres.",
+    "suggested_deadline": "2026-07-31",
+    "province": "Koshi",
+    "status": "PENDING_REVIEW"
+  },
+  {
+    "id": "rule-002",
+    "rule_name": "disability_severity_2_plus",
+    "benefit_type": "DISABILITY_ID",
+    "condition_expression": { "field": "disability.severity_body", "operator": ">=", "value": 2 },
+    "benefit_value": { "card_type": "DISABILITY" },
+    "is_active": true,
+    "priority": 20,
+    "category": "HEALTH",
+    "description": "Citizens with higher disability severity may need identification and support.",
+    "suggested_action": "Ask health offices to verify and process disability identification.",
+    "suggested_deadline": "2026-08-10",
+    "province": "Bagmati",
+    "status": "IN_PROGRESS"
+  },
+  {
+    "id": "rule-003",
+    "rule_name": "senior_citizen_70",
+    "benefit_type": "SENIOR_CITIZEN_ALLOWANCE",
+    "condition_expression": { "field": "age", "operator": ">=", "value": 70 },
+    "benefit_value": { "amount": 4000, "frequency": "monthly" },
+    "is_active": true,
+    "priority": 30,
+    "category": "BENEFITS",
+    "description": "Citizens aged 70 or above should be reviewed for monthly allowance eligibility.",
+    "suggested_action": "Send eligible records to municipalities for allowance enrolment.",
+    "suggested_deadline": "2026-07-25",
+    "province": "Gandaki",
+    "status": "COMPLETED",
+    "note": "Eligible records shared with municipalities.",
+    "completed_at": "2026-07-12"
+  }
 ]

@@ -1,20 +1,35 @@
 interface TierBadgeProps {
-  tier: 'WARD' | 'MUNICIPALITY' | 'PROVINCE' | 'CENTRAL';
+  tier: "WARD" | "MUNICIPALITY" | "PROVINCE" | "CENTRAL";
 }
+
+const styles = {
+  WARD: "bg-green-50 text-green-700 border-green-200",
+  MUNICIPALITY: "bg-orange-50 text-orange-700 border-orange-200",
+  PROVINCE: "bg-blue-50 text-blue-700 border-blue-200",
+  CENTRAL: "bg-red-50 text-red-700 border-red-200",
+};
 
 export function TierBadge({
   tier,
 }: TierBadgeProps) {
-  const colors = {
-    WARD: 'bg-green-100 text-green-700',
-    MUNICIPALITY: 'bg-orange-100 text-orange-700',
-    PROVINCE: 'bg-blue-100 text-blue-700',
-    CENTRAL: 'bg-red-100 text-red-700',
-  };
-
   return (
     <span
-      className={`px-2 py-1 rounded text-xs font-medium ${colors[tier]}`}
+      className={`
+        inline-flex
+        items-center
+        justify-center
+        rounded-full
+        border
+        px-3
+        py-1
+        text-xs
+        font-semibold
+        uppercase
+        tracking-wide
+        whitespace-nowrap
+        shadow-sm
+        ${styles[tier]}
+      `}
     >
       {tier}
     </span>
