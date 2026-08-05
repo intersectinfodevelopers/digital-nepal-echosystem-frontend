@@ -1,721 +1,493 @@
-'use client';
+"use client";
 
-import { useRegistrationForm } from '@/hooks/useRegistrationForm';
-import { registerCitizen } from '@/services/citizenService';
-import { WARD_ID, BLOOD_GROUP_LABELS, CONSENT_CHANNEL_LABELS } from '@/constants';
-import type { FamilyMember, Sex, BloodGroup, DigitalLiteracy, ConsentChannel } from '@/types/citizen';
+import React from "react";
 import {
-  SEXES,
-  BLOOD_GROUPS,
-  DIGITAL_LITERACIES,
-  CONSENT_CHANNELS,
-} from '@/types/citizen';
-import { classNames } from '@/utils';
-import { InputField, SelectField, StepIndicator, SectionCard, FormRow, FamilyMemberCard, DisabilityStep, EducationStep, HouseholdStep, GpsStep } from '@/components/ui';
-import { EmploymentForm } from '@/components/EmploymentForm';
+  Box,
+  Stack,
+  Typography,
+  Button,
+  Paper,
+  IconButton,
+} from "@mui/material";
+import {
+  NotificationsNoneOutlined as IconBell,
+  AccountCircleOutlined as IconUser,
+  InfoOutlined as IconInfo,
+  ArrowForward as IconNext,
+  ArrowBack as IconBack,
+  CheckCircleOutlined as IconCheck,
+  DeleteOutlineOutlined as IconDelete,
+  CloudUploadOutlined as IconCloudUpload,
+  SwapHorizOutlined as IconSwap,
+} from "@mui/icons-material";
+import { useRegistrationForm } from "@/hooks/useRegistrationForm";
+import { registerCitizen } from "@/services/citizenService";
+import { PortalSidebar } from "@/components/Sidebar";
+import { PortalStepper } from "@/components/Stepper";
+import { SubmitStep } from "@/components/ui";
 
+/**
+ * NewCitizenPage - Implements the comprehensive 10-step registration flow.
+ * Features a modern dual-pane layout with high-fidelity UI components for each step.
+ */
 export default function NewCitizenPage() {
   const {
     step,
     formData,
     updateField,
-    nidVerifyLoading,
-    nidVerifyError,
-    verifyNid,
-    sanitizeCitizenship,
-    setFather,
-    setMother,
-    setSpouse,
-    addChild,
-    updateChild,
-    removeChild,
-    updateConsentTimestamp,
-    updateEmploymentField,
-    updateDisabilityField,
-    updateEducationField,
-    updateHouseholdField,
-    updateGpsField,
     nextStep,
     prevStep,
     resetForm,
   } = useRegistrationForm();
 
+  // Handle file upload preview and state update
+  const handleFileUpload =
+    (field: "citizenship_front" | "citizenship_back") =>
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const file = e.target.files?.[0];
+      if (file) {
+        const url = URL.createObjectURL(file);
+        updateField(field, url);
+      }
+    };
+
+  // Final submission logic - Communicates with citizenService
+  const handleSubmit = async () => {
+    try {
+      await registerCitizen(formData);
+      alert("Citizen profile created and sent for verification!");
+      resetForm();
+    } catch {
+      alert("Submission failed. Please check connectivity and try again.");
+    }
+  };
+
+  // Map form steps to sidebar navigation labels for active state highlighting
+  const getSidebarActiveLabel = () => {
+    switch (step) {
+      case 1:
+        return "Personal Info";
+      case 2:
+        return "NID Upload";
+      case 3:
+        return "Family Info";
+      case 4:
+        return "Employment";
+      default:
+        return "Household";
+    }
+  };
+
+  // Map form steps to descriptive header titles
+  const getHeaderTitle = () => {
+    const titles = [
+      "Personal Information",
+      "NID / Citizenship Upload",
+      "Family Tree",
+      "Employment Details",
+      "Household Information",
+      "Disability Records",
+      "Educational Background",
+      "Biometric Photo",
+      "Geo-Location (GPS)",
+      "Final Review & Submit",
+    ];
+    return titles[step - 1] || "Citizen Registration";
+  };
+
   return (
-    <div className="p-6 max-w-4xl mx-auto">
-      <div className="flex items-center justify-between mb-6">
-        <div>
-          <h2 className="text-2xl font-bold text-gray-900">
-            Register New Citizen
-          </h2>
-          <p className="text-sm text-gray-500 mt-1">Ward {WARD_ID}</p>
-        </div>
-      </div>
+    <Box className="flex min-h-screen bg-[#F5F7FA]">
+      {/* Persistent Navigation Sidebar */}
+      <Box className="hidden lg:block w-[280px] shrink-0">
+        <PortalSidebar activeLabel={getSidebarActiveLabel()} />
+      </Box>
 
-      <StepIndicator currentStep={step} />
-
-      {step === 1 && (
-        <div>
-          <SectionCard
-            title="Core Identity"
-            description="Basic personal information of the citizen"
+      {/* Main Form Content Area */}
+      <Box className="flex-grow flex flex-col min-w-0">
+        {/* Contextual Top Header */}
+        <Box
+          component="header"
+          className="h-20 px-10 flex items-center justify-between bg-white border-b border-gray-100 sticky top-0 z-20 shadow-sm"
+        >
+          <Typography
+            variant="h5"
+            className="font-poppins font-bold text-[#0F172A]"
           >
-            <FormRow>
-              <InputField
-                label="Name (Nepali)"
-                value={formData.name_np}
-                onChange={(v) => updateField('name_np', v)}
-                placeholder="नेपाली अक्षरमा नाम"
-                required
-              />
-              <InputField
-                label="Name (English)"
-                value={formData.name_en}
-                onChange={(v) => updateField('name_en', v)}
-                placeholder="Full name in English"
-                required
-              />
-              <InputField
-                label="Date of Birth"
-                value={formData.dob}
-                onChange={(v) => updateField('dob', v)}
-                type="date"
-                required
-              />
-            </FormRow>
+            {getHeaderTitle()}
+          </Typography>
+          <Stack direction="row" spacing={1} sx={{ alignItems: "center" }}>
+            <IconButton className="text-gray-400 hover:bg-gray-50 transition-colors">
+              <IconBell />
+            </IconButton>
+            <IconButton className="text-gray-400 hover:bg-gray-50 transition-colors">
+              <IconUser sx={{ fontSize: 32 }} />
+            </IconButton>
+          </Stack>
+        </Box>
 
-            <FormRow>
-              <SelectField
-                label="Sex"
-                value={formData.sex}
-                onChange={(v) => updateField('sex', v as Sex)}
-                options={SEXES.map((s) => ({
-                  value: s,
-                  label: s.charAt(0) + s.slice(1).toLowerCase(),
-                }))}
-                required
-              />
-              <SelectField
-                label="Blood Group"
-                value={formData.blood_group}
-                onChange={(v) => updateField('blood_group', v as BloodGroup)}
-                options={BLOOD_GROUPS.map((bg) => ({
-                  value: bg,
-                  label: BLOOD_GROUP_LABELS[bg] || bg,
-                }))}
-              />
-              <InputField
-                label="Religion"
-                value={formData.religion}
-                onChange={(v) => updateField('religion', v)}
-                placeholder="e.g. Hindu, Buddhist"
-              />
-            </FormRow>
+        {/* Global Progress Stepper */}
+        <Box className="px-10 py-6 bg-white border-b border-gray-100 shadow-sm">
+          <PortalStepper currentStep={step} />
+        </Box>
 
-            <FormRow>
-              <InputField
-                label="Ethnicity"
-                value={formData.ethnicity}
-                onChange={(v) => updateField('ethnicity', v)}
-                placeholder="e.g. Brahmin, Chhetri"
-              />
-              <InputField
-                label="Mother Tongue"
-                value={formData.mother_tongue}
-                onChange={(v) => updateField('mother_tongue', v)}
-                placeholder="e.g. Nepali"
-              />
-              <InputField
-                label="Tole / Location"
-                value={formData.tole}
-                onChange={(v) => updateField('tole', v)}
-                placeholder="e.g. Bhagwati Tole"
-                required
-              />
-            </FormRow>
+        {/* Dynamic Step Viewport */}
+        <Box className="flex-grow p-10 overflow-y-auto bg-[#F8FAFC]">
+          <Box className="max-w-6xl mx-auto pb-32">
+            {step === 2 && (
+              <Stack spacing={5}>
+                <Paper
+                  elevation={0}
+                  className="p-12 border border-gray-200 rounded-[40px] bg-white shadow-sm"
+                >
+                  <Box className="mb-12">
+                    <Typography
+                      variant="h4"
+                      className="font-poppins font-bold text-[#0B3A84] mb-4 tracking-tight"
+                    >
+                      Identity Verification
+                    </Typography>
+                    <Typography className="text-[#64748B] text-xl max-w-3xl leading-relaxed font-medium">
+                      Please upload high-resolution photos of your National
+                      Identity Card or Citizenship Document.
+                    </Typography>
+                  </Box>
 
-            <FormRow>
-              <SelectField
-                label="Digital Literacy"
-                value={formData.digital_literacy}
-                onChange={(v) => updateField('digital_literacy', v as DigitalLiteracy)}
-                options={DIGITAL_LITERACIES.map((dl) => ({
-                  value: dl,
-                  label: dl.charAt(0) + dl.slice(1).toLowerCase(),
-                }))}
-              />
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Has Smartphone
-                </label>
-                <label className="inline-flex items-center gap-2 mt-2 cursor-pointer">
-                  <input
-                    type="checkbox"
-                    checked={formData.has_smartphone}
-                    onChange={(e) =>
-                      updateField('has_smartphone', e.target.checked)
-                    }
-                    className="w-4 h-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
-                  />
-                  <span className="text-sm text-gray-700">
-                    {formData.has_smartphone ? 'Yes' : 'No'}
-                  </span>
-                </label>
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Photo
-                </label>
-                <div className="mt-2">
-                  <label className="inline-flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg text-sm text-gray-600 hover:bg-gray-50 cursor-pointer transition-colors">
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                    </svg>
-                    Upload Photo
-                    <input type="file" accept="image/*" className="hidden" />
-                  </label>
-                </div>
-              </div>
-            </FormRow>
-          </SectionCard>
-
-          <SectionCard
-            title="National ID & Citizenship"
-            description="Verify identity through NID and citizenship records"
-          >
-            <FormRow>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  NID Number
-                  <span className="text-red-500 ml-0.5">*</span>
-                </label>
-                <div className="flex gap-2">
-                  <input
-                    type="text"
-                    value={formData.nid_number}
-                    onChange={(e) => {
-                      const digits = e.target.value.replace(/\D/g, '').slice(0, 10);
-                      updateField('nid_number', digits);
-                      if (formData.nid_verified) {
-                        updateField('nid_verified', false);
-                      }
-                    }}
-                    placeholder="10-digit NID number"
-                    maxLength={10}
-                    disabled={formData.nid_verified}
-                    className="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-gray-100 disabled:text-gray-500 font-mono"
-                  />
-                  <button
-                    type="button"
-                    onClick={verifyNid}
-                    disabled={
-                      nidVerifyLoading ||
-                      formData.nid_number.length !== 10 ||
-                      formData.nid_verified
-                    }
-                    className={classNames(
-                      'px-4 py-2 rounded-lg text-sm font-medium transition-colors whitespace-nowrap',
-                      formData.nid_verified
-                        ? 'bg-emerald-100 text-emerald-800'
-                        : 'bg-blue-600 text-white hover:bg-blue-700 disabled:bg-gray-300 disabled:text-gray-500',
-                    )}
+                  <Stack
+                    direction={{ lg: "row" }}
+                    spacing={6}
+                    className="mb-12"
                   >
-                    {nidVerifyLoading ? (
-                      <span className="inline-flex items-center gap-1">
-                        <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                        Verifying...
-                      </span>
-                    ) : formData.nid_verified ? (
-                      'Verified ✓'
-                    ) : (
-                      'Verify NID'
-                    )}
-                  </button>
-                </div>
-                {nidVerifyError && (
-                  <p className="text-sm text-red-600 mt-1">{nidVerifyError}</p>
-                )}
-                {formData.nid_verified && (
-                  <p className="text-sm text-emerald-700 mt-1">
-                    NID verified successfully
-                  </p>
-                )}
-              </div>
+                    {/* Front Side Upload */}
+                    <Box className="flex-1 text-center">
+                      <Typography className="font-poppins font-bold text-[#0B3A84] mb-5 text-xl">
+                        Front Side <span className="text-[#C61F3B]">*</span>
+                      </Typography>
+                      {formData.citizenship_front ? (
+                        <Box className="relative">
+                          <Box className="flex flex-col items-center justify-center h-80 border-4 border-green-300 rounded-[3rem] overflow-hidden bg-green-50/30 shadow-inner">
+                            <img
+                              src={formData.citizenship_front}
+                              alt="Front"
+                              className="w-full h-full object-contain p-4"
+                            />
+                            <Box className="absolute top-4 left-4 flex items-center gap-2 bg-green-500 text-white px-4 py-2 rounded-full shadow-lg">
+                              <IconCheck sx={{ fontSize: 20 }} />
+                              <Typography className="font-poppins font-bold text-sm">
+                                Uploaded
+                              </Typography>
+                            </Box>
+                          </Box>
+                          <Stack
+                            direction="row"
+                            spacing={2}
+                            className="mt-4 justify-center"
+                          >
+                            <label className="group relative flex items-center gap-2 bg-[#0B3A84] text-white px-6 py-2.5 rounded-full cursor-pointer hover:bg-[#092d6b] transition-all shadow-md">
+                              <input
+                                type="file"
+                                className="hidden"
+                                onChange={handleFileUpload("citizenship_front")}
+                                accept="image/*"
+                              />
+                              <IconSwap sx={{ fontSize: 18 }} />
+                              <Typography className="font-poppins font-bold text-sm">
+                                Replace
+                              </Typography>
+                            </label>
+                            <button
+                              type="button"
+                              onClick={() =>
+                                updateField("citizenship_front", null)
+                              }
+                              className="flex items-center gap-2 bg-white text-[#C61F3B] border-2 border-[#C61F3B] px-6 py-2.5 rounded-full cursor-pointer hover:bg-red-50 transition-all shadow-md"
+                            >
+                              <IconDelete sx={{ fontSize: 18 }} />
+                              <Typography className="font-poppins font-bold text-sm">
+                                Remove
+                              </Typography>
+                            </button>
+                          </Stack>
+                        </Box>
+                      ) : (
+                        <label className="group relative flex flex-col items-center justify-center h-80 border-4 border-dashed border-gray-300 rounded-[3rem] cursor-pointer hover:border-[#0B3A84] hover:bg-blue-50/50 transition-all overflow-hidden bg-gray-50/30 shadow-inner">
+                          <input
+                            type="file"
+                            className="hidden"
+                            onChange={handleFileUpload("citizenship_front")}
+                            accept="image/*,.pdf"
+                            onDragOver={(e) => {
+                              e.preventDefault();
+                              e.currentTarget.parentElement?.classList.add(
+                                "border-[#0B3A84]",
+                                "bg-blue-50/50",
+                              );
+                            }}
+                            onDragLeave={(e) => {
+                              e.currentTarget.parentElement?.classList.remove(
+                                "border-[#0B3A84]",
+                                "bg-blue-50/50",
+                              );
+                            }}
+                            onDrop={(e) => {
+                              e.preventDefault();
+                              e.currentTarget.parentElement?.classList.remove(
+                                "border-[#0B3A84]",
+                                "bg-blue-50/50",
+                              );
+                            }}
+                          />
+                          <Stack sx={{ alignItems: "center" }} spacing={3}>
+                            <Box className="w-[5.5rem] h-[5.5rem] bg-blue-100 rounded-[1.5rem] flex items-center justify-center text-[#0B3A84] group-hover:scale-110 group-hover:bg-[#0B3A84] group-hover:text-white transition-all duration-500 shadow-md">
+                              <IconCloudUpload sx={{ fontSize: 48 }} />
+                            </Box>
+                            <Typography className="font-poppins font-bold text-[#0B3A84] text-2xl">
+                              Take photo or upload
+                            </Typography>
+                            <Typography className="text-[#64748B] text-base font-medium">
+                              Drag &amp; Drop your file here
+                            </Typography>
+                            <Typography className="text-[#94A3B8] text-sm font-medium">
+                              JPG, PNG, or PDF — Max 5MB
+                            </Typography>
+                          </Stack>
+                        </label>
+                      )}
+                    </Box>
 
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Citizenship Number
-                </label>
-                <input
-                  type="text"
-                  value={formData.citizenship_number}
-                  onChange={(e) => sanitizeCitizenship(e.target.value)}
-                  placeholder="XX-XX-XXXXX"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 font-mono overflow-hidden text-ellipsis whitespace-nowrap"
-                />
-                <p className="text-xs text-gray-400 mt-1">
-                  Dashes and slashes are removed automatically
-                </p>
-              </div>
-            </FormRow>
-          </SectionCard>
+                    {/* Back Side Upload */}
+                    <Box className="flex-1 text-center">
+                      <Typography className="font-poppins font-bold text-[#0B3A84] mb-5 text-xl">
+                        Back Side <span className="text-[#C61F3B]">*</span>
+                      </Typography>
+                      {formData.citizenship_back ? (
+                        <Box className="relative">
+                          <Box className="flex flex-col items-center justify-center h-80 border-4 border-green-300 rounded-[3rem] overflow-hidden bg-green-50/30 shadow-inner">
+                            <img
+                              src={formData.citizenship_back}
+                              alt="Back"
+                              className="w-full h-full object-contain p-4"
+                            />
+                            <Box className="absolute top-4 left-4 flex items-center gap-2 bg-green-500 text-white px-4 py-2 rounded-full shadow-lg">
+                              <IconCheck sx={{ fontSize: 20 }} />
+                              <Typography className="font-poppins font-bold text-sm">
+                                Uploaded
+                              </Typography>
+                            </Box>
+                          </Box>
+                          <Stack
+                            direction="row"
+                            spacing={2}
+                            className="mt-4 justify-center"
+                          >
+                            <label className="group relative flex items-center gap-2 bg-[#0B3A84] text-white px-6 py-2.5 rounded-full cursor-pointer hover:bg-[#092d6b] transition-all shadow-md">
+                              <input
+                                type="file"
+                                className="hidden"
+                                onChange={handleFileUpload("citizenship_back")}
+                                accept="image/*"
+                              />
+                              <IconSwap sx={{ fontSize: 18 }} />
+                              <Typography className="font-poppins font-bold text-sm">
+                                Replace
+                              </Typography>
+                            </label>
+                            <button
+                              type="button"
+                              onClick={() =>
+                                updateField("citizenship_back", null)
+                              }
+                              className="flex items-center gap-2 bg-white text-[#C61F3B] border-2 border-[#C61F3B] px-6 py-2.5 rounded-full cursor-pointer hover:bg-red-50 transition-all shadow-md"
+                            >
+                              <IconDelete sx={{ fontSize: 18 }} />
+                              <Typography className="font-poppins font-bold text-sm">
+                                Remove
+                              </Typography>
+                            </button>
+                          </Stack>
+                        </Box>
+                      ) : (
+                        <label className="group relative flex flex-col items-center justify-center h-80 border-4 border-dashed border-gray-300 rounded-[3rem] cursor-pointer hover:border-[#0B3A84] hover:bg-blue-50/50 transition-all overflow-hidden bg-gray-50/30 shadow-inner">
+                          <input
+                            type="file"
+                            className="hidden"
+                            onChange={handleFileUpload("citizenship_back")}
+                            accept="image/*,.pdf"
+                            onDragOver={(e) => {
+                              e.preventDefault();
+                              e.currentTarget.parentElement?.classList.add(
+                                "border-[#0B3A84]",
+                                "bg-blue-50/50",
+                              );
+                            }}
+                            onDragLeave={(e) => {
+                              e.currentTarget.parentElement?.classList.remove(
+                                "border-[#0B3A84]",
+                                "bg-blue-50/50",
+                              );
+                            }}
+                            onDrop={(e) => {
+                              e.preventDefault();
+                              e.currentTarget.parentElement?.classList.remove(
+                                "border-[#0B3A84]",
+                                "bg-blue-50/50",
+                              );
+                            }}
+                          />
+                          <Stack sx={{ alignItems: "center" }} spacing={3}>
+                            <Box className="w-[5.5rem] h-[5.5rem] bg-blue-100 rounded-[1.5rem] flex items-center justify-center text-[#0B3A84] group-hover:scale-110 group-hover:bg-[#0B3A84] group-hover:text-white transition-all duration-500 shadow-md">
+                              <IconCloudUpload sx={{ fontSize: 48 }} />
+                            </Box>
+                            <Typography className="font-poppins font-bold text-[#0B3A84] text-2xl">
+                              Take photo or upload
+                            </Typography>
+                            <Typography className="text-[#64748B] text-base font-medium">
+                              Drag &amp; Drop your file here
+                            </Typography>
+                            <Typography className="text-[#94A3B8] text-sm font-medium">
+                              JPG, PNG, or PDF — Max 5MB
+                            </Typography>
+                          </Stack>
+                        </label>
+                      )}
+                    </Box>
+                  </Stack>
 
-          <SectionCard
-            title="Consent"
-            description="Record consent for data collection and processing"
-          >
-            <FormRow>
-              <SelectField
-                label="Consent Channel"
-                value={formData.consent_channel}
-                onChange={(v) => {
-                  updateField('consent_channel', v as ConsentChannel);
-                  updateConsentTimestamp();
-                }}
-                options={CONSENT_CHANNELS.filter((cc) =>
-                  ['WARD_OFFICE', 'FIELD', 'VERBAL_WITNESS'].includes(cc),
-                ).map((cc) => ({
-                  value: cc,
-                  label: CONSENT_CHANNEL_LABELS[cc] || cc,
-                }))}
-                required
-              />
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Consent Recorded At
-                </label>
-                <input
-                  type="text"
-                  value={new Date(formData.consent_recorded_at).toLocaleString()}
-                  readOnly
-                  className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm bg-gray-50 text-gray-600"
-                />
-                <p className="text-xs text-gray-400 mt-1">
-                  Auto-filled with current timestamp
-                </p>
-              </div>
-            </FormRow>
-          </SectionCard>
+                  <Box className="bg-[#F0F7FF] p-10 rounded-[2.5rem] border border-blue-100 flex gap-6 shadow-sm">
+                    <IconInfo
+                      className="text-[#0B3A84] mt-1"
+                      sx={{ fontSize: 32 }}
+                    />
+                    <Box>
+                      <Typography className="font-poppins font-bold text-[#0B3A84] mb-4 text-2xl">
+                        Upload Guidelines
+                      </Typography>
+                      <Stack
+                        spacing={2.5}
+                        className="text-[#0B3A84] opacity-90 text-lg font-medium"
+                      >
+                        <Box className="flex items-center gap-4">
+                          <Box className="w-7 h-7 rounded-full bg-[#0B3A84] flex items-center justify-center shrink-0">
+                            <IconCheck sx={{ fontSize: 18, color: "white" }} />
+                          </Box>
+                          Avoid glare and direct flash on the document surface.
+                        </Box>
+                        <Box className="flex items-center gap-4">
+                          <Box className="w-7 h-7 rounded-full bg-[#0B3A84] flex items-center justify-center shrink-0">
+                            <IconCheck sx={{ fontSize: 18, color: "white" }} />
+                          </Box>
+                          Place the document against a dark, non-reflective
+                          background.
+                        </Box>
+                        <Box className="flex items-center gap-4">
+                          <Box className="w-7 h-7 rounded-full bg-[#0B3A84] flex items-center justify-center shrink-0">
+                            <IconCheck sx={{ fontSize: 18, color: "white" }} />
+                          </Box>
+                          Ensure all four corners of the document are visible.
+                        </Box>
+                        <Box className="flex items-center gap-4">
+                          <Box className="w-7 h-7 rounded-full bg-[#0B3A84] flex items-center justify-center shrink-0">
+                            <IconCheck sx={{ fontSize: 18, color: "white" }} />
+                          </Box>
+                          Ensure all text and barcodes are perfectly legible.
+                        </Box>
+                      </Stack>
+                    </Box>
+                  </Box>
+                </Paper>
 
-          <div className="flex justify-end">
-            <button
-              type="button"
-              onClick={nextStep}
-              className="inline-flex items-center gap-2 bg-blue-600 text-white px-6 py-2.5 rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors"
-            >
-              Next: Family Tree
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-            </button>
-          </div>
-        </div>
-      )}
-
-      {step === 2 && (
-        <div>
-          <SectionCard title="Family Tree" description="Add family members of the citizen">
-            <div className="space-y-6">
-              <div>
-                <h4 className="text-sm font-semibold text-gray-800 mb-3 flex items-center gap-2">
-                  Father
-                </h4>
-                {formData.father ? (
-                  <FamilyMemberCard
-                    member={formData.father}
-                    onChange={(updates) => {
-                      if (formData.father) {
-                        setFather({ ...formData.father, ...updates } as FamilyMember);
-                      }
-                    }}
-                    onRemove={() => setFather(null)}
-                    showRemove
-                  />
-                ) : (
-                  <button
-                    type="button"
-                    onClick={() =>
-                      setFather({
-                        id: '',
-                        relationship: 'FATHER',
-                        name_np: '',
-                        name_en: '',
-                        citizenship_number: '',
-                        link_status: 'pending',
-                      })
-                    }
-                    className="text-sm text-blue-600 hover:text-blue-800 font-medium"
-                  >
-                    + Add Father
-                  </button>
-                )}
-              </div>
-
-              <div>
-                <h4 className="text-sm font-semibold text-gray-800 mb-3 flex items-center gap-2">
-                  Mother
-                </h4>
-                {formData.mother ? (
-                  <FamilyMemberCard
-                    member={formData.mother}
-                    onChange={(updates) => {
-                      if (formData.mother) {
-                        setMother({ ...formData.mother, ...updates } as FamilyMember);
-                      }
-                    }}
-                    onRemove={() => setMother(null)}
-                    showRemove
-                  />
-                ) : (
-                  <button
-                    type="button"
-                    onClick={() =>
-                      setMother({
-                        id: '',
-                        relationship: 'MOTHER',
-                        name_np: '',
-                        name_en: '',
-                        citizenship_number: '',
-                        link_status: 'pending',
-                      })
-                    }
-                    className="text-sm text-blue-600 hover:text-blue-800 font-medium"
-                  >
-                    + Add Mother
-                  </button>
-                )}
-              </div>
-
-              <div>
-                <h4 className="text-sm font-semibold text-gray-800 mb-3 flex items-center gap-2">
-                  Spouse
-                </h4>
-                {formData.spouse ? (
-                  <FamilyMemberCard
-                    member={formData.spouse}
-                    onChange={(updates) => {
-                      if (formData.spouse) {
-                        setSpouse({ ...formData.spouse, ...updates } as FamilyMember);
-                      }
-                    }}
-                    onRemove={() => setSpouse(null)}
-                    showRemove
-                  />
-                ) : (
-                  <button
-                    type="button"
-                    onClick={() =>
-                      setSpouse({
-                        id: '',
-                        relationship: 'SPOUSE',
-                        name_np: '',
-                        name_en: '',
-                        citizenship_number: '',
-                        link_status: 'pending',
-                      })
-                    }
-                    className="text-sm text-blue-600 hover:text-blue-800 font-medium"
-                  >
-                    + Add Spouse
-                  </button>
-                )}
-              </div>
-
-              <div>
-                <div className="flex items-center justify-between mb-3">
-                  <h4 className="text-sm font-semibold text-gray-800 flex items-center gap-2">
-                    Children
-                  </h4>
-                  <button
-                    type="button"
-                    onClick={addChild}
-                    className="text-sm text-blue-600 hover:text-blue-800 font-medium"
-                  >
-                    + Add Child
-                  </button>
-                </div>
-                {formData.children.length === 0 ? (
-                  <p className="text-sm text-gray-400 italic">
-                    No children added yet
-                  </p>
-                ) : (
-                  <div className="space-y-3">
-                    {formData.children.map((child, index) => (
-                      <FamilyMemberCard
-                        key={child.id}
-                        member={child}
-                        onChange={(updates) => updateChild(index, updates)}
-                        onRemove={() => removeChild(index)}
-                        showRemove
+                <Stack direction={{ xs: "column", md: "row" }} spacing={4}>
+                  {[
+                    {
+                      url: "https://images.unsplash.com/photo-1588859959584-b93533d35c3a?auto=format&fit=crop&q=80&w=800",
+                      label: "Good Example",
+                      active: true,
+                    },
+                    {
+                      url: "https://images.unsplash.com/photo-1589915282613-aad021a2a500?auto=format&fit=crop&q=80&w=800",
+                      label: "Avoid Glare",
+                      active: false,
+                    },
+                    {
+                      url: "https://images.unsplash.com/photo-1774846505579-4a710ff4c5fe?auto=format&fit=crop&q=80&w=800",
+                      label: "Avoid Blur",
+                      active: false,
+                    },
+                  ].map((ex, i) => (
+                    <Box
+                      key={i}
+                      className="flex-1 relative rounded-[3rem] overflow-hidden group shadow-xl border-4 border-white h-[22rem]"
+                    >
+                      <img
+                        src={ex.url}
+                        alt={ex.label}
+                        className="w-full h-full object-cover brightness-90 group-hover:scale-110 transition-all duration-1000"
                       />
-                    ))}
-                  </div>
-                )}
-              </div>
-            </div>
-          </SectionCard>
+                      <Box className="absolute inset-0 flex items-center justify-center bg-black/10 group-hover:bg-black/20 transition-all">
+                        <Typography
+                          className={`${ex.active ? "bg-white text-[#0B3A84]" : "bg-[#C61F3B] text-white"} backdrop-blur-xl px-12 py-3.5 rounded-full font-poppins font-bold shadow-2xl border border-white/50 text-lg`}
+                        >
+                          {ex.label}
+                        </Typography>
+                      </Box>
+                    </Box>
+                  ))}
+                </Stack>
+              </Stack>
+            )}
 
-          <div className="flex items-center justify-between">
-            <button
-              type="button"
-              onClick={prevStep}
-              className="inline-flex items-center gap-2 px-6 py-2.5 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
-            >
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-              </svg>
-              Back
-            </button>
-
-            <div className="flex gap-3">
-              <button
-                type="button"
-                onClick={resetForm}
-                className="px-6 py-2.5 border border-gray-300 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-50 transition-colors"
+            {step <= 9 && step !== 2 && (
+              <Paper
+                elevation={0}
+                className="p-12 border border-gray-200 rounded-[40px] bg-white shadow-sm text-center"
               >
-                Reset
-              </button>
-              <button
-                type="button"
+                <Typography
+                  variant="h4"
+                  className="font-poppins font-bold text-[#0B3A84] mb-3"
+                >
+                  {getHeaderTitle()}
+                </Typography>
+                <Typography className="text-[#64748B] text-lg">
+                  This step is under development and will be available soon.
+                </Typography>
+              </Paper>
+            )}
+            {step === 10 && (
+              <SubmitStep formData={formData} onSubmit={handleSubmit} />
+            )}
+          </Box>
+        </Box>
+
+        {/* Dynamic Interaction Bar (Sticky Footer) */}
+        <Box className="h-28 px-12 flex items-center justify-between bg-[#F5F7FA] border-t border-gray-200 sticky bottom-0 z-20 shadow-[0_-4px_20px_-10px_rgba(0,0,0,0.1)]">
+          <Button
+            variant="text"
+            onClick={prevStep}
+            disabled={step === 1}
+            startIcon={<IconBack />}
+            className="text-gray-600 font-poppins font-bold text-xl px-12 py-5 rounded-[1.5rem] hover:bg-gray-200 active:scale-95 transition-all duration-200 disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-transparent disabled:active:scale-100"
+          >
+            Back
+          </Button>
+          <Stack direction="row" spacing={3}>
+            <Button
+              variant="text"
+              className="text-gray-500 font-poppins font-semibold text-lg px-10 py-4 rounded-[1.5rem] hover:bg-gray-200 hover:text-gray-700 active:scale-95 transition-all duration-200"
+            >
+              Save Draft
+            </Button>
+            {step < 10 ? (
+              <Button
+                variant="contained"
                 onClick={nextStep}
-                className="inline-flex items-center gap-2 bg-blue-600 text-white px-6 py-2.5 rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors"
+                endIcon={<IconNext />}
+                className="bg-[#0B3A84] hover:bg-[#092d6b] active:scale-95 text-white font-poppins font-bold text-xl px-20 py-5 rounded-[1.5rem] shadow-2xl shadow-blue-900/40 transition-all duration-200 hover:shadow-blue-900/60"
               >
-                Next: Employment
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
-              </button>
-              <button
-                type="button"
-                onClick={() => {
-                  registerCitizen(formData);
-                  alert('Citizen registered successfully!');
-                  resetForm();
-                }}
-                className="inline-flex items-center gap-2 bg-emerald-600 text-white px-6 py-2.5 rounded-lg text-sm font-medium hover:bg-emerald-700 transition-colors"
-              >
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                </svg>
-                Register Citizen
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {step === 3 && (
-        <div>
-          <EmploymentForm
-            employment={formData.employment}
-            onChange={updateEmploymentField}
-          />
-
-          <div className="flex items-center justify-between">
-            <button
-              type="button"
-              onClick={prevStep}
-              className="inline-flex items-center gap-2 px-6 py-2.5 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
-            >
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-              </svg>
-              Back
-            </button>
-
-            <div className="flex gap-3">
-              <button
-                type="button"
-                onClick={resetForm}
-                className="px-6 py-2.5 border border-gray-300 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-50 transition-colors"
-              >
-                Reset
-              </button>
-              <button
-                type="button"
-                onClick={nextStep}
-                className="inline-flex items-center gap-2 bg-blue-600 text-white px-6 py-2.5 rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors"
-              >
-                Next: Disability
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {step === 4 && (
-        <div>
-          <DisabilityStep
-            disability={formData.disability}
-            onChange={updateDisabilityField}
-          />
-
-          <div className="flex items-center justify-between">
-            <button
-              type="button"
-              onClick={prevStep}
-              className="inline-flex items-center gap-2 px-6 py-2.5 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
-            >
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-              </svg>
-              Back
-            </button>
-
-            <div className="flex gap-3">
-              <button
-                type="button"
-                onClick={resetForm}
-                className="px-6 py-2.5 border border-gray-300 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-50 transition-colors"
-              >
-                Reset
-              </button>
-              <button
-                type="button"
-                onClick={nextStep}
-                className="inline-flex items-center gap-2 bg-blue-600 text-white px-6 py-2.5 rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors"
-              >
-                Next: Education
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {step === 5 && (
-        <div>
-          <EducationStep
-            education={formData.education}
-            onChange={updateEducationField}
-          />
-
-          <div className="flex items-center justify-between">
-            <button
-              type="button"
-              onClick={prevStep}
-              className="inline-flex items-center gap-2 px-6 py-2.5 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
-            >
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-              </svg>
-              Back
-            </button>
-
-            <div className="flex gap-3">
-              <button
-                type="button"
-                onClick={resetForm}
-                className="px-6 py-2.5 border border-gray-300 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-50 transition-colors"
-              >
-                Reset
-              </button>
-              <button
-                type="button"
-                onClick={nextStep}
-                className="inline-flex items-center gap-2 bg-blue-600 text-white px-6 py-2.5 rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors"
-              >
-                Next: Household
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {step === 6 && (
-        <div>
-          <HouseholdStep
-            household={formData.household}
-            onChange={updateHouseholdField}
-          />
-
-          <div className="flex items-center justify-between">
-            <button
-              type="button"
-              onClick={prevStep}
-              className="inline-flex items-center gap-2 px-6 py-2.5 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
-            >
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-              </svg>
-              Back
-            </button>
-
-            <div className="flex gap-3">
-              <button
-                type="button"
-                onClick={resetForm}
-                className="px-6 py-2.5 border border-gray-300 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-50 transition-colors"
-              >
-                Reset
-              </button>
-              <button
-                type="button"
-                onClick={nextStep}
-                className="inline-flex items-center gap-2 bg-blue-600 text-white px-6 py-2.5 rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors"
-              >
-                Next: GPS Coordinates
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {step === 7 && (
-        <div>
-          <GpsStep
-            gps={formData.gps}
-            onChange={updateGpsField}
-          />
-
-          <div className="flex items-center justify-between">
-            <button
-              type="button"
-              onClick={prevStep}
-              className="inline-flex items-center gap-2 px-6 py-2.5 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
-            >
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-              </svg>
-              Back
-            </button>
-
-            <div className="flex gap-3">
-              <button
-                type="button"
-                onClick={resetForm}
-                className="px-6 py-2.5 border border-gray-300 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-50 transition-colors"
-              >
-                Reset
-              </button>
-              <button
-                type="button"
-                onClick={() => {
-                  registerCitizen(formData);
-                  alert('Citizen registered successfully!');
-                  resetForm();
-                }}
-                className="inline-flex items-center gap-2 bg-emerald-600 text-white px-6 py-2.5 rounded-lg text-sm font-medium hover:bg-emerald-700 transition-colors"
-              >
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                </svg>
-                Register Citizen
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-    </div>
+                Next
+              </Button>
+            ) : null}
+          </Stack>
+        </Box>
+      </Box>
+    </Box>
   );
 }

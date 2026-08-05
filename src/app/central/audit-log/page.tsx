@@ -211,6 +211,7 @@ export default function AuditLogPage() {
               <th className="p-3 text-left">Role</th>
               <th className="p-3 text-left">Jurisdiction</th>
               <th className="p-3 text-left">Timestamp</th>
+              <th className="p-3 text-left">Actions</th>
             </tr>
           </thead>
 
@@ -245,6 +246,14 @@ export default function AuditLogPage() {
 
                 <td className="p-3">
                   {new Date(log.timestamp).toLocaleString()}
+                </td>
+                <td className="p-3">
+                  <button
+                    onClick={() => alert(`Event: ${log.event_type}\nCitizen: ${log.citizen_id}\nActor: ${log.acted_by_role}\nJurisdiction: ${log.jurisdiction}\nTime: ${log.timestamp}`)}
+                    className="text-blue-600 hover:text-blue-800 text-sm font-medium"
+                  >
+                    View Details
+                  </button>
                 </td>
               </tr>
             ))}

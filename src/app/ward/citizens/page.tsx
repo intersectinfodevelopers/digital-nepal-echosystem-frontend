@@ -5,6 +5,8 @@ import { Add, Search } from "@mui/icons-material";
 import { useCitizensFilter } from "@/hooks/useCitizensFilter";
 import { EMPLOYMENT_CATEGORIES, SYNC_STATUSES, SEXES } from "@/types/citizen";
 import { SYNC_BADGE } from "@/constants";
+import { Pagination } from "@/components/ui/Pagination";
+import { useState, useMemo } from "react";
 
 export default function CitizensPage() {
   const {
@@ -23,12 +25,21 @@ export default function CitizensPage() {
     setVerifiedFilter,
   } = useCitizensFilter();
 
+  const [page, setPage] = useState(1);
+  const pageSize = 10;
+
+  const totalPages = Math.ceil(filtered.length / pageSize);
+  const paginated = useMemo(() => {
+    const start = (page - 1) * pageSize;
+    return filtered.slice(start, start + pageSize);
+  }, [filtered, page]);
+
   return (
     <div className="p-6">
       <div className="flex items-center justify-between mb-6">
         <h2 className="text-2xl font-bold text-gray-900">Citizens</h2>
         <Link
-          href="/ward/citizens/new"
+          href="/portal/personal"
           className="inline-flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors"
         >
           <Add className="text-lg" />
@@ -45,7 +56,7 @@ export default function CitizensPage() {
                 type="text"
                 placeholder="Search by name (NP/EN)..."
                 value={search}
-                onChange={(e) => setSearch(e.target.value)}
+                onChange={(e) => { setSearch(e.target.value); setPage(1); }}
                 className="w-full pl-9 pr-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
@@ -53,7 +64,7 @@ export default function CitizensPage() {
               type="text"
               placeholder="NID last 4 digits..."
               value={nidSearch}
-              onChange={(e) => setNidSearch(e.target.value)}
+              onChange={(e) => { setNidSearch(e.target.value); setPage(1); }}
               className="w-44 px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
@@ -61,7 +72,7 @@ export default function CitizensPage() {
           <div className="flex flex-wrap gap-2">
             <select
               value={employmentFilter}
-              onChange={(e) => setEmploymentFilter(e.target.value)}
+              onChange={(e) => { setEmploymentFilter(e.target.value); setPage(1); }}
               className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               <option value="">All Employment</option>
@@ -74,7 +85,7 @@ export default function CitizensPage() {
 
             <select
               value={syncFilter}
-              onChange={(e) => setSyncFilter(e.target.value)}
+              onChange={(e) => { setSyncFilter(e.target.value); setPage(1); }}
               className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               <option value="">All Sync Status</option>
@@ -87,7 +98,7 @@ export default function CitizensPage() {
 
             <select
               value={sexFilter}
-              onChange={(e) => setSexFilter(e.target.value)}
+              onChange={(e) => { setSexFilter(e.target.value); setPage(1); }}
               className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               <option value="">All Sex</option>
@@ -100,7 +111,7 @@ export default function CitizensPage() {
 
             <select
               value={verifiedFilter}
-              onChange={(e) => setVerifiedFilter(e.target.value)}
+              onChange={(e) => { setVerifiedFilter(e.target.value); setPage(1); }}
               className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               <option value="">All NID Verification</option>
@@ -135,7 +146,7 @@ export default function CitizensPage() {
               </tr>
             </thead>
             <tbody>
-              {filtered.map((c) => (
+              {paginated.map((c) => (
                 <tr
                   key={`${c.name_en}-${c.nid_masked}`}
                   className="border-b border-gray-100 hover:bg-gray-50"
@@ -182,6 +193,13 @@ export default function CitizensPage() {
           </table>
         </div>
       </div>
+
+      <Pagination
+        currentPage={page}
+        totalPages={totalPages || 1}
+        onPageChange={setPage}
+        totalItems={filtered.length}
+      />
     </div>
   );
 }

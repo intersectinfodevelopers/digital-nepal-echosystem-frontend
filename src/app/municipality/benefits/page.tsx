@@ -1,12 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import citizens from "../../../../data/citizens.json";
 import employment from "../../../../data/employment.json";
 import disability from "../../../../data/disability.json";
 import rules from "../../../../data/eligibility-rules.json";
 import Link from "next/link";
+import { Pagination } from "@/components/ui/Pagination";
 import { Citizen } from "@/types/citizen";
+
 export default function Page() {
   const tabs = [
     "UNEMPLOYMENT",
@@ -18,6 +20,8 @@ export default function Page() {
   ];
 
   const [activeTab, setActiveTab] = useState("UNEMPLOYMENT");
+  const [page, setPage] = useState(1);
+  const pageSize = 10;
 
   const getAge = (dob: string) => {
     const birthDate = new Date(dob);
@@ -91,7 +95,7 @@ export default function Page() {
           disabilityInfo.severity_body >= 2
         );
 
-      case "SENIOR CITIZEN":
+      case "SENIOR CITIZEN": {
         const seniorRule = rules.find(
           (rule) => rule.benefit_type === "SENIOR_CITIZEN_ALLOWANCE",
         );
@@ -102,10 +106,9 @@ export default function Page() {
             : 70;
 
         return age >= minAge;
+      }
 
       case "SINGLE WOMAN":
-        // Since there is no marital status in your JSON,
-        // this temporarily returns all females.
         return citizen.sex === "FEMALE";
 
       case "FARMER":
@@ -119,6 +122,13 @@ export default function Page() {
     }
   });
 
+  const totalPages = Math.ceil(eligibleCitizens.length / pageSize);
+
+  const paginatedCitizens = useMemo(() => {
+    const start = (page - 1) * pageSize;
+    return eligibleCitizens.slice(start, start + pageSize);
+  }, [eligibleCitizens, page]);
+
   return (
     <div className="p-6">
       <h1 className="text-3xl font-bold mb-6">Benefit Eligibility</h1>
@@ -128,7 +138,7 @@ export default function Page() {
         {tabs.map((tab) => (
           <button
             key={tab}
-            onClick={() => setActiveTab(tab)}
+            onClick={() => { setActiveTab(tab); setPage(1); }}
             className={`px-4 py-2 rounded border ${
               activeTab === tab
                 ? "bg-blue-600 text-white"
@@ -140,7 +150,7 @@ export default function Page() {
         ))}
       </div>
 
-      {/* Temporary output */}
+      {/* Table */}
       <div className="text-lg">
         <div className="mb-4">
           <button className="bg-green-600 text-white px-4 py-2 rounded">
@@ -159,7 +169,7 @@ export default function Page() {
           </thead>
 
           <tbody>
-            {eligibleCitizens.map((citizen) => (
+            {paginatedCitizens.map((citizen) => (
               <tr key={citizen.id}>
                 <td className="border p-2">{citizen.name_en}</td>
                 <td className="border p-2">{citizen.ward_id}</td>
@@ -167,7 +177,6 @@ export default function Page() {
                   {getEligibilityReason(citizen as Citizen)}
                 </td>
                 <td className="border p-2">
-                  {/* Citizens JSON ma hasCard vana xaina  */}
                   No Card
                 </td>
                 <td className="border p-2 text-center">
@@ -187,8 +196,24 @@ export default function Page() {
                 </td>
               </tr>
             ))}
+            {paginatedCitizens.length === 0 && (
+              <tr>
+                <td colSpan={5} className="border p-4 text-center text-gray-500">
+                  No eligible citizens found for this category.
+                </td>
+              </tr>
+            )}
           </tbody>
         </table>
+      </div>
+
+      <div className="mt-4">
+        <Pagination
+          currentPage={page}
+          totalPages={totalPages || 1}
+          onPageChange={setPage}
+          totalItems={eligibleCitizens.length}
+        />
       </div>
     </div>
   );

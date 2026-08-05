@@ -242,3 +242,104 @@ export const SCHOLARSHIP_TYPE_LABELS: Record<string, string> = {
   NEED_BASED: "Need-Based",
   OTHER: "Other",
 };
+
+export const RELATIONSHIPS = [
+  { value: "FATHER", label: "Father" },
+  { value: "MOTHER", label: "Mother" },
+  { value: "SPOUSE", label: "Spouse" },
+  { value: "CHILD", label: "Child" },
+  { value: "OTHER", label: "Other" },
+];
+
+
+export enum Nationality {
+  NEPALI = "Nepali",
+  INDIAN = "Indian",
+  OTHER = "Other",
+}
+
+export const NATIONALITIES: Nationality[] = [
+  Nationality.NEPALI,
+  Nationality.INDIAN,
+  Nationality.OTHER,
+];
+
+export enum Gender {
+  MALE = "male",
+  FEMALE = "female",
+  OTHER = "other",
+}
+
+export const GENDERS: Gender[] = [
+  Gender.MALE,
+  Gender.FEMALE,
+  Gender.OTHER,
+];
+
+export const GENDER_LABELS: Record<Gender, string> = {
+  [Gender.MALE]: "Male",
+  [Gender.FEMALE]: "Female",
+  [Gender.OTHER]: "Other",
+};
+
+export enum MobileCountryCode {
+  NEPAL = "+977",
+  INDIA = "+91",
+}
+
+export const MOBILE_COUNTRY_CODES: MobileCountryCode[] = [
+  MobileCountryCode.NEPAL,
+  MobileCountryCode.INDIA,
+];
+
+export enum DocumentSide {
+  FRONT = "front",
+  BACK = "back",
+}
+
+export const DOCUMENT_SIDE_LABELS: Record<DocumentSide, string> = {
+  [DocumentSide.FRONT]: "Front Side",
+  [DocumentSide.BACK]: "Back Side",
+};
+
+export enum DocumentMimeType {
+  JPEG = "image/jpeg",
+  PNG = "image/png",
+  PDF = "application/pdf",
+}
+
+export const ACCEPTED_DOCUMENT_TYPES: DocumentMimeType[] = [
+  DocumentMimeType.JPEG,
+  DocumentMimeType.PNG,
+  DocumentMimeType.PDF,
+];
+
+export enum UploadStatus {
+  EMPTY = "empty",
+  UPLOADING = "uploading",
+  VERIFIED = "verified",
+}
+
+export enum Relationship {
+  FATHER = "father",
+  MOTHER = "mother",
+  SPOUSE = "spouse",
+  CHILD = "child",
+  OTHER = "other",
+}
+
+export const RELATIONSHIP_LABELS: Record<Relationship, string> = {
+  [Relationship.FATHER]: "Father",
+  [Relationship.MOTHER]: "Mother",
+  [Relationship.SPOUSE]: "Spouse",
+  [Relationship.CHILD]: "Child",
+  [Relationship.OTHER]: "Other",
+};
+
+export const RELATIONSHIP_OPTIONS: Relationship[] = [
+  Relationship.FATHER,
+  Relationship.MOTHER,
+  Relationship.SPOUSE,
+  Relationship.CHILD,
+  Relationship.OTHER,
+];
