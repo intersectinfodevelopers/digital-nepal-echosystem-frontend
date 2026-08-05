@@ -23,7 +23,7 @@ export default function LoginPage() {
     setFieldErrors({});
 
     const errors: { username?: string; password?: string } = {};
-    const usernameRegex = /^[a-zA-Z0-9_\.-]+$/; 
+    const usernameRegex = /^[a-zA-Z0-9_\.-]+$/;
 
     if (!username.trim()) {
       errors.username = "Username is required";
@@ -58,20 +58,7 @@ export default function LoginPage() {
           return;
         }
 
-        // Generate matching payload profile token on client side cleanly
-        if (data.user) {
-          const tokenPayload = {
-            id: data.user.id,
-            role: data.user.role,
-            username: data.user.username,
-            jurisdiction_id: data.user.jurisdiction_id,
-            createdAt: new Date().toISOString(),
-          };
-          const token = btoa(JSON.stringify(tokenPayload));
-          const secureFlag =
-            window.location.protocol === "https:" ? "Secure;" : "";
-          document.cookie = `auth_token=${token}; path=/; max-age=28800; SameSite=Strict; ${secureFlag}`;
-        }
+        // Server sets an HttpOnly session cookie; no client-side token storage.
 
         if (data.redirectTo) {
           router.push(data.redirectTo);

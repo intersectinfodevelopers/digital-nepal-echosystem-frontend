@@ -1,0 +1,105 @@
+{
+  "provinces": [
+    "geojson/provinces/prov-1.json",
+    "geojson/provinces/prov-2.json",
+    "geojson/provinces/prov-3.json",
+    "geojson/provinces/prov-4.json",
+    "geojson/provinces/prov-5.json",
+    "geojson/provinces/prov-6.json",
+    "geojson/provinces/prov-7.json"
+  ],
+  "districts": {
+    "prov-7_districts": [
+      "geojson/local-bodies/achham.json",
+      "geojson/local-bodies/baitadi.json",
+      "geojson/local-bodies/bajhang.json",
+      "geojson/local-bodies/bajura.json",
+      "geojson/local-bodies/dadeldhura.json",
+      "geojson/local-bodies/darchula.json",
+      "geojson/local-bodies/doti.json",
+      "geojson/local-bodies/kailali.json",
+      "geojson/local-bodies/kanchanpur.json"
+    ],
+    "prov-5_districts": [
+      "geojson/local-bodies/arghakhanchi.json",
+      "geojson/local-bodies/banke.json",
+      "geojson/local-bodies/bardiya.json",
+      "geojson/local-bodies/dang.json",
+      "geojson/local-bodies/gulmi.json",
+      "geojson/local-bodies/kapilbastu.json",
+      "geojson/local-bodies/nawalparasi5.json",
+      "geojson/local-bodies/palpa.json",
+      "geojson/local-bodies/pyuthan.json",
+      "geojson/local-bodies/rolpa.json",
+      "geojson/local-bodies/rukum5.json",
+      "geojson/local-bodies/rupandehi.json"
+    ],
+    "prov-4_districts": [
+      "geojson/local-bodies/baglung.json",
+      "geojson/local-bodies/gorkha.json",
+      "geojson/local-bodies/kaski.json",
+      "geojson/local-bodies/lamjung.json",
+      "geojson/local-bodies/manang.json",
+      "geojson/local-bodies/mustang.json",
+      "geojson/local-bodies/myagdi.json",
+      "geojson/local-bodies/nawalparasi4.json",
+      "geojson/local-bodies/parbat.json",
+      "geojson/local-bodies/syangja.json",
+      "geojson/local-bodies/tanahu.json"
+    ],
+    "prov-2_districts": [
+      "geojson/local-bodies/bara.json",
+      "geojson/local-bodies/dhanusha.json",
+      "geojson/local-bodies/mahottari.json",
+      "geojson/local-bodies/parsa.json",
+      "geojson/local-bodies/rautahat.json",
+      "geojson/local-bodies/saptari.json",
+      "geojson/local-bodies/sarlahi.json",
+      "geojson/local-bodies/siraha.json"
+    ],
+    "prov-3_districts": [
+      "geojson/local-bodies/bhaktapur.json",
+      "geojson/local-bodies/chitawan.json",
+      "geojson/local-bodies/dhading.json",
+      "geojson/local-bodies/dolakha.json",
+      "geojson/local-bodies/kabhrepalanchok.json",
+      "geojson/local-bodies/kathmandu.json",
+      "geojson/local-bodies/lalitpur.json",
+      "geojson/local-bodies/makawanpur.json",
+      "geojson/local-bodies/nuwakot.json",
+      "geojson/local-bodies/ramechhap.json",
+      "geojson/local-bodies/rasuwa.json",
+      "geojson/local-bodies/sindhuli.json",
+      "geojson/local-bodies/sindhupalchok.json"
+    ],
+    "prov-1_districts": [
+      "geojson/local-bodies/bhojpur.json",
+      "geojson/local-bodies/dhankuta.json",
+      "geojson/local-bodies/ilam.json",
+      "geojson/local-bodies/jhapa.json",
+      "geojson/local-bodies/khotang.json",
+      "geojson/local-bodies/morang.json",
+      "geojson/local-bodies/okhaldhunga.json",
+      "geojson/local-bodies/panchthar.json",
+      "geojson/local-bodies/sankhuwasabha.json",
+      "geojson/local-bodies/solukhumbu.json",
+      "geojson/local-bodies/sunsari.json",
+      "geojson/local-bodies/taplejung.json",
+      "geojson/local-bodies/terhathum.json",
+      "geojson/local-bodies/udayapur.json"
+    ],
+    "prov-6_districts": [
+      "geojson/local-bodies/dailekh.json",
+      "geojson/local-bodies/dolpa.json",
+      "geojson/local-bodies/humla.json",
+      "geojson/local-bodies/jajarkot.json",
+      "geojson/local-bodies/jumla.json",
+      "geojson/local-bodies/kalikot.json",
+      "geojson/local-bodies/mugu.json",
+      "geojson/local-bodies/rukum6.json",
+      "geojson/local-bodies/salyan.json",
+      "geojson/local-bodies/surkhet.json"
+    ]
+  },
+  "municipalities": {}
+}
