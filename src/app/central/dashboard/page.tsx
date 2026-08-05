@@ -154,8 +154,7 @@ const unemploymentHotspots = municipalities
 
 const issuedCards = idCards.filter((card) => card.issued_at !== null);
 const activeGrievances = grievances.filter(
-  (grievance) =>
-    grievance.status !== "CLOSED",
+  (grievance) => grievance.status !== "CLOSED",
 );
 
 const nationalStats = [
@@ -212,13 +211,6 @@ export default function CentralDashboardPage() {
             and grievances.
           </p>
         </header>
-
-        <div
-          className="mt-6 rounded-lg border border-amber-300 bg-amber-50 px-4 py-3 text-sm font-medium text-amber-900"
-        >
-          Central Admin — National Analytical View. Zero write access to citizen
-          records.
-        </div>
 
         <section className="mt-8">
           <h2 className="text-lg font-semibold text-slate-900">
@@ -351,7 +343,9 @@ export default function CentralDashboardPage() {
                         <th className="whitespace-nowrap px-4 py-3 font-medium text-slate-900">
                           {countryLabels[row.country] ?? "Not specified"}
                         </th>
-                        <td className="px-4 py-3 text-slate-600">{row.count}</td>
+                        <td className="px-4 py-3 text-slate-600">
+                          {row.count}
+                        </td>
                         <td className="whitespace-nowrap px-4 py-3 text-slate-600">
                           {visaLabels[row.visa] ?? row.visa}
                         </td>

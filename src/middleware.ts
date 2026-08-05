@@ -22,7 +22,7 @@ export function middleware(request: NextRequest) {
     nextUrl.pathname.startsWith('/ward') ||
     nextUrl.pathname.startsWith('/municipality');
 
-  // Rule 1: No Token? Redirect straight back to /login
+  // Rule 1: No Token? Redirect straight back to /auth/login
   if (isTargetingAdminRoute && !tokenCookie) {
     return NextResponse.redirect(new URL('/auth/login', request.url));
   }
@@ -35,8 +35,8 @@ export function middleware(request: NextRequest) {
       const userRole = tokenData.role as keyof typeof ROLE_ROUTES;
       const assignedDashboard = ROLE_ROUTES[userRole];
 
-      // If they are already logged in and try to visit /login, bypass to their dashboard
-      if (nextUrl.pathname === '/login') {
+      // If they are already logged in and try to visit /auth/login, bypass to their dashboard
+      if (nextUrl.pathname === '/auth/login') {
         return NextResponse.redirect(new URL(assignedDashboard, request.url));
       }
 
@@ -61,7 +61,7 @@ export function middleware(request: NextRequest) {
 
     } catch {
       // If the cookie is corrupted or modified, delete it and redirect to login
-      const response = NextResponse.redirect(new URL('/login', request.url));
+      const response = NextResponse.redirect(new URL('/auth/login', request.url));
       response.cookies.delete('auth_token');
       return response;
     }
@@ -73,7 +73,7 @@ export function middleware(request: NextRequest) {
 // Optimization matcher configuration
 export const config = {
   matcher: [
-    '/login',
+    '/auth/login',
     '/central/:path*',
     '/province/:path*',
     '/district/:path*',

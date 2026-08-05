@@ -1,0 +1,3316 @@
+{
+  "achham": [
+    {
+      "name": "Bannigadhi Jayagadh",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Chaurpati",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Dhakari",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Kamalbazar",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Mangalsen",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Mellekh",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Panchadewal Binayak",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Ramaroshan",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Sanphebagar",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Turmakhad",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Khaptad National Park",
+      "type": "National Park"
+    }
+  ],
+  "arghakhanchi": [
+    {
+      "name": "Bhumekasthan",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Chhatradev",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Malarani",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Panini",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Sandhikharka",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Sitganga",
+      "type": "Nagarpalika"
+    }
+  ],
+  "baglung": [
+    {
+      "name": "Badigad",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Baglung",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Bareng",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Dhorpatan",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Galkot",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Jaimuni",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Kanthekhola",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Nisikhola",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Taman Khola",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Tara Khola",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Dhorpatan Hunting Reserve",
+      "type": "Hunting Reserve"
+    }
+  ],
+  "baitadi": [
+    {
+      "name": "Dasharathchanda",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Dilasaini",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Dogadakedar",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Melauli",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Pancheshwar",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Patan",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Purchaudi",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Shivanath",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Sigas",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Surnaya",
+      "type": "Gaunpalika"
+    }
+  ],
+  "bajhang": [
+    {
+      "name": "Bithadchir",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Bungal",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Chabispathivera",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Durgathali",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "JayaPrithivi",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Saipal",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Kedarseu",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Khaptadchhanna",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Masta",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Surma",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Talkot",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Thalara",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Khaptad National Park",
+      "type": "National Park"
+    }
+  ],
+  "bajura": [
+    {
+      "name": "Badimalika",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Budhiganga",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Budhinanda",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Khaptad Chhededaha",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Gaumul",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Himali",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Jagannath",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Swamikartik Khapar",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Tribeni",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Khaptad National Park",
+      "type": "National Park"
+    }
+  ],
+  "banke": [
+    {
+      "name": "Baijanath",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Duduwa",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Janki",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Khajura",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Kohalpur",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Narainapur",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Nepalgunj",
+      "type": "Upamahanagarpalika"
+    },
+    {
+      "name": "Rapti Sonari",
+      "type": "Gaunpalika"
+    }
+  ],
+  "bara": [
+    {
+      "name": "Adarshkotwal",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Baragadhi",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Bishrampur",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Devtal",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Jitpur Simara",
+      "type": "Upamahanagarpalika"
+    },
+    {
+      "name": "Kalaiya",
+      "type": "Upamahanagarpalika"
+    },
+    {
+      "name": "Karaiyamai",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Kolhabi",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Mahagadhimai",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Nijgadh",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Pacharauta",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Parwanipur",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Pheta",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Prasauni",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Simraungadh",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Suwarna",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Parsa Wildlife Reserve",
+      "type": "Wildlife Reserve"
+    }
+  ],
+  "bardiya": [
+    {
+      "name": "Gulariya",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Madhuwan",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Rajapur",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Thakurbaba",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "BardiyaNationalPark",
+      "type": "NationalPark"
+    },
+    {
+      "name": "Geruwa",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Barbardiya",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Badhaiyatal",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Bansagadhi",
+      "type": ""
+    }
+  ],
+  "bhaktapur": [
+    {
+      "name": "Bhaktapur",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Changunarayan",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Madhyapur Thimi",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Suryabinayak",
+      "type": "Nagarpalika"
+    }
+  ],
+  "bhojpur": [
+    {
+      "name": "Aamchowk",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Arun",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Bhojpur",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Hatuwagadhi",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Pauwadungma",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Ramprasad Rai",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Salpasilichho",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Shadananda",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Temkemaiyum",
+      "type": "Gaunpalika"
+    }
+  ],
+  "chitawan": [
+    {
+      "name": "Bharatpur",
+      "type": "Mahanagarpalika"
+    },
+    {
+      "name": "Ichchhyakamana",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Kalika",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Khairahani",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Madi",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Rapti",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Ratnanagar",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Chitawan National Park",
+      "type": "National Park"
+    }
+  ],
+  "dadeldhura": [
+    {
+      "name": "Ajaymeru",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Alital",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Amargadhi",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Bhageshwar",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Ganayapdhura",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Nawadurga",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Parashuram",
+      "type": "Nagarpalika"
+    }
+  ],
+  "dailekh": [
+    {
+      "name": "Aathabis",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Bhagawatimai",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Bhairabi",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Chamunda Bindrasaini",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Dullu",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Dungeshwor",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Gurans",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Mahabu",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Narayan",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Naumule",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Thantikandh",
+      "type": "Gaunpalika"
+    }
+  ],
+  "dang": [
+    {
+      "name": "Babai",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Banglachuli",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Dangisharan",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Gadhawa",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Ghorahi",
+      "type": "Upamahanagarpalika"
+    },
+    {
+      "name": "Lamahi",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Rajpur",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Rapti",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Shantinagar",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Tulsipur",
+      "type": "Upamahanagarpalika"
+    }
+  ],
+  "darchula": [
+    {
+      "name": "Apihimal",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Byans",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Dunhu",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Lekam",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Mahakali",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Malikaarjun",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Marma",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Naugad",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Shailyashikhar",
+      "type": "Nagarpalika"
+    }
+  ],
+  "dhading": [
+    {
+      "name": "Benighat Rorang",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Dhunibesi",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Gajuri",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Galchi",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Gangajamuna",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Jwalamukhi",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Khaniyabash",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Netrawati Dabjong",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Nilakantha",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Rubi Valley",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Siddhalek",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Thakre",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Tripura Sundari",
+      "type": "Gaunpalika"
+    }
+  ],
+  "dhankuta": [
+    {
+      "name": "Chaubise",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Chhathar Jorpati",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Dhankuta",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Shahidbhumi",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Mahalaxmi",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Pakhribas",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Sangurigadhi",
+      "type": "Gaunpalika"
+    }
+  ],
+  "dhanusha": [
+    {
+      "name": "Aaurahi",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Bateshwor",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Bideha",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Chhireshwornath",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Dhanauji",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Dhanusadham",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Ganeshman Charnath",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Hansapur",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Janaknandani",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Janakpurdham",
+      "type": "Upamahanagarpalika"
+    },
+    {
+      "name": "Kamala",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Lakshminiya",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Mithila",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Mithila Bihari",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Mukhiyapatti Musarmiya",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Nagarain",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Sabaila",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Sahidnagar",
+      "type": "Nagarpalika"
+    }
+  ],
+  "dolakha": [
+    {
+      "name": "Baiteshwor",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Bhimeshwor",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Bigu",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Gaurishankar",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Jiri",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Kalinchok",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Melung",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Sailung",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Tamakoshi",
+      "type": "Gaunpalika"
+    }
+  ],
+  "dolpa": [
+    {
+      "name": "Chharka Tangsong",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Dalome",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Chharka Tangsong",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Dolpo Buddha",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Jagadulla",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Kaike",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Mudkechula",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Shey Phoksundo",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Thuli Bheri",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Tripurasundari",
+      "type": "Nagarpalika"
+    }
+  ],
+  "doti": [
+    {
+      "name": "Adharsha",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Badikedar",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Bogatan Phudsil",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Dipayal Silgadi",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Jorayal",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "K I Singh",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Purbichauki",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Sayal",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Shikhar",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Khaptad National Park",
+      "type": "National Park"
+    }
+  ],
+  "gorkha": [
+    {
+      "name": "Aarughat",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Ajirkot",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Bhimsenthapa",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Chum Nubri",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Dharche",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Gandaki",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Gorkha",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Palungtar",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Sahid Lakhan",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Siranchok",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Barpak Sulikot",
+      "type": "Gaunpalika"
+    }
+  ],
+  "gulmi": [
+    {
+      "name": "Chandrakot",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Chatrakot",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Dhurkot",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Gulmidarbar",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Isma",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Kaligandaki",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Madane",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Malika",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Musikot",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Resunga",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Rurukshetra",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Satyawati",
+      "type": "Gaunpalika"
+    }
+  ],
+  "humla": [
+    {
+      "name": "Adanchuli",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Chankheli",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Kharpunath",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Namkha",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Sarkegad",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Simkot",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Tanjakot",
+      "type": "Gaunpalika"
+    }
+  ],
+  "ilam": [
+    {
+      "name": "Chulachuli",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Deumai",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Fakphokthum",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Illam",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Mai",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Maijogmai",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Mangsebung",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Rong",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Sandakpur",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Suryodaya",
+      "type": "Nagarpalika"
+    }
+  ],
+  "jajarkot": [
+    {
+      "name": "Barekot",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Bheri",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Chhedagad",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Junichande",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Kuse",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Shiwalaya",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Nalgad",
+      "type": "Nagarpalika"
+    }
+  ],
+  "jhapa": [
+    {
+      "name": "Arjundhara",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Barhadashi",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Bhadrapur",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Birtamod",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Buddhashanti",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Damak",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Gauradhaha",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Gauriganj",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Haldibari",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Jhapa",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Kachankawal",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Kamal",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Kankai",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Mechinagar",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Shivasataxi",
+      "type": "Nagarpalika"
+    }
+  ],
+  "jumla": [
+    {
+      "name": "Chandannath",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Guthichaur",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Hima",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Kanakasundari",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Patrasi",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Sinja",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Tatopani",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Tila",
+      "type": "Gaunpalika"
+    }
+  ],
+  "kabhrepalanchok": [
+    {
+      "name": "Banepa",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Bethanchowk",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Bhumlu",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Chaurideurali",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Dhulikhel",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Khanikhola",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Mahabharat",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Mandandeupur",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Namobuddha",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Panauti",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Panchkhal",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Roshi",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Temal",
+      "type": "Gaunpalika"
+    }
+  ],
+  "kailali": [
+    {
+      "name": "Bardagoriya",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Bhajani",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Chure",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Dhangadhi",
+      "type": "Upamahanagarpalika"
+    },
+    {
+      "name": "Gauriganga",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Ghodaghodi",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Godawari",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Janaki",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Joshipur",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Kailari",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Lamkichuha",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Mohanyal",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Tikapur",
+      "type": "Nagarpalika"
+    }
+  ],
+  "kalikot": [
+    {
+      "name": "Shuva Kalika",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Khandachakra",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Mahawai",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Naraharinath",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Pachaljharana",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Palata",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Raskot",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Sanni Tribeni",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Tilagufa",
+      "type": "Nagarpalika"
+    }
+  ],
+  "kanchanpur": [
+    {
+      "name": "Bedkot",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Belauri",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Beldandi",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Bhimdatta",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Krishnapur",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Laljhadi",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Dodhara Chandani",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Punarbas",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Shuklaphanta",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Shuklaphanta National Park",
+      "type": "National Park"
+    }
+  ],
+  "kapilbastu": [
+    {
+      "name": "Banganga",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Bijayanagar",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Buddhabhumi",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Kapilbastu",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Krishnanagar",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Maharajgunj",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Mayadevi",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Shivaraj",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Suddhodhan",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Yashodhara",
+      "type": "Gaunpalika"
+    }
+  ],
+  "kaski": [
+    {
+      "name": "Annapurna",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Machhapuchchhre",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Madi",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Pokhara",
+      "type": "Mahanagarpalika"
+    },
+    {
+      "name": "Rupa",
+      "type": "Gaunpalika"
+    }
+  ],
+  "kathmandu": [
+    {
+      "name": "Budhanilakantha",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Chandragiri",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Dakshinkali",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Gokarneshwor",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Kageshwori Manahora",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Kathmandu",
+      "type": "Mahanagarpalika"
+    },
+    {
+      "name": "Kirtipur",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Nagarjun",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Shankharapur",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Tarakeshwor",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Tokha",
+      "type": "Nagarpalika"
+    }
+  ],
+  "khotang": [
+    {
+      "name": "Ainselukhark",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Barahapokhari",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Diprung Chuichumma",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Halesi Tuwachung",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Jantedhunga",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Kepilasagadhi",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Khotehang",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Rawa Besi",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Diktel Rupakot Majhuwagadhi",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Sakela",
+      "type": "Gaunpalika"
+    }
+  ],
+  "lalitpur": [
+    {
+      "name": "Bagmati",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Godawari",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Konjyosom",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Lalitpur",
+      "type": "Mahanagarpalika"
+    },
+    {
+      "name": "Mahalaxmi",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Mahankal",
+      "type": "Gaunpalika"
+    }
+  ],
+  "lamjung": [
+    {
+      "name": "Besishahar",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Dordi",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Dudhpokhari",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Kwholasothar",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "MadhyaNepal",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Marsyangdi",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Rainas",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Sundarbazar",
+      "type": "Nagarpalika"
+    }
+  ],
+  "mahottari": [
+    {
+      "name": "Aurahi",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Balwa",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Bardibas",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Bhangaha",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Ekdanra",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Gaushala",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Jaleswor",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Loharpatti",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Mahottari",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Manra Siswa",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Matihani",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Pipra",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Ramgopalpur",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Samsi",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Sonama",
+      "type": "Gaunpalika"
+    }
+  ],
+  "makawanpur": [
+    {
+      "name": "Bagmati",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Bakaiya",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Bhimphedi",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Hetauda",
+      "type": "Upamahanagarpalika"
+    },
+    {
+      "name": "Indrasarowar",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Kailash",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Makawanpurgadhi",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Manahari",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Raksirang",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Thaha",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Parsa Wildlife Reserve",
+      "type": "Wildlife Reserve"
+    },
+    {
+      "name": "Chitawan National Park",
+      "type": "National Park"
+    }
+  ],
+  "manang": [
+    {
+      "name": "Chame",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Narpa Bhumi",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Nason",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Manang Ngisyang",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Narpa Bhumi",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Dalome",
+      "type": "Gaunpalika"
+    }
+  ],
+  "morang": [
+    {
+      "name": "Belbari",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Biratnagar",
+      "type": "Mahanagarpalika"
+    },
+    {
+      "name": "Budhiganga",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Dhanpalthan",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Gramthan",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Jahada",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Kanepokhari",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Katahari",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Kerabari",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Letang",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Miklajung",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Patahrishanishchare",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Rangeli",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Ratuwamai",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Sundarharaicha",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Sunwarshi",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Uralabari",
+      "type": "Nagarpalika"
+    }
+  ],
+  "mugu": [
+    {
+      "name": "Chhayanath Rara",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Khatyad",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Mugum Karmarong",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Soru",
+      "type": "Gaunpalika"
+    }
+  ],
+  "mustang": [
+    {
+      "name": "Varagung Muktichhetra",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Lo Ghekar Damodarkunda",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Gharapjhong",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Lomanthang",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Thasang",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Muktichhetra",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Lo Ghekar Damodarkunda",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Narphu",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Lo Ghekar Damodarkunda",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Varagung Muktichhetra",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Lo Ghekar Damodarkunda",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Lo Ghekar Damodarkunda",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Lomanthang",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Lo Ghekar Damodarkunda",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Chharka Tangsong",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Lo Ghekar Damodarkunda",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Lomanthang",
+      "type": "Gaunpalika"
+    }
+  ],
+  "myagdi": [
+    {
+      "name": "Annapurna",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Beni",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Dhaulagiri",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Malika",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Mangala",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Raghuganga",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Dhorpatan Hunting Reserve",
+      "type": "Hunting Reserve"
+    }
+  ],
+  "nawalparasi4": [
+    {
+      "name": "Binayee Tribeni",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Bulingtar",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Baudikali",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Devchuli",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Gaindakot",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Hupsekot",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Kawasoti",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Madhyabindu",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Chitawan National Park",
+      "type": "National Park"
+    }
+  ],
+  "nawalparasi5": [
+    {
+      "name": "Bardaghat",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Palhi Nandan",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Pratappur",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Ramgram",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Sarawal",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Sunwal",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Susta",
+      "type": "Gaunpalika"
+    }
+  ],
+  "nuwakot": [
+    {
+      "name": "Belkotgadhi",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Bidur",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Dupcheshwar",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Kakani",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Kispang",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Likhu",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Myagang",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Panchakanya",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Shivapuri",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Suryagadhi",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Tadi",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Tarkeshwar",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Shivapuri Watershed and Wildlife Reserve",
+      "type": "Watershed and Wildlife Reserve"
+    },
+    {
+      "name": "Langtang National Park",
+      "type": "National Park"
+    }
+  ],
+  "okhaldhunga": [
+    {
+      "name": "Champadevi",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Chisankhugadhi",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Khijidemba",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Likhu",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Manebhanjyang",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Molung",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Siddhicharan",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Sunkoshi",
+      "type": "Gaunpalika"
+    }
+  ],
+  "palpa": [
+    {
+      "name": "Bagnaskali",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Mathagadhi",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Nisdi",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Purbakhola",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Rainadevi Chhahara",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Rambha",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Rampur",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Ribdikot",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Tansen",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Tinau",
+      "type": "Gaunpalika"
+    }
+  ],
+  "panchthar": [
+    {
+      "name": "Falelung",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Falgunanda",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Hilihang",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Kummayak",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Miklajung",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Phidim",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Tumbewa",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Yangwarak",
+      "type": "Gaunpalika"
+    }
+  ],
+  "parbat": [
+    {
+      "name": "Bihadi",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Jaljala",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Kushma",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Mahashila",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Modi",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Painyu",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Phalebas",
+      "type": "Nagarpalika"
+    }
+  ],
+  "parsa": [
+    {
+      "name": "Bahudaramai",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Bindabasini",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Birgunj",
+      "type": "Mahanagarpalika"
+    },
+    {
+      "name": "Chhipaharmai",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Dhobini",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Jagarnathpur",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Jirabhawani",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Kalikamai",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Pakahamainpur",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Parsagadhi",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Paterwasugauli",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Pokhariya",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "SakhuwaPrasauni",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Thori",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Chitwan National Park",
+      "type": "National Park"
+    }
+  ],
+  "pyuthan": [
+    {
+      "name": "Ayirabati",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Gaumukhi",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Jhimruk",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Mallarani",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Mandavi",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Naubahini",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Pyuthan",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Sarumarani",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Sworgadwary",
+      "type": "Nagarpalika"
+    }
+  ],
+  "ramechhap": [
+    {
+      "name": "Doramba Shailung",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Gokulganga",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Khadadevi",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Likhu Tamakoshi",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Manthali",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Ramechhap",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Sunapati",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Umakunda",
+      "type": "Gaunpalika"
+    }
+  ],
+  "rasuwa": [
+    {
+      "name": "Gosaikunda",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Kalika",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Naukunda",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Aamachhodingmo",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Uttargaya",
+      "type": "Gaunpalika"
+    }
+  ],
+  "rautahat": [
+    {
+      "name": "Baudhimai",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Brindaban",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Chandrapur",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Dewahhi Gonahi",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Durga Bhagwati",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Gadhimai",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Garuda",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Gaur",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Gujara",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Ishanath",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Katahariya",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Madhav Narayan",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Maulapur",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Paroha",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Phatuwa Bijayapur",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Rajdevi",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Rajpur",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Yemunamai",
+      "type": "Gaunpalika"
+    }
+  ],
+  "rolpa": [
+    {
+      "name": "Pariwartan",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Lungri",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Madi",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Rolpa",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Runtigadi",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Gangadev",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Sunchhahari",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Sunil Smriti",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Thawang",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Tribeni",
+      "type": "Gaunpalika"
+    }
+  ],
+  "rukum5": [
+    {
+      "name": "Bhume",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Putha Uttarganga",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Sisne",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Dhorpatan Hunting Reserve",
+      "type": "Hunting Reserve"
+    }
+  ],
+  "rukum6": [
+    {
+      "name": "Aathbiskot",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Banfikot",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Chaurjahari",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Musikot",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Sani Bheri",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Tribeni",
+      "type": "Gaunpalika"
+    }
+  ],
+  "rupandehi": [
+    {
+      "name": "Butwal",
+      "type": "Upamahanagarpalika"
+    },
+    {
+      "name": "Devdaha",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Gaidahawa",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Kanchan",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Kotahimai",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Lumbini Sanskritik",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Marchawari",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Mayadevi",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Omsatiya",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Rohini",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Sainamaina",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Sammarimai",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Siddharthanagar",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Siyari",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Sudhdhodhan",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Tillotama",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Lumbini Sanskritik Development Area",
+      "type": "Development Area"
+    }
+  ],
+  "salyan": [
+    {
+      "name": "Bagchaur",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Bangad Kupinde",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Chhatreshwori",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Darma",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Siddha Kumakh",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Kalimati",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Kapurkot",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Kumakh",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Sharada",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Tribeni",
+      "type": "Gaunpalika"
+    }
+  ],
+  "sankhuwasabha": [
+    {
+      "name": "Bhotkhola",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Chainpur",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Chichila",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Dharmadevi",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Khandbari",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Madi",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Makalu",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Panchakhapan",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Sabhapokhari",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Silichong",
+      "type": "Gaunpalika"
+    }
+  ],
+  "saptari": [
+    {
+      "name": "Agnisair Krishna Savaran",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Balan Bihul",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Rajgadh",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Bishnupur",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Bode Barsain",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Chhinnamasta",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Dakneshwori",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Hanumannagar Kankalini",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Kanchanrup",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Khadak",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Mahadeva",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Rajbiraj",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Rupani",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Saptakoshi",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Shambhunath",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Surunga",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Tilathi Koiladi",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Tirahut",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Koshi Tappu Wildlife Reserve",
+      "type": "Wildlife Reserve"
+    }
+  ],
+  "sarlahi": [
+    {
+      "name": "Bagmati",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Balara",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Barahathawa",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Basbariya",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Bishnu",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Bramhapuri",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Chakraghatta",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Chandranagar",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Dhankaul",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Godaita",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Haripur",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Haripurwa",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Hariwan",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Ishworpur",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Kabilasi",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Kaudena",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Lalbandi",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Malangawa",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Parsa",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Ramnagar",
+      "type": "Gaunpalika"
+    }
+  ],
+  "sindhuli": [
+    {
+      "name": "Dudhouli",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Ghanglekh",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Golanjor",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Hariharpurgadhi",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Kamalamai",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Marin",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Phikkal",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Sunkoshi",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Tinpatan",
+      "type": "Gaunpalika"
+    }
+  ],
+  "sindhupalchok": [
+    {
+      "name": "Balefi",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Barhabise",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Bhotekoshi",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Chautara SangachokGadhi",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Helambu",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Indrawati",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Jugal",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Lisangkhu Pakhar",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Melamchi",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Panchpokhari Thangpal",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Sunkoshi",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Tripurasundari",
+      "type": "Gaunpalika"
+    }
+  ],
+  "siraha": [
+    {
+      "name": "Arnama",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Aurahi",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Bariyarpatti",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Bhagawanpur",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Bishnupur",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Dhangadhimai",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Golbazar",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Kalyanpur",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Karjanha",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Lahan",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Laxmipur Patari",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Mirchaiya",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Naraha",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Nawarajpur",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Sakhuwanankarkatti",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Siraha",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Sukhipur",
+      "type": "Nagarpalika"
+    }
+  ],
+  "solukhumbu": [
+    {
+      "name": "Thulung Dudhkoshi",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Mapya Dudhkoshi",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Khumbupasanglahmu",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Likhupike",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Mahakulung",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Nechasalyan",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Solududhakunda",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Sotang",
+      "type": "Gaunpalika"
+    }
+  ],
+  "sunsari": [
+    {
+      "name": "Barahchhetra",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Barju",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Bhokraha Narshing",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Dewanganj",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Dharan",
+      "type": "Upamahanagarpalika"
+    },
+    {
+      "name": "Duhabi",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Gadhi",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Harinagar",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Inaruwa",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Itahari",
+      "type": "Upamahanagarpalika"
+    },
+    {
+      "name": "Koshi",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Ramdhuni",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Koshi Tappu Wildlife Reserve",
+      "type": "Wildlife Reserve"
+    }
+  ],
+  "surkhet": [
+    {
+      "name": "Barahtal",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Bheriganga",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Birendranagar",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Chaukune",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Chingad",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Gurbhakot",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Lekbeshi",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Panchpuri",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Simta",
+      "type": "Gaunpalika"
+    }
+  ],
+  "syangja": [
+    {
+      "name": "Aandhikhola",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Arjunchaupari",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Bhirkot",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Biruwa",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Chapakot",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Galyang",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Harinas",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Kaligandagi",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Phedikhola",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Putalibazar",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Waling",
+      "type": "Nagarpalika"
+    }
+  ],
+  "tanahu": [
+    {
+      "name": "Anbukhaireni",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Bandipur",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Bhanu",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Bhimad",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Vyas",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Devghat",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Ghiring",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Myagde",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Rhishing",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Shuklagandaki",
+      "type": "Nagarpalika"
+    }
+  ],
+  "taplejung": [
+    {
+      "name": "Aathrai Tribeni",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Maiwakhola",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Meringden",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Mikwakhola",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Phaktanglung",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Phungling",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Sidingba",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Sirijangha",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Pathibhara Yangwarak",
+      "type": "Gaunpalika"
+    }
+  ],
+  "terhathum": [
+    {
+      "name": "Aathrai",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Chhathar",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Laligurans",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Menchayam",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Myanglung",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Phedap",
+      "type": "Gaunpalika"
+    }
+  ],
+  "udayapur": [
+    {
+      "name": "Belaka",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Chaudandigadhi",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Katari",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Rautamai",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Limchungbung",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Tapli",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Triyuga",
+      "type": "Nagarpalika"
+    },
+    {
+      "name": "Udayapurgadhi",
+      "type": "Gaunpalika"
+    },
+    {
+      "name": "Koshi Tappu Wildlife Reserve",
+      "type": "Wildlife Reserve"
+    }
+  ]
+}
