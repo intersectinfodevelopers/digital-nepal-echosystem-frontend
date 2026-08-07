@@ -27,7 +27,7 @@ export default function NationalMapPage() {
   }, [resetToCountry]);
 
   return (
-    <main className="w-full h-[calc(100vh-3rem)]">
+    <main className="h-full w-full">
       <LeafletMap center={[28.3949, 84.124]} zoom={7} height="100%" />
     </main>
   );
