@@ -5,6 +5,7 @@ import wards from "../../../../data/wards.json";
 import municipalities from "../../../../data/municipalities.json";
 import grievances from "../../../../data/grievances.json";
 import idCards from "../../../../data/id-cards.json";
+import Table from "@/components/ui/Table";
 
 interface Citizen {
   id: string;
@@ -58,6 +59,11 @@ interface SexDistribution {
   total: number;
 }
 
+interface AgeBandRow {
+  band: string;
+  total: number;
+}
+
 interface GrievanceReport {
   id: string;
   municipality: string;
@@ -81,25 +87,7 @@ interface MunicipalityCardReport {
   approved: number;
   collected: number;
 }
-const sectionStyle = {
-  border: "1px solid #ddd",
-  borderRadius: 8,
-  padding: 20,
-  marginBottom: 30,
-  background: "#fff",
-};
 
-const tableStyle = {
-  width: "100%",
-  borderCollapse: "collapse" as const,
-  marginTop: 12,
-};
-
-const cell = {
-  border: "1px solid #ccc",
-  padding: 8,
-  textAlign: "left" as const,
-};
 const citizensData = citizens as Citizen[];
 const wardsData = wards as Ward[];
 const municipalitiesData = municipalities as Municipality[];
@@ -174,6 +162,10 @@ export default function ProvinceReportsPage() {
     else ageBands["60+"]++;
   });
 
+  const ageBandRows: AgeBandRow[] = Object.entries(ageBands).map(
+    ([band, total]) => ({ band, total }),
+  );
+
   const grievanceReport: GrievanceReport[] = municipalitiesData.map(
     (municipality) => {
       const citizenIds = getMunicipalityCitizenIds(municipality.id);
@@ -211,6 +203,7 @@ export default function ProvinceReportsPage() {
       };
     },
   );
+
   const cardTypes = [...new Set(idCardsData.map((card) => card.card_type))];
 
   const cardReport: CardReport[] = cardTypes.map((type) => {
@@ -241,231 +234,168 @@ export default function ProvinceReportsPage() {
       };
     });
 
+  const summaryCards = [
+    { label: "Total Citizens", value: citizensData.length },
+    { label: "Municipalities", value: municipalitiesData.length },
+    { label: "Wards", value: wardsData.length },
+    { label: "Grievances", value: grievancesData.length },
+    { label: "ID Cards", value: idCardsData.length },
+  ];
+
   return (
-    <div
-      style={{
-        padding: 24,
-        maxWidth: 1200,
-        margin: "0 auto",
-      }}
-    >
-      <h1
-        style={{
-          marginBottom: 24,
-          textAlign: "center",
-        }}
-      >
-        <strong> Province Reports</strong>
+    <div className="mx-auto max-w-6xl bg-background p-6">
+      <h1 className="mb-6 text-center text-2xl font-bold text-secondary">
+        Province Reports
       </h1>
 
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(180px,1fr))",
-          gap: 16,
-          marginBottom: 30,
-        }}
-      >
-        <div style={sectionStyle}>
-          <strong>Total Citizens</strong>
-          <h2>{citizensData.length}</h2>
-        </div>
-
-        <div style={sectionStyle}>
-          <strong>Municipalities</strong>
-          <h2>{municipalitiesData.length}</h2>
-        </div>
-
-        <div style={sectionStyle}>
-          <strong>Wards</strong>
-          <h2>{wardsData.length}</h2>
-        </div>
-
-        <div style={sectionStyle}>
-          <strong>Grievances</strong>
-          <h2>{grievancesData.length}</h2>
-        </div>
-
-        <div style={sectionStyle}>
-          <strong>ID Cards</strong>
-          <h2>{idCardsData.length}</h2>
-        </div>
+      <div className="mb-8 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
+        {summaryCards.map((card) => (
+          <div
+            key={card.label}
+            className="rounded-lg border border-border bg-surface p-4 shadow-card"
+          >
+            <p className="text-sm text-muted">{card.label}</p>
+            <p className="mt-1 text-2xl font-semibold text-secondary">
+              {card.value}
+            </p>
+          </div>
+        ))}
       </div>
 
-      <section style={sectionStyle}>
-        <h2>Province Population Report</h2>
+      <section className="mb-8 rounded-lg border border-border bg-surface p-6 shadow-card">
+        <div className="mb-4 flex items-center justify-between">
+          <h2 className="text-lg font-semibold text-secondary">
+            Province Population Report
+          </h2>
+          <button
+            onClick={printReport}
+            className="print:hidden rounded-md bg-primary px-4 py-2 text-sm font-medium text-white shadow-card hover:bg-primary/90 transition-colors"
+          >
+            Print Report
+          </button>
+        </div>
 
-        <button onClick={printReport}>Print Report</button>
-
-        <h3>Population by Ward</h3>
-
-        <table style={tableStyle}>
-          <thead>
-            <tr>
-              <th style={cell}>Ward</th>
-              <th style={cell}>Population</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            {populationByWard.map((ward) => (
-              <tr key={ward.id}>
-                <td style={cell}>{ward.ward}</td>
-                <td style={cell}>{ward.total}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-
-        <h3 style={{ marginTop: 24 }}>
-          <strong>Population by Municipality</strong>
+        <h3 className="mb-2 text-sm font-medium text-muted uppercase tracking-wide">
+          Population by Ward
         </h3>
+        <Table
+          columns={[
+            { key: "ward", header: "Ward" },
+            { key: "total", header: "Population" },
+          ]}
+          data={populationByWard}
+          keyExtractor={(row) => row.id}
+        />
 
-        <table style={tableStyle}>
-          <thead>
-            <tr>
-              <th style={cell}>Municipality</th>
-              <th style={cell}>Population</th>
-            </tr>
-          </thead>
+        <h3 className="mb-2 mt-6 text-sm font-medium text-muted uppercase tracking-wide">
+          Population by Municipality
+        </h3>
+        <Table
+          columns={[
+            { key: "municipality", header: "Municipality" },
+            { key: "total", header: "Population" },
+          ]}
+          data={populationByMunicipality}
+          keyExtractor={(row) => row.id}
+        />
 
-          <tbody>
-            {populationByMunicipality.map((municipality) => (
-              <tr key={municipality.id}>
-                <td style={cell}>{municipality.municipality}</td>
-                <td style={cell}>{municipality.total}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <h3 className="mb-2 mt-6 text-sm font-medium text-muted uppercase tracking-wide">
+          Sex Distribution
+        </h3>
+        <Table
+          columns={[
+            { key: "sex", header: "Sex" },
+            { key: "total", header: "Count" },
+          ]}
+          data={sexDistribution}
+          keyExtractor={(row) => row.sex}
+        />
 
-        <h3 style={{ marginTop: 24 }}>Sex Distribution</h3>
-
-        <table style={tableStyle}>
-          <thead>
-            <tr>
-              <th style={cell}>Sex</th>
-              <th style={cell}>Count</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            {sexDistribution.map((sex) => (
-              <tr key={sex.sex}>
-                <td style={cell}>{sex.sex}</td>
-                <td style={cell}>{sex.total}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-
-        <h3 style={{ marginTop: 24 }}>Age Bands</h3>
-
-        <table style={tableStyle}>
-          <thead>
-            <tr>
-              <th style={cell}>Age Group</th>
-              <th style={cell}>Population</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            {Object.entries(ageBands).map(([band, total]) => (
-              <tr key={band}>
-                <td style={cell}>{band}</td>
-                <td style={cell}>{total}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <h3 className="mb-2 mt-6 text-sm font-medium text-muted uppercase tracking-wide">
+          Age Bands
+        </h3>
+        <Table
+          columns={[
+            { key: "band", header: "Age Group" },
+            { key: "total", header: "Population" },
+          ]}
+          data={ageBandRows}
+          keyExtractor={(row) => row.band}
+        />
       </section>
 
-      <section style={sectionStyle}>
-        <h2>Grievance Resolution Report</h2>
+      <section className="mb-8 rounded-lg border border-border bg-surface p-6 shadow-card">
+        <div className="mb-4 flex items-center justify-between">
+          <h2 className="text-lg font-semibold text-secondary">
+            Grievance Resolution Report
+          </h2>
+          <button
+            onClick={printReport}
+            className="print:hidden rounded-md bg-primary px-4 py-2 text-sm font-medium text-white shadow-card hover:bg-primary/90 transition-colors"
+          >
+            Print Report
+          </button>
+        </div>
 
-        <button onClick={printReport} style={{ marginBottom: 16 }}>
-          Print Report
-        </button>
-
-        <table style={tableStyle}>
-          <thead>
-            <tr>
-              <th style={cell}>Municipality</th>
-              <th style={cell}>Received</th>
-              <th style={cell}>Resolved</th>
-              <th style={cell}>Pending</th>
-              <th style={cell}>SLA Breach Rate</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            {grievanceReport.map((report) => (
-              <tr key={report.id}>
-                <td style={cell}>{report.municipality}</td>
-                <td style={cell}>{report.received}</td>
-                <td style={cell}>{report.resolved}</td>
-                <td style={cell}>{report.pending}</td>
-                <td style={cell}>{report.sla}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <Table
+          columns={[
+            { key: "municipality", header: "Municipality" },
+            { key: "received", header: "Received" },
+            { key: "resolved", header: "Resolved" },
+            { key: "pending", header: "Pending" },
+            {
+              key: "sla",
+              header: "SLA Breach Rate",
+              render: (row) => (
+                <span className="font-medium text-danger">{row.sla}</span>
+              ),
+            },
+          ]}
+          data={grievanceReport}
+          keyExtractor={(row) => row.id}
+        />
       </section>
 
-      <section style={sectionStyle}>
-        <h2>ID Card Report</h2>
+      <section className="rounded-lg border border-border bg-surface p-6 shadow-card">
+        <div className="mb-4 flex items-center justify-between">
+          <h2 className="text-lg font-semibold text-secondary">
+            ID Card Report
+          </h2>
+          <button
+            onClick={printReport}
+            className="print:hidden rounded-md bg-primary px-4 py-2 text-sm font-medium text-white shadow-card hover:bg-primary/90 transition-colors"
+          >
+            Print Report
+          </button>
+        </div>
 
-        <button onClick={printReport} style={{ marginBottom: 16 }}>
-          Print Report
-        </button>
+        <h3 className="mb-2 text-sm font-medium text-muted uppercase tracking-wide">
+          By Card Type
+        </h3>
+        <Table
+          columns={[
+            { key: "type", header: "Card Type" },
+            { key: "initiated", header: "Initiated" },
+            { key: "approved", header: "Approved" },
+            { key: "collected", header: "Collected" },
+          ]}
+          data={cardReport}
+          keyExtractor={(row) => row.type}
+        />
 
-        <h3>By Card Type</h3>
-
-        <table style={tableStyle}>
-          <thead>
-            <tr>
-              <th style={cell}>Card Type</th>
-              <th style={cell}>Initiated</th>
-              <th style={cell}>Approved</th>
-              <th style={cell}>Collected</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            {cardReport.map((card) => (
-              <tr key={card.type}>
-                <td style={cell}>{card.type}</td>
-                <td style={cell}>{card.initiated}</td>
-                <td style={cell}>{card.approved}</td>
-                <td style={cell}>{card.collected}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-
-        <h3 style={{ marginTop: 24 }}>By Municipality</h3>
-
-        <table style={tableStyle}>
-          <thead>
-            <tr>
-              <th style={cell}>Municipality</th>
-              <th style={cell}>Initiated</th>
-              <th style={cell}>Approved</th>
-              <th style={cell}>Collected</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            {idCardMunicipalityReport.map((report) => (
-              <tr key={report.id}>
-                <td style={cell}>{report.municipality}</td>
-                <td style={cell}>{report.initiated}</td>
-                <td style={cell}>{report.approved}</td>
-                <td style={cell}>{report.collected}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <h3 className="mb-2 mt-6 text-sm font-medium text-muted uppercase tracking-wide">
+          By Municipality
+        </h3>
+        <Table
+          columns={[
+            { key: "municipality", header: "Municipality" },
+            { key: "initiated", header: "Initiated" },
+            { key: "approved", header: "Approved" },
+            { key: "collected", header: "Collected" },
+          ]}
+          data={idCardMunicipalityReport}
+          keyExtractor={(row) => row.id}
+        />
       </section>
     </div>
   );
