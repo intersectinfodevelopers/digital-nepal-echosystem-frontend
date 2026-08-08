@@ -1,65 +1,111 @@
 import citizens from "../../../../data/citizens.json";
 import wards from "../../../../data/wards.json";
+import municipalities from "../../../../data/municipalities.json";
 import idCards from "../../../../data/id-cards.json";
 import syncBatches from "../../../../data/sync-batches.json";
 
+import StatCard from "@/components/ui/StatCard";
+import Card from "@/components/ui/Card";
+
+const stats = {
+  totalCitizens: citizens.length,
+  totalMunicipalities: municipalities.length,
+  totalWards: wards.length,
+  idCardsIssued: idCards.length,
+};
+
+const syncStatusColor = (status: string) => {
+  if (status === "SYNCED" || status === "COMPLETED") {
+    return "text-success";
+  }
+
+  if (status === "PENDING" || status === "IN_PROGRESS") {
+    return "text-warning";
+  }
+
+  if (status === "CONFLICT" || status === "FAILED") {
+    return "text-danger";
+  }
+
+  return "text-muted";
+};
+
 export default function ProvinceDashboard() {
-  const stats = {
-    TotalCitizens: citizens.length,
-    TotalMunicipalities: 1,
-    TotalWards: wards.length,
-    IdCardsIssued: idCards.length,
-  };
-
   return (
-    <div>
-      <h1 className="text-center text-3xl font-bold">Province Dashboard</h1>
+    <div className="mx-auto w-full max-w-7xl bg-background p-4 md:p-6">
+      <h1 className="text-2xl font-bold text-secondary md:text-3xl">
+        Province Dashboard
+      </h1>
 
-      <h2 className="text-center italic">
+      <div className="mt-2 rounded-md border border-warning/30 bg-warning/10 px-4 py-2 text-sm font-medium text-warning">
         Province Admin — Analytical View Only. No write access to citizen
-        records
-      </h2>
+        records.
+      </div>
 
-      <div className="grid grid-cols-1 gap-3 mt-6 md:grid-cols-2 lg:grid-cols-4">
-        <div className="border rounded-lg p-3">
-          Total Citizens: {stats.TotalCitizens}
-        </div>
-        <div className="border rounded-lg p-3">
-          Total Municipalities: {stats.TotalMunicipalities}
-        </div>
-        <div className="border rounded-lg p-3">
-          Total Wards: {stats.TotalWards}
-        </div>
-        <div className="border rounded-lg p-3">
-          ID Cards Issued: {stats.IdCardsIssued}
-        </div>
+      <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+        <StatCard label="Total Citizens" value={stats.totalCitizens} />
+
+        <StatCard
+          label="Total Municipalities"
+          value={stats.totalMunicipalities}
+        />
+
+        <StatCard label="Total Wards" value={stats.totalWards} />
+
+        <StatCard label="ID Cards Issued" value={stats.idCardsIssued} />
       </div>
 
       <div className="mt-8">
-        <h2>Recent Activity</h2>
+        <Card
+          accentColor="border-primary"
+          header={
+            <h2 className="text-lg font-semibold text-secondary">
+              Recent Activity
+            </h2>
+          }
+        >
+          <div className="space-y-6">
+            <div>
+              <h3 className="text-sm font-medium uppercase tracking-wide text-muted">
+                Recent Sync Batches
+              </h3>
 
-        <h4>Recent Sync Batches</h4>
+              <ul className="mt-2 divide-y divide-border">
+                {syncBatches.slice(0, 5).map((batch) => (
+                  <li
+                    key={batch.batch_id}
+                    className="flex items-center justify-between py-2 text-sm"
+                  >
+                    <span className="text-secondary">{batch.ward_id}</span>
 
-        <ul>
-          {syncBatches.slice(0, 5).map((batch) => (
-            <li key={batch.batch_id}>
-              {batch.ward_id} - {batch.status}
-            </li>
-          ))}
-        </ul>
+                    <span
+                      className={`font-medium ${syncStatusColor(batch.status)}`}
+                    >
+                      {batch.status}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
 
-        <h3 className="mt-4">Recent ID Card Approvals</h3>
+            <div>
+              <h3 className="text-sm font-medium uppercase tracking-wide text-muted">
+                Recent ID Card Approvals
+              </h3>
 
-        <ul>
-          {idCards
-            .filter((card) => card.status === "APPROVED")
-            .slice(0, 5)
-            .map((card) => (
-              <li key={card.id}>
-                {card.card_type} Card ({card.id})
-              </li>
-            ))}
-        </ul>
+              <ul className="mt-2 divide-y divide-border">
+                {idCards
+                  .filter((card) => card.status === "APPROVED")
+                  .slice(0, 5)
+                  .map((card) => (
+                    <li key={card.id} className="py-2 text-sm text-secondary">
+                      {card.card_type} Card ({card.id})
+                    </li>
+                  ))}
+              </ul>
+            </div>
+          </div>
+        </Card>
       </div>
     </div>
   );

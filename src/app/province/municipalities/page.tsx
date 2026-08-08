@@ -2,112 +2,108 @@
 
 import { useState } from "react";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-type JsonRecord = Record<string, any>;
-
 import citizens from "../../../../data/citizens.json";
 import wards from "../../../../data/wards.json";
 import grievances from "../../../../data/grievances.json";
 import syncBatches from "../../../../data/sync-batches.json";
 import editApprovals from "../../../../data/edit-approvals.json";
+import municipalities from "../../../../data/municipalities.json";
+
+type SortKey =
+  | "name_en"
+  | "type"
+  | "totalCitizens"
+  | "nidVerified"
+  | "pendingApprovals"
+  | "activeGrievances"
+  | "lastSync";
 
 export default function MunicipalitiesPage() {
-  const [typeFilter, setTypeFilter] = useState("ALL");
   const [search, setSearch] = useState("");
-  const [sortField, setSortField] = useState("name");
-  const [sortOrder, setSortOrder] = useState("asc");
-  const [selectedMunicipality, setSelectedMunicipality] = useState<JsonRecord | null>(null);
+  const [typeFilter, setTypeFilter] = useState("ALL");
   const [currentPage, setCurrentPage] = useState(1);
-
-  const municipalityMap = new Map();
-
-  wards.forEach((ward: JsonRecord) => {
-    if (!municipalityMap.has(ward.municipality_id)) {
-      municipalityMap.set(ward.municipality_id, {
-        id: ward.municipality_id,
-        name: ward.name_en.replace(/ Ward No\. \d+$/, ""),
-        type: /municipality/i.test(ward.name_en) ? "URBAN" : "RURAL",
-      });
-    }
-  });
-
-  type MunicipalityInfo = {
+  const [sortKey, setSortKey] = useState<SortKey | null>(null);
+  const [sortDirection, setSortDirection] = useState<"asc" | "desc">("asc");
+  const [selectedMunicipality, setSelectedMunicipality] = useState<{
     id: string;
-    name: string;
+    name_en: string;
     type: string;
     totalCitizens: number;
-    nidVerified: number;
-    pendingApprovals: number;
-    activeGrievances: number;
-    lastSync: string;
-  };
+  } | null>(null);
 
-  const municipalities: MunicipalityInfo[] = Array.from(municipalityMap.values()).map(
-    (municipality: JsonRecord) => {
-      const municipalityWards = wards.filter(
-        (ward: JsonRecord) => ward.municipality_id === municipality.id,
-      );
+  const municipalityData = municipalities.map((municipality) => {
+    const municipalityWards = wards.filter(
+      (ward) => ward.municipality_id === municipality.id,
+    );
 
-      const wardIds = municipalityWards.map((ward: JsonRecord) => ward.id);
+    const wardIds = municipalityWards.map((ward) => ward.id);
 
-      const municipalityCitizens = citizens.filter((citizen: JsonRecord) =>
-        wardIds.includes(citizen.ward_id),
-      );
+    const municipalityCitizens = citizens.filter((citizen) =>
+      wardIds.includes(citizen.ward_id),
+    );
 
-      return {
-        id: municipality.id,
-        name: municipality.name,
-        type: municipality.type,
+    const citizenIds = municipalityCitizens.map((citizen) => citizen.id);
 
-        totalCitizens: municipalityCitizens.length,
+    const municipalitySyncs = syncBatches.filter((batch) =>
+      wardIds.includes(batch.ward_id),
+    );
 
-        nidVerified:
-          municipalityCitizens.length > 0
-            ? Math.round(
-                (municipalityCitizens.filter(
-                  (citizen: JsonRecord) => citizen.nid_verified,
-                ).length /
-                  municipalityCitizens.length) *
-                  100,
-              )
-            : 0,
+    return {
+      ...municipality,
 
-        pendingApprovals: editApprovals.filter((approval: JsonRecord) =>
-          wardIds.includes(approval.ward_id),
-        ).length,
+      totalCitizens: municipalityCitizens.length,
 
-        activeGrievances: grievances.filter((grievance: JsonRecord) =>
-          wardIds.includes(grievance.ward_id),
-        ).length,
+      nidVerified:
+        municipalityCitizens.length > 0
+          ? Math.round(
+              (municipalityCitizens.filter((citizen) => citizen.nid_verified)
+                .length /
+                municipalityCitizens.length) *
+                100,
+            )
+          : 0,
 
-        lastSync: (() => {
-          const municipalitySyncBatches = syncBatches.filter(
-            (batch: JsonRecord) => batch.municipality_id === municipality.id,
-          );
-          return municipalitySyncBatches.length > 0
-            ? municipalitySyncBatches[municipalitySyncBatches.length - 1]
-                ?.submitted_at || "N/A"
-            : "N/A";
-        })(),
-      };
-    },
-  );
+      pendingApprovals: editApprovals.filter((approval) =>
+        citizenIds.includes(approval.citizen_id),
+      ).length,
 
-  const filteredMunicipalities = municipalities.filter(
+      activeGrievances: grievances.filter((grievance) =>
+        citizenIds.includes(grievance.citizen_id),
+      ).length,
+
+      lastSync:
+        municipalitySyncs.length > 0
+          ? municipalitySyncs.sort(
+              (a, b) =>
+                new Date(b.submitted_at).getTime() -
+                new Date(a.submitted_at).getTime(),
+            )[0].submitted_at
+          : "N/A",
+    };
+  });
+
+  const filteredMunicipalities = municipalityData.filter(
     (municipality) =>
       (typeFilter === "ALL" || municipality.type === typeFilter) &&
-      municipality.name.toLowerCase().includes(search.toLowerCase()),
+      municipality.name_en.toLowerCase().includes(search.toLowerCase()),
   );
 
-  const sortedMunicipalities = [...filteredMunicipalities].sort((a, b) => {
-    const valueA = a[sortField as keyof typeof a];
-    const valueB = b[sortField as keyof typeof b];
+  const sortedMunicipalities = sortKey
+    ? [...filteredMunicipalities].sort((a, b) => {
+        const aVal = a[sortKey];
+        const bVal = b[sortKey];
 
-    if (valueA < valueB) return sortOrder === "asc" ? -1 : 1;
-    if (valueA > valueB) return sortOrder === "asc" ? 1 : -1;
+        if (typeof aVal === "number" && typeof bVal === "number") {
+          return sortDirection === "asc" ? aVal - bVal : bVal - aVal;
+        }
 
-    return 0;
-  });
+        const aStr = String(aVal);
+        const bStr = String(bVal);
+        return sortDirection === "asc"
+          ? aStr.localeCompare(bStr)
+          : bStr.localeCompare(aStr);
+      })
+    : filteredMunicipalities;
 
   const rowsPerPage = 5;
 
@@ -123,21 +119,22 @@ export default function MunicipalitiesPage() {
     safePage * rowsPerPage,
   );
 
-  const handleSort = (field: string) => {
-    if (sortField === field) {
-      setSortOrder(sortOrder === "asc" ? "desc" : "asc");
+  const handleSort = (key: SortKey) => {
+    if (sortKey === key) {
+      setSortDirection((dir) => (dir === "asc" ? "desc" : "asc"));
     } else {
-      setSortField(field);
-      setSortOrder("asc");
+      setSortKey(key);
+      setSortDirection("asc");
     }
+    setCurrentPage(1);
   };
 
   const wardStats = selectedMunicipality
     ? wards
-        .filter((ward: JsonRecord) => ward.municipality_id === selectedMunicipality.id)
-        .map((ward: JsonRecord) => {
+        .filter((ward) => ward.municipality_id === selectedMunicipality.id)
+        .map((ward) => {
           const wardCitizens = citizens.filter(
-            (citizen: JsonRecord) => citizen.ward_id === ward.id,
+            (citizen) => citizen.ward_id === ward.id,
           );
 
           return {
@@ -149,31 +146,33 @@ export default function MunicipalitiesPage() {
             nidVerified:
               wardCitizens.length > 0
                 ? Math.round(
-                    (wardCitizens.filter((citizen: JsonRecord) => citizen.nid_verified)
+                    (wardCitizens.filter((citizen) => citizen.nid_verified)
                       .length /
                       wardCitizens.length) *
                       100,
                   )
                 : 0,
-
-            pendingApprovals: editApprovals.filter(
-              (approval: JsonRecord) => approval.ward_id === ward.id,
-            ).length,
-
-            activeGrievances: grievances.filter(
-              (grievance: JsonRecord) => grievance.ward_id === ward.id,
-            ).length,
           };
         })
     : [];
 
+  const columns: { label: string; key: SortKey }[] = [
+    { label: "Municipality", key: "name_en" },
+    { label: "Type", key: "type" },
+    { label: "Total Citizens", key: "totalCitizens" },
+    { label: "NID Verified %", key: "nidVerified" },
+    { label: "Pending Approvals", key: "pendingApprovals" },
+    { label: "Active Grievances", key: "activeGrievances" },
+    { label: "Last Sync", key: "lastSync" },
+  ];
+
   return (
-    <div className="p-6">
-      <h1 className="text-3xl font-bold mb-6 text-center">
+    <div className="min-h-screen bg-background p-6">
+      <h1 className="mb-6 text-2xl font-bold text-secondary">
         Municipality Comparison
       </h1>
 
-      <div className="flex gap-4 mb-6">
+      <div className="mb-6 flex gap-4">
         <input
           type="text"
           placeholder="Search municipality..."
@@ -182,7 +181,7 @@ export default function MunicipalitiesPage() {
             setSearch(e.target.value);
             setCurrentPage(1);
           }}
-          className="border rounded p-2"
+          className="rounded-md border border-border bg-surface p-2 text-sm text-secondary shadow-card focus:outline-none focus:ring-2 focus:ring-primary/30"
         />
 
         <select
@@ -191,125 +190,83 @@ export default function MunicipalitiesPage() {
             setTypeFilter(e.target.value);
             setCurrentPage(1);
           }}
-          className="border rounded p-2"
+          className="rounded-md border border-border bg-surface p-2 text-sm text-secondary shadow-card focus:outline-none focus:ring-2 focus:ring-primary/30"
         >
           <option value="ALL">All Types</option>
-          <option value="RURAL">Rural</option>
-          <option value="URBAN">Urban</option>
+          <option value="URBAN_MUNICIPALITY">Urban Municipality</option>
+          <option value="RURAL_MUNICIPALITY">Rural Municipality</option>
         </select>
       </div>
 
-      <table className="w-full border border-collapse">
-        <thead>
-            <tr>
-              <th
-                className="border p-2 cursor-pointer"
-                onClick={() => handleSort("name")}
-              >
-                Municipality
-              </th>
-
-              <th
-                className="border p-2 cursor-pointer"
-                onClick={() => handleSort("type")}
-              >
-                Type
-              </th>
-
-              <th
-                className="border p-2 cursor-pointer"
-                onClick={() => handleSort("totalCitizens")}
-              >
-                Total Citizens
-              </th>
-
-              <th
-                className="border p-2 cursor-pointer"
-                onClick={() => handleSort("nidVerified")}
-              >
-                NID Verified %
-              </th>
-
-              <th
-                className="border p-2 cursor-pointer"
-                onClick={() => handleSort("pendingApprovals")}
-              >
-                Pending Approvals
-              </th>
-
-              <th
-                className="border p-2 cursor-pointer"
-                onClick={() => handleSort("activeGrievances")}
-              >
-                Active Grievances
-              </th>
-
-              <th
-                className="border p-2 cursor-pointer"
-                onClick={() => handleSort("lastSync")}
-              >
-                Last Sync
-              </th>
-
-              <th className="border p-2">
-                Actions
-              </th>
-            </tr>
-        </thead>
-
-        <tbody>
-          {paginatedMunicipalities.map((municipality) => (
-            <tr
-              key={municipality.id}
-              onClick={() => setSelectedMunicipality(municipality)}
-              className="cursor-pointer hover:bg-gray-100"
-            >
-              <td className="border p-2 text-blue-600 underline">
-                {municipality.name}
-              </td>
-
-              <td className="border p-2">{municipality.type}</td>
-
-              <td className="border p-2">{municipality.totalCitizens}</td>
-
-              <td className="border p-2">{municipality.nidVerified}%</td>
-
-              <td className="border p-2">{municipality.pendingApprovals}</td>
-
-              <td className="border p-2">{municipality.activeGrievances}</td>
-
-              <td className="border p-2">{municipality.lastSync}</td>
-              <td className="border p-2">
-                <button
-                  onClick={() => setSelectedMunicipality(municipality)}
-                  className="text-blue-600 hover:text-blue-800 text-sm font-medium underline"
+      <div className="overflow-x-auto rounded-lg border border-border bg-surface shadow-card">
+        <table className="w-full border-collapse text-sm">
+          <thead>
+            <tr className="bg-background">
+              {columns.map((col) => (
+                <th
+                  key={col.key}
+                  onClick={() => handleSort(col.key)}
+                  className="cursor-pointer select-none border-b border-border p-3 text-left font-semibold text-muted hover:text-secondary transition-colors"
                 >
-                  View Details
-                </button>
-              </td>
+                  <span className="inline-flex items-center gap-1">
+                    {col.label}
+                    {sortKey === col.key && (
+                      <span className="text-primary">
+                        {sortDirection === "asc" ? "▲" : "▼"}
+                      </span>
+                    )}
+                  </span>
+                </th>
+              ))}
             </tr>
-          ))}
+          </thead>
 
-          {paginatedMunicipalities.length === 0 && (
-            <tr>
-              <td colSpan={8} className="border p-4 text-center text-gray-500">
-                No municipalities found.
-              </td>
-            </tr>
-          )}
-        </tbody>
-      </table>
+          <tbody>
+            {paginatedMunicipalities.map((municipality) => (
+              <tr
+                key={municipality.id}
+                onClick={() => setSelectedMunicipality(municipality)}
+                className="cursor-pointer border-b border-border last:border-0 hover:bg-background transition-colors"
+              >
+                <td className="p-3 font-medium text-primary">
+                  {municipality.name_en}
+                </td>
 
-      <div className="flex justify-between mt-4">
+                <td className="p-3 text-secondary">{municipality.type}</td>
+
+                <td className="p-3 text-secondary">
+                  {municipality.totalCitizens}
+                </td>
+
+                <td className="p-3 text-secondary">
+                  {municipality.nidVerified}%
+                </td>
+
+                <td className="p-3 text-secondary">
+                  {municipality.pendingApprovals}
+                </td>
+
+                <td className="p-3 text-secondary">
+                  {municipality.activeGrievances}
+                </td>
+
+                <td className="p-3 text-muted">{municipality.lastSync}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <div className="mt-4 flex items-center justify-between">
         <button
           onClick={() => setCurrentPage((page) => Math.max(page - 1, 1))}
           disabled={safePage === 1}
-          className="border rounded px-4 py-2"
+          className="rounded-md border border-border bg-surface px-4 py-2 text-sm font-medium text-secondary shadow-card disabled:opacity-40 hover:bg-background transition-colors"
         >
           Previous
         </button>
 
-        <span>
+        <span className="text-sm text-muted">
           Page {safePage} of {totalPages}
         </span>
 
@@ -318,7 +275,7 @@ export default function MunicipalitiesPage() {
             setCurrentPage((page) => Math.min(page + 1, totalPages))
           }
           disabled={safePage === totalPages}
-          className="border rounded px-4 py-2"
+          className="rounded-md border border-border bg-surface px-4 py-2 text-sm font-medium text-secondary shadow-card disabled:opacity-40 hover:bg-background transition-colors"
         >
           Next
         </button>
@@ -326,48 +283,61 @@ export default function MunicipalitiesPage() {
 
       {selectedMunicipality && (
         <div className="mt-10">
-          <h2 className="text-2xl font-bold mb-4">
-            {selectedMunicipality.name}
+          <h2 className="mb-4 text-xl font-bold text-secondary">
+            {selectedMunicipality.name_en}
           </h2>
 
-          <div className="border rounded p-4 mb-4">
+          <div className="mb-4 rounded-lg border border-border bg-surface p-4 shadow-card text-sm text-secondary">
             <p>
-              <strong>Type:</strong> {selectedMunicipality.type}
+              <span className="text-muted">Type:</span>{" "}
+              {selectedMunicipality.type}
             </p>
 
-            <p>
-              <strong>Total Wards:</strong> {wardStats.length}
+            <p className="mt-1">
+              <span className="text-muted">Total Wards:</span>{" "}
+              {wardStats.length}
             </p>
 
-            <p>
-              <strong>Total Citizens:</strong>{" "}
+            <p className="mt-1">
+              <span className="text-muted">Total Citizens:</span>{" "}
               {selectedMunicipality.totalCitizens}
             </p>
           </div>
 
-          <h3 className="font-semibold text-lg mb-3">Ward Statistics</h3>
+          <h3 className="mb-3 text-lg font-semibold text-secondary">
+            Ward Statistics
+          </h3>
 
-          <table className="w-full border">
-            <thead>
-              <tr>
-                <th className="border p-2">Ward</th>
-                <th className="border p-2">Total Citizens</th>
-                <th className="border p-2">NID Verified %</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              {wardStats.map((ward) => (
-                <tr key={ward.id}>
-                  <td className="border p-2">Ward {ward.wardNo}</td>
-
-                  <td className="border p-2">{ward.totalCitizens}</td>
-
-                  <td className="border p-2">{ward.nidVerified}%</td>
+          <div className="overflow-x-auto rounded-lg border border-border bg-surface shadow-card">
+            <table className="w-full border-collapse text-sm">
+              <thead>
+                <tr className="bg-background">
+                  <th className="border-b border-border p-3 text-left font-semibold text-muted">
+                    Ward
+                  </th>
+                  <th className="border-b border-border p-3 text-left font-semibold text-muted">
+                    Total Citizens
+                  </th>
+                  <th className="border-b border-border p-3 text-left font-semibold text-muted">
+                    NID Verified %
+                  </th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+
+              <tbody>
+                {wardStats.map((ward) => (
+                  <tr
+                    key={ward.id}
+                    className="border-b border-border last:border-0"
+                  >
+                    <td className="p-3 text-secondary">Ward {ward.wardNo}</td>
+                    <td className="p-3 text-secondary">{ward.totalCitizens}</td>
+                    <td className="p-3 text-secondary">{ward.nidVerified}%</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       )}
     </div>
