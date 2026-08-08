@@ -29,17 +29,9 @@ export { Textarea } from "./Textarea";
 export { DatePicker } from "./DatePicker";
 export { DiffViewer } from "./DiffViewer";
 
-<<<<<<< HEAD
-// Registration step components
 // Registration step components
 export { SubmitStep } from "../SubmitStep";
 export { DisabilityStep } from "../DisabilityStep";
 export { EducationStep } from "../EducationStep";
 export { HouseholdStep } from "../HouseholdStep";
 export { GpsStep } from "../GpsStep";
-=======
-export { DisabilityStep } from "../DisabilityStep";
-export { EducationStep } from "../EducationStep";
-export { HouseholdStep } from "../HouseholdStep";
-export { GpsStep } from "../GpsStep";
->>>>>>> origin/develop
