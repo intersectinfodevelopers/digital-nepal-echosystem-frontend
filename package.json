@@ -30,7 +30,7 @@
     "leaflet-defaulticon-compatibility": "^0.1.2",
     "nanoid": "^3.3.12",
     "nepal-geojson": "^5.0.0-alpha",
-    "next": "16.2.9",
+    "next": "16.2.11",
     "react": "19.2.4",
     "react-dom": "19.2.4",
     "react-leaflet": "^5.0.0",
@@ -43,10 +43,18 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
-    "eslint-config-next": "16.2.9",
+    "eslint-config-next": "16.2.11",
     "husky": "^8.0.0",
     "prettier": "^3",
     "tailwindcss": "^4",
     "typescript": "^5"
+  }
+  ,
+  "pnpm": {
+    "overrides": {
+      "minimist": "0.2.4",
+      "postcss": "8.5.18",
+      "sharp": "0.35.0"
+    }
   }
 }
