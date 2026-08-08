@@ -4,6 +4,7 @@ import React, { useMemo, useState, useTransition } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { useMapSelection } from "@/contexts/MapSelectionContext";
 import districtLocalBodies from "@/constants/districtLocalBodies.json";
+import { Avatar } from "./Avatar";
 
 // Constants
 const PROVINCE_HIERARCHY = [
@@ -427,10 +428,10 @@ export default function Sidebar({
   };
 
   return (
-    <aside
+        <aside
       aria-label="Portal Navigation Sidebar"
-      className={`relative h-dvh sticky top-0 flex flex-col overflow-hidden p-4 bg-[#0B3067] text-white ${theme.border} ${isCollapsed ? "w-20" : "w-64"} transition-all duration-300 select-none`}
-    >
+      className={`h-dvh sticky top-0 flex flex-col justify-between overflow-hidden p-4 bg-[#0B3067] text-white ${theme.border} ${isCollapsed ? "w-20" : "w-64"} transition-all duration-300 select-none`}
+        >
       <button
         onClick={() => setIsCollapsed((prev) => !prev)}
         aria-label={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
@@ -492,12 +493,7 @@ export default function Sidebar({
         <div className="flex items-center gap-3 px-2 py-1">
           <div className="w-9 h-9 rounded-full bg-white/20 border border-white/30 flex items-center justify-center text-sm font-bold text-white shrink-0 overflow-hidden">
             {userInfo.avatarUrl ? (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img
-                src={userInfo.avatarUrl}
-                alt=""
-                className="w-full h-full object-cover"
-              />
+              <Avatar name={userInfo.name} image={userInfo.avatarUrl} size="sm" />
             ) : (
               userInfo.name.charAt(0).toUpperCase()
             )}

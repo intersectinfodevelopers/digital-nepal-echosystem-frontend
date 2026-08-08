@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
+import { Pagination } from "@/components/ui/Pagination";
 
 type WardAdmin = {
   id: number;
@@ -28,6 +29,11 @@ export default function WardAdminsPage() {
     phone: "",
     ward: "",
   });
+
+  const [search, setSearch] = useState("");
+  const [statusFilter, setStatusFilter] = useState("");
+  const [page, setPage] = useState(1);
+  const pageSize = 10;
 
   useEffect(() => {
     const loadAdmins = () => {
@@ -172,6 +178,31 @@ export default function WardAdminsPage() {
       setTempPassword("");
     }, 10000);
   };
+
+  const filteredAdmins = useMemo(() => {
+    return admins.filter((admin) => {
+      if (search) {
+        const q = search.toLowerCase();
+        if (
+          !admin.full_name.toLowerCase().includes(q) &&
+          !admin.username.toLowerCase().includes(q) &&
+          !admin.ward.toLowerCase().includes(q)
+        ) {
+          return false;
+        }
+      }
+      if (statusFilter === "active" && !admin.is_active) return false;
+      if (statusFilter === "disabled" && admin.is_active) return false;
+      return true;
+    });
+  }, [admins, search, statusFilter]);
+
+  const totalPages = Math.ceil(filteredAdmins.length / pageSize);
+
+  const paginatedAdmins = useMemo(() => {
+    const start = (page - 1) * pageSize;
+    return filteredAdmins.slice(start, start + pageSize);
+  }, [filteredAdmins, page]);
 
   return (
     <div className="p-6">
@@ -330,6 +361,25 @@ export default function WardAdminsPage() {
         </div>
       )}
 
+      <div className="flex gap-3 mb-6">
+        <input
+          type="text"
+          placeholder="Search by name, username, or ward..."
+          value={search}
+          onChange={(e) => { setSearch(e.target.value); setPage(1); }}
+          className="border border-gray-300 rounded-lg px-3 py-2 text-sm flex-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+        <select
+          value={statusFilter}
+          onChange={(e) => { setStatusFilter(e.target.value); setPage(1); }}
+          className="border border-gray-300 rounded-lg px-3 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+        >
+          <option value="">All Status</option>
+          <option value="active">Active</option>
+          <option value="disabled">Disabled</option>
+        </select>
+      </div>
+
       <table className="w-full border">
 
         <thead>
@@ -370,7 +420,7 @@ export default function WardAdminsPage() {
 
         <tbody>
 
-          {admins.map(
+          {paginatedAdmins.map(
             (admin) => (
 
               <tr
@@ -478,6 +528,15 @@ export default function WardAdminsPage() {
         </tbody>
 
       </table>
+
+      <div className="mt-4">
+        <Pagination
+          currentPage={page}
+          totalPages={totalPages || 1}
+          onPageChange={setPage}
+          totalItems={filteredAdmins.length}
+        />
+      </div>
 
     </div>
   );

@@ -11,6 +11,7 @@ interface TableProps<T> {
   data: T[];
   keyExtractor: (item: T) => string;
   emptyMessage?: string;
+  actions?: (item: T) => ReactNode;
 }
 
 export default function Table<T>({
@@ -18,117 +19,65 @@ export default function Table<T>({
   data,
   keyExtractor,
   emptyMessage = "No data found",
+  actions,
 }: TableProps<T>) {
   return (
-    <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
-      <div className="overflow-x-auto">
-        <table className="min-w-full border-collapse">
-          <thead className="bg-gray-50">
-            <tr>
-              {columns.map((col) => (
-                <th
-                  key={col.key}
-                  scope="col"
-                  className="
-                    whitespace-nowrap
-                    border-b
-                    border-gray-200
-                    px-6
-                    py-4
-                    text-left
-                    text-xs
-                    font-semibold
-                    uppercase
-                    tracking-wide
-                    text-gray-500
-                  "
-                >
-                  {col.header}
-                </th>
-              ))}
-
+    <div className="overflow-x-auto">
+      <table className="w-full text-sm">
+        <thead>
+          <tr className="border-b border-gray-100 bg-gray-50">
+            {columns.map((col) => (
               <th
-                scope="col"
-                className="
-                  whitespace-nowrap
-                  border-b
-                  border-gray-200
-                  px-6
-                  py-4
-                  text-left
-                  text-xs
-                  font-semibold
-                  uppercase
-                  tracking-wide
-                  text-gray-500
-                "
+                key={col.key}
+                className="text-left px-4 py-3 font-medium text-gray-600"
               >
+                {col.header}
+              </th>
+            ))}
+            {actions && (
+              <th className="text-left px-4 py-3 font-medium text-gray-600">
                 Actions
               </th>
-            </tr>
-          </thead>
-
-          <tbody>
-            {data.length > 0 ? (
-              data.map((item) => (
-                <tr
-                  key={keyExtractor(item)}
-                  className="
-                    border-b
-                    border-gray-100
-                    transition-colors
-                    hover:bg-blue-50
-                    last:border-b-0
-                  "
-                >
-                  {columns.map((col) => (
-                    <td
-                      key={col.key}
-                      className="px-6 py-4 text-sm text-gray-700"
-                    >
-                      {col.render
-                        ? col.render(item)
-                        : (item as Record<string, ReactNode>)[col.key]}
-                    </td>
-                  ))}
-
-                  <td className="px-6 py-4">
-                    <button
-                      type="button"
-                      className="
-                        rounded-lg
-                        border
-                        border-gray-300
-                        px-3
-                        py-1.5
-                        text-sm
-                        font-medium
-                        text-gray-700
-                        transition
-                        hover:bg-gray-100
-                        focus:outline-none
-                        focus:ring-2
-                        focus:ring-blue-200
-                      "
-                    >
-                      View
-                    </button>
-                  </td>
-                </tr>
-              ))
-            ) : (
-              <tr>
-                <td
-                  colSpan={columns.length + 1}
-                  className="px-6 py-12 text-center text-sm text-gray-500"
-                >
-                  {emptyMessage}
-                </td>
-              </tr>
             )}
-          </tbody>
-        </table>
-      </div>
+          </tr>
+        </thead>
+
+        <tbody>
+          {data.map((item) => (
+            <tr
+              key={keyExtractor(item)}
+              className="border-b border-gray-100 hover:bg-gray-50"
+            >
+              {columns.map((col) => (
+                <td
+                  key={col.key}
+                  className="px-4 py-3 text-gray-900"
+                >
+                  {col.render
+                    ? col.render(item)
+                    : (item as Record<string, ReactNode>)[col.key]}
+                </td>
+              ))}
+              {actions && (
+                <td className="px-4 py-3">
+                  {actions(item)}
+                </td>
+              )}
+            </tr>
+          ))}
+
+          {data.length === 0 && (
+            <tr>
+              <td
+                colSpan={columns.length + (actions ? 1 : 0)}
+                className="px-4 py-8 text-center text-gray-500"
+              >
+                {emptyMessage}
+              </td>
+            </tr>
+          )}
+        </tbody>
+      </table>
     </div>
   );
 }

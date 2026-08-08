@@ -16,14 +16,12 @@ export { default as Navbar } from "./Navbar";
 export { default as Breadcrumbs } from "./Breadcrumbs";
 export { TierBadge } from "./TierBadge";
 export { default as DashboardLayout } from "./DashboardLayout";
-export { default as StatCard } from "./StatCard";
 
 export { InputField } from "./InputField";
 export { SelectField } from "./SelectField";
 export { StepIndicator } from "./StepIndicator";
 export { SectionCard } from "./SectionCard";
 export { FormRow } from "./FormRow";
-export { FamilyMemberCard } from "./FamilyMemberCard";
 
 export { Select } from "./Select";
 export { Checkbox } from "./Checkbox";
@@ -31,7 +29,5 @@ export { Textarea } from "./Textarea";
 export { DatePicker } from "./DatePicker";
 export { DiffViewer } from "./DiffViewer";
 
-export { DisabilityStep } from "../DisabilityStep";
-export { EducationStep } from "../EducationStep";
-export { HouseholdStep } from "../HouseholdStep";
-export { GpsStep } from "../GpsStep";
+// Registration step components
+export { SubmitStep } from "../SubmitStep";
