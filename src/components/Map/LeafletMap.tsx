@@ -32,13 +32,15 @@ const PROVINCE_COLORS: Record<string, { fill: string; border: string }> = {
   "7": { fill: "#FCE7F3", border: "#D53F8C" },
 };
 
-type MapLevel = "country" | "province" | "district";
+type MapLevel = "country" | "province" | "district" | "localBody";
 
 type SelectionShape = {
   level: MapLevel;
   provinceId: string | null;
   provinceLabel: string | null;
   districtName: string | null;
+  localBodyName: string | null;
+  localBodyType: string | null;
 };
 
 // =====================
@@ -50,9 +52,13 @@ const slugify = (v: string) =>
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-+|-+$/g, "");
 
-const str = (v: unknown) => (v === null || v === undefined ? "" : String(v).trim());
+const str = (v: unknown) =>
+  v === null || v === undefined ? "" : String(v).trim();
 
-const propGet = (props: Record<string, unknown> | undefined, ...keys: string[]) => {
+const propGet = (
+  props: Record<string, unknown> | undefined,
+  ...keys: string[]
+) => {
   if (!props) return undefined;
   for (const k of keys) {
     if (props[k] !== undefined && props[k] !== null) return props[k];
@@ -61,12 +67,26 @@ const propGet = (props: Record<string, unknown> | undefined, ...keys: string[]) 
 };
 
 const resolveProvinceKey = (p?: Record<string, unknown>) =>
-  (str(propGet(p, "id", "Province", "province", "PROVINCE", "FIRST_PROV")) || undefined)?.toLowerCase();
+  (
+    str(propGet(p, "id", "Province", "province", "PROVINCE", "FIRST_PROV")) ||
+    undefined
+  )?.toLowerCase();
 const resolveProvinceId = (p?: Record<string, unknown>) => {
   const v = propGet(p, "id", "Province", "PROVINCE", "province_id", "province");
   return v === undefined ? undefined : str(v);
 };
-const resolveProvinceLabel = (p?: Record<string, unknown>) => str(propGet(p, "name", "name_en", "PROVINCE_NAME", "province_name", "DISTRICT", "TARGET"));
+const resolveProvinceLabel = (p?: Record<string, unknown>) =>
+  str(
+    propGet(
+      p,
+      "name",
+      "name_en",
+      "PROVINCE_NAME",
+      "province_name",
+      "DISTRICT",
+      "TARGET",
+    ),
+  );
 
 // Vector tile layer component (placed at module scope so it's not recreated during render)
 function VectorTileLayer({ url }: { url?: string }) {
@@ -81,7 +101,9 @@ function VectorTileLayer({ url }: { url?: string }) {
     try {
       const vg = Lany.vectorGrid;
       if (!vg) {
-        console.warn("Leaflet.VectorGrid not available; skipping vector tiles.");
+        console.warn(
+          "Leaflet.VectorGrid not available; skipping vector tiles.",
+        );
         return;
       }
       layer = vg.protobuf(url, {
@@ -89,19 +111,38 @@ function VectorTileLayer({ url }: { url?: string }) {
         vectorTileLayerStyles: {
           default: (props: any) => {
             const name = String(props?.name || props?.NAME || "");
-            const hue = Array.from(name).reduce((s: number, c: string) => s + c.charCodeAt(0), 0) % 360;
-            return { fillColor: `hsl(${hue} 65% 78%)`, color: `hsl(${hue} 60% 35%)`, weight: 1, fillOpacity: 0.45 };
+            const hue =
+              Array.from(name).reduce(
+                (s: number, c: string) => s + c.charCodeAt(0),
+                0,
+              ) % 360;
+            return {
+              fillColor: `hsl(${hue} 65% 78%)`,
+              color: `hsl(${hue} 60% 35%)`,
+              weight: 1,
+              fillOpacity: 0.45,
+            };
           },
         },
-        getFeatureId: (f: any) => f?.properties && (f.properties.id || f.properties.ID || f.properties.name),
+        getFeatureId: (f: any) =>
+          f?.properties &&
+          (f.properties.id || f.properties.ID || f.properties.name),
       });
 
       layer.on("click", (e: any) => {
         try {
           const prop = e?.layer?.properties || e?.feature?.properties || {};
-          const districtName = prop.DISTRICT || prop.district || prop.name || prop.NAME;
+          const districtName =
+            prop.DISTRICT || prop.district || prop.name || prop.NAME;
           if (e?.latlng) map.panTo(e.latlng);
-          setSelection((cur: any) => ({ level: "district", provinceId: cur.provinceId, provinceLabel: cur.provinceLabel, districtName: String(districtName || "").trim() }));
+          setSelection((cur: any) => ({
+            level: "district",
+            provinceId: cur.provinceId,
+            provinceLabel: cur.provinceLabel,
+            districtName: String(districtName || "").trim(),
+            localBodyName: null,
+            localBodyType: null,
+          }));
         } catch (err) {
           console.error("Vector tile click error", err);
         }
@@ -115,7 +156,8 @@ function VectorTileLayer({ url }: { url?: string }) {
 
     return () => {
       try {
-        if (localRef.current && map && map.hasLayer(localRef.current)) map.removeLayer(localRef.current);
+        if (localRef.current && map && map.hasLayer(localRef.current))
+          map.removeLayer(localRef.current);
       } catch {}
       localRef.current = null;
     };
@@ -156,7 +198,10 @@ const defaultGeoFor = (sel: SelectionShape) => {
   if (sel.level === "country") return NEPAL_PROVINCES;
   if (sel.level === "province" && sel.provinceId)
     return `/geojson/provinces/prov-${sel.provinceId}.json`;
-  if (sel.level === "district" && sel.districtName)
+  if (
+    (sel.level === "district" || sel.level === "localBody") &&
+    sel.districtName
+  )
     return `/geojson/local-bodies/${slugify(sel.districtName)}.json`;
   return NEPAL_PROVINCES;
 };
@@ -233,13 +278,23 @@ export default function LeafletMap({
   const [manifest, setManifest] = useState<any>(null);
   const lastTimedOutRef = useRef<string | null>(null);
 
+  const normalizeKey = (value: string) =>
+    value.toLowerCase().replace(/[^a-z0-9]+/g, "");
+
   const selectionLabel = useMemo(() => {
+    if (selection.level === "localBody")
+      return selection.localBodyName || "Local body view";
     if (selection.level === "district")
       return selection.districtName || "District view";
     if (selection.level === "province")
       return selection.provinceLabel || "Province view";
     return "Nepal";
-  }, [selection.level, selection.districtName, selection.provinceLabel]);
+  }, [
+    selection.level,
+    selection.districtName,
+    selection.localBodyName,
+    selection.provinceLabel,
+  ]);
 
   // Manifest loader (once)
   useEffect(() => {
@@ -402,6 +457,9 @@ export default function LeafletMap({
       resolveProvinceLabel(props) ||
       (provinceId ? `Province ${provinceId}` : null);
     const districtName = resolveDistrictName(props) || null;
+    const localBodyName = resolveLocalBodyLabel(props) || null;
+    const localBodyType =
+      str(propGet(props, "FIRST_Type", "TYPE", "type")) || null;
     // click behavior depends on current selection.level
     if (selection.level === "country" && provinceId) {
       setSelection({
@@ -409,6 +467,8 @@ export default function LeafletMap({
         provinceId,
         provinceLabel,
         districtName: null,
+        localBodyName: null,
+        localBodyType: null,
       });
       return;
     }
@@ -418,6 +478,22 @@ export default function LeafletMap({
         provinceId: cur.provinceId,
         provinceLabel: cur.provinceLabel,
         districtName,
+        localBodyName: null,
+        localBodyType: null,
+      }));
+      return;
+    }
+    if (
+      (selection.level === "district" || selection.level === "localBody") &&
+      localBodyName
+    ) {
+      setSelection((cur) => ({
+        level: "localBody",
+        provinceId: cur.provinceId,
+        provinceLabel: cur.provinceLabel,
+        districtName: cur.districtName,
+        localBodyName,
+        localBodyType,
       }));
       return;
     }
@@ -475,6 +551,32 @@ export default function LeafletMap({
   };
 
   // JSX
+  const visibleGeoJsonData = useMemo(() => {
+    if (
+      !geoJsonData ||
+      selection.level !== "localBody" ||
+      !selection.localBodyName
+    ) {
+      return geoJsonData;
+    }
+
+    const target = normalizeKey(selection.localBodyName);
+    const features = Array.isArray(geoJsonData.features)
+      ? geoJsonData.features.filter(
+          (feature: any) =>
+            normalizeKey(resolveLocalBodyLabel(feature?.properties) || "") ===
+            target,
+        )
+      : [];
+
+    return features.length > 0
+      ? {
+          ...geoJsonData,
+          features,
+        }
+      : geoJsonData;
+  }, [geoJsonData, selection.level, selection.localBodyName]);
+
   return (
     <div
       style={{ height }}
@@ -485,19 +587,32 @@ export default function LeafletMap({
           type="button"
           onClick={() =>
             setSelection((cur) =>
-              cur.level === "district"
+              cur.level === "localBody"
                 ? {
-                    level: "province",
+                    level: "district",
                     provinceId: cur.provinceId,
                     provinceLabel: cur.provinceLabel,
-                    districtName: null,
+                    districtName: cur.districtName,
+                    localBodyName: null,
+                    localBodyType: null,
                   }
-                : {
-                    level: "country",
-                    provinceId: null,
-                    provinceLabel: null,
-                    districtName: null,
-                  },
+                : cur.level === "district"
+                  ? {
+                      level: "province",
+                      provinceId: cur.provinceId,
+                      provinceLabel: cur.provinceLabel,
+                      districtName: null,
+                      localBodyName: null,
+                      localBodyType: null,
+                    }
+                  : {
+                      level: "country",
+                      provinceId: null,
+                      provinceLabel: null,
+                      districtName: null,
+                      localBodyName: null,
+                      localBodyType: null,
+                    },
             )
           }
           className="absolute left-3 top-3 z-[1000] rounded-full bg-white px-3 py-2 text-sm font-medium text-slate-700 shadow-sm ring-1 ring-slate-200 hover:bg-slate-50"
@@ -523,10 +638,10 @@ export default function LeafletMap({
           <VectorTileLayer url={vectorTilesUrl} />
         ) : (
           <>
-            <FitGeoJsonBounds data={geoJsonData} />
-            {geoJsonData && (
+            <FitGeoJsonBounds data={visibleGeoJsonData} />
+            {visibleGeoJsonData && (
               <GeoJSON
-                data={geoJsonData}
+                data={visibleGeoJsonData}
                 style={getDistrictStyle}
                 onEachFeature={onEachFeature}
               />
