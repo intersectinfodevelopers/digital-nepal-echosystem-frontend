@@ -233,10 +233,9 @@ export default async function AuditLogPage({
             ) : (
               <tr>
                 <td
-                  <td
-                    className="p-6 text-center text-sm text-gray-500"
-                    colSpan={6}
-                  >
+                  className="p-6 text-center text-sm text-gray-500"
+                  colSpan={6}
+                >
                     No audit logs match the current filters.
                   </td>
               </tr>
