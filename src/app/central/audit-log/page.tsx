@@ -233,19 +233,12 @@ export default async function AuditLogPage({
             ) : (
               <tr>
                 <td
-                  className="p-6 text-center text-sm text-gray-500"
-                  colSpan={5}
-                >
-                  No audit logs match the current filters.
-                </td>
-                <td className="p-3">
-                  <button
-                    onClick={() => alert(`Event: ${log.event_type}\nCitizen: ${log.citizen_id}\nActor: ${log.acted_by_role}\nJurisdiction: ${log.jurisdiction}\nTime: ${log.timestamp}`)}
-                    className="text-blue-600 hover:text-blue-800 text-sm font-medium"
+                  <td
+                    className="p-6 text-center text-sm text-gray-500"
+                    colSpan={6}
                   >
-                    View Details
-                  </button>
-                </td>
+                    No audit logs match the current filters.
+                  </td>
               </tr>
             )}
           </tbody>

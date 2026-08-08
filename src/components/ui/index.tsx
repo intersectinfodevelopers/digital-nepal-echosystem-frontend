@@ -31,7 +31,3 @@ export { DiffViewer } from "./DiffViewer";
 
 // Registration step components
 export { SubmitStep } from "../SubmitStep";
-export { DisabilityStep } from "../DisabilityStep";
-export { EducationStep } from "../EducationStep";
-export { HouseholdStep } from "../HouseholdStep";
-export { GpsStep } from "../GpsStep";
