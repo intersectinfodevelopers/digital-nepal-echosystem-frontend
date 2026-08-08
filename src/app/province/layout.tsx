@@ -1,5 +1,7 @@
-import Sidebar, { SidebarItem } from "@/components/ui/Sidebar";
-import { MapSelectionProvider } from "@/contexts/MapSelectionContext";
+import type { ReactNode } from "react";
+
+import Sidebar, { type SidebarItem } from "../../components/ui/Sidebar";
+import { MapSelectionProvider } from "../../contexts/MapSelectionContext";
 
 const PROVINCE_NAV_ITEMS: SidebarItem[] = [
   {
@@ -11,6 +13,7 @@ const PROVINCE_NAV_ITEMS: SidebarItem[] = [
         fill="none"
         stroke="currentColor"
         viewBox="0 0 24 24"
+        aria-hidden="true"
       >
         <path
           strokeLinecap="round"
@@ -21,7 +24,6 @@ const PROVINCE_NAV_ITEMS: SidebarItem[] = [
       </svg>
     ),
   },
-
   {
     label: "Municipalities",
     href: "/province/municipalities",
@@ -31,6 +33,7 @@ const PROVINCE_NAV_ITEMS: SidebarItem[] = [
         fill="none"
         stroke="currentColor"
         viewBox="0 0 24 24"
+        aria-hidden="true"
       >
         <path
           strokeLinecap="round"
@@ -41,7 +44,6 @@ const PROVINCE_NAV_ITEMS: SidebarItem[] = [
       </svg>
     ),
   },
-
   {
     label: "Analytics",
     href: "/province/analytics",
@@ -51,6 +53,7 @@ const PROVINCE_NAV_ITEMS: SidebarItem[] = [
         fill="none"
         stroke="currentColor"
         viewBox="0 0 24 24"
+        aria-hidden="true"
       >
         <path
           strokeLinecap="round"
@@ -61,7 +64,6 @@ const PROVINCE_NAV_ITEMS: SidebarItem[] = [
       </svg>
     ),
   },
-
   {
     label: "Reports",
     href: "/province/reports",
@@ -71,22 +73,27 @@ const PROVINCE_NAV_ITEMS: SidebarItem[] = [
         fill="none"
         stroke="currentColor"
         viewBox="0 0 24 24"
+        aria-hidden="true"
       >
         <path
           strokeLinecap="round"
           strokeLinejoin="round"
           strokeWidth="2"
-          d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707l.293.293V19a2 2 0 01-2 2z"
+          d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
         />
       </svg>
     ),
   },
 ];
 
-export default function Layout({ children }: { children: React.ReactNode }) {
+interface ProvinceLayoutProps {
+  children: ReactNode;
+}
+
+export default function ProvinceLayout({ children }: ProvinceLayoutProps) {
   return (
     <MapSelectionProvider>
-      <div className="flex min-h-screen">
+      <div className="flex min-h-screen bg-background">
         <Sidebar
           items={PROVINCE_NAV_ITEMS}
           variant="province"
@@ -96,7 +103,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           }}
         />
 
-        <main className="min-w-0 flex-1 bg-background">{children}</main>
+        <main className="min-w-0 flex-1 bg-background">
+          <div className="w-full p-4 md:p-6 lg:p-8">{children}</div>
+        </main>
       </div>
     </MapSelectionProvider>
   );

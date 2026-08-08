@@ -13,6 +13,7 @@ export { default as EmptyState } from "./EmptyState";
 
 export { default as Sidebar } from "./Sidebar";
 export { default as Navbar } from "./Navbar";
+export { default as Breadcrumbs } from "./Breadcrumbs";
 export { TierBadge } from "./TierBadge";
 export { default as DashboardLayout } from "./DashboardLayout";
 export { default as StatCard } from "./StatCard";
@@ -29,9 +30,6 @@ export { Checkbox } from "./Checkbox";
 export { Textarea } from "./Textarea";
 export { DatePicker } from "./DatePicker";
 export { DiffViewer } from "./DiffViewer";
-
-
-
 
 export { DisabilityStep } from "../DisabilityStep";
 export { EducationStep } from "../EducationStep";
