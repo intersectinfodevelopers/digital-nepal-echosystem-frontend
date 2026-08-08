@@ -23,13 +23,15 @@ export function PortalLayout({ children }: PortalLayoutProps) {
             <Typography className="font-poppins font-bold text-[22px] text-white tracking-[0.5px]">
               Prapti
             </Typography>
-            <Box className="cursor-pointer w-9 h-9 rounded-full border-2 border-white/60 flex items-center justify-center">
+            <Box
+              className="cursor-pointer w-9 h-9 rounded-full border-2 border-white/60 flex items-center justify-center"
+              sx={{ filter: "brightness(0) invert(1)" }}
+            >
               <Image
                 src="/assets/portal/user.svg"
                 alt="User profile"
                 width={18}
                 height={18}
-                style={{ filter: "brightness(0) invert(1)" }}
               />
             </Box>
           </Box>

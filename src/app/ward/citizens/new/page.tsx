@@ -165,6 +165,7 @@ export default function NewCitizenPage() {
                       {formData.citizenship_front ? (
                         <Box className="relative">
                           <Box className="flex flex-col items-center justify-center h-80 border-4 border-green-300 rounded-[3rem] overflow-hidden bg-green-50/30 shadow-inner">
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
                             <img
                               src={formData.citizenship_front}
                               alt="Front"
@@ -262,6 +263,7 @@ export default function NewCitizenPage() {
                       {formData.citizenship_back ? (
                         <Box className="relative">
                           <Box className="flex flex-col items-center justify-center h-80 border-4 border-green-300 rounded-[3rem] overflow-hidden bg-green-50/30 shadow-inner">
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
                             <img
                               src={formData.citizenship_back}
                               alt="Back"
@@ -417,6 +419,7 @@ export default function NewCitizenPage() {
                       key={i}
                       className="flex-1 relative rounded-[3rem] overflow-hidden group shadow-xl border-4 border-white h-[22rem]"
                     >
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
                         src={ex.url}
                         alt={ex.label}

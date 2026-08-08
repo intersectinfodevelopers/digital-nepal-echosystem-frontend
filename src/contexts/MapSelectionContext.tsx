@@ -9,13 +9,15 @@ import React, {
   useMemo,
 } from "react";
 
-export type MapLevel = "country" | "province" | "district";
+export type MapLevel = "country" | "province" | "district" | "localBody";
 
 export interface MapSelection {
   level: MapLevel;
   provinceId: string | null;
   provinceLabel: string | null;
   districtName: string | null;
+  localBodyName: string | null;
+  localBodyType: string | null;
 }
 
 interface MapSelectionContextType {
@@ -26,6 +28,13 @@ interface MapSelectionContextType {
     provinceId: string,
     provinceLabel: string,
     districtName: string,
+  ) => void;
+  selectLocalBody: (
+    provinceId: string,
+    provinceLabel: string,
+    districtName: string,
+    localBodyName: string,
+    localBodyType?: string,
   ) => void;
   resetToCountry: () => void;
 }
@@ -40,7 +49,29 @@ export function MapSelectionProvider({ children }: { children: ReactNode }) {
     provinceId: null,
     provinceLabel: null,
     districtName: null,
+    localBodyName: null,
+    localBodyType: null,
   });
+
+  const selectLocalBody = useCallback(
+    (
+      provinceId: string,
+      provinceLabel: string,
+      districtName: string,
+      localBodyName: string,
+      localBodyType: string | null = null,
+    ) => {
+      setSelection({
+        level: "localBody",
+        provinceId,
+        provinceLabel,
+        districtName,
+        localBodyName,
+        localBodyType,
+      });
+    },
+    [],
+  );
 
   const selectDistrict = useCallback(
     (provinceId: string, provinceLabel: string, districtName: string) => {
@@ -49,6 +80,8 @@ export function MapSelectionProvider({ children }: { children: ReactNode }) {
         provinceId,
         provinceLabel,
         districtName,
+        localBodyName: null,
+        localBodyType: null,
       });
     },
     [],
@@ -60,6 +93,8 @@ export function MapSelectionProvider({ children }: { children: ReactNode }) {
       provinceId: null,
       provinceLabel: null,
       districtName: null,
+      localBodyName: null,
+      localBodyType: null,
     });
   }, []);
 
@@ -69,6 +104,8 @@ export function MapSelectionProvider({ children }: { children: ReactNode }) {
       provinceId: id,
       provinceLabel: label,
       districtName: null,
+      localBodyName: null,
+      localBodyType: null,
     });
   }, []);
 
@@ -78,9 +115,16 @@ export function MapSelectionProvider({ children }: { children: ReactNode }) {
       setSelection,
       selectProvince,
       selectDistrict,
+      selectLocalBody,
       resetToCountry,
     }),
-    [selection, selectProvince, selectDistrict, resetToCountry],
+    [
+      selection,
+      selectProvince,
+      selectDistrict,
+      selectLocalBody,
+      resetToCountry,
+    ],
   );
 
   return (
