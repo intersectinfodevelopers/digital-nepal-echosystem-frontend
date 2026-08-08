@@ -1,5 +1,3 @@
-"use client";
-
 import employment from "../../../../data/employment.json";
 import disability from "../../../../data/disability.json";
 import households from "../../../../data/households.json";
@@ -49,6 +47,22 @@ interface Municipality {
   type: string;
 }
 
+interface MunicipalityRef {
+  id: string;
+  name: string;
+}
+
+interface IncomeGroup {
+  name: string;
+  classes: Record<string, number>;
+}
+
+interface Grievance {
+  citizen_id: string;
+  status: string;
+  filed_at: string;
+}
+
 const municipalitiesData = municipalities as Municipality[];
 const wardsData = wards as Ward[];
 const citizensData = citizens as {
@@ -56,14 +70,37 @@ const citizensData = citizens as {
   ward_id: string;
 }[];
 
-const grievancesData = grievances as {
-  citizen_id: string;
-  status: string;
-  filed_at: string;
-}[];
+const grievancesData = grievances as Grievance[];
+
+const countryMap: Record<string, string> = {
+  AE: "United Arab Emirates",
+  QA: "Qatar",
+  MY: "Malaysia",
+  JP: "Japan",
+  KR: "South Korea",
+};
+
+const getPercentage = (value: number, total: number): number => {
+  if (total === 0) {
+    return 0;
+  }
+
+  return Number(((value / total) * 100).toFixed(1));
+};
+
+const formatLabel = (value: string): string => {
+  return value
+    .replaceAll("_", " ")
+    .toLowerCase()
+    .replace(/\b\w/g, (character) => character.toUpperCase());
+};
 
 export default function ProvinceAnalytics() {
-  const citizenCount = citizens.length;
+  /*
+   * ---------------------------------------------------------
+   * Employment
+   * ---------------------------------------------------------
+   */
 
   const employmentStats = (employment as Employment[]).reduce(
     (acc: Record<string, number>, item: Employment) => {
@@ -77,13 +114,21 @@ export default function ProvinceAnalytics() {
     .map(([category, count]) => ({
       category,
       count,
-      percentage: Number(((count / employment.length) * 100).toFixed(1)),
+      percentage: getPercentage(count, employment.length),
     }))
     .sort((a, b) => b.count - a.count);
 
+  /*
+   * ---------------------------------------------------------
+   * Disability
+   * ---------------------------------------------------------
+   */
+
   const disabilityStats = (disability as Disability[]).reduce(
     (acc: Record<string, number>, item: Disability) => {
-      if (!item.disability_type) return acc;
+      if (!item.disability_type) {
+        return acc;
+      }
 
       acc[item.disability_type] = (acc[item.disability_type] || 0) + 1;
 
@@ -92,19 +137,21 @@ export default function ProvinceAnalytics() {
     {},
   );
 
-  const disabilityData = Object.entries(disabilityStats);
+  const disabilityData = Object.entries(disabilityStats).sort(
+    ([, a], [, b]) => b - a,
+  );
 
-  const countryMap: Record<string, string> = {
-    AE: "United Arab Emirates",
-    QA: "Qatar",
-    MY: "Malaysia",
-    JP: "Japan",
-    KR: "South Korea",
-  };
+  /*
+   * ---------------------------------------------------------
+   * Foreign Employment
+   * ---------------------------------------------------------
+   */
 
   const foreignStats = (employment as Employment[]).reduce(
     (acc: Record<string, number>, item: Employment) => {
-      if (item.category !== "FOREIGN_ABROAD") return acc;
+      if (item.category !== "FOREIGN_ABROAD") {
+        return acc;
+      }
 
       const code = item.sub_fields?.country_code ?? "Unknown";
       const country = countryMap[code] || code;
@@ -116,34 +163,40 @@ export default function ProvinceAnalytics() {
     {},
   );
 
-  const foreignData = Object.entries(foreignStats);
+  const foreignData = Object.entries(foreignStats).sort(
+    ([, a], [, b]) => b - a,
+  );
 
-  const wardToMunicipality: Record<string, { id: string; name: string }> = (
-    wards as Ward[]
-  ).reduce((acc: Record<string, { id: string; name: string }>, ward: Ward) => {
-    const municipality = (municipalities as Municipality[]).find(
-      (municipality) => municipality.id === ward.municipality_id,
-    );
+  /*
+   * ---------------------------------------------------------
+   * Municipality / Ward mapping
+   * ---------------------------------------------------------
+   */
 
-    acc[ward.id] = {
-      id: ward.municipality_id,
-      name: municipality?.name_en ?? "Unknown",
-    };
+  const wardToMunicipality = wardsData.reduce(
+    (acc: Record<string, MunicipalityRef>, ward: Ward) => {
+      const municipality = municipalitiesData.find(
+        (item) => item.id === ward.municipality_id,
+      );
 
-    return acc;
-  }, {});
+      acc[ward.id] = {
+        id: ward.municipality_id,
+        name: municipality?.name_en ?? "Unknown",
+      };
+
+      return acc;
+    },
+    {},
+  );
+
+  /*
+   * ---------------------------------------------------------
+   * Income Distribution
+   * ---------------------------------------------------------
+   */
 
   const incomeByMunicipality = (households as Household[]).reduce(
-    (
-      acc: Record<
-        string,
-        {
-          name: string;
-          classes: Record<string, number>;
-        }
-      >,
-      item: Household,
-    ) => {
+    (acc: Record<string, IncomeGroup>, item: Household) => {
       const municipality = wardToMunicipality[item.ward_id] ?? {
         id: "unknown",
         name: "Unknown",
@@ -166,6 +219,12 @@ export default function ProvinceAnalytics() {
 
   const incomeData = Object.entries(incomeByMunicipality);
 
+  /*
+   * ---------------------------------------------------------
+   * Grievance Monitoring
+   * ---------------------------------------------------------
+   */
+
   const grievanceStats = municipalitiesData.map((municipality) => {
     const wardIds = wardsData
       .filter((ward) => ward.municipality_id === municipality.id)
@@ -185,8 +244,7 @@ export default function ProvinceAnalytics() {
       ["RESOLVED", "CLOSED", "COMPLETED"].includes(grievance.status),
     ).length;
 
-    const resolutionRate =
-      total === 0 ? 0 : ((resolved / total) * 100).toFixed(1);
+    const resolutionRate = getPercentage(resolved, total);
 
     const slaBreached = municipalityGrievances.filter((grievance) => {
       const filedDate = new Date(grievance.filed_at);
@@ -196,7 +254,7 @@ export default function ProvinceAnalytics() {
       return days > 15;
     }).length;
 
-    const slaRate = total === 0 ? 0 : ((slaBreached / total) * 100).toFixed(1);
+    const slaRate = getPercentage(slaBreached, total);
 
     return {
       id: municipality.id,
@@ -207,176 +265,370 @@ export default function ProvinceAnalytics() {
     };
   });
 
+  /*
+   * ---------------------------------------------------------
+   * Summary
+   * ---------------------------------------------------------
+   */
+
+  const citizenCount = citizens.length;
+
+  const totalForeignWorkers = foreignData.reduce(
+    (total, [, count]) => total + count,
+    0,
+  );
+
   return (
-    <div className="p-4 space-y-8">
-      <div className="p-4">
-        <h1 className="text-3xl font-bold text-center">Province Analytics</h1>
-      </div>
+    <main className="min-h-screen bg-background px-4 py-6 md:px-6 lg:px-8">
+      <div className="mx-auto w-full max-w-7xl">
+        {/* Page Header */}
+        <header className="mb-8">
+          <h1 className="text-2xl font-bold text-secondary md:text-3xl">
+            Province Analytics
+          </h1>
 
-      <section className="bg-white border rounded-lg shadow p-6">
-        <h2 className="text-2xl font-semibold mb-6">Employment Distribution</h2>
-        <div className="space-y-5">
-          {employmentData.map((item) => (
-            <div key={item.category}>
-              <div className="flex justify-between mb-2">
-                <span>{item.category}</span>
-                <span>
-                  {item.count} ({item.percentage}%)
-                </span>
-              </div>
-              <div className="w-full h-4 bg-gray-200 rounded-full">
-                <div
-                  className="bg-blue-600 h-4 rounded-full"
-                  style={{ width: `${item.percentage}%` }}
-                />
-              </div>
+          <p className="mt-1 text-sm text-muted md:text-base">
+            Province-level employment, disability, income and grievance insights
+          </p>
+        </header>
+
+        {/* Summary Cards */}
+        <section className="mb-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="rounded-xl border border-border bg-surface p-5 shadow-card">
+            <p className="text-sm font-medium text-muted">Total Citizens</p>
+
+            <p className="mt-2 text-2xl font-bold text-secondary md:text-3xl">
+              {citizenCount}
+            </p>
+          </div>
+
+          <div className="rounded-xl border border-border bg-surface p-5 shadow-card">
+            <p className="text-sm font-medium text-muted">
+              Employment Categories
+            </p>
+
+            <p className="mt-2 text-2xl font-bold text-secondary md:text-3xl">
+              {employmentData.length}
+            </p>
+          </div>
+
+          <div className="rounded-xl border border-border bg-surface p-5 shadow-card">
+            <p className="text-sm font-medium text-muted">Disability Types</p>
+
+            <p className="mt-2 text-2xl font-bold text-secondary md:text-3xl">
+              {disabilityData.length}
+            </p>
+          </div>
+
+          <div className="rounded-xl border border-border bg-surface p-5 shadow-card">
+            <p className="text-sm font-medium text-muted">Citizens Abroad</p>
+
+            <p className="mt-2 text-2xl font-bold text-secondary md:text-3xl">
+              {totalForeignWorkers}
+            </p>
+          </div>
+        </section>
+
+        {/* Employment Distribution */}
+        <section className="mb-6 rounded-xl border border-border bg-surface p-5 shadow-card md:p-6">
+          <div className="mb-6">
+            <h2 className="text-lg font-semibold text-secondary md:text-xl">
+              Employment Distribution
+            </h2>
+
+            <p className="mt-1 text-sm text-muted">
+              Distribution of citizens by employment category
+            </p>
+          </div>
+
+          {employmentData.length > 0 ? (
+            <div className="space-y-5">
+              {employmentData.map((item) => (
+                <div key={item.category}>
+                  <div className="mb-2 flex items-center justify-between gap-4 text-sm">
+                    <span className="font-medium text-secondary">
+                      {formatLabel(item.category)}
+                    </span>
+
+                    <span className="shrink-0 text-muted">
+                      {item.count} ({item.percentage}%)
+                    </span>
+                  </div>
+
+                  <div className="h-2.5 w-full overflow-hidden rounded-full bg-background">
+                    <div
+                      className="h-full rounded-full bg-primary transition-all duration-500"
+                      style={{
+                        width: `${item.percentage}%`,
+                      }}
+                    />
+                  </div>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
-      </section>
+          ) : (
+            <p className="py-6 text-center text-sm text-muted">
+              No employment data available.
+            </p>
+          )}
+        </section>
 
-      <section className="bg-white border rounded-lg shadow p-6">
-        <h2 className="text-2xl font-semibold mb-6">Foreign Employment</h2>
-        <table className="w-full border">
-          <thead className="bg-gray-100">
-            <tr>
-              <th className="border p-3 text-left">Country</th>
-              <th className="border p-3 text-left">Citizens Abroad</th>
-            </tr>
-          </thead>
-          <tbody>
-            {foreignData.length ? (
-              foreignData.map(([country, count]) => (
-                <tr key={country}>
-                  <td className="border p-3">{country}</td>
-                  <td className="border p-3">{String(count)}</td>
+        {/* Foreign Employment */}
+        <section className="mb-6 rounded-xl border border-border bg-surface p-5 shadow-card md:p-6">
+          <div className="mb-6">
+            <h2 className="text-lg font-semibold text-secondary md:text-xl">
+              Foreign Employment
+            </h2>
+
+            <p className="mt-1 text-sm text-muted">
+              Citizens currently recorded as working abroad
+            </p>
+          </div>
+
+          <div className="overflow-x-auto rounded-lg border border-border">
+            <table className="w-full min-w-[500px] border-collapse text-sm">
+              <thead>
+                <tr className="bg-background">
+                  <th className="border-b border-border px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-muted">
+                    Country
+                  </th>
+
+                  <th className="border-b border-border px-4 py-3 text-right text-xs font-semibold uppercase tracking-wide text-muted">
+                    Citizens Abroad
+                  </th>
                 </tr>
-              ))
-            ) : (
-              <tr>
-                <td colSpan={2} className="border p-4 text-center">
-                  No records found
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
-      </section>
+              </thead>
 
-      <section className="bg-white border rounded-lg shadow p-6">
-        <h2 className="text-2xl font-semibold mb-6">Disability Summary</h2>
-        <table className="w-full border">
-          <thead className="bg-gray-100">
-            <tr>
-              <th className="border p-3 text-left">Disability Type</th>
-              <th className="border p-3 text-left">Count</th>
-            </tr>
-          </thead>
-          <tbody>
-            {disabilityData.map(([type, count]) => (
-              <tr key={type}>
-                <td className="border p-3">{type}</td>
-                <td className="border p-3">{String(count)}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </section>
+              <tbody>
+                {foreignData.length > 0 ? (
+                  foreignData.map(([country, count]) => (
+                    <tr
+                      key={country}
+                      className="border-b border-border last:border-0 hover:bg-background/50"
+                    >
+                      <td className="px-4 py-3 font-medium text-secondary">
+                        {country}
+                      </td>
 
-      <section className="bg-white border rounded-lg shadow p-6">
-        <h2 className="text-2xl font-semibold mb-6">
-          Income Distribution by Municipality
-        </h2>
-        <table className="w-full border">
-          <thead className="bg-gray-100">
-            <tr>
-              <th className="border p-3 text-left">Municipality</th>
-              <th className="border p-3 text-left">Poverty Class</th>
-              <th className="border p-3 text-left">Households</th>
-            </tr>
-          </thead>
-          <tbody>
-            {incomeData.length ? (
-              incomeData.flatMap(([muniId, { name, classes }]) =>
-                Object.entries(classes).map(([cls, count]) => (
-                  <tr key={`${muniId}-${cls}`}>
-                    <td className="border p-3">{name}</td>
-                    <td className="border p-3">{cls}</td>
-                    <td className="border p-3">{String(count)}</td>
+                      <td className="px-4 py-3 text-right text-secondary">
+                        {count}
+                      </td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td
+                      colSpan={2}
+                      className="px-4 py-6 text-center text-muted"
+                    >
+                      No foreign employment records found.
+                    </td>
                   </tr>
-                )),
-              )
-            ) : (
-              <tr>
-                <td colSpan={3} className="border p-4 text-center">
-                  No records found
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
-      </section>
+                )}
+              </tbody>
+            </table>
+          </div>
+        </section>
 
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <div className="border rounded-lg p-4 bg-white shadow">
-          <p>Citizens</p>
-          <p className="text-2xl font-bold">{citizenCount}</p>
-        </div>
+        {/* Disability Summary */}
+        <section className="mb-6 rounded-xl border border-border bg-surface p-5 shadow-card md:p-6">
+          <div className="mb-6">
+            <h2 className="text-lg font-semibold text-secondary md:text-xl">
+              Disability Summary
+            </h2>
 
-        <div className="border rounded-lg p-4 bg-white shadow">
-          <p>Employment Categories</p>
-          <p className="text-2xl font-bold">{employmentData.length}</p>
-        </div>
+            <p className="mt-1 text-sm text-muted">
+              Citizens grouped by recorded disability type
+            </p>
+          </div>
 
-        <div className="border rounded-lg p-4 bg-white shadow">
-          <p>Disability Types</p>
-          <p className="text-2xl font-bold">{disabilityData.length}</p>
-        </div>
+          <div className="overflow-x-auto rounded-lg border border-border">
+            <table className="w-full min-w-[500px] border-collapse text-sm">
+              <thead>
+                <tr className="bg-background">
+                  <th className="border-b border-border px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-muted">
+                    Disability Type
+                  </th>
 
-        <div className="border rounded-lg p-4 bg-white shadow">
-          <p>Municipalities</p>
-          <p className="text-2xl font-bold">{municipalitiesData.length}</p>
-        </div>
-      </div>
-
-      <section className="bg-white border rounded-lg shadow p-6">
-        <h2 className="text-2xl font-semibold mb-6">Grievance Monitoring</h2>
-
-        <table className="w-full border">
-          <thead className="bg-gray-100">
-            <tr>
-              <th className="border p-3 text-left">Municipality</th>
-              <th className="border p-3 text-center">Total Grievances</th>
-              <th className="border p-3 text-center">Resolution Rate</th>
-              <th className="border p-3 text-center">SLA Breach Rate</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            {grievanceStats.length > 0 ? (
-              grievanceStats.map((item) => (
-                <tr key={item.id}>
-                  <td className="border p-3">{item.municipality}</td>
-
-                  <td className="border p-3 text-center">{item.total}</td>
-
-                  <td className="border p-3 text-center">
-                    {item.resolutionRate}%
-                  </td>
-
-                  <td className="border p-3 text-center">{item.slaRate}%</td>
+                  <th className="border-b border-border px-4 py-3 text-right text-xs font-semibold uppercase tracking-wide text-muted">
+                    Count
+                  </th>
                 </tr>
-              ))
-            ) : (
-              <tr>
-                <td colSpan={4} className="border p-4 text-center">
-                  No grievance data available
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
-      </section>
-    </div>
+              </thead>
+
+              <tbody>
+                {disabilityData.length > 0 ? (
+                  disabilityData.map(([type, count]) => (
+                    <tr
+                      key={type}
+                      className="border-b border-border last:border-0 hover:bg-background/50"
+                    >
+                      <td className="px-4 py-3 font-medium text-secondary">
+                        {formatLabel(type)}
+                      </td>
+
+                      <td className="px-4 py-3 text-right text-secondary">
+                        {count}
+                      </td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td
+                      colSpan={2}
+                      className="px-4 py-6 text-center text-muted"
+                    >
+                      No disability data available.
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        {/* Income Distribution */}
+        <section className="mb-6 rounded-xl border border-border bg-surface p-5 shadow-card md:p-6">
+          <div className="mb-6">
+            <h2 className="text-lg font-semibold text-secondary md:text-xl">
+              Income Distribution by Municipality
+            </h2>
+
+            <p className="mt-1 text-sm text-muted">
+              Household distribution by poverty classification
+            </p>
+          </div>
+
+          <div className="overflow-x-auto rounded-lg border border-border">
+            <table className="w-full min-w-[650px] border-collapse text-sm">
+              <thead>
+                <tr className="bg-background">
+                  <th className="border-b border-border px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-muted">
+                    Municipality
+                  </th>
+
+                  <th className="border-b border-border px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-muted">
+                    Poverty Class
+                  </th>
+
+                  <th className="border-b border-border px-4 py-3 text-right text-xs font-semibold uppercase tracking-wide text-muted">
+                    Households
+                  </th>
+                </tr>
+              </thead>
+
+              <tbody>
+                {incomeData.length > 0 ? (
+                  incomeData.flatMap(([municipalityId, group]) =>
+                    Object.entries(group.classes).map(
+                      ([povertyClass, count]) => (
+                        <tr
+                          key={`${municipalityId}-${povertyClass}`}
+                          className="border-b border-border last:border-0 hover:bg-background/50"
+                        >
+                          <td className="px-4 py-3 font-medium text-secondary">
+                            {group.name}
+                          </td>
+
+                          <td className="px-4 py-3 text-secondary">
+                            {formatLabel(povertyClass)}
+                          </td>
+
+                          <td className="px-4 py-3 text-right text-secondary">
+                            {count}
+                          </td>
+                        </tr>
+                      ),
+                    ),
+                  )
+                ) : (
+                  <tr>
+                    <td
+                      colSpan={3}
+                      className="px-4 py-6 text-center text-muted"
+                    >
+                      No income distribution data available.
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        {/* Grievance Monitoring */}
+        <section className="rounded-xl border border-border bg-surface p-5 shadow-card md:p-6">
+          <div className="mb-6">
+            <h2 className="text-lg font-semibold text-secondary md:text-xl">
+              Grievance Monitoring
+            </h2>
+
+            <p className="mt-1 text-sm text-muted">
+              Resolution and SLA performance by municipality
+            </p>
+          </div>
+
+          <div className="overflow-x-auto rounded-lg border border-border">
+            <table className="w-full min-w-[750px] border-collapse text-sm">
+              <thead>
+                <tr className="bg-background">
+                  <th className="border-b border-border px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-muted">
+                    Municipality
+                  </th>
+
+                  <th className="border-b border-border px-4 py-3 text-right text-xs font-semibold uppercase tracking-wide text-muted">
+                    Total Grievances
+                  </th>
+
+                  <th className="border-b border-border px-4 py-3 text-right text-xs font-semibold uppercase tracking-wide text-muted">
+                    Resolution Rate
+                  </th>
+
+                  <th className="border-b border-border px-4 py-3 text-right text-xs font-semibold uppercase tracking-wide text-muted">
+                    SLA Breach Rate
+                  </th>
+                </tr>
+              </thead>
+
+              <tbody>
+                {grievanceStats.length > 0 ? (
+                  grievanceStats.map((item) => (
+                    <tr
+                      key={item.id}
+                      className="border-b border-border last:border-0 hover:bg-background/50"
+                    >
+                      <td className="px-4 py-3 font-medium text-secondary">
+                        {item.municipality}
+                      </td>
+
+                      <td className="px-4 py-3 text-right text-secondary">
+                        {item.total}
+                      </td>
+
+                      <td className="px-4 py-3 text-right font-medium text-success">
+                        {item.resolutionRate}%
+                      </td>
+
+                      <td className="px-4 py-3 text-right font-medium text-danger">
+                        {item.slaRate}%
+                      </td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td
+                      colSpan={4}
+                      className="px-4 py-6 text-center text-muted"
+                    >
+                      No grievance data available.
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+    </main>
   );
 }
