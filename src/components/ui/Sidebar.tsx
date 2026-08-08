@@ -329,7 +329,8 @@ export default function Sidebar({
 }: SidebarProps) {
   const pathname = usePathname();
   const router = useRouter();
-  const { selectProvince, selectDistrict } = useMapSelection();
+  const { selection, selectProvince, selectDistrict, selectLocalBody } =
+    useMapSelection();
 
   const [isCollapsed, setIsCollapsed] = useState<boolean>(collapsed);
   const [isPending, startTransition] = useTransition();
@@ -371,6 +372,25 @@ export default function Sidebar({
     );
   };
 
+  const handleLocalBodyClick = (
+    provinceId: string,
+    provinceLabel: string,
+    district: string,
+    localBodyName: string,
+    localBodyType: string,
+  ) => {
+    setExpandedProvince(provinceId);
+    setExpandedDistrict(districtKey(provinceId, district));
+    selectLocalBody(
+      provinceId,
+      provinceLabel,
+      district,
+      localBodyName,
+      localBodyType,
+    );
+    goToNationalMap();
+  };
+
   const handleDistrictClick = (
     provinceId: string,
     provinceLabel: string,
@@ -408,10 +428,10 @@ export default function Sidebar({
   };
 
   return (
-    <aside
+        <aside
       aria-label="Portal Navigation Sidebar"
-      className={`h-screen sticky top-0 flex flex-col justify-between p-4 bg-[#0B3067] text-white ${theme.border} ${isCollapsed ? "w-20" : "w-64"} transition-all duration-300 select-none`}
-    >
+      className={`h-dvh sticky top-0 flex flex-col justify-between overflow-hidden p-4 bg-[#0B3067] text-white ${theme.border} ${isCollapsed ? "w-20" : "w-64"} transition-all duration-300 select-none`}
+        >
       <button
         onClick={() => setIsCollapsed((prev) => !prev)}
         aria-label={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
@@ -441,7 +461,7 @@ export default function Sidebar({
         </svg>
       </button>
 
-      <div className="flex flex-col gap-4">
+      <div className="flex min-h-0 flex-1 flex-col gap-4">
         <div className="flex items-center gap-3 px-2 py-2 border-b border-white/10 pb-4">
           <div className="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center text-white shrink-0">
             <svg
@@ -488,7 +508,10 @@ export default function Sidebar({
           )}
         </div>
 
-        <nav aria-label="Main Navigation" className="space-y-1 mt-2">
+        <nav
+          aria-label="Main Navigation"
+          className="mt-2 min-h-0 flex-1 space-y-1 overflow-y-auto pr-1 pb-4"
+        >
           {items.map((item) => {
             if (!item.href) return null;
             const active =
@@ -607,24 +630,43 @@ export default function Sidebar({
                                       {getLocalBodies(district).length})
                                     </p>
                                     {getLocalBodies(district).length > 0 ? (
-                                      getLocalBodies(district).map((lb) => (
-                                        <div
-                                          key={lb.name}
-                                          className="flex items-center gap-2 rounded px-2 py-1 text-[10.5px] text-white/60 hover:bg-white/5 hover:text-white transition-colors"
-                                        >
-                                          <span
-                                            className={`w-1.5 h-1.5 rounded-full shrink-0 ${lb.type.includes("Nagarpalika") ? "bg-blue-400" : "bg-emerald-400"}`}
-                                          />
-                                          <span className="flex-1 truncate">
-                                            {lb.name}
-                                          </span>
-                                          <span className="text-[9px] text-white/35 shrink-0">
-                                            {lb.type.includes("Nagarpalika")
-                                              ? "NP"
-                                              : "GP"}
-                                          </span>
-                                        </div>
-                                      ))
+                                      getLocalBodies(district).map((lb) => {
+                                        const isActiveLocalBody =
+                                          selection.level === "localBody" &&
+                                          selection.provinceId ===
+                                            province.id &&
+                                          selection.districtName === district &&
+                                          selection.localBodyName === lb.name;
+
+                                        return (
+                                          <button
+                                            key={lb.name}
+                                            type="button"
+                                            onClick={() =>
+                                              handleLocalBodyClick(
+                                                province.id,
+                                                province.label,
+                                                district,
+                                                lb.name,
+                                                lb.type,
+                                              )
+                                            }
+                                            className={`flex w-full items-center gap-2 rounded px-2 py-1 text-left text-[10.5px] transition-colors ${isActiveLocalBody ? "bg-white/12 text-white" : "text-white/60 hover:bg-white/5 hover:text-white"}`}
+                                          >
+                                            <span
+                                              className={`w-1.5 h-1.5 rounded-full shrink-0 ${lb.type.includes("Nagarpalika") ? "bg-blue-400" : "bg-emerald-400"}`}
+                                            />
+                                            <span className="flex-1 truncate">
+                                              {lb.name}
+                                            </span>
+                                            <span className="text-[9px] text-white/35 shrink-0">
+                                              {lb.type.includes("Nagarpalika")
+                                                ? "NP"
+                                                : "GP"}
+                                            </span>
+                                          </button>
+                                        );
+                                      })
                                     ) : (
                                       <div className="px-2 py-1 text-[10px] text-white/40 italic">
                                         No local bodies found

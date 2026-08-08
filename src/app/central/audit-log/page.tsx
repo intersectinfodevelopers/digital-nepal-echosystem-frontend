@@ -1,9 +1,5 @@
-"use client";
-
-import { useMemo, useState } from "react";
 import logs from "../../../../data/audit-log.json";
 
-/* ================= COLORS ================= */
 const eventColors: Record<string, string> = {
   REGISTERED: "bg-green-100 text-green-800",
   UPDATED: "bg-blue-100 text-blue-800",
@@ -24,65 +20,75 @@ const roleColors: Record<string, string> = {
 
 const maskCitizenId = (id: string) => `${id.slice(0, 8)}****`;
 
-/* ================= COMPONENT ================= */
-export default function AuditLogPage() {
-  const [eventType, setEventType] = useState("");
-  const [province, setProvince] = useState("");
-  const [role, setRole] = useState("");
+function getParam(value: string | string[] | undefined) {
+  if (Array.isArray(value)) return value[0] ?? "";
+  return value ?? "";
+}
 
-  const [fromDate, setFromDate] = useState("");
-  const [toDate, setToDate] = useState("");
+function buildQueryString(params: Record<string, string | number | undefined>) {
+  const searchParams = new URLSearchParams();
 
-  const [page, setPage] = useState(1);
+  for (const [key, value] of Object.entries(params)) {
+    if (value === undefined || value === "") continue;
+    searchParams.set(key, String(value));
+  }
+
+  const query = searchParams.toString();
+  return query ? `?${query}` : "";
+}
+
+export default async function AuditLogPage({
+  searchParams,
+}: {
+  searchParams?: Promise<Record<string, string | string[] | undefined>>;
+}) {
+  const resolvedSearchParams = searchParams ? await searchParams : {};
+
+  const eventType = getParam(resolvedSearchParams.eventType);
+  const province = getParam(resolvedSearchParams.province);
+  const role = getParam(resolvedSearchParams.role);
+  const fromDate = getParam(resolvedSearchParams.fromDate);
+  const toDate = getParam(resolvedSearchParams.toDate);
+  const page = Math.max(
+    1,
+    Number(getParam(resolvedSearchParams.page) || 1) || 1,
+  );
   const pageSize = 20;
 
-  /* ================= FILTER LOGIC ================= */
-  const filteredLogs = useMemo(() => {
-    return logs.filter((log) => {
-      const matchEvent =
-        !eventType || log.event_type === eventType;
+  const filteredLogs = logs.filter((log) => {
+    const matchEvent = !eventType || log.event_type === eventType;
+    const matchProvince =
+      !province ||
+      log.jurisdiction.toLowerCase().includes(province.toLowerCase());
+    const matchRole = !role || log.acted_by_role === role;
 
-      const matchProvince =
-        !province ||
-        log.jurisdiction
-          .toLowerCase()
-          .includes(province.toLowerCase());
+    const logTime = new Date(log.timestamp).getTime();
+    const from = fromDate ? new Date(fromDate).getTime() : null;
+    const to = toDate ? new Date(toDate).getTime() : null;
+    const matchDate = (!from || logTime >= from) && (!to || logTime <= to);
 
-      const matchRole =
-        !role || log.acted_by_role === role;
+    return matchEvent && matchProvince && matchRole && matchDate;
+  });
 
-      const logTime = new Date(log.timestamp).getTime();
-      const from = fromDate ? new Date(fromDate).getTime() : null;
-      const to = toDate ? new Date(toDate).getTime() : null;
+  const totalPages = Math.max(1, Math.ceil(filteredLogs.length / pageSize));
+  const currentPage = Math.min(page, totalPages);
+  const start = (currentPage - 1) * pageSize;
+  const paginatedLogs = filteredLogs.slice(start, start + pageSize);
 
-      const matchDate =
-        (!from || logTime >= from) &&
-        (!to || logTime <= to);
-
-      return matchEvent && matchProvince && matchRole && matchDate;
-    });
-  }, [eventType, province, role, fromDate, toDate]);
-
-  const totalPages = Math.ceil(filteredLogs.length / pageSize);
-
-  const paginatedLogs = useMemo(() => {
-    const start = (page - 1) * pageSize;
-    return filteredLogs.slice(start, start + pageSize);
-  }, [filteredLogs, page]);
+  const baseParams = {
+    eventType,
+    province,
+    role,
+    fromDate,
+    toDate,
+  };
 
   return (
     <div className="min-h-screen bg-gray-50 p-6 text-gray-900">
+      <h1 className="mb-6 text-2xl font-bold">Audit Log Viewer</h1>
 
-      {/* HEADER */}
-      <h1 className="mb-6 text-2xl font-bold">
-        Audit Log Viewer
-      </h1>
-
-      {/* FILTERS */}
-      <div className="mb-6 rounded-lg bg-white p-4 shadow">
+      <form method="get" className="mb-6 rounded-lg bg-white p-4 shadow">
         <div className="grid gap-4 md:grid-cols-5">
-
-          {/* EVENT TYPE */}
           <div>
             <label
               htmlFor="eventType"
@@ -90,14 +96,10 @@ export default function AuditLogPage() {
             >
               Event Type
             </label>
-
             <select
               id="eventType"
-              value={eventType}
-              onChange={(e) => {
-                setEventType(e.target.value);
-                setPage(1);
-              }}
+              name="eventType"
+              defaultValue={eventType}
               className="w-full rounded border p-2"
             >
               <option value="">All Events</option>
@@ -109,7 +111,6 @@ export default function AuditLogPage() {
             </select>
           </div>
 
-          {/* PROVINCE */}
           <div>
             <label
               htmlFor="province"
@@ -117,35 +118,23 @@ export default function AuditLogPage() {
             >
               Province
             </label>
-
             <input
               id="province"
-              value={province}
-              onChange={(e) => {
-                setProvince(e.target.value);
-                setPage(1);
-              }}
+              name="province"
+              defaultValue={province}
               className="w-full rounded border p-2"
               placeholder="Filter by province"
             />
           </div>
 
-          {/* ROLE */}
           <div>
-            <label
-              htmlFor="role"
-              className="mb-1 block text-sm font-medium"
-            >
+            <label htmlFor="role" className="mb-1 block text-sm font-medium">
               Role
             </label>
-
             <select
               id="role"
-              value={role}
-              onChange={(e) => {
-                setRole(e.target.value);
-                setPage(1);
-              }}
+              name="role"
+              defaultValue={role}
               className="w-full rounded border p-2"
             >
               <option value="">All Roles</option>
@@ -157,7 +146,6 @@ export default function AuditLogPage() {
             </select>
           </div>
 
-          {/* FROM DATE */}
           <div>
             <label
               htmlFor="fromDate"
@@ -165,43 +153,46 @@ export default function AuditLogPage() {
             >
               From Date
             </label>
-
             <input
               id="fromDate"
+              name="fromDate"
               type="date"
-              value={fromDate}
-              onChange={(e) => {
-                setFromDate(e.target.value);
-                setPage(1);
-              }}
+              defaultValue={fromDate}
               className="w-full rounded border p-2"
             />
           </div>
 
-          {/* TO DATE */}
           <div>
-            <label
-              htmlFor="toDate"
-              className="mb-1 block text-sm font-medium"
-            >
+            <label htmlFor="toDate" className="mb-1 block text-sm font-medium">
               To Date
             </label>
-
             <input
               id="toDate"
+              name="toDate"
               type="date"
-              value={toDate}
-              onChange={(e) => {
-                setToDate(e.target.value);
-                setPage(1);
-              }}
+              defaultValue={toDate}
               className="w-full rounded border p-2"
             />
           </div>
         </div>
-      </div>
 
-      {/* TABLE */}
+        <div className="mt-4 flex items-center gap-3">
+          <input type="hidden" name="page" value="1" />
+          <button
+            type="submit"
+            className="rounded bg-slate-900 px-4 py-2 text-sm font-medium text-white hover:bg-slate-800"
+          >
+            Apply Filters
+          </button>
+          <a
+            href="/central/audit-log"
+            className="rounded border border-slate-200 px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50"
+          >
+            Reset
+          </a>
+        </div>
+      </form>
+
       <div className="overflow-x-auto rounded-lg bg-white shadow">
         <table className="w-full">
           <thead className="bg-gray-100">
@@ -214,38 +205,38 @@ export default function AuditLogPage() {
               <th className="p-3 text-left">Actions</th>
             </tr>
           </thead>
-
           <tbody>
-            {paginatedLogs.map((log) => (
-              <tr key={log.id} className="border-t">
-                <td className="p-3">
-                  <span
-                    className={`rounded px-2 py-1 text-sm font-medium ${
-                      eventColors[log.event_type]
-                    }`}
-                  >
-                    {log.event_type}
-                  </span>
-                </td>
-
-                <td className="p-3">
-                  {maskCitizenId(log.citizen_id)}
-                </td>
-
-                <td className="p-3">
-                  <span
-                    className={`rounded px-2 py-1 text-sm font-medium ${
-                      roleColors[log.acted_by_role]
-                    }`}
-                  >
-                    {log.acted_by_role}
-                  </span>
-                </td>
-
-                <td className="p-3">{log.jurisdiction}</td>
-
-                <td className="p-3">
-                  {new Date(log.timestamp).toLocaleString()}
+            {paginatedLogs.length > 0 ? (
+              paginatedLogs.map((log) => (
+                <tr key={log.id} className="border-t">
+                  <td className="p-3">
+                    <span
+                      className={`rounded px-2 py-1 text-sm font-medium ${eventColors[log.event_type] || "bg-gray-100 text-gray-800"}`}
+                    >
+                      {log.event_type}
+                    </span>
+                  </td>
+                  <td className="p-3">{maskCitizenId(log.citizen_id)}</td>
+                  <td className="p-3">
+                    <span
+                      className={`rounded px-2 py-1 text-sm font-medium ${roleColors[log.acted_by_role] || "bg-gray-100 text-gray-800"}`}
+                    >
+                      {log.acted_by_role}
+                    </span>
+                  </td>
+                  <td className="p-3">{log.jurisdiction}</td>
+                  <td className="p-3">
+                    {new Date(log.timestamp).toLocaleString()}
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td
+                  className="p-6 text-center text-sm text-gray-500"
+                  colSpan={5}
+                >
+                  No audit logs match the current filters.
                 </td>
                 <td className="p-3">
                   <button
@@ -256,32 +247,39 @@ export default function AuditLogPage() {
                   </button>
                 </td>
               </tr>
-            ))}
+            )}
           </tbody>
         </table>
       </div>
 
-      {/* PAGINATION */}
       <div className="mt-4 flex items-center justify-center gap-2">
-        <button
-          disabled={page === 1}
-          onClick={() => setPage((p) => p - 1)}
-          className="rounded border px-3 py-1 disabled:opacity-50"
+        <a
+          aria-disabled={currentPage === 1}
+          href={
+            currentPage === 1
+              ? "/central/audit-log"
+              : `/central/audit-log${buildQueryString({ ...baseParams, page: currentPage - 1 })}`
+          }
+          className={`rounded border px-3 py-1 ${currentPage === 1 ? "pointer-events-none opacity-50" : "hover:bg-white"}`}
         >
           Prev
-        </button>
+        </a>
 
         <span>
-          Page {page} of {totalPages || 1}
+          Page {currentPage} of {totalPages}
         </span>
 
-        <button
-          disabled={page === totalPages}
-          onClick={() => setPage((p) => p + 1)}
-          className="rounded border px-3 py-1 disabled:opacity-50"
+        <a
+          aria-disabled={currentPage === totalPages}
+          href={
+            currentPage === totalPages
+              ? `/central/audit-log${buildQueryString(baseParams)}`
+              : `/central/audit-log${buildQueryString({ ...baseParams, page: currentPage + 1 })}`
+          }
+          className={`rounded border px-3 py-1 ${currentPage === totalPages ? "pointer-events-none opacity-50" : "hover:bg-white"}`}
         >
           Next
-        </button>
+        </a>
       </div>
     </div>
   );

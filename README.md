@@ -46,22 +46,26 @@ The Digital Nepal Citizen Ecosystem provides a comprehensive digital platform fo
 ### Installation
 
 1. **Clone the repository**
+
    ```bash
    git clone https://github.com/intersectinfodevelopers/digital-nepal-echosystem-frontend.git
    cd digital-nepal-echosystem-frontend
    ```
 
 2. **Install dependencies**
+
    ```bash
    npm install
    ```
 
 3. **Set up environment variables**
+
    ```bash
    cp .env.example .env.local
    ```
 
 4. **Start development server**
+
    ```bash
    npm run dev
    ```
@@ -165,18 +169,21 @@ MIT License - see [LICENSE](LICENSE) for details.
 ## Roadmap
 
 ### Phase 1 (Current - 3 Weeks)
+
 - [x] Project setup and scaffolding
 - [x] Component library
 - [x] Mock data layer
-- [ ] Core pages and workflows
+- [x] Core pages and workflows
 
 ### Phase 2 (Upcoming)
+
 - [ ] Spring Boot API integration
 - [ ] User authentication
 - [ ] Advanced filtering and search
 - [ ] Real-time updates
 
 ### Phase 3 (Future)
+
 - [ ] Mobile app (React Native)
 - [ ] Progressive Web App
 - [ ] Advanced analytics
