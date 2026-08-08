@@ -29,8 +29,7 @@ import {
   STUDENT_LEVEL_LABELS, INSTITUTION_TYPE_LABELS, SCHOLARSHIP_TYPE_LABELS,
   EMPLOYMENT_CATEGORY_LABELS, INCOME_BAND_LABELS, BLOOD_GROUP_LABELS,
   VISA_TYPE_LABELS, LAND_TYPE_LABELS, IRRIGATION_TYPE_LABELS,
-  REMITTANCE_BAND_LABELS, GOV_GRADE_LABELS, COUNTRY_OPTIONS, SKILL_OPTIONS,
-  RELATIONSHIP_OPTIONS,
+  REMITTANCE_BAND_LABELS, GOV_GRADE_LABELS, COUNTRY_OPTIONS,
 } from "@/constants";
 
 type IDCard = {
@@ -1219,6 +1218,7 @@ function EditPhotoModal({
       <div className="space-y-4">
         {photo ? (
           <div className="flex flex-col items-center gap-3">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={photo} alt="New photo" className="w-48 h-48 object-cover rounded-2xl border-2 border-green-300" />
             <label className="text-sm font-medium text-blue-600 cursor-pointer hover:text-blue-800">
               <input type="file" className="hidden" onChange={handleFileUpload} accept="image/*" />
@@ -1373,7 +1373,7 @@ export default function CitizenDetailPage() {
         <SectionCard title="Biometric Photo" description="Citizen portrait photo">
           <SectionHeader title="Portrait" onEdit={() => setEditModal("photo")} />
           <div className="text-sm text-gray-400 py-4 text-center">
-            Upload or replace the citizen's biometric photo.
+            Upload or replace the citizen&apos;s biometric photo.
           </div>
         </SectionCard>
       ),
@@ -1384,7 +1384,7 @@ export default function CitizenDetailPage() {
         <SectionCard title="GPS Coordinates" description="Geographic location of residence">
           <SectionHeader title="Location" onEdit={() => setEditModal("gps")} />
           <div className="text-sm text-gray-400 py-4 text-center">
-            Update the citizen's GPS coordinates and place name.
+            Update the citizen&apos;s GPS coordinates and place name.
           </div>
         </SectionCard>
       ),
