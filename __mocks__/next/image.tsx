@@ -10,7 +10,7 @@ interface NextImageProps {
 
 const NextImage: React.FC<NextImageProps> = ({ alt, src, width, height, className }) => (
   // eslint-disable-next-line @next/next/no-img-element
-  <img alt={alt} src={src} width={width as any} height={height as any} className={className} />
+  <img alt={alt} src={src} width={width} height={height} className={className} />
 );
 
 export default NextImage;
