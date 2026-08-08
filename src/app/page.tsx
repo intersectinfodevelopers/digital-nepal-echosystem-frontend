@@ -1,13 +1,5 @@
-"use client";
-
-import CitizensPage from "./ward/citizens/page";
-import WardDashboardPage from "./ward/dashboard/page";
+import DashboardLayout from "@/app/ward/dashboard/DashboardLayout";
 
 export default function Home() {
-  return (
-    <div>
-      <WardDashboardPage />
-      <CitizensPage />
-    </div>
-  );
+  return <DashboardLayout />;
 }

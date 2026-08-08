@@ -1,23 +1,188 @@
-@config "../../tailwind.config.ts";
+@config "../../tailwind.config.cjs";
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #F6F8FB;
+  --foreground: #1E293B;
+  --primary: #0B2E6B;
+  --sidebar: #0B2E6B;
+  --active-red: #C01F38;
+  --border: #E4E8EF;
+  --text-secondary: #64748B;
+  --verified-blue: #1E40AF;
+  --pending-red: #DC2626;
+  --success-green: #16A34A;
+  --warning-orange: #D97706;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+  --color-primary: var(--primary);
+  --color-sidebar: var(--sidebar);
+  --font-sans: 'Inter', sans-serif;
+  --font-poppins: 'Poppins', sans-serif;
   --font-mono: var(--font-geist-mono);
 }
+
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Inter', sans-serif;
 }
 
-.place-marker {
-  filter: hue-rotate(200deg) saturate(0.6);
+@layer components {
+  .form-input {
+    @apply h-12 bg-white [&_.MuiOutlinedInput-notchedOutline]:rounded-[4px] [&_.MuiOutlinedInput-notchedOutline]:border [&_.MuiOutlinedInput-notchedOutline]:border-[#D9D9D9] [&:hover_.MuiOutlinedInput-notchedOutline]:border-[#0F4DB8] [&.Mui-focused_.MuiOutlinedInput-notchedOutline]:border-[#0F4DB8] [&.Mui-focused_.MuiOutlinedInput-notchedOutline]:shadow-[0_0_0_3px_rgba(15,77,184,0.1)] [&_.MuiInputBase-input]:py-3 [&_.MuiInputBase-input]:px-4 [&_.MuiInputBase-input]:text-[14px] [&_.MuiInputBase-input]:font-['Inter,sans-serif'] [&_.MuiInputBase-input]:text-[#222222];
+  }
+
+  .form-select {
+    @apply h-12 bg-white [&_.MuiOutlinedInput-notchedOutline]:rounded-[4px] [&_.MuiOutlinedInput-notchedOutline]:border [&_.MuiOutlinedInput-notchedOutline]:border-[#D9D9D9] [&:hover_.MuiOutlinedInput-notchedOutline]:border-[#0F4DB8] [&.Mui-focused_.MuiOutlinedInput-notchedOutline]:border-[#0F4DB8] [&.Mui-focused_.MuiOutlinedInput-notchedOutline]:shadow-[0_0_0_3px_rgba(15,77,184,0.1)] [&_.MuiSelect-select]:py-3 [&_.MuiSelect-select]:px-4 [&_.MuiSelect-select]:text-[14px] [&_.MuiSelect-select]:font-['Inter,sans-serif'] [&_.MuiSelect-select]:text-[#222222];
+  }
+
+  .form-input-rounded {
+    @apply h-12 bg-white [&_.MuiOutlinedInput-notchedOutline]:rounded-[10px] [&_.MuiOutlinedInput-notchedOutline]:border [&_.MuiOutlinedInput-notchedOutline]:border-[#D9DEE8] [&:hover_.MuiOutlinedInput-notchedOutline]:border-[#0A2D6D] [&.Mui-focused_.MuiOutlinedInput-notchedOutline]:border-[#0A2D6D] [&.Mui-focused_.MuiOutlinedInput-notchedOutline]:shadow-[0_0_0_3px_rgba(10,45,109,0.12)] [&_.MuiInputBase-input]:py-3 [&_.MuiInputBase-input]:px-4 [&_.MuiInputBase-input]:text-[15px] [&_.MuiInputBase-input]:font-['Inter,sans-serif'] [&_.MuiInputBase-input]:text-[#1F2A44];
+  }
+
+  .form-select-rounded {
+    @apply h-12 bg-white [&_.MuiOutlinedInput-notchedOutline]:rounded-[10px] [&_.MuiOutlinedInput-notchedOutline]:border [&_.MuiOutlinedInput-notchedOutline]:border-[#D9DEE8] [&:hover_.MuiOutlinedInput-notchedOutline]:border-[#0A2D6D] [&.Mui-focused_.MuiOutlinedInput-notchedOutline]:border-[#0A2D6D] [&.Mui-focused_.MuiOutlinedInput-notchedOutline]:shadow-[0_0_0_3px_rgba(10,45,109,0.12)] [&_.MuiSelect-select]:py-3 [&_.MuiSelect-select]:px-4 [&_.MuiSelect-select]:text-[15px] [&_.MuiSelect-select]:font-['Inter,sans-serif'] [&_.MuiSelect-select]:text-[#1F2A44];
+  }
+}
+
+@keyframes scan {
+  0% {
+    top: 0;
+  }
+  50% {
+    top: calc(100% - 3px);
+  }
+  100% {
+    top: 0;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pop {
+  0% {
+    transform: scale(0.4);
+    opacity: 0;
+  }
+  70% {
+    transform: scale(1.12);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(-6px);
+  }
+  40% {
+    transform: translateX(6px);
+  }
+  60% {
+    transform: translateX(-4px);
+  }
+  80% {
+    transform: translateX(4px);
+  }
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes indeterminate {
+  0% {
+    left: -40%;
+    width: 40%;
+  }
+  100% {
+    left: 100%;
+    width: 40%;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -400px 0;
+  }
+  100% {
+    background-position: 400px 0;
+  }
+}
+
+@keyframes drop-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(11, 46, 107, 0.14);
+  }
+  50% {
+    box-shadow: 0 0 0 14px rgba(11, 46, 107, 0);
+  }
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(0);
+    opacity: 0.35;
+  }
+  100% {
+    transform: scale(3.5);
+    opacity: 0;
+  }
+}
+
+@layer utilities {
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 4px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #E2E8F0;
+    border-radius: 99px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #CBD5E1;
+  }
+
+  .stepper-scrollbar::-webkit-scrollbar {
+    height: 4px;
+  }
+  .stepper-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .stepper-scrollbar::-webkit-scrollbar-thumb {
+    background: #E2E8F0;
+    border-radius: 99px;
+  }
+  .stepper-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #CBD5E1;
+  }
 }

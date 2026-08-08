@@ -202,6 +202,7 @@ export default async function AuditLogPage({
               <th className="p-3 text-left">Role</th>
               <th className="p-3 text-left">Jurisdiction</th>
               <th className="p-3 text-left">Timestamp</th>
+              <th className="p-3 text-left">Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -233,10 +234,10 @@ export default async function AuditLogPage({
               <tr>
                 <td
                   className="p-6 text-center text-sm text-gray-500"
-                  colSpan={5}
+                  colSpan={6}
                 >
-                  No audit logs match the current filters.
-                </td>
+                    No audit logs match the current filters.
+                  </td>
               </tr>
             )}
           </tbody>

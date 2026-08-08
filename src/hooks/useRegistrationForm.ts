@@ -3,289 +3,198 @@
 import { useState, useCallback } from 'react';
 import type {
   RegistrationFormData,
-  FamilyMember,
   EmploymentData,
   DisabilityData,
   EducationData,
   HouseholdData,
   GpsCoordinates,
+  ConsentChannel,
 } from '@/types/citizen';
-import citizensRaw from '../../data/citizens.json';
-import { nanoid } from 'nanoid';
+import { usePersonalInfoForm, createDefaultPersonalInfoData } from './usePersonalInfoForm';
+import { useNidForm, createDefaultNidData } from './useNidForm';
 
-function autoLinkFamilyMember(member: FamilyMember): FamilyMember {
-  if (!member.citizenship_number) {
-    return { ...member, link_status: 'pending' };
-  }
-  const matched = (citizensRaw as Array<{ citizenship_number?: string }>).some(
-    (c) => c.citizenship_number === member.citizenship_number,
-  );
-  return { ...member, link_status: matched ? 'linked' : 'pending' };
-}
+/* ------------------------------------------------------------------ */
+/* Defaults for steps that are not implemented yet (Family, Employment, */
+/* Household, Disability, Education, Photo, GPS — a later phase).        */
+/* ------------------------------------------------------------------ */
+const DEFAULT_EMPLOYMENT: EmploymentData = {
+  category: '',
+  income_band: '',
+  unemployed_duration_months: 0,
+  unemployed_skills: [],
+  unemployed_office_registered: false,
+  farmer_land_area_ropani: '',
+  farmer_land_type: '',
+  farmer_primary_crop: '',
+  farmer_irrigation_type: '',
+  farmer_agri_loan: false,
+  foreign_country: '',
+  foreign_visa_type: '',
+  foreign_employer_name: '',
+  foreign_departure_date: '',
+  foreign_expected_return: '',
+  foreign_remittance_band: '',
+  foreign_doe_registered: false,
+  gov_ministry: '',
+  gov_grade: '',
+  gov_posting_district: '',
+  gov_service_entry_year: '',
+  student_institution: '',
+  student_level: '',
+  student_field_of_study: '',
+  student_abroad: false,
+};
 
-const emptyFamilyMember = (
-  relationship: FamilyMember['relationship'],
-): FamilyMember => ({
-  id: nanoid(),
-  relationship,
-  name_np: '',
-  name_en: '',
-  citizenship_number: '',
-  link_status: 'pending',
-});
+const DEFAULT_DISABILITY: DisabilityData = {
+  disability_type: '',
+  severity_body: 0,
+  severity_activity: 0,
+  severity_participation: 0,
+  certificate_no: '',
+  issuing_hospital: '',
+  certificate_expiry: '',
+};
 
-export function createDefaultEmploymentData(): EmploymentData {
-  return {
-    category: '',
-    income_band: '',
-    unemployed_duration_months: 0,
-    unemployed_skills: [],
-    unemployed_office_registered: false,
-    farmer_land_area_ropani: '',        
-    farmer_land_type: '',
-    farmer_primary_crop: '',
-    farmer_irrigation_type: '',
-    farmer_agri_loan: false,
-    foreign_country: '',
-    foreign_visa_type: '',
-    foreign_employer_name: '',
-    foreign_departure_date: '',
-    foreign_expected_return: '',
-    foreign_remittance_band: '',
-    foreign_doe_registered: false,
-    gov_ministry: '',
-    gov_grade: '',
-    gov_posting_district: '',
-    gov_service_entry_year: '',
-    student_institution: '',
-    student_level: '',
-    student_field_of_study: '',
-    student_abroad: false,
-  };
-}
+const DEFAULT_EDUCATION: EducationData = {
+  level: '',
+  institution_name: '',
+  institution_type: '',
+  study_location: '',
+  is_dropout: false,
+  dropout_reason: '',
+  dropout_date: '',
+  has_scholarship: false,
+  scholarship_type: '',
+  scholarship_provider: '',
+};
 
-export function createDefaultDisabilityData(): DisabilityData {
-  return {
-    disability_type: '',
-    severity_body: 0,
-    severity_activity: 0,
-    severity_participation: 0,
-    certificate_no: '',
-    issuing_hospital: '',
-    certificate_expiry: '',
-  };
-}
+const DEFAULT_HOUSEHOLD: HouseholdData = {
+  house_type: '',
+  construction_type: '',
+  room_count: 0,
+  electricity_source: '',
+  water_source: '',
+  sanitation: '',
+  internet_access: '',
+  has_bank_account: false,
+  monthly_income_band: '',
+  poverty_class: '',
+};
 
-export function createDefaultEducationData(): EducationData {
-  return {
-    level: '',
-    institution_name: '',
-    institution_type: '',
-    study_location: '',
-    is_dropout: false,
-    dropout_reason: '',
-    dropout_date: '',
-    has_scholarship: false,
-    scholarship_type: '',
-    scholarship_provider: '',
-  };
-}
-
-export function createDefaultHouseholdData(): HouseholdData {
-  return {
-    house_type: '',
-    construction_type: '',
-    room_count: 1,
-    electricity_source: '',
-    water_source: '',
-    sanitation: '',
-    internet_access: '',
-    has_bank_account: false,
-    monthly_income_band: '',
-    poverty_class: '',
-  };
-}
-
-export function createDefaultGpsCoordinates(): GpsCoordinates {
-  return {
-    latitude: '',
-    longitude: '',
-    place_name: '',
-  };
-}
+const DEFAULT_GPS: GpsCoordinates = {
+  latitude: '',
+  longitude: '',
+  place_name: '',
+};
 
 export function createDefaultFormData(): RegistrationFormData {
   return {
-    name_np: '',
-    name_en: '',
-    dob: '',
-    sex: '',
-    blood_group: '',
-    religion: '',
-    ethnicity: '',
-    mother_tongue: '',
-    tole: '',
-    digital_literacy: '',
-    has_smartphone: false,
-    nid_number: '',
-    nid_verified: false,
-    citizenship_number: '',
-    consent_channel: '',
-    consent_recorded_at: new Date().toISOString(),
+    ...createDefaultPersonalInfoData(),
+    ...createDefaultNidData(),
     photo: null,
     father: null,
     mother: null,
     spouse: null,
     children: [],
-    employment: createDefaultEmploymentData(),
-    disability: createDefaultDisabilityData(),
-    education: createDefaultEducationData(),
-    household: createDefaultHouseholdData(),
-    gps: createDefaultGpsCoordinates(),
+    employment: { ...DEFAULT_EMPLOYMENT },
+    disability: { ...DEFAULT_DISABILITY },
+    education: { ...DEFAULT_EDUCATION },
+    household: { ...DEFAULT_HOUSEHOLD },
+    gps: { ...DEFAULT_GPS },
+    consent_channel: '',
+    consent_recorded_at: new Date().toISOString(),
   };
 }
 
 export function useRegistrationForm() {
   const [step, setStep] = useState(1);
-  const [formData, setFormData] = useState<RegistrationFormData>(
-    createDefaultFormData(),
+
+  const personal = usePersonalInfoForm();
+  const nid = useNidForm();
+
+  const [consentChannel, setConsentChannel] = useState<ConsentChannel | ''>('');
+  const [consentRecordedAt, setConsentRecordedAt] = useState(
+    () => new Date().toISOString(),
   );
-  const [nidVerifyLoading, setNidVerifyLoading] = useState(false);
-  const [nidVerifyError, setNidVerifyError] = useState('');
+
+  const formData: RegistrationFormData = {
+    ...personal.data,
+    ...nid.data,
+    photo: null,
+    father: null,
+    mother: null,
+    spouse: null,
+    children: [],
+    employment: { ...DEFAULT_EMPLOYMENT },
+    disability: { ...DEFAULT_DISABILITY },
+    education: { ...DEFAULT_EDUCATION },
+    household: { ...DEFAULT_HOUSEHOLD },
+    gps: { ...DEFAULT_GPS },
+    consent_channel: consentChannel,
+    consent_recorded_at: consentRecordedAt,
+  };
 
   const updateField = useCallback(
     <K extends keyof RegistrationFormData>(
       key: K,
       value: RegistrationFormData[K],
     ) => {
-      setFormData((prev) => ({ ...prev, [key]: value }));
+      switch (key) {
+        case 'citizenship_front':
+          nid.setCitizenshipFront(value as string | null);
+          break;
+        case 'citizenship_back':
+          nid.setCitizenshipBack(value as string | null);
+          break;
+        case 'consent_channel':
+          setConsentChannel(value as ConsentChannel | '');
+          break;
+        case 'consent_recorded_at':
+          setConsentRecordedAt(value as string);
+          break;
+        default:
+          personal.updateField(
+            key as keyof typeof personal.data,
+            value as never,
+          );
+      }
     },
-    [],
+    [personal, nid],
   );
 
-  const verifyNid = useCallback(async () => {
-    const nid = formData.nid_number.trim();
-    if (nid.length !== 10 || !/^\d{10}$/.test(nid)) {
-      setNidVerifyError('NID must be exactly 10 digits');
-      return;
-    }
-    setNidVerifyLoading(true);
-    setNidVerifyError('');
-    await new Promise((r) => setTimeout(r, 800));
-    setNidVerifyLoading(false);
-    setFormData((prev) => ({ ...prev, nid_verified: true }));
-  }, [formData.nid_number]);
-
-  const sanitizeCitizenship = useCallback((value: string) => {
-    const cleaned = value.replace(/[-/]/g, '');
-    setFormData((prev) => ({ ...prev, citizenship_number: cleaned }));
-  }, []);
-
-  const setFather = useCallback((member: FamilyMember | null) => {
-    setFormData((prev) => ({
-      ...prev,
-      father: member ? autoLinkFamilyMember(member) : null,
-    }));
-  }, []);
-
-  const setMother = useCallback((member: FamilyMember | null) => {
-    setFormData((prev) => ({
-      ...prev,
-      mother: member ? autoLinkFamilyMember(member) : null,
-    }));
-  }, []);
-
-  const setSpouse = useCallback((member: FamilyMember | null) => {
-    setFormData((prev) => ({
-      ...prev,
-      spouse: member ? autoLinkFamilyMember(member) : null,
-    }));
-  }, []);
-
-  const addChild = useCallback(() => {
-    setFormData((prev) => ({
-      ...prev,
-      children: [...prev.children, emptyFamilyMember('CHILD')],
-    }));
-  }, []);
-
-  const updateChild = useCallback(
-    (index: number, updates: Partial<FamilyMember>) => {
-      setFormData((prev) => {
-        const children = [...prev.children];
-        const merged = { ...children[index], ...updates } as FamilyMember;
-        children[index] = autoLinkFamilyMember(merged);
-        return { ...prev, children };
+  const setFormData = useCallback(
+    (next: RegistrationFormData) => {
+      personal.setData({
+        name_np: next.name_np,
+        name_en: next.name_en,
+        dob: next.dob,
+        sex: next.sex,
+        blood_group: next.blood_group,
+        religion: next.religion,
+        ethnicity: next.ethnicity,
+        mother_tongue: next.mother_tongue,
+        tole: next.tole,
+        digital_literacy: next.digital_literacy,
+        has_smartphone: next.has_smartphone,
       });
+      nid.setData({
+        nid_number: next.nid_number,
+        nid_verified: next.nid_verified,
+        citizenship_number: next.citizenship_number,
+        citizenship_front: next.citizenship_front,
+        citizenship_back: next.citizenship_back,
+      });
+      setConsentChannel(next.consent_channel);
+      setConsentRecordedAt(next.consent_recorded_at);
     },
-    [],
-  );
-
-  const removeChild = useCallback((index: number) => {
-    setFormData((prev) => ({
-      ...prev,
-      children: prev.children.filter((_, i) => i !== index),
-    }));
-  }, []);
-
-  const updateEmploymentField = useCallback(
-    <K extends keyof EmploymentData>(key: K, value: EmploymentData[K]) => {
-      setFormData((prev) => ({
-        ...prev,
-        employment: { ...prev.employment, [key]: value },
-      }));
-    },
-    [],
+    [personal, nid],
   );
 
   const updateConsentTimestamp = useCallback(() => {
-    setFormData((prev) => ({
-      ...prev,
-      consent_recorded_at: new Date().toISOString(),
-    }));
+    setConsentRecordedAt(new Date().toISOString());
   }, []);
 
-  const updateDisabilityField = useCallback(
-    <K extends keyof DisabilityData>(key: K, value: DisabilityData[K]) => {
-      setFormData((prev) => ({
-        ...prev,
-        disability: { ...prev.disability, [key]: value },
-      }));
-    },
-    [],
-  );
-
-  const updateEducationField = useCallback(
-    <K extends keyof EducationData>(key: K, value: EducationData[K]) => {
-      setFormData((prev) => ({
-        ...prev,
-        education: { ...prev.education, [key]: value },
-      }));
-    },
-    [],
-  );
-
-  const updateHouseholdField = useCallback(
-    <K extends keyof HouseholdData>(key: K, value: HouseholdData[K]) => {
-      setFormData((prev) => ({
-        ...prev,
-        household: { ...prev.household, [key]: value },
-      }));
-    },
-    [],
-  );
-
-  const updateGpsField = useCallback(
-    <K extends keyof GpsCoordinates>(key: K, value: GpsCoordinates[K]) => {
-      setFormData((prev) => ({
-        ...prev,
-        gps: { ...prev.gps, [key]: value },
-      }));
-    },
-    [],
-  );
-
-  const MAX_STEP = 7;
+  const MAX_STEP = 10;
 
   const nextStep = useCallback(() => {
     setStep((s) => Math.min(s + 1, MAX_STEP));
@@ -296,32 +205,25 @@ export function useRegistrationForm() {
   }, []);
 
   const resetForm = useCallback(() => {
-    setFormData(createDefaultFormData());
+    personal.setData(createDefaultPersonalInfoData());
+    nid.setData(createDefaultNidData());
+    setConsentChannel('');
+    setConsentRecordedAt(new Date().toISOString());
     setStep(1);
-    setNidVerifyError('');
-  }, []);
+  }, [personal, nid]);
 
   return {
     step,
     formData,
     setFormData,
     updateField,
-    nidVerifyLoading,
-    nidVerifyError,
-    verifyNid,
-    sanitizeCitizenship,
-    setFather,
-    setMother,
-    setSpouse,
-    addChild,
-    updateChild,
-    removeChild,
+    personal,
+    nid,
+    verifyNid: nid.verifyNid,
+    sanitizeCitizenship: nid.sanitizeCitizenship,
+    nidVerifyLoading: nid.verifyLoading,
+    nidVerifyError: nid.verifyError,
     updateConsentTimestamp,
-    updateEmploymentField,
-    updateDisabilityField,
-    updateEducationField,
-    updateHouseholdField,
-    updateGpsField,
     nextStep,
     prevStep,
     resetForm,

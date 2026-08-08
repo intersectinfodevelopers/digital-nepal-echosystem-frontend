@@ -3,6 +3,7 @@
 import type { Citizen, RegistrationFormData } from '@/types/citizen';
 import { WARD_ID } from '@/constants';
 import { nanoid } from 'nanoid';
+import { recordActivity, formatActivityTime } from './activityService';
 import citizensStatic from '../../data/citizens.json';
 
 const STORAGE_KEY = 'citizens_registered';
@@ -68,6 +69,14 @@ export function registerCitizen(formData: RegistrationFormData): Citizen {
   const stored = getStored();
   stored.push(citizen);
   setStored(stored);
+
+  recordActivity({
+    name: citizen.name_en,
+    nid: citizen.nid_masked,
+    time: formatActivityTime(new Date()),
+    action: 'Registration',
+    status: 'Pending',
+  });
 
   return citizen;
 }
