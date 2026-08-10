@@ -3,8 +3,7 @@
 import Link from "next/link";
 import { Add, Search } from "@mui/icons-material";
 import { useCitizensFilter } from "@/hooks/useCitizensFilter";
-import { EMPLOYMENT_CATEGORIES, SYNC_STATUSES, SEXES } from "@/types/citizen";
-import { SYNC_BADGE } from "@/constants";
+import { EMPLOYMENT_CATEGORIES, SEXES } from "@/types/citizen";
 import { Pagination } from "@/components/ui/Pagination";
 import { useState, useMemo } from "react";
 
@@ -17,8 +16,6 @@ export default function CitizensPage() {
     setNidSearch,
     employmentFilter,
     setEmploymentFilter,
-    syncFilter,
-    setSyncFilter,
     sexFilter,
     setSexFilter,
     verifiedFilter,
@@ -84,19 +81,6 @@ export default function CitizensPage() {
             </select>
 
             <select
-              value={syncFilter}
-              onChange={(e) => { setSyncFilter(e.target.value); setPage(1); }}
-              className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-            >
-              <option value="">All Sync Status</option>
-              {SYNC_STATUSES.map((s) => (
-                <option key={s} value={s}>
-                  {s.charAt(0).toUpperCase() + s.slice(1)}
-                </option>
-              ))}
-            </select>
-
-            <select
               value={sexFilter}
               onChange={(e) => { setSexFilter(e.target.value); setPage(1); }}
               className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -138,9 +122,6 @@ export default function CitizensPage() {
                   Employment
                 </th>
                 <th className="text-left px-4 py-3 font-medium text-gray-600">
-                  Sync Status
-                </th>
-                <th className="text-left px-4 py-3 font-medium text-gray-600">
                   Actions
                 </th>
               </tr>
@@ -160,16 +141,6 @@ export default function CitizensPage() {
                     {c.employment_category}
                   </td>
                   <td className="px-4 py-3">
-                    <span
-                      className={`inline-block px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                        SYNC_BADGE[c.sync_status] || "bg-gray-100 text-gray-800"
-                      }`}
-                    >
-                      {c.sync_status.charAt(0).toUpperCase() +
-                        c.sync_status.slice(1)}
-                    </span>
-                  </td>
-                  <td className="px-4 py-3">
                     <Link
                       href={`/ward/citizens/${c.nid_masked}`}
                       className="text-blue-600 hover:text-blue-800 text-sm font-medium"
@@ -182,7 +153,7 @@ export default function CitizensPage() {
               {filtered.length === 0 && (
                 <tr>
                   <td
-                    colSpan={6}
+                    colSpan={5}
                     className="px-4 py-8 text-center text-gray-500"
                   >
                     No citizens found

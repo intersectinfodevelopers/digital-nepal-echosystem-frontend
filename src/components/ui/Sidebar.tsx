@@ -418,7 +418,7 @@ export default function Sidebar({
           headers: { "Content-Type": "application/json" },
         });
         if (res.ok) {
-          router.push("/auth/login");
+          router.push("/login");
           router.refresh();
         }
       } catch (err) {
