@@ -1,0 +1,19 @@
+
+> digital-nepal-echosystem-frontend@0.1.0 predev
+> npm run setup:geojson
+
+
+> digital-nepal-echosystem-frontend@0.1.0 setup:geojson
+> node scripts/setup-geojson.js
+
+[setup-geojson] Scanning GeoJSON files...
+[setup-geojson] manifest.json written — 7 provinces, 77 districts.
+
+> digital-nepal-echosystem-frontend@0.1.0 dev
+> next dev --webpack
+
+▲ Next.js 16.2.11 (webpack)
+- Local:         http://localhost:3000
+- Network:       http://192.168.18.11:3000
+✓ Ready in 2.4s
+[?25h

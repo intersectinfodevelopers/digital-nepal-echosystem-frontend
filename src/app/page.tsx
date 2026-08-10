@@ -1,5 +1,5 @@
-import DashboardLayout from "@/app/ward/dashboard/DashboardLayout";
+import { redirect } from "next/navigation";
 
 export default function Home() {
-  return <DashboardLayout />;
+  redirect("/login");
 }
