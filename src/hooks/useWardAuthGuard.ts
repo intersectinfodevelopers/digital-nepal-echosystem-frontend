@@ -8,21 +8,7 @@ import {
 } from "@/services/wardAuth.service";
 import type { WardAdminSession } from "@/types/ward-admin";
 
-/**
- * Guards a ward page: redirects unauthenticated users to /login and
- * forwards a mismatched ward id (manual URL entry) to the admin's own
- * dashboard. Returns the authenticated ward session once authorized.
- *
- * The session is resolved after mount instead of in a useState initializer
- * so that server-side rendering never reads localStorage/clients-only state,
- * which would otherwise desync the server HTML from the client render and
- * trigger React hydration errors.
- *
- * When the mock session disappears from localStorage (e.g. the user clears
- * site data in the same tab), the guard revokes the HttpOnly auth cookie
- * before redirecting to /login. Otherwise the middleware would still see the
- * valid cookie and bounce the user straight back to the dashboard.
- */
+
 export function useWardAuthGuard(wardId: string | null) {
   const router = useRouter();
   const [session, setSession] = useState<WardAdminSession | null>(null);
