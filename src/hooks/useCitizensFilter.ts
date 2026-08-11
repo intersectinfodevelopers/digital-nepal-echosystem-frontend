@@ -25,7 +25,6 @@ export function useCitizensFilter() {
   const [search, setSearch] = useState("");
   const [nidSearch, setNidSearch] = useState("");
   const [employmentFilter, setEmploymentFilter] = useState("");
-  const [syncFilter, setSyncFilter] = useState("");
   const [sexFilter, setSexFilter] = useState("");
   const [verifiedFilter, setVerifiedFilter] = useState("");
 
@@ -46,9 +45,6 @@ export function useCitizensFilter() {
       if (employmentFilter && c.employment_category !== employmentFilter) {
         return false;
       }
-      if (syncFilter && c.sync_status !== syncFilter) {
-        return false;
-      }
       if (sexFilter && c.sex !== sexFilter) {
         return false;
       }
@@ -65,7 +61,6 @@ export function useCitizensFilter() {
     search,
     nidSearch,
     employmentFilter,
-    syncFilter,
     sexFilter,
     verifiedFilter,
   ]);
@@ -78,8 +73,6 @@ export function useCitizensFilter() {
     setNidSearch,
     employmentFilter,
     setEmploymentFilter,
-    syncFilter,
-    setSyncFilter,
     sexFilter,
     setSexFilter,
     verifiedFilter,

@@ -1,14 +1,6 @@
-import type { AlertItem, RecentActivityItem, StatItem } from "@/types/dashboard";
+import type { AlertItem, RecentActivityItem } from "@/types/dashboard";
 
-export const WARD_NAME = "Ward 03";
-export const WARD_MUNICIPALITY = "Kummayak Rural Municipality, Panchthar";
 export const LAST_SYNCED = "Today, 10:42AM";
-
-export const stats: StatItem[] = [
-  { label: "Registrations Today", value: 12, tone: "blue" },
-  { label: "Pending Sync", value: 3, tone: "orange" },
-  { label: "Offline Records", value: 4, tone: "red" },
-];
 
 export const activities: RecentActivityItem[] = [
   {

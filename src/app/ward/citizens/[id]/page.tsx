@@ -205,7 +205,6 @@ function IdentityTab({
       <div className="mt-3 pt-3 border-t border-gray-100 grid grid-cols-2 gap-x-8">
         <DataRow label="Consent Channel" value={CONSENT_CHANNEL_LABELS[citizen.consent_channel] || citizen.consent_channel} />
         <DataRow label="Consent Recorded At" value={citizen.consent_recorded_at} />
-        <DataRow label="Sync Status" value={citizen.sync_status} />
         <DataRow label="Active" value={citizen.is_active} />
       </div>
     </SectionCard>
@@ -1415,13 +1414,6 @@ export default function CitizenDetailPage() {
             {citizen.name_np} &middot; {citizen.nid_masked} &middot; Ward {citizen.ward_id}
           </p>
         </div>
-        <span className={`ml-auto text-xs font-medium px-2.5 py-0.5 rounded-full ${
-          citizen.sync_status === "synced" ? "bg-emerald-100 text-emerald-800" :
-          citizen.sync_status === "pending" ? "bg-amber-100 text-amber-800" :
-          "bg-red-100 text-red-800"
-        }`}>
-          {citizen.sync_status}
-        </span>
       </div>
 
       <div className="flex gap-6">

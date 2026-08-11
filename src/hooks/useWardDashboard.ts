@@ -1,39 +1,32 @@
 import { useMemo } from "react";
 import type { Citizen } from "@/types/citizen";
+import type { StatItem } from "@/types/dashboard";
 import citizensRaw from "../../data/citizens.json";
-import { getWardStats } from "../../lib/utils";
+import idCardsRaw from "../../data/id-cards.json";
 
 const citizens = citizensRaw as Citizen[];
+const idCards = idCardsRaw as { citizen_id: string; status: string }[];
 
-export function useWardDashboard(wardId: string) {
+export function useWardDashboard(wardId: string): StatItem[] {
   return useMemo(() => {
     const wardCitizens = citizens.filter(
-      (citizen) => citizen.ward_id === wardId
+      (citizen) => citizen.ward_id === wardId,
     );
 
-    const stats = getWardStats(wardCitizens);
+    const issuedCards = idCards.filter(
+      (card) =>
+        card.status !== "PENDING_APPROVAL" &&
+        wardCitizens.some((citizen) => citizen.id === card.citizen_id),
+    ).length;
 
     return [
+      { label: "Total Citizens", value: wardCitizens.length, tone: "blue" },
       {
-        title: "Total Citizens",
-        value: stats.total_citizens,
-        icon: "People",
+        label: "NID Verified",
+        value: wardCitizens.filter((citizen) => citizen.nid_verified).length,
+        tone: "blue",
       },
-      {
-        title: "NID Verified",
-        value: stats.nid_verified,
-        icon: "VerifiedUser",
-      },
-      {
-        title: "Pending Sync",
-        value: stats.pending_sync,
-        icon: "SyncProblem",
-      },
-      {
-        title: "ID Cards Issued",
-        value: stats.id_cards_issued,
-        icon: "CreditCard",
-      },
+      { label: "ID Cards Issued", value: issuedCards, tone: "red" },
     ];
   }, [wardId]);
 }
