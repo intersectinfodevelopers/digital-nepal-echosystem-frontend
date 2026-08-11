@@ -90,7 +90,7 @@ Each tier has:
 - Role-based access control (RBAC)
 - Three tiers: Admin, Manager, User
 - Session management with JWT tokens
-- Protected routes with middleware
+- Protected routes with proxy (formerly middleware)
 
 ### Data Management
 - Mock data layer (JSON)

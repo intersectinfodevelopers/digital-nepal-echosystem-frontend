@@ -8,18 +8,11 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: "#155EEF",
-        secondary: "#344054",
-
         success: "#17B26A",
         danger: "#F04438",
         warning: "#F79009",
-
-        border: "#D0D5DD",
-        surface: "#FFFFFF",
-
         muted: "#667085",
-        background: "#F9FAFB",
+        surface: "#FFFFFF",
       },
 
       borderRadius: {
@@ -51,6 +44,7 @@ module.exports = {
       spacing: {
         18: "4.5rem",
         22: "5.5rem",
+        65: "16.25rem",
       },
 
       transitionDuration: {

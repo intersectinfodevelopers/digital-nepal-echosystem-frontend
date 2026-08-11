@@ -3,6 +3,7 @@
 import React, { useMemo, useState, useTransition } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { useMapSelection } from "@/contexts/MapSelectionContext";
+import { logoutUser } from "@/services/auth.service";
 import districtLocalBodies from "@/constants/districtLocalBodies.json";
 import { Avatar } from "./Avatar";
 
@@ -413,12 +414,15 @@ export default function Sidebar({
   const handleLogout = () => {
     startTransition(async () => {
       try {
-        const res = await fetch("/auth/api/auth/logout", {
+        logoutUser();
+      } catch {}
+      try {
+        const res = await fetch("/api/auth/logout", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
         });
         if (res.ok) {
-          router.push("/auth/login");
+          router.push("/login");
           router.refresh();
         }
       } catch (err) {
