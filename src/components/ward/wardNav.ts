@@ -1,3 +1,5 @@
+import type { ReactNode } from "react";
+
 export type WardViewId =
   | "dashboard"
   | "citizens"
@@ -14,6 +16,7 @@ export type WardNavSection =
 export interface WardNavItem {
   id: WardViewId;
   label: string;
+  icon?: ReactNode;
 }
 
 export const WARD_NAV: WardNavSection[] = [

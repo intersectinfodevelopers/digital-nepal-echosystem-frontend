@@ -2,9 +2,18 @@
 
 import { useMemo, useState, useRef } from "react";
 import { Pagination } from "@/components/ui/Pagination";
+import type { User } from "@/types/auth";
+
+type ProvinceAdminSource = User & {
+  created_at?: string;
+  created_by?: string | null;
+  denorm?: {
+    province_name?: string;
+  };
+};
 
 // Data imports
-import initialProvinceAdmins from "../../../../data/admins/province-admins.json";
+import usersData from "../../../../data/users.json";
 import initialAuditLogs from "../../../../data/admin-audit.json";
 import provincesData from "../../../../data/provinces.json";
 
@@ -39,7 +48,21 @@ export default function ProvinceAdminsPage() {
 
   // Core States (Initialized directly with static JSON data arrays)
   const [admins, setAdmins] = useState<ProvinceAdmin[]>(
-    initialProvinceAdmins as ProvinceAdmin[],
+    (usersData as ProvinceAdminSource[])
+      .filter((u) => u.role === "PROVINCE_ADMIN")
+      .map((u) => ({
+        id: u.id,
+        username: u.username,
+        full_name: u.full_name,
+        province_id: u.jurisdiction_id,
+        province_name: u.denorm?.province_name ?? "",
+        is_active: u.is_active,
+        failed_logins: u.failed_logins || 0,
+        locked_until: null,
+        last_login: u.last_login || null,
+        created_at: u.created_at || new Date().toISOString(),
+        created_by: u.created_by || null,
+      })) as ProvinceAdmin[],
   );
   const [auditLogs, setAuditLogs] = useState<AuditLog[]>(
     initialAuditLogs as unknown as AuditLog[],

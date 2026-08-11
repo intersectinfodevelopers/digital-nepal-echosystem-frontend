@@ -1,12 +1,12 @@
 "use client";
 
-import { useWardAuthGuard } from "@/hooks/useWardAuthGuard";
-import WardDashboardShell from "@/components/ward/WardDashboardShell";
+import { useAuthGuard } from "@/hooks/useAuthGuard";
+import DashboardTab from "@/components/ward/DashboardTab";
 
 export default function WardDashboardPage() {
-  const { session, authorized } = useWardAuthGuard(null);
+  const { session, authorized } = useAuthGuard("WARD_ADMIN");
 
-  if (!authorized || !session) return null;
+  if (!authorized || !session || !session.ward_id) return null;
 
-  return <WardDashboardShell wardId={session.ward_id} />;
+  return <DashboardTab wardId={session.ward_id} />;
 }

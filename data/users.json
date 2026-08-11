@@ -2,6 +2,7 @@
   {
     "id": "user-ward-4",
     "username": "ward4.kummayak",
+    "email": "ward4.kummayak@kummayak.local",
     "password": "ward4pass",
     "full_name": "Dhana Raj Thapa",
     "phone": "9812345678",
@@ -12,11 +13,22 @@
     "failed_logins": 0,
     "last_login": "2026-06-08T09:30:00Z",
     "lat": 26.955,
-    "lng": 87.285
+    "lng": 87.285,
+    "denorm": {
+      "ward_id": "ward-004",
+      "ward_name": "Phungling Municipality Ward No. 4",
+      "municipality_id": "mun-01",
+      "municipality_name": "Phungling Municipality",
+      "district_id": "dist-01",
+      "district_name": "Taplejung",
+      "province_id": "prov-1",
+      "province_name": "Koshi Province"
+    }
   },
   {
     "id": "user-ward-3",
     "username": "ward3.kummayak",
+    "email": "ward3.kummayak@kummayak.local",
     "password": "ward3pass",
     "full_name": "Sita Kumari Limbu",
     "phone": "9812345679",
@@ -27,11 +39,22 @@
     "failed_logins": 0,
     "last_login": "2026-06-07T10:15:00Z",
     "lat": 26.948,
-    "lng": 87.272
+    "lng": 87.272,
+    "denorm": {
+      "ward_id": "ward-003",
+      "ward_name": "Phungling Municipality Ward No. 3",
+      "municipality_id": "mun-01",
+      "municipality_name": "Phungling Municipality",
+      "district_id": "dist-01",
+      "district_name": "Taplejung",
+      "province_id": "prov-1",
+      "province_name": "Koshi Province"
+    }
   },
   {
     "id": "user-ward-5",
     "username": "ward5.kummayak",
+    "email": "ward5.kummayak@kummayak.local",
     "password": "ward5pass",
     "full_name": "Ram Prasad Adhikari",
     "phone": "9812345680",
@@ -42,41 +65,196 @@
     "failed_logins": 2,
     "last_login": "2026-06-06T08:45:00Z",
     "lat": 26.962,
-    "lng": 87.298
+    "lng": 87.298,
+    "denorm": {
+      "ward_id": "ward-005",
+      "ward_name": "Phungling Municipality Ward No. 5",
+      "municipality_id": "mun-01",
+      "municipality_name": "Phungling Municipality",
+      "district_id": "dist-01",
+      "district_name": "Taplejung",
+      "province_id": "prov-1",
+      "province_name": "Koshi Province"
+    }
+  },
+  {
+    "id": "user-ward-1",
+    "username": "ward1.kummayak",
+    "email": "ward1.kummayak@kummayak.local",
+    "password": "ward1pass",
+    "full_name": "Hari Prasad Adhikari",
+    "phone": "9812345601",
+    "role": "WARD_ADMIN",
+    "jurisdiction_type": "WARD",
+    "jurisdiction_id": "ward-001",
+    "is_active": true,
+    "denorm": {
+      "ward_id": "ward-001",
+      "ward_name": "Phungling Municipality Ward No. 1",
+      "municipality_id": "mun-01",
+      "municipality_name": "Phungling Municipality",
+      "district_id": "dist-01",
+      "district_name": "Taplejung",
+      "province_id": "prov-1",
+      "province_name": "Koshi Province"
+    }
+  },
+  {
+    "id": "user-ward-2",
+    "username": "ward2.kummayak",
+    "email": "ward2.kummayak@kummayak.local",
+    "password": "ward2pass",
+    "full_name": "Gita Kumari Limbu",
+    "phone": "9812345602",
+    "role": "WARD_ADMIN",
+    "jurisdiction_type": "WARD",
+    "jurisdiction_id": "ward-002",
+    "is_active": true,
+    "denorm": {
+      "ward_id": "ward-002",
+      "ward_name": "Phungling Municipality Ward No. 2",
+      "municipality_id": "mun-01",
+      "municipality_name": "Phungling Municipality",
+      "district_id": "dist-01",
+      "district_name": "Taplejung",
+      "province_id": "prov-1",
+      "province_name": "Koshi Province"
+    }
+  },
+  {
+    "id": "user-ward-6",
+    "username": "ward6.kummayak",
+    "email": "ward6.kummayak@kummayak.local",
+    "password": "ward6pass",
+    "full_name": "Krishna Prasad Adhikari",
+    "phone": "9812345606",
+    "role": "WARD_ADMIN",
+    "jurisdiction_type": "WARD",
+    "jurisdiction_id": "ward-006",
+    "is_active": true,
+    "denorm": {
+      "ward_id": "ward-006",
+      "ward_name": "Phungling Municipality Ward No. 6",
+      "municipality_id": "mun-01",
+      "municipality_name": "Phungling Municipality",
+      "district_id": "dist-01",
+      "district_name": "Taplejung",
+      "province_id": "prov-1",
+      "province_name": "Koshi Province"
+    }
+  },
+  {
+    "id": "user-ward-7",
+    "username": "ward7.kummayak",
+    "email": "ward7.kummayak@kummayak.local",
+    "password": "ward7pass",
+    "full_name": "Maya Kumari Sharma",
+    "phone": "9812345607",
+    "role": "WARD_ADMIN",
+    "jurisdiction_type": "WARD",
+    "jurisdiction_id": "ward-007",
+    "is_active": false,
+    "denorm": {
+      "ward_id": "ward-007",
+      "ward_name": "Phungling Municipality Ward No. 7",
+      "municipality_id": "mun-01",
+      "municipality_name": "Phungling Municipality",
+      "district_id": "dist-01",
+      "district_name": "Taplejung",
+      "province_id": "prov-1",
+      "province_name": "Koshi Province"
+    }
+  },
+  {
+    "id": "user-ward-8",
+    "username": "ward8.kummayak",
+    "email": "ward8.kummayak@kummayak.local",
+    "password": "ward8pass",
+    "full_name": "Bishnu Bahadur Thapa",
+    "phone": "9812345608",
+    "role": "WARD_ADMIN",
+    "jurisdiction_type": "WARD",
+    "jurisdiction_id": "ward-008",
+    "is_active": true,
+    "denorm": {
+      "ward_id": "ward-008",
+      "ward_name": "Phungling Municipality Ward No. 8",
+      "municipality_id": "mun-01",
+      "municipality_name": "Phungling Municipality",
+      "district_id": "dist-01",
+      "district_name": "Taplejung",
+      "province_id": "prov-1",
+      "province_name": "Koshi Province"
+    }
+  },
+  {
+    "id": "user-ward-9",
+    "username": "ward9.kummayak",
+    "email": "ward9.kummayak@kummayak.local",
+    "password": "ward9pass",
+    "full_name": "Sushila Devi Kafle",
+    "phone": "9812345609",
+    "role": "WARD_ADMIN",
+    "jurisdiction_type": "WARD",
+    "jurisdiction_id": "ward-009",
+    "is_active": true,
+    "denorm": {
+      "ward_id": "ward-009",
+      "ward_name": "Phungling Municipality Ward No. 9",
+      "municipality_id": "mun-01",
+      "municipality_name": "Phungling Municipality",
+      "district_id": "dist-01",
+      "district_name": "Taplejung",
+      "province_id": "prov-1",
+      "province_name": "Koshi Province"
+    }
   },
   {
     "id": "user-municipality",
     "username": "kummayak.admin",
+    "email": "kummayak.admin@kummayak.local",
     "password": "municipalitypass",
     "full_name": "Bishnu Maya Kafle",
     "phone": "9812345681",
     "role": "LOCAL_BODY_ADMIN",
     "jurisdiction_type": "MUNICIPALITY",
-    "jurisdiction_id": "mun-kummayak",
+    "jurisdiction_id": "mun-08",
     "is_active": true,
     "failed_logins": 0,
     "last_login": "2026-06-08T11:20:00Z",
-    "lat": 26.958,
-    "lng": 87.281
+    "denorm": {
+      "ward_id": null,
+      "ward_name": null,
+      "municipality_id": "mun-08",
+      "municipality_name": "Kummayak Rural Municipality",
+      "district_id": "dist-02",
+      "district_name": "Panchthar",
+      "province_id": "prov-1",
+      "province_name": "Koshi Province"
+    }
   },
   {
     "id": "user-province",
     "username": "koshi.province",
+    "email": "koshi.province@koshi.nepal",
     "password": "provincepass",
     "full_name": "Koshi Prasad Nepal",
     "phone": "9812345682",
     "role": "PROVINCE_ADMIN",
     "jurisdiction_type": "PROVINCE",
-    "jurisdiction_id": "prov-koshi",
+    "jurisdiction_id": "prov-1",
     "is_active": true,
     "failed_logins": 0,
     "last_login": "2026-06-07T14:00:00Z",
-    "lat": 26.97,
-    "lng": 87.33
+    "denorm": {
+      "province_id": "prov-1",
+      "province_name": "Koshi Province"
+    }
   },
   {
     "id": "user-central",
     "username": "nepal.central",
+    "email": "nepal.central@nepal.gov",
     "password": "centralpass",
     "full_name": "Ganga Devi Sharma",
     "phone": "9812345683",
@@ -87,6 +265,134 @@
     "failed_logins": 0,
     "last_login": "2026-06-08T08:00:00Z",
     "lat": 27.7172,
-    "lng": 85.324
+    "lng": 85.324,
+    "denorm": {
+      "ward_id": null,
+      "ward_name": null,
+      "municipality_id": null,
+      "municipality_name": null,
+      "district_id": null,
+      "district_name": null,
+      "province_id": null,
+      "province_name": null
+    }
+  },
+  {
+    "id": "user-municipality-mun-35",
+    "username": "admin.mun-35",
+    "email": "admin.mun-35@mun-35.local",
+    "password": "municipalitypass",
+    "full_name": "Municipality Admin Biratnagar Metropolitan City",
+    "phone": "9800000001",
+    "role": "LOCAL_BODY_ADMIN",
+    "jurisdiction_type": "MUNICIPALITY",
+    "jurisdiction_id": "mun-35",
+    "is_active": true,
+    "denorm": {
+      "ward_id": null,
+      "ward_name": null,
+      "municipality_id": "mun-35",
+      "municipality_name": "Biratnagar Metropolitan City",
+      "district_id": "dist-05",
+      "district_name": "Morang",
+      "province_id": "prov-1",
+      "province_name": "Koshi Province"
+    }
+  },
+  {
+    "id": "user-province-prov-2",
+    "username": "prov-2.admin",
+    "email": "prov-2.admin@prov-2.local",
+    "password": "provincepass",
+    "full_name": "Province Admin Madhesh Province",
+    "phone": "9800000000",
+    "role": "PROVINCE_ADMIN",
+    "jurisdiction_type": "PROVINCE",
+    "jurisdiction_id": "prov-2",
+    "is_active": true,
+    "denorm": {
+      "province_id": "prov-2",
+      "province_name": "Madhesh Province"
+    }
+  },
+  {
+    "id": "user-province-prov-3",
+    "username": "prov-3.admin",
+    "email": "prov-3.admin@prov-3.local",
+    "password": "provincepass",
+    "full_name": "Province Admin Bagmati Province",
+    "phone": "9800000000",
+    "role": "PROVINCE_ADMIN",
+    "jurisdiction_type": "PROVINCE",
+    "jurisdiction_id": "prov-3",
+    "is_active": true,
+    "denorm": {
+      "province_id": "prov-3",
+      "province_name": "Bagmati Province"
+    }
+  },
+  {
+    "id": "user-province-prov-4",
+    "username": "prov-4.admin",
+    "email": "prov-4.admin@prov-4.local",
+    "password": "provincepass",
+    "full_name": "Province Admin Gandaki Province",
+    "phone": "9800000000",
+    "role": "PROVINCE_ADMIN",
+    "jurisdiction_type": "PROVINCE",
+    "jurisdiction_id": "prov-4",
+    "is_active": true,
+    "denorm": {
+      "province_id": "prov-4",
+      "province_name": "Gandaki Province"
+    }
+  },
+  {
+    "id": "user-province-prov-5",
+    "username": "prov-5.admin",
+    "email": "prov-5.admin@prov-5.local",
+    "password": "provincepass",
+    "full_name": "Province Admin Lumbini Province",
+    "phone": "9800000000",
+    "role": "PROVINCE_ADMIN",
+    "jurisdiction_type": "PROVINCE",
+    "jurisdiction_id": "prov-5",
+    "is_active": true,
+    "denorm": {
+      "province_id": "prov-5",
+      "province_name": "Lumbini Province"
+    }
+  },
+  {
+    "id": "user-province-prov-6",
+    "username": "prov-6.admin",
+    "email": "prov-6.admin@prov-6.local",
+    "password": "provincepass",
+    "full_name": "Province Admin Karnali Province",
+    "phone": "9800000000",
+    "role": "PROVINCE_ADMIN",
+    "jurisdiction_type": "PROVINCE",
+    "jurisdiction_id": "prov-6",
+    "is_active": true,
+    "denorm": {
+      "province_id": "prov-6",
+      "province_name": "Karnali Province"
+    }
+  },
+  {
+    "id": "user-province-prov-7",
+    "username": "prov-7.admin",
+    "email": "prov-7.admin@prov-7.local",
+    "password": "provincepass",
+    "full_name": "Province Admin Sudurpashchim Province",
+    "phone": "9800000000",
+    "role": "PROVINCE_ADMIN",
+    "jurisdiction_type": "PROVINCE",
+    "jurisdiction_id": "prov-7",
+    "is_active": true,
+    "denorm": {
+      "province_id": "prov-7",
+      "province_name": "Sudurpashchim Province"
+    }
   }
 ]
