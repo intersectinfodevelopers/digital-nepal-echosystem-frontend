@@ -1,112 +1,117 @@
-import type { ReactNode } from "react";
+"use client";
 
-import Sidebar, { type SidebarItem } from "../../components/ui/Sidebar";
-import { MapSelectionProvider } from "../../contexts/MapSelectionContext";
+import { ReactNode, useState } from "react";
+import { Drawer, useMediaQuery } from "@mui/material";
+import { AccountBalanceOutlined, BarChartOutlined, FlagOutlined, FormatListBulletedOutlined, PublicOutlined } from "@mui/icons-material";
+import { usePathname, useRouter } from "next/navigation";
+import WardSidebar, { getNavItems, type AdminNavSection } from "@/components/ward/WardSidebar";
+import WardTopbar from "@/components/ward/WardTopbar";
+import RouteGuard from "@/components/RouteGuard";
+import { getCurrentSession } from "@/services/auth.service";
+import { MapSelectionProvider } from "@/contexts/MapSelectionContext";
 
-const PROVINCE_NAV_ITEMS: SidebarItem[] = [
+const PROVINCE_NAV: AdminNavSection[] = [
   {
-    label: "Dashboard",
-    href: "/province/dashboard",
-    icon: (
-      <svg
-        className="h-5 w-5"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-        aria-hidden="true"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth="2"
-          d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"
-        />
-      </svg>
-    ),
-  },
-  {
-    label: "Municipalities",
-    href: "/province/municipalities",
-    icon: (
-      <svg
-        className="h-5 w-5"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-        aria-hidden="true"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth="2"
-          d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
-        />
-      </svg>
-    ),
-  },
-  {
-    label: "Analytics",
-    href: "/province/analytics",
-    icon: (
-      <svg
-        className="h-5 w-5"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-        aria-hidden="true"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth="2"
-          d="M9 19v-6a2 2 0 012-2h2a2 2 0 012 2v6m-6 0h6m2 0h2a2 2 0 002-2v-3a2 2 0 00-2-2h-3m-14 0H3a2 2 0 00-2 2v3a2 2 0 002 2h2m0 0h2a2 2 0 002-2v-3a2 2 0 00-2-2H3z"
-        />
-      </svg>
-    ),
-  },
-  {
-    label: "Reports",
-    href: "/province/reports",
-    icon: (
-      <svg
-        className="h-5 w-5"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-        aria-hidden="true"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth="2"
-          d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-        />
-      </svg>
-    ),
+    type: "group",
+    label: "Main",
+    items: [
+      { id: "/province/dashboard", label: "Dashboard", icon: <AccountBalanceOutlined sx={{ fontSize: 20 }} /> },
+      { id: "/province/municipalities", label: "Municipalities", icon: <FormatListBulletedOutlined sx={{ fontSize: 20 }} /> },
+      { id: "/province/analytics", label: "Analytics", icon: <BarChartOutlined sx={{ fontSize: 20 }} /> },
+      { id: "/province/reports", label: "Reports", icon: <FlagOutlined sx={{ fontSize: 20 }} /> },
+    ],
   },
 ];
+
+function getActiveView(pathname: string) {
+  if (pathname.startsWith("/province/municipalities")) return "/province/municipalities";
+  if (pathname.startsWith("/province/analytics")) return "/province/analytics";
+  if (pathname.startsWith("/province/reports")) return "/province/reports";
+  return "/province/dashboard";
+}
 
 interface ProvinceLayoutProps {
   children: ReactNode;
 }
 
 export default function ProvinceLayout({ children }: ProvinceLayoutProps) {
+  const pathname = usePathname();
+  const router = useRouter();
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const isDesktop = useMediaQuery("(min-width:1024px)");
+  const session = getCurrentSession();
+  const activeItem = getActiveView(pathname);
+
+  const handleNavigate = (href: string) => {
+    setMobileOpen(false);
+    router.push(href);
+  };
+
+  const handleToggleDesktopSidebar = () => setSidebarOpen((prev) => !prev);
+  const handleOpenSidebar = () => {
+    if (isDesktop) {
+      handleToggleDesktopSidebar();
+    } else {
+      setMobileOpen(true);
+    }
+  };
+
+  const provinceName = session?.province_name ?? "Province";
+  const activeLabel = getNavItems(PROVINCE_NAV).find((item) => item.id === activeItem)?.label ?? "Dashboard";
+
   return (
     <MapSelectionProvider>
-      <div className="flex min-h-screen bg-background">
-        <Sidebar
-          items={PROVINCE_NAV_ITEMS}
-          variant="province"
-          userInfo={{
-            name: "Province Admin",
-            role: "Province Authority",
-          }}
-        />
+      <RouteGuard requiredRole="PROVINCE_ADMIN">
+        <div className="flex min-h-screen bg-[#f5f7fb]">
+          <div className="hidden lg:block">
+            <div className="fixed inset-y-0 left-0 z-40">
+              <WardSidebar
+                active={activeItem}
+                onNavigate={handleNavigate}
+                navSections={PROVINCE_NAV}
+                headerTitle="Province Administration"
+                headerSubtitle={provinceName}
+                entityMeta="Province Government"
+                collapsed={!sidebarOpen}
+              />
+            </div>
+          </div>
 
-        <main className="min-w-0 flex-1 bg-background">
-          <div className="w-full p-4 md:p-6 lg:p-8">{children}</div>
-        </main>
-      </div>
+          <Drawer
+            open={mobileOpen && !isDesktop}
+            onClose={() => setMobileOpen(false)}
+            slotProps={{ paper: { sx: { borderRadius: 0, width: 260 } } }}
+          >
+            <WardSidebar
+              active={activeItem}
+              onNavigate={handleNavigate}
+              navSections={PROVINCE_NAV}
+              headerTitle="Province Administration"
+              headerSubtitle={provinceName}
+              entityMeta="Province Government"
+              onClose={() => setMobileOpen(false)}
+            />
+          </Drawer>
+
+          <div className={`flex min-w-0 flex-1 flex-col ${sidebarOpen ? "lg:pl-65" : "lg:pl-18"}`}>
+            <WardTopbar
+              sectionLabel="Province Portal"
+              subtitle={activeLabel}
+              icon={<PublicOutlined sx={{ fontSize: 20 }} />}
+              userName={session?.full_name ?? "Province Admin"}
+              userRole={session?.role ?? "Province Authority"}
+              sidebarOpen={sidebarOpen}
+              onOpenSidebar={handleOpenSidebar}
+              onGoProfile={() => router.push("/province/dashboard")}
+            />
+
+            <main className="flex-1 px-4 pt-20 pb-6 sm:px-6 lg:px-8">
+              {children}
+            </main>
+          </div>
+        </div>
+      </RouteGuard>
     </MapSelectionProvider>
   );
 }

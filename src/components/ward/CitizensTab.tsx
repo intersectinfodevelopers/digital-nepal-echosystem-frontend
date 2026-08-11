@@ -94,7 +94,7 @@ export default function CitizensTab({ wardId }: { wardId: string }) {
             <Download sx={{ fontSize: 18 }} /> Export
           </button>
           <Link
-            href="/portal/personal"
+            href="/ward/dashboard/registercitizen"
             className="flex h-10 items-center gap-1.5 rounded-xl bg-[#0A3E9E] px-4 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#083078]"
           >
             <Add sx={{ fontSize: 18 }} /> Register Citizen

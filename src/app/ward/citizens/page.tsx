@@ -36,7 +36,7 @@ export default function CitizensPage() {
       <div className="flex items-center justify-between mb-6">
         <h2 className="text-2xl font-bold text-gray-900">Citizens</h2>
         <Link
-          href="/portal/personal"
+          href="/ward/dashboard/registercitizen"
           className="inline-flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors"
         >
           <Add className="text-lg" />

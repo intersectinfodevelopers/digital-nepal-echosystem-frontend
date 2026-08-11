@@ -1,37 +1,38 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
+import { logoutUser } from "@/services/auth.service";
 import { Menu, MenuItem, ListItemIcon, Divider } from "@mui/material";
 import { Menu as MenuIcon, PersonOutlined, Logout } from "@mui/icons-material";
-import { getWardAdminSession, logoutWardAdmin } from "@/services/wardAuth.service";
-import { getWardProfile, getNotifications } from "@/services/mockWardAdmin";
 import NotificationBell from "./NotificationBell";
-import { useWardAdminStore } from "@/hooks/useWardAdminStore";
-import type { WardViewId } from "./wardNav";
-import { WARD_VIEW_TITLES } from "./wardNav";
 
 interface WardTopbarProps {
-  wardId: string;
-  view: WardViewId;
-  icon: React.ReactNode;
+  sectionLabel: string;
+  subtitle?: string;
+  icon?: ReactNode;
+  userName: string;
+  userRole: string;
+  unreadCount?: number;
+  notificationWardId?: string;
+  sidebarOpen: boolean;
   onOpenSidebar: () => void;
   onGoProfile: () => void;
 }
 
 export default function WardTopbar({
-  wardId,
-  view,
+  sectionLabel,
+  subtitle,
   icon,
+  userName,
+  userRole,
+  unreadCount = 0,
+  notificationWardId,
+  sidebarOpen,
   onOpenSidebar,
   onGoProfile,
 }: WardTopbarProps) {
-  useWardAdminStore();
   const [anchor, setAnchor] = useState<HTMLElement | null>(null);
-  const profile = getWardProfile(wardId);
-  const session = getWardAdminSession();
-  const name = session?.admin_name || profile.admin_name || "Ward Admin";
-  const title = WARD_VIEW_TITLES[view];
-  const unread = getNotifications(wardId).filter((n) => !n.read).length;
+  const name = userName || "Admin";
 
   const initials = name
     .split(" ")
@@ -42,18 +43,20 @@ export default function WardTopbar({
 
   const goLogout = () => {
     setAnchor(null);
-    logoutWardAdmin();
-    fetch("/auth/api/auth/logout", { method: "POST" }).catch(() => {});
+    try {
+      logoutUser();
+    } catch {}
+    fetch("/api/auth/logout", { method: "POST" }).catch(() => {});
     window.location.href = "/login";
   };
 
   return (
-    <header className="sticky top-0 z-30 flex h-16 items-center gap-4 border-b border-[#e6e8ee] bg-white px-4 sm:px-6">
+    <header className={`fixed top-0 left-0 right-0 z-30 flex h-16 items-center gap-4 border-b border-[#e6e8ee] bg-white px-4 sm:px-6 ${sidebarOpen ? "lg:pl-65" : "lg:pl-18"}`}>
       <button
         type="button"
         aria-label="Open navigation"
         onClick={onOpenSidebar}
-        className="flex h-9 w-9 items-center justify-center rounded-lg text-[#6B7280] transition-colors hover:bg-[#F5F7FB] hover:text-[#0A3E9E] lg:hidden"
+        className="flex h-9 w-9 items-center justify-center rounded-lg text-[#6B7280] transition-colors hover:bg-[#F5F7FB] hover:text-[#0A3E9E]"
       >
         <MenuIcon sx={{ fontSize: 22 }} />
       </button>
@@ -63,15 +66,21 @@ export default function WardTopbar({
           {icon}
         </span>
         <div className="min-w-0">
-          <h1 className="truncate text-[17px] font-bold text-[#0A3E9E]">{title}</h1>
-          <p className="hidden truncate text-xs text-[#9CA3AF] sm:block">
-            {profile.municipality}, Ward {profile.ward_id.replace("ward-", "")}
-          </p>
+          <div className="mb-1 flex items-center gap-2 text-xs text-[#9CA3AF]">
+            <span>{sectionLabel}</span>
+            {subtitle ? (
+              <>
+                <span>{">"}</span>
+                <span className="font-semibold text-[#0A3E9E]">{subtitle}</span>
+              </>
+            ) : null}
+          </div>
+          <p className="text-xs text-[#6B7280]">{userRole}</p>
         </div>
       </div>
 
       <div className="ml-auto flex items-center gap-2">
-        <NotificationBell wardId={wardId} unread={unread} />
+        {notificationWardId ? <NotificationBell wardId={notificationWardId} unread={unreadCount} /> : null}
 
         <div className="mx-1 h-6 w-px bg-[#e6e8ee]" />
 
@@ -85,7 +94,7 @@ export default function WardTopbar({
           </span>
           <span className="hidden text-left sm:block">
             <span className="block text-[13px] font-semibold text-[#374151]">{name}</span>
-            <span className="block text-[11px] text-[#9CA3AF]">Ward Admin</span>
+            <span className="block text-[11px] text-[#9CA3AF]">{userRole || "Admin"}</span>
           </span>
         </button>
 

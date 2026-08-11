@@ -34,7 +34,8 @@ import {
   resetWardData,
   getDashboardStats,
 } from "@/services/mockWardAdmin";
-import { logoutWardAdmin } from "@/services/wardAuth.service";
+// logout handled via unified auth.service
+import { logoutUser } from "@/services/auth.service";
 import { useWardAdminStore } from "@/hooks/useWardAdminStore";
 
 export default function ProfileTab({ wardId }: { wardId: string }) {
@@ -61,9 +62,11 @@ export default function ProfileTab({ wardId }: { wardId: string }) {
   };
 
   const handleLogout = async () => {
-    logoutWardAdmin();
     try {
-      await fetch("/auth/api/auth/logout", { method: "POST" });
+      logoutUser();
+    } catch {}
+    try {
+      await fetch("/api/auth/logout", { method: "POST" });
     } catch {
       // ignore
     }

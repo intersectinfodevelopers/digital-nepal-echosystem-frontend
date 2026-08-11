@@ -22,8 +22,8 @@ export default function AuthLayout({ children }: AuthLayoutProps) {
         aria-hidden="true"
       />
 
-      <main className="flex min-h-screen w-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-        <div className="w-full max-w-md">{children}</div>
+      <main className="relative w-full">
+        <div className="w-full">{children}</div>
       </main>
       <footer className="absolute bottom-4 left-0 right-0 text-center text-xs text-slate-400 dark:text-slate-600">
         &copy; {new Date().getFullYear()} Government of Nepal. All Rights

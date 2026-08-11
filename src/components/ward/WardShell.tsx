@@ -11,20 +11,15 @@ import {
   ChecklistOutlined,
   BadgeOutlined,
 } from "@mui/icons-material";
+import { usePathname, useRouter } from "next/navigation";
 import type { ReactNode } from "react";
-import WardSidebar from "./WardSidebar";
-import WardTopbar from "./WardTopbar";
-import DashboardTab from "./DashboardTab";
-import CitizensTab from "./CitizensTab";
-import MapTab from "./MapTab";
-import ServicesTab from "./ServicesTab";
-import ProfileTab from "./ProfileTab";
-import ApprovalQueueTab from "./ApprovalQueueTab";
-import IdCardRequestsTab from "./IdCardRequestsTab";
-import type { WardViewId } from "./wardNav";
-import { WARD_VIEW_TITLES } from "./wardNav";
 import { getCurrentSession } from "@/services/auth.service";
 import { getNotifications } from "@/services/mockWardAdmin";
+import Breadcrumbs from "@/components/ui/Breadcrumbs";
+import WardSidebar from "./WardSidebar";
+import WardTopbar from "./WardTopbar";
+import type { WardViewId } from "./wardNav";
+import { WARD_VIEW_TITLES } from "./wardNav";
 
 const VIEW_ICONS: Record<WardViewId, ReactNode> = {
   dashboard: <HomeOutlined sx={{ fontSize: 20 }} />,
@@ -36,69 +31,62 @@ const VIEW_ICONS: Record<WardViewId, ReactNode> = {
   idcards: <BadgeOutlined sx={{ fontSize: 20 }} />,
 };
 
-export default function WardDashboardShell({ wardId }: { wardId: string }) {
-  const [view, setView] = useState<WardViewId>("dashboard");
+const VIEW_PATHS: Record<WardViewId, string> = {
+  dashboard: "/ward/dashboard",
+  citizens: "/ward/citizens",
+  map: "/ward/dashboard",
+  services: "/ward/dashboard",
+  profile: "/ward/dashboard",
+  approvals: "/ward/dashboard",
+  idcards: "/ward/dashboard",
+};
+
+function getActiveView(pathname: string): WardViewId {
+  if (pathname.startsWith("/ward/citizens")) return "citizens";
+  return "dashboard";
+}
+
+export default function WardShell({ children }: { children: ReactNode }) {
+  const pathname = usePathname();
+  const router = useRouter();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const isDesktop = useMediaQuery("(min-width:1024px)");
 
-  const renderView = (v: WardViewId) => {
-    switch (v) {
-      case "citizens":
-        return <CitizensTab wardId={wardId} />;
-      case "map":
-        return <MapTab wardId={wardId} />;
-      case "services":
-        return <ServicesTab wardId={wardId} />;
-      case "profile":
-        return <ProfileTab wardId={wardId} />;
-      case "approvals":
-        return <ApprovalQueueTab wardId={wardId} />;
-      case "idcards":
-        return <IdCardRequestsTab wardId={wardId} />;
-      case "dashboard":
-      default:
-        return <DashboardTab wardId={wardId} />;
-    }
-  };
+  const activeView = getActiveView(pathname);
+  const session = getCurrentSession();
+  const wardId = session?.ward_id ?? "ward-001";
+  const wardNumber = wardId.replace("ward-", "");
+  const unread = getNotifications(wardId).filter((n) => !n.read).length;
 
-  const navigate = (id: string) => {
-    setView(id as WardViewId);
+  const handleNavigate = (id: string) => {
     setMobileOpen(false);
-    window.scrollTo({ top: 0 });
+    const view = id as WardViewId;
+    router.push(VIEW_PATHS[view]);
   };
 
   const handleToggleDesktopSidebar = () => {
     setSidebarOpen((prev) => !prev);
   };
 
-  const handleOpenMobileDrawer = () => {
-    setMobileOpen(true);
-  };
-
-  const closeMobileDrawer = () => {
-    setMobileOpen(false);
-  };
-
-  const session = getCurrentSession();
-  const unread = getNotifications(wardId).filter((n) => !n.read).length;
-
   const handleOpenSidebar = () => {
     if (isDesktop) {
       handleToggleDesktopSidebar();
     } else {
-      handleOpenMobileDrawer();
+      setMobileOpen(true);
     }
   };
+
+  const closeMobileDrawer = () => setMobileOpen(false);
 
   return (
     <div className="flex min-h-screen bg-[#f5f7fb]">
       <div className="hidden lg:block">
         <div className="fixed inset-y-0 left-0 z-40">
           <WardSidebar
-            active={view}
-            onNavigate={navigate}
-            wardId={wardId}
+            active={activeView}
+            onNavigate={handleNavigate}
+            wardId={"ward-001"}
             collapsed={!sidebarOpen}
           />
         </div>
@@ -109,27 +97,31 @@ export default function WardDashboardShell({ wardId }: { wardId: string }) {
         slotProps={{ paper: { sx: { borderRadius: 0, width: 260 } } }}
       >
         <WardSidebar
-          active={view}
-          onNavigate={navigate}
-          wardId={wardId}
+          active={activeView}
+          onNavigate={handleNavigate}
+          wardId={"ward-001"}
           onClose={closeMobileDrawer}
         />
       </Drawer>
       <div className={`flex min-w-0 flex-1 flex-col ${sidebarOpen ? "lg:pl-65" : "lg:pl-18"}`}>
         <WardTopbar
-          sectionLabel={`Ward ${wardId.replace("ward-", "")}`}
-          subtitle={WARD_VIEW_TITLES[view]}
-          icon={VIEW_ICONS[view]}
+          sectionLabel={`Ward ${wardNumber}`}
+          subtitle={WARD_VIEW_TITLES[activeView]}
+          icon={VIEW_ICONS[activeView]}
           userName={session?.full_name ?? "Ward Admin"}
           userRole={session?.role ?? "Ward Admin"}
           unreadCount={unread}
           notificationWardId={wardId}
           sidebarOpen={sidebarOpen}
           onOpenSidebar={handleOpenSidebar}
-          onGoProfile={() => navigate("profile")}
+          onGoProfile={() => router.push("/ward/dashboard")}
         />
-
-        <main className="flex-1 px-4 pt-20 pb-6 sm:px-6 lg:px-8">{renderView(view)}</main>
+        <main className="flex-1 px-4 pt-20 pb-6 sm:px-6 lg:px-8">
+          <div className="mb-4">
+            <Breadcrumbs />
+          </div>
+          {children}
+        </main>
       </div>
     </div>
   );
