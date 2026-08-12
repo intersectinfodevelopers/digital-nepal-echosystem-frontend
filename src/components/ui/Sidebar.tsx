@@ -4,138 +4,11 @@ import React, { useMemo, useState, useTransition } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { useMapSelection } from "@/contexts/MapSelectionContext";
 import { logoutUser } from "@/services/auth.service";
-import districtLocalBodies from "@/constants/districtLocalBodies.json";
+import {
+  PROVINCE_HIERARCHY,
+  getLocalBodies,
+} from "@/constants/provinceHierarchy";
 import { Avatar } from "./Avatar";
-
-// Constants
-const PROVINCE_HIERARCHY = [
-  {
-    id: "1",
-    label: "Koshi",
-    color: "#E53E3E",
-    districts: [
-      "Bhojpur",
-      "Dhankuta",
-      "Ilam",
-      "Jhapa",
-      "Khotang",
-      "Morang",
-      "Okhaldhunga",
-      "Panchthar",
-      "Sankhuwasabha",
-      "Solukhumbu",
-      "Sunsari",
-      "Taplejung",
-      "Terhathum",
-      "Udayapur",
-    ],
-  },
-  {
-    id: "2",
-    label: "Madhesh",
-    color: "#8D6E63",
-    districts: [
-      "Bara",
-      "Dhanusha",
-      "Mahottari",
-      "Parsa",
-      "Rautahat",
-      "Saptari",
-      "Sarlahi",
-      "Siraha",
-    ],
-  },
-  {
-    id: "3",
-    label: "Bagmati",
-    color: "#3182CE",
-    districts: [
-      "Bhaktapur",
-      "Chitawan",
-      "Dhading",
-      "Dolakha",
-      "Kabhrepalanchok",
-      "Kathmandu",
-      "Lalitpur",
-      "Makawanpur",
-      "Nuwakot",
-      "Ramechhap",
-      "Rasuwa",
-      "Sindhuli",
-      "Sindhupalchok",
-    ],
-  },
-  {
-    id: "4",
-    label: "Gandaki",
-    color: "#DD6B20",
-    districts: [
-      "Baglung",
-      "Gorkha",
-      "Kaski",
-      "Lamjung",
-      "Manang",
-      "Mustang",
-      "Myagdi",
-      "Nawalparasi (East)",
-      "Parbat",
-      "Syangja",
-      "Tanahu",
-    ],
-  },
-  {
-    id: "5",
-    label: "Lumbini",
-    color: "#805AD5",
-    districts: [
-      "Arghakhanchi",
-      "Banke",
-      "Bardiya",
-      "Dang",
-      "Gulmi",
-      "Kapilbastu",
-      "Nawalparasi (West)",
-      "Palpa",
-      "Pyuthan",
-      "Rolpa",
-      "Rukum (East)",
-      "Rupandehi",
-    ],
-  },
-  {
-    id: "6",
-    label: "Karnali",
-    color: "#38A169",
-    districts: [
-      "Dailekh",
-      "Dolpa",
-      "Humla",
-      "Jajarkot",
-      "Jumla",
-      "Kalikot",
-      "Mugu",
-      "Rukum (West)",
-      "Salyan",
-      "Surkhet",
-    ],
-  },
-  {
-    id: "7",
-    label: "Sudurpashchim",
-    color: "#D53F8C",
-    districts: [
-      "Achham",
-      "Baitadi",
-      "Bajhang",
-      "Bajura",
-      "Dadeldhura",
-      "Darchula",
-      "Doti",
-      "Kailali",
-      "Kanchanpur",
-    ],
-  },
-];
 
 export interface SidebarItem {
   label: string;
@@ -311,6 +184,10 @@ const SIDEBAR_THEME: Record<string, { active: string; border: string }> = {
   },
 };
 
+const districtKey = (provinceId: string, district: string) =>
+  `${provinceId}:${district}`;
+
+
 const SHARED = {
   toggleBtn:
     "absolute -right-3 top-6 bg-[#0099FF] text-white p-1 rounded-full shadow-md hover:bg-blue-400 focus:outline-none focus:ring-2 focus:ring-white transition",
@@ -336,9 +213,29 @@ export default function Sidebar({
   const [isCollapsed, setIsCollapsed] = useState<boolean>(collapsed);
   const [isPending, startTransition] = useTransition();
 
-  const [mapExpanded, setMapExpanded] = useState<boolean>(false);
-  const [expandedProvince, setExpandedProvince] = useState<string | null>(null);
-  const [expandedDistrict, setExpandedDistrict] = useState<string | null>(null);
+  // Manual toggle overrides — null means "derive from selection"
+  const [mapExpandedOverride, setMapExpandedOverride] = useState<boolean | null>(null);
+  const [expandedProvinceOverride, setExpandedProvinceOverride] = useState<string | null | undefined>(undefined);
+  const [expandedDistrictOverride, setExpandedDistrictOverride] = useState<string | null | undefined>(undefined);
+
+  // Derived expansion state from context selection (no useEffect needed)
+  const mapExpanded = useMemo(() => {
+    if (mapExpandedOverride !== null) return mapExpandedOverride;
+    return selection.level !== "country";
+  }, [mapExpandedOverride, selection.level]);
+
+  const expandedProvince = useMemo(() => {
+    if (expandedProvinceOverride !== undefined) return expandedProvinceOverride;
+    return selection.provinceId ?? null;
+  }, [expandedProvinceOverride, selection.provinceId]);
+
+  const expandedDistrict = useMemo(() => {
+    if (expandedDistrictOverride !== undefined) return expandedDistrictOverride;
+    if (selection.provinceId && selection.districtName) {
+      return districtKey(selection.provinceId, selection.districtName);
+    }
+    return null;
+  }, [expandedDistrictOverride, selection.provinceId, selection.districtName]);
 
   const theme = useMemo(
     () => SIDEBAR_THEME[variant] ?? SIDEBAR_THEME.central,
@@ -353,24 +250,10 @@ export default function Sidebar({
   };
 
   const handleProvinceClick = (provinceId: string, provinceLabel: string) => {
-    setExpandedProvince((cur) => (cur === provinceId ? null : provinceId));
+    setExpandedProvinceOverride((cur) => (cur === provinceId ? null : provinceId));
+    setExpandedDistrictOverride(undefined); // reset district when province changes
     selectProvince(provinceId, provinceLabel);
     goToNationalMap();
-  };
-
-  const districtKey = (provinceId: string, district: string) =>
-    `${provinceId}:${district}`;
-
-  const normalizeDistrictKey = (dist: string) =>
-    dist.toLowerCase().replace(/[^a-z0-9]+/g, "");
-
-  const getLocalBodies = (district: string) => {
-    const key = normalizeDistrictKey(district);
-    return (
-      (districtLocalBodies as Record<string, { name: string; type: string }[]>)[
-        key
-      ] || []
-    );
   };
 
   const handleLocalBodyClick = (
@@ -380,8 +263,8 @@ export default function Sidebar({
     localBodyName: string,
     localBodyType: string,
   ) => {
-    setExpandedProvince(provinceId);
-    setExpandedDistrict(districtKey(provinceId, district));
+    setExpandedProvinceOverride(provinceId);
+    setExpandedDistrictOverride(districtKey(provinceId, district));
     selectLocalBody(
       provinceId,
       provinceLabel,
@@ -397,7 +280,7 @@ export default function Sidebar({
     provinceLabel: string,
     district: string,
   ) => {
-    setExpandedDistrict((cur) =>
+    setExpandedDistrictOverride((cur) =>
       cur === districtKey(provinceId, district)
         ? null
         : districtKey(provinceId, district),
@@ -406,8 +289,7 @@ export default function Sidebar({
     goToNationalMap();
   };
 
-  const handleNavItemClick = (itemHref: string, isMapItem: boolean) => {
-    if (isMapItem) setMapExpanded((v) => !v);
+  const handleNavItemClick = (itemHref: string) => {
     go(itemHref);
   };
 
@@ -432,10 +314,10 @@ export default function Sidebar({
   };
 
   return (
-        <aside
+    <aside
       aria-label="Portal Navigation Sidebar"
       className={`h-dvh sticky top-0 flex flex-col justify-between overflow-hidden p-4 bg-[#0B3067] text-white ${theme.border} ${isCollapsed ? "w-20" : "w-64"} transition-all duration-300 select-none`}
-        >
+    >
       <button
         onClick={() => setIsCollapsed((prev) => !prev)}
         aria-label={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
@@ -497,7 +379,11 @@ export default function Sidebar({
         <div className="flex items-center gap-3 px-2 py-1">
           <div className="w-9 h-9 rounded-full bg-white/20 border border-white/30 flex items-center justify-center text-sm font-bold text-white shrink-0 overflow-hidden">
             {userInfo.avatarUrl ? (
-              <Avatar name={userInfo.name} image={userInfo.avatarUrl} size="sm" />
+              <Avatar
+                name={userInfo.name}
+                image={userInfo.avatarUrl}
+                size="sm"
+              />
             ) : (
               userInfo.name.charAt(0).toUpperCase()
             )}
@@ -529,7 +415,7 @@ export default function Sidebar({
                   type="button"
                   aria-current={active ? "page" : undefined}
                   title={isCollapsed ? item.label : undefined}
-                  onClick={() => handleNavItemClick(item.href, isMapItem)}
+                  onClick={() => handleNavItemClick(item.href)}
                   className={`${SHARED.navBtnBase} ${active ? theme.active : "text-white/80 hover:bg-white/10 hover:text-white"}`}
                 >
                   {item.icon && (
@@ -539,19 +425,36 @@ export default function Sidebar({
                     <span className="flex-1 truncate">{item.label}</span>
                   )}
                   {isMapItem && !isCollapsed && (
-                    <svg
-                      width="14"
-                      height="14"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className={`shrink-0 transition-transform duration-200 ${mapExpanded ? "rotate-90" : ""}`}
+                    <span
+                      role="button"
+                      tabIndex={0}
+                      aria-label="Toggle map dropdown"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setMapExpandedOverride((v) => !(v ?? selection.level !== "country"));
+                      }}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter" || e.key === " ") {
+                          e.stopPropagation();
+                          setMapExpandedOverride((v) => !(v ?? selection.level !== "country"));
+                        }
+                      }}
+                      className="p-1 rounded hover:bg-white/20 transition-colors shrink-0 flex items-center justify-center"
                     >
-                      <path d="M9 18l6-6-6-6" />
-                    </svg>
+                      <svg
+                        width="14"
+                        height="14"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        className={`transition-transform duration-200 ${mapExpanded ? "rotate-90" : ""}`}
+                      >
+                        <path d="M9 18l6-6-6-6" />
+                      </svg>
+                    </span>
                   )}
                 </button>
 

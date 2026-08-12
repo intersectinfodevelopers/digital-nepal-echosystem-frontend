@@ -2,7 +2,7 @@
 // 
 //  Scans the public/geojson directory and regenerates public/manifest.json
 //  so the app knows which province and district GeoJSON files are available.
- 
+
 
 /* eslint-disable @typescript-eslint/no-require-imports */
 const fs = require('fs');
