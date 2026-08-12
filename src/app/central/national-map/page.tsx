@@ -1,8 +1,6 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { useEffect } from "react";
-import { useMapSelection } from "@/contexts/MapSelectionContext";
 
 const LeafletMap = dynamic(() => import("@/components/Map/LeafletMap"), {
   ssr: false,
@@ -16,16 +14,6 @@ const LeafletMap = dynamic(() => import("@/components/Map/LeafletMap"), {
 });
 
 export default function NationalMapPage() {
-  const { resetToCountry } = useMapSelection();
-
-  useEffect(() => {
-    try {
-      resetToCountry();
-    } catch {
-      // ignore
-    }
-  }, [resetToCountry]);
-
   return (
     <main className="h-full w-full">
       <LeafletMap center={[28.3949, 84.124]} zoom={7} height="100%" />
