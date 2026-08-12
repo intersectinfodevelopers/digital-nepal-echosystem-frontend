@@ -1,12 +1,35 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import citizens from "../../../../data/citizens.json";
+import districts from "../../../../data/district.json";
 import editApprovals from "../../../../data/edit-approvals.json";
 import grievances from "../../../../data/grievances.json";
+import municipalities from "../../../../data/municipalities.json";
+import provinces from "../../../../data/provinces.json";
 import syncBatches from "../../../../data/sync-batches.json";
 import wards from "../../../../data/wards.json";
 import Link from "next/link";
-import { useSyncExternalStore } from "react";
+import { useEffect, useMemo, useSyncExternalStore } from "react";
+import { useMapSelection } from "@/contexts/MapSelectionContext";
+import { getCurrentSession } from "@/services/auth.service";
+
+const LeafletMap = dynamic(() => import("@/components/Map/LeafletMap"), {
+  ssr: false,
+  loading: () => (
+    <div className="flex h-full w-full items-center justify-center rounded-2xl border border-gray-200 bg-[#FAFAFA]">
+      <p className="text-sm font-semibold text-gray-500">
+        Loading GIS Engine...
+      </p>
+    </div>
+  ),
+});
+
+function geoJsonLocalBodyName(name: string) {
+  return name
+    .replace(/\s+(rural municipality|municipality|metropolitan city|sub-metropolitan city)$/i, "")
+    .trim();
+}
 
 type Approval = {
   id: string;
@@ -98,6 +121,44 @@ function subscribeToApprovalStorage(onStoreChange: () => void) {
 }
 
 export default function MunicipalityDashboardPage() {
+  const { selectLocalBody } = useMapSelection();
+  const session = getCurrentSession();
+
+  const mapDetails = useMemo(() => {
+    const municipality = municipalities.find(
+      (item) => item.id === session?.municipality_id,
+    );
+    const district = districts.find(
+      (item) => item.id === municipality?.district_id,
+    );
+    const province = provinces.find(
+      (item) => item.id === district?.province_id,
+    );
+
+    if (!municipality || !district || !province) return null;
+
+    return {
+      provinceId: province.id.replace(/^prov-/, ""),
+      provinceLabel: province.name_en,
+      districtName: district.name_en,
+      municipalityName: municipality.name_en,
+      geoJsonName: geoJsonLocalBodyName(municipality.name_en),
+      municipalityType: municipality.type,
+    };
+  }, [session?.municipality_id]);
+
+  useEffect(() => {
+    if (!mapDetails) return;
+
+    selectLocalBody(
+      mapDetails.provinceId,
+      mapDetails.provinceLabel,
+      mapDetails.districtName,
+      mapDetails.geoJsonName,
+      mapDetails.municipalityType,
+    );
+  }, [mapDetails, selectLocalBody]);
+
   const approvals = useSyncExternalStore(
     subscribeToApprovalStorage,
     getStoredApprovals,
@@ -331,6 +392,23 @@ export default function MunicipalityDashboardPage() {
           </div>
         ))}
       </div>
+
+      {mapDetails && (
+        <section className="mt-6 rounded-lg border border-gray-200 bg-white p-5">
+          <div className="mb-4">
+            <h2 className="text-lg font-semibold text-gray-900">
+              {mapDetails.municipalityName} Map
+            </h2>
+            <p className="text-sm text-gray-600">
+              Administrative boundary of {mapDetails.municipalityName}.
+            </p>
+          </div>
+
+          <div className="h-[500px] w-full overflow-hidden rounded-xl">
+            <LeafletMap center={[27.7, 85.3]} zoom={10} height="100%" />
+          </div>
+        </section>
+      )}
 
       <section className="mt-6 rounded-lg border border-gray-200 bg-white p-5">
         <h2 className="text-lg font-semibold text-gray-900">Approval Analytics</h2>
