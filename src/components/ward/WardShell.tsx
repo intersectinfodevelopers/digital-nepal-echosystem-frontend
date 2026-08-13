@@ -30,7 +30,6 @@ const VIEW_ICONS: Record<WardViewId, ReactNode> = {
   profile: <PersonOutlined sx={{ fontSize: 20 }} />,
   approvals: <ChecklistOutlined sx={{ fontSize: 20 }} />,
   idcards: <BadgeOutlined sx={{ fontSize: 20 }} />,
-  "national-map": <MapOutlined sx={{ fontSize: 20 }} />,
 };
 
 const VIEW_PATHS: Record<WardViewId, string> = {
