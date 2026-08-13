@@ -1,7 +1,28 @@
 import type { WardNavItem, WardNavSection, WardViewId } from "@/types/navigation";
 
-export type { WardNavItem, WardNavSection, WardViewId };
+export type WardViewId =
+  | "dashboard"
+  | "citizens"
+  | "map"
+  | "services"
+  | "profile"
+  | "approvals"
+  | "idcards"
+  | "national-map";
 
+export type WardNavSection =
+  | { type: "group"; label: string; items: WardNavItem[] }
+  | { type: "divider" };
+
+export interface WardNavItem {
+  id: WardViewId;
+  label: string;
+  icon?: ReactNode;
+  /** Marker that the sidebar should render a hierarchical province → district → local body dropdown for this item. */
+  hasMapTree?: boolean;
+  /** Optional target href to navigate to when a node inside the dropdown is selected. Defaults to "/central/national-map". */
+  mapHref?: string;
+}
 
 export const WARD_NAV: WardNavSection[] = [
   {
@@ -10,7 +31,12 @@ export const WARD_NAV: WardNavSection[] = [
     items: [
       { id: "dashboard", label: "Dashboard" },
       { id: "citizens", label: "Citizens" },
-      { id: "map", label: "Map" },
+      {
+        id: "national-map",
+        label: "National Map",
+        hasMapTree: true,
+        mapHref: "/central/national-map",
+      },
       { id: "services", label: "Services" },
       { id: "profile", label: "Profile" },
     ],
@@ -34,4 +60,5 @@ export const WARD_VIEW_TITLES: Record<WardViewId, string> = {
   profile: "Profile",
   approvals: "Approval Queue",
   idcards: "ID Card Requests",
+  "national-map": "National Map",
 };
