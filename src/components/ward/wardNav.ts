@@ -1,23 +1,7 @@
-import type { ReactNode } from "react";
+import type { WardNavItem, WardNavSection, WardViewId } from "@/types/navigation";
 
-export type WardViewId =
-  | "dashboard"
-  | "citizens"
-  | "map"
-  | "services"
-  | "profile"
-  | "approvals"
-  | "idcards";
+export type { WardNavItem, WardNavSection, WardViewId };
 
-export type WardNavSection =
-  | { type: "group"; label: string; items: WardNavItem[] }
-  | { type: "divider" };
-
-export interface WardNavItem {
-  id: WardViewId;
-  label: string;
-  icon?: ReactNode;
-}
 
 export const WARD_NAV: WardNavSection[] = [
   {

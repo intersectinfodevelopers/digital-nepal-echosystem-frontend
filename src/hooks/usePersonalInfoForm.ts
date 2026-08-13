@@ -1,22 +1,7 @@
 'use client';
 
 import { useCallback, useState } from 'react';
-import type { RegistrationFormData } from '@/types/citizen';
-
-export type PersonalInfoData = Pick<
-  RegistrationFormData,
-  | 'name_np'
-  | 'name_en'
-  | 'dob'
-  | 'sex'
-  | 'blood_group'
-  | 'religion'
-  | 'ethnicity'
-  | 'mother_tongue'
-  | 'tole'
-  | 'digital_literacy'
-  | 'has_smartphone'
->;
+import type { PersonalInfoData } from '@/types/registration';
 
 export function createDefaultPersonalInfoData(): PersonalInfoData {
   return {

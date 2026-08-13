@@ -7,25 +7,7 @@ import {
   UploadStatus,
 } from "@/constants";
 
-export interface EmploymentProofState {
-  status: UploadStatus;
-  name: string | null;
-  type: string | null;
-  size: number | null;
-  previewUrl: string | null;
-  progress: number;
-  error: string | null;
-}
-
-export const EMPTY_EMPLOYMENT_PROOF: EmploymentProofState = {
-  status: UploadStatus.EMPTY,
-  name: null,
-  type: null,
-  size: null,
-  previewUrl: null,
-  progress: 0,
-  error: null,
-};
+import type { EmploymentProofState, EmploymentUpload } from "@/types/employment";
 
 const MAX_SIZE = 5 * 1024 * 1024;
 
@@ -39,19 +21,15 @@ function revokeUrl(url: string | null) {
   }
 }
 
-export interface EmploymentUpload {
-  state: EmploymentProofState;
-  isDragOver: boolean;
-  browseRef: React.RefObject<HTMLInputElement | null>;
-  cameraRef: React.RefObject<HTMLInputElement | null>;
-  onFile: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onOpenBrowse: () => void;
-  onOpenCamera: () => void;
-  onDragOver: (e: React.DragEvent) => void;
-  onDragLeave: (e: React.DragEvent) => void;
-  onDrop: (e: React.DragEvent) => void;
-  remove: () => void;
-}
+export const EMPTY_EMPLOYMENT_PROOF: EmploymentProofState = {
+  status: UploadStatus.EMPTY,
+  name: null,
+  type: null,
+  size: null,
+  previewUrl: null,
+  progress: 0,
+  error: null,
+};
 
 export function useEmploymentUpload(
   value?: EmploymentProofState,

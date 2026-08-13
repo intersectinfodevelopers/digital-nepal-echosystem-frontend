@@ -6,7 +6,6 @@ import { registerCitizen } from "@/services/citizenService";
 import { PortalStepper } from "@/components/Stepper";
 import { SubmitStep } from "@/components/ui";
 
-
 export default function WardRegisterCitizenPage() {
   const { step, formData, updateField, nextStep, prevStep, resetForm } =
     useRegistrationForm();
@@ -262,3 +261,4 @@ export default function WardRegisterCitizenPage() {
       </div>
   );
 }
+

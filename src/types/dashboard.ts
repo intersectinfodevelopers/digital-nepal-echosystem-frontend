@@ -1,4 +1,4 @@
-export type StatTone = "blue" | "orange" | "red";
+export type StatTone = "blue" | "orange" | "red" | "green";
 
 export interface StatItem {
   label: string;

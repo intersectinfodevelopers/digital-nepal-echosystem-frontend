@@ -3,7 +3,9 @@
 import { useEffect, useRef, useState } from "react";
 import type { ReactNode } from "react";
 
-export type StatTone = "blue" | "orange" | "red" | "green";
+import type { StatTone } from "@/types/dashboard";
+
+export type { StatTone };
 
 const toneClasses: Record<StatTone, { value: string; badge: string }> = {
   blue: { value: "text-[#0A3E9E]", badge: "bg-[#E8EFFC] text-[#0A3E9E]" },

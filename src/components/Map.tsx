@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
+import type { MapMarker, MapProps } from "@/types/map";
 
 const defaultIcon = L.icon({
   iconUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
@@ -27,25 +28,7 @@ const placeIcon = L.icon({
   className: "place-marker",
 });
 
-export interface MapMarker {
-  lat: number;
-  lng: number;
-  label?: string;
-  description?: string;
-  totalCitizens?: number;
-  totalMunicipalities?: number;
-  topEmploymentCategory?: string;
-  type?: "selected" | "place";
-}
-
-interface MapProps {
-  center?: [number, number];
-  zoom?: number;
-  markers?: MapMarker[];
-  height?: string;
-  showResetControl?: boolean;
-  onClick?: (lat: number, lng: number) => void;
-}
+export type { MapMarker };
 
 function createPopup(marker: MapMarker) {
   const popup = document.createElement("div");

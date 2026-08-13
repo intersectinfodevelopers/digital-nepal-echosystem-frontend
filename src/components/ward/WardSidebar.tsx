@@ -25,15 +25,9 @@ const ICONS: Record<string, ReactNode> = {
   idcards: <BadgeOutlined sx={{ fontSize: 20 }} />,
 };
 
-export interface AdminNavItem {
-  id: string;
-  label: string;
-  icon?: ReactNode;
-}
+import type { AdminNavItem, AdminNavSection } from "@/types/navigation";
 
-export type AdminNavSection =
-  | { type: "group"; label: string; items: AdminNavItem[] }
-  | { type: "divider" };
+export type { AdminNavItem, AdminNavSection };
 
 export function getNavItems(sections: AdminNavSection[]): AdminNavItem[] {
   return sections.flatMap((section) => (section.type === "group" ? section.items : []));

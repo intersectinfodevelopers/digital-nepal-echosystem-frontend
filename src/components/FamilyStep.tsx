@@ -21,11 +21,11 @@ import {
 } from "@mui/icons-material";
 import { PortalSidebar } from "@/components/Sidebar";
 import { PortalStepper } from "@/components/Stepper";
-import {
-  useFamilyForm,
-  type FamilyMemberDraft,
-  type FamilyMemberField,
-} from "@/hooks/useFamilyForm";
+import { useFamilyForm } from "@/hooks/useFamilyForm";
+import type {
+  FamilyMemberDraft,
+  FamilyMemberField,
+} from "@/types/registration";
 import {
   RELATIONSHIP_LABELS,
   RELATIONSHIP_OPTIONS,

@@ -21,7 +21,7 @@ import ServicesTab from "./ServicesTab";
 import ProfileTab from "./ProfileTab";
 import ApprovalQueueTab from "./ApprovalQueueTab";
 import IdCardRequestsTab from "./IdCardRequestsTab";
-import type { WardViewId } from "./wardNav";
+import type { WardViewId } from "@/types/navigation";
 import { WARD_VIEW_TITLES } from "./wardNav";
 import { getCurrentSession } from "@/services/auth.service";
 import { getNotifications } from "@/services/mockWardAdmin";

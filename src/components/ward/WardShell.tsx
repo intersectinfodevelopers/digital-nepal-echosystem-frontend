@@ -18,7 +18,7 @@ import { getNotifications } from "@/services/mockWardAdmin";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import WardSidebar from "./WardSidebar";
 import WardTopbar from "./WardTopbar";
-import type { WardViewId } from "./wardNav";
+import type { WardViewId } from "@/types/navigation";
 import { WARD_VIEW_TITLES } from "./wardNav";
 
 const VIEW_ICONS: Record<WardViewId, ReactNode> = {
