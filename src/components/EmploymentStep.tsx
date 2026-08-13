@@ -30,12 +30,12 @@ import {
 import { PortalSidebar } from "@/components/Sidebar";
 import { PortalStepper } from "@/components/Stepper";
 import { EMPLOYMENT_STATUS_OPTIONS, UploadStatus } from "@/constants";
-import {
-  useEmploymentForm,
-  type PanStatus,
-  type SaveStatus,
-} from "@/hooks/useEmploymentForm";
-import type { EmploymentUpload } from "@/hooks/useEmploymentUpload";
+import { useEmploymentForm } from "@/hooks/useEmploymentForm";
+import type {
+  EmploymentUpload,
+  PanStatus,
+  SaveStatus,
+} from "@/types/employment";
 
 function FieldLabel({
   htmlFor,

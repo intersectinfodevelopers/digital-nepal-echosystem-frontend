@@ -16,6 +16,7 @@ import auditLogData from "../../../../../data/audit-log.json";
 import editApprovalsData from "../../../../../data/edit-approvals.json";
 import type { Citizen } from "@/types/citizen";
 import type { AuditLog } from "@/types/audit-log";
+import type { ApprovalEntry, FamilyRecord, IDCard } from "@/types/ward";
 
 import { Tabs, Modal } from "@/components/ui";
 import { useEligibility } from "@/hooks/useEligibility";
@@ -31,35 +32,6 @@ import {
   VISA_TYPE_LABELS, LAND_TYPE_LABELS, IRRIGATION_TYPE_LABELS,
   REMITTANCE_BAND_LABELS, GOV_GRADE_LABELS, COUNTRY_OPTIONS,
 } from "@/constants";
-
-type IDCard = {
-  id: string;
-  citizen_id: string;
-  card_type: string;
-  status: string;
-  qr_hash: string;
-  issued_at: string | null;
-  expires_at: string | null;
-  collected_at: string | null;
-};
-
-type FamilyRecord = {
-  citizen_id: string;
-  father: { name_np: string; name_en: string; citizenship_number: string } | null;
-  mother: { name_np: string; name_en: string; citizenship_number: string } | null;
-  spouse: { name_np: string; name_en: string; citizenship_number: string } | null;
-  children: { name_np: string; name_en: string; citizenship_number: string }[];
-};
-
-type ApprovalEntry = {
-  id: string;
-  citizen_id: string;
-  submitter_id: string;
-  status: string;
-  old_value_json: Record<string, unknown>;
-  new_value_json: Record<string, unknown>;
-  submitted_at: string;
-};
 
 const LOCAL_STORAGE_KEY = "edit-approvals";
 const initialApprovals = editApprovalsData as unknown as ApprovalEntry[];

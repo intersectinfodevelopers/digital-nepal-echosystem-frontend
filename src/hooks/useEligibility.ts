@@ -1,15 +1,11 @@
 import { useMemo } from "react";
 import type { Citizen } from "@/types/citizen";
-import type { EligibilityRule } from "@/types/eligibility-rule";
+import type {
+  ConditionExpression,
+  EligibilityRule,
+} from "@/types/eligibility-rule";
 
 import eligibilityRulesData from "../../data/eligibility-rules.json";
-
-export type ConditionExpression = {
-  field: string;
-  operator: string;
-  value: unknown;
-  and?: ConditionExpression;
-};
 
 function calculateAge(dob: string): number {
   const birth = new Date(dob);

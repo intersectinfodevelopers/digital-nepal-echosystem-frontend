@@ -21,10 +21,8 @@ import {
   DocumentSide,
   UploadStatus,
 } from "@/constants";
-import {
-  useDocumentUpload,
-  type DocumentUpload,
-} from "@/hooks/useDocumentUpload";
+import { useDocumentUpload } from "@/hooks/useDocumentUpload";
+import type { DocumentUpload } from "@/types/document";
 
 const GUIDELINES = [
   "Avoid glare and shadows on the document.",

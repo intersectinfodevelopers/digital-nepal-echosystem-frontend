@@ -9,35 +9,13 @@ import React, {
   useMemo,
 } from "react";
 
-export type MapLevel = "country" | "province" | "district" | "localBody";
+import type {
+  MapLevel,
+  MapSelection,
+  MapSelectionContextType,
+} from "@/types/map";
 
-export interface MapSelection {
-  level: MapLevel;
-  provinceId: string | null;
-  provinceLabel: string | null;
-  districtName: string | null;
-  localBodyName: string | null;
-  localBodyType: string | null;
-}
-
-interface MapSelectionContextType {
-  selection: MapSelection;
-  setSelection: React.Dispatch<React.SetStateAction<MapSelection>>;
-  selectProvince: (id: string, label: string) => void;
-  selectDistrict: (
-    provinceId: string,
-    provinceLabel: string,
-    districtName: string,
-  ) => void;
-  selectLocalBody: (
-    provinceId: string,
-    provinceLabel: string,
-    districtName: string,
-    localBodyName: string,
-    localBodyType?: string,
-  ) => void;
-  resetToCountry: () => void;
-}
+export type { MapLevel, MapSelection };
 
 const MapSelectionContext = createContext<MapSelectionContextType | undefined>(
   undefined,

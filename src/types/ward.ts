@@ -105,3 +105,48 @@ export interface WardProfile {
   role: string;
   photo: string | null;
 }
+
+export interface IDCard {
+  id: string;
+  citizen_id: string;
+  card_type: string;
+  status: string;
+  qr_hash: string;
+  issued_at: string | null;
+  expires_at: string | null;
+  collected_at: string | null;
+}
+
+export interface FamilyRecord {
+  citizen_id: string;
+  father: {
+    name_np: string;
+    name_en: string;
+    citizenship_number: string;
+  } | null;
+  mother: {
+    name_np: string;
+    name_en: string;
+    citizenship_number: string;
+  } | null;
+  spouse: {
+    name_np: string;
+    name_en: string;
+    citizenship_number: string;
+  } | null;
+  children: {
+    name_np: string;
+    name_en: string;
+    citizenship_number: string;
+  }[];
+}
+
+export interface ApprovalEntry {
+  id: string;
+  citizen_id: string;
+  submitter_id: string;
+  status: string;
+  old_value_json: Record<string, unknown>;
+  new_value_json: Record<string, unknown>;
+  submitted_at: string;
+}

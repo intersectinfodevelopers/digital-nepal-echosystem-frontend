@@ -7,53 +7,12 @@ import {
   PAN_FORMAT,
   UploadStatus,
 } from "@/constants";
+
 import {
-  EMPTY_EMPLOYMENT_PROOF,
-  useEmploymentUpload,
-  type EmploymentProofState,
-} from "./useEmploymentUpload";
-
-export type PanStatus =
-  | "idle"
-  | "loading"
-  | "verified"
-  | "invalid"
-  | "unavailable";
-
-export type SaveStatus = "idle" | "saving" | "saved";
-
-export interface EmploymentErrors {
-  employmentStatus?: string;
-  monthlyIncome?: string;
-  employerName?: string;
-  panNumber?: string;
-  proof?: string;
-}
-
-export interface EmploymentFormData {
-  employmentStatus: string;
-  monthlyIncome: string;
-  employerName: string;
-  panNumber: string;
-  panStatus: PanStatus;
-  proof: EmploymentProofState;
-}
-
-interface StoredProof {
-  name: string;
-  type: string;
-  size: number;
-  status: UploadStatus;
-}
-
-interface StoredDraft {
-  employmentStatus: string;
-  monthlyIncome: string;
-  employerName: string;
-  panNumber: string;
-  panStatus: PanStatus;
-  proof: StoredProof | null;
-}
+EMPTY_EMPLOYMENT_PROOF,
+useEmploymentUpload
+} from "./useEmploymentUpload"
+import type {EmploymentFormData, PanStatus, StoredDraft, EmploymentErrors, SaveStatus} from "@/types/employment"
 
 const STORAGE_KEY = "prapti_employment_draft_v1";
 const PAN_SERVICE_UNAVAILABLE_VALUES = ["999999999"];
@@ -67,6 +26,7 @@ const PAN_STATUSES: PanStatus[] = [
   "invalid",
   "unavailable",
 ];
+
 
 export function createDefaultEmploymentData(): EmploymentFormData {
   return {
