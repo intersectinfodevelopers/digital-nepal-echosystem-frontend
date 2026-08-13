@@ -36,12 +36,11 @@ const VIEW_PATHS: Record<WardViewId, string> = {
   dashboard: "/ward/dashboard",
   citizens: "/ward/citizens",
   map: "/ward/dashboard",
-  "national-map": "/ward/dashboard",
+  "national-map": "/central/national-map",
   services: "/ward/dashboard",
   profile: "/ward/dashboard",
   approvals: "/ward/dashboard",
   idcards: "/ward/dashboard",
-  "national-map": "/central/national-map",
 };
 
 function getActiveView(pathname: string): WardViewId {
@@ -107,7 +106,9 @@ export default function WardShell({ children }: { children: ReactNode }) {
           onClose={closeMobileDrawer}
         />
       </Drawer>
-      <div className={`flex min-w-0 flex-1 flex-col ${sidebarOpen ? "lg:pl-65" : "lg:pl-18"}`}>
+      <div
+        className={`flex min-w-0 flex-1 flex-col ${sidebarOpen ? "lg:pl-65" : "lg:pl-18"}`}
+      >
         <WardTopbar
           sectionLabel={`Ward ${wardNumber}`}
           subtitle={WARD_VIEW_TITLES[activeView]}
