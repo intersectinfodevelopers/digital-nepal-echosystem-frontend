@@ -17,6 +17,7 @@ import WardTopbar from "./WardTopbar";
 import DashboardTab from "./DashboardTab";
 import CitizensTab from "./CitizensTab";
 import MapTab from "./MapTab";
+import NationalMapTab from "./NationalMapTab";
 import ServicesTab from "./ServicesTab";
 import ProfileTab from "./ProfileTab";
 import ApprovalQueueTab from "./ApprovalQueueTab";
@@ -30,6 +31,7 @@ const VIEW_ICONS: Record<WardViewId, ReactNode> = {
   dashboard: <HomeOutlined sx={{ fontSize: 20 }} />,
   citizens: <GroupOutlined sx={{ fontSize: 20 }} />,
   map: <MapOutlined sx={{ fontSize: 20 }} />,
+  "national-map": <MapOutlined sx={{ fontSize: 20 }} />,
   services: <GridViewOutlined sx={{ fontSize: 20 }} />,
   profile: <PersonOutlined sx={{ fontSize: 20 }} />,
   approvals: <ChecklistOutlined sx={{ fontSize: 20 }} />,
@@ -48,6 +50,8 @@ export default function WardDashboardShell({ wardId }: { wardId: string }) {
         return <CitizensTab wardId={wardId} />;
       case "map":
         return <MapTab wardId={wardId} />;
+      case "national-map":
+        return <NationalMapTab wardId={wardId} />;
       case "services":
         return <ServicesTab wardId={wardId} />;
       case "profile":

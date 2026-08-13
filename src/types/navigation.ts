@@ -4,6 +4,7 @@ export type WardViewId =
   | "dashboard"
   | "citizens"
   | "map"
+  | "national-map"
   | "services"
   | "profile"
   | "approvals"

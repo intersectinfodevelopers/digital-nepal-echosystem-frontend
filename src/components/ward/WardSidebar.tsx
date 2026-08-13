@@ -19,6 +19,7 @@ const ICONS: Record<string, ReactNode> = {
   dashboard: <DashboardOutlined sx={{ fontSize: 20 }} />,
   citizens: <GroupOutlined sx={{ fontSize: 20 }} />,
   map: <MapOutlined sx={{ fontSize: 20 }} />,
+  "national-map": <MapOutlined sx={{ fontSize: 20 }} />,
   services: <GridViewOutlined sx={{ fontSize: 20 }} />,
   profile: <PersonOutlined sx={{ fontSize: 20 }} />,
   approvals: <ChecklistOutlined sx={{ fontSize: 20 }} />,
