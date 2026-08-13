@@ -9,6 +9,7 @@ import type { AdminNavSection } from "@/types/navigation";
 import WardTopbar from "@/components/ward/WardTopbar";
 import RouteGuard from "@/components/RouteGuard";
 import { getCurrentSession } from "@/services/auth.service";
+import { MapSelectionProvider } from "@/contexts/MapSelectionContext";
 
 const MUNICIPALITY_NAV: AdminNavSection[] = [
   {
@@ -60,8 +61,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   const activeLabel = getNavItems(MUNICIPALITY_NAV).find((item) => item.id === activeItem)?.label ?? "Dashboard";
 
   return (
-    <RouteGuard requiredRole="LOCAL_BODY_ADMIN">
-      <div className="flex min-h-screen bg-[#f5f7fb]">
+    <MapSelectionProvider>
+      <RouteGuard requiredRole="LOCAL_BODY_ADMIN">
+        <div className="flex min-h-screen bg-[#f5f7fb]">
         <div className="hidden lg:block">
           <div className="fixed inset-y-0 left-0 z-40">
             <WardSidebar
@@ -108,7 +110,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             {children}
           </main>
         </div>
-      </div>
-    </RouteGuard>
+        </div>
+      </RouteGuard>
+    </MapSelectionProvider>
   );
 }

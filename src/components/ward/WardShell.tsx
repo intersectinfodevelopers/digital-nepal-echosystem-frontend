@@ -30,6 +30,7 @@ const VIEW_ICONS: Record<WardViewId, ReactNode> = {
   profile: <PersonOutlined sx={{ fontSize: 20 }} />,
   approvals: <ChecklistOutlined sx={{ fontSize: 20 }} />,
   idcards: <BadgeOutlined sx={{ fontSize: 20 }} />,
+  "national-map": <MapOutlined sx={{ fontSize: 20 }} />,
 };
 
 const VIEW_PATHS: Record<WardViewId, string> = {
@@ -41,6 +42,7 @@ const VIEW_PATHS: Record<WardViewId, string> = {
   profile: "/ward/dashboard",
   approvals: "/ward/dashboard",
   idcards: "/ward/dashboard",
+  "national-map": "/central/national-map",
 };
 
 function getActiveView(pathname: string): WardViewId {
@@ -64,7 +66,8 @@ export default function WardShell({ children }: { children: ReactNode }) {
   const handleNavigate = (id: string) => {
     setMobileOpen(false);
     const view = id as WardViewId;
-    router.push(VIEW_PATHS[view]);
+    const path = VIEW_PATHS[view] ?? id;
+    router.push(path);
   };
 
   const handleToggleDesktopSidebar = () => {

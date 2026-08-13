@@ -607,9 +607,11 @@ export default function LeafletMap({
           }
           className="absolute left-3 top-3 z-[1000] rounded-full bg-white px-3 py-2 text-sm font-medium text-slate-700 shadow-sm ring-1 ring-slate-200 hover:bg-slate-50"
         >
-          {selection.level === "district"
-            ? "Back to province"
-            : "Back to Nepal"}
+          {selection.level === "localBody"
+            ? "Back to district"
+            : selection.level === "district"
+              ? "Back to province"
+              : "Back to Nepal"}
         </button>
       )}
 
