@@ -30,7 +30,6 @@ const ICONS: Record<string, ReactNode> = {
   profile: <PersonOutlined sx={{ fontSize: 20 }} />,
   approvals: <ChecklistOutlined sx={{ fontSize: 20 }} />,
   idcards: <BadgeOutlined sx={{ fontSize: 20 }} />,
-  "national-map": <MapOutlined sx={{ fontSize: 20 }} />,
 };
 
 export interface AdminNavItem {
