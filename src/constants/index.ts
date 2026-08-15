@@ -337,3 +337,49 @@ export const RELATIONSHIP_OPTIONS: Relationship[] = [
   Relationship.CHILD,
   Relationship.OTHER,
 ];
+
+export interface EmploymentStatusOption {
+  value: string;
+  label: string;
+}
+
+export const EMPLOYMENT_STATUS_OPTIONS: EmploymentStatusOption[] = [
+  { value: "full_time_professional", label: "Full-time Professional" },
+  { value: "part_time", label: "Part-time" },
+  { value: "self_employed", label: "Self-employed" },
+  { value: "business_owner", label: "Business Owner" },
+  { value: "freelancer", label: "Freelancer" },
+  { value: "student", label: "Student" },
+  { value: "unemployed", label: "Unemployed" },
+  { value: "retired", label: "Retired" },
+  { value: "other", label: "Other" },
+];
+
+export const EMPLOYMENT_STATUS_LABELS: Record<string, string> =
+  Object.fromEntries(EMPLOYMENT_STATUS_OPTIONS.map((o) => [o.value, o.label]));
+
+export const EMPLOYER_REQUIRED_STATUSES: string[] = [
+  "full_time_professional",
+  "part_time",
+  "self_employed",
+  "business_owner",
+  "freelancer",
+];
+
+export const PAN_FORMAT = /^\d{9}$/;
+
+export interface HouseholdOwnershipOption {
+  value: string;
+  label: string;
+}
+
+export const HOUSEHOLD_OWNERSHIP_OPTIONS: HouseholdOwnershipOption[] = [
+  { value: "owned", label: "Owned" },
+  { value: "rented", label: "Rented" },
+  { value: "government", label: "Government Provided" },
+  { value: "relative", label: "Relative's House" },
+  { value: "other", label: "Other" },
+];
+
+export const HOUSEHOLD_OWNERSHIP_LABELS: Record<string, string> =
+  Object.fromEntries(HOUSEHOLD_OWNERSHIP_OPTIONS.map((o) => [o.value, o.label]));

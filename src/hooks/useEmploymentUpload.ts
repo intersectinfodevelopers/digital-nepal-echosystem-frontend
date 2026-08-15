@@ -6,15 +6,8 @@ import {
   DocumentMimeType,
   UploadStatus,
 } from "@/constants";
-import type { PanelState, DocumentUpload } from "@/types/document";
 
-const EMPTY_PANEL: PanelState = {
-  status: UploadStatus.EMPTY,
-  previewUrl: null,
-  fileName: null,
-  progress: 0,
-  error: null,
-};
+import type { EmploymentProofState, EmploymentUpload } from "@/types/employment";
 
 const MAX_SIZE = 5 * 1024 * 1024;
 
@@ -23,19 +16,51 @@ function revokeUrl(url: string | null) {
     try {
       URL.revokeObjectURL(url);
     } catch {
+      return;
     }
   }
 }
 
-export function useDocumentUpload(): DocumentUpload {
-  const [state, setState] = useState<PanelState>(EMPTY_PANEL);
+export const EMPTY_EMPLOYMENT_PROOF: EmploymentProofState = {
+  status: UploadStatus.EMPTY,
+  name: null,
+  type: null,
+  size: null,
+  previewUrl: null,
+  progress: 0,
+  error: null,
+};
+
+export function useEmploymentUpload(
+  value?: EmploymentProofState,
+  onChange?: (next: EmploymentProofState) => void,
+): EmploymentUpload {
+  const [internal, setInternal] = useState<EmploymentProofState>(
+    value ?? EMPTY_EMPLOYMENT_PROOF,
+  );
+  const state = value ?? internal;
+
+  const setState = useCallback(
+    (next: EmploymentProofState) => {
+      if (onChange) {
+        onChange(next);
+      } else {
+        setInternal(next);
+      }
+    },
+    [onChange],
+  );
+
+  const [isDragOver, setIsDragOver] = useState(false);
   const browseRef = useRef<HTMLInputElement>(null);
+  const cameraRef = useRef<HTMLInputElement>(null);
   const intervalRef = useRef<number | null>(null);
   const urlRef = useRef<string | null>(null);
+  const baseRef = useRef<EmploymentProofState>(EMPTY_EMPLOYMENT_PROOF);
 
   const cleanTimer = useCallback(() => {
     if (intervalRef.current !== null) {
-      clearInterval(intervalRef.current);
+      window.clearInterval(intervalRef.current);
       intervalRef.current = null;
     }
   }, []);
@@ -49,16 +74,17 @@ export function useDocumentUpload(): DocumentUpload {
 
   const beginUpload = useCallback(
     (file: File) => {
-      if (!ACCEPTED_DOCUMENT_TYPES.includes(file.type as DocumentMimeType)) {
+      const type = file.type as DocumentMimeType;
+      if (!ACCEPTED_DOCUMENT_TYPES.includes(type)) {
         setState({
-          ...EMPTY_PANEL,
+          ...EMPTY_EMPLOYMENT_PROOF,
           error: "Unsupported file type. Use JPG, PNG or PDF.",
         });
         return;
       }
       if (file.size > MAX_SIZE) {
         setState({
-          ...EMPTY_PANEL,
+          ...EMPTY_EMPLOYMENT_PROOF,
           error: "File exceeds the 5 MB maximum size.",
         });
         return;
@@ -70,27 +96,34 @@ export function useDocumentUpload(): DocumentUpload {
       urlRef.current = url;
       let progress = 0;
 
-      setState({
+      baseRef.current = {
         status: UploadStatus.UPLOADING,
+        name: file.name,
+        type: file.type,
+        size: file.size,
         previewUrl: url,
-        fileName: file.name,
         progress: 0,
         error: null,
-      });
+      };
+      setState(baseRef.current);
 
       intervalRef.current = window.setInterval(() => {
         progress = Math.min(100, progress + 20 + Math.random() * 20);
-        setState((prev) => ({ ...prev, status: UploadStatus.UPLOADING, progress }));
+        setState({ ...baseRef.current, progress });
         if (progress >= 100) {
           if (intervalRef.current !== null) {
-            clearInterval(intervalRef.current);
+            window.clearInterval(intervalRef.current);
             intervalRef.current = null;
           }
-          setState((prev) => ({ ...prev, status: UploadStatus.VERIFIED, progress: 100 }));
+          setState({
+            ...baseRef.current,
+            status: UploadStatus.VERIFIED,
+            progress: 100,
+          });
         }
       }, 160);
     },
-    [cleanTimer],
+    [cleanTimer, setState],
   );
 
   const onFile = useCallback(
@@ -105,15 +138,18 @@ export function useDocumentUpload(): DocumentUpload {
   const onDragOver = useCallback((e: React.DragEvent) => {
     e.preventDefault();
     e.dataTransfer.dropEffect = "copy";
+    setIsDragOver(true);
   }, []);
 
   const onDragLeave = useCallback((e: React.DragEvent) => {
     e.preventDefault();
+    setIsDragOver(false);
   }, []);
 
   const onDrop = useCallback(
     (e: React.DragEvent) => {
       e.preventDefault();
+      setIsDragOver(false);
       const file = e.dataTransfer.files?.[0];
       if (file) beginUpload(file);
     },
@@ -124,13 +160,28 @@ export function useDocumentUpload(): DocumentUpload {
     browseRef.current?.click();
   }, []);
 
+  const onOpenCamera = useCallback(() => {
+    cameraRef.current?.click();
+  }, []);
+
+  const remove = useCallback(() => {
+    cleanTimer();
+    revokeUrl(urlRef.current);
+    urlRef.current = null;
+    setState(EMPTY_EMPLOYMENT_PROOF);
+  }, [cleanTimer, setState]);
+
   return {
     state,
+    isDragOver,
     browseRef,
+    cameraRef,
     onFile,
     onOpenBrowse,
+    onOpenCamera,
     onDragOver,
     onDragLeave,
     onDrop,
+    remove,
   };
 }

@@ -21,11 +21,11 @@ import {
 } from "@mui/icons-material";
 import { PortalSidebar } from "@/components/Sidebar";
 import { PortalStepper } from "@/components/Stepper";
-import {
-  useFamilyForm,
-  type FamilyMemberDraft,
-  type FamilyMemberField,
-} from "@/hooks/useFamilyForm";
+import { useFamilyForm } from "@/hooks/useFamilyForm";
+import type {
+  FamilyMemberDraft,
+  FamilyMemberField,
+} from "@/types/registration";
 import {
   RELATIONSHIP_LABELS,
   RELATIONSHIP_OPTIONS,
@@ -324,9 +324,8 @@ export function FamilyStep() {
 
             <button
               type="button"
-              disabled
-              title="The Employment step is under development"
-              className="h-12 px-8 rounded-xl bg-[#0A2D6D] text-white font-semibold text-[15px] shadow-[0_8px_20px_rgba(10,45,109,0.3)] opacity-60 cursor-not-allowed flex items-center gap-2"
+              onClick={() => router.push("/portal/employment")}
+              className="h-12 px-8 rounded-xl bg-[#0A2D6D] text-white font-semibold text-[15px] shadow-[0_8px_20px_rgba(10,45,109,0.3)] hover:bg-[#081F4D] transition-all duration-200 active:scale-[0.98] flex items-center gap-2"
             >
               Next
               <ArrowForward className="w-5 h-5" />

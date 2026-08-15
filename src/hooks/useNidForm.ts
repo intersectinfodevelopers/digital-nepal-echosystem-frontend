@@ -1,16 +1,8 @@
 "use client";
 
-import type { RegistrationFormData } from "@/types/citizen";
+import type { NidData } from "@/types/registration";
 
 import { useCallback, useState } from "react";
-
-export type NidData = Pick<RegistrationFormData,
-| 'nid_number'
-| 'nid_verified'
-| 'citizenship_number'
-| 'citizenship_front'
-| 'citizenship_back'
->;
 
 export function createDefaultNidData(): NidData {
   return {

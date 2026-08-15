@@ -1,16 +1,7 @@
 'use client';
 
 import { useCallback, useState } from 'react';
-
-export interface FamilyMemberDraft {
-  id: string;
-  relationship: string;
-  fullName: string;
-  occupation: string;
-  age: string;
-}
-
-export type FamilyMemberField = Exclude<keyof FamilyMemberDraft, 'id'>;
+import type { FamilyMemberDraft, FamilyMemberField } from "@/types/registration";
 
 export function createDefaultFamilyMember(): FamilyMemberDraft {
   return {
