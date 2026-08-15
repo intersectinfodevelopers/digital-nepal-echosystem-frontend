@@ -16,7 +16,12 @@ const LeafletMap = dynamic(() => import("@/components/Map/LeafletMap"), {
 export default function NationalMapPage() {
   return (
     <main className="h-full w-full">
-      <LeafletMap center={[28.3949, 84.124]} zoom={7} height="100%" />
+      <LeafletMap
+        center={[28.3949, 84.124]}
+        zoom={7}
+        height="100%"
+        minimumLevel="country"
+      />
     </main>
   );
 }

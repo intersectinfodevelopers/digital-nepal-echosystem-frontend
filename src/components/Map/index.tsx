@@ -18,6 +18,7 @@ export interface MapProps {
   height?: string;
   showResetControl?: boolean;
   vectorTilesUrl?: string;
+  minimumLevel?: "country" | "province" | "district" | "localBody";
 }
 
 const LeafletMap = dynamic(() => import("./LeafletMap"), {

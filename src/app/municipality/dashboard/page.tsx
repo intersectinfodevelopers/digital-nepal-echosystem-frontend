@@ -405,7 +405,12 @@ export default function MunicipalityDashboardPage() {
           </div>
 
           <div className="h-[500px] w-full overflow-hidden rounded-xl">
-            <LeafletMap center={[27.7, 85.3]} zoom={10} height="100%" />
+            <LeafletMap
+              center={[27.7, 85.3]}
+              zoom={10}
+              height="100%"
+              minimumLevel="localBody"
+            />
           </div>
         </section>
       )}
