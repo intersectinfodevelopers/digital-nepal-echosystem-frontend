@@ -14,11 +14,11 @@ export default function AuthLayout({ children }: AuthLayoutProps) {
     <div className="relative min-h-screen w-full overflow-hidden bg-slate-50 dark:bg-slate-900">
       
       <div
-        className="absolute -top-[40%] left-1/2 -z-10 h-[600px] w-[1000px] -translate-x-1/2 rounded-full bg-blue-500/10 blur-[120px] dark:bg-blue-500/5"
+        className="absolute top-[-40%] left-1/2 -z-10 h-150 w-250 -translate-x-1/2 rounded-full bg-blue-500/10 blur-[120px] dark:bg-blue-500/5"
         aria-hidden="true"
       />
       <div
-        className="absolute -bottom-[20%] left-[10%] -z-10 h-[400px] w-[600px] rounded-full bg-emerald-500/5 blur-[100px] dark:bg-emerald-500/2"
+        className="absolute bottom-[-20%] left-[10%] -z-10 h-100 w-150 rounded-full bg-emerald-500/5 blur-[100px] dark:bg-emerald-500/2"
         aria-hidden="true"
       />
 
