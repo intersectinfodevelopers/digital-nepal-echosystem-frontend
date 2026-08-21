@@ -32,6 +32,12 @@ const PROVINCE_COLORS: Record<string, { fill: string; border: string }> = {
   "7": { fill: "#FCE7F3", border: "#D53F8C" },
 };
 
+const LEVEL_ORDER: Record<SelectionShape["level"], number> = {
+  country: 0,
+  province: 1,
+  district: 2,
+  localBody: 3,
+};
 
 // =====================
 // String / Property Helpers
@@ -41,6 +47,9 @@ const slugify = (v: string) =>
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-+|-+$/g, "");
+
+const provinceFileId = (value: string) =>
+  value.toLowerCase().replace(/^prov-/, "");
 
 const str = (v: unknown) =>
   v === null || v === undefined ? "" : String(v).trim();
@@ -187,7 +196,7 @@ const isSafeGeojsonPath = (raw?: string | null) => {
 const defaultGeoFor = (sel: SelectionShape) => {
   if (sel.level === "country") return NEPAL_PROVINCES;
   if (sel.level === "province" && sel.provinceId)
-    return `/geojson/provinces/prov-${sel.provinceId}.json`;
+    return `/geojson/provinces/prov-${provinceFileId(sel.provinceId)}.json`;
   if (
     (sel.level === "district" || sel.level === "localBody") &&
     sel.districtName
@@ -227,12 +236,13 @@ const resolveGeoJsonUrl = (manifest: any, sel: SelectionShape) => {
   if (!manifest) return defaultGeoFor(sel);
   if (sel.level === "country") return NEPAL_PROVINCES;
   if (sel.level === "province" && sel.provinceId) {
+    const fileId = provinceFileId(sel.provinceId);
     const candidate = (manifest.provinces || []).find((p: string) =>
-      p.includes(`prov-${sel.provinceId}.json`),
+      p.includes(`prov-${fileId}.json`),
     );
     return candidate
       ? `/${candidate.replace(/^\//, "")}`
-      : `/geojson/provinces/prov-${sel.provinceId}.json`;
+      : `/geojson/provinces/prov-${fileId}.json`;
   }
   if (sel.level === "district") {
     const fromManifest = findDistrictManifestEntry(manifest, sel);
@@ -262,6 +272,7 @@ export default function LeafletMap({
   zoom = 7,
   height = "600px",
   vectorTilesUrl,
+  minimumLevel = "country",
 }: MapProps) {
   const { selection, setSelection } = useMapSelection();
   const [geoJsonData, setGeoJsonData] = useState<any>(null);
@@ -572,7 +583,8 @@ export default function LeafletMap({
       style={{ height }}
       className="w-full rounded-2xl overflow-hidden bg-[#FAFAFA] border border-gray-200 shadow-sm relative z-0 flex items-center justify-center"
     >
-      {selection.level !== "country" && (
+      {LEVEL_ORDER[selection.level] >
+        LEVEL_ORDER[minimumLevel as SelectionShape["level"]] && (
         <button
           type="button"
           onClick={() =>
