@@ -14,9 +14,15 @@ import familyData from "../../../../../data/family.json";
 import idCardsData from "../../../../../data/id-cards.json";
 import auditLogData from "../../../../../data/audit-log.json";
 import editApprovalsData from "../../../../../data/edit-approvals.json";
-import type { Citizen } from "@/types/citizen";
+import type {
+  Citizen,
+  RegistrationFormData,
+  EmploymentData,
+  FamilyMember,
+} from "@/types/citizen";
 import type { AuditLog } from "@/types/audit-log";
 import type { ApprovalEntry, FamilyRecord, IDCard } from "@/types/ward";
+import { getCitizenFormData } from "@/services/citizenService";
 
 import { Tabs, Modal } from "@/components/ui";
 import { useEligibility } from "@/hooks/useEligibility";
@@ -42,6 +48,62 @@ const DISABILITY_TYPES_OPTIONS = [
 ];
 
 const SEVERITY_LABELS = ["None", "Mild", "Moderate", "Severe", "Complete"];
+
+/* ------------------------------------------------------------------ */
+/* Builders: map the stored RegistrationFormData into the record       */
+/* shapes the tabs (Family, Employment, …) expect.                     */
+/* ------------------------------------------------------------------ */
+function toMember(
+  m: FamilyMember | null | undefined,
+): { name_np: string; name_en: string; citizenship_number: string } | null {
+  if (!m) return null;
+  return {
+    name_np: m.name_np,
+    name_en: m.name_en,
+    citizenship_number: m.citizenship_number,
+  };
+}
+
+function buildFamilyRecord(profile: RegistrationFormData): FamilyRecord {
+  return {
+    citizen_id: "",
+    father: toMember(profile.father),
+    mother: toMember(profile.mother),
+    spouse: toMember(profile.spouse),
+    children: (profile.children || [])
+      .map(toMember)
+      .filter((c): c is { name_np: string; name_en: string; citizenship_number: string } => c !== null),
+  };
+}
+
+function buildEmploymentRecord(emp: EmploymentData): Record<string, unknown> {
+  const sub_fields: Record<string, unknown> = {};
+  if (emp.unemployed_duration_months)
+    sub_fields.duration_months = emp.unemployed_duration_months;
+  if (emp.unemployed_skills.length) sub_fields.skills = emp.unemployed_skills;
+  if (emp.unemployed_office_registered) sub_fields.office_registered = true;
+  if (emp.farmer_land_area_ropani) sub_fields.land_ropani = emp.farmer_land_area_ropani;
+  if (emp.farmer_land_type) sub_fields.land_type = emp.farmer_land_type;
+  if (emp.farmer_primary_crop) sub_fields.crop = emp.farmer_primary_crop;
+  if (emp.farmer_irrigation_type) sub_fields.irrigation = emp.farmer_irrigation_type;
+  if (emp.farmer_agri_loan) sub_fields.agri_loan = true;
+  if (emp.foreign_country) sub_fields.country = emp.foreign_country;
+  if (emp.foreign_visa_type) sub_fields.visa_type = emp.foreign_visa_type;
+  if (emp.foreign_employer_name) sub_fields.employer_name = emp.foreign_employer_name;
+  if (emp.foreign_departure_date) sub_fields.departure_date = emp.foreign_departure_date;
+  if (emp.foreign_expected_return) sub_fields.expected_return = emp.foreign_expected_return;
+  if (emp.foreign_remittance_band) sub_fields.remittance_band = emp.foreign_remittance_band;
+  if (emp.foreign_doe_registered) sub_fields.doe_registered = true;
+  if (emp.gov_ministry) sub_fields.ministry = emp.gov_ministry;
+  if (emp.gov_grade) sub_fields.grade = emp.gov_grade;
+  if (emp.gov_posting_district) sub_fields.posting_district = emp.gov_posting_district;
+  if (emp.gov_service_entry_year) sub_fields.service_entry_year = emp.gov_service_entry_year;
+  if (emp.student_institution) sub_fields.institution = emp.student_institution;
+  if (emp.student_level) sub_fields.level = emp.student_level;
+  if (emp.student_field_of_study) sub_fields.field_of_study = emp.student_field_of_study;
+  if (emp.student_abroad) sub_fields.study_abroad = true;
+  return { citizen_id: "", category: emp.category, income_band: emp.income_band, sub_fields };
+}
 
 function getApprovals(): ApprovalEntry[] {
   if (typeof window === "undefined") return initialApprovals;
@@ -167,12 +229,18 @@ function IdentityTab({
           <DataRow label="Tole" value={citizen.tole} />
         </div>
         <div>
-          <DataRow label="NID" value={citizen.nid_masked} />
+          <DataRow label="NID" value={(citizen as unknown as Record<string, unknown>).nid_number as string | undefined || citizen.nid_masked} />
           <DataRow label="Citizenship No." value={citizen.citizenship_number} />
           <DataRow label="NID Verified" value={citizen.nid_verified} />
           <DataRow label="Digital Literacy" value={citizen.digital_literacy} />
           <DataRow label="Has Smartphone" value={citizen.has_smartphone} />
         </div>
+      </div>
+      <div className="mt-3 pt-3 border-t border-gray-100 grid grid-cols-2 gap-x-8">
+        <DataRow label="Blood Group" value={BLOOD_GROUP_LABELS[(citizen as unknown as Record<string, unknown>).blood_group as string] || ((citizen as unknown as Record<string, unknown>).blood_group as string | undefined)} />
+        <DataRow label="Religion" value={(citizen as unknown as Record<string, unknown>).religion as string | undefined} />
+        <DataRow label="Ethnicity" value={(citizen as unknown as Record<string, unknown>).ethnicity as string | undefined} />
+        <DataRow label="Mother Tongue" value={(citizen as unknown as Record<string, unknown>).mother_tongue as string | undefined} />
       </div>
       <div className="mt-3 pt-3 border-t border-gray-100 grid grid-cols-2 gap-x-8">
         <DataRow label="Consent Channel" value={CONSENT_CHANNEL_LABELS[citizen.consent_channel] || citizen.consent_channel} />
@@ -1264,37 +1332,19 @@ export default function CitizenDetailPage() {
   const params = useParams<{ id: string }>();
   const idParam = params.id;
 
-  const citizens = citizensData as unknown as Citizen[];
+  const [registered] = useState<Citizen[]>(() => {
+    if (typeof window === "undefined") return [];
+    try {
+      const raw = localStorage.getItem("citizens_registered");
+      return raw ? (JSON.parse(raw) as Citizen[]) : [];
+    } catch {
+      return [];
+    }
+  });
+
+  const citizens = [...registered, ...(citizensData as unknown as Citizen[])];
   const citizen = citizens.find(
     (c) => c.id === idParam || c.nid_masked === idParam,
-  );
-
-  const employmentRec = (employmentData as unknown as Record<string, unknown>[]).find(
-    (e) => e.citizen_id === citizen?.id,
-  ) || null;
-
-  const disabilityRec = (disabilityData as unknown as Record<string, unknown>[]).find(
-    (d) => d.citizen_id === citizen?.id,
-  ) || null;
-
-  const householdRec = (householdsData as unknown as Record<string, unknown>[]).find(
-    (h) => h.head_citizen_id === citizen?.id || h.id === citizen?.household_id,
-  ) || null;
-
-  const educationRec = (educationData as unknown as Record<string, unknown>[]).find(
-    (e) => e.citizen_id === citizen?.id,
-  ) || null;
-
-  const family = (familyData as unknown as FamilyRecord[]).find(
-    (f) => f.citizen_id === citizen?.id,
-  );
-
-  const idCards = (idCardsData as unknown as IDCard[]).filter(
-    (c) => c.citizen_id === citizen?.id,
-  );
-
-  const auditEntries = (auditLogData as unknown as AuditLog[]).filter(
-    (a) => a.citizen_id === citizen?.id,
   );
 
   const [editModal, setEditModal] = useState<string | null>(null);
@@ -1313,10 +1363,81 @@ export default function CitizenDetailPage() {
     );
   }
 
+  // Full registration data for newly registered citizens (persisted by
+  // citizenService.registerCitizen). Resolves from the dedicated profile
+  // store, the registration embedded on the stored record, or the portal
+  // snapshot/drafts, so registered citizens always render every section
+  // they entered. Falls back to static JSON for the seeded demo records.
+  const profile = getCitizenFormData(citizen, registered);
+
+  const hasEmployment = !!profile?.employment?.category;
+  const hasDisability = !!profile?.disability?.disability_type;
+  const hasHousehold = !!profile?.household;
+  const hasEducation = !!profile?.education?.level;
+
+  // Identity fields beyond the core record are carried on the registration
+  // payload, so merge them in for a complete display.
+  const displayCitizen: Citizen & Record<string, unknown> = {
+    ...citizen,
+    blood_group: profile?.blood_group ?? (citizen as unknown as Record<string, unknown>).blood_group,
+    religion: profile?.religion ?? (citizen as unknown as Record<string, unknown>).religion,
+    ethnicity: profile?.ethnicity ?? (citizen as unknown as Record<string, unknown>).ethnicity,
+    mother_tongue: profile?.mother_tongue ?? (citizen as unknown as Record<string, unknown>).mother_tongue,
+    citizenship_number: profile?.citizenship_number ?? citizen.citizenship_number,
+    nid_number: profile?.nid_number ?? (citizen as unknown as Record<string, unknown>).nid_number ?? citizen.nid_masked,
+    photo: profile?.photo ?? (citizen as unknown as Record<string, unknown>).photo,
+    latitude: profile?.gps?.latitude !== undefined && profile.gps.latitude !== ""
+      ? Number(profile.gps.latitude)
+      : citizen.latitude,
+    longitude: profile?.gps?.longitude !== undefined && profile.gps.longitude !== ""
+      ? Number(profile.gps.longitude)
+      : citizen.longitude,
+    place_name: profile?.gps?.place_name ?? citizen.place_name,
+  };
+
+  const employmentRec = hasEmployment
+    ? buildEmploymentRecord(profile.employment)
+    : (employmentData as unknown as Record<string, unknown>[]).find(
+        (e) => e.citizen_id === citizen.id,
+      ) || null;
+
+  const disabilityRec = hasDisability
+    ? (profile.disability as unknown as Record<string, unknown>)
+    : (disabilityData as unknown as Record<string, unknown>[]).find(
+        (d) => d.citizen_id === citizen.id,
+      ) || null;
+
+  const householdRec = hasHousehold
+    ? (profile.household as unknown as Record<string, unknown>)
+    : (householdsData as unknown as Record<string, unknown>[]).find(
+        (h) => h.head_citizen_id === citizen.id || h.id === citizen.household_id,
+      ) || null;
+
+  const educationRec = hasEducation
+    ? (profile.education as unknown as Record<string, unknown>)
+    : (educationData as unknown as Record<string, unknown>[]).find(
+        (e) => e.citizen_id === citizen.id,
+      ) || null;
+
+  const family =
+    profile && (profile.father || profile.mother || profile.spouse || (profile.children && profile.children.length > 0))
+      ? buildFamilyRecord(profile)
+      : (familyData as unknown as FamilyRecord[]).find(
+          (f) => f.citizen_id === citizen.id,
+        );
+
+  const idCards = (idCardsData as unknown as IDCard[]).filter(
+    (c) => c.citizen_id === citizen.id,
+  );
+
+  const auditEntries = (auditLogData as unknown as AuditLog[]).filter(
+    (a) => a.citizen_id === citizen.id,
+  );
+
   const tabs = [
     {
       label: "Identity",
-      content: <IdentityTab citizen={citizen} onEdit={() => setEditModal("identity")} />,
+      content: <IdentityTab citizen={displayCitizen as Citizen} onEdit={() => setEditModal("identity")} />,
     },
     {
       label: "Family",
@@ -1343,9 +1464,18 @@ export default function CitizenDetailPage() {
       content: (
         <SectionCard title="Biometric Photo" description="Citizen portrait photo">
           <SectionHeader title="Portrait" onEdit={() => setEditModal("photo")} />
-          <div className="text-sm text-gray-400 py-4 text-center">
-            Upload or replace the citizen&apos;s biometric photo.
-          </div>
+          {(displayCitizen as unknown as Record<string, unknown>).photo ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={(displayCitizen as unknown as Record<string, unknown>).photo as string}
+              alt="Citizen portrait"
+              className="w-48 h-48 object-cover rounded-2xl border border-gray-200"
+            />
+          ) : (
+            <div className="text-sm text-gray-400 py-4 text-center">
+              No photo uploaded.
+            </div>
+          )}
         </SectionCard>
       ),
     },
@@ -1354,9 +1484,17 @@ export default function CitizenDetailPage() {
       content: (
         <SectionCard title="GPS Coordinates" description="Geographic location of residence">
           <SectionHeader title="Location" onEdit={() => setEditModal("gps")} />
-          <div className="text-sm text-gray-400 py-4 text-center">
-            Update the citizen&apos;s GPS coordinates and place name.
-          </div>
+          {displayCitizen.latitude != null ? (
+            <div className="grid grid-cols-2 gap-x-8">
+              <DataRow label="Latitude" value={displayCitizen.latitude} />
+              <DataRow label="Longitude" value={displayCitizen.longitude} />
+              <DataRow label="Place Name" value={displayCitizen.place_name} />
+            </div>
+          ) : (
+            <div className="text-sm text-gray-400 py-4 text-center">
+              No GPS coordinates recorded.
+            </div>
+          )}
         </SectionCard>
       ),
     },

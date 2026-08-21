@@ -1,3 +1,5 @@
+import type { EducationFieldDef } from "@/types/education";
+
 export const WARD_ID = "ward-004";
 
 export const STEP_LABELS = [
@@ -383,3 +385,205 @@ export const HOUSEHOLD_OWNERSHIP_OPTIONS: HouseholdOwnershipOption[] = [
 
 export const HOUSEHOLD_OWNERSHIP_LABELS: Record<string, string> =
   Object.fromEntries(HOUSEHOLD_OWNERSHIP_OPTIONS.map((o) => [o.value, o.label]));
+
+export interface DisabilityTypeOption {
+  value: string;
+  label: string;
+}
+
+export const DISABILITY_TYPE_OPTIONS: DisabilityTypeOption[] = [
+  { value: "PHYSICAL", label: "Physical Disability" },
+  { value: "VISUAL", label: "Visual Disability" },
+  { value: "HEARING", label: "Hearing Disability" },
+  { value: "SPEECH", label: "Speech and Language Disability" },
+  { value: "INTELLECTUAL", label: "Intellectual Disability" },
+  { value: "MENTAL", label: "Mental / Psychosocial Disability" },
+  { value: "MULTIPLE", label: "Multiple Disabilities" },
+  { value: "OTHER", label: "Other" },
+];
+
+export interface SeverityLevel {
+  value: number;
+  label: string;
+}
+
+export const SEVERITY_LEVELS: SeverityLevel[] = [
+  { value: 0, label: "No impact" },
+  { value: 1, label: "Mild" },
+  { value: 2, label: "Moderate" },
+  { value: 3, label: "Severe" },
+  { value: 4, label: "Complete" },
+];
+
+export const SEVERITY_LEVEL_LABELS: Record<number, string> = Object.fromEntries(
+  SEVERITY_LEVELS.map((level) => [level.value, level.label]),
+);
+
+export interface AffectedAreaOption {
+  value: string;
+  label: string;
+}
+
+export const AFFECTED_AREA_OPTIONS: AffectedAreaOption[] = [
+  { value: "body_function", label: "Body Function" },
+  { value: "activity_limitation", label: "Activity Limitation" },
+  { value: "participation_restriction", label: "Participation Restriction" },
+];
+
+export interface EducationLevelOption {
+  value: string;
+  label: string;
+}
+
+export const EDUCATION_LEVEL_OPTIONS: EducationLevelOption[] = [
+  { value: "secondary", label: "Secondary Education" },
+  { value: "higher_secondary", label: "Higher Secondary / +2" },
+  { value: "diploma", label: "Diploma" },
+  { value: "bachelors", label: "Bachelor's Degree" },
+  { value: "masters", label: "Master's Degree" },
+  { value: "mphil", label: "MPhil" },
+  { value: "phd", label: "PhD" },
+  { value: "other", label: "Other" },
+];
+
+export const EDUCATION_LEVEL_LABELS: Record<string, string> =
+  Object.fromEntries(EDUCATION_LEVEL_OPTIONS.map((o) => [o.value, o.label]));
+
+export interface EducationStatusOption {
+  value: string;
+  label: string;
+}
+
+export const EDUCATION_STATUS_OPTIONS: EducationStatusOption[] = [
+  { value: "completed", label: "Completed" },
+  { value: "studying", label: "Currently Studying" },
+  { value: "graduated", label: "Graduated" },
+  { value: "discontinued", label: "Discontinued" },
+  { value: "withdrawn", label: "Withdrawn" },
+  { value: "on_leave", label: "On Leave" },
+  { value: "other", label: "Other" },
+];
+
+export const EDUCATION_STATUS_LABELS: Record<string, string> =
+  Object.fromEntries(EDUCATION_STATUS_OPTIONS.map((o) => [o.value, o.label]));
+
+export interface GradingScaleOption {
+  value: string;
+  label: string;
+}
+
+export const GRADING_SCALE_OPTIONS: GradingScaleOption[] = [
+  { value: "gpa_4", label: "GPA / 4.0" },
+  { value: "gpa_10", label: "GPA / 10.0" },
+  { value: "cgpa", label: "CGPA" },
+  { value: "percentage", label: "Percentage (%)" },
+  { value: "other", label: "Other" },
+];
+
+export const GRADING_SCALE_LABELS: Record<string, string> =
+  Object.fromEntries(GRADING_SCALE_OPTIONS.map((o) => [o.value, o.label]));
+
+// Statuses that represent a finished education period (require completion date).
+export const EDUCATION_COMPLETED_STATUSES: string[] = [
+  "completed",
+  "graduated",
+  "discontinued",
+  "withdrawn",
+];
+
+// Statuses that represent an ongoing education period (show expected date + semester/year).
+export const EDUCATION_ACTIVE_STATUSES: string[] = ["studying", "on_leave"];
+
+// Statuses that were terminated early (show end date + reason).
+export const EDUCATION_TERMINATED_STATUSES: string[] = ["discontinued", "withdrawn"];
+
+// Statuses that indicate successful completion (show certificate availability).
+export const EDUCATION_FINISHED_STATUSES: string[] = ["completed", "graduated"];
+
+// Label used for the completion date field depending on the selected status.
+export const EDUCATION_COMPLETION_LABELS: Record<string, string> = {
+  completed: "Completion Date",
+  graduated: "Completion Date",
+  studying: "Expected Completion Date",
+  on_leave: "Expected Completion Date",
+  discontinued: "End Date",
+  withdrawn: "End Date",
+};
+
+// Dynamic per-level field configuration rendered in the education step.
+export const EDUCATION_LEVEL_FIELDS: Record<string, EducationFieldDef[]> = {
+  secondary: [
+    { key: "faculty", label: "Stream", placeholder: "e.g. Science, Management, Humanities" },
+    { key: "board", label: "Board", placeholder: "e.g. NEB" },
+    { key: "startDate", label: "Start Date", type: "date" },
+    { key: "completionDate", label: "Completion Date", type: "date" },
+    { key: "grade", label: "GPA / Percentage", placeholder: "e.g. 3.8 GPA or 78%" },
+  ],
+  higher_secondary: [
+    { key: "faculty", label: "Stream", placeholder: "e.g. Science, Management, Humanities" },
+    { key: "board", label: "Board", placeholder: "e.g. NEB" },
+    { key: "startDate", label: "Start Date", type: "date" },
+    { key: "completionDate", label: "Completion Date", type: "date" },
+    { key: "grade", label: "GPA / Percentage", placeholder: "e.g. 3.5 GPA or 72%" },
+  ],
+  diploma: [
+    { key: "degreeName", label: "Program Name", placeholder: "e.g. Diploma in Civil Engineering" },
+    { key: "major", label: "Specialization", placeholder: "e.g. Civil, IT, Nursing" },
+    { key: "board", label: "Board / University", placeholder: "e.g. CTEVT, TU" },
+    { key: "startDate", label: "Start Date", type: "date" },
+    { key: "completionDate", label: "Completion Date", type: "date" },
+    { key: "grade", label: "GPA / Percentage", placeholder: "e.g. 3.5 GPA or 72%" },
+  ],
+  bachelors: [
+    { key: "degreeName", label: "Degree Name", placeholder: "e.g. Bachelor of Business Administration" },
+    { key: "faculty", label: "Faculty / Stream", placeholder: "e.g. Management, Science, Engineering" },
+    { key: "board", label: "University / Board", placeholder: "e.g. Tribhuvan University, Purbanchal University" },
+    { key: "major", label: "Major / Specialization", placeholder: "e.g. Finance, Computer Science" },
+    { key: "startDate", label: "Start Date", type: "date" },
+    { key: "completionDate", label: "Completion Date", type: "date" },
+    { key: "grade", label: "GPA / Percentage", placeholder: "e.g. 3.6 GPA or 82%" },
+    {
+      key: "gradingScale",
+      label: "Grading Scale",
+      type: "select",
+      options: GRADING_SCALE_OPTIONS,
+    },
+  ],
+  masters: [
+    { key: "degreeName", label: "Program Name", placeholder: "e.g. Master of Science in Computer Science" },
+    { key: "major", label: "Specialization", placeholder: "e.g. Data Science, Finance" },
+    { key: "board", label: "University / Board", placeholder: "e.g. Tribhuvan University" },
+    { key: "thesisArea", label: "Thesis / Research Area", placeholder: "e.g. Machine Learning, Public Health" },
+    { key: "startDate", label: "Start Date", type: "date" },
+    { key: "completionDate", label: "Completion Date", type: "date" },
+    { key: "grade", label: "GPA / Percentage", placeholder: "e.g. 3.8 GPA or 85%" },
+    {
+      key: "gradingScale",
+      label: "Grading Scale",
+      type: "select",
+      options: GRADING_SCALE_OPTIONS,
+    },
+  ],
+  mphil: [
+    { key: "degreeName", label: "Program Name", placeholder: "e.g. MPhil in Development Studies" },
+    { key: "thesisArea", label: "Research Area", placeholder: "e.g. Rural Development" },
+    { key: "board", label: "University / Board", placeholder: "e.g. Tribhuvan University" },
+    { key: "startDate", label: "Start Date", type: "date" },
+    { key: "completionDate", label: "Completion Date", type: "date" },
+    { key: "grade", label: "GPA / Percentage", placeholder: "e.g. 3.7 GPA" },
+  ],
+  phd: [
+    { key: "degreeName", label: "Program Name", placeholder: "e.g. PhD in Physics" },
+    { key: "thesisArea", label: "Thesis / Research Area", placeholder: "e.g. Theoretical Physics" },
+    { key: "board", label: "University / Board", placeholder: "e.g. Tribhuvan University" },
+    { key: "startDate", label: "Start Date", type: "date" },
+    { key: "completionDate", label: "Completion Date", type: "date" },
+    { key: "grade", label: "GPA / Percentage", placeholder: "e.g. 3.9 GPA" },
+  ],
+  other: [
+    { key: "degreeName", label: "Program / Course Name", placeholder: "e.g. Professional Certification" },
+    { key: "board", label: "Board / University", placeholder: "e.g. NEB, TU, CTEVT" },
+    { key: "startDate", label: "Start Date", type: "date" },
+    { key: "completionDate", label: "Completion / End Date", type: "date" },
+  ],
+};

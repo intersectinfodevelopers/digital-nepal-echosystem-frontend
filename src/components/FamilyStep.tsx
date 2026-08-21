@@ -22,23 +22,12 @@ import {
 import { PortalSidebar } from "@/components/Sidebar";
 import { PortalStepper } from "@/components/Stepper";
 import { useFamilyForm } from "@/hooks/useFamilyForm";
-import type {
-  FamilyMemberDraft,
-  FamilyMemberField,
-} from "@/types/registration";
 import {
   RELATIONSHIP_LABELS,
   RELATIONSHIP_OPTIONS,
   Relationship,
 } from "@/constants";
-
-interface FamilyMemberCardProps {
-  member: FamilyMemberDraft;
-  index: number;
-  total: number;
-  onRemove: (id: string) => void;
-  onUpdate: (id: string, field: FamilyMemberField, value: string) => void;
-}
+import { FamilyMemberCardProps } from "@/types/registration";
 
 function FamilyMemberCard({
   member,
@@ -324,7 +313,10 @@ export function FamilyStep() {
 
             <button
               type="button"
-              onClick={() => router.push("/portal/employment")}
+              onClick={() => {
+                saveDraft();
+                router.push("/portal/employment");
+              }}
               className="h-12 px-8 rounded-xl bg-[#0A2D6D] text-white font-semibold text-[15px] shadow-[0_8px_20px_rgba(10,45,109,0.3)] hover:bg-[#081F4D] transition-all duration-200 active:scale-[0.98] flex items-center gap-2"
             >
               Next

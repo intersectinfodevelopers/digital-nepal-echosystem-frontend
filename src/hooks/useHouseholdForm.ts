@@ -94,6 +94,7 @@ function loadDraft(): HouseholdFormData | null {
 }
 
 function persist(stored: StoredDraft) {
+  if (typeof window === "undefined") return;
   try {
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify(stored));
   } catch {
@@ -116,19 +117,19 @@ export function useHouseholdForm() {
   useEffect(() => {
     if (!dirtyRef.current) return;
     setSaveStatus("saving");
-    if (saveTimerRef.current !== null) {
+    if (saveTimerRef.current !== null && typeof window !== "undefined") {
       window.clearTimeout(saveTimerRef.current);
     }
-    saveTimerRef.current = window.setTimeout(() => {
+    saveTimerRef.current = typeof window !== "undefined" ? window.setTimeout(() => {
       persist(toStored(data));
       setSaveStatus("saved");
       setLastSaved(formatTime(new Date()));
-    }, AUTO_SAVE_DELAY_MS);
+    }, AUTO_SAVE_DELAY_MS) : null;
   }, [data]);
 
   useEffect(() => {
     return () => {
-      if (saveTimerRef.current !== null) {
+      if (saveTimerRef.current !== null && typeof window !== "undefined") {
         window.clearTimeout(saveTimerRef.current);
       }
     };

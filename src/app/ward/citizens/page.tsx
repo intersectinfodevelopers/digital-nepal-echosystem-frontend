@@ -142,7 +142,7 @@ export default function CitizensPage() {
                   </td>
                   <td className="px-4 py-3">
                     <Link
-                      href={`/ward/citizens/${c.nid_masked}`}
+                      href={`/ward/citizens/${c.id}`}
                       className="text-blue-600 hover:text-blue-800 text-sm font-medium"
                     >
                       View

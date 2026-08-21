@@ -121,6 +121,7 @@ function loadDraft(): EmploymentFormData | null {
 }
 
 function persist(stored: StoredDraft) {
+  if (typeof window === "undefined") return;
   try {
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify(stored));
   } catch {
@@ -159,22 +160,22 @@ export function useEmploymentForm() {
   useEffect(() => {
     if (!dirtyRef.current) return;
     setSaveStatus("saving");
-    if (saveTimerRef.current !== null) {
+    if (saveTimerRef.current !== null && typeof window !== "undefined") {
       window.clearTimeout(saveTimerRef.current);
     }
-    saveTimerRef.current = window.setTimeout(() => {
+    saveTimerRef.current = typeof window !== "undefined" ? window.setTimeout(() => {
       persist(toStored(data));
       setSaveStatus("saved");
       setLastSaved(formatTime(new Date()));
-    }, AUTO_SAVE_DELAY_MS);
+    }, AUTO_SAVE_DELAY_MS) : null;
   }, [data]);
 
   useEffect(() => {
     return () => {
-      if (panTimerRef.current !== null) {
+      if (panTimerRef.current !== null && typeof window !== "undefined") {
         window.clearTimeout(panTimerRef.current);
       }
-      if (saveTimerRef.current !== null) {
+      if (saveTimerRef.current !== null && typeof window !== "undefined") {
         window.clearTimeout(saveTimerRef.current);
       }
     };
@@ -210,7 +211,9 @@ export function useEmploymentForm() {
   const setPanNumber = useCallback((raw: string) => {
     dirtyRef.current = true;
     if (panTimerRef.current !== null) {
-      window.clearTimeout(panTimerRef.current);
+      if (typeof window !== "undefined") {
+        window.clearTimeout(panTimerRef.current);
+      }
       panTimerRef.current = null;
     }
     const digits = raw.replace(/\D/g, "").slice(0, 9);

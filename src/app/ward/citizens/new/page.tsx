@@ -21,10 +21,9 @@ import {
   SwapHorizOutlined as IconSwap,
 } from "@mui/icons-material";
 import { useRegistrationForm } from "@/hooks/useRegistrationForm";
-import { registerCitizen } from "@/services/citizenService";
 import { PortalSidebar } from "@/components/Sidebar";
 import { PortalStepper } from "@/components/Stepper";
-import { SubmitStep } from "@/components/ui";
+import { ReviewSubmitStep } from "@/components/ReviewSubmitStep";
 
 /**
  * NewCitizenPage - Implements the comprehensive 10-step registration flow.
@@ -37,7 +36,6 @@ export default function NewCitizenPage() {
     updateField,
     nextStep,
     prevStep,
-    resetForm,
   } = useRegistrationForm();
 
   // Handle file upload preview and state update
@@ -50,17 +48,6 @@ export default function NewCitizenPage() {
         updateField(field, url);
       }
     };
-
-  // Final submission logic - Communicates with citizenService
-  const handleSubmit = async () => {
-    try {
-      await registerCitizen(formData);
-      alert("Citizen profile created and sent for verification!");
-      resetForm();
-    } catch {
-      alert("Submission failed. Please check connectivity and try again.");
-    }
-  };
 
   // Map form steps to sidebar navigation labels for active state highlighting
   const getSidebarActiveLabel = () => {
@@ -455,7 +442,26 @@ export default function NewCitizenPage() {
               </Paper>
             )}
             {step === 10 && (
-              <SubmitStep formData={formData} onSubmit={handleSubmit} />
+              <ReviewSubmitStep
+                formData={formData}
+                onNavigateToStep={(s) => {
+                  // Navigate back to the corresponding step in the wizard
+                  // Since we are inside the wizard, we just reset step via the hook
+                  // For simplicity, we redirect to the portal routes
+                  const routes: Record<number, string> = {
+                    1: "/portal/personal",
+                    2: "/portal/nid",
+                    3: "/portal/family",
+                    4: "/portal/employment",
+                    5: "/portal/household",
+                    6: "/portal/disability",
+                    7: "/portal/education",
+                    8: "/portal/photo",
+                    9: "/portal/location",
+                  };
+                  window.location.href = routes[s] || "/portal/personal";
+                }}
+              />
             )}
           </Box>
         </Box>
