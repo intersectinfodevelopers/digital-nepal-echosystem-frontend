@@ -1362,12 +1362,6 @@ export default function CitizenDetailPage() {
       </main>
     );
   }
-
-  // Full registration data for newly registered citizens (persisted by
-  // citizenService.registerCitizen). Resolves from the dedicated profile
-  // store, the registration embedded on the stored record, or the portal
-  // snapshot/drafts, so registered citizens always render every section
-  // they entered. Falls back to static JSON for the seeded demo records.
   const profile = getCitizenFormData(citizen, registered);
 
   const hasEmployment = !!profile?.employment?.category;
@@ -1375,8 +1369,6 @@ export default function CitizenDetailPage() {
   const hasHousehold = !!profile?.household;
   const hasEducation = !!profile?.education?.level;
 
-  // Identity fields beyond the core record are carried on the registration
-  // payload, so merge them in for a complete display.
   const displayCitizen: Citizen & Record<string, unknown> = {
     ...citizen,
     blood_group: profile?.blood_group ?? (citizen as unknown as Record<string, unknown>).blood_group,

@@ -24,11 +24,8 @@ import { useRegistrationForm } from "@/hooks/useRegistrationForm";
 import { PortalSidebar } from "@/components/Sidebar";
 import { PortalStepper } from "@/components/Stepper";
 import { ReviewSubmitStep } from "@/components/ReviewSubmitStep";
+import Image from "next/image";
 
-/**
- * NewCitizenPage - Implements the comprehensive 10-step registration flow.
- * Features a modern dual-pane layout with high-fidelity UI components for each step.
- */
 export default function NewCitizenPage() {
   const {
     step,
@@ -49,7 +46,6 @@ export default function NewCitizenPage() {
       }
     };
 
-  // Map form steps to sidebar navigation labels for active state highlighting
   const getSidebarActiveLabel = () => {
     switch (step) {
       case 1:
@@ -64,8 +60,6 @@ export default function NewCitizenPage() {
         return "Household";
     }
   };
-
-  // Map form steps to descriptive header titles
   const getHeaderTitle = () => {
     const titles = [
       "Personal Information",
@@ -84,14 +78,10 @@ export default function NewCitizenPage() {
 
   return (
     <Box className="flex min-h-screen bg-[#F5F7FA]">
-      {/* Persistent Navigation Sidebar */}
       <Box className="hidden lg:block w-[280px] shrink-0">
         <PortalSidebar activeLabel={getSidebarActiveLabel()} />
       </Box>
-
-      {/* Main Form Content Area */}
       <Box className="flex-grow flex flex-col min-w-0">
-        {/* Contextual Top Header */}
         <Box
           component="header"
           className="h-20 px-10 flex items-center justify-between bg-white border-b border-gray-100 sticky top-0 z-20 shadow-sm"
@@ -112,12 +102,9 @@ export default function NewCitizenPage() {
           </Stack>
         </Box>
 
-        {/* Global Progress Stepper */}
         <Box className="px-10 py-6 bg-white border-b border-gray-100 shadow-sm">
           <PortalStepper currentStep={step} />
         </Box>
-
-        {/* Dynamic Step Viewport */}
         <Box className="flex-grow p-10 overflow-y-auto bg-[#F8FAFC]">
           <Box className="max-w-6xl mx-auto pb-32">
             {step === 2 && (
@@ -144,7 +131,6 @@ export default function NewCitizenPage() {
                     spacing={6}
                     className="mb-12"
                   >
-                    {/* Front Side Upload */}
                     <Box className="flex-1 text-center">
                       <Typography className="font-poppins font-bold text-[#0B3A84] mb-5 text-xl">
                         Front Side <span className="text-[#C61F3B]">*</span>
@@ -152,8 +138,7 @@ export default function NewCitizenPage() {
                       {formData.citizenship_front ? (
                         <Box className="relative">
                           <Box className="flex flex-col items-center justify-center h-80 border-4 border-green-300 rounded-[3rem] overflow-hidden bg-green-50/30 shadow-inner">
-                            {/* eslint-disable-next-line @next/next/no-img-element */}
-                            <img
+                            <Image
                               src={formData.citizenship_front}
                               alt="Front"
                               className="w-full h-full object-contain p-4"
@@ -445,9 +430,7 @@ export default function NewCitizenPage() {
               <ReviewSubmitStep
                 formData={formData}
                 onNavigateToStep={(s) => {
-                  // Navigate back to the corresponding step in the wizard
-                  // Since we are inside the wizard, we just reset step via the hook
-                  // For simplicity, we redirect to the portal routes
+                
                   const routes: Record<number, string> = {
                     1: "/portal/personal",
                     2: "/portal/nid",
@@ -465,8 +448,6 @@ export default function NewCitizenPage() {
             )}
           </Box>
         </Box>
-
-        {/* Dynamic Interaction Bar (Sticky Footer) */}
         <Box className="h-28 px-12 flex items-center justify-between bg-[#F5F7FA] border-t border-gray-200 sticky bottom-0 z-20 shadow-[0_-4px_20px_-10px_rgba(0,0,0,0.1)]">
           <Button
             variant="text"
