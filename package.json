@@ -29,7 +29,7 @@
     "@mui/material": "^9.1.1",
     "leaflet": "^1.9.4",
     "leaflet-defaulticon-compatibility": "^0.1.2",
-    "nanoid": "^3.3.12",
+    "nanoid": "^3.3.18",
     "nepal-geojson": "^5.0.0-alpha",
     "next": "16.2.11",
     "react": "19.2.4",

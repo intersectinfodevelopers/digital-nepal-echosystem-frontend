@@ -583,8 +583,7 @@ export default function LeafletMap({
       style={{ height }}
       className="w-full rounded-2xl overflow-hidden bg-[#FAFAFA] border border-gray-200 shadow-sm relative z-0 flex items-center justify-center"
     >
-      {LEVEL_ORDER[selection.level] >
-        LEVEL_ORDER[minimumLevel as SelectionShape["level"]] && (
+      {LEVEL_ORDER[selection.level] > LEVEL_ORDER[minimumLevel] && (
         <button
           type="button"
           onClick={() =>

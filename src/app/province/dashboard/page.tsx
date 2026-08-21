@@ -227,6 +227,7 @@ export default function ProvinceDashboard() {
               center={province.center}
               zoom={province.zoom}
               height="100%"
+              minimumLevel="province"
             />
           </div>
         </Card>
