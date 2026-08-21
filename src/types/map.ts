@@ -46,7 +46,6 @@ export interface MapProps {
   zoom?: number;
   markers?: MapMarker[];
   height?: string;
-  minimumLevel?: string;
   showResetControl?: boolean;
   vectorTilesUrl?: string;
   onClick?: (lat: number, lng: number) => void;
