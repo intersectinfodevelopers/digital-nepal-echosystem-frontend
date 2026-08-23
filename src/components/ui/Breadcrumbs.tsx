@@ -20,6 +20,7 @@ const ROUTE_LABELS: Record<string, string> = {
   dashboard: "Dashboard",
   analytics: "Analytics",
   "national-map": "National Map",
+  map: "Ward Map",
   "province-admins": "Province Admins",
   "eligibility-rules": "Eligibility Rules",
   "audit-log": "Audit Log",

@@ -18,33 +18,34 @@ import { getNotifications } from "@/services/mockWardAdmin";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import WardSidebar from "./WardSidebar";
 import WardTopbar from "./WardTopbar";
-import type { WardViewId } from "./wardNav";
+import type { WardViewId } from "@/types/navigation";
 import { WARD_VIEW_TITLES } from "./wardNav";
 
 const VIEW_ICONS: Record<WardViewId, ReactNode> = {
   dashboard: <HomeOutlined sx={{ fontSize: 20 }} />,
   citizens: <GroupOutlined sx={{ fontSize: 20 }} />,
   map: <MapOutlined sx={{ fontSize: 20 }} />,
+  "national-map": <MapOutlined sx={{ fontSize: 20 }} />,
   services: <GridViewOutlined sx={{ fontSize: 20 }} />,
   profile: <PersonOutlined sx={{ fontSize: 20 }} />,
   approvals: <ChecklistOutlined sx={{ fontSize: 20 }} />,
   idcards: <BadgeOutlined sx={{ fontSize: 20 }} />,
-  "national-map": <MapOutlined sx={{ fontSize: 20 }} />,
 };
 
 const VIEW_PATHS: Record<WardViewId, string> = {
   dashboard: "/ward/dashboard",
   citizens: "/ward/citizens",
-  map: "/ward/dashboard",
+  map: "/ward/map",
+  "national-map": "/ward/map",
   services: "/ward/dashboard",
   profile: "/ward/dashboard",
   approvals: "/ward/dashboard",
   idcards: "/ward/dashboard",
-  "national-map": "/central/national-map",
 };
 
 function getActiveView(pathname: string): WardViewId {
   if (pathname.startsWith("/ward/citizens")) return "citizens";
+  if (pathname.startsWith("/ward/map")) return "map";
   return "dashboard";
 }
 
@@ -106,7 +107,9 @@ export default function WardShell({ children }: { children: ReactNode }) {
           onClose={closeMobileDrawer}
         />
       </Drawer>
-      <div className={`flex min-w-0 flex-1 flex-col ${sidebarOpen ? "lg:pl-65" : "lg:pl-18"}`}>
+      <div
+        className={`flex min-w-0 flex-1 flex-col ${sidebarOpen ? "lg:pl-65" : "lg:pl-18"}`}
+      >
         <WardTopbar
           sectionLabel={`Ward ${wardNumber}`}
           subtitle={WARD_VIEW_TITLES[activeView]}

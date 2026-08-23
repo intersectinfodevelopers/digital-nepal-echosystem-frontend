@@ -116,6 +116,7 @@ export interface Citizen {
   latitude?: number;
   longitude?: number;
   place_name?: string;
+  registration?: RegistrationFormData;
 }
 
 export type CitizenList = Citizen[];
@@ -167,6 +168,10 @@ export interface HouseholdData {
   has_bank_account: boolean;
   monthly_income_band: string;
   poverty_class: string;
+  address?: string;
+  ownership_status?: string;
+  years_at_residence?: string;
+  electricity_sc_number?: string;
 }
 
 export interface GpsCoordinates {

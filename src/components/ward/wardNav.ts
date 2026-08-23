@@ -11,8 +11,7 @@ export type WardViewId =
   | "national-map";
 
 export type WardNavSection =
-  | { type: "group"; label: string; items: WardNavItem[] }
-  | { type: "divider" };
+  { type: "group"; label: string; items: WardNavItem[] } | { type: "divider" };
 
 export interface WardNavItem {
   id: WardViewId;
@@ -32,10 +31,10 @@ export const WARD_NAV: WardNavSection[] = [
       { id: "dashboard", label: "Dashboard" },
       { id: "citizens", label: "Citizens" },
       {
-        id: "national-map",
-        label: "National Map",
+        id: "map",
+        label: "Ward Map",
         hasMapTree: true,
-        mapHref: "/central/national-map",
+        mapHref: "/ward/map",
       },
       { id: "services", label: "Services" },
       { id: "profile", label: "Profile" },
@@ -55,10 +54,10 @@ export const WARD_NAV: WardNavSection[] = [
 export const WARD_VIEW_TITLES: Record<WardViewId, string> = {
   dashboard: "Dashboard",
   citizens: "Citizens",
-  map: "Map",
+  map: "Ward Map",
+  "national-map": "National Map",
   services: "Services",
   profile: "Profile",
   approvals: "Approval Queue",
   idcards: "ID Card Requests",
-  "national-map": "National Map",
 };

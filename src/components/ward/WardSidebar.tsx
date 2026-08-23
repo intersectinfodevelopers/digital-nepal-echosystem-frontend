@@ -25,11 +25,11 @@ const ICONS: Record<string, ReactNode> = {
   dashboard: <DashboardOutlined sx={{ fontSize: 20 }} />,
   citizens: <GroupOutlined sx={{ fontSize: 20 }} />,
   map: <MapOutlined sx={{ fontSize: 20 }} />,
+  "national-map": <MapOutlined sx={{ fontSize: 20 }} />,
   services: <GridViewOutlined sx={{ fontSize: 20 }} />,
   profile: <PersonOutlined sx={{ fontSize: 20 }} />,
   approvals: <ChecklistOutlined sx={{ fontSize: 20 }} />,
   idcards: <BadgeOutlined sx={{ fontSize: 20 }} />,
-  "national-map": <MapOutlined sx={{ fontSize: 20 }} />,
 };
 
 export interface AdminNavItem {
@@ -118,9 +118,10 @@ export default function WardSidebar({
   const isMapItemActive = (item: AdminNavItem) => {
     const navItem = item as WardNavItem;
     if (!navItem.hasMapTree && item.id !== "national-map") return false;
-    const href = navItem.mapHref ?? "/central/national-map";
+    const href = navItem.mapHref ?? "/ward/map";
     return (
       active === item.id ||
+      active === "map" ||
       active === "national-map" ||
       active === href ||
       active.startsWith(`${href}/`)
@@ -130,7 +131,7 @@ export default function WardSidebar({
   const toggleMap = setExpandedMapToggle;
 
   const goToMap = (item: WardNavItem | AdminNavItem) => {
-    const href = (item as WardNavItem).mapHref ?? "/central/national-map";
+    const href = (item as WardNavItem).mapHref ?? "/ward/map";
     onNavigate(href);
   };
 

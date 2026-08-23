@@ -44,6 +44,41 @@ export function PersonalStep() {
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
+  const persistDraft = () => {
+    const sexMap: Record<string, string> = {
+      male: "MALE",
+      female: "FEMALE",
+      other: "OTHER",
+    };
+    const payload = {
+      name_np: "",
+      name_en: formData.full_name,
+      dob: formData.dob,
+      sex: sexMap[formData.gender] ?? "",
+      nationality: formData.nationality,
+      consent_channel: "PORTAL",
+    };
+    try {
+      if (typeof window !== "undefined") {
+        window.localStorage.setItem(
+          "prapti_personal_draft_v1",
+          JSON.stringify(payload),
+        );
+      }
+    } catch {
+      // localStorage may be full or unavailable
+    }
+  };
+
+  const handleSaveDraft = () => {
+    persistDraft();
+  };
+
+  const handleNext = () => {
+    persistDraft();
+    router.push("/portal/nid");
+  };
+
   return (
     <div className="flex flex-col min-w-0"> 
       <header className="sticky top-0 z-30 h-16 bg-white/95 backdrop-blur border-b border-[#E4E8EF] flex items-center justify-between px-6 md:px-10">
@@ -309,6 +344,7 @@ export function PersonalStep() {
         <div className="flex items-center gap-3 md:gap-4">
           <button
             type="button"
+            onClick={handleSaveDraft}
             className="h-12 px-7 rounded-xl border-[1.5px] border-[#D9DEE8] bg-white text-[#1F2A44] font-semibold text-[15px] hover:border-[#6B7280] hover:bg-[#F8F9FB] transition-all duration-200 active:scale-[0.98] flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0A2D6D] focus-visible:ring-offset-2"
           >
             Save Draft
@@ -316,7 +352,7 @@ export function PersonalStep() {
 
           <button
             type="button"
-            onClick={() => router.push("/portal/nid")}
+            onClick={handleNext}
             className="h-12 px-8 rounded-xl bg-[#0A2D6D] text-white font-semibold text-[15px] shadow-[0_8px_20px_rgba(10,45,109,0.3)] hover:bg-[#081F4D] transition-all duration-200 active:scale-[0.98] flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0A2D6D] focus-visible:ring-offset-2"
           >
             Next Step

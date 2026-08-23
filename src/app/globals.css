@@ -47,6 +47,18 @@ body {
   .form-select-rounded {
     @apply h-12 bg-white [&_.MuiOutlinedInput-notchedOutline]:rounded-[10px] [&_.MuiOutlinedInput-notchedOutline]:border [&_.MuiOutlinedInput-notchedOutline]:border-[#D9DEE8] [&:hover_.MuiOutlinedInput-notchedOutline]:border-[#0A2D6D] [&.Mui-focused_.MuiOutlinedInput-notchedOutline]:border-[#0A2D6D] [&.Mui-focused_.MuiOutlinedInput-notchedOutline]:shadow-[0_0_0_3px_rgba(10,45,109,0.12)] [&_.MuiSelect-select]:py-3 [&_.MuiSelect-select]:px-4 [&_.MuiSelect-select]:text-[15px] [&_.MuiSelect-select]:font-['Inter,sans-serif'] [&_.MuiSelect-select]:text-[#1F2A44];
   }
+
+  .form-input-household {
+    @apply h-[52px] bg-white [&_.MuiOutlinedInput-notchedOutline]:rounded-[8px] [&_.MuiOutlinedInput-notchedOutline]:border [&_.MuiOutlinedInput-notchedOutline]:border-[#D1D5DB] [&:hover_.MuiOutlinedInput-notchedOutline]:border-[#1F4FBF] [&.Mui-focused_.MuiOutlinedInput-notchedOutline]:border-[#0E3A8A] [&.Mui-focused_.MuiOutlinedInput-notchedOutline]:shadow-[0_0_0_3px_rgba(31,79,191,0.12)] [&_.MuiInputBase-input]:py-3.5 [&_.MuiInputBase-input]:px-4 [&_.MuiInputBase-input]:text-[15px] [&_.MuiInputBase-input]:font-['Inter,sans-serif'] [&_.MuiInputBase-input]:text-[#0F172A];
+  }
+
+  .form-select-household {
+    @apply h-[52px] bg-white [&_.MuiOutlinedInput-notchedOutline]:rounded-[8px] [&_.MuiOutlinedInput-notchedOutline]:border [&_.MuiOutlinedInput-notchedOutline]:border-[#D1D5DB] [&:hover_.MuiOutlinedInput-notchedOutline]:border-[#1F4FBF] [&.Mui-focused_.MuiOutlinedInput-notchedOutline]:border-[#0E3A8A] [&.Mui-focused_.MuiOutlinedInput-notchedOutline]:shadow-[0_0_0_3px_rgba(31,79,191,0.12)] [&_.MuiSelect-select]:py-3.5 [&_.MuiSelect-select]:px-4 [&_.MuiSelect-select]:text-[15px] [&_.MuiSelect-select]:font-['Inter,sans-serif'] [&_.MuiSelect-select]:text-[#0F172A];
+  }
+
+  .form-textarea-household {
+    @apply bg-white [&_.MuiOutlinedInput-notchedOutline]:rounded-[8px] [&_.MuiOutlinedInput-notchedOutline]:border [&_.MuiOutlinedInput-notchedOutline]:border-[#D1D5DB] [&:hover_.MuiOutlinedInput-notchedOutline]:border-[#1F4FBF] [&.Mui-focused_.MuiOutlinedInput-notchedOutline]:border-[#0E3A8A] [&.Mui-focused_.MuiOutlinedInput-notchedOutline]:shadow-[0_0_0_3px_rgba(31,79,191,0.12)] [&_.MuiInputBase-input]:py-3.5 [&_.MuiInputBase-input]:px-4 [&_.MuiInputBase-input]:text-[15px] [&_.MuiInputBase-input]:font-['Inter,sans-serif'] [&_.MuiInputBase-input]:text-[#0F172A];
+  }
 }
 
 @keyframes scan {
@@ -157,6 +169,24 @@ body {
   }
 }
 
+@keyframes pin-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(194, 24, 59, 0.45);
+  }
+  70% {
+    box-shadow: 0 0 0 18px rgba(194, 24, 59, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(194, 24, 59, 0);
+  }
+}
+
+@keyframes radar-sweep {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 @layer utilities {
   .custom-scrollbar::-webkit-scrollbar {
     width: 4px;
@@ -184,5 +214,71 @@ body {
   }
   .stepper-scrollbar::-webkit-scrollbar-thumb:hover {
     background: #CBD5E1;
+  }
+
+  .pin-pulse {
+    animation: pin-pulse 2.2s ease-out infinite;
+  }
+
+  .radar-sweep {
+    animation: radar-sweep 6s linear infinite;
+    transform-origin: center;
+  }
+
+  .conditional-reveal {
+    animation: fadeInUp 200ms ease-out both;
+  }
+
+  .severity-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    display: block;
+    width: 100%;
+    height: 6px;
+    border-radius: 999px;
+    background: #e2e8f0;
+    outline: none;
+    cursor: pointer;
+  }
+
+  .severity-slider::-webkit-slider-runnable-track {
+    height: 6px;
+    border-radius: 999px;
+  }
+
+  .severity-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 18px;
+    width: 18px;
+    margin-top: -6px;
+    border-radius: 999px;
+    background: #06439b;
+    border: 3px solid #ffffff;
+    box-shadow: 0 1px 4px rgba(15, 23, 42, 0.35);
+    transition: transform 150ms ease, box-shadow 150ms ease;
+  }
+
+  .severity-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.08);
+  }
+
+  .severity-slider:focus-visible {
+    box-shadow: 0 0 0 4px rgba(6, 67, 155, 0.18);
+  }
+
+  .severity-slider::-moz-range-track {
+    height: 6px;
+    border-radius: 999px;
+    background: transparent;
+  }
+
+  .severity-slider::-moz-range-thumb {
+    height: 12px;
+    width: 12px;
+    border: 3px solid #ffffff;
+    border-radius: 999px;
+    background: #06439b;
+    box-shadow: 0 1px 4px rgba(15, 23, 42, 0.35);
   }
 }

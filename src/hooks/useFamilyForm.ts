@@ -1,16 +1,7 @@
 'use client';
 
 import { useCallback, useState } from 'react';
-
-export interface FamilyMemberDraft {
-  id: string;
-  relationship: string;
-  fullName: string;
-  occupation: string;
-  age: string;
-}
-
-export type FamilyMemberField = Exclude<keyof FamilyMemberDraft, 'id'>;
+import type { FamilyMemberDraft, FamilyMemberField } from "@/types/registration";
 
 export function createDefaultFamilyMember(): FamilyMemberDraft {
   return {
@@ -49,9 +40,23 @@ export function useFamilyForm() {
   );
 
   const saveDraft = useCallback(() => {
+    if (typeof window === "undefined") {
+      setDraftSaved(true);
+      return;
+    }
+    try {
+      window.localStorage.setItem(
+        "prapti_family_draft_v1",
+        JSON.stringify({ members }),
+      );
+    } catch {
+      // localStorage may be full or unavailable
+    }
     setDraftSaved(true);
-    window.setTimeout(() => setDraftSaved(false), 2200);
-  }, []);
+    if (typeof window !== "undefined") {
+      window.setTimeout(() => setDraftSaved(false), 2200);
+    }
+  }, [members]);
 
   return {
     members,

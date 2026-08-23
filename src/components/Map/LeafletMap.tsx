@@ -6,7 +6,7 @@ import { MapContainer, GeoJSON, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import "leaflet-defaulticon-compatibility";
 
-import type { MapProps } from "./index";
+import type { MapProps, SelectionShape } from "@/types/map";
 import { useMapSelection } from "@/contexts/MapSelectionContext";
 
 // =====================
@@ -32,22 +32,11 @@ const PROVINCE_COLORS: Record<string, { fill: string; border: string }> = {
   "7": { fill: "#FCE7F3", border: "#D53F8C" },
 };
 
-type MapLevel = "country" | "province" | "district" | "localBody";
-
-const LEVEL_ORDER: Record<MapLevel, number> = {
+const LEVEL_ORDER: Record<SelectionShape["level"], number> = {
   country: 0,
   province: 1,
   district: 2,
   localBody: 3,
-};
-
-type SelectionShape = {
-  level: MapLevel;
-  provinceId: string | null;
-  provinceLabel: string | null;
-  districtName: string | null;
-  localBodyName: string | null;
-  localBodyType: string | null;
 };
 
 // =====================

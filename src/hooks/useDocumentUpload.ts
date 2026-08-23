@@ -6,14 +6,7 @@ import {
   DocumentMimeType,
   UploadStatus,
 } from "@/constants";
-
-export interface PanelState {
-  status: UploadStatus;
-  previewUrl: string | null;
-  fileName: string | null;
-  progress: number;
-  error: string | null;
-}
+import type { PanelState, DocumentUpload } from "@/types/document";
 
 const EMPTY_PANEL: PanelState = {
   status: UploadStatus.EMPTY,
@@ -34,16 +27,6 @@ function revokeUrl(url: string | null) {
   }
 }
 
-export interface DocumentUpload {
-  state: PanelState;
-  browseRef: React.RefObject<HTMLInputElement | null>;
-  onFile: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onOpenBrowse: () => void;
-  onDragOver: (e: React.DragEvent) => void;
-  onDragLeave: (e: React.DragEvent) => void;
-  onDrop: (e: React.DragEvent) => void;
-}
-
 export function useDocumentUpload(): DocumentUpload {
   const [state, setState] = useState<PanelState>(EMPTY_PANEL);
   const browseRef = useRef<HTMLInputElement>(null);
@@ -51,10 +34,10 @@ export function useDocumentUpload(): DocumentUpload {
   const urlRef = useRef<string | null>(null);
 
   const cleanTimer = useCallback(() => {
-    if (intervalRef.current !== null) {
-      clearInterval(intervalRef.current);
-      intervalRef.current = null;
-    }
+if (intervalRef.current !== null && typeof window !== "undefined") {
+            clearInterval(intervalRef.current);
+            intervalRef.current = null;
+          }
   }, []);
 
   useEffect(() => {
@@ -95,17 +78,17 @@ export function useDocumentUpload(): DocumentUpload {
         error: null,
       });
 
-      intervalRef.current = window.setInterval(() => {
+      intervalRef.current = typeof window !== "undefined" ? window.setInterval(() => {
         progress = Math.min(100, progress + 20 + Math.random() * 20);
         setState((prev) => ({ ...prev, status: UploadStatus.UPLOADING, progress }));
         if (progress >= 100) {
-          if (intervalRef.current !== null) {
+          if (intervalRef.current !== null && typeof window !== "undefined") {
             clearInterval(intervalRef.current);
             intervalRef.current = null;
           }
           setState((prev) => ({ ...prev, status: UploadStatus.VERIFIED, progress: 100 }));
         }
-      }, 160);
+      }, 160) : null;
     },
     [cleanTimer],
   );

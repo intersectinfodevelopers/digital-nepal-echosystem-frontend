@@ -4,10 +4,13 @@ import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
+  AccessibleOutlined,
   GroupOutlined,
   HomeOutlined,
   LogoutOutlined,
   PersonOutlined,
+  PhotoCameraOutlined,
+  SchoolOutlined,
   UploadOutlined,
   WorkOutlined,
 } from "@mui/icons-material";
@@ -25,13 +28,17 @@ const NAV_ITEMS: NavItem[] = [
   { label: "Family Info", icon: GroupOutlined, href: "/portal/family" },
   { label: "Employment", icon: WorkOutlined },
   { label: "Household", icon: HomeOutlined },
+  { label: "Disability", icon: AccessibleOutlined, href: "/portal/disability" },
+  { label: "Education", icon: SchoolOutlined, href: "/portal/education" },
+  { label: "Photo", icon: PhotoCameraOutlined },
 ];
 
 interface PortalSidebarProps {
   activeLabel?: string;
+  onSaveExit?: () => void;
 }
 
-export function PortalSidebar({ activeLabel }: PortalSidebarProps) {
+export function PortalSidebar({ activeLabel, onSaveExit }: PortalSidebarProps) {
   const pathname = usePathname();
 
   return (
@@ -81,7 +88,8 @@ export function PortalSidebar({ activeLabel }: PortalSidebarProps) {
       <div className="p-5">
         <button
           type="button"
-          className="w-full h-[56px] rounded-[12px] bg-white text-[#0A2D6D] font-poppins font-semibold text-[16px] flex items-center justify-center gap-2"
+          onClick={onSaveExit}
+          className="w-full h-[56px] rounded-[12px] bg-white text-[#0A2D6D] font-poppins font-semibold text-[16px] flex items-center justify-center gap-2 transition-colors duration-150 hover:bg-[#EFF4FF] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
         >
           <LogoutOutlined className="w-[18px] h-[18px]" />
           Save & Exit
