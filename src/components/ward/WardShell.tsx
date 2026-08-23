@@ -35,8 +35,8 @@ const VIEW_ICONS: Record<WardViewId, ReactNode> = {
 const VIEW_PATHS: Record<WardViewId, string> = {
   dashboard: "/ward/dashboard",
   citizens: "/ward/citizens",
-  map: "/ward/dashboard",
-  "national-map": "/central/national-map",
+  map: "/ward/map",
+  "national-map": "/ward/map",
   services: "/ward/dashboard",
   profile: "/ward/dashboard",
   approvals: "/ward/dashboard",
@@ -45,6 +45,7 @@ const VIEW_PATHS: Record<WardViewId, string> = {
 
 function getActiveView(pathname: string): WardViewId {
   if (pathname.startsWith("/ward/citizens")) return "citizens";
+  if (pathname.startsWith("/ward/map")) return "map";
   return "dashboard";
 }
 

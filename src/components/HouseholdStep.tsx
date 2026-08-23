@@ -10,7 +10,6 @@ import {
   TextField,
 } from "@mui/material";
 import {
-  AccountCircleOutlined,
   ArrowBack,
   ArrowForward,
   BoltOutlined,
@@ -20,12 +19,11 @@ import {
   LocationOn,
   LogoutOutlined,
   MyLocation,
-  NotificationsNoneOutlined,
   ShieldOutlined,
-  VerifiedUserOutlined,
 } from "@mui/icons-material";
 import { PortalSidebar } from "@/components/Sidebar";
 import { PortalStepper } from "@/components/Stepper";
+import { PortalHeader } from "@/components/ui";
 import { HOUSEHOLD_OWNERSHIP_OPTIONS } from "@/constants";
 import {
   formatScNumber,
@@ -66,39 +64,6 @@ function FieldError({ message }: { message?: string }) {
       <ErrorOutlined className="h-3.5 w-3.5 shrink-0" />
       {message}
     </p>
-  );
-}
-
-function PortalHeader() {
-  return (
-    <header className="sticky top-0 z-30 flex h-[70px] shrink-0 items-center justify-between border-b border-[#E5E7EB] bg-white px-6 md:px-10">
-      <div className="flex items-center gap-3">
-        <span className="flex h-9 w-9 items-center justify-center rounded-[10px] bg-[#0E3A8A]">
-          <VerifiedUserOutlined className="h-5 w-5 text-white" />
-        </span>
-        <span className="font-poppins text-[24px] font-bold uppercase leading-none tracking-[0.02em] text-[#0E3A8A]">
-          PRAPTI
-        </span>
-      </div>
-
-      <div className="flex items-center gap-4">
-        <button
-          type="button"
-          aria-label="Notifications"
-          className="relative flex h-10 w-10 items-center justify-center rounded-full border border-[#E5E7EB] text-[#0E3A8A] transition-colors hover:bg-[#F1F5F9]"
-        >
-          <NotificationsNoneOutlined className="h-5 w-5" />
-          <span className="absolute right-2 top-2 h-2 w-2 rounded-full bg-[#C2183B]" />
-        </button>
-        <button
-          type="button"
-          aria-label="User profile"
-          className="flex h-10 w-10 items-center justify-center rounded-full border border-[#E5E7EB] text-[#0E3A8A] transition-colors hover:bg-[#F1F5F9]"
-        >
-          <AccountCircleOutlined className="h-6 w-6" />
-        </button>
-      </div>
-    </header>
   );
 }
 
@@ -263,22 +228,24 @@ function GeographicMap({ latitude, longitude }: { latitude: string; longitude: s
 
   const recalibrate = () => {
     if (phase === "recalibrating") return;
-    if (timerRef.current !== null) {
+    if (timerRef.current !== null && typeof window !== "undefined") {
       window.clearTimeout(timerRef.current);
     }
     setPhase("recalibrating");
-    timerRef.current = window.setTimeout(() => {
-      setPhase("done");
+    if (typeof window !== "undefined") {
       timerRef.current = window.setTimeout(() => {
-        setPhase("idle");
-        timerRef.current = null;
-      }, 2200);
-    }, 1400);
+        setPhase("done");
+        timerRef.current = window.setTimeout(() => {
+          setPhase("idle");
+          timerRef.current = null;
+        }, 2200);
+      }, 1400);
+    }
   };
 
   useEffect(() => {
     return () => {
-      if (timerRef.current !== null) {
+      if (timerRef.current !== null && typeof window !== "undefined") {
         window.clearTimeout(timerRef.current);
       }
     };

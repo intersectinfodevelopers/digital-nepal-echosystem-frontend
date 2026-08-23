@@ -147,6 +147,51 @@ export function NidStep() {
   const front = useDocumentUpload();
   const back = useDocumentUpload();
 
+  const blobUrlToDataUrl = async (url: string | null): Promise<string | null> => {
+    if (!url) return null;
+    if (url.startsWith("data:")) return url;
+    try {
+      const res = await fetch(url);
+      const blob = await res.blob();
+      const reader = new FileReader();
+      return await new Promise<string>((resolve, reject) => {
+        reader.onload = () => resolve(String(reader.result));
+        reader.onerror = () => reject(new Error("Unable to read file"));
+        reader.readAsDataURL(blob);
+      });
+    } catch {
+      return url;
+    }
+  };
+
+  const persistDraft = async () => {
+    const [frontUrl, backUrl] = await Promise.all([
+      blobUrlToDataUrl(front.state.previewUrl),
+      blobUrlToDataUrl(back.state.previewUrl),
+    ]);
+    const payload = {
+      nid_number: "",
+      nid_verified: false,
+      citizenship_number: "",
+      citizenship_front: frontUrl,
+      citizenship_back: backUrl,
+    };
+    try {
+      window.localStorage.setItem("prapti_nid_draft_v1", JSON.stringify(payload));
+    } catch {
+      // localStorage may be full or unavailable
+    }
+  };
+
+  const handleSaveDraft = () => {
+    void persistDraft();
+  };
+
+  const handleNext = () => {
+    void persistDraft();
+    router.push("/portal/family");
+  };
+
   return (
     <div className="flex min-h-screen bg-[#F6F8FB] font-poppins">
       <PortalSidebar activeLabel="NID Upload" />
@@ -283,11 +328,14 @@ export function NidStep() {
             Back
           </button>
           <div className="flex items-center gap-4">
-            <button className="h-12 px-6 rounded-[10px] border border-[#D8D8D8] bg-white text-[#1E293B] font-poppins font-medium text-[15px]">
+            <button
+              onClick={handleSaveDraft}
+              className="h-12 px-6 rounded-[10px] border border-[#D8D8D8] bg-white text-[#1E293B] font-poppins font-medium text-[15px]"
+            >
               Save Draft
             </button>
             <button
-              onClick={() => router.push("/portal/family")}
+              onClick={handleNext}
               className="h-12 px-7 rounded-[10px] bg-[#0A2D6D] text-white font-poppins font-semibold text-[15px] flex items-center gap-2"
             >
               Next

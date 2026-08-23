@@ -34,10 +34,10 @@ export function useDocumentUpload(): DocumentUpload {
   const urlRef = useRef<string | null>(null);
 
   const cleanTimer = useCallback(() => {
-    if (intervalRef.current !== null) {
-      clearInterval(intervalRef.current);
-      intervalRef.current = null;
-    }
+if (intervalRef.current !== null && typeof window !== "undefined") {
+            clearInterval(intervalRef.current);
+            intervalRef.current = null;
+          }
   }, []);
 
   useEffect(() => {
@@ -78,17 +78,17 @@ export function useDocumentUpload(): DocumentUpload {
         error: null,
       });
 
-      intervalRef.current = window.setInterval(() => {
+      intervalRef.current = typeof window !== "undefined" ? window.setInterval(() => {
         progress = Math.min(100, progress + 20 + Math.random() * 20);
         setState((prev) => ({ ...prev, status: UploadStatus.UPLOADING, progress }));
         if (progress >= 100) {
-          if (intervalRef.current !== null) {
+          if (intervalRef.current !== null && typeof window !== "undefined") {
             clearInterval(intervalRef.current);
             intervalRef.current = null;
           }
           setState((prev) => ({ ...prev, status: UploadStatus.VERIFIED, progress: 100 }));
         }
-      }, 160);
+      }, 160) : null;
     },
     [cleanTimer],
   );

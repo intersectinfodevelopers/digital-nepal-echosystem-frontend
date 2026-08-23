@@ -21,14 +21,13 @@ import {
   DescriptionOutlined,
   ErrorOutlined,
   InsertDriveFileOutlined,
-  LockOutlined,
   PhotoCameraOutlined,
   PictureAsPdfOutlined,
-  ShieldOutlined,
   VerifiedUserOutlined,
 } from "@mui/icons-material";
 import { PortalSidebar } from "@/components/Sidebar";
 import { PortalStepper } from "@/components/Stepper";
+import { PortalHeader } from "@/components/ui";
 import { EMPLOYMENT_STATUS_OPTIONS, UploadStatus } from "@/constants";
 import { useEmploymentForm } from "@/hooks/useEmploymentForm";
 import type {
@@ -71,34 +70,6 @@ function FieldError({ message }: { message?: string }) {
       <ErrorOutlined className="h-3.5 w-3.5 shrink-0" />
       {message}
     </p>
-  );
-}
-
-function PortalHeader() {
-  return (
-    <header className="sticky top-0 z-30 h-[72px] shrink-0 border-b border-[#E4E8EF] bg-white px-6 md:px-10 flex items-center justify-between">
-      <div className="flex items-center gap-3">
-        <span className="flex h-9 w-9 items-center justify-center rounded-[10px] bg-[#0A2D6D]">
-          <VerifiedUserOutlined className="h-5 w-5 text-white" />
-        </span>
-        <span className="font-poppins text-[24px] font-bold leading-none tracking-[0.02em] text-[#0A2D6D]">
-          PRAPTI
-        </span>
-      </div>
-
-      <div className="flex items-center gap-4">
-        <span className="inline-flex items-center gap-2 rounded-[6px] border border-[#D6E4FF] bg-[#EEF4FF] px-3 py-1.5">
-          <LockOutlined className="h-3.5 w-3.5 text-[#0A2D6D]" />
-          <span className="font-poppins text-[12px] font-semibold text-[#0A2D6D]">
-            ENCRYPTION: AES-256-GCM
-          </span>
-        </span>
-        <ShieldOutlined
-          aria-label="Secure portal"
-          className="h-6 w-6 text-[#0A2D6D]"
-        />
-      </div>
-    </header>
   );
 }
 
@@ -596,7 +567,7 @@ export function EmploymentStep() {
       <PortalSidebar activeLabel="Employment" />
 
       <div className="flex min-w-0 flex-1 flex-col">
-        <PortalHeader />
+        <PortalHeader variant="encryption" />
 
         <main className="mx-auto w-full max-w-[1240px] flex-1 px-6 py-8 pb-40 md:px-10">
           <PortalStepper currentStep={4} />

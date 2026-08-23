@@ -59,7 +59,7 @@ export function useEmploymentUpload(
   const baseRef = useRef<EmploymentProofState>(EMPTY_EMPLOYMENT_PROOF);
 
   const cleanTimer = useCallback(() => {
-    if (intervalRef.current !== null) {
+    if (intervalRef.current !== null && typeof window !== "undefined") {
       window.clearInterval(intervalRef.current);
       intervalRef.current = null;
     }
@@ -107,11 +107,11 @@ export function useEmploymentUpload(
       };
       setState(baseRef.current);
 
-      intervalRef.current = window.setInterval(() => {
+      intervalRef.current = typeof window !== "undefined" ? window.setInterval(() => {
         progress = Math.min(100, progress + 20 + Math.random() * 20);
         setState({ ...baseRef.current, progress });
         if (progress >= 100) {
-          if (intervalRef.current !== null) {
+          if (intervalRef.current !== null && typeof window !== "undefined") {
             window.clearInterval(intervalRef.current);
             intervalRef.current = null;
           }
@@ -121,7 +121,7 @@ export function useEmploymentUpload(
             progress: 100,
           });
         }
-      }, 160);
+      }, 160) : null;
     },
     [cleanTimer, setState],
   );

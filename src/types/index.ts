@@ -32,4 +32,16 @@ export type {
   StoredDraft as HouseholdStoredDraft,
 } from "./household";
 
+export type {
+  DisabilityErrors,
+  DisabilityFormData,
+  StoredDraft as DisabilityStoredDraft,
+} from "./disability";
+
+export type {
+  EducationErrors,
+  EducationFormData,
+  StoredDraft as EducationStoredDraft,
+} from "./education";
+
 export type { User as UserInfo } from "./user";

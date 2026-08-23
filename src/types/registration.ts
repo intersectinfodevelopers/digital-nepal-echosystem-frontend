@@ -34,4 +34,12 @@ export interface FamilyMemberDraft {
   age: string;
 }
 
+export interface FamilyMemberCardProps {
+  member: FamilyMemberDraft;
+  index: number;
+  total: number;
+  onRemove: (id: string) => void;
+  onUpdate: (id: string, field: FamilyMemberField, value: string) => void;
+}
+
 export type FamilyMemberField = Exclude<keyof FamilyMemberDraft, "id">;

@@ -28,6 +28,4 @@ export { Checkbox } from "./Checkbox";
 export { Textarea } from "./Textarea";
 export { DatePicker } from "./DatePicker";
 export { DiffViewer } from "./DiffViewer";
-
-// Registration step components
-export { SubmitStep } from "../SubmitStep";
+export { PortalHeader } from "./PortalHeader";

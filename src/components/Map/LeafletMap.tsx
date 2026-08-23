@@ -32,6 +32,12 @@ const PROVINCE_COLORS: Record<string, { fill: string; border: string }> = {
   "7": { fill: "#FCE7F3", border: "#D53F8C" },
 };
 
+const LEVEL_ORDER: Record<SelectionShape["level"], number> = {
+  country: 0,
+  province: 1,
+  district: 2,
+  localBody: 3,
+};
 
 // =====================
 // String / Property Helpers
