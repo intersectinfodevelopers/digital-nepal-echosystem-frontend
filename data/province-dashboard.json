@@ -45,7 +45,7 @@
     "center": [26.9, 85.9],
     "zoom": 8,
     "summary": { "citizens": 22160, "households": 6280, "id_cards_issued": 16920, "id_cards_pending": 1110, "grievances_open": 71, "grievances_resolved": 405, "active_municipalities": 11, "active_wards": 0 },
-    "structure": { "districts": 8, "metropolitan_cities": 0, "sub_metropolitan_cities": 1, "municipalities": 73, "rural_municipalities": 59, "total_local_levels": 136, "wards": 1271 },
+    "structure": { "districts": 8, "metropolitan_cities": 1, "sub_metropolitan_cities": 3, "municipalities": 73, "rural_municipalities": 59, "total_local_levels": 136, "wards": 1271 },
     "trend": [
       { "month": "Mar", "citizens": 20962, "households": 5903, "id_cards_issued": 15145 },
       { "month": "Apr", "citizens": 21561, "households": 6029, "id_cards_issued": 15737 },
@@ -65,7 +65,7 @@
     "center": [27.6, 85.5],
     "zoom": 8,
     "summary": { "citizens": 28640, "households": 8420, "id_cards_issued": 23110, "id_cards_pending": 940, "grievances_open": 38, "grievances_resolved": 524, "active_municipalities": 9, "active_wards": 0 },
-    "structure": { "districts": 13, "metropolitan_cities": 1, "sub_metropolitan_cities": 3, "municipalities": 41, "rural_municipalities": 74, "total_local_levels": 119, "wards": 1121 },
+    "structure": { "districts": 13, "metropolitan_cities": 3, "sub_metropolitan_cities": 1, "municipalities": 41, "rural_municipalities": 74, "total_local_levels": 119, "wards": 1121 },
     "trend": [
       { "month": "Mar", "citizens": 28125, "households": 7915, "id_cards_issued": 20700 },
       { "month": "Apr", "citizens": 28400, "households": 8083, "id_cards_issued": 21505 },
@@ -85,7 +85,7 @@
     "center": [28.3, 84.0],
     "zoom": 8,
     "summary": { "citizens": 12480, "households": 3610, "id_cards_issued": 10040, "id_cards_pending": 510, "grievances_open": 22, "grievances_resolved": 184, "active_municipalities": 7, "active_wards": 0 },
-    "structure": { "districts": 11, "metropolitan_cities": 0, "sub_metropolitan_cities": 1, "municipalities": 27, "rural_municipalities": 58, "total_local_levels": 85, "wards": 759 },
+    "structure": { "districts": 11, "metropolitan_cities": 1, "sub_metropolitan_cities": 0, "municipalities": 26, "rural_municipalities": 58, "total_local_levels": 85, "wards": 759 },
     "trend": [
       { "month": "Mar", "citizens": 11705, "households": 3393, "id_cards_issued": 8990 },
       { "month": "Apr", "citizens": 12000, "households": 3465, "id_cards_issued": 9340 },

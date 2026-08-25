@@ -378,7 +378,7 @@ function WizardFooter({
   const isSaving = saveStatus === "saving";
 
   return (
-    <footer className="fixed bottom-0 left-[270px] right-0 z-30 flex h-16 items-center justify-between border-t border-[#E5E7EB] bg-white px-[34px]">
+    <footer className="registration-footer sticky bottom-0 z-30 flex h-19 items-center justify-between border-t border-[#E5E7EB] bg-white px-4 sm:px-6 md:px-8">
       <button
         type="button"
         onClick={onBack}
@@ -445,7 +445,7 @@ export function DisabilityInformationStep() {
                   />
                   <div className="min-w-0 flex-1">
                     <div className="flex items-start justify-between gap-4">
-                      <h2 className="font-poppins text-[21px] font-bold leading-[1.2] text-[#0E3A8A]">
+                      <h2 className="registration-title font-poppins text-[21px] font-bold leading-[1.2] text-[#0E3A8A]">
                         Disability Information
                       </h2>
                       <DraftStatus status={form.saveStatus} />

@@ -87,7 +87,7 @@ export function PersonalStep() {
             <CameraIcon sx={{ fontSize: 28, color: "#0F4DB8", opacity: 0.6 }} />
           </div>
           <div>
-            <h2 className="font-poppins text-2xl font-extrabold tracking-tight text-[#0A2D6D]">
+            <h2 className="registration-title font-poppins text-2xl font-extrabold tracking-tight text-[#0A2D6D]">
               Profile Identification
             </h2>
             <p className="mt-2 max-w-lg text-[15px] leading-relaxed text-[#6B7280]">
@@ -307,7 +307,7 @@ export function PersonalStep() {
           </div>
         </section>
       </main>
-      <footer className="fixed bottom-0 left-[270px] right-0 z-30 bg-white/95 backdrop-blur border-t border-[#E3E8F2] h-[80px] px-6 md:px-10 flex items-center justify-between shadow-[0_-4px_16px_rgba(15,61,145,0.05)]">
+      <footer className="registration-footer sticky bottom-0 z-30 bg-white/95 backdrop-blur border-t border-[#E3E8F2] h-19 px-4 sm:px-6 md:px-10 flex items-center justify-between shadow-[0_-4px_16px_rgba(15,61,145,0.05)]">
         <button
           type="button"
           className="h-12 px-7 rounded-xl border-[1.5px] border-[#D9DEE8] bg-white text-[#1F2A44] font-semibold text-[15px] hover:border-[#6B7280] hover:bg-[#F8F9FB] transition-all duration-200 active:scale-[0.98] flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0A2D6D] focus-visible:ring-offset-2"

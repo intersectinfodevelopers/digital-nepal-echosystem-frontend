@@ -21,7 +21,7 @@
   --color-primary: var(--primary);
   --color-sidebar: var(--sidebar);
   --font-sans: 'Inter', sans-serif;
-  --font-poppins: 'Poppins', sans-serif;
+  --font-poppins: 'Inter', sans-serif;
   --font-mono: var(--font-geist-mono);
 }
 
@@ -62,6 +62,73 @@ body {
   background-color: rgba(255, 255, 255, 0.68);
 }
 
+.analytics-tabs-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: #98A2B3 #F2F4F7;
+  scrollbar-gutter: stable;
+}
+
+.analytics-tabs-scroll::-webkit-scrollbar {
+  height: 6px;
+}
+
+.analytics-tabs-scroll::-webkit-scrollbar-track {
+  background: #F2F4F7;
+  border-radius: 999px;
+}
+
+.analytics-tabs-scroll::-webkit-scrollbar-thumb {
+  background: #98A2B3;
+  border-radius: 999px;
+}
+
+.analytics-tabs-scroll::-webkit-scrollbar-thumb:hover {
+  background: #667085;
+}
+
+.employment-form .font-poppins {
+  font-family: var(--font-sans) !important;
+}
+
+.employment-form .employment-field {
+  height: 44px;
+}
+
+.employment-form .employment-field .MuiInputBase-input,
+.employment-form .employment-field .MuiSelect-select {
+  font-family: var(--font-sans) !important;
+  font-size: 14px !important;
+  padding-top: 10px !important;
+  padding-bottom: 10px !important;
+}
+
+.registration-footer {
+  font-family: var(--font-sans);
+}
+
+.registration-footer button {
+  min-height: 44px;
+  border-radius: 10px;
+  font-family: var(--font-sans) !important;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.registration-title {
+  color: #0A2D6D !important;
+  font-family: var(--font-sans) !important;
+  font-size: 28px !important;
+  font-weight: 750 !important;
+  letter-spacing: -0.01em;
+  line-height: 1.2 !important;
+}
+
+@media (max-width: 640px) {
+  .registration-title {
+    font-size: 24px !important;
+  }
+}
+
 @layer components {
   .form-input {
     @apply h-12 bg-white [&_.MuiOutlinedInput-notchedOutline]:rounded-[4px] [&_.MuiOutlinedInput-notchedOutline]:border [&_.MuiOutlinedInput-notchedOutline]:border-[#D9D9D9] [&:hover_.MuiOutlinedInput-notchedOutline]:border-[#0F4DB8] [&.Mui-focused_.MuiOutlinedInput-notchedOutline]:border-[#0F4DB8] [&.Mui-focused_.MuiOutlinedInput-notchedOutline]:shadow-[0_0_0_3px_rgba(15,77,184,0.1)] [&_.MuiInputBase-input]:py-3 [&_.MuiInputBase-input]:px-4 [&_.MuiInputBase-input]:text-[14px] [&_.MuiInputBase-input]:font-['Inter,sans-serif'] [&_.MuiInputBase-input]:text-[#222222];
@@ -72,23 +139,35 @@ body {
   }
 
   .form-input-rounded {
-    @apply h-12 bg-white [&_.MuiOutlinedInput-notchedOutline]:rounded-[10px] [&_.MuiOutlinedInput-notchedOutline]:border [&_.MuiOutlinedInput-notchedOutline]:border-[#D9DEE8] [&:hover_.MuiOutlinedInput-notchedOutline]:border-[#0A2D6D] [&.Mui-focused_.MuiOutlinedInput-notchedOutline]:border-[#0A2D6D] [&.Mui-focused_.MuiOutlinedInput-notchedOutline]:shadow-[0_0_0_3px_rgba(10,45,109,0.12)] [&_.MuiInputBase-input]:py-3 [&_.MuiInputBase-input]:px-4 [&_.MuiInputBase-input]:text-[15px] [&_.MuiInputBase-input]:font-['Inter,sans-serif'] [&_.MuiInputBase-input]:text-[#1F2A44];
+    @apply h-12 bg-white [&_.MuiOutlinedInput-notchedOutline]:rounded-[10px] [&_.MuiOutlinedInput-notchedOutline]:border [&_.MuiOutlinedInput-notchedOutline]:border-[#D9DEE8] [&:hover_.MuiOutlinedInput-notchedOutline]:border-[#0A2D6D] [&.Mui-focused_.MuiOutlinedInput-notchedOutline]:border-[#0A2D6D] [&.Mui-focused_.MuiOutlinedInput-notchedOutline]:shadow-[0_0_0_3px_rgba(10,45,109,0.12)] [&_.MuiInputBase-input]:py-3 [&_.MuiInputBase-input]:px-4 [&_.MuiInputBase-input]:text-[14px] [&_.MuiInputBase-input]:font-['Inter,sans-serif'] [&_.MuiInputBase-input]:text-[#1F2A44];
   }
 
   .form-select-rounded {
-    @apply h-12 bg-white [&_.MuiOutlinedInput-notchedOutline]:rounded-[10px] [&_.MuiOutlinedInput-notchedOutline]:border [&_.MuiOutlinedInput-notchedOutline]:border-[#D9DEE8] [&:hover_.MuiOutlinedInput-notchedOutline]:border-[#0A2D6D] [&.Mui-focused_.MuiOutlinedInput-notchedOutline]:border-[#0A2D6D] [&.Mui-focused_.MuiOutlinedInput-notchedOutline]:shadow-[0_0_0_3px_rgba(10,45,109,0.12)] [&_.MuiSelect-select]:py-3 [&_.MuiSelect-select]:px-4 [&_.MuiSelect-select]:text-[15px] [&_.MuiSelect-select]:font-['Inter,sans-serif'] [&_.MuiSelect-select]:text-[#1F2A44];
+    @apply h-12 bg-white [&_.MuiOutlinedInput-notchedOutline]:rounded-[10px] [&_.MuiOutlinedInput-notchedOutline]:border [&_.MuiOutlinedInput-notchedOutline]:border-[#D9DEE8] [&:hover_.MuiOutlinedInput-notchedOutline]:border-[#0A2D6D] [&.Mui-focused_.MuiOutlinedInput-notchedOutline]:border-[#0A2D6D] [&.Mui-focused_.MuiOutlinedInput-notchedOutline]:shadow-[0_0_0_3px_rgba(10,45,109,0.12)] [&_.MuiSelect-select]:py-3 [&_.MuiSelect-select]:px-4 [&_.MuiSelect-select]:text-[14px] [&_.MuiSelect-select]:font-['Inter,sans-serif'] [&_.MuiSelect-select]:text-[#1F2A44];
   }
 
   .form-input-household {
-    @apply h-[52px] bg-white [&_.MuiOutlinedInput-notchedOutline]:rounded-[8px] [&_.MuiOutlinedInput-notchedOutline]:border [&_.MuiOutlinedInput-notchedOutline]:border-[#D1D5DB] [&:hover_.MuiOutlinedInput-notchedOutline]:border-[#1F4FBF] [&.Mui-focused_.MuiOutlinedInput-notchedOutline]:border-[#0E3A8A] [&.Mui-focused_.MuiOutlinedInput-notchedOutline]:shadow-[0_0_0_3px_rgba(31,79,191,0.12)] [&_.MuiInputBase-input]:py-3.5 [&_.MuiInputBase-input]:px-4 [&_.MuiInputBase-input]:text-[15px] [&_.MuiInputBase-input]:font-['Inter,sans-serif'] [&_.MuiInputBase-input]:text-[#0F172A];
+    @apply h-12 bg-white [&_.MuiOutlinedInput-notchedOutline]:rounded-[8px] [&_.MuiOutlinedInput-notchedOutline]:border [&_.MuiOutlinedInput-notchedOutline]:border-[#D1D5DB] [&:hover_.MuiOutlinedInput-notchedOutline]:border-[#1F4FBF] [&.Mui-focused_.MuiOutlinedInput-notchedOutline]:border-[#0E3A8A] [&.Mui-focused_.MuiOutlinedInput-notchedOutline]:shadow-[0_0_0_3px_rgba(31,79,191,0.12)] [&_.MuiInputBase-input]:py-3 [&_.MuiInputBase-input]:px-4 [&_.MuiInputBase-input]:text-[14px] [&_.MuiInputBase-input]:font-['Inter,sans-serif'] [&_.MuiInputBase-input]:text-[#0F172A];
   }
 
   .form-select-household {
-    @apply h-[52px] bg-white [&_.MuiOutlinedInput-notchedOutline]:rounded-[8px] [&_.MuiOutlinedInput-notchedOutline]:border [&_.MuiOutlinedInput-notchedOutline]:border-[#D1D5DB] [&:hover_.MuiOutlinedInput-notchedOutline]:border-[#1F4FBF] [&.Mui-focused_.MuiOutlinedInput-notchedOutline]:border-[#0E3A8A] [&.Mui-focused_.MuiOutlinedInput-notchedOutline]:shadow-[0_0_0_3px_rgba(31,79,191,0.12)] [&_.MuiSelect-select]:py-3.5 [&_.MuiSelect-select]:px-4 [&_.MuiSelect-select]:text-[15px] [&_.MuiSelect-select]:font-['Inter,sans-serif'] [&_.MuiSelect-select]:text-[#0F172A];
+    @apply h-12 bg-white [&_.MuiOutlinedInput-notchedOutline]:rounded-[8px] [&_.MuiOutlinedInput-notchedOutline]:border [&_.MuiOutlinedInput-notchedOutline]:border-[#D1D5DB] [&:hover_.MuiOutlinedInput-notchedOutline]:border-[#1F4FBF] [&.Mui-focused_.MuiOutlinedInput-notchedOutline]:border-[#0E3A8A] [&.Mui-focused_.MuiOutlinedInput-notchedOutline]:shadow-[0_0_0_3px_rgba(31,79,191,0.12)] [&_.MuiSelect-select]:py-3 [&_.MuiSelect-select]:px-4 [&_.MuiSelect-select]:text-[14px] [&_.MuiSelect-select]:font-['Inter,sans-serif'] [&_.MuiSelect-select]:text-[#0F172A];
   }
 
   .form-textarea-household {
     @apply bg-white [&_.MuiOutlinedInput-notchedOutline]:rounded-[8px] [&_.MuiOutlinedInput-notchedOutline]:border [&_.MuiOutlinedInput-notchedOutline]:border-[#D1D5DB] [&:hover_.MuiOutlinedInput-notchedOutline]:border-[#1F4FBF] [&.Mui-focused_.MuiOutlinedInput-notchedOutline]:border-[#0E3A8A] [&.Mui-focused_.MuiOutlinedInput-notchedOutline]:shadow-[0_0_0_3px_rgba(31,79,191,0.12)] [&_.MuiInputBase-input]:py-3.5 [&_.MuiInputBase-input]:px-4 [&_.MuiInputBase-input]:text-[15px] [&_.MuiInputBase-input]:font-['Inter,sans-serif'] [&_.MuiInputBase-input]:text-[#0F172A];
+  }
+
+  .header-cell {
+    @apply border-b border-[#DDE2EA] bg-[#F8FAFC] px-5 py-3 text-[11px] font-bold uppercase tracking-[0.04em] text-[#8492A6];
+  }
+
+  .table-cell {
+    @apply border-b border-[#EAECF0] px-5 py-3.5 align-middle text-[#344054];
+  }
+
+  tbody tr:last-child .table-cell {
+    @apply border-b-0;
   }
 }
 

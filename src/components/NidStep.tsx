@@ -212,7 +212,7 @@ export function NidStep() {
           <PortalStepper currentStep={2} />
 
           <section className="bg-white rounded-[10px] border border-[#D8D8D8] p-8 shadow-[0_1px_3px_rgba(10,45,109,0.06)]">
-            <h2 className="font-poppins font-bold text-[24px] text-[#0A2D6D] leading-tight">
+            <h2 className="registration-title font-poppins font-bold text-[24px] text-[#0A2D6D] leading-tight">
               Identity Verification
             </h2>
             <p className="font-poppins text-[16px] text-[#64748B] mt-2 leading-relaxed max-w-[760px]">
@@ -299,7 +299,7 @@ export function NidStep() {
           </section>
         </main>
 
-        <footer className="fixed bottom-0 left-[270px] right-0 z-30 bg-white border-t border-[#D8D8D8] h-[76px] px-8 flex items-center justify-between">
+        <footer className="registration-footer sticky bottom-0 z-30 bg-white border-t border-[#D8D8D8] h-19 px-4 sm:px-6 md:px-8 flex items-center justify-between">
           <button
             onClick={() => router.push("/ward/dashboard/registercitizen/personal")}
             className="h-12 px-6 rounded-[10px] border border-[#D8D8D8] bg-white text-[#1E293B] font-poppins font-medium text-[15px] flex items-center gap-2"

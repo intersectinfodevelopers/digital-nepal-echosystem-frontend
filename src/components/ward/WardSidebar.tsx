@@ -20,6 +20,8 @@ import {
   type LocalBody,
 } from "@/constants/provinceHierarchy";
 import { WARD_NAV, type WardNavItem } from "./wardNav";
+import districtsData from "../../../data/district.json";
+import municipalitiesData from "../../../data/municipalities.json";
 
 const ICONS: Record<string, ReactNode> = {
   dashboard: <DashboardOutlined sx={{ fontSize: 20 }} />,
@@ -130,9 +132,9 @@ export default function WardSidebar({
 
   const toggleMap = setExpandedMapToggle;
 
-  const goToMap = (item: WardNavItem | AdminNavItem) => {
+  const goToMap = (item: WardNavItem | AdminNavItem, scopeId?: string) => {
     const href = (item as WardNavItem).mapHref ?? "/ward/map";
-    onNavigate(href);
+    onNavigate(scopeId && href.includes("analytics") ? `${href}?scope=${scopeId}` : href);
   };
 
   const handleProvinceClick =
@@ -141,7 +143,7 @@ export default function WardSidebar({
       setExpandedProvinceIdOverride((cur) => (cur === provinceId ? null : provinceId));
       setExpandedDistrictKeyOverride(null);
       selectProvince(provinceId, provinceLabel);
-      goToMap(item);
+      goToMap(item, `prov-${provinceId}`);
     };
 
   const handleDistrictClick =
@@ -150,7 +152,8 @@ export default function WardSidebar({
       const key = districtKey(provinceId, district);
       setExpandedDistrictKeyOverride((cur) => (cur === key ? null : key));
       selectDistrict(provinceId, provinceLabel, district);
-      goToMap(item);
+      const districtId = districtsData.find((entry) => entry.name_en === district)?.id;
+      goToMap(item, districtId);
     };
 
   const handleLocalBodyClick =
@@ -164,7 +167,8 @@ export default function WardSidebar({
       setExpandedProvinceIdOverride(provinceId);
       setExpandedDistrictKeyOverride(districtKey(provinceId, district));
       selectLocalBody(provinceId, provinceLabel, district, lb.name, lb.type);
-      goToMap(item);
+      const municipalityId = municipalitiesData.find((entry) => entry.name_en === lb.name)?.id;
+      goToMap(item, municipalityId);
     };
 
   return (

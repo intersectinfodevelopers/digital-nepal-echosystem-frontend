@@ -15,7 +15,7 @@ export async function POST(request: Request) {
     process.env.NEXT_PUBLIC_API_URL || process.env.NEXT_PUBLIC_API_BASE_URL;
   const useMockData =
     process.env.NEXT_PUBLIC_ENABLE_MOCK_DATA === "true" ||
-    (!apiBaseUrl && process.env.NODE_ENV !== "production");
+    (!apiBaseUrl && process.env.NEXT_PUBLIC_ENABLE_MOCK_DATA !== "false");
 
   const { email, password } = await request.json();
 
@@ -34,8 +34,7 @@ export async function POST(request: Request) {
       );
     }
 
-    const publicUser = { ...user };
-    delete publicUser.password;
+    const { password: _password, ...publicUser } = user;
     return createLoginResponse(publicUser, "mock-token");
   }
 

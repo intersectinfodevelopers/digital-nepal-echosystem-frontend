@@ -186,7 +186,7 @@ export function FamilyStep() {
                     <DescriptionOutlined className="w-3.5 h-3.5" />
                     FORM_INDEX: F-301-A
                   </span>
-                  <h2 className="font-poppins font-bold text-[26px] md:text-[32px] text-[#1F2A44] tracking-tight mt-5 mb-3 leading-tight">
+                  <h2 className="registration-title font-poppins font-bold text-[26px] md:text-[32px] text-[#1F2A44] tracking-tight mt-5 mb-3 leading-tight">
                     Immediate Family Declaration
                   </h2>
                   <p className="text-[15px] md:text-base text-[#6B7280] leading-relaxed max-w-[680px]">
@@ -270,7 +270,7 @@ export function FamilyStep() {
             </section>
           </div>
         </main>
-        <footer className="fixed bottom-0 left-67.5 right-0 z-30 bg-white/95 backdrop-blur border-t border-[#E3E8F2] h-[80px] px-6 md:px-10 flex items-center justify-between shadow-[0_-4px_16px_rgba(15,61,145,0.05)]">
+        <footer className="registration-footer sticky bottom-0 z-30 bg-white/95 backdrop-blur border-t border-[#E3E8F2] h-19 px-4 sm:px-6 md:px-10 flex items-center justify-between shadow-[0_-4px_16px_rgba(15,61,145,0.05)]">
           <button
             type="button"
             onClick={() => router.push("/ward/dashboard/registercitizen/nid")}

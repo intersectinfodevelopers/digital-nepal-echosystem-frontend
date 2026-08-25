@@ -1,307 +1,2795 @@
 [
-  { "id": "ward-001", "municipality_id": "mun-01", "ward_no": 1, "name_np": "फुङलिङ नगरपालिका वडा नं १", "name_en": "Phungling Municipality Ward No. 1" },
-  { "id": "ward-002", "municipality_id": "mun-01", "ward_no": 2, "name_np": "फुङलिङ नगरपालिका वडा नं २", "name_en": "Phungling Municipality Ward No. 2" },
-  { "id": "ward-003", "municipality_id": "mun-01", "ward_no": 3, "name_np": "फुङलिङ नगरपालिका वडा नं ३", "name_en": "Phungling Municipality Ward No. 3" },
-  { "id": "ward-004", "municipality_id": "mun-01", "ward_no": 4, "name_np": "फुङलिङ नगरपालिका वडा नं ४", "name_en": "Phungling Municipality Ward No. 4" },
-  { "id": "ward-005", "municipality_id": "mun-01", "ward_no": 5, "name_np": "फुङलिङ नगरपालिका वडा नं ५", "name_en": "Phungling Municipality Ward No. 5" },
-  { "id": "ward-006", "municipality_id": "mun-01", "ward_no": 6, "name_np": "फुङलिङ नगरपालिका वडा नं ६", "name_en": "Phungling Municipality Ward No. 6" },
-  { "id": "ward-007", "municipality_id": "mun-01", "ward_no": 7, "name_np": "फुङलिङ नगरपालिका वडा नं ७", "name_en": "Phungling Municipality Ward No. 7" },
-  { "id": "ward-008", "municipality_id": "mun-01", "ward_no": 8, "name_np": "फुङलिङ नगरपालिका वडा नं ८", "name_en": "Phungling Municipality Ward No. 8" },
-  { "id": "ward-009", "municipality_id": "mun-01", "ward_no": 9, "name_np": "फुङलिङ नगरपालिका वडा नं ९", "name_en": "Phungling Municipality Ward No. 9" },
-  { "id": "ward-010", "municipality_id": "mun-01", "ward_no": 10, "name_np": "फुङलिङ नगरपालिका वडा नं १०", "name_en": "Phungling Municipality Ward No. 10" },
-
-  { "id": "ward-011", "municipality_id": "mun-07", "ward_no": 1, "name_np": "फिदिम नगरपालिका वडा नं १", "name_en": "Phidim Municipality Ward No. 1" },
-  { "id": "ward-012", "municipality_id": "mun-07", "ward_no": 2, "name_np": "फिदिम नगरपालिका वडा नं २", "name_en": "Phidim Municipality Ward No. 2" },
-  { "id": "ward-013", "municipality_id": "mun-07", "ward_no": 3, "name_np": "फिदिम नगरपालिका वडा नं ३", "name_en": "Phidim Municipality Ward No. 3" },
-  { "id": "ward-014", "municipality_id": "mun-07", "ward_no": 4, "name_np": "फिदिम नगरपालिका वडा नं ४", "name_en": "Phidim Municipality Ward No. 4" },
-  { "id": "ward-015", "municipality_id": "mun-07", "ward_no": 5, "name_np": "फिदिम नगरपालिका वडा नं ५", "name_en": "Phidim Municipality Ward No. 5" },
-  { "id": "ward-016", "municipality_id": "mun-07", "ward_no": 6, "name_np": "फिदिम नगरपालिका वडा नं ६", "name_en": "Phidim Municipality Ward No. 6" },
-  { "id": "ward-017", "municipality_id": "mun-07", "ward_no": 7, "name_np": "फिदिम नगरपालिका वडा नं ७", "name_en": "Phidim Municipality Ward No. 7" },
-  { "id": "ward-018", "municipality_id": "mun-07", "ward_no": 8, "name_np": "फिदिम नगरपालिका वडा नं ८", "name_en": "Phidim Municipality Ward No. 8" },
-  { "id": "ward-019", "municipality_id": "mun-07", "ward_no": 9, "name_np": "फिदिम नगरपालिका वडा नं ९", "name_en": "Phidim Municipality Ward No. 9" },
-  { "id": "ward-020", "municipality_id": "mun-07", "ward_no": 10, "name_np": "फिदिम नगरपालिका वडा नं १०", "name_en": "Phidim Municipality Ward No. 10" },
-
-  { "id": "ward-021", "municipality_id": "mun-08", "ward_no": 1, "name_np": "माञ्जाबुङ", "name_en": "Manjabung" },
-  { "id": "ward-022", "municipality_id": "mun-08", "ward_no": 2, "name_np": "यासोक", "name_en": "Yashok" },
-  { "id": "ward-023", "municipality_id": "mun-08", "ward_no": 3, "name_np": "स्याब्रुम्बा", "name_en": "Sybrumba" },
-  { "id": "ward-024", "municipality_id": "mun-08", "ward_no": 4, "name_np": "रानीगाउँ-३", "name_en": "Ranigaun-3" },
-  { "id": "ward-025", "municipality_id": "mun-08", "ward_no": 5, "name_np": "रानीगाउँ-४", "name_en": "Ranigaun-4" },
-
-  { "id": "ward-026", "municipality_id": "mun-09", "ward_no": 1, "name_np": "फालेलुङ गाउँपालिका वडा नं १", "name_en": "Phalelung Rural Municipality Ward No. 1" },
-  { "id": "ward-027", "municipality_id": "mun-09", "ward_no": 2, "name_np": "फालेलुङ गाउँपालिका वडा नं २", "name_en": "Phalelung Rural Municipality Ward No. 2" },
-  { "id": "ward-028", "municipality_id": "mun-09", "ward_no": 3, "name_np": "फालेलुङ गाउँपालिका वडा नं ३", "name_en": "Phalelung Rural Municipality Ward No. 3" },
-  { "id": "ward-029", "municipality_id": "mun-09", "ward_no": 4, "name_np": "फालेलुङ गाउँपालिका वडा नं ४", "name_en": "Phalelung Rural Municipality Ward No. 4" },
-  { "id": "ward-030", "municipality_id": "mun-09", "ward_no": 5, "name_np": "फालेलुङ गाउँपालिका वडा नं ५", "name_en": "Phalelung Rural Municipality Ward No. 5" },
-
-  { "id": "ward-031", "municipality_id": "mun-10", "ward_no": 1, "name_np": "याङवरक गाउँपालिका वडा नं १", "name_en": "Yangwarak Rural Municipality Ward No. 1" },
-  { "id": "ward-032", "municipality_id": "mun-10", "ward_no": 2, "name_np": "याङवरक गाउँपालिका वडा नं २", "name_en": "Yangwarak Rural Municipality Ward No. 2" },
-  { "id": "ward-033", "municipality_id": "mun-10", "ward_no": 3, "name_np": "याङवरक गाउँपालिका वडा नं ३", "name_en": "Yangwarak Rural Municipality Ward No. 3" },
-  { "id": "ward-034", "municipality_id": "mun-10", "ward_no": 4, "name_np": "याङवरक गाउँपालिका वडा नं ४", "name_en": "Yangwarak Rural Municipality Ward No. 4" },
-  { "id": "ward-035", "municipality_id": "mun-10", "ward_no": 5, "name_np": "याङवरक गाउँपालिका वडा नं ५", "name_en": "Yangwarak Rural Municipality Ward No. 5" },
-
-  { "id": "ward-036", "municipality_id": "mun-11", "ward_no": 1, "name_np": "तुम्बेवा गाउँपालिका वडा नं १", "name_en": "Tumbeva Rural Municipality Ward No. 1" },
-  { "id": "ward-037", "municipality_id": "mun-11", "ward_no": 2, "name_np": "तुम्बेवा गाउँपालिका वडा नं २", "name_en": "Tumbeva Rural Municipality Ward No. 2" },
-  { "id": "ward-038", "municipality_id": "mun-11", "ward_no": 3, "name_np": "तुम्बेवा गाउँपालिका वडा नं ३", "name_en": "Tumbeva Rural Municipality Ward No. 3" },
-  { "id": "ward-039", "municipality_id": "mun-11", "ward_no": 4, "name_np": "तुम्बेवा गाउँपालिका वडा नं ४", "name_en": "Tumbeva Rural Municipality Ward No. 4" },
-  { "id": "ward-040", "municipality_id": "mun-11", "ward_no": 5, "name_np": "तुम्बेवा गाउँपालिका वडा नं ५", "name_en": "Tumbeva Rural Municipality Ward No. 5" },
-
-  { "id": "ward-041", "municipality_id": "mun-12", "ward_no": 1, "name_np": "मिक्लाजुङ गाउँपालिका वडा नं १", "name_en": "Miklajung Rural Municipality Ward No. 1" },
-  { "id": "ward-042", "municipality_id": "mun-12", "ward_no": 2, "name_np": "मिक्लाजुङ गाउँपालिका वडा नं २", "name_en": "Miklajung Rural Municipality Ward No. 2" },
-  { "id": "ward-043", "municipality_id": "mun-12", "ward_no": 3, "name_np": "मिक्लाजुङ गाउँपालिका वडा नं ३", "name_en": "Miklajung Rural Municipality Ward No. 3" },
-  { "id": "ward-044", "municipality_id": "mun-12", "ward_no": 4, "name_np": "मिक्लाजुङ गाउँपालिका वडा नं ४", "name_en": "Miklajung Rural Municipality Ward No. 4" },
-  { "id": "ward-045", "municipality_id": "mun-12", "ward_no": 5, "name_np": "मिक्लाजुङ गाउँपालिका वडा नं ५", "name_en": "Miklajung Rural Municipality Ward No. 5" },
-
-  { "id": "ward-046", "municipality_id": "mun-13", "ward_no": 1, "name_np": "इलाम नगरपालिका वडा नं १", "name_en": "Ilam Municipality Ward No. 1" },
-  { "id": "ward-047", "municipality_id": "mun-13", "ward_no": 2, "name_np": "इलाम नगरपालिका वडा नं २", "name_en": "Ilam Municipality Ward No. 2" },
-  { "id": "ward-048", "municipality_id": "mun-13", "ward_no": 3, "name_np": "इलाम नगरपालिका वडा नं ३", "name_en": "Ilam Municipality Ward No. 3" },
-  { "id": "ward-049", "municipality_id": "mun-13", "ward_no": 4, "name_np": "इलाम नगरपालिका वडा नं ४", "name_en": "Ilam Municipality Ward No. 4" },
-  { "id": "ward-050", "municipality_id": "mun-13", "ward_no": 5, "name_np": "इलाम नगरपालिका वडा नं ५", "name_en": "Ilam Municipality Ward No. 5" },
-  { "id": "ward-051", "municipality_id": "mun-13", "ward_no": 6, "name_np": "इलाम नगरपालिका वडा नं ६", "name_en": "Ilam Municipality Ward No. 6" },
-  { "id": "ward-052", "municipality_id": "mun-13", "ward_no": 7, "name_np": "इलाम नगरपालिका वडा नं ७", "name_en": "Ilam Municipality Ward No. 7" },
-  { "id": "ward-053", "municipality_id": "mun-13", "ward_no": 8, "name_np": "इलाम नगरपालिका वडा नं ८", "name_en": "Ilam Municipality Ward No. 8" },
-  { "id": "ward-054", "municipality_id": "mun-13", "ward_no": 9, "name_np": "इलाम नगरपालिका वडा नं ९", "name_en": "Ilam Municipality Ward No. 9" },
-  { "id": "ward-055", "municipality_id": "mun-13", "ward_no": 10, "name_np": "इलाम नगरपालिका वडा नं १०", "name_en": "Ilam Municipality Ward No. 10" },
-  { "id": "ward-056", "municipality_id": "mun-13", "ward_no": 11, "name_np": "इलाम नगरपालिका वडा नं ११", "name_en": "Ilam Municipality Ward No. 11" },
-  { "id": "ward-057", "municipality_id": "mun-13", "ward_no": 12, "name_np": "इलाम नगरपालिका वडा नं १२", "name_en": "Ilam Municipality Ward No. 12" },
-
-  { "id": "ward-058", "municipality_id": "mun-14", "ward_no": 1, "name_np": "सूर्योदय नगरपालिका वडा नं १", "name_en": "Suryodaya Municipality Ward No. 1" },
-  { "id": "ward-059", "municipality_id": "mun-14", "ward_no": 2, "name_np": "सूर्योदय नगरपालिका वडा नं २", "name_en": "Suryodaya Municipality Ward No. 2" },
-  { "id": "ward-060", "municipality_id": "mun-14", "ward_no": 3, "name_np": "सूर्योदय नगरपालिका वडा नं ३", "name_en": "Suryodaya Municipality Ward No. 3" },
-  { "id": "ward-061", "municipality_id": "mun-14", "ward_no": 4, "name_np": "सूर्योदय नगरपालिका वडा नं ४", "name_en": "Suryodaya Municipality Ward No. 4" },
-  { "id": "ward-062", "municipality_id": "mun-14", "ward_no": 5, "name_np": "सूर्योदय नगरपालिका वडा नं ५", "name_en": "Suryodaya Municipality Ward No. 5" },
-  { "id": "ward-063", "municipality_id": "mun-14", "ward_no": 6, "name_np": "सूर्योदय नगरपालिका वडा नं ६", "name_en": "Suryodaya Municipality Ward No. 6" },
-  { "id": "ward-064", "municipality_id": "mun-14", "ward_no": 7, "name_np": "सूर्योदय नगरपालिका वडा नं ७", "name_en": "Suryodaya Municipality Ward No. 7" },
-  { "id": "ward-065", "municipality_id": "mun-14", "ward_no": 8, "name_np": "सूर्योदय नगरपालिका वडा नं ८", "name_en": "Suryodaya Municipality Ward No. 8" },
-  { "id": "ward-066", "municipality_id": "mun-14", "ward_no": 9, "name_np": "सूर्योदय नगरपालिका वडा नं ९", "name_en": "Suryodaya Municipality Ward No. 9" },
-  { "id": "ward-067", "municipality_id": "mun-14", "ward_no": 10, "name_np": "सूर्योदय नगरपालिका वडा नं १०", "name_en": "Suryodaya Municipality Ward No. 10" },
-
-  { "id": "ward-068", "municipality_id": "mun-35", "ward_no": 1, "name_np": "विराटनगर महानगरपालिका वडा नं १", "name_en": "Biratnagar Metropolitan City Ward No. 1" },
-  { "id": "ward-069", "municipality_id": "mun-35", "ward_no": 2, "name_np": "विराटनगर महानगरपालिका वडा नं २", "name_en": "Biratnagar Metropolitan City Ward No. 2" },
-  { "id": "ward-070", "municipality_id": "mun-35", "ward_no": 3, "name_np": "विराटनगर महानगरपालिका वडा नं ३", "name_en": "Biratnagar Metropolitan City Ward No. 3" },
-  { "id": "ward-071", "municipality_id": "mun-35", "ward_no": 4, "name_np": "विराटनगर महानगरपालिका वडा नं ४", "name_en": "Biratnagar Metropolitan City Ward No. 4" },
-  { "id": "ward-072", "municipality_id": "mun-35", "ward_no": 5, "name_np": "विराटनगर महानगरपालिका वडा नं ५", "name_en": "Biratnagar Metropolitan City Ward No. 5" },
-  { "id": "ward-073", "municipality_id": "mun-35", "ward_no": 6, "name_np": "विराटनगर महानगरपालिका वडा नं ६", "name_en": "Biratnagar Metropolitan City Ward No. 6" },
-  { "id": "ward-074", "municipality_id": "mun-35", "ward_no": 7, "name_np": "विराटनगर महानगरपालिका वडा नं ७", "name_en": "Biratnagar Metropolitan City Ward No. 7" },
-  { "id": "ward-075", "municipality_id": "mun-35", "ward_no": 8, "name_np": "विराटनगर महानगरपालिका वडा नं ८", "name_en": "Biratnagar Metropolitan City Ward No. 8" },
-  { "id": "ward-076", "municipality_id": "mun-35", "ward_no": 9, "name_np": "विराटनगर महानगरपालिका वडा नं ९", "name_en": "Biratnagar Metropolitan City Ward No. 9" },
-  { "id": "ward-077", "municipality_id": "mun-35", "ward_no": 10, "name_np": "विराटनगर महानगरपालिका वडा नं १०", "name_en": "Biratnagar Metropolitan City Ward No. 10" },
-  { "id": "ward-078", "municipality_id": "mun-35", "ward_no": 11, "name_np": "विराटनगर महानगरपालिका वडा नं ११", "name_en": "Biratnagar Metropolitan City Ward No. 11" },
-  { "id": "ward-079", "municipality_id": "mun-35", "ward_no": 12, "name_np": "विराटनगर महानगरपालिका वडा नं १२", "name_en": "Biratnagar Metropolitan City Ward No. 12" },
-  { "id": "ward-080", "municipality_id": "mun-35", "ward_no": 13, "name_np": "विराटनगर महानगरपालिका वडा नं १३", "name_en": "Biratnagar Metropolitan City Ward No. 13" },
-  { "id": "ward-081", "municipality_id": "mun-35", "ward_no": 14, "name_np": "विराटनगर महानगरपालिका वडा नं १४", "name_en": "Biratnagar Metropolitan City Ward No. 14" },
-  { "id": "ward-082", "municipality_id": "mun-35", "ward_no": 15, "name_np": "विराटनगर महानगरपालिका वडा नं १५", "name_en": "Biratnagar Metropolitan City Ward No. 15" },
-  { "id": "ward-083", "municipality_id": "mun-35", "ward_no": 16, "name_np": "विराटनगर महानगरपालिका वडा नं १६", "name_en": "Biratnagar Metropolitan City Ward No. 16" },
-  { "id": "ward-084", "municipality_id": "mun-35", "ward_no": 17, "name_np": "विराटनगर महानगरपालिका वडा नं १७", "name_en": "Biratnagar Metropolitan City Ward No. 17" },
-  { "id": "ward-085", "municipality_id": "mun-35", "ward_no": 18, "name_np": "विराटनगर महानगरपालिका वडा नं १८", "name_en": "Biratnagar Metropolitan City Ward No. 18" },
-  { "id": "ward-086", "municipality_id": "mun-35", "ward_no": 19, "name_np": "विराटनगर महानगरपालिका वडा नं १९", "name_en": "Biratnagar Metropolitan City Ward No. 19" },
-
-  { "id": "ward-087", "municipality_id": "mun-51", "ward_no": 1, "name_np": "इटहरी उपमहानगरपालिका वडा नं १", "name_en": "Itahari Sub-Metropolitan City Ward No. 1" },
-  { "id": "ward-088", "municipality_id": "mun-51", "ward_no": 2, "name_np": "इटहरी उपमहानगरपालिका वडा नं २", "name_en": "Itahari Sub-Metropolitan City Ward No. 2" },
-  { "id": "ward-089", "municipality_id": "mun-51", "ward_no": 3, "name_np": "इटहरी उपमहानगरपालिका वडा नं ३", "name_en": "Itahari Sub-Metropolitan City Ward No. 3" },
-  { "id": "ward-090", "municipality_id": "mun-51", "ward_no": 4, "name_np": "इटहरी उपमहानगरपालिका वडा नं ४", "name_en": "Itahari Sub-Metropolitan City Ward No. 4" },
-  { "id": "ward-091", "municipality_id": "mun-51", "ward_no": 5, "name_np": "इटहरी उपमहानगरपालिका वडा नं ५", "name_en": "Itahari Sub-Metropolitan City Ward No. 5" },
-  { "id": "ward-092", "municipality_id": "mun-51", "ward_no": 6, "name_np": "इटहरी उपमहानगरपालिका वडा नं ६", "name_en": "Itahari Sub-Metropolitan City Ward No. 6" },
-  { "id": "ward-093", "municipality_id": "mun-51", "ward_no": 7, "name_np": "इटहरी उपमहानगरपालिका वडा नं ७", "name_en": "Itahari Sub-Metropolitan City Ward No. 7" },
-  { "id": "ward-094", "municipality_id": "mun-51", "ward_no": 8, "name_np": "इटहरी उपमहानगरपालिका वडा नं ८", "name_en": "Itahari Sub-Metropolitan City Ward No. 8" },
-  { "id": "ward-095", "municipality_id": "mun-51", "ward_no": 9, "name_np": "इटहरी उपमहानगरपालिका वडा नं ९", "name_en": "Itahari Sub-Metropolitan City Ward No. 9" },
-  { "id": "ward-096", "municipality_id": "mun-51", "ward_no": 10, "name_np": "इटहरी उपमहानगरपालिका वडा नं १०", "name_en": "Itahari Sub-Metropolitan City Ward No. 10" },
-  { "id": "ward-097", "municipality_id": "mun-51", "ward_no": 11, "name_np": "इटहरी उपमहानगरपालिका वडा नं ११", "name_en": "Itahari Sub-Metropolitan City Ward No. 11" },
-  { "id": "ward-098", "municipality_id": "mun-51", "ward_no": 12, "name_np": "इटहरी उपमहानगरपालिका वडा नं १२", "name_en": "Itahari Sub-Metropolitan City Ward No. 12" },
-  { "id": "ward-099", "municipality_id": "mun-51", "ward_no": 13, "name_np": "इटहरी उपमहानगरपालिका वडा नं १३", "name_en": "Itahari Sub-Metropolitan City Ward No. 13" },
-  { "id": "ward-100", "municipality_id": "mun-51", "ward_no": 14, "name_np": "इटहरी उपमहानगरपालिका वडा नं १४", "name_en": "Itahari Sub-Metropolitan City Ward No. 14" },
-  { "id": "ward-101", "municipality_id": "mun-51", "ward_no": 15, "name_np": "इटहरी उपमहानगरपालिका वडा नं १५", "name_en": "Itahari Sub-Metropolitan City Ward No. 15" },
-  { "id": "ward-102", "municipality_id": "mun-51", "ward_no": 16, "name_np": "इटहरी उपमहानगरपालिका वडा नं १६", "name_en": "Itahari Sub-Metropolitan City Ward No. 16" },
-  { "id": "ward-103", "municipality_id": "mun-51", "ward_no": 17, "name_np": "इटहरी उपमहानगरपालिका वडा नं १७", "name_en": "Itahari Sub-Metropolitan City Ward No. 17" },
-  { "id": "ward-104", "municipality_id": "mun-51", "ward_no": 18, "name_np": "इटहरी उपमहानगरपालिका वडा नं १८", "name_en": "Itahari Sub-Metropolitan City Ward No. 18" },
-  { "id": "ward-105", "municipality_id": "mun-51", "ward_no": 19, "name_np": "इटहरी उपमहानगरपालिका वडा नं १९", "name_en": "Itahari Sub-Metropolitan City Ward No. 19" },
-  { "id": "ward-106", "municipality_id": "mun-51", "ward_no": 20, "name_np": "इटहरी उपमहानगरपालिका वडा नं २०", "name_en": "Itahari Sub-Metropolitan City Ward No. 20" },
-
-  { "id": "ward-107", "municipality_id": "mun-52", "ward_no": 1, "name_np": "धरान उपमहानगरपालिका वडा नं १", "name_en": "Dharan Sub-Metropolitan City Ward No. 1" },
-  { "id": "ward-108", "municipality_id": "mun-52", "ward_no": 2, "name_np": "धरान उपमहानगरपालिका वडा नं २", "name_en": "Dharan Sub-Metropolitan City Ward No. 2" },
-  { "id": "ward-109", "municipality_id": "mun-52", "ward_no": 3, "name_np": "धरान उपमहानगरपालिका वडा नं ३", "name_en": "Dharan Sub-Metropolitan City Ward No. 3" },
-  { "id": "ward-110", "municipality_id": "mun-52", "ward_no": 4, "name_np": "धरान उपमहानगरपालिका वडा नं ४", "name_en": "Dharan Sub-Metropolitan City Ward No. 4" },
-  { "id": "ward-111", "municipality_id": "mun-52", "ward_no": 5, "name_np": "धरान उपमहानगरपालिका वडा नं ५", "name_en": "Dharan Sub-Metropolitan City Ward No. 5" },
-  { "id": "ward-112", "municipality_id": "mun-52", "ward_no": 6, "name_np": "धरान उपमहानगरपालिका वडा नं ६", "name_en": "Dharan Sub-Metropolitan City Ward No. 6" },
-  { "id": "ward-113", "municipality_id": "mun-52", "ward_no": 7, "name_np": "धरान उपमहानगरपालिका वडा नं ७", "name_en": "Dharan Sub-Metropolitan City Ward No. 7" },
-  { "id": "ward-114", "municipality_id": "mun-52", "ward_no": 8, "name_np": "धरान उपमहानगरपालिका वडा नं ८", "name_en": "Dharan Sub-Metropolitan City Ward No. 8" },
-  { "id": "ward-115", "municipality_id": "mun-52", "ward_no": 9, "name_np": "धरान उपमहानगरपालिका वडा नं ९", "name_en": "Dharan Sub-Metropolitan City Ward No. 9" },
-  { "id": "ward-116", "municipality_id": "mun-52", "ward_no": 10, "name_np": "धरान उपमहानगरपालिका वडा नं १०", "name_en": "Dharan Sub-Metropolitan City Ward No. 10" },
-  { "id": "ward-117", "municipality_id": "mun-52", "ward_no": 11, "name_np": "धरान उपमहानगरपालिका वडा नं ११", "name_en": "Dharan Sub-Metropolitan City Ward No. 11" },
-  { "id": "ward-118", "municipality_id": "mun-52", "ward_no": 12, "name_np": "धरान उपमहानगरपालिका वडा नं १२", "name_en": "Dharan Sub-Metropolitan City Ward No. 12" },
-  { "id": "ward-119", "municipality_id": "mun-52", "ward_no": 13, "name_np": "धरान उपमहानगरपालिका वडा नं १३", "name_en": "Dharan Sub-Metropolitan City Ward No. 13" },
-  { "id": "ward-120", "municipality_id": "mun-52", "ward_no": 14, "name_np": "धरान उपमहानगरपालिका वडा नं १४", "name_en": "Dharan Sub-Metropolitan City Ward No. 14" },
-  { "id": "ward-121", "municipality_id": "mun-52", "ward_no": 15, "name_np": "धरान उपमहानगरपालिका वडा नं १५", "name_en": "Dharan Sub-Metropolitan City Ward No. 15" },
-  { "id": "ward-122", "municipality_id": "mun-52", "ward_no": 16, "name_np": "धरान उपमहानगरपालिका वडा नं १६", "name_en": "Dharan Sub-Metropolitan City Ward No. 16" },
-  { "id": "ward-123", "municipality_id": "mun-52", "ward_no": 17, "name_np": "धरान उपमहानगरपालिका वडा नं १७", "name_en": "Dharan Sub-Metropolitan City Ward No. 17" },
-  { "id": "ward-124", "municipality_id": "mun-52", "ward_no": 18, "name_np": "धरान उपमहानगरपालिका वडा नं १८", "name_en": "Dharan Sub-Metropolitan City Ward No. 18" },
-  { "id": "ward-125", "municipality_id": "mun-52", "ward_no": 19, "name_np": "धरान उपमहानगरपालिका वडा नं १९", "name_en": "Dharan Sub-Metropolitan City Ward No. 19" },
-
-  { "id": "ward-126", "municipality_id": "mun-62", "ward_no": 1, "name_np": "धनकुटा नगरपालिका वडा नं १", "name_en": "Dhankuta Municipality Ward No. 1" },
-  { "id": "ward-127", "municipality_id": "mun-62", "ward_no": 2, "name_np": "धनकुटा नगरपालिका वडा नं २", "name_en": "Dhankuta Municipality Ward No. 2" },
-  { "id": "ward-128", "municipality_id": "mun-62", "ward_no": 3, "name_np": "धनकुटा नगरपालिका वडा नं ३", "name_en": "Dhankuta Municipality Ward No. 3" },
-  { "id": "ward-129", "municipality_id": "mun-62", "ward_no": 4, "name_np": "धनकुटा नगरपालिका वडा नं ४", "name_en": "Dhankuta Municipality Ward No. 4" },
-  { "id": "ward-130", "municipality_id": "mun-62", "ward_no": 5, "name_np": "धनकुटा नगरपालिका वडा नं ५", "name_en": "Dhankuta Municipality Ward No. 5" },
-  { "id": "ward-131", "municipality_id": "mun-62", "ward_no": 6, "name_np": "धनकुटा नगरपालिका वडा नं ६", "name_en": "Dhankuta Municipality Ward No. 6" },
-  { "id": "ward-132", "municipality_id": "mun-62", "ward_no": 7, "name_np": "धनकुटा नगरपालिका वडा नं ७", "name_en": "Dhankuta Municipality Ward No. 7" },
-  { "id": "ward-133", "municipality_id": "mun-62", "ward_no": 8, "name_np": "धनकुटा नगरपालिका वडा नं ८", "name_en": "Dhankuta Municipality Ward No. 8" },
-  { "id": "ward-134", "municipality_id": "mun-62", "ward_no": 9, "name_np": "धनकुटा नगरपालिका वडा नं ९", "name_en": "Dhankuta Municipality Ward No. 9" },
-  { "id": "ward-135", "municipality_id": "mun-62", "ward_no": 10, "name_np": "धनकुटा नगरपालिका वडा नं १०", "name_en": "Dhankuta Municipality Ward No. 10" },
-
-  { "id": "ward-136", "municipality_id": "mun-63", "ward_no": 1, "name_np": "पाख्रिबास नगरपालिका वडा नं १", "name_en": "Pakhribas Municipality Ward No. 1" },
-  { "id": "ward-137", "municipality_id": "mun-63", "ward_no": 2, "name_np": "पाख्रिबास नगरपालिका वडा नं २", "name_en": "Pakhribas Municipality Ward No. 2" },
-  { "id": "ward-138", "municipality_id": "mun-63", "ward_no": 3, "name_np": "पाख्रिबास नगरपालिका वडा नं ३", "name_en": "Pakhribas Municipality Ward No. 3" },
-  { "id": "ward-139", "municipality_id": "mun-63", "ward_no": 4, "name_np": "पाख्रिबास नगरपालिका वडा नं ४", "name_en": "Pakhribas Municipality Ward No. 4" },
-  { "id": "ward-140", "municipality_id": "mun-63", "ward_no": 5, "name_np": "पाख्रिबास नगरपालिका वडा नं ५", "name_en": "Pakhribas Municipality Ward No. 5" },
-  { "id": "ward-141", "municipality_id": "mun-63", "ward_no": 6, "name_np": "पाख्रिबास नगरपालिका वडा नं ६", "name_en": "Pakhribas Municipality Ward No. 6" },
-  { "id": "ward-142", "municipality_id": "mun-63", "ward_no": 7, "name_np": "पाख्रिबास नगरपालिका वडा नं ७", "name_en": "Pakhribas Municipality Ward No. 7" },
-  { "id": "ward-143", "municipality_id": "mun-63", "ward_no": 8, "name_np": "पाख्रिबास नगरपालिका वडा नं ८", "name_en": "Pakhribas Municipality Ward No. 8" },
-
-  { "id": "ward-144", "municipality_id": "mun-69", "ward_no": 1, "name_np": "म्याङलुङ नगरपालिका वडा नं १", "name_en": "Myanglung Municipality Ward No. 1" },
-  { "id": "ward-145", "municipality_id": "mun-69", "ward_no": 2, "name_np": "म्याङलुङ नगरपालिका वडा नं २", "name_en": "Myanglung Municipality Ward No. 2" },
-  { "id": "ward-146", "municipality_id": "mun-69", "ward_no": 3, "name_np": "म्याङलुङ नगरपालिका वडा नं ३", "name_en": "Myanglung Municipality Ward No. 3" },
-  { "id": "ward-147", "municipality_id": "mun-69", "ward_no": 4, "name_np": "म्याङलुङ नगरपालिका वडा नं ४", "name_en": "Myanglung Municipality Ward No. 4" },
-  { "id": "ward-148", "municipality_id": "mun-69", "ward_no": 5, "name_np": "म्याङलुङ नगरपालिका वडा नं ५", "name_en": "Myanglung Municipality Ward No. 5" },
-  { "id": "ward-149", "municipality_id": "mun-69", "ward_no": 6, "name_np": "म्याङलुङ नगरपालिका वडा नं ६", "name_en": "Myanglung Municipality Ward No. 6" },
-  { "id": "ward-150", "municipality_id": "mun-69", "ward_no": 7, "name_np": "म्याङलुङ नगरपालिका वडा नं ७", "name_en": "Myanglung Municipality Ward No. 7" },
-  { "id": "ward-151", "municipality_id": "mun-69", "ward_no": 8, "name_np": "म्याङलुङ नगरपालिका वडा नं ८", "name_en": "Myanglung Municipality Ward No. 8" },
-  { "id": "ward-152", "municipality_id": "mun-69", "ward_no": 9, "name_np": "म्याङलुङ नगरपालिका वडा नं ९", "name_en": "Myanglung Municipality Ward No. 9" },
-
-  { "id": "ward-153", "municipality_id": "mun-70", "ward_no": 1, "name_np": "लालीगुराँस नगरपालिका वडा नं १", "name_en": "Laligurans Municipality Ward No. 1" },
-  { "id": "ward-154", "municipality_id": "mun-70", "ward_no": 2, "name_np": "लालीगुराँस नगरपालिका वडा नं २", "name_en": "Laligurans Municipality Ward No. 2" },
-  { "id": "ward-155", "municipality_id": "mun-70", "ward_no": 3, "name_np": "लालीगुराँस नगरपालिका वडा नं ३", "name_en": "Laligurans Municipality Ward No. 3" },
-  { "id": "ward-156", "municipality_id": "mun-70", "ward_no": 4, "name_np": "लालीगुराँस नगरपालिका वडा नं ४", "name_en": "Laligurans Municipality Ward No. 4" },
-  { "id": "ward-157", "municipality_id": "mun-70", "ward_no": 5, "name_np": "लालीगुराँस नगरपालिका वडा नं ५", "name_en": "Laligurans Municipality Ward No. 5" },
-  { "id": "ward-158", "municipality_id": "mun-70", "ward_no": 6, "name_np": "लालीगुराँस नगरपालिका वडा नं ६", "name_en": "Laligurans Municipality Ward No. 6" },
-  { "id": "ward-159", "municipality_id": "mun-70", "ward_no": 7, "name_np": "लालीगुराँस नगरपालिका वडा नं ७", "name_en": "Laligurans Municipality Ward No. 7" },
-  { "id": "ward-160", "municipality_id": "mun-70", "ward_no": 8, "name_np": "लालीगुराँस नगरपालिका वडा नं ८", "name_en": "Laligurans Municipality Ward No. 8" },
-  { "id": "ward-161", "municipality_id": "mun-70", "ward_no": 9, "name_np": "लालीगुराँस नगरपालिका वडा नं ९", "name_en": "Laligurans Municipality Ward No. 9" },
-
-  { "id": "ward-162", "municipality_id": "mun-75", "ward_no": 1, "name_np": "खाँदबारी नगरपालिका वडा नं १", "name_en": "Khandbari Municipality Ward No. 1" },
-  { "id": "ward-163", "municipality_id": "mun-75", "ward_no": 2, "name_np": "खाँदबारी नगरपालिका वडा नं २", "name_en": "Khandbari Municipality Ward No. 2" },
-  { "id": "ward-164", "municipality_id": "mun-75", "ward_no": 3, "name_np": "खाँदबारी नगरपालिका वडा नं ३", "name_en": "Khandbari Municipality Ward No. 3" },
-  { "id": "ward-165", "municipality_id": "mun-75", "ward_no": 4, "name_np": "खाँदबारी नगरपालिका वडा नं ४", "name_en": "Khandbari Municipality Ward No. 4" },
-  { "id": "ward-166", "municipality_id": "mun-75", "ward_no": 5, "name_np": "खाँदबारी नगरपालिका वडा नं ५", "name_en": "Khandbari Municipality Ward No. 5" },
-  { "id": "ward-167", "municipality_id": "mun-75", "ward_no": 6, "name_np": "खाँदबारी नगरपालिका वडा नं ६", "name_en": "Khandbari Municipality Ward No. 6" },
-  { "id": "ward-168", "municipality_id": "mun-75", "ward_no": 7, "name_np": "खाँदबारी नगरपालिका वडा नं ७", "name_en": "Khandbari Municipality Ward No. 7" },
-  { "id": "ward-169", "municipality_id": "mun-75", "ward_no": 8, "name_np": "खाँदबारी नगरपालिका वडा नं ८", "name_en": "Khandbari Municipality Ward No. 8" },
-  { "id": "ward-170", "municipality_id": "mun-75", "ward_no": 9, "name_np": "खाँदबारी नगरपालिका वडा नं ९", "name_en": "Khandbari Municipality Ward No. 9" },
-  { "id": "ward-171", "municipality_id": "mun-75", "ward_no": 10, "name_np": "खाँदबारी नगरपालिका वडा नं १०", "name_en": "Khandbari Municipality Ward No. 10" },
-
-  { "id": "ward-172", "municipality_id": "mun-76", "ward_no": 1, "name_np": "चैनपुर नगरपालिका वडा नं १", "name_en": "Chainpur Municipality Ward No. 1" },
-  { "id": "ward-173", "municipality_id": "mun-76", "ward_no": 2, "name_np": "चैनपुर नगरपालिका वडा नं २", "name_en": "Chainpur Municipality Ward No. 2" },
-  { "id": "ward-174", "municipality_id": "mun-76", "ward_no": 3, "name_np": "चैनपुर नगरपालिका वडा नं ३", "name_en": "Chainpur Municipality Ward No. 3" },
-  { "id": "ward-175", "municipality_id": "mun-76", "ward_no": 4, "name_np": "चैनपुर नगरपालिका वडा नं ४", "name_en": "Chainpur Municipality Ward No. 4" },
-  { "id": "ward-176", "municipality_id": "mun-76", "ward_no": 5, "name_np": "चैनपुर नगरपालिका वडा नं ५", "name_en": "Chainpur Municipality Ward No. 5" },
-  { "id": "ward-177", "municipality_id": "mun-76", "ward_no": 6, "name_np": "चैनपुर नगरपालिका वडा नं ६", "name_en": "Chainpur Municipality Ward No. 6" },
-  { "id": "ward-178", "municipality_id": "mun-76", "ward_no": 7, "name_np": "चैनपुर नगरपालिका वडा नं ७", "name_en": "Chainpur Municipality Ward No. 7" },
-  { "id": "ward-179", "municipality_id": "mun-76", "ward_no": 8, "name_np": "चैनपुर नगरपालिका वडा नं ८", "name_en": "Chainpur Municipality Ward No. 8" },
-  { "id": "ward-180", "municipality_id": "mun-76", "ward_no": 9, "name_np": "चैनपुर नगरपालिका वडा नं ९", "name_en": "Chainpur Municipality Ward No. 9" },
-
-  { "id": "ward-181", "municipality_id": "mun-84", "ward_no": 1, "name_np": "भोजपुर नगरपालिका वडा नं १", "name_en": "Bhojpur Municipality Ward No. 1" },
-  { "id": "ward-182", "municipality_id": "mun-84", "ward_no": 2, "name_np": "भोजपुर नगरपालिका वडा नं २", "name_en": "Bhojpur Municipality Ward No. 2" },
-  { "id": "ward-183", "municipality_id": "mun-84", "ward_no": 3, "name_np": "भोजपुर नगरपालिका वडा नं ३", "name_en": "Bhojpur Municipality Ward No. 3" },
-  { "id": "ward-184", "municipality_id": "mun-84", "ward_no": 4, "name_np": "भोजपुर नगरपालिका वडा नं ४", "name_en": "Bhojpur Municipality Ward No. 4" },
-  { "id": "ward-185", "municipality_id": "mun-84", "ward_no": 5, "name_np": "भोजपुर नगरपालिका वडा नं ५", "name_en": "Bhojpur Municipality Ward No. 5" },
-  { "id": "ward-186", "municipality_id": "mun-84", "ward_no": 6, "name_np": "भोजपुर नगरपालिका वडा नं ६", "name_en": "Bhojpur Municipality Ward No. 6" },
-  { "id": "ward-187", "municipality_id": "mun-84", "ward_no": 7, "name_np": "भोजपुर नगरपालिका वडा नं ७", "name_en": "Bhojpur Municipality Ward No. 7" },
-  { "id": "ward-188", "municipality_id": "mun-84", "ward_no": 8, "name_np": "भोजपुर नगरपालिका वडा नं ८", "name_en": "Bhojpur Municipality Ward No. 8" },
-  { "id": "ward-189", "municipality_id": "mun-84", "ward_no": 9, "name_np": "भोजपुर नगरपालिका वडा नं ९", "name_en": "Bhojpur Municipality Ward No. 9" },
-  { "id": "ward-190", "municipality_id": "mun-84", "ward_no": 10, "name_np": "भोजपुर नगरपालिका वडा नं १०", "name_en": "Bhojpur Municipality Ward No. 10" },
-  { "id": "ward-191", "municipality_id": "mun-84", "ward_no": 11, "name_np": "भोजपुर नगरपालिका वडा नं ११", "name_en": "Bhojpur Municipality Ward No. 11" },
-
-  { "id": "ward-192", "municipality_id": "mun-85", "ward_no": 1, "name_np": "षडानन्द नगरपालिका वडा नं १", "name_en": "Shadanand Municipality Ward No. 1" },
-  { "id": "ward-193", "municipality_id": "mun-85", "ward_no": 2, "name_np": "षडानन्द नगरपालिका वडा नं २", "name_en": "Shadanand Municipality Ward No. 2" },
-  { "id": "ward-194", "municipality_id": "mun-85", "ward_no": 3, "name_np": "षडानन्द नगरपालिका वडा नं ३", "name_en": "Shadanand Municipality Ward No. 3" },
-  { "id": "ward-195", "municipality_id": "mun-85", "ward_no": 4, "name_np": "षडानन्द नगरपालिका वडा नं ४", "name_en": "Shadanand Municipality Ward No. 4" },
-  { "id": "ward-196", "municipality_id": "mun-85", "ward_no": 5, "name_np": "षडानन्द नगरपालिका वडा नं ५", "name_en": "Shadanand Municipality Ward No. 5" },
-  { "id": "ward-197", "municipality_id": "mun-85", "ward_no": 6, "name_np": "षडानन्द नगरपालिका वडा नं ६", "name_en": "Shadanand Municipality Ward No. 6" },
-  { "id": "ward-198", "municipality_id": "mun-85", "ward_no": 7, "name_np": "षडानन्द नगरपालिका वडा नं ७", "name_en": "Shadanand Municipality Ward No. 7" },
-  { "id": "ward-199", "municipality_id": "mun-85", "ward_no": 8, "name_np": "षडानन्द नगरपालिका वडा नं ८", "name_en": "Shadanand Municipality Ward No. 8" },
-  { "id": "ward-200", "municipality_id": "mun-85", "ward_no": 9, "name_np": "षडानन्द नगरपालिका वडा नं ९", "name_en": "Shadanand Municipality Ward No. 9" },
-
-  { "id": "ward-201", "municipality_id": "mun-92", "ward_no": 1, "name_np": "सोलु दुधकुण्ड नगरपालिका वडा नं १", "name_en": "Solududhkunda Municipality Ward No. 1" },
-  { "id": "ward-202", "municipality_id": "mun-92", "ward_no": 2, "name_np": "सोलु दुधकुण्ड नगरपालिका वडा नं २", "name_en": "Solududhkunda Municipality Ward No. 2" },
-  { "id": "ward-203", "municipality_id": "mun-92", "ward_no": 3, "name_np": "सोलु दुधकुण्ड नगरपालिका वडा नं ३", "name_en": "Solududhkunda Municipality Ward No. 3" },
-  { "id": "ward-204", "municipality_id": "mun-92", "ward_no": 4, "name_np": "सोलु दुधकुण्ड नगरपालिका वडा नं ४", "name_en": "Solududhkunda Municipality Ward No. 4" },
-  { "id": "ward-205", "municipality_id": "mun-92", "ward_no": 5, "name_np": "सोलु दुधकुण्ड नगरपालिका वडा नं ५", "name_en": "Solududhkunda Municipality Ward No. 5" },
-  { "id": "ward-206", "municipality_id": "mun-92", "ward_no": 6, "name_np": "सोलु दुधकुण्ड नगरपालिका वडा नं ६", "name_en": "Solududhkunda Municipality Ward No. 6" },
-  { "id": "ward-207", "municipality_id": "mun-92", "ward_no": 7, "name_np": "सोलु दुधकुण्ड नगरपालिका वडा नं ७", "name_en": "Solududhkunda Municipality Ward No. 7" },
-  { "id": "ward-208", "municipality_id": "mun-92", "ward_no": 8, "name_np": "सोलु दुधकुण्ड नगरपालिका वडा नं ८", "name_en": "Solududhkunda Municipality Ward No. 8" },
-  { "id": "ward-209", "municipality_id": "mun-92", "ward_no": 9, "name_np": "सोलु दुधकुण्ड नगरपालिका वडा नं ९", "name_en": "Solududhkunda Municipality Ward No. 9" },
-  { "id": "ward-210", "municipality_id": "mun-92", "ward_no": 10, "name_np": "सोलु दुधकुण्ड नगरपालिका वडा नं १०", "name_en": "Solududhkunda Municipality Ward No. 10" },
-  { "id": "ward-211", "municipality_id": "mun-92", "ward_no": 11, "name_np": "सोलु दुधकुण्ड नगरपालिका वडा नं ११", "name_en": "Solududhkunda Municipality Ward No. 11" },
-
-  { "id": "ward-212", "municipality_id": "mun-99", "ward_no": 1, "name_np": "सिद्धिचरण नगरपालिका वडा नं १", "name_en": "Siddhicharan Municipality Ward No. 1" },
-  { "id": "ward-213", "municipality_id": "mun-99", "ward_no": 2, "name_np": "सिद्धिचरण नगरपालिका वडा नं २", "name_en": "Siddhicharan Municipality Ward No. 2" },
-  { "id": "ward-214", "municipality_id": "mun-99", "ward_no": 3, "name_np": "सिद्धिचरण नगरपालिका वडा नं ३", "name_en": "Siddhicharan Municipality Ward No. 3" },
-  { "id": "ward-215", "municipality_id": "mun-99", "ward_no": 4, "name_np": "सिद्धिचरण नगरपालिका वडा नं ४", "name_en": "Siddhicharan Municipality Ward No. 4" },
-  { "id": "ward-216", "municipality_id": "mun-99", "ward_no": 5, "name_np": "सिद्धिचरण नगरपालिका वडा नं ५", "name_en": "Siddhicharan Municipality Ward No. 5" },
-  { "id": "ward-217", "municipality_id": "mun-99", "ward_no": 6, "name_np": "सिद्धिचरण नगरपालिका वडा नं ६", "name_en": "Siddhicharan Municipality Ward No. 6" },
-  { "id": "ward-218", "municipality_id": "mun-99", "ward_no": 7, "name_np": "सिद्धिचरण नगरपालिका वडा नं ७", "name_en": "Siddhicharan Municipality Ward No. 7" },
-  { "id": "ward-219", "municipality_id": "mun-99", "ward_no": 8, "name_np": "सिद्धिचरण नगरपालिका वडा नं ८", "name_en": "Siddhicharan Municipality Ward No. 8" },
-  { "id": "ward-220", "municipality_id": "mun-99", "ward_no": 9, "name_np": "सिद्धिचरण नगरपालिका वडा नं ९", "name_en": "Siddhicharan Municipality Ward No. 9" },
-
-  { "id": "ward-221", "municipality_id": "mun-106", "ward_no": 1, "name_np": "दिक्तेल रुपाकोट मझुवागढी नगरपालिका वडा नं १", "name_en": "Diktel Rupakot Majhuwagadhi Municipality Ward No. 1" },
-  { "id": "ward-222", "municipality_id": "mun-106", "ward_no": 2, "name_np": "दिक्तेल रुपाकोट मझुवागढी नगरपालिका वडा नं २", "name_en": "Diktel Rupakot Majhuwagadhi Municipality Ward No. 2" },
-  { "id": "ward-223", "municipality_id": "mun-106", "ward_no": 3, "name_np": "दिक्तेल रुपाकोट मझुवागढी नगरपालिका वडा नं ३", "name_en": "Diktel Rupakot Majhuwagadhi Municipality Ward No. 3" },
-  { "id": "ward-224", "municipality_id": "mun-106", "ward_no": 4, "name_np": "दिक्तेल रुपाकोट मझुवागढी नगरपालिका वडा नं ४", "name_en": "Diktel Rupakot Majhuwagadhi Municipality Ward No. 4" },
-  { "id": "ward-225", "municipality_id": "mun-106", "ward_no": 5, "name_np": "दिक्तेल रुपाकोट मझुवागढी नगरपालिका वडा नं ५", "name_en": "Diktel Rupakot Majhuwagadhi Municipality Ward No. 5" },
-  { "id": "ward-226", "municipality_id": "mun-106", "ward_no": 6, "name_np": "दिक्तेल रुपाकोट मझुवागढी नगरपालिका वडा नं ६", "name_en": "Diktel Rupakot Majhuwagadhi Municipality Ward No. 6" },
-  { "id": "ward-227", "municipality_id": "mun-106", "ward_no": 7, "name_np": "दिक्तेल रुपाकोट मझुवागढी नगरपालिका वडा नं ७", "name_en": "Diktel Rupakot Majhuwagadhi Municipality Ward No. 7" },
-  { "id": "ward-228", "municipality_id": "mun-106", "ward_no": 8, "name_np": "दिक्तेल रुपाकोट मझुवागढी नगरपालिका वडा नं ८", "name_en": "Diktel Rupakot Majhuwagadhi Municipality Ward No. 8" },
-  { "id": "ward-229", "municipality_id": "mun-106", "ward_no": 9, "name_np": "दिक्तेल रुपाकोट मझुवागढी नगरपालिका वडा नं ९", "name_en": "Diktel Rupakot Majhuwagadhi Municipality Ward No. 9" },
-  { "id": "ward-230", "municipality_id": "mun-106", "ward_no": 10, "name_np": "दिक्तेल रुपाकोट मझुवागढी नगरपालिका वडा नं १०", "name_en": "Diktel Rupakot Majhuwagadhi Municipality Ward No. 10" },
-  { "id": "ward-231", "municipality_id": "mun-106", "ward_no": 11, "name_np": "दिक्तेल रुपाकोट मझुवागढी नगरपालिका वडा नं ११", "name_en": "Diktel Rupakot Majhuwagadhi Municipality Ward No. 11" },
-  { "id": "ward-232", "municipality_id": "mun-106", "ward_no": 12, "name_np": "दिक्तेल रुपाकोट मझुवागढी नगरपालिका वडा नं १२", "name_en": "Diktel Rupakot Majhuwagadhi Municipality Ward No. 12" },
-  { "id": "ward-233", "municipality_id": "mun-106", "ward_no": 13, "name_np": "दिक्तेल रुपाकोट मझुवागढी नगरपालिका वडा नं १३", "name_en": "Diktel Rupakot Majhuwagadhi Municipality Ward No. 13" },
-  { "id": "ward-234", "municipality_id": "mun-106", "ward_no": 14, "name_np": "दिक्तेल रुपाकोट मझुवागढी नगरपालिका वडा नं १४", "name_en": "Diktel Rupakot Majhuwagadhi Municipality Ward No. 14" },
-  { "id": "ward-235", "municipality_id": "mun-106", "ward_no": 15, "name_np": "दिक्तेल रुपाकोट मझुवागढी नगरपालिका वडा नं १५", "name_en": "Diktel Rupakot Majhuwagadhi Municipality Ward No. 15" },
-
-  { "id": "ward-236", "municipality_id": "mun-107", "ward_no": 1, "name_np": "हलेसी तुवाचुङ नगरपालिका वडा नं १", "name_en": "Halesi Tuwachung Municipality Ward No. 1" },
-  { "id": "ward-237", "municipality_id": "mun-107", "ward_no": 2, "name_np": "हलेसी तुवाचुङ नगरपालिका वडा नं २", "name_en": "Halesi Tuwachung Municipality Ward No. 2" },
-  { "id": "ward-238", "municipality_id": "mun-107", "ward_no": 3, "name_np": "हलेसी तुवाचुङ नगरपालिका वडा नं ३", "name_en": "Halesi Tuwachung Municipality Ward No. 3" },
-  { "id": "ward-239", "municipality_id": "mun-107", "ward_no": 4, "name_np": "हलेसी तुवाचुङ नगरपालिका वडा नं ४", "name_en": "Halesi Tuwachung Municipality Ward No. 4" },
-  { "id": "ward-240", "municipality_id": "mun-107", "ward_no": 5, "name_np": "हलेसी तुवाचुङ नगरपालिका वडा नं ५", "name_en": "Halesi Tuwachung Municipality Ward No. 5" },
-  { "id": "ward-241", "municipality_id": "mun-107", "ward_no": 6, "name_np": "हलेसी तुवाचुङ नगरपालिका वडा नं ६", "name_en": "Halesi Tuwachung Municipality Ward No. 6" },
-  { "id": "ward-242", "municipality_id": "mun-107", "ward_no": 7, "name_np": "हलेसी तुवाचुङ नगरपालिका वडा नं ७", "name_en": "Halesi Tuwachung Municipality Ward No. 7" },
-  { "id": "ward-243", "municipality_id": "mun-107", "ward_no": 8, "name_np": "हलेसी तुवाचुङ नगरपालिका वडा नं ८", "name_en": "Halesi Tuwachung Municipality Ward No. 8" },
-  { "id": "ward-244", "municipality_id": "mun-107", "ward_no": 9, "name_np": "हलेसी तुवाचुङ नगरपालिका वडा नं ९", "name_en": "Halesi Tuwachung Municipality Ward No. 9" },
-
-  { "id": "ward-245", "municipality_id": "mun-115", "ward_no": 1, "name_np": "त्रियुगा नगरपालिका वडा नं १", "name_en": "Triyuga Municipality Ward No. 1" },
-  { "id": "ward-246", "municipality_id": "mun-115", "ward_no": 2, "name_np": "त्रियुगा नगरपालिका वडा नं २", "name_en": "Triyuga Municipality Ward No. 2" },
-  { "id": "ward-247", "municipality_id": "mun-115", "ward_no": 3, "name_np": "त्रियुगा नगरपालिका वडा नं ३", "name_en": "Triyuga Municipality Ward No. 3" },
-  { "id": "ward-248", "municipality_id": "mun-115", "ward_no": 4, "name_np": "त्रियुगा नगरपालिका वडा नं ४", "name_en": "Triyuga Municipality Ward No. 4" },
-  { "id": "ward-249", "municipality_id": "mun-115", "ward_no": 5, "name_np": "त्रियुगा नगरपालिका वडा नं ५", "name_en": "Triyuga Municipality Ward No. 5" },
-  { "id": "ward-250", "municipality_id": "mun-115", "ward_no": 6, "name_np": "त्रियुगा नगरपालिका वडा नं ६", "name_en": "Triyuga Municipality Ward No. 6" },
-  { "id": "ward-251", "municipality_id": "mun-115", "ward_no": 7, "name_np": "त्रियुगा नगरपालिका वडा नं ७", "name_en": "Triyuga Municipality Ward No. 7" },
-  { "id": "ward-252", "municipality_id": "mun-115", "ward_no": 8, "name_np": "त्रियुगा नगरपालिका वडा नं ८", "name_en": "Triyuga Municipality Ward No. 8" },
-  { "id": "ward-253", "municipality_id": "mun-115", "ward_no": 9, "name_np": "त्रियुगा नगरपालिका वडा नं ९", "name_en": "Triyuga Municipality Ward No. 9" },
-  { "id": "ward-254", "municipality_id": "mun-115", "ward_no": 10, "name_np": "त्रियुगा नगरपालिका वडा नं १०", "name_en": "Triyuga Municipality Ward No. 10" },
-  { "id": "ward-255", "municipality_id": "mun-115", "ward_no": 11, "name_np": "त्रियुगा नगरपालिका वडा नं ११", "name_en": "Triyuga Municipality Ward No. 11" },
-  { "id": "ward-256", "municipality_id": "mun-115", "ward_no": 12, "name_np": "त्रियुगा नगरपालिका वडा नं १२", "name_en": "Triyuga Municipality Ward No. 12" },
-  { "id": "ward-257", "municipality_id": "mun-115", "ward_no": 13, "name_np": "त्रियुगा नगरपालिका वडा नं १३", "name_en": "Triyuga Municipality Ward No. 13" },
-  { "id": "ward-258", "municipality_id": "mun-115", "ward_no": 14, "name_np": "त्रियुगा नगरपालिका वडा नं १४", "name_en": "Triyuga Municipality Ward No. 14" },
-  { "id": "ward-259", "municipality_id": "mun-115", "ward_no": 15, "name_np": "त्रियुगा नगरपालिका वडा नं १५", "name_en": "Triyuga Municipality Ward No. 15" },
-  { "id": "ward-260", "municipality_id": "mun-115", "ward_no": 16, "name_np": "त्रियुगा नगरपालिका वडा नं १६", "name_en": "Triyuga Municipality Ward No. 16" },
-
-  { "id": "ward-261", "municipality_id": "mun-116", "ward_no": 1, "name_np": "कटारी नगरपालिका वडा नं १", "name_en": "Katari Municipality Ward No. 1" },
-  { "id": "ward-262", "municipality_id": "mun-116", "ward_no": 2, "name_np": "कटारी नगरपालिका वडा नं २", "name_en": "Katari Municipality Ward No. 2" },
-  { "id": "ward-263", "municipality_id": "mun-116", "ward_no": 3, "name_np": "कटारी नगरपालिका वडा नं ३", "name_en": "Katari Municipality Ward No. 3" },
-  { "id": "ward-264", "municipality_id": "mun-116", "ward_no": 4, "name_np": "कटारी नगरपालिका वडा नं ४", "name_en": "Katari Municipality Ward No. 4" },
-  { "id": "ward-265", "municipality_id": "mun-116", "ward_no": 5, "name_np": "कटारी नगरपालिका वडा नं ५", "name_en": "Katari Municipality Ward No. 5" },
-  { "id": "ward-266", "municipality_id": "mun-116", "ward_no": 6, "name_np": "कटारी नगरपालिका वडा नं ६", "name_en": "Katari Municipality Ward No. 6" },
-  { "id": "ward-267", "municipality_id": "mun-116", "ward_no": 7, "name_np": "कटारी नगरपालिका वडा नं ७", "name_en": "Katari Municipality Ward No. 7" },
-  { "id": "ward-268", "municipality_id": "mun-116", "ward_no": 8, "name_np": "कटारी नगरपालिका वडा नं ८", "name_en": "Katari Municipality Ward No. 8" },
-  { "id": "ward-269", "municipality_id": "mun-116", "ward_no": 9, "name_np": "कटारी नगरपालिका वडा नं ९", "name_en": "Katari Municipality Ward No. 9" },
-  { "id": "ward-270", "municipality_id": "mun-116", "ward_no": 10, "name_np": "कटारी नगरपालिका वडा नं १०", "name_en": "Katari Municipality Ward No. 10" },
-
-  { "id": "ward-271", "municipality_id": "mun-117", "ward_no": 1, "name_np": "चौदण्डीगढी नगरपालिका वडा नं १", "name_en": "Chaudandigadhi Municipality Ward No. 1" },
-  { "id": "ward-272", "municipality_id": "mun-117", "ward_no": 2, "name_np": "चौदण्डीगढी नगरपालिका वडा नं २", "name_en": "Chaudandigadhi Municipality Ward No. 2" },
-  { "id": "ward-273", "municipality_id": "mun-117", "ward_no": 3, "name_np": "चौदण्डीगढी नगरपालिका वडा नं ३", "name_en": "Chaudandigadhi Municipality Ward No. 3" },
-  { "id": "ward-274", "municipality_id": "mun-117", "ward_no": 4, "name_np": "चौदण्डीगढी नगरपालिका वडा नं ४", "name_en": "Chaudandigadhi Municipality Ward No. 4" },
-  { "id": "ward-275", "municipality_id": "mun-117", "ward_no": 5, "name_np": "चौदण्डीगढी नगरपालिका वडा नं ५", "name_en": "Chaudandigadhi Municipality Ward No. 5" },
-  { "id": "ward-276", "municipality_id": "mun-117", "ward_no": 6, "name_np": "चौदण्डीगढी नगरपालिका वडा नं ६", "name_en": "Chaudandigadhi Municipality Ward No. 6" },
-  { "id": "ward-277", "municipality_id": "mun-117", "ward_no": 7, "name_np": "चौदण्डीगढी नगरपालिका वडा नं ७", "name_en": "Chaudandigadhi Municipality Ward No. 7" },
-  { "id": "ward-278", "municipality_id": "mun-117", "ward_no": 8, "name_np": "चौदण्डीगढी नगरपालिका वडा नं ८", "name_en": "Chaudandigadhi Municipality Ward No. 8" },
-  { "id": "ward-279", "municipality_id": "mun-117", "ward_no": 9, "name_np": "चौदण्डीगढी नगरपालिका वडा नं ९", "name_en": "Chaudandigadhi Municipality Ward No. 9" }
+  {
+    "id": "ward-001",
+    "municipality_id": "mun-01",
+    "ward_no": 1,
+    "name_np": "फुङलिङ नगरपालिका वडा नं १",
+    "name_en": "Phungling Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-002",
+    "municipality_id": "mun-01",
+    "ward_no": 2,
+    "name_np": "फुङलिङ नगरपालिका वडा नं २",
+    "name_en": "Phungling Municipality Ward No. 2"
+  },
+  {
+    "id": "ward-003",
+    "municipality_id": "mun-01",
+    "ward_no": 3,
+    "name_np": "फुङलिङ नगरपालिका वडा नं ३",
+    "name_en": "Phungling Municipality Ward No. 3"
+  },
+  {
+    "id": "ward-004",
+    "municipality_id": "mun-01",
+    "ward_no": 4,
+    "name_np": "फुङलिङ नगरपालिका वडा नं ४",
+    "name_en": "Phungling Municipality Ward No. 4"
+  },
+  {
+    "id": "ward-005",
+    "municipality_id": "mun-01",
+    "ward_no": 5,
+    "name_np": "फुङलिङ नगरपालिका वडा नं ५",
+    "name_en": "Phungling Municipality Ward No. 5"
+  },
+  {
+    "id": "ward-006",
+    "municipality_id": "mun-01",
+    "ward_no": 6,
+    "name_np": "फुङलिङ नगरपालिका वडा नं ६",
+    "name_en": "Phungling Municipality Ward No. 6"
+  },
+  {
+    "id": "ward-007",
+    "municipality_id": "mun-01",
+    "ward_no": 7,
+    "name_np": "फुङलिङ नगरपालिका वडा नं ७",
+    "name_en": "Phungling Municipality Ward No. 7"
+  },
+  {
+    "id": "ward-008",
+    "municipality_id": "mun-01",
+    "ward_no": 8,
+    "name_np": "फुङलिङ नगरपालिका वडा नं ८",
+    "name_en": "Phungling Municipality Ward No. 8"
+  },
+  {
+    "id": "ward-009",
+    "municipality_id": "mun-01",
+    "ward_no": 9,
+    "name_np": "फुङलिङ नगरपालिका वडा नं ९",
+    "name_en": "Phungling Municipality Ward No. 9"
+  },
+  {
+    "id": "ward-010",
+    "municipality_id": "mun-01",
+    "ward_no": 10,
+    "name_np": "फुङलिङ नगरपालिका वडा नं १०",
+    "name_en": "Phungling Municipality Ward No. 10"
+  },
+  {
+    "id": "ward-011",
+    "municipality_id": "mun-07",
+    "ward_no": 1,
+    "name_np": "फिदिम नगरपालिका वडा नं १",
+    "name_en": "Phidim Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-012",
+    "municipality_id": "mun-07",
+    "ward_no": 2,
+    "name_np": "फिदिम नगरपालिका वडा नं २",
+    "name_en": "Phidim Municipality Ward No. 2"
+  },
+  {
+    "id": "ward-013",
+    "municipality_id": "mun-07",
+    "ward_no": 3,
+    "name_np": "फिदिम नगरपालिका वडा नं ३",
+    "name_en": "Phidim Municipality Ward No. 3"
+  },
+  {
+    "id": "ward-014",
+    "municipality_id": "mun-07",
+    "ward_no": 4,
+    "name_np": "फिदिम नगरपालिका वडा नं ४",
+    "name_en": "Phidim Municipality Ward No. 4"
+  },
+  {
+    "id": "ward-015",
+    "municipality_id": "mun-07",
+    "ward_no": 5,
+    "name_np": "फिदिम नगरपालिका वडा नं ५",
+    "name_en": "Phidim Municipality Ward No. 5"
+  },
+  {
+    "id": "ward-016",
+    "municipality_id": "mun-07",
+    "ward_no": 6,
+    "name_np": "फिदिम नगरपालिका वडा नं ६",
+    "name_en": "Phidim Municipality Ward No. 6"
+  },
+  {
+    "id": "ward-017",
+    "municipality_id": "mun-07",
+    "ward_no": 7,
+    "name_np": "फिदिम नगरपालिका वडा नं ७",
+    "name_en": "Phidim Municipality Ward No. 7"
+  },
+  {
+    "id": "ward-018",
+    "municipality_id": "mun-07",
+    "ward_no": 8,
+    "name_np": "फिदिम नगरपालिका वडा नं ८",
+    "name_en": "Phidim Municipality Ward No. 8"
+  },
+  {
+    "id": "ward-019",
+    "municipality_id": "mun-07",
+    "ward_no": 9,
+    "name_np": "फिदिम नगरपालिका वडा नं ९",
+    "name_en": "Phidim Municipality Ward No. 9"
+  },
+  {
+    "id": "ward-020",
+    "municipality_id": "mun-07",
+    "ward_no": 10,
+    "name_np": "फिदिम नगरपालिका वडा नं १०",
+    "name_en": "Phidim Municipality Ward No. 10"
+  },
+  {
+    "id": "ward-021",
+    "municipality_id": "mun-08",
+    "ward_no": 1,
+    "name_np": "माञ्जाबुङ",
+    "name_en": "Manjabung"
+  },
+  {
+    "id": "ward-022",
+    "municipality_id": "mun-08",
+    "ward_no": 2,
+    "name_np": "यासोक",
+    "name_en": "Yashok"
+  },
+  {
+    "id": "ward-023",
+    "municipality_id": "mun-08",
+    "ward_no": 3,
+    "name_np": "स्याब्रुम्बा",
+    "name_en": "Sybrumba"
+  },
+  {
+    "id": "ward-024",
+    "municipality_id": "mun-08",
+    "ward_no": 4,
+    "name_np": "रानीगाउँ-३",
+    "name_en": "Ranigaun-3"
+  },
+  {
+    "id": "ward-025",
+    "municipality_id": "mun-08",
+    "ward_no": 5,
+    "name_np": "रानीगाउँ-४",
+    "name_en": "Ranigaun-4"
+  },
+  {
+    "id": "ward-026",
+    "municipality_id": "mun-09",
+    "ward_no": 1,
+    "name_np": "फालेलुङ गाउँपालिका वडा नं १",
+    "name_en": "Phalelung Rural Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-027",
+    "municipality_id": "mun-09",
+    "ward_no": 2,
+    "name_np": "फालेलुङ गाउँपालिका वडा नं २",
+    "name_en": "Phalelung Rural Municipality Ward No. 2"
+  },
+  {
+    "id": "ward-028",
+    "municipality_id": "mun-09",
+    "ward_no": 3,
+    "name_np": "फालेलुङ गाउँपालिका वडा नं ३",
+    "name_en": "Phalelung Rural Municipality Ward No. 3"
+  },
+  {
+    "id": "ward-029",
+    "municipality_id": "mun-09",
+    "ward_no": 4,
+    "name_np": "फालेलुङ गाउँपालिका वडा नं ४",
+    "name_en": "Phalelung Rural Municipality Ward No. 4"
+  },
+  {
+    "id": "ward-030",
+    "municipality_id": "mun-09",
+    "ward_no": 5,
+    "name_np": "फालेलुङ गाउँपालिका वडा नं ५",
+    "name_en": "Phalelung Rural Municipality Ward No. 5"
+  },
+  {
+    "id": "ward-031",
+    "municipality_id": "mun-10",
+    "ward_no": 1,
+    "name_np": "याङवरक गाउँपालिका वडा नं १",
+    "name_en": "Yangwarak Rural Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-032",
+    "municipality_id": "mun-10",
+    "ward_no": 2,
+    "name_np": "याङवरक गाउँपालिका वडा नं २",
+    "name_en": "Yangwarak Rural Municipality Ward No. 2"
+  },
+  {
+    "id": "ward-033",
+    "municipality_id": "mun-10",
+    "ward_no": 3,
+    "name_np": "याङवरक गाउँपालिका वडा नं ३",
+    "name_en": "Yangwarak Rural Municipality Ward No. 3"
+  },
+  {
+    "id": "ward-034",
+    "municipality_id": "mun-10",
+    "ward_no": 4,
+    "name_np": "याङवरक गाउँपालिका वडा नं ४",
+    "name_en": "Yangwarak Rural Municipality Ward No. 4"
+  },
+  {
+    "id": "ward-035",
+    "municipality_id": "mun-10",
+    "ward_no": 5,
+    "name_np": "याङवरक गाउँपालिका वडा नं ५",
+    "name_en": "Yangwarak Rural Municipality Ward No. 5"
+  },
+  {
+    "id": "ward-036",
+    "municipality_id": "mun-11",
+    "ward_no": 1,
+    "name_np": "तुम्बेवा गाउँपालिका वडा नं १",
+    "name_en": "Tumbeva Rural Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-037",
+    "municipality_id": "mun-11",
+    "ward_no": 2,
+    "name_np": "तुम्बेवा गाउँपालिका वडा नं २",
+    "name_en": "Tumbeva Rural Municipality Ward No. 2"
+  },
+  {
+    "id": "ward-038",
+    "municipality_id": "mun-11",
+    "ward_no": 3,
+    "name_np": "तुम्बेवा गाउँपालिका वडा नं ३",
+    "name_en": "Tumbeva Rural Municipality Ward No. 3"
+  },
+  {
+    "id": "ward-039",
+    "municipality_id": "mun-11",
+    "ward_no": 4,
+    "name_np": "तुम्बेवा गाउँपालिका वडा नं ४",
+    "name_en": "Tumbeva Rural Municipality Ward No. 4"
+  },
+  {
+    "id": "ward-040",
+    "municipality_id": "mun-11",
+    "ward_no": 5,
+    "name_np": "तुम्बेवा गाउँपालिका वडा नं ५",
+    "name_en": "Tumbeva Rural Municipality Ward No. 5"
+  },
+  {
+    "id": "ward-041",
+    "municipality_id": "mun-12",
+    "ward_no": 1,
+    "name_np": "मिक्लाजुङ गाउँपालिका वडा नं १",
+    "name_en": "Miklajung Rural Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-042",
+    "municipality_id": "mun-12",
+    "ward_no": 2,
+    "name_np": "मिक्लाजुङ गाउँपालिका वडा नं २",
+    "name_en": "Miklajung Rural Municipality Ward No. 2"
+  },
+  {
+    "id": "ward-043",
+    "municipality_id": "mun-12",
+    "ward_no": 3,
+    "name_np": "मिक्लाजुङ गाउँपालिका वडा नं ३",
+    "name_en": "Miklajung Rural Municipality Ward No. 3"
+  },
+  {
+    "id": "ward-044",
+    "municipality_id": "mun-12",
+    "ward_no": 4,
+    "name_np": "मिक्लाजुङ गाउँपालिका वडा नं ४",
+    "name_en": "Miklajung Rural Municipality Ward No. 4"
+  },
+  {
+    "id": "ward-045",
+    "municipality_id": "mun-12",
+    "ward_no": 5,
+    "name_np": "मिक्लाजुङ गाउँपालिका वडा नं ५",
+    "name_en": "Miklajung Rural Municipality Ward No. 5"
+  },
+  {
+    "id": "ward-046",
+    "municipality_id": "mun-13",
+    "ward_no": 1,
+    "name_np": "इलाम नगरपालिका वडा नं १",
+    "name_en": "Ilam Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-047",
+    "municipality_id": "mun-13",
+    "ward_no": 2,
+    "name_np": "इलाम नगरपालिका वडा नं २",
+    "name_en": "Ilam Municipality Ward No. 2"
+  },
+  {
+    "id": "ward-048",
+    "municipality_id": "mun-13",
+    "ward_no": 3,
+    "name_np": "इलाम नगरपालिका वडा नं ३",
+    "name_en": "Ilam Municipality Ward No. 3"
+  },
+  {
+    "id": "ward-049",
+    "municipality_id": "mun-13",
+    "ward_no": 4,
+    "name_np": "इलाम नगरपालिका वडा नं ४",
+    "name_en": "Ilam Municipality Ward No. 4"
+  },
+  {
+    "id": "ward-050",
+    "municipality_id": "mun-13",
+    "ward_no": 5,
+    "name_np": "इलाम नगरपालिका वडा नं ५",
+    "name_en": "Ilam Municipality Ward No. 5"
+  },
+  {
+    "id": "ward-051",
+    "municipality_id": "mun-13",
+    "ward_no": 6,
+    "name_np": "इलाम नगरपालिका वडा नं ६",
+    "name_en": "Ilam Municipality Ward No. 6"
+  },
+  {
+    "id": "ward-052",
+    "municipality_id": "mun-13",
+    "ward_no": 7,
+    "name_np": "इलाम नगरपालिका वडा नं ७",
+    "name_en": "Ilam Municipality Ward No. 7"
+  },
+  {
+    "id": "ward-053",
+    "municipality_id": "mun-13",
+    "ward_no": 8,
+    "name_np": "इलाम नगरपालिका वडा नं ८",
+    "name_en": "Ilam Municipality Ward No. 8"
+  },
+  {
+    "id": "ward-054",
+    "municipality_id": "mun-13",
+    "ward_no": 9,
+    "name_np": "इलाम नगरपालिका वडा नं ९",
+    "name_en": "Ilam Municipality Ward No. 9"
+  },
+  {
+    "id": "ward-055",
+    "municipality_id": "mun-13",
+    "ward_no": 10,
+    "name_np": "इलाम नगरपालिका वडा नं १०",
+    "name_en": "Ilam Municipality Ward No. 10"
+  },
+  {
+    "id": "ward-056",
+    "municipality_id": "mun-13",
+    "ward_no": 11,
+    "name_np": "इलाम नगरपालिका वडा नं ११",
+    "name_en": "Ilam Municipality Ward No. 11"
+  },
+  {
+    "id": "ward-057",
+    "municipality_id": "mun-13",
+    "ward_no": 12,
+    "name_np": "इलाम नगरपालिका वडा नं १२",
+    "name_en": "Ilam Municipality Ward No. 12"
+  },
+  {
+    "id": "ward-058",
+    "municipality_id": "mun-14",
+    "ward_no": 1,
+    "name_np": "सूर्योदय नगरपालिका वडा नं १",
+    "name_en": "Suryodaya Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-059",
+    "municipality_id": "mun-14",
+    "ward_no": 2,
+    "name_np": "सूर्योदय नगरपालिका वडा नं २",
+    "name_en": "Suryodaya Municipality Ward No. 2"
+  },
+  {
+    "id": "ward-060",
+    "municipality_id": "mun-14",
+    "ward_no": 3,
+    "name_np": "सूर्योदय नगरपालिका वडा नं ३",
+    "name_en": "Suryodaya Municipality Ward No. 3"
+  },
+  {
+    "id": "ward-061",
+    "municipality_id": "mun-14",
+    "ward_no": 4,
+    "name_np": "सूर्योदय नगरपालिका वडा नं ४",
+    "name_en": "Suryodaya Municipality Ward No. 4"
+  },
+  {
+    "id": "ward-062",
+    "municipality_id": "mun-14",
+    "ward_no": 5,
+    "name_np": "सूर्योदय नगरपालिका वडा नं ५",
+    "name_en": "Suryodaya Municipality Ward No. 5"
+  },
+  {
+    "id": "ward-063",
+    "municipality_id": "mun-14",
+    "ward_no": 6,
+    "name_np": "सूर्योदय नगरपालिका वडा नं ६",
+    "name_en": "Suryodaya Municipality Ward No. 6"
+  },
+  {
+    "id": "ward-064",
+    "municipality_id": "mun-14",
+    "ward_no": 7,
+    "name_np": "सूर्योदय नगरपालिका वडा नं ७",
+    "name_en": "Suryodaya Municipality Ward No. 7"
+  },
+  {
+    "id": "ward-065",
+    "municipality_id": "mun-14",
+    "ward_no": 8,
+    "name_np": "सूर्योदय नगरपालिका वडा नं ८",
+    "name_en": "Suryodaya Municipality Ward No. 8"
+  },
+  {
+    "id": "ward-066",
+    "municipality_id": "mun-14",
+    "ward_no": 9,
+    "name_np": "सूर्योदय नगरपालिका वडा नं ९",
+    "name_en": "Suryodaya Municipality Ward No. 9"
+  },
+  {
+    "id": "ward-067",
+    "municipality_id": "mun-14",
+    "ward_no": 10,
+    "name_np": "सूर्योदय नगरपालिका वडा नं १०",
+    "name_en": "Suryodaya Municipality Ward No. 10"
+  },
+  {
+    "id": "ward-068",
+    "municipality_id": "mun-35",
+    "ward_no": 1,
+    "name_np": "विराटनगर महानगरपालिका वडा नं १",
+    "name_en": "Biratnagar Metropolitan City Ward No. 1"
+  },
+  {
+    "id": "ward-069",
+    "municipality_id": "mun-35",
+    "ward_no": 2,
+    "name_np": "विराटनगर महानगरपालिका वडा नं २",
+    "name_en": "Biratnagar Metropolitan City Ward No. 2"
+  },
+  {
+    "id": "ward-070",
+    "municipality_id": "mun-35",
+    "ward_no": 3,
+    "name_np": "विराटनगर महानगरपालिका वडा नं ३",
+    "name_en": "Biratnagar Metropolitan City Ward No. 3"
+  },
+  {
+    "id": "ward-071",
+    "municipality_id": "mun-35",
+    "ward_no": 4,
+    "name_np": "विराटनगर महानगरपालिका वडा नं ४",
+    "name_en": "Biratnagar Metropolitan City Ward No. 4"
+  },
+  {
+    "id": "ward-072",
+    "municipality_id": "mun-35",
+    "ward_no": 5,
+    "name_np": "विराटनगर महानगरपालिका वडा नं ५",
+    "name_en": "Biratnagar Metropolitan City Ward No. 5"
+  },
+  {
+    "id": "ward-073",
+    "municipality_id": "mun-35",
+    "ward_no": 6,
+    "name_np": "विराटनगर महानगरपालिका वडा नं ६",
+    "name_en": "Biratnagar Metropolitan City Ward No. 6"
+  },
+  {
+    "id": "ward-074",
+    "municipality_id": "mun-35",
+    "ward_no": 7,
+    "name_np": "विराटनगर महानगरपालिका वडा नं ७",
+    "name_en": "Biratnagar Metropolitan City Ward No. 7"
+  },
+  {
+    "id": "ward-075",
+    "municipality_id": "mun-35",
+    "ward_no": 8,
+    "name_np": "विराटनगर महानगरपालिका वडा नं ८",
+    "name_en": "Biratnagar Metropolitan City Ward No. 8"
+  },
+  {
+    "id": "ward-076",
+    "municipality_id": "mun-35",
+    "ward_no": 9,
+    "name_np": "विराटनगर महानगरपालिका वडा नं ९",
+    "name_en": "Biratnagar Metropolitan City Ward No. 9"
+  },
+  {
+    "id": "ward-077",
+    "municipality_id": "mun-35",
+    "ward_no": 10,
+    "name_np": "विराटनगर महानगरपालिका वडा नं १०",
+    "name_en": "Biratnagar Metropolitan City Ward No. 10"
+  },
+  {
+    "id": "ward-078",
+    "municipality_id": "mun-35",
+    "ward_no": 11,
+    "name_np": "विराटनगर महानगरपालिका वडा नं ११",
+    "name_en": "Biratnagar Metropolitan City Ward No. 11"
+  },
+  {
+    "id": "ward-079",
+    "municipality_id": "mun-35",
+    "ward_no": 12,
+    "name_np": "विराटनगर महानगरपालिका वडा नं १२",
+    "name_en": "Biratnagar Metropolitan City Ward No. 12"
+  },
+  {
+    "id": "ward-080",
+    "municipality_id": "mun-35",
+    "ward_no": 13,
+    "name_np": "विराटनगर महानगरपालिका वडा नं १३",
+    "name_en": "Biratnagar Metropolitan City Ward No. 13"
+  },
+  {
+    "id": "ward-081",
+    "municipality_id": "mun-35",
+    "ward_no": 14,
+    "name_np": "विराटनगर महानगरपालिका वडा नं १४",
+    "name_en": "Biratnagar Metropolitan City Ward No. 14"
+  },
+  {
+    "id": "ward-082",
+    "municipality_id": "mun-35",
+    "ward_no": 15,
+    "name_np": "विराटनगर महानगरपालिका वडा नं १५",
+    "name_en": "Biratnagar Metropolitan City Ward No. 15"
+  },
+  {
+    "id": "ward-083",
+    "municipality_id": "mun-35",
+    "ward_no": 16,
+    "name_np": "विराटनगर महानगरपालिका वडा नं १६",
+    "name_en": "Biratnagar Metropolitan City Ward No. 16"
+  },
+  {
+    "id": "ward-084",
+    "municipality_id": "mun-35",
+    "ward_no": 17,
+    "name_np": "विराटनगर महानगरपालिका वडा नं १७",
+    "name_en": "Biratnagar Metropolitan City Ward No. 17"
+  },
+  {
+    "id": "ward-085",
+    "municipality_id": "mun-35",
+    "ward_no": 18,
+    "name_np": "विराटनगर महानगरपालिका वडा नं १८",
+    "name_en": "Biratnagar Metropolitan City Ward No. 18"
+  },
+  {
+    "id": "ward-086",
+    "municipality_id": "mun-35",
+    "ward_no": 19,
+    "name_np": "विराटनगर महानगरपालिका वडा नं १९",
+    "name_en": "Biratnagar Metropolitan City Ward No. 19"
+  },
+  {
+    "id": "ward-087",
+    "municipality_id": "mun-51",
+    "ward_no": 1,
+    "name_np": "इटहरी उपमहानगरपालिका वडा नं १",
+    "name_en": "Itahari Sub-Metropolitan City Ward No. 1"
+  },
+  {
+    "id": "ward-088",
+    "municipality_id": "mun-51",
+    "ward_no": 2,
+    "name_np": "इटहरी उपमहानगरपालिका वडा नं २",
+    "name_en": "Itahari Sub-Metropolitan City Ward No. 2"
+  },
+  {
+    "id": "ward-089",
+    "municipality_id": "mun-51",
+    "ward_no": 3,
+    "name_np": "इटहरी उपमहानगरपालिका वडा नं ३",
+    "name_en": "Itahari Sub-Metropolitan City Ward No. 3"
+  },
+  {
+    "id": "ward-090",
+    "municipality_id": "mun-51",
+    "ward_no": 4,
+    "name_np": "इटहरी उपमहानगरपालिका वडा नं ४",
+    "name_en": "Itahari Sub-Metropolitan City Ward No. 4"
+  },
+  {
+    "id": "ward-091",
+    "municipality_id": "mun-51",
+    "ward_no": 5,
+    "name_np": "इटहरी उपमहानगरपालिका वडा नं ५",
+    "name_en": "Itahari Sub-Metropolitan City Ward No. 5"
+  },
+  {
+    "id": "ward-092",
+    "municipality_id": "mun-51",
+    "ward_no": 6,
+    "name_np": "इटहरी उपमहानगरपालिका वडा नं ६",
+    "name_en": "Itahari Sub-Metropolitan City Ward No. 6"
+  },
+  {
+    "id": "ward-093",
+    "municipality_id": "mun-51",
+    "ward_no": 7,
+    "name_np": "इटहरी उपमहानगरपालिका वडा नं ७",
+    "name_en": "Itahari Sub-Metropolitan City Ward No. 7"
+  },
+  {
+    "id": "ward-094",
+    "municipality_id": "mun-51",
+    "ward_no": 8,
+    "name_np": "इटहरी उपमहानगरपालिका वडा नं ८",
+    "name_en": "Itahari Sub-Metropolitan City Ward No. 8"
+  },
+  {
+    "id": "ward-095",
+    "municipality_id": "mun-51",
+    "ward_no": 9,
+    "name_np": "इटहरी उपमहानगरपालिका वडा नं ९",
+    "name_en": "Itahari Sub-Metropolitan City Ward No. 9"
+  },
+  {
+    "id": "ward-096",
+    "municipality_id": "mun-51",
+    "ward_no": 10,
+    "name_np": "इटहरी उपमहानगरपालिका वडा नं १०",
+    "name_en": "Itahari Sub-Metropolitan City Ward No. 10"
+  },
+  {
+    "id": "ward-097",
+    "municipality_id": "mun-51",
+    "ward_no": 11,
+    "name_np": "इटहरी उपमहानगरपालिका वडा नं ११",
+    "name_en": "Itahari Sub-Metropolitan City Ward No. 11"
+  },
+  {
+    "id": "ward-098",
+    "municipality_id": "mun-51",
+    "ward_no": 12,
+    "name_np": "इटहरी उपमहानगरपालिका वडा नं १२",
+    "name_en": "Itahari Sub-Metropolitan City Ward No. 12"
+  },
+  {
+    "id": "ward-099",
+    "municipality_id": "mun-51",
+    "ward_no": 13,
+    "name_np": "इटहरी उपमहानगरपालिका वडा नं १३",
+    "name_en": "Itahari Sub-Metropolitan City Ward No. 13"
+  },
+  {
+    "id": "ward-100",
+    "municipality_id": "mun-51",
+    "ward_no": 14,
+    "name_np": "इटहरी उपमहानगरपालिका वडा नं १४",
+    "name_en": "Itahari Sub-Metropolitan City Ward No. 14"
+  },
+  {
+    "id": "ward-101",
+    "municipality_id": "mun-51",
+    "ward_no": 15,
+    "name_np": "इटहरी उपमहानगरपालिका वडा नं १५",
+    "name_en": "Itahari Sub-Metropolitan City Ward No. 15"
+  },
+  {
+    "id": "ward-102",
+    "municipality_id": "mun-51",
+    "ward_no": 16,
+    "name_np": "इटहरी उपमहानगरपालिका वडा नं १६",
+    "name_en": "Itahari Sub-Metropolitan City Ward No. 16"
+  },
+  {
+    "id": "ward-103",
+    "municipality_id": "mun-51",
+    "ward_no": 17,
+    "name_np": "इटहरी उपमहानगरपालिका वडा नं १७",
+    "name_en": "Itahari Sub-Metropolitan City Ward No. 17"
+  },
+  {
+    "id": "ward-104",
+    "municipality_id": "mun-51",
+    "ward_no": 18,
+    "name_np": "इटहरी उपमहानगरपालिका वडा नं १८",
+    "name_en": "Itahari Sub-Metropolitan City Ward No. 18"
+  },
+  {
+    "id": "ward-105",
+    "municipality_id": "mun-51",
+    "ward_no": 19,
+    "name_np": "इटहरी उपमहानगरपालिका वडा नं १९",
+    "name_en": "Itahari Sub-Metropolitan City Ward No. 19"
+  },
+  {
+    "id": "ward-106",
+    "municipality_id": "mun-51",
+    "ward_no": 20,
+    "name_np": "इटहरी उपमहानगरपालिका वडा नं २०",
+    "name_en": "Itahari Sub-Metropolitan City Ward No. 20"
+  },
+  {
+    "id": "ward-107",
+    "municipality_id": "mun-52",
+    "ward_no": 1,
+    "name_np": "धरान उपमहानगरपालिका वडा नं १",
+    "name_en": "Dharan Sub-Metropolitan City Ward No. 1"
+  },
+  {
+    "id": "ward-108",
+    "municipality_id": "mun-52",
+    "ward_no": 2,
+    "name_np": "धरान उपमहानगरपालिका वडा नं २",
+    "name_en": "Dharan Sub-Metropolitan City Ward No. 2"
+  },
+  {
+    "id": "ward-109",
+    "municipality_id": "mun-52",
+    "ward_no": 3,
+    "name_np": "धरान उपमहानगरपालिका वडा नं ३",
+    "name_en": "Dharan Sub-Metropolitan City Ward No. 3"
+  },
+  {
+    "id": "ward-110",
+    "municipality_id": "mun-52",
+    "ward_no": 4,
+    "name_np": "धरान उपमहानगरपालिका वडा नं ४",
+    "name_en": "Dharan Sub-Metropolitan City Ward No. 4"
+  },
+  {
+    "id": "ward-111",
+    "municipality_id": "mun-52",
+    "ward_no": 5,
+    "name_np": "धरान उपमहानगरपालिका वडा नं ५",
+    "name_en": "Dharan Sub-Metropolitan City Ward No. 5"
+  },
+  {
+    "id": "ward-112",
+    "municipality_id": "mun-52",
+    "ward_no": 6,
+    "name_np": "धरान उपमहानगरपालिका वडा नं ६",
+    "name_en": "Dharan Sub-Metropolitan City Ward No. 6"
+  },
+  {
+    "id": "ward-113",
+    "municipality_id": "mun-52",
+    "ward_no": 7,
+    "name_np": "धरान उपमहानगरपालिका वडा नं ७",
+    "name_en": "Dharan Sub-Metropolitan City Ward No. 7"
+  },
+  {
+    "id": "ward-114",
+    "municipality_id": "mun-52",
+    "ward_no": 8,
+    "name_np": "धरान उपमहानगरपालिका वडा नं ८",
+    "name_en": "Dharan Sub-Metropolitan City Ward No. 8"
+  },
+  {
+    "id": "ward-115",
+    "municipality_id": "mun-52",
+    "ward_no": 9,
+    "name_np": "धरान उपमहानगरपालिका वडा नं ९",
+    "name_en": "Dharan Sub-Metropolitan City Ward No. 9"
+  },
+  {
+    "id": "ward-116",
+    "municipality_id": "mun-52",
+    "ward_no": 10,
+    "name_np": "धरान उपमहानगरपालिका वडा नं १०",
+    "name_en": "Dharan Sub-Metropolitan City Ward No. 10"
+  },
+  {
+    "id": "ward-117",
+    "municipality_id": "mun-52",
+    "ward_no": 11,
+    "name_np": "धरान उपमहानगरपालिका वडा नं ११",
+    "name_en": "Dharan Sub-Metropolitan City Ward No. 11"
+  },
+  {
+    "id": "ward-118",
+    "municipality_id": "mun-52",
+    "ward_no": 12,
+    "name_np": "धरान उपमहानगरपालिका वडा नं १२",
+    "name_en": "Dharan Sub-Metropolitan City Ward No. 12"
+  },
+  {
+    "id": "ward-119",
+    "municipality_id": "mun-52",
+    "ward_no": 13,
+    "name_np": "धरान उपमहानगरपालिका वडा नं १३",
+    "name_en": "Dharan Sub-Metropolitan City Ward No. 13"
+  },
+  {
+    "id": "ward-120",
+    "municipality_id": "mun-52",
+    "ward_no": 14,
+    "name_np": "धरान उपमहानगरपालिका वडा नं १४",
+    "name_en": "Dharan Sub-Metropolitan City Ward No. 14"
+  },
+  {
+    "id": "ward-121",
+    "municipality_id": "mun-52",
+    "ward_no": 15,
+    "name_np": "धरान उपमहानगरपालिका वडा नं १५",
+    "name_en": "Dharan Sub-Metropolitan City Ward No. 15"
+  },
+  {
+    "id": "ward-122",
+    "municipality_id": "mun-52",
+    "ward_no": 16,
+    "name_np": "धरान उपमहानगरपालिका वडा नं १६",
+    "name_en": "Dharan Sub-Metropolitan City Ward No. 16"
+  },
+  {
+    "id": "ward-123",
+    "municipality_id": "mun-52",
+    "ward_no": 17,
+    "name_np": "धरान उपमहानगरपालिका वडा नं १७",
+    "name_en": "Dharan Sub-Metropolitan City Ward No. 17"
+  },
+  {
+    "id": "ward-124",
+    "municipality_id": "mun-52",
+    "ward_no": 18,
+    "name_np": "धरान उपमहानगरपालिका वडा नं १८",
+    "name_en": "Dharan Sub-Metropolitan City Ward No. 18"
+  },
+  {
+    "id": "ward-125",
+    "municipality_id": "mun-52",
+    "ward_no": 19,
+    "name_np": "धरान उपमहानगरपालिका वडा नं १९",
+    "name_en": "Dharan Sub-Metropolitan City Ward No. 19"
+  },
+  {
+    "id": "ward-126",
+    "municipality_id": "mun-62",
+    "ward_no": 1,
+    "name_np": "धनकुटा नगरपालिका वडा नं १",
+    "name_en": "Dhankuta Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-127",
+    "municipality_id": "mun-62",
+    "ward_no": 2,
+    "name_np": "धनकुटा नगरपालिका वडा नं २",
+    "name_en": "Dhankuta Municipality Ward No. 2"
+  },
+  {
+    "id": "ward-128",
+    "municipality_id": "mun-62",
+    "ward_no": 3,
+    "name_np": "धनकुटा नगरपालिका वडा नं ३",
+    "name_en": "Dhankuta Municipality Ward No. 3"
+  },
+  {
+    "id": "ward-129",
+    "municipality_id": "mun-62",
+    "ward_no": 4,
+    "name_np": "धनकुटा नगरपालिका वडा नं ४",
+    "name_en": "Dhankuta Municipality Ward No. 4"
+  },
+  {
+    "id": "ward-130",
+    "municipality_id": "mun-62",
+    "ward_no": 5,
+    "name_np": "धनकुटा नगरपालिका वडा नं ५",
+    "name_en": "Dhankuta Municipality Ward No. 5"
+  },
+  {
+    "id": "ward-131",
+    "municipality_id": "mun-62",
+    "ward_no": 6,
+    "name_np": "धनकुटा नगरपालिका वडा नं ६",
+    "name_en": "Dhankuta Municipality Ward No. 6"
+  },
+  {
+    "id": "ward-132",
+    "municipality_id": "mun-62",
+    "ward_no": 7,
+    "name_np": "धनकुटा नगरपालिका वडा नं ७",
+    "name_en": "Dhankuta Municipality Ward No. 7"
+  },
+  {
+    "id": "ward-133",
+    "municipality_id": "mun-62",
+    "ward_no": 8,
+    "name_np": "धनकुटा नगरपालिका वडा नं ८",
+    "name_en": "Dhankuta Municipality Ward No. 8"
+  },
+  {
+    "id": "ward-134",
+    "municipality_id": "mun-62",
+    "ward_no": 9,
+    "name_np": "धनकुटा नगरपालिका वडा नं ९",
+    "name_en": "Dhankuta Municipality Ward No. 9"
+  },
+  {
+    "id": "ward-135",
+    "municipality_id": "mun-62",
+    "ward_no": 10,
+    "name_np": "धनकुटा नगरपालिका वडा नं १०",
+    "name_en": "Dhankuta Municipality Ward No. 10"
+  },
+  {
+    "id": "ward-136",
+    "municipality_id": "mun-63",
+    "ward_no": 1,
+    "name_np": "पाख्रिबास नगरपालिका वडा नं १",
+    "name_en": "Pakhribas Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-137",
+    "municipality_id": "mun-63",
+    "ward_no": 2,
+    "name_np": "पाख्रिबास नगरपालिका वडा नं २",
+    "name_en": "Pakhribas Municipality Ward No. 2"
+  },
+  {
+    "id": "ward-138",
+    "municipality_id": "mun-63",
+    "ward_no": 3,
+    "name_np": "पाख्रिबास नगरपालिका वडा नं ३",
+    "name_en": "Pakhribas Municipality Ward No. 3"
+  },
+  {
+    "id": "ward-139",
+    "municipality_id": "mun-63",
+    "ward_no": 4,
+    "name_np": "पाख्रिबास नगरपालिका वडा नं ४",
+    "name_en": "Pakhribas Municipality Ward No. 4"
+  },
+  {
+    "id": "ward-140",
+    "municipality_id": "mun-63",
+    "ward_no": 5,
+    "name_np": "पाख्रिबास नगरपालिका वडा नं ५",
+    "name_en": "Pakhribas Municipality Ward No. 5"
+  },
+  {
+    "id": "ward-141",
+    "municipality_id": "mun-63",
+    "ward_no": 6,
+    "name_np": "पाख्रिबास नगरपालिका वडा नं ६",
+    "name_en": "Pakhribas Municipality Ward No. 6"
+  },
+  {
+    "id": "ward-142",
+    "municipality_id": "mun-63",
+    "ward_no": 7,
+    "name_np": "पाख्रिबास नगरपालिका वडा नं ७",
+    "name_en": "Pakhribas Municipality Ward No. 7"
+  },
+  {
+    "id": "ward-143",
+    "municipality_id": "mun-63",
+    "ward_no": 8,
+    "name_np": "पाख्रिबास नगरपालिका वडा नं ८",
+    "name_en": "Pakhribas Municipality Ward No. 8"
+  },
+  {
+    "id": "ward-144",
+    "municipality_id": "mun-69",
+    "ward_no": 1,
+    "name_np": "म्याङलुङ नगरपालिका वडा नं १",
+    "name_en": "Myanglung Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-145",
+    "municipality_id": "mun-69",
+    "ward_no": 2,
+    "name_np": "म्याङलुङ नगरपालिका वडा नं २",
+    "name_en": "Myanglung Municipality Ward No. 2"
+  },
+  {
+    "id": "ward-146",
+    "municipality_id": "mun-69",
+    "ward_no": 3,
+    "name_np": "म्याङलुङ नगरपालिका वडा नं ३",
+    "name_en": "Myanglung Municipality Ward No. 3"
+  },
+  {
+    "id": "ward-147",
+    "municipality_id": "mun-69",
+    "ward_no": 4,
+    "name_np": "म्याङलुङ नगरपालिका वडा नं ४",
+    "name_en": "Myanglung Municipality Ward No. 4"
+  },
+  {
+    "id": "ward-148",
+    "municipality_id": "mun-69",
+    "ward_no": 5,
+    "name_np": "म्याङलुङ नगरपालिका वडा नं ५",
+    "name_en": "Myanglung Municipality Ward No. 5"
+  },
+  {
+    "id": "ward-149",
+    "municipality_id": "mun-69",
+    "ward_no": 6,
+    "name_np": "म्याङलुङ नगरपालिका वडा नं ६",
+    "name_en": "Myanglung Municipality Ward No. 6"
+  },
+  {
+    "id": "ward-150",
+    "municipality_id": "mun-69",
+    "ward_no": 7,
+    "name_np": "म्याङलुङ नगरपालिका वडा नं ७",
+    "name_en": "Myanglung Municipality Ward No. 7"
+  },
+  {
+    "id": "ward-151",
+    "municipality_id": "mun-69",
+    "ward_no": 8,
+    "name_np": "म्याङलुङ नगरपालिका वडा नं ८",
+    "name_en": "Myanglung Municipality Ward No. 8"
+  },
+  {
+    "id": "ward-152",
+    "municipality_id": "mun-69",
+    "ward_no": 9,
+    "name_np": "म्याङलुङ नगरपालिका वडा नं ९",
+    "name_en": "Myanglung Municipality Ward No. 9"
+  },
+  {
+    "id": "ward-153",
+    "municipality_id": "mun-70",
+    "ward_no": 1,
+    "name_np": "लालीगुराँस नगरपालिका वडा नं १",
+    "name_en": "Laligurans Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-154",
+    "municipality_id": "mun-70",
+    "ward_no": 2,
+    "name_np": "लालीगुराँस नगरपालिका वडा नं २",
+    "name_en": "Laligurans Municipality Ward No. 2"
+  },
+  {
+    "id": "ward-155",
+    "municipality_id": "mun-70",
+    "ward_no": 3,
+    "name_np": "लालीगुराँस नगरपालिका वडा नं ३",
+    "name_en": "Laligurans Municipality Ward No. 3"
+  },
+  {
+    "id": "ward-156",
+    "municipality_id": "mun-70",
+    "ward_no": 4,
+    "name_np": "लालीगुराँस नगरपालिका वडा नं ४",
+    "name_en": "Laligurans Municipality Ward No. 4"
+  },
+  {
+    "id": "ward-157",
+    "municipality_id": "mun-70",
+    "ward_no": 5,
+    "name_np": "लालीगुराँस नगरपालिका वडा नं ५",
+    "name_en": "Laligurans Municipality Ward No. 5"
+  },
+  {
+    "id": "ward-158",
+    "municipality_id": "mun-70",
+    "ward_no": 6,
+    "name_np": "लालीगुराँस नगरपालिका वडा नं ६",
+    "name_en": "Laligurans Municipality Ward No. 6"
+  },
+  {
+    "id": "ward-159",
+    "municipality_id": "mun-70",
+    "ward_no": 7,
+    "name_np": "लालीगुराँस नगरपालिका वडा नं ७",
+    "name_en": "Laligurans Municipality Ward No. 7"
+  },
+  {
+    "id": "ward-160",
+    "municipality_id": "mun-70",
+    "ward_no": 8,
+    "name_np": "लालीगुराँस नगरपालिका वडा नं ८",
+    "name_en": "Laligurans Municipality Ward No. 8"
+  },
+  {
+    "id": "ward-161",
+    "municipality_id": "mun-70",
+    "ward_no": 9,
+    "name_np": "लालीगुराँस नगरपालिका वडा नं ९",
+    "name_en": "Laligurans Municipality Ward No. 9"
+  },
+  {
+    "id": "ward-162",
+    "municipality_id": "mun-75",
+    "ward_no": 1,
+    "name_np": "खाँदबारी नगरपालिका वडा नं १",
+    "name_en": "Khandbari Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-163",
+    "municipality_id": "mun-75",
+    "ward_no": 2,
+    "name_np": "खाँदबारी नगरपालिका वडा नं २",
+    "name_en": "Khandbari Municipality Ward No. 2"
+  },
+  {
+    "id": "ward-164",
+    "municipality_id": "mun-75",
+    "ward_no": 3,
+    "name_np": "खाँदबारी नगरपालिका वडा नं ३",
+    "name_en": "Khandbari Municipality Ward No. 3"
+  },
+  {
+    "id": "ward-165",
+    "municipality_id": "mun-75",
+    "ward_no": 4,
+    "name_np": "खाँदबारी नगरपालिका वडा नं ४",
+    "name_en": "Khandbari Municipality Ward No. 4"
+  },
+  {
+    "id": "ward-166",
+    "municipality_id": "mun-75",
+    "ward_no": 5,
+    "name_np": "खाँदबारी नगरपालिका वडा नं ५",
+    "name_en": "Khandbari Municipality Ward No. 5"
+  },
+  {
+    "id": "ward-167",
+    "municipality_id": "mun-75",
+    "ward_no": 6,
+    "name_np": "खाँदबारी नगरपालिका वडा नं ६",
+    "name_en": "Khandbari Municipality Ward No. 6"
+  },
+  {
+    "id": "ward-168",
+    "municipality_id": "mun-75",
+    "ward_no": 7,
+    "name_np": "खाँदबारी नगरपालिका वडा नं ७",
+    "name_en": "Khandbari Municipality Ward No. 7"
+  },
+  {
+    "id": "ward-169",
+    "municipality_id": "mun-75",
+    "ward_no": 8,
+    "name_np": "खाँदबारी नगरपालिका वडा नं ८",
+    "name_en": "Khandbari Municipality Ward No. 8"
+  },
+  {
+    "id": "ward-170",
+    "municipality_id": "mun-75",
+    "ward_no": 9,
+    "name_np": "खाँदबारी नगरपालिका वडा नं ९",
+    "name_en": "Khandbari Municipality Ward No. 9"
+  },
+  {
+    "id": "ward-171",
+    "municipality_id": "mun-75",
+    "ward_no": 10,
+    "name_np": "खाँदबारी नगरपालिका वडा नं १०",
+    "name_en": "Khandbari Municipality Ward No. 10"
+  },
+  {
+    "id": "ward-172",
+    "municipality_id": "mun-76",
+    "ward_no": 1,
+    "name_np": "चैनपुर नगरपालिका वडा नं १",
+    "name_en": "Chainpur Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-173",
+    "municipality_id": "mun-76",
+    "ward_no": 2,
+    "name_np": "चैनपुर नगरपालिका वडा नं २",
+    "name_en": "Chainpur Municipality Ward No. 2"
+  },
+  {
+    "id": "ward-174",
+    "municipality_id": "mun-76",
+    "ward_no": 3,
+    "name_np": "चैनपुर नगरपालिका वडा नं ३",
+    "name_en": "Chainpur Municipality Ward No. 3"
+  },
+  {
+    "id": "ward-175",
+    "municipality_id": "mun-76",
+    "ward_no": 4,
+    "name_np": "चैनपुर नगरपालिका वडा नं ४",
+    "name_en": "Chainpur Municipality Ward No. 4"
+  },
+  {
+    "id": "ward-176",
+    "municipality_id": "mun-76",
+    "ward_no": 5,
+    "name_np": "चैनपुर नगरपालिका वडा नं ५",
+    "name_en": "Chainpur Municipality Ward No. 5"
+  },
+  {
+    "id": "ward-177",
+    "municipality_id": "mun-76",
+    "ward_no": 6,
+    "name_np": "चैनपुर नगरपालिका वडा नं ६",
+    "name_en": "Chainpur Municipality Ward No. 6"
+  },
+  {
+    "id": "ward-178",
+    "municipality_id": "mun-76",
+    "ward_no": 7,
+    "name_np": "चैनपुर नगरपालिका वडा नं ७",
+    "name_en": "Chainpur Municipality Ward No. 7"
+  },
+  {
+    "id": "ward-179",
+    "municipality_id": "mun-76",
+    "ward_no": 8,
+    "name_np": "चैनपुर नगरपालिका वडा नं ८",
+    "name_en": "Chainpur Municipality Ward No. 8"
+  },
+  {
+    "id": "ward-180",
+    "municipality_id": "mun-76",
+    "ward_no": 9,
+    "name_np": "चैनपुर नगरपालिका वडा नं ९",
+    "name_en": "Chainpur Municipality Ward No. 9"
+  },
+  {
+    "id": "ward-181",
+    "municipality_id": "mun-84",
+    "ward_no": 1,
+    "name_np": "भोजपुर नगरपालिका वडा नं १",
+    "name_en": "Bhojpur Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-182",
+    "municipality_id": "mun-84",
+    "ward_no": 2,
+    "name_np": "भोजपुर नगरपालिका वडा नं २",
+    "name_en": "Bhojpur Municipality Ward No. 2"
+  },
+  {
+    "id": "ward-183",
+    "municipality_id": "mun-84",
+    "ward_no": 3,
+    "name_np": "भोजपुर नगरपालिका वडा नं ३",
+    "name_en": "Bhojpur Municipality Ward No. 3"
+  },
+  {
+    "id": "ward-184",
+    "municipality_id": "mun-84",
+    "ward_no": 4,
+    "name_np": "भोजपुर नगरपालिका वडा नं ४",
+    "name_en": "Bhojpur Municipality Ward No. 4"
+  },
+  {
+    "id": "ward-185",
+    "municipality_id": "mun-84",
+    "ward_no": 5,
+    "name_np": "भोजपुर नगरपालिका वडा नं ५",
+    "name_en": "Bhojpur Municipality Ward No. 5"
+  },
+  {
+    "id": "ward-186",
+    "municipality_id": "mun-84",
+    "ward_no": 6,
+    "name_np": "भोजपुर नगरपालिका वडा नं ६",
+    "name_en": "Bhojpur Municipality Ward No. 6"
+  },
+  {
+    "id": "ward-187",
+    "municipality_id": "mun-84",
+    "ward_no": 7,
+    "name_np": "भोजपुर नगरपालिका वडा नं ७",
+    "name_en": "Bhojpur Municipality Ward No. 7"
+  },
+  {
+    "id": "ward-188",
+    "municipality_id": "mun-84",
+    "ward_no": 8,
+    "name_np": "भोजपुर नगरपालिका वडा नं ८",
+    "name_en": "Bhojpur Municipality Ward No. 8"
+  },
+  {
+    "id": "ward-189",
+    "municipality_id": "mun-84",
+    "ward_no": 9,
+    "name_np": "भोजपुर नगरपालिका वडा नं ९",
+    "name_en": "Bhojpur Municipality Ward No. 9"
+  },
+  {
+    "id": "ward-190",
+    "municipality_id": "mun-84",
+    "ward_no": 10,
+    "name_np": "भोजपुर नगरपालिका वडा नं १०",
+    "name_en": "Bhojpur Municipality Ward No. 10"
+  },
+  {
+    "id": "ward-191",
+    "municipality_id": "mun-84",
+    "ward_no": 11,
+    "name_np": "भोजपुर नगरपालिका वडा नं ११",
+    "name_en": "Bhojpur Municipality Ward No. 11"
+  },
+  {
+    "id": "ward-192",
+    "municipality_id": "mun-85",
+    "ward_no": 1,
+    "name_np": "षडानन्द नगरपालिका वडा नं १",
+    "name_en": "Shadanand Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-193",
+    "municipality_id": "mun-85",
+    "ward_no": 2,
+    "name_np": "षडानन्द नगरपालिका वडा नं २",
+    "name_en": "Shadanand Municipality Ward No. 2"
+  },
+  {
+    "id": "ward-194",
+    "municipality_id": "mun-85",
+    "ward_no": 3,
+    "name_np": "षडानन्द नगरपालिका वडा नं ३",
+    "name_en": "Shadanand Municipality Ward No. 3"
+  },
+  {
+    "id": "ward-195",
+    "municipality_id": "mun-85",
+    "ward_no": 4,
+    "name_np": "षडानन्द नगरपालिका वडा नं ४",
+    "name_en": "Shadanand Municipality Ward No. 4"
+  },
+  {
+    "id": "ward-196",
+    "municipality_id": "mun-85",
+    "ward_no": 5,
+    "name_np": "षडानन्द नगरपालिका वडा नं ५",
+    "name_en": "Shadanand Municipality Ward No. 5"
+  },
+  {
+    "id": "ward-197",
+    "municipality_id": "mun-85",
+    "ward_no": 6,
+    "name_np": "षडानन्द नगरपालिका वडा नं ६",
+    "name_en": "Shadanand Municipality Ward No. 6"
+  },
+  {
+    "id": "ward-198",
+    "municipality_id": "mun-85",
+    "ward_no": 7,
+    "name_np": "षडानन्द नगरपालिका वडा नं ७",
+    "name_en": "Shadanand Municipality Ward No. 7"
+  },
+  {
+    "id": "ward-199",
+    "municipality_id": "mun-85",
+    "ward_no": 8,
+    "name_np": "षडानन्द नगरपालिका वडा नं ८",
+    "name_en": "Shadanand Municipality Ward No. 8"
+  },
+  {
+    "id": "ward-200",
+    "municipality_id": "mun-85",
+    "ward_no": 9,
+    "name_np": "षडानन्द नगरपालिका वडा नं ९",
+    "name_en": "Shadanand Municipality Ward No. 9"
+  },
+  {
+    "id": "ward-201",
+    "municipality_id": "mun-92",
+    "ward_no": 1,
+    "name_np": "सोलु दुधकुण्ड नगरपालिका वडा नं १",
+    "name_en": "Solududhkunda Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-202",
+    "municipality_id": "mun-92",
+    "ward_no": 2,
+    "name_np": "सोलु दुधकुण्ड नगरपालिका वडा नं २",
+    "name_en": "Solududhkunda Municipality Ward No. 2"
+  },
+  {
+    "id": "ward-203",
+    "municipality_id": "mun-92",
+    "ward_no": 3,
+    "name_np": "सोलु दुधकुण्ड नगरपालिका वडा नं ३",
+    "name_en": "Solududhkunda Municipality Ward No. 3"
+  },
+  {
+    "id": "ward-204",
+    "municipality_id": "mun-92",
+    "ward_no": 4,
+    "name_np": "सोलु दुधकुण्ड नगरपालिका वडा नं ४",
+    "name_en": "Solududhkunda Municipality Ward No. 4"
+  },
+  {
+    "id": "ward-205",
+    "municipality_id": "mun-92",
+    "ward_no": 5,
+    "name_np": "सोलु दुधकुण्ड नगरपालिका वडा नं ५",
+    "name_en": "Solududhkunda Municipality Ward No. 5"
+  },
+  {
+    "id": "ward-206",
+    "municipality_id": "mun-92",
+    "ward_no": 6,
+    "name_np": "सोलु दुधकुण्ड नगरपालिका वडा नं ६",
+    "name_en": "Solududhkunda Municipality Ward No. 6"
+  },
+  {
+    "id": "ward-207",
+    "municipality_id": "mun-92",
+    "ward_no": 7,
+    "name_np": "सोलु दुधकुण्ड नगरपालिका वडा नं ७",
+    "name_en": "Solududhkunda Municipality Ward No. 7"
+  },
+  {
+    "id": "ward-208",
+    "municipality_id": "mun-92",
+    "ward_no": 8,
+    "name_np": "सोलु दुधकुण्ड नगरपालिका वडा नं ८",
+    "name_en": "Solududhkunda Municipality Ward No. 8"
+  },
+  {
+    "id": "ward-209",
+    "municipality_id": "mun-92",
+    "ward_no": 9,
+    "name_np": "सोलु दुधकुण्ड नगरपालिका वडा नं ९",
+    "name_en": "Solududhkunda Municipality Ward No. 9"
+  },
+  {
+    "id": "ward-210",
+    "municipality_id": "mun-92",
+    "ward_no": 10,
+    "name_np": "सोलु दुधकुण्ड नगरपालिका वडा नं १०",
+    "name_en": "Solududhkunda Municipality Ward No. 10"
+  },
+  {
+    "id": "ward-211",
+    "municipality_id": "mun-92",
+    "ward_no": 11,
+    "name_np": "सोलु दुधकुण्ड नगरपालिका वडा नं ११",
+    "name_en": "Solududhkunda Municipality Ward No. 11"
+  },
+  {
+    "id": "ward-212",
+    "municipality_id": "mun-99",
+    "ward_no": 1,
+    "name_np": "सिद्धिचरण नगरपालिका वडा नं १",
+    "name_en": "Siddhicharan Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-213",
+    "municipality_id": "mun-99",
+    "ward_no": 2,
+    "name_np": "सिद्धिचरण नगरपालिका वडा नं २",
+    "name_en": "Siddhicharan Municipality Ward No. 2"
+  },
+  {
+    "id": "ward-214",
+    "municipality_id": "mun-99",
+    "ward_no": 3,
+    "name_np": "सिद्धिचरण नगरपालिका वडा नं ३",
+    "name_en": "Siddhicharan Municipality Ward No. 3"
+  },
+  {
+    "id": "ward-215",
+    "municipality_id": "mun-99",
+    "ward_no": 4,
+    "name_np": "सिद्धिचरण नगरपालिका वडा नं ४",
+    "name_en": "Siddhicharan Municipality Ward No. 4"
+  },
+  {
+    "id": "ward-216",
+    "municipality_id": "mun-99",
+    "ward_no": 5,
+    "name_np": "सिद्धिचरण नगरपालिका वडा नं ५",
+    "name_en": "Siddhicharan Municipality Ward No. 5"
+  },
+  {
+    "id": "ward-217",
+    "municipality_id": "mun-99",
+    "ward_no": 6,
+    "name_np": "सिद्धिचरण नगरपालिका वडा नं ६",
+    "name_en": "Siddhicharan Municipality Ward No. 6"
+  },
+  {
+    "id": "ward-218",
+    "municipality_id": "mun-99",
+    "ward_no": 7,
+    "name_np": "सिद्धिचरण नगरपालिका वडा नं ७",
+    "name_en": "Siddhicharan Municipality Ward No. 7"
+  },
+  {
+    "id": "ward-219",
+    "municipality_id": "mun-99",
+    "ward_no": 8,
+    "name_np": "सिद्धिचरण नगरपालिका वडा नं ८",
+    "name_en": "Siddhicharan Municipality Ward No. 8"
+  },
+  {
+    "id": "ward-220",
+    "municipality_id": "mun-99",
+    "ward_no": 9,
+    "name_np": "सिद्धिचरण नगरपालिका वडा नं ९",
+    "name_en": "Siddhicharan Municipality Ward No. 9"
+  },
+  {
+    "id": "ward-221",
+    "municipality_id": "mun-106",
+    "ward_no": 1,
+    "name_np": "दिक्तेल रुपाकोट मझुवागढी नगरपालिका वडा नं १",
+    "name_en": "Diktel Rupakot Majhuwagadhi Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-222",
+    "municipality_id": "mun-106",
+    "ward_no": 2,
+    "name_np": "दिक्तेल रुपाकोट मझुवागढी नगरपालिका वडा नं २",
+    "name_en": "Diktel Rupakot Majhuwagadhi Municipality Ward No. 2"
+  },
+  {
+    "id": "ward-223",
+    "municipality_id": "mun-106",
+    "ward_no": 3,
+    "name_np": "दिक्तेल रुपाकोट मझुवागढी नगरपालिका वडा नं ३",
+    "name_en": "Diktel Rupakot Majhuwagadhi Municipality Ward No. 3"
+  },
+  {
+    "id": "ward-224",
+    "municipality_id": "mun-106",
+    "ward_no": 4,
+    "name_np": "दिक्तेल रुपाकोट मझुवागढी नगरपालिका वडा नं ४",
+    "name_en": "Diktel Rupakot Majhuwagadhi Municipality Ward No. 4"
+  },
+  {
+    "id": "ward-225",
+    "municipality_id": "mun-106",
+    "ward_no": 5,
+    "name_np": "दिक्तेल रुपाकोट मझुवागढी नगरपालिका वडा नं ५",
+    "name_en": "Diktel Rupakot Majhuwagadhi Municipality Ward No. 5"
+  },
+  {
+    "id": "ward-226",
+    "municipality_id": "mun-106",
+    "ward_no": 6,
+    "name_np": "दिक्तेल रुपाकोट मझुवागढी नगरपालिका वडा नं ६",
+    "name_en": "Diktel Rupakot Majhuwagadhi Municipality Ward No. 6"
+  },
+  {
+    "id": "ward-227",
+    "municipality_id": "mun-106",
+    "ward_no": 7,
+    "name_np": "दिक्तेल रुपाकोट मझुवागढी नगरपालिका वडा नं ७",
+    "name_en": "Diktel Rupakot Majhuwagadhi Municipality Ward No. 7"
+  },
+  {
+    "id": "ward-228",
+    "municipality_id": "mun-106",
+    "ward_no": 8,
+    "name_np": "दिक्तेल रुपाकोट मझुवागढी नगरपालिका वडा नं ८",
+    "name_en": "Diktel Rupakot Majhuwagadhi Municipality Ward No. 8"
+  },
+  {
+    "id": "ward-229",
+    "municipality_id": "mun-106",
+    "ward_no": 9,
+    "name_np": "दिक्तेल रुपाकोट मझुवागढी नगरपालिका वडा नं ९",
+    "name_en": "Diktel Rupakot Majhuwagadhi Municipality Ward No. 9"
+  },
+  {
+    "id": "ward-230",
+    "municipality_id": "mun-106",
+    "ward_no": 10,
+    "name_np": "दिक्तेल रुपाकोट मझुवागढी नगरपालिका वडा नं १०",
+    "name_en": "Diktel Rupakot Majhuwagadhi Municipality Ward No. 10"
+  },
+  {
+    "id": "ward-231",
+    "municipality_id": "mun-106",
+    "ward_no": 11,
+    "name_np": "दिक्तेल रुपाकोट मझुवागढी नगरपालिका वडा नं ११",
+    "name_en": "Diktel Rupakot Majhuwagadhi Municipality Ward No. 11"
+  },
+  {
+    "id": "ward-232",
+    "municipality_id": "mun-106",
+    "ward_no": 12,
+    "name_np": "दिक्तेल रुपाकोट मझुवागढी नगरपालिका वडा नं १२",
+    "name_en": "Diktel Rupakot Majhuwagadhi Municipality Ward No. 12"
+  },
+  {
+    "id": "ward-233",
+    "municipality_id": "mun-106",
+    "ward_no": 13,
+    "name_np": "दिक्तेल रुपाकोट मझुवागढी नगरपालिका वडा नं १३",
+    "name_en": "Diktel Rupakot Majhuwagadhi Municipality Ward No. 13"
+  },
+  {
+    "id": "ward-234",
+    "municipality_id": "mun-106",
+    "ward_no": 14,
+    "name_np": "दिक्तेल रुपाकोट मझुवागढी नगरपालिका वडा नं १४",
+    "name_en": "Diktel Rupakot Majhuwagadhi Municipality Ward No. 14"
+  },
+  {
+    "id": "ward-235",
+    "municipality_id": "mun-106",
+    "ward_no": 15,
+    "name_np": "दिक्तेल रुपाकोट मझुवागढी नगरपालिका वडा नं १५",
+    "name_en": "Diktel Rupakot Majhuwagadhi Municipality Ward No. 15"
+  },
+  {
+    "id": "ward-236",
+    "municipality_id": "mun-107",
+    "ward_no": 1,
+    "name_np": "हलेसी तुवाचुङ नगरपालिका वडा नं १",
+    "name_en": "Halesi Tuwachung Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-237",
+    "municipality_id": "mun-107",
+    "ward_no": 2,
+    "name_np": "हलेसी तुवाचुङ नगरपालिका वडा नं २",
+    "name_en": "Halesi Tuwachung Municipality Ward No. 2"
+  },
+  {
+    "id": "ward-238",
+    "municipality_id": "mun-107",
+    "ward_no": 3,
+    "name_np": "हलेसी तुवाचुङ नगरपालिका वडा नं ३",
+    "name_en": "Halesi Tuwachung Municipality Ward No. 3"
+  },
+  {
+    "id": "ward-239",
+    "municipality_id": "mun-107",
+    "ward_no": 4,
+    "name_np": "हलेसी तुवाचुङ नगरपालिका वडा नं ४",
+    "name_en": "Halesi Tuwachung Municipality Ward No. 4"
+  },
+  {
+    "id": "ward-240",
+    "municipality_id": "mun-107",
+    "ward_no": 5,
+    "name_np": "हलेसी तुवाचुङ नगरपालिका वडा नं ५",
+    "name_en": "Halesi Tuwachung Municipality Ward No. 5"
+  },
+  {
+    "id": "ward-241",
+    "municipality_id": "mun-107",
+    "ward_no": 6,
+    "name_np": "हलेसी तुवाचुङ नगरपालिका वडा नं ६",
+    "name_en": "Halesi Tuwachung Municipality Ward No. 6"
+  },
+  {
+    "id": "ward-242",
+    "municipality_id": "mun-107",
+    "ward_no": 7,
+    "name_np": "हलेसी तुवाचुङ नगरपालिका वडा नं ७",
+    "name_en": "Halesi Tuwachung Municipality Ward No. 7"
+  },
+  {
+    "id": "ward-243",
+    "municipality_id": "mun-107",
+    "ward_no": 8,
+    "name_np": "हलेसी तुवाचुङ नगरपालिका वडा नं ८",
+    "name_en": "Halesi Tuwachung Municipality Ward No. 8"
+  },
+  {
+    "id": "ward-244",
+    "municipality_id": "mun-107",
+    "ward_no": 9,
+    "name_np": "हलेसी तुवाचुङ नगरपालिका वडा नं ९",
+    "name_en": "Halesi Tuwachung Municipality Ward No. 9"
+  },
+  {
+    "id": "ward-245",
+    "municipality_id": "mun-115",
+    "ward_no": 1,
+    "name_np": "त्रियुगा नगरपालिका वडा नं १",
+    "name_en": "Triyuga Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-246",
+    "municipality_id": "mun-115",
+    "ward_no": 2,
+    "name_np": "त्रियुगा नगरपालिका वडा नं २",
+    "name_en": "Triyuga Municipality Ward No. 2"
+  },
+  {
+    "id": "ward-247",
+    "municipality_id": "mun-115",
+    "ward_no": 3,
+    "name_np": "त्रियुगा नगरपालिका वडा नं ३",
+    "name_en": "Triyuga Municipality Ward No. 3"
+  },
+  {
+    "id": "ward-248",
+    "municipality_id": "mun-115",
+    "ward_no": 4,
+    "name_np": "त्रियुगा नगरपालिका वडा नं ४",
+    "name_en": "Triyuga Municipality Ward No. 4"
+  },
+  {
+    "id": "ward-249",
+    "municipality_id": "mun-115",
+    "ward_no": 5,
+    "name_np": "त्रियुगा नगरपालिका वडा नं ५",
+    "name_en": "Triyuga Municipality Ward No. 5"
+  },
+  {
+    "id": "ward-250",
+    "municipality_id": "mun-115",
+    "ward_no": 6,
+    "name_np": "त्रियुगा नगरपालिका वडा नं ६",
+    "name_en": "Triyuga Municipality Ward No. 6"
+  },
+  {
+    "id": "ward-251",
+    "municipality_id": "mun-115",
+    "ward_no": 7,
+    "name_np": "त्रियुगा नगरपालिका वडा नं ७",
+    "name_en": "Triyuga Municipality Ward No. 7"
+  },
+  {
+    "id": "ward-252",
+    "municipality_id": "mun-115",
+    "ward_no": 8,
+    "name_np": "त्रियुगा नगरपालिका वडा नं ८",
+    "name_en": "Triyuga Municipality Ward No. 8"
+  },
+  {
+    "id": "ward-253",
+    "municipality_id": "mun-115",
+    "ward_no": 9,
+    "name_np": "त्रियुगा नगरपालिका वडा नं ९",
+    "name_en": "Triyuga Municipality Ward No. 9"
+  },
+  {
+    "id": "ward-254",
+    "municipality_id": "mun-115",
+    "ward_no": 10,
+    "name_np": "त्रियुगा नगरपालिका वडा नं १०",
+    "name_en": "Triyuga Municipality Ward No. 10"
+  },
+  {
+    "id": "ward-255",
+    "municipality_id": "mun-115",
+    "ward_no": 11,
+    "name_np": "त्रियुगा नगरपालिका वडा नं ११",
+    "name_en": "Triyuga Municipality Ward No. 11"
+  },
+  {
+    "id": "ward-256",
+    "municipality_id": "mun-115",
+    "ward_no": 12,
+    "name_np": "त्रियुगा नगरपालिका वडा नं १२",
+    "name_en": "Triyuga Municipality Ward No. 12"
+  },
+  {
+    "id": "ward-257",
+    "municipality_id": "mun-115",
+    "ward_no": 13,
+    "name_np": "त्रियुगा नगरपालिका वडा नं १३",
+    "name_en": "Triyuga Municipality Ward No. 13"
+  },
+  {
+    "id": "ward-258",
+    "municipality_id": "mun-115",
+    "ward_no": 14,
+    "name_np": "त्रियुगा नगरपालिका वडा नं १४",
+    "name_en": "Triyuga Municipality Ward No. 14"
+  },
+  {
+    "id": "ward-259",
+    "municipality_id": "mun-115",
+    "ward_no": 15,
+    "name_np": "त्रियुगा नगरपालिका वडा नं १५",
+    "name_en": "Triyuga Municipality Ward No. 15"
+  },
+  {
+    "id": "ward-260",
+    "municipality_id": "mun-115",
+    "ward_no": 16,
+    "name_np": "त्रियुगा नगरपालिका वडा नं १६",
+    "name_en": "Triyuga Municipality Ward No. 16"
+  },
+  {
+    "id": "ward-261",
+    "municipality_id": "mun-116",
+    "ward_no": 1,
+    "name_np": "कटारी नगरपालिका वडा नं १",
+    "name_en": "Katari Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-262",
+    "municipality_id": "mun-116",
+    "ward_no": 2,
+    "name_np": "कटारी नगरपालिका वडा नं २",
+    "name_en": "Katari Municipality Ward No. 2"
+  },
+  {
+    "id": "ward-263",
+    "municipality_id": "mun-116",
+    "ward_no": 3,
+    "name_np": "कटारी नगरपालिका वडा नं ३",
+    "name_en": "Katari Municipality Ward No. 3"
+  },
+  {
+    "id": "ward-264",
+    "municipality_id": "mun-116",
+    "ward_no": 4,
+    "name_np": "कटारी नगरपालिका वडा नं ४",
+    "name_en": "Katari Municipality Ward No. 4"
+  },
+  {
+    "id": "ward-265",
+    "municipality_id": "mun-116",
+    "ward_no": 5,
+    "name_np": "कटारी नगरपालिका वडा नं ५",
+    "name_en": "Katari Municipality Ward No. 5"
+  },
+  {
+    "id": "ward-266",
+    "municipality_id": "mun-116",
+    "ward_no": 6,
+    "name_np": "कटारी नगरपालिका वडा नं ६",
+    "name_en": "Katari Municipality Ward No. 6"
+  },
+  {
+    "id": "ward-267",
+    "municipality_id": "mun-116",
+    "ward_no": 7,
+    "name_np": "कटारी नगरपालिका वडा नं ७",
+    "name_en": "Katari Municipality Ward No. 7"
+  },
+  {
+    "id": "ward-268",
+    "municipality_id": "mun-116",
+    "ward_no": 8,
+    "name_np": "कटारी नगरपालिका वडा नं ८",
+    "name_en": "Katari Municipality Ward No. 8"
+  },
+  {
+    "id": "ward-269",
+    "municipality_id": "mun-116",
+    "ward_no": 9,
+    "name_np": "कटारी नगरपालिका वडा नं ९",
+    "name_en": "Katari Municipality Ward No. 9"
+  },
+  {
+    "id": "ward-270",
+    "municipality_id": "mun-116",
+    "ward_no": 10,
+    "name_np": "कटारी नगरपालिका वडा नं १०",
+    "name_en": "Katari Municipality Ward No. 10"
+  },
+  {
+    "id": "ward-271",
+    "municipality_id": "mun-117",
+    "ward_no": 1,
+    "name_np": "चौदण्डीगढी नगरपालिका वडा नं १",
+    "name_en": "Chaudandigadhi Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-272",
+    "municipality_id": "mun-117",
+    "ward_no": 2,
+    "name_np": "चौदण्डीगढी नगरपालिका वडा नं २",
+    "name_en": "Chaudandigadhi Municipality Ward No. 2"
+  },
+  {
+    "id": "ward-273",
+    "municipality_id": "mun-117",
+    "ward_no": 3,
+    "name_np": "चौदण्डीगढी नगरपालिका वडा नं ३",
+    "name_en": "Chaudandigadhi Municipality Ward No. 3"
+  },
+  {
+    "id": "ward-274",
+    "municipality_id": "mun-117",
+    "ward_no": 4,
+    "name_np": "चौदण्डीगढी नगरपालिका वडा नं ४",
+    "name_en": "Chaudandigadhi Municipality Ward No. 4"
+  },
+  {
+    "id": "ward-275",
+    "municipality_id": "mun-117",
+    "ward_no": 5,
+    "name_np": "चौदण्डीगढी नगरपालिका वडा नं ५",
+    "name_en": "Chaudandigadhi Municipality Ward No. 5"
+  },
+  {
+    "id": "ward-276",
+    "municipality_id": "mun-117",
+    "ward_no": 6,
+    "name_np": "चौदण्डीगढी नगरपालिका वडा नं ६",
+    "name_en": "Chaudandigadhi Municipality Ward No. 6"
+  },
+  {
+    "id": "ward-277",
+    "municipality_id": "mun-117",
+    "ward_no": 7,
+    "name_np": "चौदण्डीगढी नगरपालिका वडा नं ७",
+    "name_en": "Chaudandigadhi Municipality Ward No. 7"
+  },
+  {
+    "id": "ward-278",
+    "municipality_id": "mun-117",
+    "ward_no": 8,
+    "name_np": "चौदण्डीगढी नगरपालिका वडा नं ८",
+    "name_en": "Chaudandigadhi Municipality Ward No. 8"
+  },
+  {
+    "id": "ward-279",
+    "municipality_id": "mun-117",
+    "ward_no": 9,
+    "name_np": "चौदण्डीगढी नगरपालिका वडा नं ९",
+    "name_en": "Chaudandigadhi Municipality Ward No. 9"
+  },
+  {
+    "id": "ward-280",
+    "municipality_id": "mun-124",
+    "ward_no": 1,
+    "name_np": "Janakpurdham Sub-Metropolitan City Ward No. 1",
+    "name_en": "Janakpurdham Sub-Metropolitan City Ward No. 1"
+  },
+  {
+    "id": "ward-281",
+    "municipality_id": "mun-124",
+    "ward_no": 2,
+    "name_np": "Janakpurdham Sub-Metropolitan City Ward No. 2",
+    "name_en": "Janakpurdham Sub-Metropolitan City Ward No. 2"
+  },
+  {
+    "id": "ward-282",
+    "municipality_id": "mun-125",
+    "ward_no": 1,
+    "name_np": "Bateshwar Rural Municipality Ward No. 1",
+    "name_en": "Bateshwar Rural Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-283",
+    "municipality_id": "mun-125",
+    "ward_no": 2,
+    "name_np": "Bateshwar Rural Municipality Ward No. 2",
+    "name_en": "Bateshwar Rural Municipality Ward No. 2"
+  },
+  {
+    "id": "ward-284",
+    "municipality_id": "mun-126",
+    "ward_no": 1,
+    "name_np": "Kathmandu Metropolitan City Ward No. 1",
+    "name_en": "Kathmandu Metropolitan City Ward No. 1"
+  },
+  {
+    "id": "ward-285",
+    "municipality_id": "mun-126",
+    "ward_no": 2,
+    "name_np": "Kathmandu Metropolitan City Ward No. 2",
+    "name_en": "Kathmandu Metropolitan City Ward No. 2"
+  },
+  {
+    "id": "ward-286",
+    "municipality_id": "mun-127",
+    "ward_no": 1,
+    "name_np": "Kakani Rural Municipality Ward No. 1",
+    "name_en": "Kakani Rural Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-287",
+    "municipality_id": "mun-127",
+    "ward_no": 2,
+    "name_np": "Kakani Rural Municipality Ward No. 2",
+    "name_en": "Kakani Rural Municipality Ward No. 2"
+  },
+  {
+    "id": "ward-288",
+    "municipality_id": "mun-128",
+    "ward_no": 1,
+    "name_np": "Pokhara Metropolitan City Ward No. 1",
+    "name_en": "Pokhara Metropolitan City Ward No. 1"
+  },
+  {
+    "id": "ward-289",
+    "municipality_id": "mun-128",
+    "ward_no": 2,
+    "name_np": "Pokhara Metropolitan City Ward No. 2",
+    "name_en": "Pokhara Metropolitan City Ward No. 2"
+  },
+  {
+    "id": "ward-290",
+    "municipality_id": "mun-129",
+    "ward_no": 1,
+    "name_np": "Machhapuchchhre Rural Municipality Ward No. 1",
+    "name_en": "Machhapuchchhre Rural Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-291",
+    "municipality_id": "mun-129",
+    "ward_no": 2,
+    "name_np": "Machhapuchchhre Rural Municipality Ward No. 2",
+    "name_en": "Machhapuchchhre Rural Municipality Ward No. 2"
+  },
+  {
+    "id": "ward-292",
+    "municipality_id": "mun-130",
+    "ward_no": 1,
+    "name_np": "Butwal Sub-Metropolitan City Ward No. 1",
+    "name_en": "Butwal Sub-Metropolitan City Ward No. 1"
+  },
+  {
+    "id": "ward-293",
+    "municipality_id": "mun-130",
+    "ward_no": 2,
+    "name_np": "Butwal Sub-Metropolitan City Ward No. 2",
+    "name_en": "Butwal Sub-Metropolitan City Ward No. 2"
+  },
+  {
+    "id": "ward-294",
+    "municipality_id": "mun-131",
+    "ward_no": 1,
+    "name_np": "Ruru Rural Municipality Ward No. 1",
+    "name_en": "Ruru Rural Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-295",
+    "municipality_id": "mun-131",
+    "ward_no": 2,
+    "name_np": "Ruru Rural Municipality Ward No. 2",
+    "name_en": "Ruru Rural Municipality Ward No. 2"
+  },
+  {
+    "id": "ward-296",
+    "municipality_id": "mun-132",
+    "ward_no": 1,
+    "name_np": "Birendranagar Municipality Ward No. 1",
+    "name_en": "Birendranagar Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-297",
+    "municipality_id": "mun-132",
+    "ward_no": 2,
+    "name_np": "Birendranagar Municipality Ward No. 2",
+    "name_en": "Birendranagar Municipality Ward No. 2"
+  },
+  {
+    "id": "ward-298",
+    "municipality_id": "mun-133",
+    "ward_no": 1,
+    "name_np": "Chandannath Municipality Ward No. 1",
+    "name_en": "Chandannath Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-299",
+    "municipality_id": "mun-133",
+    "ward_no": 2,
+    "name_np": "Chandannath Municipality Ward No. 2",
+    "name_en": "Chandannath Municipality Ward No. 2"
+  },
+  {
+    "id": "ward-300",
+    "municipality_id": "mun-134",
+    "ward_no": 1,
+    "name_np": "Dhangadhi Sub-Metropolitan City Ward No. 1",
+    "name_en": "Dhangadhi Sub-Metropolitan City Ward No. 1"
+  },
+  {
+    "id": "ward-301",
+    "municipality_id": "mun-134",
+    "ward_no": 2,
+    "name_np": "Dhangadhi Sub-Metropolitan City Ward No. 2",
+    "name_en": "Dhangadhi Sub-Metropolitan City Ward No. 2"
+  },
+  {
+    "id": "ward-302",
+    "municipality_id": "mun-135",
+    "ward_no": 1,
+    "name_np": "Bhimdatta Municipality Ward No. 1",
+    "name_en": "Bhimdatta Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-303",
+    "municipality_id": "mun-135",
+    "ward_no": 2,
+    "name_np": "Bhimdatta Municipality Ward No. 2",
+    "name_en": "Bhimdatta Municipality Ward No. 2"
+  },
+  {
+    "id": "ward-304",
+    "municipality_id": "mun-02",
+    "ward_no": 1,
+    "name_np": "Sidingwa Rural Municipality Ward No. 1",
+    "name_en": "Sidingwa Rural Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-305",
+    "municipality_id": "mun-03",
+    "ward_no": 1,
+    "name_np": "Maiwakhola Rural Municipality Ward No. 1",
+    "name_en": "Maiwakhola Rural Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-306",
+    "municipality_id": "mun-04",
+    "ward_no": 1,
+    "name_np": "Mikwakhola Rural Municipality Ward No. 1",
+    "name_en": "Mikwakhola Rural Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-307",
+    "municipality_id": "mun-05",
+    "ward_no": 1,
+    "name_np": "Aathrai Triveni Rural Municipality Ward No. 1",
+    "name_en": "Aathrai Triveni Rural Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-308",
+    "municipality_id": "mun-06",
+    "ward_no": 1,
+    "name_np": "Sirijangha Rural Municipality Ward No. 1",
+    "name_en": "Sirijangha Rural Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-309",
+    "municipality_id": "mun-15",
+    "ward_no": 1,
+    "name_np": "Deumai Municipality Ward No. 1",
+    "name_en": "Deumai Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-310",
+    "municipality_id": "mun-16",
+    "ward_no": 1,
+    "name_np": "Mai Municipality Ward No. 1",
+    "name_en": "Mai Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-311",
+    "municipality_id": "mun-17",
+    "ward_no": 1,
+    "name_np": "Chulachuli Rural Municipality Ward No. 1",
+    "name_en": "Chulachuli Rural Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-312",
+    "municipality_id": "mun-18",
+    "ward_no": 1,
+    "name_np": "Phakphokthum Rural Municipality Ward No. 1",
+    "name_en": "Phakphokthum Rural Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-313",
+    "municipality_id": "mun-19",
+    "ward_no": 1,
+    "name_np": "Mangsebung Rural Municipality Ward No. 1",
+    "name_en": "Mangsebung Rural Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-314",
+    "municipality_id": "mun-20",
+    "ward_no": 1,
+    "name_np": "Rong Rural Municipality Ward No. 1",
+    "name_en": "Rong Rural Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-315",
+    "municipality_id": "mun-21",
+    "ward_no": 1,
+    "name_np": "Sandakpur Rural Municipality Ward No. 1",
+    "name_en": "Sandakpur Rural Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-316",
+    "municipality_id": "mun-22",
+    "ward_no": 1,
+    "name_np": "Bhadrapur Municipality Ward No. 1",
+    "name_en": "Bhadrapur Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-317",
+    "municipality_id": "mun-23",
+    "ward_no": 1,
+    "name_np": "Birtamod Municipality Ward No. 1",
+    "name_en": "Birtamod Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-318",
+    "municipality_id": "mun-24",
+    "ward_no": 1,
+    "name_np": "Damak Municipality Ward No. 1",
+    "name_en": "Damak Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-319",
+    "municipality_id": "mun-25",
+    "ward_no": 1,
+    "name_np": "Mechinagar Municipality Ward No. 1",
+    "name_en": "Mechinagar Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-320",
+    "municipality_id": "mun-26",
+    "ward_no": 1,
+    "name_np": "Gauradaha Municipality Ward No. 1",
+    "name_en": "Gauradaha Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-321",
+    "municipality_id": "mun-27",
+    "ward_no": 1,
+    "name_np": "Kankai Municipality Ward No. 1",
+    "name_en": "Kankai Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-322",
+    "municipality_id": "mun-28",
+    "ward_no": 1,
+    "name_np": "Shivasatakshi Municipality Ward No. 1",
+    "name_en": "Shivasatakshi Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-323",
+    "municipality_id": "mun-29",
+    "ward_no": 1,
+    "name_np": "Arjundhara Rural Municipality Ward No. 1",
+    "name_en": "Arjundhara Rural Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-324",
+    "municipality_id": "mun-30",
+    "ward_no": 1,
+    "name_np": "Bahradashi Rural Municipality Ward No. 1",
+    "name_en": "Bahradashi Rural Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-325",
+    "municipality_id": "mun-31",
+    "ward_no": 1,
+    "name_np": "Jhapa Rural Municipality Ward No. 1",
+    "name_en": "Jhapa Rural Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-326",
+    "municipality_id": "mun-32",
+    "ward_no": 1,
+    "name_np": "Kachankawal Rural Municipality Ward No. 1",
+    "name_en": "Kachankawal Rural Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-327",
+    "municipality_id": "mun-33",
+    "ward_no": 1,
+    "name_np": "Kamal Rural Municipality Ward No. 1",
+    "name_en": "Kamal Rural Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-328",
+    "municipality_id": "mun-34",
+    "ward_no": 1,
+    "name_np": "Gauriganj Rural Municipality Ward No. 1",
+    "name_en": "Gauriganj Rural Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-329",
+    "municipality_id": "mun-36",
+    "ward_no": 1,
+    "name_np": "Belbari Municipality Ward No. 1",
+    "name_en": "Belbari Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-330",
+    "municipality_id": "mun-37",
+    "ward_no": 1,
+    "name_np": "Ratuwamai Municipality Ward No. 1",
+    "name_en": "Ratuwamai Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-331",
+    "municipality_id": "mun-38",
+    "ward_no": 1,
+    "name_np": "Pathari Shanishchare Municipality Ward No. 1",
+    "name_en": "Pathari Shanishchare Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-332",
+    "municipality_id": "mun-39",
+    "ward_no": 1,
+    "name_np": "Sundar Haraicha Municipality Ward No. 1",
+    "name_en": "Sundar Haraicha Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-333",
+    "municipality_id": "mun-40",
+    "ward_no": 1,
+    "name_np": "Letang Municipality Ward No. 1",
+    "name_en": "Letang Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-334",
+    "municipality_id": "mun-41",
+    "ward_no": 1,
+    "name_np": "Rangeli Municipality Ward No. 1",
+    "name_en": "Rangeli Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-335",
+    "municipality_id": "mun-42",
+    "ward_no": 1,
+    "name_np": "Urlabari Municipality Ward No. 1",
+    "name_en": "Urlabari Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-336",
+    "municipality_id": "mun-43",
+    "ward_no": 1,
+    "name_np": "Sunwarshi Municipality Ward No. 1",
+    "name_en": "Sunwarshi Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-337",
+    "municipality_id": "mun-44",
+    "ward_no": 1,
+    "name_np": "Katahari Rural Municipality Ward No. 1",
+    "name_en": "Katahari Rural Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-338",
+    "municipality_id": "mun-45",
+    "ward_no": 1,
+    "name_np": "Gramthan Rural Municipality Ward No. 1",
+    "name_en": "Gramthan Rural Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-339",
+    "municipality_id": "mun-46",
+    "ward_no": 1,
+    "name_np": "Budhiganga Rural Municipality Ward No. 1",
+    "name_en": "Budhiganga Rural Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-340",
+    "municipality_id": "mun-47",
+    "ward_no": 1,
+    "name_np": "Dhanpalthan Rural Municipality Ward No. 1",
+    "name_en": "Dhanpalthan Rural Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-341",
+    "municipality_id": "mun-48",
+    "ward_no": 1,
+    "name_np": "Jahada Rural Municipality Ward No. 1",
+    "name_en": "Jahada Rural Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-342",
+    "municipality_id": "mun-49",
+    "ward_no": 1,
+    "name_np": "Kerabari Rural Municipality Ward No. 1",
+    "name_en": "Kerabari Rural Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-343",
+    "municipality_id": "mun-50",
+    "ward_no": 1,
+    "name_np": "Miklajung Rural Municipality Ward No. 1",
+    "name_en": "Miklajung Rural Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-344",
+    "municipality_id": "mun-53",
+    "ward_no": 1,
+    "name_np": "Inaruwa Municipality Ward No. 1",
+    "name_en": "Inaruwa Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-345",
+    "municipality_id": "mun-54",
+    "ward_no": 1,
+    "name_np": "Duhabi Municipality Ward No. 1",
+    "name_en": "Duhabi Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-346",
+    "municipality_id": "mun-55",
+    "ward_no": 1,
+    "name_np": "Ramdhuni Municipality Ward No. 1",
+    "name_en": "Ramdhuni Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-347",
+    "municipality_id": "mun-56",
+    "ward_no": 1,
+    "name_np": "Barahakshetra Municipality Ward No. 1",
+    "name_en": "Barahakshetra Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-348",
+    "municipality_id": "mun-57",
+    "ward_no": 1,
+    "name_np": "Koshi Rural Municipality Ward No. 1",
+    "name_en": "Koshi Rural Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-349",
+    "municipality_id": "mun-58",
+    "ward_no": 1,
+    "name_np": "Harinagara Rural Municipality Ward No. 1",
+    "name_en": "Harinagara Rural Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-350",
+    "municipality_id": "mun-59",
+    "ward_no": 1,
+    "name_np": "Bhokraha Rural Municipality Ward No. 1",
+    "name_en": "Bhokraha Rural Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-351",
+    "municipality_id": "mun-60",
+    "ward_no": 1,
+    "name_np": "Devanagunj Rural Municipality Ward No. 1",
+    "name_en": "Devanagunj Rural Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-352",
+    "municipality_id": "mun-61",
+    "ward_no": 1,
+    "name_np": "Gadhi Rural Municipality Ward No. 1",
+    "name_en": "Gadhi Rural Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-353",
+    "municipality_id": "mun-64",
+    "ward_no": 1,
+    "name_np": "Sangurigadhi Rural Municipality Ward No. 1",
+    "name_en": "Sangurigadhi Rural Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-354",
+    "municipality_id": "mun-65",
+    "ward_no": 1,
+    "name_np": "Khalsi Chhintapu Rural Municipality Ward No. 1",
+    "name_en": "Khalsi Chhintapu Rural Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-355",
+    "municipality_id": "mun-66",
+    "ward_no": 1,
+    "name_np": "Chaubise Rural Municipality Ward No. 1",
+    "name_en": "Chaubise Rural Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-356",
+    "municipality_id": "mun-67",
+    "ward_no": 1,
+    "name_np": "Teliya Rural Municipality Ward No. 1",
+    "name_en": "Teliya Rural Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-357",
+    "municipality_id": "mun-68",
+    "ward_no": 1,
+    "name_np": "Sahidbhumi Rural Municipality Ward No. 1",
+    "name_en": "Sahidbhumi Rural Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-358",
+    "municipality_id": "mun-71",
+    "ward_no": 1,
+    "name_np": "Aathrai Rural Municipality Ward No. 1",
+    "name_en": "Aathrai Rural Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-359",
+    "municipality_id": "mun-72",
+    "ward_no": 1,
+    "name_np": "Chhathar Rural Municipality Ward No. 1",
+    "name_en": "Chhathar Rural Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-360",
+    "municipality_id": "mun-73",
+    "ward_no": 1,
+    "name_np": "Pate Danda Rural Municipality Ward No. 1",
+    "name_en": "Pate Danda Rural Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-361",
+    "municipality_id": "mun-74",
+    "ward_no": 1,
+    "name_np": "Mencheyem Rural Municipality Ward No. 1",
+    "name_en": "Mencheyem Rural Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-362",
+    "municipality_id": "mun-77",
+    "ward_no": 1,
+    "name_np": "Dharmadevi Municipality Ward No. 1",
+    "name_en": "Dharmadevi Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-363",
+    "municipality_id": "mun-78",
+    "ward_no": 1,
+    "name_np": "Madi Municipality Ward No. 1",
+    "name_en": "Madi Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-364",
+    "municipality_id": "mun-79",
+    "ward_no": 1,
+    "name_np": "Panchkhapan Rural Municipality Ward No. 1",
+    "name_en": "Panchkhapan Rural Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-365",
+    "municipality_id": "mun-80",
+    "ward_no": 1,
+    "name_np": "Sabhapokhari Rural Municipality Ward No. 1",
+    "name_en": "Sabhapokhari Rural Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-366",
+    "municipality_id": "mun-81",
+    "ward_no": 1,
+    "name_np": "Bhotekhola Rural Municipality Ward No. 1",
+    "name_en": "Bhotekhola Rural Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-367",
+    "municipality_id": "mun-82",
+    "ward_no": 1,
+    "name_np": "Chichila Rural Municipality Ward No. 1",
+    "name_en": "Chichila Rural Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-368",
+    "municipality_id": "mun-83",
+    "ward_no": 1,
+    "name_np": "Silichong Rural Municipality Ward No. 1",
+    "name_en": "Silichong Rural Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-369",
+    "municipality_id": "mun-86",
+    "ward_no": 1,
+    "name_np": "Amchok Rural Municipality Ward No. 1",
+    "name_en": "Amchok Rural Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-370",
+    "municipality_id": "mun-87",
+    "ward_no": 1,
+    "name_np": "Temkemaiyung Rural Municipality Ward No. 1",
+    "name_en": "Temkemaiyung Rural Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-371",
+    "municipality_id": "mun-88",
+    "ward_no": 1,
+    "name_np": "Arun Rural Municipality Ward No. 1",
+    "name_en": "Arun Rural Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-372",
+    "municipality_id": "mun-89",
+    "ward_no": 1,
+    "name_np": "Pauwadungma Rural Municipality Ward No. 1",
+    "name_en": "Pauwadungma Rural Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-373",
+    "municipality_id": "mun-90",
+    "ward_no": 1,
+    "name_np": "Ramprasad Rai Rural Municipality Ward No. 1",
+    "name_en": "Ramprasad Rai Rural Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-374",
+    "municipality_id": "mun-91",
+    "ward_no": 1,
+    "name_np": "Salpasilichho Rural Municipality Ward No. 1",
+    "name_en": "Salpasilichho Rural Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-375",
+    "municipality_id": "mun-93",
+    "ward_no": 1,
+    "name_np": "Nechasalyan Rural Municipality Ward No. 1",
+    "name_en": "Nechasalyan Rural Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-376",
+    "municipality_id": "mun-94",
+    "ward_no": 1,
+    "name_np": "Sotang Rural Municipality Ward No. 1",
+    "name_en": "Sotang Rural Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-377",
+    "municipality_id": "mun-95",
+    "ward_no": 1,
+    "name_np": "Dudhkoshi Rural Municipality Ward No. 1",
+    "name_en": "Dudhkoshi Rural Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-378",
+    "municipality_id": "mun-96",
+    "ward_no": 1,
+    "name_np": "Mahakulung Rural Municipality Ward No. 1",
+    "name_en": "Mahakulung Rural Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-379",
+    "municipality_id": "mun-97",
+    "ward_no": 1,
+    "name_np": "Likhu Pike Rural Municipality Ward No. 1",
+    "name_en": "Likhu Pike Rural Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-380",
+    "municipality_id": "mun-98",
+    "ward_no": 1,
+    "name_np": "Thulung Dudhkoshi Rural Municipality Ward No. 1",
+    "name_en": "Thulung Dudhkoshi Rural Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-381",
+    "municipality_id": "mun-100",
+    "ward_no": 1,
+    "name_np": "Khiji Demba Rural Municipality Ward No. 1",
+    "name_en": "Khiji Demba Rural Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-382",
+    "municipality_id": "mun-101",
+    "ward_no": 1,
+    "name_np": "Chisankhugadhi Rural Municipality Ward No. 1",
+    "name_en": "Chisankhugadhi Rural Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-383",
+    "municipality_id": "mun-102",
+    "ward_no": 1,
+    "name_np": "Manebhanjyang Rural Municipality Ward No. 1",
+    "name_en": "Manebhanjyang Rural Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-384",
+    "municipality_id": "mun-103",
+    "ward_no": 1,
+    "name_np": "Molung Rural Municipality Ward No. 1",
+    "name_en": "Molung Rural Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-385",
+    "municipality_id": "mun-104",
+    "ward_no": 1,
+    "name_np": "Likhu Rural Municipality Ward No. 1",
+    "name_en": "Likhu Rural Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-386",
+    "municipality_id": "mun-105",
+    "ward_no": 1,
+    "name_np": "Sunkoshi Rural Municipality Ward No. 1",
+    "name_en": "Sunkoshi Rural Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-387",
+    "municipality_id": "mun-108",
+    "ward_no": 1,
+    "name_np": "Khotang Rural Municipality Ward No. 1",
+    "name_en": "Khotang Rural Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-388",
+    "municipality_id": "mun-109",
+    "ward_no": 1,
+    "name_np": "Diprung Rural Municipality Ward No. 1",
+    "name_en": "Diprung Rural Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-389",
+    "municipality_id": "mun-110",
+    "ward_no": 1,
+    "name_np": "Sakela Rural Municipality Ward No. 1",
+    "name_en": "Sakela Rural Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-390",
+    "municipality_id": "mun-111",
+    "ward_no": 1,
+    "name_np": "Barahapokhari Rural Municipality Ward No. 1",
+    "name_en": "Barahapokhari Rural Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-391",
+    "municipality_id": "mun-112",
+    "ward_no": 1,
+    "name_np": "Rawa Besi Rural Municipality Ward No. 1",
+    "name_en": "Rawa Besi Rural Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-392",
+    "municipality_id": "mun-113",
+    "ward_no": 1,
+    "name_np": "Janteshwari Rural Municipality Ward No. 1",
+    "name_en": "Janteshwari Rural Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-393",
+    "municipality_id": "mun-114",
+    "ward_no": 1,
+    "name_np": "Kharpa Rural Municipality Ward No. 1",
+    "name_en": "Kharpa Rural Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-394",
+    "municipality_id": "mun-118",
+    "ward_no": 1,
+    "name_np": "Belka Municipality Ward No. 1",
+    "name_en": "Belka Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-395",
+    "municipality_id": "mun-119",
+    "ward_no": 1,
+    "name_np": "Udayapurgadhi Rural Municipality Ward No. 1",
+    "name_en": "Udayapurgadhi Rural Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-396",
+    "municipality_id": "mun-120",
+    "ward_no": 1,
+    "name_np": "Rautamai Rural Municipality Ward No. 1",
+    "name_en": "Rautamai Rural Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-397",
+    "municipality_id": "mun-121",
+    "ward_no": 1,
+    "name_np": "Sunkoshi Rural Municipality Ward No. 1",
+    "name_en": "Sunkoshi Rural Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-398",
+    "municipality_id": "mun-122",
+    "ward_no": 1,
+    "name_np": "Tapali Rural Municipality Ward No. 1",
+    "name_en": "Tapali Rural Municipality Ward No. 1"
+  },
+  {
+    "id": "ward-399",
+    "municipality_id": "mun-123",
+    "ward_no": 1,
+    "name_np": "Limchungbung Rural Municipality Ward No. 1",
+    "name_en": "Limchungbung Rural Municipality Ward No. 1"
+  }
 ]

@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { Drawer, useMediaQuery } from "@mui/material";
 import {
   HomeOutlined,
+  BarChartOutlined,
   GroupOutlined,
   MapOutlined,
   GridViewOutlined,
@@ -30,6 +31,7 @@ import Breadcrumbs from "@/components/ui/Breadcrumbs";
 
 const VIEW_ICONS: Record<WardViewId, ReactNode> = {
   dashboard: <HomeOutlined sx={{ fontSize: 20 }} />,
+  analytics: <BarChartOutlined sx={{ fontSize: 20 }} />,
   citizens: <GroupOutlined sx={{ fontSize: 20 }} />,
   map: <MapOutlined sx={{ fontSize: 20 }} />,
   "national-map": <MapOutlined sx={{ fontSize: 20 }} />,

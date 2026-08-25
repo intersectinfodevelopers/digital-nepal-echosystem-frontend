@@ -162,7 +162,7 @@ export function ReviewSubmitStep({
               />
             </svg>
           </div>
-          <h2 className="mb-3 text-xl font-bold text-[#1F2A44]">
+          <h2 className="registration-title mb-3 text-xl font-bold text-[#1F2A44]">
             Registration Submitted Successfully
           </h2>
           <p className="mb-6 text-[11px] leading-relaxed text-[#687386]">
@@ -375,7 +375,7 @@ export function ReviewSubmitStep({
             </div>
           </div>
         </main>
-        <footer className="fixed bottom-0 left-[270px] right-0 z-30 flex h-[76px] items-center justify-between border-t border-[#D8DDE5] bg-white px-6 md:px-10">
+        <footer className="registration-footer sticky bottom-0 z-30 flex h-19 items-center justify-between border-t border-[#D8DDE5] bg-white px-4 sm:px-6 md:px-10">
           <button
             type="button"
             onClick={() => onNavigateToStep(9)}

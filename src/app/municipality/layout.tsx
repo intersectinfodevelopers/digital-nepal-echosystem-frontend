@@ -17,6 +17,7 @@ const MUNICIPALITY_NAV: AdminNavSection[] = [
     label: "Main",
     items: [
       { id: "/municipality/dashboard", label: "Dashboard", icon: <DashboardOutlined sx={{ fontSize: 20 }} /> },
+      { id: "/municipality/analytics", label: "Analytics", icon: <BarChartOutlined sx={{ fontSize: 20 }} />, hasMapTree: true, mapHref: "/municipality/analytics" },
       { id: "/municipality/approvals", label: "Approvals", icon: <ChecklistOutlined sx={{ fontSize: 20 }} /> },
       { id: "/municipality/conflicts", label: "Conflicts", icon: <ReportProblemOutlined sx={{ fontSize: 20 }} /> },
       { id: "/municipality/benefits", label: "Benefits", icon: <CardGiftcardOutlined sx={{ fontSize: 20 }} /> },
@@ -27,6 +28,7 @@ const MUNICIPALITY_NAV: AdminNavSection[] = [
 ];
 
 function getActiveView(pathname: string) {
+  if (pathname.startsWith("/municipality/analytics")) return "/municipality/analytics";
   if (pathname.startsWith("/municipality/approvals")) return "/municipality/approvals";
   if (pathname.startsWith("/municipality/conflicts")) return "/municipality/conflicts";
   if (pathname.startsWith("/municipality/benefits")) return "/municipality/benefits";
@@ -106,7 +108,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             onGoProfile={() => router.push("/municipality/dashboard")}
           />
 
-          <main className="flex-1 px-4 pt-20 pb-6 sm:px-6 lg:px-8">
+          <main className="flex-1 px-4 pt-6 pb-6 sm:px-6 lg:px-8">
             {children}
           </main>
         </div>

@@ -19,7 +19,7 @@ interface PortalStepperProps {
   currentStep: number;
 }
 
-const MIN_STEP_WIDTH = 76;
+const MIN_STEP_WIDTH = 82;
 
 export function PortalStepper({ currentStep }: PortalStepperProps) {
   const minRowWidth = MIN_STEP_WIDTH * STEPS.length;
@@ -38,9 +38,9 @@ export function PortalStepper({ currentStep }: PortalStepperProps) {
           const isActive = stepNumber === currentStep;
 
           let circleClasses =
-            "relative z-10 w-[34px] h-[34px] rounded-full flex items-center justify-center text-[14px] font-semibold shrink-0";
+            "relative z-10 flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-[12px] font-bold shadow-sm";
           let labelClasses =
-            "font-poppins text-[12px] text-center leading-tight mt-2 font-medium w-full px-1 truncate";
+            "font-sans mt-2 w-full truncate px-1 text-center text-[11px] font-semibold leading-tight";
 
           if (isCompleted) {
             circleClasses += " bg-[#0A2D6D] text-white";
@@ -63,7 +63,7 @@ export function PortalStepper({ currentStep }: PortalStepperProps) {
               {index < STEPS.length - 1 && (
                 <div
                   aria-hidden="true"
-                  className={`absolute top-[28px] left-1/2 h-[2px] rounded-full ${
+                    className={`absolute left-1/2 top-3.75 h-0.5 rounded-full ${
                     stepNumber < currentStep ? "bg-[#0A2D6D]" : "bg-[#D8D8D8]"
                   }`}
                   style={{ width: "100%" }}

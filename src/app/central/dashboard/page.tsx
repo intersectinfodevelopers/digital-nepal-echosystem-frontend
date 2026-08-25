@@ -1,19 +1,17 @@
 import citizens from "../../../../data/citizens.json";
-import idCards from "../../../../data/id-cards.json";
-import municipalities from "../../../../data/municipalities.json";
 import provinces from "../../../../data/provinces.json";
-import wards from "../../../../data/wards.json";
-import grievances from "../../../../data/grievances.json";
 import ScopeDashboard, { type ScopeMetric, type ScopeAction } from "@/components/dashboard/ScopeDashboard";
+import CentralHierarchyTable from "@/components/dashboard/CentralHierarchyTable";
+import LocalLevelStructure from "@/components/dashboard/LocalLevelStructure";
+import { TOTAL_DISTRICTS_OFFICIAL, TOTAL_LOCAL_LEVELS_OFFICIAL, TOTAL_WARDS_OFFICIAL } from "@/constants/officialStats";
 
 const number = (value: number) => value.toLocaleString("en-US");
 const metrics: ScopeMetric[] = [
   { label: "Total Citizens Nationally", value: number(citizens.length), foot: "▲ 8 this week", accent: "navy", icon: "♙" },
   { label: "Total Provinces", value: provinces.length, foot: "All onboarded", accent: "blue", icon: "⌖" },
-  { label: "Total Municipalities", value: municipalities.length, foot: "Local bodies", accent: "purple", icon: "▥" },
-  { label: "Total Wards", value: number(wards.length), foot: "Official ward count", accent: "orange", icon: "▤" },
-  { label: "ID Cards Issued", value: idCards.filter((card) => card.issued_at !== null).length, foot: "Issued platform cards", accent: "green", icon: "▣" },
-  { label: "Active Grievances", value: grievances.filter((grievance) => grievance.status !== "CLOSED").length, foot: "Requires attention", accent: "red", icon: "⚑" },
+  { label: "Total Districts", value: TOTAL_DISTRICTS_OFFICIAL, foot: "Official district count", accent: "purple", icon: "▥" },
+  { label: "Total Local Levels", value: TOTAL_LOCAL_LEVELS_OFFICIAL, foot: "6 metro · 11 sub-metro · 276 muni · 460 rural", accent: "orange", icon: "▤" },
+  { label: "Total Wards", value: number(TOTAL_WARDS_OFFICIAL), foot: "Official ward count", accent: "teal", icon: "▤" },
 ];
 const coverage: ScopeMetric[] = [
   { label: "Households Registered", value: 138, foot: "26.1% below poverty line", accent: "orange", icon: "⌂" },
@@ -29,5 +27,6 @@ const actions: ScopeAction[] = [
 ];
 
 export default function CentralDashboardPage() {
-  return <ScopeDashboard scope="Central Administration" title="National Dashboard" description="National overview of citizens, administrative divisions, ID cards, and grievances aggregated across all 7 provinces." metrics={metrics} coverageTitle="Registration Coverage" coverageSubtitle="What Ward Admins have captured, aggregated nationally" coverage={coverage} actions={actions} table={{ title: "Province Breakdown", subtitle: "Live platform figures across every province", headers: ["Province", "Citizens", "Municipalities", "ID Cards Issued"], rows: provinces.map((province) => [province.name_en, "—", "—", "—"]) }} />;
+  return <ScopeDashboard scope="Central Administration" title="National Dashboard" description="National overview of citizens, administrative divisions, ID cards, and grievances aggregated across all 7 provinces." metrics={metrics} coverageTitle="Registration Coverage" coverageSubtitle="What Ward Admins have captured, aggregated nationally" coverage={coverage} actions={actions}><LocalLevelStructure structure={{ metropolitan_cities: 6, sub_metropolitan_cities: 11, municipalities: 276, rural_municipalities: 460, total_local_levels: TOTAL_LOCAL_LEVELS_OFFICIAL, wards: TOTAL_WARDS_OFFICIAL }} /><CentralHierarchyTable /></ScopeDashboard>;
 }
+
