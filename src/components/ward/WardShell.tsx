@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Drawer, useMediaQuery } from "@mui/material";
 import {
   HomeOutlined,
+  BarChartOutlined,
   GroupOutlined,
   MapOutlined,
   GridViewOutlined,
@@ -23,6 +24,7 @@ import { WARD_VIEW_TITLES } from "./wardNav";
 
 const VIEW_ICONS: Record<WardViewId, ReactNode> = {
   dashboard: <HomeOutlined sx={{ fontSize: 20 }} />,
+  analytics: <BarChartOutlined sx={{ fontSize: 20 }} />,
   citizens: <GroupOutlined sx={{ fontSize: 20 }} />,
   map: <MapOutlined sx={{ fontSize: 20 }} />,
   "national-map": <MapOutlined sx={{ fontSize: 20 }} />,
@@ -34,6 +36,7 @@ const VIEW_ICONS: Record<WardViewId, ReactNode> = {
 
 const VIEW_PATHS: Record<WardViewId, string> = {
   dashboard: "/ward/dashboard",
+  analytics: "/ward/analytics",
   citizens: "/ward/citizens",
   map: "/ward/map",
   "national-map": "/ward/map",
@@ -44,6 +47,7 @@ const VIEW_PATHS: Record<WardViewId, string> = {
 };
 
 function getActiveView(pathname: string): WardViewId {
+  if (pathname.startsWith("/ward/analytics")) return "analytics";
   if (pathname.startsWith("/ward/citizens")) return "citizens";
   if (pathname.startsWith("/ward/map")) return "map";
   return "dashboard";
@@ -122,7 +126,7 @@ export default function WardShell({ children }: { children: ReactNode }) {
           onOpenSidebar={handleOpenSidebar}
           onGoProfile={() => router.push("/ward/dashboard")}
         />
-        <main className="flex-1 px-4 pt-20 pb-6 sm:px-6 lg:px-8">
+        <main className="flex-1 px-4 pt-6 pb-6 sm:px-6 lg:px-8">
           <div className="mb-4">
             <Breadcrumbs />
           </div>

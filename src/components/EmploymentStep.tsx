@@ -25,9 +25,7 @@ import {
   PictureAsPdfOutlined,
   VerifiedUserOutlined,
 } from "@mui/icons-material";
-import { PortalSidebar } from "@/components/Sidebar";
 import { PortalStepper } from "@/components/Stepper";
-import { PortalHeader } from "@/components/ui";
 import { EMPLOYMENT_STATUS_OPTIONS, UploadStatus } from "@/constants";
 import { useEmploymentForm } from "@/hooks/useEmploymentForm";
 import type {
@@ -75,7 +73,7 @@ function FieldError({ message }: { message?: string }) {
 
 function FormIdBadge() {
   return (
-    <span className="inline-flex shrink-0 items-center gap-2 rounded-[6px] border border-[#D9DEE8] bg-[#F1F4FB] px-3 py-1.5 font-poppins text-[12px] font-semibold text-[#5F6673]">
+    <span className="inline-flex shrink-0 items-center gap-2 rounded-lg border border-[#D9DEE8] bg-[#F5F8FD] px-3 py-1.5 font-poppins text-[12px] font-semibold text-[#5F6673] shadow-sm">
       <DescriptionOutlined className="h-4 w-4 text-[#0A2D6D]" />
       FORM_ID: 06-EMP-99
     </span>
@@ -101,7 +99,7 @@ function EmploymentStatusSelect({
         fullWidth
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="form-select-rounded"
+        className="form-select-rounded employment-field"
         MenuProps={{
           slotProps: {
             paper: {
@@ -136,7 +134,7 @@ function IncomeInput({
   return (
     <div>
       <FieldLabel htmlFor="monthly-income" required>
-        Monthly Income (NPR)
+        Monthly Income (NPR)      
       </FieldLabel>
       <TextField
         id="monthly-income"
@@ -157,7 +155,7 @@ function IncomeInput({
             ),
           },
         }}
-        className="form-input-rounded"
+        className="form-input-rounded employment-field"
       />
       <FieldError message={error} />
     </div>
@@ -187,7 +185,7 @@ function EmployerInput({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         slotProps={{ htmlInput: { maxLength: 120 } }}
-        className="form-input-rounded"
+        className="form-input-rounded employment-field"
       />
       <FieldError message={error} />
     </div>
@@ -288,7 +286,7 @@ function PanVerificationInput({
             ),
           },
         }}
-        className="form-input-rounded"
+        className="form-input-rounded employment-field"
       />
       <p className="mt-2 font-poppins text-[10px] font-semibold uppercase tracking-[0.14em] text-[#5F6673]">
         Real-time validation with IRD active
@@ -443,7 +441,7 @@ function DocumentUploader({
           onDragOver={onDragOver}
           onDragLeave={onDragLeave}
           onDrop={onDrop}
-          className={`flex h-[185px] w-full cursor-pointer flex-col items-center justify-center gap-2 rounded-[8px] border-2 border-dashed transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0A2D6D] focus-visible:ring-offset-2 ${
+          className={`flex h-46.25 w-full cursor-pointer flex-col items-center justify-center gap-2 rounded-[8px] border-2 border-dashed transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0A2D6D] focus-visible:ring-offset-2 ${
             isDragOver
               ? "border-[#0A2D6D] bg-[#EEF4FF]"
               : "border-[#B9C6DC] bg-white"
@@ -530,11 +528,11 @@ function BottomNavigation({
   onNext: () => void;
 }) {
   return (
-    <footer className="fixed bottom-0 left-[270px] right-0 z-30 flex h-[76px] items-center justify-between border-t border-[#D5D8DD] bg-white px-6 md:px-10">
+    <footer className="registration-footer sticky bottom-0 z-30 flex h-19 items-center justify-between border-t border-[#D5D8DD] bg-white/95 px-4 shadow-[0_-4px_16px_rgba(15,23,42,0.06)] backdrop-blur sm:px-6 md:px-10">
       <button
         type="button"
         onClick={onBack}
-        className="flex h-12 w-[120px] items-center justify-center gap-2 rounded-[8px] bg-[#EFF1F4] font-poppins text-[14px] font-semibold text-[#0A2D6D] transition-all duration-200 hover:bg-[#E4E7EC] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0A2D6D] focus-visible:ring-offset-2"
+        className="flex h-11 min-w-28 items-center justify-center gap-2 rounded-lg border border-[#D9DEE8] bg-white px-4 font-semibold text-[14px] text-[#0A2D6D] transition-all duration-200 hover:border-[#0A2D6D] hover:bg-[#F5F8FD] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0A2D6D] focus-visible:ring-offset-2"
       >
         <ArrowBack className="h-5 w-5" />
         BACK
@@ -543,7 +541,7 @@ function BottomNavigation({
       <button
         type="button"
         onClick={onNext}
-        className="flex h-12 w-[145px] items-center justify-center gap-2 rounded-[8px] bg-[#0A2D6D] font-poppins text-[14px] font-semibold text-white shadow-[0_8px_20px_rgba(10,45,109,0.3)] transition-all duration-200 hover:bg-[#081F4D] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0A2D6D] focus-visible:ring-offset-2"
+        className="flex h-11 min-w-32 items-center justify-center gap-2 rounded-lg bg-[#0A2D6D] px-4 font-semibold text-[14px] text-white shadow-[0_8px_20px_rgba(10,45,109,0.22)] transition-all duration-200 hover:bg-[#081F4D] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0A2D6D] focus-visible:ring-offset-2"
       >
         NEXT
         <ArrowForward className="h-5 w-5" />
@@ -558,37 +556,37 @@ export function EmploymentStep() {
 
   const handleNext = () => {
     if (form.attemptProceed()) {
-      router.push("/portal/household");
+      router.push("/ward/dashboard/registercitizen/household");
     }
   };
 
   return (
-    <div className="flex min-h-screen bg-[#F7F8FA]">
-      <PortalSidebar activeLabel="Employment" />
+    <div className="employment-form flex min-h-screen bg-[#F5F7FB]">
 
-      <div className="flex min-w-0 flex-1 flex-col">
-        <PortalHeader variant="encryption" />
+       <div className="flex min-w-0 flex-1 flex-col"> 
 
-        <main className="mx-auto w-full max-w-[1240px] flex-1 px-6 py-8 pb-40 md:px-10">
+        <main className="w-full max-w-none flex-1 px-0 py-2 pb-32 md:py-4">
           <PortalStepper currentStep={4} />
 
-          <section className="rounded-[10px] border border-[#D5D8DD] bg-white p-8 md:p-10">
-            <div className="flex flex-col items-start justify-between gap-6 md:flex-row">
+          <section className="overflow-hidden rounded-2xl border border-[#E1E7F0] bg-white shadow-[0_8px_28px_rgba(15,61,145,0.07)]">
+            <div className="border-b border-[#E8ECF2] bg-[linear-gradient(120deg,#F8FAFF_0%,#FFFFFF_70%)] px-6 py-7 md:px-9 md:py-8">
+              <div className="flex flex-col items-start justify-between gap-5 md:flex-row">
               <div className="min-w-0 flex-1">
-                <h2 className="font-poppins text-[30px] font-bold leading-tight tracking-tight text-[#0A2D6D] md:text-[32px]">
+                <p className="mb-2 text-[11px] font-bold uppercase tracking-[0.14em] text-[#C01F38]">Step 4 of 8 · Citizen registration</p>
+                <h2 className="registration-title font-poppins text-[28px] font-bold leading-tight tracking-tight text-[#0A2D6D] md:text-[30px]">
                   Employment Details
                 </h2>
-                <p className="mt-2 font-poppins text-[16px] text-[#5F6673]">
+                <p className="mt-2 max-w-2xl font-poppins text-[14px] leading-relaxed text-[#667085] md:text-[15px]">
                   Provide accurate information for sovereign data
                   cross-referencing.
                 </p>
               </div>
               <FormIdBadge />
+              </div>
             </div>
 
-            <div aria-hidden="true" className="mt-6 h-px bg-[#BFC3C9]" />
-
-            <div className="mt-6 grid gap-7 md:grid-cols-2">
+            <div className="px-6 py-7 md:px-9 md:py-8">
+            <div className="grid gap-6 md:grid-cols-2">
               <EmploymentStatusSelect
                 value={form.data.employmentStatus}
                 error={form.errors.employmentStatus}
@@ -601,7 +599,7 @@ export function EmploymentStep() {
               />
             </div>
 
-            <div className="mt-7 grid gap-7 md:grid-cols-2">
+            <div className="mt-7 grid gap-6 md:grid-cols-2">
               <EmployerInput
                 value={form.data.employerName}
                 required={form.isEmployerRequired}
@@ -616,21 +614,22 @@ export function EmploymentStep() {
               />
             </div>
 
-            <div className="mt-8">
+            <div className="mt-8 rounded-xl border border-[#E8ECF2] bg-[#FBFCFE] p-4 md:p-5">
               <DocumentUploader upload={form.upload} error={form.errors.proof} />
             </div>
 
-            <div className="mt-6 flex justify-end">
+            <div className="mt-6 flex justify-end border-t border-[#E8ECF2] pt-5">
               <SaveStatusIndicator
                 status={form.saveStatus}
                 lastSaved={form.lastSaved}
               />
             </div>
+            </div>
           </section>
         </main>
 
         <BottomNavigation
-          onBack={() => router.push("/portal/family")}
+          onBack={() => router.push("/ward/dashboard/registercitizen/family")}
           onNext={handleNext}
         />
       </div>

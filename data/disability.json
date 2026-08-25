@@ -15,5 +15,734 @@
     "severity_activity": 0,
     "severity_participation": 0,
     "certificate_no": null
+  },
+  {
+    "citizen_id": "cit-002",
+    "disability_type": "SPEECH",
+    "severity_body": 2,
+    "severity_activity": 3,
+    "severity_participation": 1,
+    "certificate_no": null,
+    "certificate_expiry": "2031-12-31"
+  },
+  {
+    "citizen_id": "cit-0012",
+    "disability_type": "MULTIPLE",
+    "severity_body": 2,
+    "severity_activity": 1,
+    "severity_participation": 3,
+    "certificate_no": "D-75591",
+    "certificate_expiry": "2031-12-31"
+  },
+  {
+    "citizen_id": "cit-0038",
+    "disability_type": "PSYCHOSOCIAL",
+    "severity_body": 3,
+    "severity_activity": 3,
+    "severity_participation": 1,
+    "certificate_no": "D-75659",
+    "certificate_expiry": "2031-12-31"
+  },
+  {
+    "citizen_id": "cit-0043",
+    "disability_type": "SENSORY_HEARING",
+    "severity_body": 2,
+    "severity_activity": 3,
+    "severity_participation": 2,
+    "certificate_no": "D-75685",
+    "certificate_expiry": "2031-12-31"
+  },
+  {
+    "citizen_id": "cit-0064",
+    "disability_type": "SENSORY_HEARING",
+    "severity_body": 2,
+    "severity_activity": 3,
+    "severity_participation": 1,
+    "certificate_no": null,
+    "certificate_expiry": "2031-12-31"
+  },
+  {
+    "citizen_id": "cit-0069",
+    "disability_type": "PHYSICAL",
+    "severity_body": 1,
+    "severity_activity": 2,
+    "severity_participation": 3,
+    "certificate_no": "D-75753",
+    "certificate_expiry": "2031-12-31"
+  },
+  {
+    "citizen_id": "cit-0095",
+    "disability_type": "SPEECH",
+    "severity_body": 2,
+    "severity_activity": 2,
+    "severity_participation": 3,
+    "certificate_no": null,
+    "certificate_expiry": "2031-12-31"
+  },
+  {
+    "citizen_id": "cit-0103",
+    "disability_type": "MULTIPLE",
+    "severity_body": 3,
+    "severity_activity": 3,
+    "severity_participation": 2,
+    "certificate_no": null,
+    "certificate_expiry": "2031-12-31"
+  },
+  {
+    "citizen_id": "cit-0129",
+    "disability_type": "PSYCHOSOCIAL",
+    "severity_body": 1,
+    "severity_activity": 2,
+    "severity_participation": 3,
+    "certificate_no": null,
+    "certificate_expiry": "2031-12-31"
+  },
+  {
+    "citizen_id": "cit-0134",
+    "disability_type": "SENSORY_HEARING",
+    "severity_body": 3,
+    "severity_activity": 2,
+    "severity_participation": 1,
+    "certificate_no": null,
+    "certificate_expiry": "2031-12-31"
+  },
+  {
+    "citizen_id": "cit-0155",
+    "disability_type": "SENSORY_HEARING",
+    "severity_body": 3,
+    "severity_activity": 2,
+    "severity_participation": 3,
+    "certificate_no": "D-76679",
+    "certificate_expiry": "2031-12-31"
+  },
+  {
+    "citizen_id": "cit-0160",
+    "disability_type": "PHYSICAL",
+    "severity_body": 1,
+    "severity_activity": 2,
+    "severity_participation": 1,
+    "certificate_no": "D-76705",
+    "certificate_expiry": "2031-12-31"
+  },
+  {
+    "citizen_id": "cit-0186",
+    "disability_type": "SPEECH",
+    "severity_body": 3,
+    "severity_activity": 1,
+    "severity_participation": 2,
+    "certificate_no": "D-76773",
+    "certificate_expiry": "2031-12-31"
+  },
+  {
+    "citizen_id": "cit-0191",
+    "disability_type": "INTELLECTUAL",
+    "severity_body": 2,
+    "severity_activity": 1,
+    "severity_participation": 3,
+    "certificate_no": "D-76799",
+    "certificate_expiry": "2031-12-31"
+  },
+  {
+    "citizen_id": "cit-0225",
+    "disability_type": "SENSORY_HEARING",
+    "severity_body": 1,
+    "severity_activity": 3,
+    "severity_participation": 3,
+    "certificate_no": "D-77547",
+    "certificate_expiry": "2031-12-31"
+  },
+  {
+    "citizen_id": "cit-0230",
+    "disability_type": "PHYSICAL",
+    "severity_body": 3,
+    "severity_activity": 1,
+    "severity_participation": 1,
+    "certificate_no": "D-77573",
+    "certificate_expiry": "2031-12-31"
+  },
+  {
+    "citizen_id": "cit-0251",
+    "disability_type": "PHYSICAL",
+    "severity_body": 2,
+    "severity_activity": 1,
+    "severity_participation": 3,
+    "certificate_no": null,
+    "certificate_expiry": "2031-12-31"
+  },
+  {
+    "citizen_id": "cit-0256",
+    "disability_type": "SPEECH",
+    "severity_body": 1,
+    "severity_activity": 3,
+    "severity_participation": 2,
+    "certificate_no": "D-77641",
+    "certificate_expiry": "2031-12-31"
+  },
+  {
+    "citizen_id": "cit-0277",
+    "disability_type": "SPEECH",
+    "severity_body": 1,
+    "severity_activity": 3,
+    "severity_participation": 1,
+    "certificate_no": null,
+    "certificate_expiry": "2031-12-31"
+  },
+  {
+    "citizen_id": "cit-0282",
+    "disability_type": "INTELLECTUAL",
+    "severity_body": 3,
+    "severity_activity": 3,
+    "severity_participation": 2,
+    "certificate_no": null,
+    "certificate_expiry": "2031-12-31"
+  },
+  {
+    "citizen_id": "cit-0316",
+    "disability_type": "SENSORY_HEARING",
+    "severity_body": 2,
+    "severity_activity": 2,
+    "severity_participation": 3,
+    "certificate_no": null,
+    "certificate_expiry": "2031-12-31"
+  },
+  {
+    "citizen_id": "cit-0321",
+    "disability_type": "PHYSICAL",
+    "severity_body": 3,
+    "severity_activity": 2,
+    "severity_participation": 1,
+    "certificate_no": null,
+    "certificate_expiry": "2031-12-31"
+  },
+  {
+    "citizen_id": "cit-0342",
+    "disability_type": "PHYSICAL",
+    "severity_body": 3,
+    "severity_activity": 2,
+    "severity_participation": 2,
+    "certificate_no": "D-78567",
+    "certificate_expiry": "2031-12-31"
+  },
+  {
+    "citizen_id": "cit-0347",
+    "disability_type": "SPEECH",
+    "severity_body": 2,
+    "severity_activity": 1,
+    "severity_participation": 2,
+    "certificate_no": null,
+    "certificate_expiry": "2031-12-31"
+  },
+  {
+    "citizen_id": "cit-0368",
+    "disability_type": "SPEECH",
+    "severity_body": 1,
+    "severity_activity": 1,
+    "severity_participation": 1,
+    "certificate_no": "D-78635",
+    "certificate_expiry": "2031-12-31"
+  },
+  {
+    "citizen_id": "cit-0373",
+    "disability_type": "INTELLECTUAL",
+    "severity_body": 3,
+    "severity_activity": 1,
+    "severity_participation": 1,
+    "certificate_no": "D-78661",
+    "certificate_expiry": "2031-12-31"
+  },
+  {
+    "citizen_id": "cit-0399",
+    "disability_type": "SENSORY_VISION",
+    "severity_body": 2,
+    "severity_activity": 1,
+    "severity_participation": 3,
+    "certificate_no": "D-78729",
+    "certificate_expiry": "2031-12-31"
+  },
+  {
+    "citizen_id": "cit-0407",
+    "disability_type": "SENSORY_HEARING",
+    "severity_body": 2,
+    "severity_activity": 1,
+    "severity_participation": 2,
+    "certificate_no": "D-79409",
+    "certificate_expiry": "2031-12-31"
+  },
+  {
+    "citizen_id": "cit-0412",
+    "disability_type": "PHYSICAL",
+    "severity_body": 1,
+    "severity_activity": 1,
+    "severity_participation": 3,
+    "certificate_no": "D-79435",
+    "certificate_expiry": "2031-12-31"
+  },
+  {
+    "citizen_id": "cit-0438",
+    "disability_type": "SPEECH",
+    "severity_body": 3,
+    "severity_activity": 3,
+    "severity_participation": 1,
+    "certificate_no": "D-79503",
+    "certificate_expiry": "2031-12-31"
+  },
+  {
+    "citizen_id": "cit-0443",
+    "disability_type": "INTELLECTUAL",
+    "severity_body": 2,
+    "severity_activity": 3,
+    "severity_participation": 2,
+    "certificate_no": "D-79529",
+    "certificate_expiry": "2031-12-31"
+  },
+  {
+    "citizen_id": "cit-0464",
+    "disability_type": "INTELLECTUAL",
+    "severity_body": 1,
+    "severity_activity": 3,
+    "severity_participation": 1,
+    "certificate_no": null,
+    "certificate_expiry": "2031-12-31"
+  },
+  {
+    "citizen_id": "cit-0469",
+    "disability_type": "SENSORY_VISION",
+    "severity_body": 3,
+    "severity_activity": 2,
+    "severity_participation": 3,
+    "certificate_no": "D-79597",
+    "certificate_expiry": "2031-12-31"
+  },
+  {
+    "citizen_id": "cit-0485",
+    "disability_type": "INTELLECTUAL",
+    "severity_body": 1,
+    "severity_activity": 3,
+    "severity_participation": 3,
+    "certificate_no": "D-79655",
+    "certificate_expiry": "2031-12-31"
+  },
+  {
+    "citizen_id": "cit-0490",
+    "disability_type": "SENSORY_VISION",
+    "severity_body": 3,
+    "severity_activity": 3,
+    "severity_participation": 3,
+    "certificate_no": "D-79681",
+    "certificate_expiry": "2031-12-31"
+  },
+  {
+    "citizen_id": "cit-0503",
+    "disability_type": "PHYSICAL",
+    "severity_body": 2,
+    "severity_activity": 2,
+    "severity_participation": 2,
+    "certificate_no": null,
+    "certificate_expiry": "2031-12-31"
+  },
+  {
+    "citizen_id": "cit-0529",
+    "disability_type": "SPEECH",
+    "severity_body": 3,
+    "severity_activity": 2,
+    "severity_participation": 3,
+    "certificate_no": null,
+    "certificate_expiry": "2031-12-31"
+  },
+  {
+    "citizen_id": "cit-0534",
+    "disability_type": "INTELLECTUAL",
+    "severity_body": 2,
+    "severity_activity": 2,
+    "severity_participation": 1,
+    "certificate_no": null,
+    "certificate_expiry": "2031-12-31"
+  },
+  {
+    "citizen_id": "cit-0555",
+    "disability_type": "INTELLECTUAL",
+    "severity_body": 2,
+    "severity_activity": 2,
+    "severity_participation": 3,
+    "certificate_no": "D-80523",
+    "certificate_expiry": "2031-12-31"
+  },
+  {
+    "citizen_id": "cit-0560",
+    "disability_type": "SENSORY_VISION",
+    "severity_body": 1,
+    "severity_activity": 2,
+    "severity_participation": 1,
+    "certificate_no": "D-80549",
+    "certificate_expiry": "2031-12-31"
+  },
+  {
+    "citizen_id": "cit-0581",
+    "disability_type": "SENSORY_VISION",
+    "severity_body": 3,
+    "severity_activity": 2,
+    "severity_participation": 3,
+    "certificate_no": null,
+    "certificate_expiry": "2031-12-31"
+  },
+  {
+    "citizen_id": "cit-0586",
+    "disability_type": "MULTIPLE",
+    "severity_body": 2,
+    "severity_activity": 1,
+    "severity_participation": 2,
+    "certificate_no": "D-80617",
+    "certificate_expiry": "2031-12-31"
+  },
+  {
+    "citizen_id": "cit-0625",
+    "disability_type": "INTELLECTUAL",
+    "severity_body": 3,
+    "severity_activity": 3,
+    "severity_participation": 3,
+    "certificate_no": "D-81391",
+    "certificate_expiry": "2031-12-31"
+  },
+  {
+    "citizen_id": "cit-0651",
+    "disability_type": "SENSORY_VISION",
+    "severity_body": 2,
+    "severity_activity": 3,
+    "severity_participation": 3,
+    "certificate_no": null,
+    "certificate_expiry": "2031-12-31"
+  },
+  {
+    "citizen_id": "cit-0672",
+    "disability_type": "SENSORY_VISION",
+    "severity_body": 1,
+    "severity_activity": 3,
+    "severity_participation": 2,
+    "certificate_no": "D-81543",
+    "certificate_expiry": "2031-12-31"
+  },
+  {
+    "citizen_id": "cit-0677",
+    "disability_type": "MULTIPLE",
+    "severity_body": 3,
+    "severity_activity": 2,
+    "severity_participation": 1,
+    "certificate_no": null,
+    "certificate_expiry": "2031-12-31"
+  },
+  {
+    "citizen_id": "cit-0698",
+    "disability_type": "MULTIPLE",
+    "severity_body": 3,
+    "severity_activity": 2,
+    "severity_participation": 3,
+    "certificate_no": "D-81611",
+    "certificate_expiry": "2031-12-31"
+  },
+  {
+    "citizen_id": "cit-0711",
+    "disability_type": "SPEECH",
+    "severity_body": 2,
+    "severity_activity": 3,
+    "severity_participation": 3,
+    "certificate_no": "D-82317",
+    "certificate_expiry": "2031-12-31"
+  },
+  {
+    "citizen_id": "cit-0716",
+    "disability_type": "INTELLECTUAL",
+    "severity_body": 1,
+    "severity_activity": 2,
+    "severity_participation": 2,
+    "certificate_no": null,
+    "certificate_expiry": "2031-12-31"
+  },
+  {
+    "citizen_id": "cit-0742",
+    "disability_type": "SENSORY_VISION",
+    "severity_body": 2,
+    "severity_activity": 2,
+    "severity_participation": 2,
+    "certificate_no": "D-82411",
+    "certificate_expiry": "2031-12-31"
+  },
+  {
+    "citizen_id": "cit-0768",
+    "disability_type": "MULTIPLE",
+    "severity_body": 1,
+    "severity_activity": 1,
+    "severity_participation": 3,
+    "certificate_no": "D-82479",
+    "certificate_expiry": "2031-12-31"
+  },
+  {
+    "citizen_id": "cit-0773",
+    "disability_type": "PSYCHOSOCIAL",
+    "severity_body": 3,
+    "severity_activity": 1,
+    "severity_participation": 1,
+    "certificate_no": "D-82505",
+    "certificate_expiry": "2031-12-31"
+  },
+  {
+    "citizen_id": "cit-0794",
+    "disability_type": "PSYCHOSOCIAL",
+    "severity_body": 2,
+    "severity_activity": 1,
+    "severity_participation": 3,
+    "certificate_no": null,
+    "certificate_expiry": "2031-12-31"
+  },
+  {
+    "citizen_id": "cit-0799",
+    "disability_type": "SENSORY_HEARING",
+    "severity_body": 1,
+    "severity_activity": 3,
+    "severity_participation": 2,
+    "certificate_no": "D-82573",
+    "certificate_expiry": "2031-12-31"
+  },
+  {
+    "citizen_id": "cit-0802",
+    "disability_type": "SPEECH",
+    "severity_body": 3,
+    "severity_activity": 1,
+    "severity_participation": 2,
+    "certificate_no": null,
+    "certificate_expiry": "2031-12-31"
+  },
+  {
+    "citizen_id": "cit-0807",
+    "disability_type": "INTELLECTUAL",
+    "severity_body": 2,
+    "severity_activity": 1,
+    "severity_participation": 2,
+    "certificate_no": "D-83253",
+    "certificate_expiry": "2031-12-31"
+  },
+  {
+    "citizen_id": "cit-0833",
+    "disability_type": "SENSORY_VISION",
+    "severity_body": 3,
+    "severity_activity": 1,
+    "severity_participation": 1,
+    "certificate_no": null,
+    "certificate_expiry": "2031-12-31"
+  },
+  {
+    "citizen_id": "cit-0859",
+    "disability_type": "MULTIPLE",
+    "severity_body": 2,
+    "severity_activity": 3,
+    "severity_participation": 3,
+    "certificate_no": null,
+    "certificate_expiry": "2031-12-31"
+  },
+  {
+    "citizen_id": "cit-0864",
+    "disability_type": "PSYCHOSOCIAL",
+    "severity_body": 3,
+    "severity_activity": 3,
+    "severity_participation": 3,
+    "certificate_no": null,
+    "certificate_expiry": "2031-12-31"
+  },
+  {
+    "citizen_id": "cit-0885",
+    "disability_type": "PSYCHOSOCIAL",
+    "severity_body": 3,
+    "severity_activity": 3,
+    "severity_participation": 2,
+    "certificate_no": "D-83499",
+    "certificate_expiry": "2031-12-31"
+  },
+  {
+    "citizen_id": "cit-0890",
+    "disability_type": "SENSORY_HEARING",
+    "severity_body": 2,
+    "severity_activity": 3,
+    "severity_participation": 3,
+    "certificate_no": "D-83525",
+    "certificate_expiry": "2031-12-31"
+  },
+  {
+    "citizen_id": "cit-0919",
+    "disability_type": "INTELLECTUAL",
+    "severity_body": 2,
+    "severity_activity": 2,
+    "severity_participation": 3,
+    "certificate_no": "D-84247",
+    "certificate_expiry": "2031-12-31"
+  },
+  {
+    "citizen_id": "cit-0924",
+    "disability_type": "SENSORY_VISION",
+    "severity_body": 1,
+    "severity_activity": 2,
+    "severity_participation": 1,
+    "certificate_no": "D-84273",
+    "certificate_expiry": "2031-12-31"
+  },
+  {
+    "citizen_id": "cit-0955",
+    "disability_type": "PSYCHOSOCIAL",
+    "severity_body": 1,
+    "severity_activity": 1,
+    "severity_participation": 3,
+    "certificate_no": "D-84367",
+    "certificate_expiry": "2031-12-31"
+  },
+  {
+    "citizen_id": "cit-0960",
+    "disability_type": "SENSORY_HEARING",
+    "severity_body": 3,
+    "severity_activity": 2,
+    "severity_participation": 1,
+    "certificate_no": "D-84393",
+    "certificate_expiry": "2031-12-31"
+  },
+  {
+    "citizen_id": "cit-0981",
+    "disability_type": "SENSORY_HEARING",
+    "severity_body": 3,
+    "severity_activity": 2,
+    "severity_participation": 2,
+    "certificate_no": null,
+    "certificate_expiry": "2031-12-31"
+  },
+  {
+    "citizen_id": "cit-0986",
+    "disability_type": "PHYSICAL",
+    "severity_body": 2,
+    "severity_activity": 1,
+    "severity_participation": 2,
+    "certificate_no": "D-84461",
+    "certificate_expiry": "2031-12-31"
+  },
+  {
+    "citizen_id": "cit-1001",
+    "disability_type": "SENSORY_VISION",
+    "severity_body": 3,
+    "severity_activity": 3,
+    "severity_participation": 2,
+    "certificate_no": null,
+    "certificate_expiry": "2031-12-31"
+  },
+  {
+    "citizen_id": "cit-1027",
+    "disability_type": "MULTIPLE",
+    "severity_body": 2,
+    "severity_activity": 2,
+    "severity_participation": 3,
+    "certificate_no": null,
+    "certificate_expiry": "2031-12-31"
+  },
+  {
+    "citizen_id": "cit-1032",
+    "disability_type": "PSYCHOSOCIAL",
+    "severity_body": 1,
+    "severity_activity": 2,
+    "severity_participation": 1,
+    "certificate_no": null,
+    "certificate_expiry": "2031-12-31"
+  },
+  {
+    "citizen_id": "cit-1053",
+    "disability_type": "PSYCHOSOCIAL",
+    "severity_body": 3,
+    "severity_activity": 2,
+    "severity_participation": 2,
+    "certificate_no": "D-05507",
+    "certificate_expiry": "2031-12-31"
+  },
+  {
+    "citizen_id": "cit-1058",
+    "disability_type": "SENSORY_HEARING",
+    "severity_body": 2,
+    "severity_activity": 1,
+    "severity_participation": 2,
+    "certificate_no": null,
+    "certificate_expiry": "2031-12-31"
+  },
+  {
+    "citizen_id": "cit-1079",
+    "disability_type": "SENSORY_HEARING",
+    "severity_body": 2,
+    "severity_activity": 1,
+    "severity_participation": 1,
+    "certificate_no": "D-05575",
+    "certificate_expiry": "2031-12-31"
+  },
+  {
+    "citizen_id": "cit-1084",
+    "disability_type": "PHYSICAL",
+    "severity_body": 1,
+    "severity_activity": 1,
+    "severity_participation": 1,
+    "certificate_no": "D-05601",
+    "certificate_expiry": "2031-12-31"
+  },
+  {
+    "citizen_id": "cit-1118",
+    "disability_type": "MULTIPLE",
+    "severity_body": 3,
+    "severity_activity": 3,
+    "severity_participation": 2,
+    "certificate_no": "D-06349",
+    "certificate_expiry": "2031-12-31"
+  },
+  {
+    "citizen_id": "cit-1123",
+    "disability_type": "PSYCHOSOCIAL",
+    "severity_body": 2,
+    "severity_activity": 3,
+    "severity_participation": 3,
+    "certificate_no": "D-06375",
+    "certificate_expiry": "2031-12-31"
+  },
+  {
+    "citizen_id": "cit-1144",
+    "disability_type": "PSYCHOSOCIAL",
+    "severity_body": 1,
+    "severity_activity": 3,
+    "severity_participation": 2,
+    "certificate_no": null,
+    "certificate_expiry": "2031-12-31"
+  },
+  {
+    "citizen_id": "cit-1149",
+    "disability_type": "SENSORY_HEARING",
+    "severity_body": 3,
+    "severity_activity": 3,
+    "severity_participation": 1,
+    "certificate_no": "D-06443",
+    "certificate_expiry": "2031-12-31"
+  },
+  {
+    "citizen_id": "cit-1170",
+    "disability_type": "SENSORY_HEARING",
+    "severity_body": 3,
+    "severity_activity": 3,
+    "severity_participation": 1,
+    "certificate_no": "D-06527",
+    "certificate_expiry": "2031-12-31"
+  },
+  {
+    "citizen_id": "cit-1175",
+    "disability_type": "PHYSICAL",
+    "severity_body": 2,
+    "severity_activity": 3,
+    "severity_participation": 1,
+    "certificate_no": null,
+    "certificate_expiry": "2031-12-31"
+  },
+  {
+    "citizen_id": "cit-1196",
+    "disability_type": "PHYSICAL",
+    "severity_body": 1,
+    "severity_activity": 3,
+    "severity_participation": 3,
+    "certificate_no": "D-06595",
+    "certificate_expiry": "2031-12-31"
   }
 ]

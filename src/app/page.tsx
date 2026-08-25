@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 export default function Home() {
@@ -13,10 +14,12 @@ export default function Home() {
       >
         <nav className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 sm:px-6">
           <div className="flex items-center gap-3">
-            <img
+            <Image
               src="/assets/Flag_of_Nepal.gif"
               alt="Flag of Nepal"
               className="h-8 w-auto"
+              width={16}
+              height={16}
             />
             <span className="text-lg font-semibold tracking-tight" style={{ color: "var(--foreground)" }}>
               Digital Nepal Citizen Ecosystem
@@ -35,11 +38,13 @@ export default function Home() {
 
       {/* Hero */}
       <main className="flex flex-1 flex-col items-center justify-center px-4 py-16 text-center sm:px-6">
-        <img
+        <Image
           src="/assets/Flag_of_Nepal.gif"
           alt="Flag of Nepal"
           className="mb-8 h-28 w-auto"
           style={{ filter: "drop-shadow(0 10px 20px rgba(11, 46, 107, 0.15))" }}
+          width={28}
+          height={28}
         />
 
         <h1 className="max-w-2xl text-3xl font-bold tracking-tight sm:text-4xl" style={{ color: "var(--foreground)" }}>

@@ -16,8 +16,6 @@ import {
   CameraAltOutlined as CameraIcon,
   CloudUploadOutlined as UploadIcon,
   InfoOutlined as InfoIcon,
-  PersonOutlined,
-  VerifiedUserOutlined,
 } from "@mui/icons-material";
 import { PortalStepper } from "@/components/Stepper";
 import {
@@ -76,34 +74,11 @@ export function PersonalStep() {
 
   const handleNext = () => {
     persistDraft();
-    router.push("/portal/nid");
+    router.push("/ward/dashboard/registercitizen/nid");
   };
 
   return (
     <div className="flex flex-col min-w-0"> 
-      <header className="sticky top-0 z-30 h-16 bg-white/95 backdrop-blur border-b border-[#E4E8EF] flex items-center justify-between px-6 md:px-10">
-        <div className="flex items-center gap-3">
-          <span className="w-8 h-8 rounded-[10px] bg-[#0A2D6D] flex items-center justify-center">
-            <VerifiedUserOutlined className="w-[18px] h-[18px] text-white" />
-          </span>
-          <div className="flex items-baseline gap-2.5">
-            <span className="font-poppins font-bold text-[19px] tracking-[0.04em] text-[#0A2D6D]">
-              PRAPTI
-            </span>
-            <span className="hidden md:inline text-[12px] font-medium text-[#6B7280]">
-              Digital Citizen Services
-            </span>
-          </div>
-        </div>
-
-        <button
-          type="button"
-          aria-label="Account profile"
-          className="w-9 h-9 rounded-full border-[1.5px] border-[#D9DEE8] bg-white flex items-center justify-center hover:border-[#0A2D6D] hover:bg-[#F1F4FB] transition-colors"
-        >
-          <PersonOutlined className="w-[18px] h-[18px] text-[#0A2D6D]" />
-        </button>
-      </header>
 
       <main className="flex-1 w-full max-w-[1240px] mx-auto px-6 md:px-10 py-8 pb-40">
         <PortalStepper currentStep={1} />
@@ -112,7 +87,7 @@ export function PersonalStep() {
             <CameraIcon sx={{ fontSize: 28, color: "#0F4DB8", opacity: 0.6 }} />
           </div>
           <div>
-            <h2 className="font-poppins text-2xl font-extrabold tracking-tight text-[#0A2D6D]">
+            <h2 className="registration-title font-poppins text-2xl font-extrabold tracking-tight text-[#0A2D6D]">
               Profile Identification
             </h2>
             <p className="mt-2 max-w-lg text-[15px] leading-relaxed text-[#6B7280]">
@@ -332,7 +307,7 @@ export function PersonalStep() {
           </div>
         </section>
       </main>
-      <footer className="fixed bottom-0 left-[270px] right-0 z-30 bg-white/95 backdrop-blur border-t border-[#E3E8F2] h-[80px] px-6 md:px-10 flex items-center justify-between shadow-[0_-4px_16px_rgba(15,61,145,0.05)]">
+      <footer className="registration-footer sticky bottom-0 z-30 bg-white/95 backdrop-blur border-t border-[#E3E8F2] h-19 px-4 sm:px-6 md:px-10 flex items-center justify-between shadow-[0_-4px_16px_rgba(15,61,145,0.05)]">
         <button
           type="button"
           className="h-12 px-7 rounded-xl border-[1.5px] border-[#D9DEE8] bg-white text-[#1F2A44] font-semibold text-[15px] hover:border-[#6B7280] hover:bg-[#F8F9FB] transition-all duration-200 active:scale-[0.98] flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0A2D6D] focus-visible:ring-offset-2"

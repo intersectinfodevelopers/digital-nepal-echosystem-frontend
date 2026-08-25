@@ -51,7 +51,7 @@ export default function WardTopbar({
   };
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-30 flex h-16 items-center gap-4 border-b border-[#e6e8ee] bg-white px-4 sm:px-6 ${sidebarOpen ? "lg:pl-65" : "lg:pl-18"}`}>
+    <header className="sticky top-0 z-30 flex h-16 shrink-0 items-center gap-4 border-b border-[#e6e8ee] bg-white px-4 sm:px-6">
       <button
         type="button"
         aria-label="Open navigation"
