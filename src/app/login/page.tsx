@@ -24,7 +24,7 @@ export default function LoginPage() {
     }
   }, [router]);
 
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setServerError(null);
     setFieldErrors({});
@@ -48,21 +48,26 @@ export default function LoginPage() {
     }
 
     setIsSubmitting(true);
-    setTimeout(() => {
-      const session = loginUser(email, password);
+    try {
+      const session = await loginUser(email, password);
       if (session) {
         router.push(ROLE_HOME_ROUTE[session.role as keyof typeof ROLE_HOME_ROUTE]);
         router.refresh();
         return;
       }
+    } catch (error) {
       setIsSubmitting(false);
-      setServerError("Invalid credentials. Please check your email and password.");
-    }, 600);
+      setServerError(
+        error instanceof Error
+          ? error.message
+          : "Invalid credentials. Please check your email and password.",
+      );
+    }
   };
 
   return (
     <div className="min-h-screen bg-background px-4 py-6">
-      <div className="relative mx-auto flex min-h-[360px] max-w-2xl overflow-hidden rounded-[28px] shadow-[0_24px_50px_rgba(15,45,109,0.10)]">
+      <div className="relative mx-auto flex min-h-90 max-w-2xl overflow-hidden rounded-[28px] shadow-[0_24px_50px_rgba(15,45,109,0.10)]">
 
         {/* Left panel */}
         <aside
