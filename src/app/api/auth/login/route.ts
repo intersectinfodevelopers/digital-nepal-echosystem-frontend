@@ -1,4 +1,6 @@
 import { NextResponse } from "next/server";
+import usersData from "../../../../../data/users.json";
+import type { User } from "@/types/auth";
 
 type ApiUser = {
   id?: string;
@@ -9,7 +11,33 @@ type ApiUser = {
 };
 
 export async function POST(request: Request) {
-  const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL;
+  const apiBaseUrl =
+    process.env.NEXT_PUBLIC_API_URL || process.env.NEXT_PUBLIC_API_BASE_URL;
+  const useMockData =
+    process.env.NEXT_PUBLIC_ENABLE_MOCK_DATA === "true" ||
+    (!apiBaseUrl && process.env.NODE_ENV !== "production");
+
+  const { email, password } = await request.json();
+
+  if (useMockData) {
+    const user = (usersData as User[]).find(
+      (candidate) =>
+        candidate.email.toLowerCase() === String(email).trim().toLowerCase() &&
+        candidate.password === password &&
+        candidate.is_active,
+    );
+
+    if (!user) {
+      return NextResponse.json(
+        { message: "Invalid credentials." },
+        { status: 401 },
+      );
+    }
+
+    const publicUser = { ...user };
+    delete publicUser.password;
+    return createLoginResponse(publicUser, "mock-token");
+  }
 
   if (!apiBaseUrl) {
     return NextResponse.json(
@@ -19,7 +47,6 @@ export async function POST(request: Request) {
   }
 
   try {
-    const { email, password } = await request.json();
     const response = await fetch(`${apiBaseUrl}/auth/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -52,23 +79,34 @@ export async function POST(request: Request) {
       }),
     ).toString("base64");
 
-    const result = NextResponse.json({
-      user,
-      token: data.token ?? "",
-    });
-    result.cookies.set("auth_token", sessionPayload, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "lax",
-      path: "/",
-      maxAge: 60 * 60 * 8,
-    });
-
-    return result;
+    return createLoginResponse(user, data.token ?? "", sessionPayload);
   } catch {
     return NextResponse.json(
       { message: "Unable to connect to the login API." },
       { status: 502 },
     );
   }
+}
+
+function createLoginResponse(
+  user: ApiUser | User,
+  token: string,
+  sessionPayload = Buffer.from(
+    JSON.stringify({
+      id: user.id,
+      email: user.email,
+      role: user.role,
+      jurisdiction_id: user.jurisdiction_id ?? null,
+    }),
+  ).toString("base64"),
+) {
+  const result = NextResponse.json({ user, token });
+  result.cookies.set("auth_token", sessionPayload, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "lax",
+    path: "/",
+    maxAge: 60 * 60 * 8,
+  });
+  return result;
 }
