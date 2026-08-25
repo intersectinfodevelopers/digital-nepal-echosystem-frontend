@@ -28,8 +28,8 @@ const NAV_ITEMS: NavItem[] = [
   { label: "Family Info", icon: GroupOutlined, href: "/ward/dashboard/registercitizen/family" },
   { label: "Employment", icon: WorkOutlined },
   { label: "Household", icon: HomeOutlined },
-  { label: "Disability", icon: AccessibleOutlined, href: "/portal/disability" },
-  { label: "Education", icon: SchoolOutlined, href: "/portal/education" },
+  { label: "Disability", icon: AccessibleOutlined, href: "/ward/dashboard/registercitizen/disability" },
+  { label: "Education", icon: SchoolOutlined, href: "/ward/dashboard/registercitizen/education" },
   { label: "Photo", icon: PhotoCameraOutlined },
 ];
 
