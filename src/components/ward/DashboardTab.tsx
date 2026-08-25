@@ -55,7 +55,7 @@ export default function DashboardTab({ wardId }: { wardId: string }) {
           </p>
         </div>
         <Link
-          href="/portal/personal"
+          href="/ward/dashboard/registercitizen"
           className="flex h-11 items-center justify-center gap-2 rounded-xl bg-[#0A3E9E] px-5 text-[15px] font-semibold text-white shadow-sm transition-colors hover:bg-[#083078] active:scale-[0.99]"
         >
           <PersonAddOutlined sx={{ fontSize: 18 }} /> Register Citizen

@@ -2,9 +2,8 @@
 
 import React from "react";
 import { useRouter } from "next/navigation";
-import { MenuItem, Select, TextField } from "@mui/material";
+import {  MenuItem, Select, TextField } from "@mui/material";
 import {
-  AccountCircleOutlined,
   AddCircleOutlined,
   ArrowBack,
   ArrowForward,
@@ -19,7 +18,6 @@ import {
   PersonOutlined,
   VerifiedUserOutlined,
 } from "@mui/icons-material";
-import { PortalSidebar } from "@/components/Sidebar";
 import { PortalStepper } from "@/components/Stepper";
 import { useFamilyForm } from "@/hooks/useFamilyForm";
 import {
@@ -175,22 +173,7 @@ export function FamilyStep() {
 
   return (
     <div className="flex min-h-screen bg-[#F7F8FA]">
-      <PortalSidebar activeLabel="Family Info" />
-
       <div className="flex-1 flex flex-col min-w-0">
-        <header className="sticky top-0 z-30 h-16 bg-white border-b border-[#E4E8EF] flex items-center justify-between px-6 md:px-10">
-          <span className="font-poppins font-bold text-[20px] tracking-[0.04em] text-[#163B87] uppercase">
-            PRAPTI
-          </span>
-
-          <button
-            type="button"
-            aria-label="Account profile"
-            className="flex items-center justify-center p-1 text-[#163B87] transition-colors hover:text-[#0A2D6D]"
-          >
-            <AccountCircleOutlined className="w-6 h-6" />
-          </button>
-        </header>
 
         <main className="flex-1 w-full max-w-310 mx-auto px-6 md:px-10 py-8 pb-40">
           <PortalStepper currentStep={3} />
@@ -290,7 +273,7 @@ export function FamilyStep() {
         <footer className="fixed bottom-0 left-67.5 right-0 z-30 bg-white/95 backdrop-blur border-t border-[#E3E8F2] h-[80px] px-6 md:px-10 flex items-center justify-between shadow-[0_-4px_16px_rgba(15,61,145,0.05)]">
           <button
             type="button"
-            onClick={() => router.push("/portal/nid")}
+            onClick={() => router.push("/ward/dashboard/registercitizen/nid")}
             className="h-12 px-7 rounded-xl border-[1.5px] border-[#D9DEE8] bg-white text-[#1F2A44] font-semibold text-[15px] hover:border-[#6B7280] hover:bg-[#F8F9FB] transition-all duration-200 active:scale-[0.98] flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0A2D6D] focus-visible:ring-offset-2"
           >
             <ArrowBack className="w-5 h-5" />
@@ -315,7 +298,7 @@ export function FamilyStep() {
               type="button"
               onClick={() => {
                 saveDraft();
-                router.push("/portal/employment");
+                router.push("/ward/dashboard/registercitizen/employment");
               }}
               className="h-12 px-8 rounded-xl bg-[#0A2D6D] text-white font-semibold text-[15px] shadow-[0_8px_20px_rgba(10,45,109,0.3)] hover:bg-[#081F4D] transition-all duration-200 active:scale-[0.98] flex items-center gap-2"
             >

@@ -1,6 +1,7 @@
 'use client';
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
+import { useSearchParams } from 'next/navigation';
 import type {
   RegistrationFormData,
   EmploymentData,
@@ -107,7 +108,9 @@ export function createDefaultFormData(): RegistrationFormData {
 }
 
 export function useRegistrationForm() {
-  const [step, setStep] = useState(1);
+  const searchParams = useSearchParams();
+  const stepFromUrl = searchParams.get('step') ? parseInt(searchParams.get('step') as string, 10) : 1;
+  const [step, setStep] = useState(stepFromUrl > 0 && stepFromUrl <= 10 ? stepFromUrl : 1);
 
   const personal = usePersonalInfoForm();
   const nid = useNidForm();

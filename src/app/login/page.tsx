@@ -1,5 +1,6 @@
 ﻿"use client";
 
+import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { loginUser, getCurrentSession, ROLE_HOME_ROUTE } from "@/services/auth.service";
@@ -82,7 +83,13 @@ export default function LoginPage() {
           {/* Centered logo / title / subtitle */}
           <div className="flex flex-1 flex-col items-center justify-center text-center">
             <div className="mb-6 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-white shadow-[0_10px_30px_rgba(0,0,0,0.18)]">
-              <img src="/assets/Flag_of_Nepal.gif" alt="Nepal flag" className="h-7 w-auto" />
+              <Image
+                src="/assets/Flag_of_Nepal.gif"
+                alt="Nepal flag"
+                className="h-7 w-auto"
+                width={14}
+                height={14}
+              />
             </div>
             <h2 className="text-3xl font-bold tracking-tight">Digital Nepal</h2>
             <p className="mt-3 max-w-xs text-sm leading-6 text-white/75">

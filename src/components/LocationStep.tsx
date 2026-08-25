@@ -13,9 +13,7 @@ import {
   WarningAmberOutlined,
 } from "@mui/icons-material";
 import { CircularProgress } from "@mui/material";
-import { PortalSidebar } from "@/components/Sidebar";
 import { PortalStepper } from "@/components/Stepper";
-import { PortalHeader } from "@/components/ui";
 import { LocationMap } from "@/components/LocationMap";
 import type { DraftSaveStatus, AccuracyLevel } from "@/types/location";
 import { useLocationForm } from "@/hooks/useLocationForm";
@@ -220,12 +218,7 @@ export function LocationStep() {
   const handleNext = () => {
     if (!validate()) return;
     saveDraftNow();
-    router.push("/portal/submit");
-  };
-
-  const handleSaveExit = () => {
-    saveDraftNow();
-    router.push("/portal");
+    router.push("/ward/dashboard/registercitizen/submit");
   };
 
   const isCapturing = captureStatus === "requesting";
@@ -235,10 +228,7 @@ export function LocationStep() {
 
   return (
     <div className="flex min-h-screen bg-[#E8EEF7]">
-      <PortalSidebar activeLabel="Location" onSaveExit={handleSaveExit} />
-
       <div className="flex min-w-0 flex-1 flex-col">
-        <PortalHeader />
 
         <main className="mx-auto w-full max-w-[1130px] flex-1 px-4 py-8 pb-36 sm:px-6 md:px-8 lg:px-10">
           <PortalStepper currentStep={9} />
@@ -443,7 +433,7 @@ export function LocationStep() {
         </main>
 
         <BottomNavigation
-          onBack={() => router.push("/portal/photo")}
+          onBack={() => router.push("/ward/dashboard/registercitizen/photo")}
           onNext={handleNext}
           onSaveDraft={saveDraftNow}
           canProceed={canProceed}

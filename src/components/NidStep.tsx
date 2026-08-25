@@ -10,10 +10,7 @@ import {
   CheckCircle,
   CloudUploadOutlined,
   InfoOutlined,
-  NotificationsNoneOutlined,
-  PersonOutlined,
 } from "@mui/icons-material";
-import { PortalSidebar } from "@/components/Sidebar";
 import { PortalStepper } from "@/components/Stepper";
 import {
   ACCEPTED_DOCUMENT_TYPES,
@@ -31,19 +28,22 @@ const GUIDELINES = [
   "Ensure all four corners of the document are within the frame.",
 ];
 
-
 interface UploadPanelProps {
   label: string;
   footerText?: string;
   upload: DocumentUpload;
 }
 
-function UploadPanel({
-  label,
-  footerText,
-  upload,
-}: UploadPanelProps) {
-  const { state, browseRef, onFile, onOpenBrowse, onDragOver, onDragLeave, onDrop } = upload;
+function UploadPanel({ label, footerText, upload }: UploadPanelProps) {
+  const {
+    state,
+    browseRef,
+    onFile,
+    onOpenBrowse,
+    onDragOver,
+    onDragLeave,
+    onDrop,
+  } = upload;
 
   return (
     <div>
@@ -147,7 +147,9 @@ export function NidStep() {
   const front = useDocumentUpload();
   const back = useDocumentUpload();
 
-  const blobUrlToDataUrl = async (url: string | null): Promise<string | null> => {
+  const blobUrlToDataUrl = async (
+    url: string | null,
+  ): Promise<string | null> => {
     if (!url) return null;
     if (url.startsWith("data:")) return url;
     try {
@@ -177,7 +179,10 @@ export function NidStep() {
       citizenship_back: backUrl,
     };
     try {
-      window.localStorage.setItem("prapti_nid_draft_v1", JSON.stringify(payload));
+      window.localStorage.setItem(
+        "prapti_nid_draft_v1",
+        JSON.stringify(payload),
+      );
     } catch {
       // localStorage may be full or unavailable
     }
@@ -189,40 +194,23 @@ export function NidStep() {
 
   const handleNext = () => {
     void persistDraft();
-    router.push("/portal/family");
+    router.push("/ward/dashboard/registercitizen/family");
   };
 
   return (
     <div className="flex min-h-screen bg-[#F6F8FB] font-poppins">
-      <PortalSidebar activeLabel="NID Upload" />
+      {/* <DashboardSidebar activeLabel="NID Upload" /> */}
 
       <div className="flex-1 flex flex-col min-w-0">
-       
         <header className="h-[72px] shrink-0 bg-white border-b border-[#E4E8EF] flex items-center justify-between px-8">
           <h1 className="font-poppins font-bold text-[38px] text-[#0A2D6D] tracking-tight leading-none">
             NID / Citizenship Upload
           </h1>
-          <div className="flex items-center gap-5">
-            <button
-              aria-label="Notifications"
-              className="text-[#64748B] flex items-center justify-center"
-            >
-              <NotificationsNoneOutlined className="w-6 h-6" />
-            </button>
-            <div
-              aria-label="User profile"
-              className="w-10 h-10 rounded-full bg-[#0A2D6D] flex items-center justify-center text-white"
-            >
-              <PersonOutlined className="w-6 h-6" />
-            </div>
-          </div>
         </header>
 
-        
         <main className="flex-1 w-full max-w-[1200px] mx-auto px-8 py-6 pb-36">
           <PortalStepper currentStep={2} />
 
-         
           <section className="bg-white rounded-[10px] border border-[#D8D8D8] p-8 shadow-[0_1px_3px_rgba(10,45,109,0.06)]">
             <h2 className="font-poppins font-bold text-[24px] text-[#0A2D6D] leading-tight">
               Identity Verification
@@ -257,7 +245,8 @@ export function NidStep() {
                 </h3>
                 <ul className="mt-3 space-y-2">
                   {GUIDELINES.map((g) => (
-                    <li key={g} className="flex items-start gap-2.5"><Check className="w-4 h-4 text-[#0A2D6D] shrink-0 mt-0.5" />
+                    <li key={g} className="flex items-start gap-2.5">
+                      <Check className="w-4 h-4 text-[#0A2D6D] shrink-0 mt-0.5" />
                       <span className="font-poppins text-[14px] text-[#334155]">
                         {g}
                       </span>
@@ -268,10 +257,7 @@ export function NidStep() {
             </div>
           </section>
           <section className="grid grid-cols-3 gap-6 mt-6">
-            <ExampleCard
-              badge="Good Example"
-              badgeClass="text-[#0A2D6D]"
-            >
+            <ExampleCard badge="Good Example" badgeClass="text-[#0A2D6D]">
               <div className="absolute inset-0 bg-[#16233F]" />
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="w-[110px] h-[190px] rounded-[18px] bg-[#0A2D6D] border-[3px] border-[#3A5A9C] p-2 flex flex-col items-center">
@@ -286,10 +272,7 @@ export function NidStep() {
               </div>
             </ExampleCard>
 
-            <ExampleCard
-              badge="Avoid Glare"
-              badgeClass="text-[#C01F38]"
-            >
+            <ExampleCard badge="Avoid Glare" badgeClass="text-[#C01F38]">
               <div className="absolute inset-0 bg-[#1F2A3E]" />
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="relative w-[170px] h-[108px] rounded-[10px] bg-[#E8EEF8] overflow-hidden">
@@ -303,10 +286,7 @@ export function NidStep() {
               </div>
             </ExampleCard>
 
-            <ExampleCard
-              badge="Avoid Blur"
-              badgeClass="text-[#C01F38]"
-            >
+            <ExampleCard badge="Avoid Blur" badgeClass="text-[#C01F38]">
               <div className="absolute inset-0 bg-[#232F45]" />
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="w-[170px] h-[108px] rounded-[10px] bg-[#E8EEF8] blur-[2px] opacity-90 p-3">
@@ -321,7 +301,7 @@ export function NidStep() {
 
         <footer className="fixed bottom-0 left-[270px] right-0 z-30 bg-white border-t border-[#D8D8D8] h-[76px] px-8 flex items-center justify-between">
           <button
-            onClick={() => router.push("/portal/personal")}
+            onClick={() => router.push("/ward/dashboard/registercitizen/personal")}
             className="h-12 px-6 rounded-[10px] border border-[#D8D8D8] bg-white text-[#1E293B] font-poppins font-medium text-[15px] flex items-center gap-2"
           >
             <ArrowBack className="w-5 h-5" />

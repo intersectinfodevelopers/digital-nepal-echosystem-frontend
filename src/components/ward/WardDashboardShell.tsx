@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 import { Drawer, useMediaQuery } from "@mui/material";
 import {
   HomeOutlined,
@@ -17,7 +18,6 @@ import WardTopbar from "./WardTopbar";
 import DashboardTab from "./DashboardTab";
 import CitizensTab from "./CitizensTab";
 import MapTab from "./MapTab";
-import NationalMapTab from "./NationalMapTab";
 import ServicesTab from "./ServicesTab";
 import ProfileTab from "./ProfileTab";
 import ApprovalQueueTab from "./ApprovalQueueTab";
@@ -26,6 +26,7 @@ import type { WardViewId } from "@/types/navigation";
 import { WARD_VIEW_TITLES } from "./wardNav";
 import { getCurrentSession } from "@/services/auth.service";
 import { getNotifications } from "@/services/mockWardAdmin";
+import Breadcrumbs from "@/components/ui/Breadcrumbs";
 
 const VIEW_ICONS: Record<WardViewId, ReactNode> = {
   dashboard: <HomeOutlined sx={{ fontSize: 20 }} />,
@@ -43,6 +44,8 @@ export default function WardDashboardShell({ wardId }: { wardId: string }) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const isDesktop = useMediaQuery("(min-width:1024px)");
+  const pathname = usePathname();
+  const isRegisterCitizen = pathname.startsWith("/ward/dashboard/registercitizen");
 
   const renderView = (v: WardViewId) => {
     switch (v) {
@@ -51,8 +54,6 @@ export default function WardDashboardShell({ wardId }: { wardId: string }) {
       case "map":
       case "national-map":
         return <MapTab wardId={wardId} />;
-      case "national-map":
-        return <NationalMapTab wardId={wardId} />;
       case "services":
         return <ServicesTab wardId={wardId} />;
       case "profile":
@@ -98,44 +99,63 @@ export default function WardDashboardShell({ wardId }: { wardId: string }) {
 
   return (
     <div className="flex min-h-screen bg-[#f5f7fb]">
-      <div className="hidden lg:block">
-        <div className="fixed inset-y-0 left-0 z-40">
+      {!isRegisterCitizen && (
+        <div className="hidden lg:block">
+          <div className="fixed inset-y-0 left-0 z-40">
+            <WardSidebar
+              active={view}
+              onNavigate={navigate}
+              wardId={wardId}
+              collapsed={!sidebarOpen}
+            />
+          </div>
+        </div>
+      )}
+      {!isRegisterCitizen && (
+        <Drawer
+          open={mobileOpen && !isDesktop}
+          onClose={closeMobileDrawer}
+          slotProps={{ paper: { sx: { borderRadius: 0, width: 260 } } }}
+        >
           <WardSidebar
             active={view}
             onNavigate={navigate}
             wardId={wardId}
-            collapsed={!sidebarOpen}
+            onClose={closeMobileDrawer}
           />
+        </Drawer>
+      )}
+      {isRegisterCitizen ? (
+        <div className="flex min-w-0 flex-1 flex-col">
+          <main className="flex-1 px-4 pt-20 pb-6 sm:px-6 lg:px-8">
+            <div className="mb-4">
+              <Breadcrumbs />
+            </div>
+            {renderView(view)}
+          </main>
         </div>
-      </div>
-      <Drawer
-        open={mobileOpen && !isDesktop}
-        onClose={closeMobileDrawer}
-        slotProps={{ paper: { sx: { borderRadius: 0, width: 260 } } }}
-      >
-        <WardSidebar
-          active={view}
-          onNavigate={navigate}
-          wardId={wardId}
-          onClose={closeMobileDrawer}
-        />
-      </Drawer>
-      <div className={`flex min-w-0 flex-1 flex-col ${sidebarOpen ? "lg:pl-65" : "lg:pl-18"}`}>
-        <WardTopbar
-          sectionLabel={`Ward ${wardId.replace("ward-", "")}`}
-          subtitle={WARD_VIEW_TITLES[view]}
-          icon={VIEW_ICONS[view]}
-          userName={session?.full_name ?? "Ward Admin"}
-          userRole={session?.role ?? "Ward Admin"}
-          unreadCount={unread}
-          notificationWardId={wardId}
-          sidebarOpen={sidebarOpen}
-          onOpenSidebar={handleOpenSidebar}
-          onGoProfile={() => navigate("profile")}
-        />
-
-        <main className="flex-1 px-4 pt-20 pb-6 sm:px-6 lg:px-8">{renderView(view)}</main>
-      </div>
+      ) : (
+        <div className={`flex min-w-0 flex-1 flex-col ${sidebarOpen ? "lg:pl-65" : "lg:pl-18"}`}>
+          <WardTopbar
+            sectionLabel={`Ward ${wardId.replace("ward-", "")}`}
+            subtitle={WARD_VIEW_TITLES[view]}
+            icon={VIEW_ICONS[view]}
+            userName={session?.full_name ?? "Ward Admin"}
+            userRole={session?.role ?? "Ward Admin"}
+            unreadCount={unread}
+            notificationWardId={wardId}
+            sidebarOpen={sidebarOpen}
+            onOpenSidebar={handleOpenSidebar}
+            onGoProfile={() => navigate("profile")}
+          />
+          <main className="flex-1 px-4 pt-20 pb-6 sm:px-6 lg:px-8">
+            <div className="mb-4">
+              <Breadcrumbs />
+            </div>
+            {renderView(view)}
+          </main>
+        </div>
+      )}
     </div>
   );
 }

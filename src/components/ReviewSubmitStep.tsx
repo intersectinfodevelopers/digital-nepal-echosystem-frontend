@@ -6,9 +6,7 @@ import {
   ArrowBack,
   ArrowForward,
 } from "@mui/icons-material";
-import { PortalSidebar } from "@/components/Sidebar";
 import { PortalStepper } from "@/components/Stepper";
-import { PortalHeader } from "@/components/ui";
 import { registerCitizen } from "@/services/citizenService";
 import type { RegistrationFormData } from "@/types/citizen";
 
@@ -17,8 +15,6 @@ interface ReviewSubmitStepProps {
   formData?: RegistrationFormData;
   onNavigateToStep: (step: number) => void;
 }
-
-
 interface Field {
   label: string;
   value: string | number | boolean | null | undefined;
@@ -277,10 +273,12 @@ export function ReviewSubmitStep({
 
   return (
     <div className="flex min-h-screen bg-[#F8FAFC]">
-      <PortalSidebar activeLabel="Personal Info" />
+      {/* <Box className="hidden lg:block w-[280px] shrink-0">
+        <DashboardSidebar activeLabel="Personal Info" />
+      </Box> */}
 
       <div className="flex min-w-0 flex-1 flex-col">
-        <PortalHeader />
+        
 
         <main className="mx-auto w-full max-w-[1440px] flex-1 px-6 py-8 pb-40 md:px-10">
           <PortalStepper currentStep={10} />
@@ -383,7 +381,7 @@ export function ReviewSubmitStep({
             onClick={() => onNavigateToStep(9)}
             className="flex h-12 items-center justify-center gap-1.5 rounded-[8px] border border-[#D1D5DB] bg-white px-5 font-poppins text-[13px] font-bold text-[#0E3A8A] transition-colors duration-150 hover:border-[#0E3A8A] hover:bg-[#F1F5F9] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0E3A8A] focus-visible:ring-offset-2"
           >
-            <ArrowBack className="h-4 w-4" />
+            <ArrowBack  className="h-4 w-4" />
             Back
           </button>
 
@@ -411,9 +409,10 @@ export function ReviewSubmitStep({
               Submit
               <ArrowForward className="h-4 w-4" />
             </button>
-          </div>
+          </div>     
         </footer>
       </div>
     </div>
   );
 }
+     

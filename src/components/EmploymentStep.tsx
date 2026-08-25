@@ -25,9 +25,7 @@ import {
   PictureAsPdfOutlined,
   VerifiedUserOutlined,
 } from "@mui/icons-material";
-import { PortalSidebar } from "@/components/Sidebar";
 import { PortalStepper } from "@/components/Stepper";
-import { PortalHeader } from "@/components/ui";
 import { EMPLOYMENT_STATUS_OPTIONS, UploadStatus } from "@/constants";
 import { useEmploymentForm } from "@/hooks/useEmploymentForm";
 import type {
@@ -136,7 +134,7 @@ function IncomeInput({
   return (
     <div>
       <FieldLabel htmlFor="monthly-income" required>
-        Monthly Income (NPR)
+        Monthly Income (NPR)      
       </FieldLabel>
       <TextField
         id="monthly-income"
@@ -558,16 +556,14 @@ export function EmploymentStep() {
 
   const handleNext = () => {
     if (form.attemptProceed()) {
-      router.push("/portal/household");
+      router.push("/ward/dashboard/registercitizen/household");
     }
   };
 
   return (
     <div className="flex min-h-screen bg-[#F7F8FA]">
-      <PortalSidebar activeLabel="Employment" />
 
-      <div className="flex min-w-0 flex-1 flex-col">
-        <PortalHeader variant="encryption" />
+       <div className="flex min-w-0 flex-1 flex-col"> 
 
         <main className="mx-auto w-full max-w-[1240px] flex-1 px-6 py-8 pb-40 md:px-10">
           <PortalStepper currentStep={4} />
@@ -630,7 +626,7 @@ export function EmploymentStep() {
         </main>
 
         <BottomNavigation
-          onBack={() => router.push("/portal/family")}
+          onBack={() => router.push("/ward/dashboard/registercitizen/family")}
           onNext={handleNext}
         />
       </div>

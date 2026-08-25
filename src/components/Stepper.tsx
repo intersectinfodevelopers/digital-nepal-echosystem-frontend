@@ -49,7 +49,8 @@ export function PortalStepper({ currentStep }: PortalStepperProps) {
             circleClasses += " bg-[#C01F38] text-white";
             labelClasses += " text-[#C01F38] font-semibold";
           } else {
-            circleClasses += " bg-white text-[#64748B] border-[1.5px] border-[#D8D8D8]";
+            circleClasses +=
+              " bg-white text-[#64748B] border-[1.5px] border-[#D8D8D8]";
             labelClasses += " text-[#94A3B8]";
           }
 
@@ -63,16 +64,12 @@ export function PortalStepper({ currentStep }: PortalStepperProps) {
                 <div
                   aria-hidden="true"
                   className={`absolute top-[28px] left-1/2 h-[2px] rounded-full ${
-                    stepNumber < currentStep
-                      ? "bg-[#0A2D6D]"
-                      : "bg-[#D8D8D8]"
+                    stepNumber < currentStep ? "bg-[#0A2D6D]" : "bg-[#D8D8D8]"
                   }`}
                   style={{ width: "100%" }}
                 />
               )}
-              <div className={circleClasses}>
-                {stepNumber}
-              </div>
+              <div className={circleClasses}>{stepNumber}</div>
               <span className={labelClasses}>{label}</span>
             </div>
           );

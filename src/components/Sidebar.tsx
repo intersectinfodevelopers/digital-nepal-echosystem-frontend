@@ -23,9 +23,9 @@ interface NavItem {
 }
 
 const NAV_ITEMS: NavItem[] = [
-  { label: "Personal Info", icon: PersonOutlined, href: "/portal/personal" },
-  { label: "NID Upload", icon: UploadOutlined, href: "/portal/nid" },
-  { label: "Family Info", icon: GroupOutlined, href: "/portal/family" },
+  { label: "Personal Info", icon: PersonOutlined, href: "/ward/dashboard/registercitizen/personal" },
+  { label: "NID Upload", icon: UploadOutlined, href: "/ward/dashboard/registercitizen/nid" },
+  { label: "Family Info", icon: GroupOutlined, href: "/ward/dashboard/registercitizen/family" },
   { label: "Employment", icon: WorkOutlined },
   { label: "Household", icon: HomeOutlined },
   { label: "Disability", icon: AccessibleOutlined, href: "/portal/disability" },
@@ -33,12 +33,12 @@ const NAV_ITEMS: NavItem[] = [
   { label: "Photo", icon: PhotoCameraOutlined },
 ];
 
-interface PortalSidebarProps {
+interface DashboardSidebarProps {
   activeLabel?: string;
   onSaveExit?: () => void;
 }
 
-export function PortalSidebar({ activeLabel, onSaveExit }: PortalSidebarProps) {
+export function DashboardSidebar({ activeLabel, onSaveExit }: DashboardSidebarProps) {
   const pathname = usePathname();
 
   return (
