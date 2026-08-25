@@ -34,9 +34,6 @@ export interface EmploymentProofState {
   error: string | null;
 }
 
-
-
-
 export interface EmploymentUpload {
   state: EmploymentProofState;
   isDragOver: boolean;
@@ -50,9 +47,6 @@ export interface EmploymentUpload {
   onDrop: (e: React.DragEvent) => void;
   remove: () => void;
 }
-
-
-
 export interface EmploymentFormData {
   employmentStatus: string;
   monthlyIncome: string;

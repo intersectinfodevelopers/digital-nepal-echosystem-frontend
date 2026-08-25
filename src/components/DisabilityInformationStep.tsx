@@ -13,9 +13,7 @@ import {
   SaveOutlined,
   UploadFileOutlined,
 } from "@mui/icons-material";
-import { PortalSidebar } from "@/components/Sidebar";
 import { PortalStepper } from "@/components/Stepper";
-import { PortalHeader } from "@/components/ui";
 import {
   AFFECTED_AREA_OPTIONS,
   DISABILITY_TYPE_OPTIONS,
@@ -233,9 +231,7 @@ function RadioOption({
   onChange: (value: boolean) => void;
 }) {
   return (
-    <label
-      className="flex cursor-pointer items-center gap-2.5 has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-[#06439B]/30 has-[:focus-visible]:ring-offset-2"
-    >
+    <label className="flex cursor-pointer items-center gap-2.5 has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-[#06439B]/30 has-[:focus-visible]:ring-offset-2">
       <input
         type="radio"
         name={name}
@@ -273,7 +269,11 @@ function DraftStatus({ status }: { status: SaveStatus }) {
   return (
     <span
       className={`inline-flex items-center gap-1.5 font-poppins text-[13px] font-medium ${
-        isSaving ? "text-[#B45309]" : isSaved ? "text-[#15803D]" : "text-[#94A3B8]"
+        isSaving
+          ? "text-[#B45309]"
+          : isSaved
+            ? "text-[#15803D]"
+            : "text-[#94A3B8]"
       }`}
     >
       {isSaving ? (
@@ -422,21 +422,15 @@ export function DisabilityInformationStep() {
 
   const handleNext = () => {
     if (form.attemptProceed()) {
-      router.push("/portal/education");
+      router.push("/ward/dashboard/registercitizen/education");
     }
-  };
-
-  const handleSaveExit = () => {
-    form.saveDraftNow();
-    router.push("/portal");
-  };
+  }
 
   return (
     <div className="flex min-h-screen bg-[#F8FAFC]">
-      <PortalSidebar activeLabel="Disability" onSaveExit={handleSaveExit} />
 
       <div className="flex min-w-0 flex-1 flex-col">
-        <PortalHeader />
+        
 
         <main className="flex-1 px-6 py-8 pb-40 md:px-10">
           <div className="mx-auto w-full max-w-[1250px]">
@@ -484,9 +478,7 @@ export function DisabilityInformationStep() {
                         key={option.value}
                         label={option.label}
                         checked={form.data.affectedAreas.includes(option.value)}
-                        onChange={() =>
-                          form.toggleAffectedArea(option.value)
-                        }
+                        onChange={() => form.toggleAffectedArea(option.value)}
                       />
                     ))}
                   </div>
@@ -547,7 +539,7 @@ export function DisabilityInformationStep() {
         </main>
 
         <WizardFooter
-          onBack={() => router.push("/portal/household")}
+          onBack={() => router.push("/ward/dashboard/registercitizen/household")}
           onSaveDraft={form.saveDraftNow}
           onNext={handleNext}
           saveStatus={form.saveStatus}

@@ -20,10 +20,9 @@ import {
   LogoutOutlined,
   MyLocation,
   ShieldOutlined,
+
 } from "@mui/icons-material";
-import { PortalSidebar } from "@/components/Sidebar";
 import { PortalStepper } from "@/components/Stepper";
-import { PortalHeader } from "@/components/ui";
 import { HOUSEHOLD_OWNERSHIP_OPTIONS } from "@/constants";
 import {
   formatScNumber,
@@ -450,16 +449,15 @@ export function HouseholdStep() {
 
   const handleNext = () => {
     if (form.attemptProceed()) {
-      router.push("/portal/disability");
+      router.push("/ward/dashboard/registercitizen/disability");
     }
   };
 
   return (
     <div className="flex min-h-screen bg-[#F8FAFC]">
-      <PortalSidebar activeLabel="Household" />
 
       <div className="flex min-w-0 flex-1 flex-col">
-        <PortalHeader />
+        
 
         <main className="mx-auto w-full max-w-[1440px] flex-1 px-6 py-8 pb-40 md:px-10">
           <PortalStepper currentStep={5} />
@@ -557,9 +555,8 @@ export function HouseholdStep() {
             </aside>
           </div>
         </main>
-
         <BottomNavigation
-          onBack={() => router.push("/portal/employment")}
+          onBack={() => router.push("/ward/dashboard/registercitizen/employment")}
           onNext={handleNext}
         />
       </div>

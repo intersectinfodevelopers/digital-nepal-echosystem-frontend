@@ -17,9 +17,7 @@ import {
   LockOutlined,
   WarningAmberOutlined,
 } from "@mui/icons-material";
-import { PortalSidebar } from "@/components/Sidebar";
 import { PortalStepper } from "@/components/Stepper";
-import { PortalHeader } from "@/components/ui";
 import { formatFileSize, usePhotoForm } from "@/hooks/usePhotoForm";
 import type { DraftSaveStatus } from "@/types/photo";
 
@@ -259,23 +257,15 @@ export function PhotoStep() {
       return;
     }
     saveDraftNow();
-    router.push("/portal/location");
-  };
-
-  const handleSaveExit = () => {
-    saveDraftNow();
-    router.push("/portal");
+    router.push("/ward/dashboard/registercitizen/location");
   };
 
   const showPreview = status !== "empty";
 
   return (
     <div className="flex min-h-screen bg-[#E8EEF7]">
-      <PortalSidebar activeLabel="Photo" onSaveExit={handleSaveExit} />
 
       <div className="flex min-w-0 flex-1 flex-col">
-        <PortalHeader />
-
         <main className="mx-auto w-full max-w-[1130px] flex-1 px-4 py-8 pb-36 sm:px-6 md:px-8 lg:px-10">
           <PortalStepper currentStep={8} />
 
@@ -465,7 +455,7 @@ export function PhotoStep() {
         </main>
 
         <BottomNavigation
-          onBack={() => router.push("/portal/education")}
+          onBack={() => router.push("/ward/dashboard/registercitizen/education")}
           onNext={handleNext}
           onSaveDraft={saveDraftNow}
           canProceed={canProceed}
