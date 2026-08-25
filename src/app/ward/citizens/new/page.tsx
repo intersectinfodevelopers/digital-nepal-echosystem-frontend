@@ -21,7 +21,7 @@ import {
   SwapHorizOutlined as IconSwap,
 } from "@mui/icons-material";
 import { useRegistrationForm } from "@/hooks/useRegistrationForm";
-import { PortalSidebar } from "@/components/Sidebar";
+import { DashboardSidebar } from "@/components/Sidebar";
 import { PortalStepper } from "@/components/Stepper";
 import { ReviewSubmitStep } from "@/components/ReviewSubmitStep";
 import Image from "next/image";
@@ -79,7 +79,7 @@ export default function NewCitizenPage() {
   return (
     <Box className="flex min-h-screen bg-[#F5F7FA]">
       <Box className="hidden lg:block w-[280px] shrink-0">
-        <PortalSidebar activeLabel={getSidebarActiveLabel()} />
+        <DashboardSidebar activeLabel={getSidebarActiveLabel()} />
       </Box>
       <Box className="flex-grow flex flex-col min-w-0">
         <Box
@@ -432,8 +432,8 @@ export default function NewCitizenPage() {
                 onNavigateToStep={(s) => {
                 
                   const routes: Record<number, string> = {
-                    1: "/portal/personal",
-                    2: "/portal/nid",
+                    1: "/ward/dashboard/registercitizen",
+                    2: "/ward/dashboard/registercitizen",
                     3: "/portal/family",
                     4: "/portal/employment",
                     5: "/portal/household",

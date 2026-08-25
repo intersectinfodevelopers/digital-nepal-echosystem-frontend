@@ -35,6 +35,8 @@ const CENTRAL_NAV: AdminNavSection[] = [
         id: "/central/analytics",
         label: "Analytics",
         icon: <AnalyticsOutlined sx={{ fontSize: 20 }} />,
+        hasMapTree: true,
+        mapHref: "/central/analytics",
       },
       {
         id: "/central/national-map",
@@ -166,7 +168,7 @@ export default function CentralLayout({
               onGoProfile={() => router.push("/central/dashboard")}
             />
 
-            <main className="flex-1 px-4 pt-20 pb-6 sm:px-6 lg:px-8">
+            <main className="flex-1 px-4 pt-6 pb-6 sm:px-6 lg:px-8">
               {children}
             </main>
           </div>

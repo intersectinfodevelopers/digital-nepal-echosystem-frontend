@@ -1,293 +1,114 @@
 "use client";
 
-import dynamic from "next/dynamic";
-import { useEffect, useMemo } from "react";
+import Link from "next/link";
+import { useMemo } from "react";
 
-import { useMapSelection } from "@/contexts/MapSelectionContext";
-import citizens from "../../../../data/citizens.json";
-import wards from "../../../../data/wards.json";
-import municipalities from "../../../../data/municipalities.json";
-import idCards from "../../../../data/id-cards.json";
-import syncBatches from "../../../../data/sync-batches.json";
+import provinceData from "../../../../data/province-dashboard.json";
+import districtData from "../../../../data/district.json";
+import LocalLevelStructure from "@/components/dashboard/LocalLevelStructure";
 
-import StatCard from "@/components/ui/StatCard";
-import Card from "@/components/ui/Card";
+type ProvinceDashboardData = (typeof provinceData)[number];
+type Accent = "navy" | "blue" | "purple" | "orange" | "teal" | "green" | "red";
 
-const LeafletMap = dynamic(() => import("@/components/Map/LeafletMap"), {
-  ssr: false,
-  loading: () => (
-    <div className="flex h-full w-full items-center justify-center rounded-2xl border border-gray-200 bg-[#FAFAFA]">
-      <p className="text-sm font-semibold text-gray-500">
-        Loading GIS Engine...
-      </p>
-    </div>
-  ),
-});
-
-type ProvinceInfo = {
-  id: string;
-  name: string;
-  center: [number, number];
-  zoom: number;
+const accentStyles: Record<Accent, { line: string; icon: string; iconBg: string }> = {
+  navy: { line: "#0B3067", icon: "#0B3067", iconBg: "#EAF0FB" },
+  blue: { line: "#4565E8", icon: "#4565E8", iconBg: "#EAF0FB" },
+  purple: { line: "#A100F2", icon: "#A100F2", iconBg: "#F1E8FD" },
+  orange: { line: "#EC7600", icon: "#EC7600", iconBg: "#FDF0E4" },
+  teal: { line: "#009B8E", icon: "#009B8E", iconBg: "#E6F7F5" },
+  green: { line: "#00B86B", icon: "#00B86B", iconBg: "#E7F8EF" },
+  red: { line: "#F0002E", icon: "#F0002E", iconBg: "#FDEDEC" },
 };
 
-const PROVINCES: Record<string, ProvinceInfo> = {
-  "prov-1": {
-    id: "prov-1",
-    name: "Koshi Province",
-    center: [27.2, 87.3],
-    zoom: 8,
-  },
-  "prov-2": {
-    id: "prov-2",
-    name: "Madhesh Province",
-    center: [26.9, 85.9],
-    zoom: 8,
-  },
-  "prov-3": {
-    id: "prov-3",
-    name: "Bagmati Province",
-    center: [27.6, 85.5],
-    zoom: 8,
-  },
-  "prov-4": {
-    id: "prov-4",
-    name: "Gandaki Province",
-    center: [28.3, 84.0],
-    zoom: 8,
-  },
-  "prov-5": {
-    id: "prov-5",
-    name: "Lumbini Province",
-    center: [27.8, 83.3],
-    zoom: 8,
-  },
-  "prov-6": {
-    id: "prov-6",
-    name: "Karnali Province",
-    center: [29.0, 82.3],
-    zoom: 7,
-  },
-  "prov-7": {
-    id: "prov-7",
-    name: "Sudurpashchim Province",
-    center: [29.3, 80.7],
-    zoom: 7,
-  },
-};
-
-function normalizeProvinceId(value: string | null): string | null {
-  if (!value) return null;
-
-  const normalized = value.toLowerCase().trim();
-
-  if (normalized.startsWith("prov-")) {
-    return normalized;
+function getProvinceId(): string {
+  if (typeof document === "undefined") return "prov-1";
+  const token = document.cookie.split("; ").find((row) => row.startsWith("auth_token="))?.split("=")[1];
+  try {
+    const payload = token ? JSON.parse(atob(token)) : null;
+    return typeof payload?.jurisdiction_id === "string" ? payload.jurisdiction_id : "prov-1";
+  } catch {
+    return "prov-1";
   }
-
-  if (/^[1-7]$/.test(normalized)) {
-    return `prov-${normalized}`;
-  }
-
-  return null;
 }
 
-function syncStatusColor(status: string): string {
-  if (status === "SYNCED" || status === "COMPLETED") {
-    return "text-success";
-  }
-
-  if (status === "PENDING" || status === "IN_PROGRESS") {
-    return "text-warning";
-  }
-
-  if (status === "CONFLICT" || status === "FAILED") {
-    return "text-danger";
-  }
-
-  return "text-muted";
-}
+const number = (value: number) => value.toLocaleString("en-US");
 
 export default function ProvinceDashboard() {
-  const { selectProvince } = useMapSelection();
-
-  const provinceId = useMemo(() => {
-    if (typeof window === "undefined") {
-      return null;
-    }
-
-    const token = document.cookie
-      .split("; ")
-      .find((row) => row.startsWith("auth_token="))
-      ?.split("=")[1];
-
-    if (!token) {
-      return null;
-    }
-
-    try {
-      const decoded = JSON.parse(atob(token));
-
-      return normalizeProvinceId(
-        typeof decoded.jurisdiction_id === "string"
-          ? decoded.jurisdiction_id
-          : null,
-      );
-    } catch {
-      return null;
-    }
+  const province = useMemo<ProvinceDashboardData>(() => {
+    const id = getProvinceId();
+    return provinceData.find((item) => item.id === id) ?? provinceData[0];
   }, []);
-
-  const province = provinceId ? PROVINCES[provinceId] : PROVINCES["prov-1"];
-
-  useEffect(() => {
-    selectProvince(province.id.replace("prov-", ""), province.name);
-  }, [province.id, province.name, selectProvince]);
-
-  const stats = useMemo(() => {
-    const provinceNumber = province.id.replace("prov-", "");
-
-    const provinceWards = wards.filter((ward) => {
-      if (provinceNumber === "1") {
-        return ward.id.startsWith("ward-");
-      }
-
-      return false;
-    });
-
-    const provinceWardIds = new Set(provinceWards.map((ward) => ward.id));
-
-    const provinceCitizens = citizens.filter((citizen) =>
-      provinceWardIds.has(citizen.ward_id),
-    );
-
-    const provinceMunicipalityIds = new Set(
-      provinceWards.map((ward) => ward.municipality_id),
-    );
-
-    const provinceMunicipalities = municipalities.filter((municipality) =>
-      provinceMunicipalityIds.has(municipality.id),
-    );
-
-    const provinceIdCards = idCards.filter((card) =>
-      provinceCitizens.some((citizen) => citizen.id === card.citizen_id),
-    );
-
-    return {
-      totalCitizens: provinceCitizens.length,
-      totalMunicipalities: provinceMunicipalities.length,
-      totalWards: provinceWards.length,
-      idCardsIssued: provinceIdCards.length,
-    };
-  }, [province.id]);
+  const totalLocalLevels = province.structure.total_local_levels;
+  const provinceDistricts = districtData.filter((district) => district.province_id === province.id);
 
   return (
-    <div>
-      <h1 className="text-2xl font-bold text-secondary">
-        {province.name} Dashboard
-      </h1>
+    <main className="mx-auto w-full max-w-380 px-0 pb-12">
+      <header className="flex flex-wrap items-end justify-between gap-5">
+        <div>
+          <p className="flex items-center gap-2 text-[12px] font-bold uppercase tracking-[0.08em] text-[#F0002E]"><span className="h-2 w-2 rounded-sm bg-[#F0002E]" />Province Administration</p>
+          <h1 className="mt-2 text-[29px] font-extrabold tracking-tight text-[#101828]">{province.name_en} Dashboard</h1>
+          <p className="mt-1.5 max-w-180 text-sm leading-relaxed text-[#667085]">Province overview of citizens, administrative divisions, ID cards, and grievances across {province.structure.districts} districts.</p>
+        </div>
+        <div className="flex gap-2.5 pb-0.5">
+          <Link href="/province/map" className="inline-flex items-center gap-2 rounded-lg border border-[#D0D5DD] bg-white px-4 py-2.5 text-[13px] font-semibold text-[#101828] hover:bg-[#FAFBFC]"><MapIcon />View Map</Link>
+          <Link href="/province/analytics" className="inline-flex items-center gap-2 rounded-lg bg-[#281078] px-4 py-2.5 text-[13px] font-semibold text-white hover:bg-[#1D0B5D]"><ChartIcon />Open Full Analytics</Link>
+        </div>
+      </header>
 
-      <div className="mt-2 rounded-md border border-warning/30 bg-warning/10 px-4 py-2 text-sm font-medium text-warning">
-        Province Admin — Analytical View Only. No write access to citizen
-        records.
+      <Section title="Province Statistics" subtitle="Official administrative structure + live platform counts" />
+      <div className="grid gap-3.5 sm:grid-cols-2 xl:grid-cols-4">
+        <Metric label="Total Citizens" value={number(province.summary.citizens)} foot="▲ 6.4% this month" accent="navy" icon={<PersonIcon />} />
+        <Metric label="Total Districts" value={province.structure.districts} foot="Official district count" accent="blue" icon={<DistrictIcon />} />
+        <Metric label="Total Local Levels" value={totalLocalLevels} foot={`${province.structure.municipalities} municipalities`} accent="purple" icon={<BuildingIcon />} />
+        <Metric label="Total Wards" value={number(province.structure.wards)} foot="Official ward count" accent="orange" icon={<WardIcon />} />
       </div>
 
-      {/* Province Statistics */}
-      <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
-        <StatCard label="Total Citizens" value={stats.totalCitizens} />
-
-        <StatCard
-          label="Total Municipalities"
-          value={stats.totalMunicipalities}
-        />
-
-        <StatCard label="Total Wards" value={stats.totalWards} />
-
-        <StatCard label="ID Cards Issued" value={stats.idCardsIssued} />
+      <Section title="Province Level Structure" subtitle="District headquarters and local-level composition for this province" />
+      <div className="grid gap-5 lg:grid-cols-[1.3fr_1fr]">
+        <Panel>
+          <div className="overflow-x-auto"><table className="w-full min-w-140 border-collapse text-[13px]"><thead><tr><th className="header-cell text-left">District Name</th><th className="header-cell text-left">District Headquarters</th><th className="header-cell text-left">District Code</th></tr></thead><tbody>{provinceDistricts.map((district) => <tr key={district.id} className="hover:bg-[#FAFBFC]"><td className="table-cell font-bold">{district.name_en}</td><td className="table-cell font-semibold">{district.headquarters}</td><td className="table-cell text-[#667085]">{district.id.replace("dist-", "")}</td></tr>)}</tbody></table></div>
+        </Panel>
       </div>
 
-      {/* Overall Province Map */}
-      <div className="mt-8">
-        <Card
-          accentColor="border-primary"
-          header={
-            <div>
-              <h2 className="text-lg font-semibold text-secondary">
-                {province.name} Map
-              </h2>
+      <LocalLevelStructure structure={province.structure} />
 
-              <p className="mt-1 text-sm text-muted">
-                Overall geographical view of {province.name}
-              </p>
-            </div>
-          }
-        >
-          <div className="h-[500px] w-full overflow-hidden rounded-xl">
-            <LeafletMap
-              center={province.center}
-              zoom={province.zoom}
-              height="100%"
-              minimumLevel="province"
-            />
-          </div>
-        </Card>
+      <Section title="Registration Coverage" subtitle={`What municipalities have captured across ${province.name_en}`} />
+      <div className="grid gap-3.5 sm:grid-cols-2 xl:grid-cols-4">
+        <Metric label="Households Registered" value={number(province.summary.households)} foot="Province household records" accent="orange" icon={<HomeIcon />} />
+        <Metric label="Active Municipalities" value={province.summary.active_municipalities} foot="Reporting in this cycle" accent="blue" icon={<BuildingIcon />} />
+        <Metric label="ID Cards Pending" value={number(province.summary.id_cards_pending)} foot="Requires processing" accent="purple" icon={<CardIcon />} />
+        <Metric label="Resolved Grievances" value={number(province.summary.grievances_resolved)} foot="Province total" accent="green" icon={<CheckIcon />} />
       </div>
 
-      {/* Recent Activity */}
-      <div className="mt-8">
-        <Card
-          accentColor="border-primary"
-          header={
-            <h2 className="text-lg font-semibold text-secondary">
-              Recent Activity
-            </h2>
-          }
-        >
-          <div className="space-y-6">
-            {/* Sync batches */}
-            <div>
-              <h3 className="text-sm font-medium uppercase tracking-wide text-muted">
-                Recent Sync Batches
-              </h3>
-
-              <ul className="mt-2 divide-y divide-border">
-                {syncBatches.slice(0, 5).map((batch) => (
-                  <li
-                    key={batch.batch_id}
-                    className="flex items-center justify-between py-2 text-sm"
-                  >
-                    <span className="text-secondary">{batch.ward_id}</span>
-
-                    <span
-                      className={`font-medium ${syncStatusColor(batch.status)}`}
-                    >
-                      {batch.status}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* ID card approvals */}
-            <div>
-              <h3 className="text-sm font-medium uppercase tracking-wide text-muted">
-                Recent ID Card Approvals
-              </h3>
-
-              <ul className="mt-2 divide-y divide-border">
-                {idCards
-                  .filter((card) => card.status === "APPROVED")
-                  .slice(0, 5)
-                  .map((card) => (
-                    <li key={card.id} className="py-2 text-sm text-secondary">
-                      {card.card_type} Card ({card.id})
-                    </li>
-                  ))}
-              </ul>
-            </div>
-          </div>
-        </Card>
+      <Section title="Quick Actions" subtitle="Frequently used Province tools" />
+      <div className="grid gap-3.5 sm:grid-cols-2 xl:grid-cols-4">
+        <Action href="/province/municipalities" title="Municipality Directory" desc="Review municipalities, local levels, wards, and reporting status." cta="Open Directory →" accent="navy" icon={<BuildingIcon />} />
+        <Action href="/province/analytics" title="Province Analytics" desc="Compare citizen registration, ID cards, and coverage trends." cta="Open Analytics →" accent="purple" icon={<ChartIcon />} />
+        <Action href="/province/reports" title="Province Reports" desc="Generate province-level population and service reports." cta="View Reports →" accent="orange" icon={<ReportIcon />} />
+        <Action href="/province/municipalities" title="Sync Monitoring" desc="Monitor municipality sync health and resolve conflicts." cta="Check Sync Status →" accent="red" icon={<SyncIcon />} />
       </div>
-    </div>
+
+      <Section title="Municipality Breakdown" subtitle="Live platform figures and sync health within this province" />
+      <Panel className="p-0"><div className="overflow-x-auto"><table className="w-full min-w-190 border-collapse text-[13px]"><thead><tr>{["Municipality", "Type", "Wards", "Citizens", "ID Cards Issued", "Sync Status"].map((head) => <th key={head} className="header-cell text-left">{head}</th>)}</tr></thead><tbody>{province.municipalities.map((municipality) => <tr key={municipality.id} className="hover:bg-[#FAFBFC]"><td className="table-cell font-bold">{municipality.name}</td><td className="table-cell text-[#667085]">{municipality.type}</td><td className="table-cell font-semibold">{municipality.wards}</td><td className="table-cell font-semibold">{number(municipality.citizens)}</td><td className="table-cell font-semibold">{number(municipality.id_cards_issued)}</td><td className="table-cell"><span className={`rounded-full px-2.5 py-1 text-[11px] font-bold ${municipality.sync_status === "SYNCED" ? "bg-[#E7F8EF] text-[#087443]" : municipality.sync_status === "CONFLICT" ? "bg-[#FDEDEC] text-[#C01F38]" : "bg-[#FEF3E2] text-[#B54708]"}`}>{municipality.sync_status}</span></td></tr>)}</tbody></table></div></Panel>
+
+      <footer className="mt-5 flex flex-wrap justify-between gap-2 border-t border-[#EAECF0] pt-4 text-[11.5px] text-[#98A2B3]"><span>{province.name_en} Province Portal · Data refreshed every 15 minutes</span><span>Analytical view only · No write access to citizen records</span></footer>
+    </main>
   );
 }
+
+function Section({ title, subtitle }: { title: string; subtitle: string }) { return <div className="mb-3 mt-7"><h2 className="flex items-center gap-2 text-lg font-bold text-[#101828]"><span className="h-2 w-2 rounded-sm bg-[#F0002E]" />{title}</h2><p className="mt-1 text-sm text-[#98A2B3]">{subtitle}</p></div>; }
+function Panel({ children, className = "" }: { children: React.ReactNode; className?: string }) { return <div className={`rounded-[10px] border border-[#DDE2EA] bg-white shadow-[0_1px_3px_rgba(16,24,40,0.08)] ${className}`}>{children}</div>; }
+function Metric({ label, value, foot, accent, icon }: { label: string; value: string | number; foot: string; accent: Accent; icon: React.ReactNode }) { const style = accentStyles[accent]; return <div className="relative min-h-38 overflow-hidden rounded-[10px] border border-[#DDE2EA] bg-white px-4.5 py-4.5 shadow-[0_2px_5px_rgba(16,24,40,0.10)]"><div className="absolute inset-x-0 top-0 h-0.75 rounded-t-[10px]" style={{ backgroundColor: style.line }} /><div className="flex items-start justify-between gap-2"><p className="max-w-32 text-[12px] font-semibold leading-[1.35] text-[#667085]">{label}</p><span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-lg font-bold" style={{ backgroundColor: style.iconBg, color: style.icon }}>{icon}</span></div><p className="mt-4 text-[29px] font-extrabold leading-none tracking-tight text-[#101828]">{value}</p><p className="mt-3.5 text-[11.5px] font-medium leading-4 text-[#98A2B3]">{foot}</p></div>; }
+function Action({ href, title, desc, cta, accent, icon }: { href: string; title: string; desc: string; cta: string; accent: Accent; icon: React.ReactNode }) { const style = accentStyles[accent]; return <Link href={href} className="flex min-h-43.5 flex-col rounded-[10px] border border-[#DDE2EA] bg-white p-4 shadow-[0_1px_3px_rgba(16,24,40,0.08)] transition hover:-translate-y-0.5 hover:shadow-md"><span className="flex h-9 w-9 items-center justify-center rounded-lg text-lg font-bold" style={{ backgroundColor: style.iconBg, color: style.icon }}>{icon}</span><p className="mt-3 text-[13.5px] font-bold text-[#101828]">{title}</p><p className="mt-2 text-[11.5px] leading-snug text-[#98A2B3]">{desc}</p><p className="mt-auto pt-4 text-[11.5px] font-bold text-[#F0002E]">{cta}</p></Link>; }
+function PersonIcon() { return <span aria-hidden="true">♙</span>; }
+function HomeIcon() { return <span aria-hidden="true">⌂</span>; }
+function CardIcon() { return <span aria-hidden="true">▣</span>; }
+function FlagIcon() { return <span aria-hidden="true">⚑</span>; }
+function BuildingIcon() { return <span aria-hidden="true">▥</span>; }
+function WardIcon() { return <span aria-hidden="true">▤</span>; }
+function CheckIcon() { return <span aria-hidden="true">✓</span>; }
+function ReportIcon() { return <span aria-hidden="true">▤</span>; }
+function SyncIcon() { return <span aria-hidden="true">↻</span>; }
+function DistrictIcon() { return <span aria-hidden="true">⌘</span>; }
+function MapIcon() { return <span aria-hidden="true">⌖</span>; }
+function ChartIcon() { return <span aria-hidden="true">▥</span>; }

@@ -17,9 +17,7 @@ import {
   ErrorOutlined,
   LocationOnOutlined,
 } from "@mui/icons-material";
-import { PortalSidebar } from "@/components/Sidebar";
 import { PortalStepper } from "@/components/Stepper";
-import { PortalHeader } from "@/components/ui";
 import {
   EDUCATION_ACTIVE_STATUSES,
   EDUCATION_COMPLETION_LABELS,
@@ -553,7 +551,7 @@ function BottomNavigation({
   submitting: boolean;
 }) {
   return (
-    <footer className="fixed bottom-0 left-[270px] right-0 z-30 flex h-[76px] items-center justify-between border-t border-[#E5E7EB] bg-white px-6 md:px-10">
+    <footer className="registration-footer sticky bottom-0 z-30 flex h-19 items-center justify-between border-t border-[#E5E7EB] bg-white px-4 sm:px-6 md:px-10">
       <button
         type="button"
         onClick={onBack}
@@ -602,22 +600,13 @@ export function EducationStep() {
     form.saveDraftNow();
     setSubmitting(true);
     window.setTimeout(() => {
-      router.push("/portal/photo");
+      router.push("/ward/dashboard/registercitizen/photo");
     }, 400);
-  };
-
-  const handleSaveExit = () => {
-    form.saveDraftNow();
-    router.push("/portal");
   };
 
   return (
     <div className="flex min-h-screen bg-[#F8FAFC]">
-      <PortalSidebar activeLabel="Education" onSaveExit={handleSaveExit} />
-
       <div className="flex min-w-0 flex-1 flex-col">
-        <PortalHeader />
-
         <main className="mx-auto w-full max-w-[1440px] flex-1 px-6 py-8 pb-40 md:px-10">
           <PortalStepper currentStep={7} />
 
@@ -630,7 +619,7 @@ export function EducationStep() {
                 />
                 <div className="min-w-0 flex-1">
                   <div className="flex items-start justify-between gap-4">
-                    <h2 className="font-poppins text-[22px] font-bold leading-tight tracking-tight text-[#0E3A8A]">
+                    <h2 className="registration-title font-poppins text-[22px] font-bold leading-tight tracking-tight text-[#0E3A8A]">
                       Education Information
                     </h2>
                     <DraftStatus status={form.saveStatus} />
@@ -685,7 +674,7 @@ export function EducationStep() {
         </main>
 
         <BottomNavigation
-          onBack={() => router.push("/portal/disability")}
+          onBack={() => router.push("/ward/dashboard/registercitizen/disability")}
           onNext={handleNext}
           submitting={submitting}
         />

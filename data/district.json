@@ -1,16 +1,142 @@
- [
-  { "id": "dist-01", "province_id": "prov-1", "name_np": "ताप्लेजुङ", "name_en": "Taplejung" },
-  { "id": "dist-02", "province_id": "prov-1", "name_np": "पाँचथर", "name_en": "Panchthar" },
-  { "id": "dist-03", "province_id": "prov-1", "name_np": "इलाम", "name_en": "Ilam" },
-  { "id": "dist-04", "province_id": "prov-1", "name_np": "झापा", "name_en": "Jhapa" },
-  { "id": "dist-05", "province_id": "prov-1", "name_np": "मोरङ", "name_en": "Morang" },
-  { "id": "dist-06", "province_id": "prov-1", "name_np": "सुनसरी", "name_en": "Sunsari" },
-  { "id": "dist-07", "province_id": "prov-1", "name_np": "धनकुटा", "name_en": "Dhankuta" },
-  { "id": "dist-08", "province_id": "prov-1", "name_np": "तेह्रथुम", "name_en": "Terhathum" },
-  { "id": "dist-09", "province_id": "prov-1", "name_np": "सङ्खुवासभा", "name_en": "Sankhuwasabha" },
-  { "id": "dist-10", "province_id": "prov-1", "name_np": "भोजपुर", "name_en": "Bhojpur" },
-  { "id": "dist-11", "province_id": "prov-1", "name_np": "सोलुखुम्बु", "name_en": "Solukhumbu" },
-  { "id": "dist-12", "province_id": "prov-1", "name_np": "ओखलढुङ्गा", "name_en": "Okhaldhunga" },
-  { "id": "dist-13", "province_id": "prov-1", "name_np": "खोटाङ", "name_en": "Khotang" },
-  { "id": "dist-14", "province_id": "prov-1", "name_np": "उदयपुर", "name_en": "Udayapur" }
-]   
+[
+  {
+    "id": "dist-01",
+    "province_id": "prov-1",
+    "name_np": "ताप्लेजुङ",
+    "name_en": "Taplejung",
+    "headquarters": "Phungling"
+  },
+  {
+    "id": "dist-02",
+    "province_id": "prov-1",
+    "name_np": "पाँचथर",
+    "name_en": "Panchthar",
+    "headquarters": "Phidim"
+  },
+  {
+    "id": "dist-03",
+    "province_id": "prov-1",
+    "name_np": "इलाम",
+    "name_en": "Ilam",
+    "headquarters": "Ilam"
+  },
+  {
+    "id": "dist-04",
+    "province_id": "prov-1",
+    "name_np": "झापा",
+    "name_en": "Jhapa",
+    "headquarters": "Bhadrapur"
+  },
+  {
+    "id": "dist-05",
+    "province_id": "prov-1",
+    "name_np": "मोरङ",
+    "name_en": "Morang",
+    "headquarters": "Biratnagar"
+  },
+  {
+    "id": "dist-06",
+    "province_id": "prov-1",
+    "name_np": "सुनसरी",
+    "name_en": "Sunsari",
+    "headquarters": "Inaruwa"
+  },
+  {
+    "id": "dist-07",
+    "province_id": "prov-1",
+    "name_np": "धनकुटा",
+    "name_en": "Dhankuta",
+    "headquarters": "Dhankuta"
+  },
+  {
+    "id": "dist-08",
+    "province_id": "prov-1",
+    "name_np": "तेह्रथुम",
+    "name_en": "Terhathum",
+    "headquarters": "Myanglung"
+  },
+  {
+    "id": "dist-09",
+    "province_id": "prov-1",
+    "name_np": "सङ्खुवासभा",
+    "name_en": "Sankhuwasabha",
+    "headquarters": "Khandbari"
+  },
+  {
+    "id": "dist-10",
+    "province_id": "prov-1",
+    "name_np": "भोजपुर",
+    "name_en": "Bhojpur",
+    "headquarters": "Bhojpur"
+  },
+  {
+    "id": "dist-11",
+    "province_id": "prov-1",
+    "name_np": "सोलुखुम्बु",
+    "name_en": "Solukhumbu",
+    "headquarters": "Salleri"
+  },
+  {
+    "id": "dist-12",
+    "province_id": "prov-1",
+    "name_np": "ओखलढुङ्गा",
+    "name_en": "Okhaldhunga",
+    "headquarters": "Siddhicharan"
+  },
+  {
+    "id": "dist-13",
+    "province_id": "prov-1",
+    "name_np": "खोटाङ",
+    "name_en": "Khotang",
+    "headquarters": "Diktel"
+  },
+  {
+    "id": "dist-14",
+    "province_id": "prov-1",
+    "name_np": "उदयपुर",
+    "name_en": "Udayapur",
+    "headquarters": "Gaighat"
+  },
+  {
+    "id": "dist-15",
+    "province_id": "prov-2",
+    "name_np": "Dhanusha",
+    "name_en": "Dhanusha",
+    "headquarters": "Janakpur"
+  },
+  {
+    "id": "dist-16",
+    "province_id": "prov-3",
+    "name_np": "Kathmandu",
+    "name_en": "Kathmandu",
+    "headquarters": "Kathmandu"
+  },
+  {
+    "id": "dist-17",
+    "province_id": "prov-4",
+    "name_np": "Kaski",
+    "name_en": "Kaski",
+    "headquarters": "Pokhara"
+  },
+  {
+    "id": "dist-18",
+    "province_id": "prov-5",
+    "name_np": "Rupandehi",
+    "name_en": "Rupandehi",
+    "headquarters": "Bhairahawa"
+  },
+  {
+    "id": "dist-19",
+    "province_id": "prov-6",
+    "name_np": "Surkhet",
+    "name_en": "Surkhet",
+    "headquarters": "Birendranagar"
+  },
+  {
+    "id": "dist-20",
+    "province_id": "prov-7",
+    "name_np": "Kailali",
+    "name_en": "Kailali",
+    "headquarters": "Dhangadhi"
+  }
+]
