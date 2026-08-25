@@ -10,7 +10,7 @@ import provinces from "../../../../data/provinces.json";
 import syncBatches from "../../../../data/sync-batches.json";
 import wards from "../../../../data/wards.json";
 import Link from "next/link";
-import { useEffect, useMemo, useSyncExternalStore } from "react";
+import { useState, useEffect, useMemo, useSyncExternalStore } from "react";
 import { useMapSelection } from "@/contexts/MapSelectionContext";
 import { getCurrentSession } from "@/services/auth.service";
 
@@ -120,6 +120,7 @@ function subscribeToApprovalStorage(onStoreChange: () => void) {
   return () => window.removeEventListener("storage", onStoreChange);
 }
 
+
 export default function MunicipalityDashboardPage() {
   const { selectLocalBody } = useMapSelection();
   const session = getCurrentSession();
@@ -181,12 +182,12 @@ export default function MunicipalityDashboardPage() {
     approvedWithDates.length === 0
       ? "N/A"
       : (
-          approvedWithDates.reduce(
-            (total, approval) =>
-              total + getDaysBetween(approval.submitted_at, approval.approved_at!),
-            0,
-          ) / approvedWithDates.length
-        ).toFixed(1);
+        approvedWithDates.reduce(
+          (total, approval) =>
+            total + getDaysBetween(approval.submitted_at, approval.approved_at!),
+          0,
+        ) / approvedWithDates.length
+      ).toFixed(1);
   const rejectionsThisMonth = approvals.filter(
     (approval) =>
       approval.status === "REJECTED" && isThisMonth(approval.rejected_at),
@@ -322,6 +323,8 @@ export default function MunicipalityDashboardPage() {
       status,
     }
   })
+
+  const [visibleCount, setVisibleCount] = useState(10)
   const conflictAlerts =
     syncHealth.filter(
 
@@ -369,303 +372,1112 @@ export default function MunicipalityDashboardPage() {
     );
 
   return (
+    <main className="min-h-screen bg-[#f5f7fb] p-4 sm:p-6 lg:p-8">
 
+     
 
-    <main className="p-6">
-      <h1 className="text-2xl font-semibold text-black">
-        Municipality Dashboard
-      </h1>
-      <p className="mt-1 text-sm text-black">
-        Overview of citizens, approvals, sync conflicts and grievances.
-      </p>
-      <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {stats.map((stat) => (
-          <div
-            key={stat.title}
-            className="rounded-lg border border-gray-200 bg-white p-5"
-          >
-            <p className="text-sm text-gray-500">{stat.title}</p>
+      <div className="mb-6 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
 
-            <p className="mt-2 text-2xl font-semibold text-gray-900">
-              {stat.value}
-            </p>
+        <div>
+          <div className="mb-1 flex items-center gap-2">
+            <span
+              className="h-2 w-2 rounded-full"
+              style={{ backgroundColor: "var(--primary)" }}
+            />
+
+            <span
+              className="text-xs font-semibold uppercase tracking-[0.15em]"
+              style={{ color: "var(--primary)" }}
+            >
+              Municipality Portal
+            </span>
           </div>
-        ))}
+
+          <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
+            Municipality Dashboard
+          </h1>
+
+          <p className="mt-1 text-sm text-gray-500">
+            Overview of citizens, approvals, ward synchronization and
+            grievances.
+          </p>
+
+          {mapDetails && (
+            <div className="mt-2 flex flex-wrap items-center gap-2 text-xs text-gray-500">
+              <span>{mapDetails.municipalityName}</span>
+              <span className="text-gray-300">•</span>
+              <span>{mapDetails.districtName}</span>
+              <span className="text-gray-300">•</span>
+              <span>{mapDetails.provinceLabel}</span>
+            </div>
+          )}
+        </div>
+
+        <div className="flex flex-wrap gap-2">
+
+          <Link
+            href="/municipality/reports"
+            className="inline-flex items-center gap-2 rounded-lg border bg-white px-4 py-2.5 text-sm font-semibold text-gray-700 shadow-sm transition hover:bg-gray-50"
+            style={{ borderColor: "var(--border)" }}
+          >
+            <svg
+              className="h-4 w-4"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+            >
+              <path d="M4 19V5" />
+              <path d="M4 19h16" />
+              <path d="M8 16v-5" />
+              <path d="M12 16V8" />
+              <path d="M16 16v-3" />
+            </svg>
+
+            Reports
+          </Link>
+
+          <button
+            type="button"
+            onClick={() => window.location.reload()}
+            className="inline-flex items-center gap-2 rounded-lg px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:opacity-90"
+            style={{ backgroundColor: "var(--primary)" }}
+          >
+            <svg
+              className="h-4 w-4"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+            >
+              <path d="M20 11a8.1 8.1 0 0 0-15.5-2" />
+              <path d="M4 4v5h5" />
+              <path d="M4 13a8.1 8.1 0 0 0 15.5 2" />
+              <path d="M20 20v-5h-5" />
+            </svg>
+
+            Refresh
+          </button>
+
+        </div>
       </div>
 
-      {mapDetails && (
-        <section className="mt-6 rounded-lg border border-gray-200 bg-white p-5">
-          <div className="mb-4">
+
+      
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
+
+       
+
+        <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md">
+
+          <div className="flex items-start justify-between">
+
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-wide text-gray-500">
+                Total Citizens
+              </p>
+
+              <p className="mt-2 text-3xl font-bold text-gray-900">
+                {totalCitizens.toLocaleString()}
+              </p>
+
+              <p className="mt-2 text-xs text-gray-500">
+                Registered citizen records
+              </p>
+            </div>
+
+            <div
+              className="flex h-11 w-11 items-center justify-center rounded-xl"
+              style={{
+                backgroundColor: "rgba(15,45,109,0.08)",
+                color: "var(--primary)",
+              }}
+            >
+              <svg
+                className="h-5 w-5"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+              >
+                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                <circle cx="9" cy="7" r="4" />
+                <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+              </svg>
+            </div>
+
+          </div>
+        </div>
+
+
+       
+
+        <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md">
+
+          <div className="flex items-start justify-between">
+
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-wide text-gray-500">
+                Pending Approvals
+              </p>
+
+              <p className="mt-2 text-3xl font-bold text-gray-900">
+                {pendingApprovals}
+              </p>
+
+              <p className="mt-2 text-xs text-amber-600">
+                Requires administrative review
+              </p>
+            </div>
+
+            <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-amber-50 text-amber-600">
+              <svg
+                className="h-5 w-5"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+              >
+                <circle cx="12" cy="12" r="9" />
+                <path d="M12 7v5l3 2" />
+              </svg>
+            </div>
+
+          </div>
+        </div>
+
+
+       
+        <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md">
+
+          <div className="flex items-start justify-between">
+
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-wide text-gray-500">
+                Sync Conflicts
+              </p>
+
+              <p className="mt-2 text-3xl font-bold text-gray-900">
+                {syncConflicts}
+              </p>
+
+              <p
+                className={`mt-2 text-xs ${syncConflicts > 0
+                    ? "text-red-600"
+                    : "text-green-600"
+                  }`}
+              >
+                {syncConflicts > 0
+                  ? "Needs attention"
+                  : "No unresolved conflicts"}
+              </p>
+            </div>
+
+            <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-red-50 text-red-600">
+              <svg
+                className="h-5 w-5"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+              >
+                <path d="M10.3 3.2L2.4 17a2 2 0 0 0 1.7 3h15.8a2 2 0 0 0 1.7-3L13.7 3.2a2 2 0 0 0-3.4 0Z" />
+                <path d="M12 9v4" />
+                <path d="M12 17h.01" />
+              </svg>
+            </div>
+
+          </div>
+        </div>
+
+
+      
+
+        <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md">
+
+          <div className="flex items-start justify-between">
+
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-wide text-gray-500">
+                Active Grievances
+              </p>
+
+              <p className="mt-2 text-3xl font-bold text-gray-900">
+                {activeGrievances}
+              </p>
+
+              <p className="mt-2 text-xs text-blue-600">
+                Open citizen issues
+              </p>
+            </div>
+
+            <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-blue-50 text-blue-600">
+              <svg
+                className="h-5 w-5"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+              >
+                <path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4v8Z" />
+              </svg>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+
+     
+
+      <div className="mt-6 grid grid-cols-1 gap-6 xl:grid-cols-[minmax(0,2fr)_minmax(320px,1fr)]">
+
+      
+
+        {mapDetails && (
+          <section className="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
+
+            <div className="flex items-center justify-between border-b border-gray-100 px-5 py-4">
+
+              <div>
+                <h2 className="text-lg font-semibold text-gray-900">
+                  Municipality Map
+                </h2>
+
+                <p className="mt-1 text-xs text-gray-500">
+                  Administrative boundary and local body location
+                </p>
+              </div>
+
+              <span
+                className="rounded-full px-3 py-1 text-xs font-semibold"
+                style={{
+                  backgroundColor: "rgba(15,45,109,0.08)",
+                  color: "var(--primary)",
+                }}
+              >
+                GIS
+              </span>
+
+            </div>
+
+            <div className="h-[430px] w-full p-3">
+              <div className="h-full w-full overflow-hidden rounded-lg">
+                <LeafletMap
+                  center={[27.7, 85.3]}
+                  zoom={10}
+                  height="100%"
+                  minimumLevel="localBody"
+                />
+              </div>
+            </div>
+
+          </section>
+        )}
+
+
+      
+
+        <section className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
+
+          <div className="flex items-start justify-between">
+
+            <div>
+              <h2 className="text-lg font-semibold text-gray-900">
+                System Health
+              </h2>
+
+              <p className="mt-1 text-xs text-gray-500">
+                Current ward synchronization status
+              </p>
+            </div>
+
+            <span className="flex items-center gap-1.5 text-xs font-semibold text-green-600">
+              <span className="h-2 w-2 rounded-full bg-green-500" />
+              Live
+            </span>
+
+          </div>
+
+          {(() => {
+            const healthy = syncHealth.filter(
+              (ward) => ward.status === "HEALTHY"
+            ).length;
+
+            const critical = syncHealth.filter(
+              (ward) => ward.status === "CRITICAL"
+            ).length;
+
+            const noData = syncHealth.filter(
+              (ward) => ward.status === "NO DATA"
+            ).length;
+
+            const total = syncHealth.length;
+
+            return (
+              <>
+                <div className="mt-6 flex items-center gap-5">
+
+                  <div
+                    className="flex h-28 w-28 shrink-0 items-center justify-center rounded-full"
+                    style={{
+                      background: `conic-gradient(
+                      #16a34a ${total
+                          ? (healthy / total) * 360
+                          : 0
+                        }deg,
+                      #f3f4f6 0deg
+                    )`,
+                    }}
+                  >
+                    <div className="flex h-20 w-20 flex-col items-center justify-center rounded-full bg-white">
+                      <span className="text-2xl font-bold text-gray-900">
+                        {healthy}
+                      </span>
+
+                      <span className="text-[10px] text-gray-500">
+                        Healthy
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="min-w-0 flex-1">
+
+                    <div className="flex items-center justify-between border-b border-gray-100 py-2">
+                      <span className="text-sm text-gray-600">
+                        Total wards
+                      </span>
+
+                      <span className="font-semibold text-gray-900">
+                        {total}
+                      </span>
+                    </div>
+
+                    <div className="flex items-center justify-between border-b border-gray-100 py-2">
+                      <span className="flex items-center gap-2 text-sm text-gray-600">
+                        <span className="h-2 w-2 rounded-full bg-green-500" />
+                        Healthy
+                      </span>
+
+                      <span className="font-semibold text-green-600">
+                        {healthy}
+                      </span>
+                    </div>
+
+                    <div className="flex items-center justify-between border-b border-gray-100 py-2">
+                      <span className="flex items-center gap-2 text-sm text-gray-600">
+                        <span className="h-2 w-2 rounded-full bg-red-500" />
+                        Critical
+                      </span>
+
+                      <span className="font-semibold text-red-600">
+                        {critical}
+                      </span>
+                    </div>
+
+                    <div className="flex items-center justify-between py-2">
+                      <span className="flex items-center gap-2 text-sm text-gray-600">
+                        <span className="h-2 w-2 rounded-full bg-gray-400" />
+                        No data
+                      </span>
+
+                      <span className="font-semibold text-gray-600">
+                        {noData}
+                      </span>
+                    </div>
+
+                  </div>
+
+                </div>
+
+                <Link
+                  // href={`/municipality/dashboard/sync-history/${ward.id}`}
+                  href="/municipality/dashboard/sync-history"
+             
+                  className="mt-6 flex w-full items-center justify-center rounded-lg border px-4 py-2.5 text-sm font-semibold transition hover:bg-gray-50"
+                  style={{
+                    borderColor: "var(--border)",
+                    color: "var(--primary)",
+                  }}
+                >
+                  View Sync History
+                </Link>
+              </>
+            );
+          })()}
+
+        </section>
+
+      </div>
+
+
+      
+
+      <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-2">
+
+
+        <section className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
+
+          <div className="mb-5">
             <h2 className="text-lg font-semibold text-gray-900">
-              {mapDetails.municipalityName} Map
+              Approval Analytics
             </h2>
-            <p className="text-sm text-gray-600">
-              Administrative boundary of {mapDetails.municipalityName}.
+
+            <p className="mt-1 text-xs text-gray-500">
+              Performance of citizen data edit approvals
             </p>
           </div>
 
-          <div className="h-[500px] w-full overflow-hidden rounded-xl">
-            <LeafletMap
-              center={[27.7, 85.3]}
-              zoom={10}
-              height="100%"
-              minimumLevel="localBody"
-            />
-          </div>
-        </section>
-      )}
+          <div className="grid grid-cols-3 divide-x divide-gray-100">
 
-      <section className="mt-6 rounded-lg border border-gray-200 bg-white p-5">
-        <h2 className="text-lg font-semibold text-gray-900">Approval Analytics</h2>
-        <div className="mt-4 grid gap-4 sm:grid-cols-3">
-          {analytics.map((item) => (
-            <div key={item.title} className="rounded-md border border-gray-100 p-4">
-              <p className="text-sm text-gray-500">{item.title}</p>
-              <p className="mt-2 text-2xl font-semibold text-gray-900">
-                {item.value}
+            {analytics.map((item) => (
+              <div
+                key={item.title}
+                className="px-4 first:pl-0 last:pr-0"
+              >
+                <p className="text-xs leading-5 text-gray-500">
+                  {item.title}
+                </p>
+
+                <p className="mt-2 text-2xl font-bold text-gray-900">
+                  {item.value}
+                </p>
+              </div>
+            ))}
+
+          </div>
+
+          <div className="mt-6 rounded-lg bg-gray-50 p-4">
+
+            <div className="mb-2 flex items-center justify-between">
+              <span className="text-xs font-medium text-gray-500">
+                Approval performance
+              </span>
+
+              <span
+                className="text-sm font-bold"
+                style={{ color: "var(--primary)" }}
+              >
+                {approvalRate}%
+              </span>
+            </div>
+
+            <div className="h-2 overflow-hidden rounded-full bg-gray-200">
+              <div
+                className="h-full rounded-full transition-all"
+                style={{
+                  width: `${approvalRate}%`,
+                  backgroundColor: "var(--primary)",
+                }}
+              />
+            </div>
+
+          </div>
+
+        </section>
+
+
+    
+
+        <section className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
+
+          <div className="mb-4 flex items-center justify-between">
+
+            <div>
+              <h2 className="text-lg font-semibold text-gray-900">
+                Monthly Approval Trend
+              </h2>
+
+              <p className="mt-1 text-xs text-gray-500">
+                Approved requests by week
               </p>
             </div>
-          ))}
-        </div>
-      </section>
 
-      <section className="mt-6 rounded-lg border border-gray-200 bg-white p-5">
-        <h2 className="text-lg font-semibold text-gray-900">
-          Monthly Approval Trend
-        </h2>
-        <div className="mt-4 flex h-44 items-end gap-4 border-b border-gray-200">
-          {approvalTrend.map((item) => (
-            <div key={item.week} className="flex flex-1 flex-col items-center gap-2">
+            <span
+              className="rounded-md px-2.5 py-1 text-xs font-medium"
+              style={{
+                backgroundColor: "rgba(15,45,109,0.08)",
+                color: "var(--primary)",
+              }}
+            >
+              This month
+            </span>
+
+          </div>
+
+          <div className="mt-6 flex h-44 items-end gap-3 border-b border-gray-100">
+
+            {approvalTrend.map((item) => (
               <div
-                className="w-full rounded-t bg-blue-600"
-                style={{ height: `${(item.count / maxTrendCount) * 140}px` }}
-                title={`${item.count} approvals`}
-              />
-              <span className="pb-2 text-xs text-gray-600">Week {item.week}</span>
-            </div>
-          ))}
-        </div>
-      </section>
+                key={item.week}
+                className="group flex h-full flex-1 flex-col items-center justify-end gap-2"
+              >
 
-      <section className="mt-6 rounded-lg border border-gray-200 bg-white p-5">
-        <h2 className="mb-4 text-lg font-semibold text-gray-900">
-          Ward Performance
-        </h2>
+                <span className="text-xs font-medium text-gray-500 opacity-0 transition group-hover:opacity-100">
+                  {item.count}
+                </span>
+
+                <div
+                  className="w-full max-w-[55px] rounded-t-md transition-all hover:opacity-80"
+                  style={{
+                    height: `${Math.max(
+                      (item.count / maxTrendCount) * 130,
+                      6
+                    )}px`,
+                    backgroundColor: "var(--primary)",
+                  }}
+                  title={`${item.count} approvals`}
+                />
+
+                <span className="pb-2 text-[11px] text-gray-500">
+                  W{item.week}
+                </span>
+
+              </div>
+            ))}
+
+          </div>
+
+        </section>
+
+      </div>
+
+
+     
+
+      <section className="mt-6 overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
+
+        <div className="flex flex-col gap-3 border-b border-gray-100 px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
+
+          <div>
+            <h2 className="text-lg font-semibold text-gray-900">
+              Ward Performance
+            </h2>
+
+            <p className="mt-1 text-xs text-gray-500">
+              Citizen registration, approvals and synchronization by ward
+            </p>
+          </div>
+
+          <Link
+            href="/municipality/dashboard/wards"
+            className="text-sm font-semibold hover:underline"
+            style={{ color: "var(--primary)" }}
+          >
+            View all wards →
+          </Link>
+
+        </div>
+
         <div className="overflow-x-auto">
-          <table className="w-full table-auto border-collapse border border-gray-200">
+
+          <table className="w-full min-w-[760px]">
+
             <thead>
-              <tr>
-                <th className="border border-gray-200 px-4 py-2 text-left text-sm font-semibold text-gray-900">
+              <tr className="border-b border-gray-100 bg-gray-50">
+
+                <th className="px-5 py-3 text-left text-[11px] font-semibold uppercase tracking-wide text-gray-500">
                   Ward
                 </th>
-                <th className="border border-gray-200 px-4 py-2 text-left text-sm font-semibold text-gray-900">
-                  Citizens Registered
+
+                <th className="px-5 py-3 text-right text-[11px] font-semibold uppercase tracking-wide text-gray-500">
+                  Citizens
                 </th>
-                <th className="border border-gray-200 px-4 py-2 text-left text-sm font-semibold text-gray-900">
-                  Pending Approvals
+
+                <th className="px-5 py-3 text-right text-[11px] font-semibold uppercase tracking-wide text-gray-500">
+                  Pending
                 </th>
-                <th className="border border-gray-200 px-4 py-2 text-left text-sm font-semibold text-gray-900">
-                  Approval Rate
+
+                <th className="px-5 py-3 text-right text-[11px] font-semibold uppercase tracking-wide text-gray-500">
+                  Approval
                 </th>
-                <th className="border border-gray-200 px-4 py-2 text-left text-sm font-semibold text-gray-900">
+
+                <th className="px-5 py-3 text-right text-[11px] font-semibold uppercase tracking-wide text-gray-500">
                   Last Sync
                 </th>
+
               </tr>
             </thead>
+
             <tbody>
-              {wardPerformance.map((ward) => (
-                <tr key={ward.wardId} className="hover:bg-gray-100">
-                  <td className="border p-2">{ward.wardName}</td>
-                  <td className="border p-2">{ward.citizensRegistered}</td>
-                  <td className="border p-2">{ward.pendingApprovals}</td>
-                  <td className="border p-2">{ward.approvalRate}%</td>
-                  <td className="border p-2">{ward.lastSync}</td>
-                </tr>
-              ))}
+
+              {wardPerformance
+                .slice(0, 8)
+                .map((ward) => (
+                  <tr
+                    key={ward.wardId}
+                    className="border-b border-gray-100 transition hover:bg-gray-50"
+                  >
+
+                    <td className="px-5 py-3.5">
+                      <Link
+                        href={`/municipality/dashboard/wards/${ward.wardId}`}
+                        className="text-sm font-semibold hover:underline"
+                        style={{ color: "var(--primary)" }}
+                      >
+                        {ward.wardName}
+                      </Link>
+                    </td>
+
+                    <td className="px-5 py-3.5 text-right text-sm font-medium text-gray-900">
+                      {ward.citizensRegistered.toLocaleString()}
+                    </td>
+
+                    <td className="px-5 py-3.5 text-right text-sm text-gray-600">
+                      {ward.pendingApprovals}
+                    </td>
+
+                    <td className="px-5 py-3.5 text-right">
+
+                      <span
+                        className={`inline-flex rounded-full px-2.5 py-1 text-xs font-semibold ${ward.approvalRate >= 80
+                            ? "bg-green-50 text-green-700"
+                            : ward.approvalRate >= 50
+                              ? "bg-amber-50 text-amber-700"
+                              : "bg-red-50 text-red-700"
+                          }`}
+                      >
+                        {ward.approvalRate}%
+                      </span>
+
+                    </td>
+
+                    <td className="px-5 py-3.5 text-right text-xs text-gray-500">
+                      {ward.lastSync}
+                    </td>
+
+                  </tr>
+                ))}
+
             </tbody>
+
           </table>
+
         </div>
+
       </section>
-      <section className="mt-8 rounded-lg border border-gray-200 bg-white p-5">
-        <div className="mb-4">
-          <h2 className="text-lg font-semibold text-gray-900">
-            Recent Approval Activity
-          </h2>
-          <p className="text-sm text-gray-600">
-            Latest citizen data edit requests from ward offices.
-          </p>
-        </div>
-        <div className="space-y-3">
-          {recentApprovalActions.map((approval) => (
-            <div
-              key={approval.id}
-              className="flex items-center justify-between rounded-md border border-gray-100 p-3"
-            >
-              <div>
-                <p className="font-medium text-gray-900">
-                  {approval.citizenName}
-                </p>
-                <p className="text-sm text-gray-600">
-                  Changed field: {approval.changedFields.join(", ")}
-                </p>
-              </div>
-              <span className="rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-700">
-                {approval.status}
-              </span>
+
+
+     
+
+      <div className="mt-6 grid grid-cols-1 gap-6 xl:grid-cols-2">
+
+       
+
+        <section className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
+
+          <div className="mb-5 flex items-center justify-between">
+
+            <div>
+              <h2 className="text-lg font-semibold text-gray-900">
+                Recent Approval Activity
+              </h2>
+
+              <p className="mt-1 text-xs text-gray-500">
+                Latest citizen data edit requests
+              </p>
             </div>
-          ))}
-        </div>
-      </section>
-      <section className="mt-6 rounded-lg border border-gray-200 bg-white p-5">
-        <div className="mb-4">
-          <h2 className="text-lg font-semibold text-gray-900">
-            Recent Sync Batches
-          </h2>
 
-          <p className="text-sm text-gray-600">
-            Latest offline sync activity submitted from ward offices.
-          </p>
-        </div>
-
-        <div className="space-y-3">
-          {recentSyncBatches.map((batch) => (
-            <div
-              key={batch.id}
-              className="flex items-center justify-between rounded-md border border-gray-100 p-3"
+            <Link
+              href="/municipality/approvals"
+              className="text-xs font-semibold hover:underline"
+              style={{ color: "var(--primary)" }}
             >
-              <div>
-                <p className="font-medium text-gray-900">{batch.wardName}</p>
+              View all
+            </Link>
 
-                <p className="text-sm text-gray-600">
-                  {batch.recordCount} records · {batch.conflictCount} conflicts
-                </p>
-              </div>
+          </div>
 
-              <span className="rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-700">
-                {batch.status}
-              </span>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section className="mt-6 rounded-lg border  border-red-200  bg-red-50  p-5"   >
-        <h2
-          className=" mb-4 text-lg font-semibold  text-red-700">
-          Conflict Alerts
-        </h2>
-
-        {conflictAlerts.length === 0 ? (
-          <p>No unresolved conflicts</p>
-        ) : (
           <div className="space-y-3">
+
+            {recentApprovalActions.map((approval) => (
+
+              <div
+                key={approval.id}
+                className="flex items-center gap-3 rounded-lg border border-gray-100 p-3 transition hover:bg-gray-50"
+              >
+
+                <div
+                  className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-xs font-bold"
+                  style={{
+                    backgroundColor: "rgba(15,45,109,0.08)",
+                    color: "var(--primary)",
+                  }}
+                >
+                  {approval.citizenName
+                    .charAt(0)
+                    .toUpperCase()}
+                </div>
+
+                <div className="min-w-0 flex-1">
+
+                  <p className="truncate text-sm font-semibold text-gray-900">
+                    {approval.citizenName}
+                  </p>
+
+                  <p className="mt-0.5 truncate text-xs text-gray-500">
+                    Changed: {approval.changedFields.join(", ")}
+                  </p>
+
+                </div>
+
+                <span
+                  className={`shrink-0 rounded-full px-2.5 py-1 text-[10px] font-semibold ${approval.status === "APPROVED"
+                      ? "bg-green-50 text-green-700"
+                      : approval.status === "REJECTED"
+                        ? "bg-red-50 text-red-700"
+                        : "bg-amber-50 text-amber-700"
+                    }`}
+                >
+                  {approval.status.replaceAll("_", " ")}
+                </span>
+
+              </div>
+
+            ))}
+
+          </div>
+
+        </section>
+
+
+     
+        <section className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
+
+          <div className="mb-5 flex items-center justify-between">
+
+            <div>
+              <h2 className="text-lg font-semibold text-gray-900">
+                Recent Sync Activity
+              </h2>
+
+              <p className="mt-1 text-xs text-gray-500">
+                Latest synchronization from ward offices
+              </p>
+            </div>
+
+            <Link
+              href="/municipality/dashboard/sync-history"
+              className="text-xs font-semibold hover:underline"
+              style={{ color: "var(--primary)" }}
+            >
+              View all
+            </Link>
+
+          </div>
+
+          <div className="space-y-3">
+
+            {recentSyncBatches.map((batch) => (
+
+              <div
+                key={batch.id}
+                className="flex items-center gap-3 rounded-lg border border-gray-100 p-3 transition hover:bg-gray-50"
+              >
+
+                <div
+                  className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg"
+                  style={{
+                    backgroundColor:
+                      batch.conflictCount > 0
+                        ? "rgba(220,38,38,0.08)"
+                        : "rgba(22,163,74,0.08)",
+                    color:
+                      batch.conflictCount > 0
+                        ? "#dc2626"
+                        : "#16a34a",
+                  }}
+                >
+                  {batch.conflictCount > 0 ? "!" : "✓"}
+                </div>
+
+                <div className="min-w-0 flex-1">
+
+                  <p className="truncate text-sm font-semibold text-gray-900">
+                    {batch.wardName}
+                  </p>
+
+                  <p className="mt-0.5 text-xs text-gray-500">
+                    {batch.recordCount} records
+                    {" · "}
+                    {batch.conflictCount} conflicts
+                  </p>
+
+                </div>
+
+                <span
+                  className={`shrink-0 rounded-full px-2.5 py-1 text-[10px] font-semibold ${batch.conflictCount > 0
+                      ? "bg-red-50 text-red-700"
+                      : "bg-green-50 text-green-700"
+                    }`}
+                >
+                  {batch.status.replaceAll("_", " ")}
+                </span>
+
+              </div>
+
+            ))}
+
+          </div>
+
+        </section>
+
+      </div>
+
+
+
+      {conflictAlerts.length > 0 && (
+
+        <section className="mt-6 overflow-hidden rounded-xl border border-red-200 bg-white shadow-sm">
+
+          <div className="border-b border-red-100 bg-red-50 px-5 py-4">
+
+            <div className="flex items-center gap-3">
+
+              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-red-100 text-red-600">
+                ⚠
+              </div>
+
+              <div>
+                <h2 className="text-lg font-semibold text-red-800">
+                  Conflict Alerts
+                </h2>
+
+                <p className="mt-0.5 text-xs text-red-600">
+                  {conflictAlerts.length} ward
+                  {conflictAlerts.length === 1 ? "" : "s"} require attention
+                </p>
+              </div>
+
+            </div>
+
+          </div>
+
+          <div className="space-y-2 p-4">
+
             {conflictAlerts.map((ward) => (
+
               <div
                 key={ward.wardId}
-                className=" flex items-center justify-between rounded border  bg-white  p-3">
+                className="flex flex-col gap-3 rounded-lg border border-red-100 bg-red-50/40 p-4 sm:flex-row sm:items-center sm:justify-between"
+              >
+
                 <div>
-                  <p className="font-medium">
-                    ⚠ {ward.wardName}
+
+                  <p className="text-sm font-semibold text-gray-900">
+                    {ward.wardName}
                   </p>
 
-                  <p className="text-sm text-gray-600">
-                    {ward.conflictCount} unresolved conflicts
+                  <p className="mt-1 text-xs text-gray-600">
+                    {ward.conflictCount} unresolved conflict
+                    {ward.conflictCount === 1 ? "" : "s"}
                   </p>
+
                 </div>
 
                 <Link
                   href={`/municipality/dashboard/conflicts/${ward.wardId}`}
-                  className="text-blue-600 hover:underline"
+                  className="inline-flex w-fit items-center rounded-lg bg-red-600 px-4 py-2 text-xs font-semibold text-white transition hover:bg-red-700"
                 >
-                  Resolve
+                  Resolve Conflict
                 </Link>
+
               </div>
+
             ))}
+
           </div>
-        )}
-      </section>
 
-      <section className="mt-6 rounded-lg border border-gray-200 bg-white p-5">
-        <h2 className="mb-4 text-lg font-semibold">Sync Health by Ward</h2>
-        <table className="w-full table-auto border-collapse border border-gray-200">
-          <thead>
-            <tr>
-              <th className="border border-gray-200 px-4 py-2 text-left text-sm font-semibold text-gray-900">
-                Ward
-              </th>
-              <th className="border border-gray-200 px-4 py-2 text-left text-sm font-semibold text-gray-900">
-                Last Sync
-              </th>
-              <th className="border border-gray-200 px-4 py-2 text-left text-sm font-semibold text-gray-900">
-                Pending Records
-              </th>
-              <th className="border border-gray-200 px-4 py-2 text-left text-sm font-semibold text-gray-900">
-                Conflicts
-              </th>
-              <th className="border border-gray-200 px-4 py-2 text-left text-sm font-semibold text-gray-900">
-                Status
-              </th>
-            </tr>
-          </thead>
+        </section>
 
-          <tbody>
-            {syncHealth.map((ward) => (
-              <tr
-                key={ward.wardId}
-                className="hover:bg-gray-100"
-              >
-                <td className="border p-2">
+      )}
 
-                  <Link
-                    href={`/municipality/dashboard/sync-history/${ward.wardId}`}
-                    className="text-blue-600 hover:underline"
-                  >
-                    {ward.wardName}
-                  </Link>
 
-                </td>
+      
 
-                <td className="border p-2">
-                  {ward.lastSync}
-                </td>
+      <section className="mt-6 overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
 
-                <td className="border p-2">
-                  {ward.pendingRecords}
-                </td>
+        <div className="flex flex-col gap-3 border-b border-gray-100 px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
 
-                <td className="border p-2">
-                  {ward.conflictCount}
-                </td>
+          <div>
+            <h2 className="text-lg font-semibold text-gray-900">
+              Sync Health by Ward
+            </h2>
 
-                <td className="border p-2">
+            <p className="mt-1 text-xs text-gray-500">
+              Monitor synchronization status across ward offices
+            </p>
+          </div>
 
-                  <span
-                    className={
-                      ward.status === "HEALTHY"
-                        ? "text-green-600"
+          <span className="text-xs text-gray-500">
+            Showing{" "}
+            {Math.min(visibleCount, syncHealth.length)} of{" "}
+            {syncHealth.length}
+          </span>
 
-                        : ward.status === "STALE"
-                          ? "text-yellow-600"
+        </div>
 
-                          : ward.status === "NO DATA"
-                            ? "text-gray-600"
+        <div className="overflow-x-auto">
 
-                            : "text-red-600"
-                    }
-                  >
+          <table className="w-full min-w-[760px]">
 
-                    {ward.status}
+            <thead>
+              <tr className="border-b border-gray-100 bg-gray-50">
 
-                  </span>
+                <th className="px-5 py-3 text-left text-[11px] font-semibold uppercase tracking-wide text-gray-500">
+                  Ward
+                </th>
 
-                </td>
+                <th className="px-5 py-3 text-left text-[11px] font-semibold uppercase tracking-wide text-gray-500">
+                  Last Sync
+                </th>
+
+                <th className="px-5 py-3 text-right text-[11px] font-semibold uppercase tracking-wide text-gray-500">
+                  Pending
+                </th>
+
+                <th className="px-5 py-3 text-right text-[11px] font-semibold uppercase tracking-wide text-gray-500">
+                  Conflicts
+                </th>
+
+                <th className="px-5 py-3 text-right text-[11px] font-semibold uppercase tracking-wide text-gray-500">
+                  Status
+                </th>
 
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+
+            <tbody>
+
+              {syncHealth
+                .slice(0, visibleCount)
+                .map((ward) => (
+
+                  <tr
+                    key={ward.wardId}
+                    className="border-b border-gray-100 transition hover:bg-gray-50"
+                  >
+
+                    <td className="px-5 py-3.5">
+
+                      <Link
+                        href={`/municipality/dashboard/sync-history/${ward.wardId}`}
+                        className="text-sm font-semibold hover:underline"
+                        style={{ color: "var(--primary)" }}
+                      >
+                        {ward.wardName}
+                      </Link>
+
+                    </td>
+
+                    <td className="px-5 py-3.5 text-xs text-gray-500">
+                      {ward.lastSync}
+                    </td>
+
+                    <td className="px-5 py-3.5 text-right text-sm text-gray-700">
+                      {ward.pendingRecords}
+                    </td>
+
+                    <td className="px-5 py-3.5 text-right">
+
+                      <span
+                        className={`text-sm font-semibold ${ward.conflictCount > 0
+                            ? "text-red-600"
+                            : "text-gray-600"
+                          }`}
+                      >
+                        {ward.conflictCount}
+                      </span>
+
+                    </td>
+
+                    <td className="px-5 py-3.5 text-right">
+
+                      <span
+                        className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[10px] font-semibold ${ward.status === "HEALTHY"
+                            ? "bg-green-50 text-green-700"
+                            : ward.status === "STALE"
+                              ? "bg-amber-50 text-amber-700"
+                              : ward.status === "NO DATA"
+                                ? "bg-gray-100 text-gray-600"
+                                : "bg-red-50 text-red-700"
+                          }`}
+                      >
+
+                        <span
+                          className={`h-1.5 w-1.5 rounded-full ${ward.status === "HEALTHY"
+                              ? "bg-green-500"
+                              : ward.status === "STALE"
+                                ? "bg-amber-500"
+                                : ward.status === "NO DATA"
+                                  ? "bg-gray-400"
+                                  : "bg-red-500"
+                            }`}
+                        />
+
+                        {ward.status}
+
+                      </span>
+
+                    </td>
+
+                  </tr>
+
+                ))}
+
+            </tbody>
+
+          </table>
+
+        </div>
+
+
+
+        {syncHealth.length > 10 && (
+
+          <div className="flex justify-center gap-3 border-t border-gray-100 p-4">
+
+            {visibleCount < syncHealth.length && (
+              <button
+                type="button"
+                onClick={() =>
+                  setVisibleCount((prev) => prev + 10)
+                }
+                className="rounded-lg px-5 py-2 text-sm font-semibold text-white transition hover:opacity-90"
+                style={{
+                  backgroundColor: "var(--primary)",
+                }}
+              >
+                Show More
+              </button>
+            )}
+
+            {visibleCount > 10 && (
+              <button
+                type="button"
+                onClick={() => setVisibleCount(10)}
+                className="rounded-lg border px-5 py-2 text-sm font-semibold transition hover:bg-gray-50"
+                style={{
+                  borderColor: "var(--border)",
+                  color: "var(--primary)",
+                }}
+              >
+                Show Less
+              </button>
+            )}
+
+          </div>
+
+        )}
 
       </section>
+
+      <div className="mt-6 border-t border-gray-200 py-5 text-center text-xs text-gray-400">
+        Digital Nepal · Municipality Administration Portal
+      </div>
+
     </main>
   );
 }
