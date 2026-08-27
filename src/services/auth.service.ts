@@ -1,4 +1,3 @@
-import usersData from "../../data/users.json";
 import wardsData from "../../data/wards.json";
 import municipalitiesData from "../../data/municipalities.json";
 import districtsData from "../../data/district.json";
@@ -7,7 +6,6 @@ import { LoginSession, User } from "@/types/auth";
 
 const STORAGE_KEY = "digital_nepal_session";
 
-const users = usersData as User[];
 const wards = wardsData as { id: string; municipality_id: string; name_en: string }[];
 const municipalities = municipalitiesData as { id: string; district_id: string; name_en: string }[];
 const districts = districtsData as { id: string; province_id: string; name_en: string }[];
@@ -19,10 +17,6 @@ export const ROLE_HOME_ROUTE = {
   PROVINCE_ADMIN: "/province/dashboard",
   CENTRAL_ADMIN: "/central/dashboard",
 } as const;
-
-function normalizeEmail(value: string): string {
-  return value.trim().toLowerCase();
-}
 
 export function resolveSessionDetails(user: User) {
   const denorm = user.denorm;
@@ -97,20 +91,28 @@ export function resolveSessionDetails(user: User) {
   };
 }
 
-export function loginUser(email: string, password: string): LoginSession | null {
-  const normalizedEmail = normalizeEmail(email);
+export async function loginUser(
+  email: string,
+  password: string,
+): Promise<LoginSession> {
+  const response = await fetch("/api/auth/login", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email, password }),
+  });
+  const data = await response.json().catch(() => ({}));
 
-  const user = users.find(
-    (u) =>
-      normalizeEmail(u.email) === normalizedEmail &&
-      u.password === password &&
-      u.is_active,
-  );
+  if (!response.ok) {
+    throw new Error(data.message ?? "Invalid credentials.");
+  }
 
-  if (!user) return null;
+  const user = data.user as User | undefined;
+  if (!user) {
+    throw new Error("Login API did not return user information.");
+  }
 
   const session: LoginSession = {
-    token: "mock-jwt-token",
+    token: data.token ?? "",
     id: user.id,
     email: user.email,
     username: user.username,
@@ -123,19 +125,6 @@ export function loginUser(email: string, password: string): LoginSession | null 
   };
   if (typeof window !== "undefined") {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(session));
-    try {
-      const payload = {
-        id: session.id,
-        role: session.role,
-        email: session.email,
-        jurisdiction_id: session.jurisdiction_id ?? null,
-      };
-      const cookieVal = typeof btoa !== "undefined" ? btoa(JSON.stringify(payload)) : Buffer.from(JSON.stringify(payload)).toString("base64");
-      // set a cookie so middleware can detect a session on server-side
-      document.cookie = `auth_token=${cookieVal}; path=/; max-age=${60 * 60};`;
-    } catch {
-      // ignore cookie set errors
-    }
   }
   return session;
 }

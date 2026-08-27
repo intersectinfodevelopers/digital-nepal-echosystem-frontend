@@ -20,6 +20,8 @@ import {
   type LocalBody,
 } from "@/constants/provinceHierarchy";
 import { WARD_NAV, type WardNavItem } from "./wardNav";
+import districtsData from "../../../data/district.json";
+import municipalitiesData from "../../../data/municipalities.json";
 
 const ICONS: Record<string, ReactNode> = {
   dashboard: <DashboardOutlined sx={{ fontSize: 20 }} />,
@@ -130,9 +132,9 @@ export default function WardSidebar({
 
   const toggleMap = setExpandedMapToggle;
 
-  const goToMap = (item: WardNavItem | AdminNavItem) => {
+  const goToMap = (item: WardNavItem | AdminNavItem, scopeId?: string) => {
     const href = (item as WardNavItem).mapHref ?? "/ward/map";
-    onNavigate(href);
+    onNavigate(scopeId && href.includes("analytics") ? `${href}?scope=${scopeId}` : href);
   };
 
   const handleProvinceClick =
@@ -141,7 +143,7 @@ export default function WardSidebar({
       setExpandedProvinceIdOverride((cur) => (cur === provinceId ? null : provinceId));
       setExpandedDistrictKeyOverride(null);
       selectProvince(provinceId, provinceLabel);
-      goToMap(item);
+      goToMap(item, `prov-${provinceId}`);
     };
 
   const handleDistrictClick =
@@ -150,7 +152,8 @@ export default function WardSidebar({
       const key = districtKey(provinceId, district);
       setExpandedDistrictKeyOverride((cur) => (cur === key ? null : key));
       selectDistrict(provinceId, provinceLabel, district);
-      goToMap(item);
+      const districtId = districtsData.find((entry) => entry.name_en === district)?.id;
+      goToMap(item, districtId);
     };
 
   const handleLocalBodyClick =
@@ -164,7 +167,8 @@ export default function WardSidebar({
       setExpandedProvinceIdOverride(provinceId);
       setExpandedDistrictKeyOverride(districtKey(provinceId, district));
       selectLocalBody(provinceId, provinceLabel, district, lb.name, lb.type);
-      goToMap(item);
+      const municipalityId = municipalitiesData.find((entry) => entry.name_en === lb.name)?.id;
+      goToMap(item, municipalityId);
     };
 
   return (
@@ -172,13 +176,13 @@ export default function WardSidebar({
       className={`flex h-full shrink-0 flex-col bg-[#0B3067] text-white shadow-lg ${collapsed ? "w-18" : "w-65"}`}
     >
       <div
-        className={`flex items-center gap-3 border-b border-white/10 ${collapsed ? "justify-center px-3 py-4" : "justify-between px-5 py-5"}`}
+        className={`flex h-16 shrink-0 items-center gap-3 border-b border-white/10 ${collapsed ? "justify-center px-3" : "justify-between px-4"}`}
       >
         <div
           className={`flex items-center gap-3 ${collapsed ? "justify-center" : ""}`}
         >
-          <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-white/10 text-white shadow-sm border border-white/10">
-            <AccountBalanceOutlined sx={{ fontSize: 24 }} />
+          <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-white/10 bg-white/10 text-white shadow-sm">
+            <AccountBalanceOutlined sx={{ fontSize: 21 }} />
           </span>
           {!collapsed ? (
             <div className="min-w-0">
@@ -207,7 +211,7 @@ export default function WardSidebar({
 
       {/* Navigation */}
       <nav
-        className={`flex-1 overflow-y-auto ${collapsed ? "px-1 py-3" : "px-3 py-4"}`}
+        className={`sidebar-scrollbar flex-1 overflow-y-auto ${collapsed ? "px-1 py-3" : "px-3 py-4"}`}
       >
         {sections.map((section, i) => {
           if (section.type === "divider") {

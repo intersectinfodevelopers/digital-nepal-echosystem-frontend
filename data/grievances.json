@@ -16,5 +16,869 @@
     "status": "REFERRED_JUDICIAL",
     "filed_at": "2026-05-28T09:00:00Z",
     "escalation_level": "NYAYIK_SAMITI"
+  },
+  {
+    "id": "grv-000003",
+    "tracking_code": "GRV-2026-000003",
+    "citizen_id": "cit-0077",
+    "category": "SERVICE_DELAY",
+    "status": "REFERRED_JUDICIAL",
+    "filed_at": "2026-06-15T10:00:00Z",
+    "escalation_level": "WARD"
+  },
+  {
+    "id": "grv-000004",
+    "tracking_code": "GRV-2026-000004",
+    "citizen_id": "cit-0084",
+    "category": "DATA_INACCURACY",
+    "status": "IN_PROGRESS",
+    "filed_at": "2026-06-15T10:00:00Z",
+    "escalation_level": "WARD"
+  },
+  {
+    "id": "grv-000005",
+    "tracking_code": "GRV-2026-000005",
+    "citizen_id": "cit-0089",
+    "category": "DATA_INACCURACY",
+    "status": "CLOSED",
+    "filed_at": "2026-06-15T10:00:00Z",
+    "escalation_level": "WARD"
+  },
+  {
+    "id": "grv-000006",
+    "tracking_code": "GRV-2026-000006",
+    "citizen_id": "cit-0108",
+    "category": "SERVICE_DELAY",
+    "status": "RECEIVED",
+    "filed_at": "2026-06-15T10:00:00Z",
+    "escalation_level": "WARD"
+  },
+  {
+    "id": "grv-000007",
+    "tracking_code": "GRV-2026-000007",
+    "citizen_id": "cit-0127",
+    "category": "DOCUMENT_ERROR",
+    "status": "RECEIVED",
+    "filed_at": "2026-06-15T10:00:00Z",
+    "escalation_level": "WARD"
+  },
+  {
+    "id": "grv-000008",
+    "tracking_code": "GRV-2026-000008",
+    "citizen_id": "cit-0134",
+    "category": "BENEFIT_DENIAL",
+    "status": "CLOSED",
+    "filed_at": "2026-06-15T10:00:00Z",
+    "escalation_level": "WARD"
+  },
+  {
+    "id": "grv-000009",
+    "tracking_code": "GRV-2026-000009",
+    "citizen_id": "cit-0139",
+    "category": "BENEFIT_DENIAL",
+    "status": "RESOLVED_WARD",
+    "filed_at": "2026-06-15T10:00:00Z",
+    "escalation_level": "WARD"
+  },
+  {
+    "id": "grv-000010",
+    "tracking_code": "GRV-2026-000010",
+    "citizen_id": "cit-0146",
+    "category": "OTHER",
+    "status": "IN_PROGRESS",
+    "filed_at": "2026-06-15T10:00:00Z",
+    "escalation_level": "WARD"
+  },
+  {
+    "id": "grv-000011",
+    "tracking_code": "GRV-2026-000011",
+    "citizen_id": "cit-0153",
+    "category": "SERVICE_DELAY",
+    "status": "CLOSED",
+    "filed_at": "2026-06-15T10:00:00Z",
+    "escalation_level": "WARD"
+  },
+  {
+    "id": "grv-000012",
+    "tracking_code": "GRV-2026-000012",
+    "citizen_id": "cit-0158",
+    "category": "SERVICE_DELAY",
+    "status": "RESOLVED_WARD",
+    "filed_at": "2026-06-15T10:00:00Z",
+    "escalation_level": "WARD"
+  },
+  {
+    "id": "grv-000013",
+    "tracking_code": "GRV-2026-000013",
+    "citizen_id": "cit-0160",
+    "category": "DATA_INACCURACY",
+    "status": "REFERRED_JUDICIAL",
+    "filed_at": "2026-06-15T10:00:00Z",
+    "escalation_level": "WARD"
+  },
+  {
+    "id": "grv-000014",
+    "tracking_code": "GRV-2026-000014",
+    "citizen_id": "cit-0165",
+    "category": "DATA_INACCURACY",
+    "status": "IN_PROGRESS",
+    "filed_at": "2026-06-15T10:00:00Z",
+    "escalation_level": "WARD"
+  },
+  {
+    "id": "grv-000015",
+    "tracking_code": "GRV-2026-000015",
+    "citizen_id": "cit-0172",
+    "category": "DOCUMENT_ERROR",
+    "status": "RECEIVED",
+    "filed_at": "2026-06-15T10:00:00Z",
+    "escalation_level": "WARD"
+  },
+  {
+    "id": "grv-000016",
+    "tracking_code": "GRV-2026-000016",
+    "citizen_id": "cit-0177",
+    "category": "DOCUMENT_ERROR",
+    "status": "REFERRED_JUDICIAL",
+    "filed_at": "2026-06-15T10:00:00Z",
+    "escalation_level": "WARD"
+  },
+  {
+    "id": "grv-000017",
+    "tracking_code": "GRV-2026-000017",
+    "citizen_id": "cit-0184",
+    "category": "BENEFIT_DENIAL",
+    "status": "IN_PROGRESS",
+    "filed_at": "2026-06-15T10:00:00Z",
+    "escalation_level": "WARD"
+  },
+  {
+    "id": "grv-000018",
+    "tracking_code": "GRV-2026-000018",
+    "citizen_id": "cit-0191",
+    "category": "OTHER",
+    "status": "RECEIVED",
+    "filed_at": "2026-06-15T10:00:00Z",
+    "escalation_level": "WARD"
+  },
+  {
+    "id": "grv-000019",
+    "tracking_code": "GRV-2026-000019",
+    "citizen_id": "cit-0196",
+    "category": "OTHER",
+    "status": "REFERRED_JUDICIAL",
+    "filed_at": "2026-06-15T10:00:00Z",
+    "escalation_level": "WARD"
+  },
+  {
+    "id": "grv-000020",
+    "tracking_code": "GRV-2026-000020",
+    "citizen_id": "cit-0203",
+    "category": "DOCUMENT_ERROR",
+    "status": "RESOLVED_WARD",
+    "filed_at": "2026-06-15T10:00:00Z",
+    "escalation_level": "WARD"
+  },
+  {
+    "id": "grv-000021",
+    "tracking_code": "GRV-2026-000021",
+    "citizen_id": "cit-0210",
+    "category": "BENEFIT_DENIAL",
+    "status": "IN_PROGRESS",
+    "filed_at": "2026-06-15T10:00:00Z",
+    "escalation_level": "WARD"
+  },
+  {
+    "id": "grv-000022",
+    "tracking_code": "GRV-2026-000022",
+    "citizen_id": "cit-0215",
+    "category": "BENEFIT_DENIAL",
+    "status": "CLOSED",
+    "filed_at": "2026-06-15T10:00:00Z",
+    "escalation_level": "WARD"
+  },
+  {
+    "id": "grv-000023",
+    "tracking_code": "GRV-2026-000023",
+    "citizen_id": "cit-0222",
+    "category": "OTHER",
+    "status": "REFERRED_JUDICIAL",
+    "filed_at": "2026-06-15T10:00:00Z",
+    "escalation_level": "WARD"
+  },
+  {
+    "id": "grv-000024",
+    "tracking_code": "GRV-2026-000024",
+    "citizen_id": "cit-0349",
+    "category": "OTHER",
+    "status": "RECEIVED",
+    "filed_at": "2026-06-15T10:00:00Z",
+    "escalation_level": "WARD"
+  },
+  {
+    "id": "grv-000025",
+    "tracking_code": "GRV-2026-000025",
+    "citizen_id": "cit-0356",
+    "category": "SERVICE_DELAY",
+    "status": "REFERRED_JUDICIAL",
+    "filed_at": "2026-06-15T10:00:00Z",
+    "escalation_level": "WARD"
+  },
+  {
+    "id": "grv-000026",
+    "tracking_code": "GRV-2026-000026",
+    "citizen_id": "cit-0387",
+    "category": "BENEFIT_DENIAL",
+    "status": "RECEIVED",
+    "filed_at": "2026-06-15T10:00:00Z",
+    "escalation_level": "WARD"
+  },
+  {
+    "id": "grv-000027",
+    "tracking_code": "GRV-2026-000027",
+    "citizen_id": "cit-0394",
+    "category": "OTHER",
+    "status": "CLOSED",
+    "filed_at": "2026-06-15T10:00:00Z",
+    "escalation_level": "WARD"
+  },
+  {
+    "id": "grv-000028",
+    "tracking_code": "GRV-2026-000028",
+    "citizen_id": "cit-0399",
+    "category": "OTHER",
+    "status": "RESOLVED_WARD",
+    "filed_at": "2026-06-15T10:00:00Z",
+    "escalation_level": "WARD"
+  },
+  {
+    "id": "grv-000029",
+    "tracking_code": "GRV-2026-000029",
+    "citizen_id": "cit-0406",
+    "category": "DOCUMENT_ERROR",
+    "status": "IN_PROGRESS",
+    "filed_at": "2026-06-15T10:00:00Z",
+    "escalation_level": "WARD"
+  },
+  {
+    "id": "grv-000030",
+    "tracking_code": "GRV-2026-000030",
+    "citizen_id": "cit-0413",
+    "category": "BENEFIT_DENIAL",
+    "status": "RECEIVED",
+    "filed_at": "2026-06-15T10:00:00Z",
+    "escalation_level": "WARD"
+  },
+  {
+    "id": "grv-000031",
+    "tracking_code": "GRV-2026-000031",
+    "citizen_id": "cit-0418",
+    "category": "BENEFIT_DENIAL",
+    "status": "REFERRED_JUDICIAL",
+    "filed_at": "2026-06-15T10:00:00Z",
+    "escalation_level": "WARD"
+  },
+  {
+    "id": "grv-000032",
+    "tracking_code": "GRV-2026-000032",
+    "citizen_id": "cit-0425",
+    "category": "OTHER",
+    "status": "IN_PROGRESS",
+    "filed_at": "2026-06-15T10:00:00Z",
+    "escalation_level": "WARD"
+  },
+  {
+    "id": "grv-000033",
+    "tracking_code": "GRV-2026-000033",
+    "citizen_id": "cit-0432",
+    "category": "SERVICE_DELAY",
+    "status": "RECEIVED",
+    "filed_at": "2026-06-15T10:00:00Z",
+    "escalation_level": "WARD"
+  },
+  {
+    "id": "grv-000034",
+    "tracking_code": "GRV-2026-000034",
+    "citizen_id": "cit-0437",
+    "category": "SERVICE_DELAY",
+    "status": "REFERRED_JUDICIAL",
+    "filed_at": "2026-06-15T10:00:00Z",
+    "escalation_level": "WARD"
+  },
+  {
+    "id": "grv-000035",
+    "tracking_code": "GRV-2026-000035",
+    "citizen_id": "cit-0444",
+    "category": "DATA_INACCURACY",
+    "status": "RESOLVED_WARD",
+    "filed_at": "2026-06-15T10:00:00Z",
+    "escalation_level": "WARD"
+  },
+  {
+    "id": "grv-000036",
+    "tracking_code": "GRV-2026-000036",
+    "citizen_id": "cit-0449",
+    "category": "DATA_INACCURACY",
+    "status": "RECEIVED",
+    "filed_at": "2026-06-15T10:00:00Z",
+    "escalation_level": "WARD"
+  },
+  {
+    "id": "grv-000037",
+    "tracking_code": "GRV-2026-000037",
+    "citizen_id": "cit-0451",
+    "category": "DOCUMENT_ERROR",
+    "status": "RECEIVED",
+    "filed_at": "2026-06-15T10:00:00Z",
+    "escalation_level": "WARD"
+  },
+  {
+    "id": "grv-000038",
+    "tracking_code": "GRV-2026-000038",
+    "citizen_id": "cit-0456",
+    "category": "DOCUMENT_ERROR",
+    "status": "REFERRED_JUDICIAL",
+    "filed_at": "2026-06-15T10:00:00Z",
+    "escalation_level": "WARD"
+  },
+  {
+    "id": "grv-000039",
+    "tracking_code": "GRV-2026-000039",
+    "citizen_id": "cit-0463",
+    "category": "BENEFIT_DENIAL",
+    "status": "RESOLVED_WARD",
+    "filed_at": "2026-06-15T10:00:00Z",
+    "escalation_level": "WARD"
+  },
+  {
+    "id": "grv-000040",
+    "tracking_code": "GRV-2026-000040",
+    "citizen_id": "cit-0470",
+    "category": "OTHER",
+    "status": "IN_PROGRESS",
+    "filed_at": "2026-06-15T10:00:00Z",
+    "escalation_level": "WARD"
+  },
+  {
+    "id": "grv-000041",
+    "tracking_code": "GRV-2026-000041",
+    "citizen_id": "cit-0475",
+    "category": "OTHER",
+    "status": "CLOSED",
+    "filed_at": "2026-06-15T10:00:00Z",
+    "escalation_level": "WARD"
+  },
+  {
+    "id": "grv-000042",
+    "tracking_code": "GRV-2026-000042",
+    "citizen_id": "cit-0482",
+    "category": "SERVICE_DELAY",
+    "status": "RESOLVED_WARD",
+    "filed_at": "2026-06-15T10:00:00Z",
+    "escalation_level": "WARD"
+  },
+  {
+    "id": "grv-000043",
+    "tracking_code": "GRV-2026-000043",
+    "citizen_id": "cit-0501",
+    "category": "OTHER",
+    "status": "REFERRED_JUDICIAL",
+    "filed_at": "2026-06-15T10:00:00Z",
+    "escalation_level": "WARD"
+  },
+  {
+    "id": "grv-000044",
+    "tracking_code": "GRV-2026-000044",
+    "citizen_id": "cit-0520",
+    "category": "DATA_INACCURACY",
+    "status": "REFERRED_JUDICIAL",
+    "filed_at": "2026-06-15T10:00:00Z",
+    "escalation_level": "WARD"
+  },
+  {
+    "id": "grv-000045",
+    "tracking_code": "GRV-2026-000045",
+    "citizen_id": "cit-0628",
+    "category": "OTHER",
+    "status": "RECEIVED",
+    "filed_at": "2026-06-15T10:00:00Z",
+    "escalation_level": "WARD"
+  },
+  {
+    "id": "grv-000046",
+    "tracking_code": "GRV-2026-000046",
+    "citizen_id": "cit-0659",
+    "category": "DOCUMENT_ERROR",
+    "status": "RESOLVED_WARD",
+    "filed_at": "2026-06-15T10:00:00Z",
+    "escalation_level": "WARD"
+  },
+  {
+    "id": "grv-000047",
+    "tracking_code": "GRV-2026-000047",
+    "citizen_id": "cit-0666",
+    "category": "BENEFIT_DENIAL",
+    "status": "IN_PROGRESS",
+    "filed_at": "2026-06-15T10:00:00Z",
+    "escalation_level": "WARD"
+  },
+  {
+    "id": "grv-000048",
+    "tracking_code": "GRV-2026-000048",
+    "citizen_id": "cit-0673",
+    "category": "OTHER",
+    "status": "CLOSED",
+    "filed_at": "2026-06-15T10:00:00Z",
+    "escalation_level": "WARD"
+  },
+  {
+    "id": "grv-000049",
+    "tracking_code": "GRV-2026-000049",
+    "citizen_id": "cit-0678",
+    "category": "OTHER",
+    "status": "RESOLVED_WARD",
+    "filed_at": "2026-06-15T10:00:00Z",
+    "escalation_level": "WARD"
+  },
+  {
+    "id": "grv-000050",
+    "tracking_code": "GRV-2026-000050",
+    "citizen_id": "cit-0685",
+    "category": "SERVICE_DELAY",
+    "status": "IN_PROGRESS",
+    "filed_at": "2026-06-15T10:00:00Z",
+    "escalation_level": "WARD"
+  },
+  {
+    "id": "grv-000051",
+    "tracking_code": "GRV-2026-000051",
+    "citizen_id": "cit-0692",
+    "category": "DATA_INACCURACY",
+    "status": "RECEIVED",
+    "filed_at": "2026-06-15T10:00:00Z",
+    "escalation_level": "WARD"
+  },
+  {
+    "id": "grv-000052",
+    "tracking_code": "GRV-2026-000052",
+    "citizen_id": "cit-0697",
+    "category": "DATA_INACCURACY",
+    "status": "REFERRED_JUDICIAL",
+    "filed_at": "2026-06-15T10:00:00Z",
+    "escalation_level": "WARD"
+  },
+  {
+    "id": "grv-000053",
+    "tracking_code": "GRV-2026-000053",
+    "citizen_id": "cit-0704",
+    "category": "OTHER",
+    "status": "RESOLVED_WARD",
+    "filed_at": "2026-06-15T10:00:00Z",
+    "escalation_level": "WARD"
+  },
+  {
+    "id": "grv-000054",
+    "tracking_code": "GRV-2026-000054",
+    "citizen_id": "cit-0709",
+    "category": "OTHER",
+    "status": "RECEIVED",
+    "filed_at": "2026-06-15T10:00:00Z",
+    "escalation_level": "WARD"
+  },
+  {
+    "id": "grv-000055",
+    "tracking_code": "GRV-2026-000055",
+    "citizen_id": "cit-0711",
+    "category": "SERVICE_DELAY",
+    "status": "IN_PROGRESS",
+    "filed_at": "2026-06-15T10:00:00Z",
+    "escalation_level": "WARD"
+  },
+  {
+    "id": "grv-000056",
+    "tracking_code": "GRV-2026-000056",
+    "citizen_id": "cit-0716",
+    "category": "SERVICE_DELAY",
+    "status": "CLOSED",
+    "filed_at": "2026-06-15T10:00:00Z",
+    "escalation_level": "WARD"
+  },
+  {
+    "id": "grv-000057",
+    "tracking_code": "GRV-2026-000057",
+    "citizen_id": "cit-0723",
+    "category": "DATA_INACCURACY",
+    "status": "RESOLVED_WARD",
+    "filed_at": "2026-06-15T10:00:00Z",
+    "escalation_level": "WARD"
+  },
+  {
+    "id": "grv-000058",
+    "tracking_code": "GRV-2026-000058",
+    "citizen_id": "cit-0728",
+    "category": "DATA_INACCURACY",
+    "status": "RECEIVED",
+    "filed_at": "2026-06-15T10:00:00Z",
+    "escalation_level": "WARD"
+  },
+  {
+    "id": "grv-000059",
+    "tracking_code": "GRV-2026-000059",
+    "citizen_id": "cit-0730",
+    "category": "DOCUMENT_ERROR",
+    "status": "IN_PROGRESS",
+    "filed_at": "2026-06-15T10:00:00Z",
+    "escalation_level": "WARD"
+  },
+  {
+    "id": "grv-000060",
+    "tracking_code": "GRV-2026-000060",
+    "citizen_id": "cit-0735",
+    "category": "DOCUMENT_ERROR",
+    "status": "CLOSED",
+    "filed_at": "2026-06-15T10:00:00Z",
+    "escalation_level": "WARD"
+  },
+  {
+    "id": "grv-000061",
+    "tracking_code": "GRV-2026-000061",
+    "citizen_id": "cit-0742",
+    "category": "BENEFIT_DENIAL",
+    "status": "REFERRED_JUDICIAL",
+    "filed_at": "2026-06-15T10:00:00Z",
+    "escalation_level": "WARD"
+  },
+  {
+    "id": "grv-000062",
+    "tracking_code": "GRV-2026-000062",
+    "citizen_id": "cit-0747",
+    "category": "BENEFIT_DENIAL",
+    "status": "IN_PROGRESS",
+    "filed_at": "2026-06-15T10:00:00Z",
+    "escalation_level": "WARD"
+  },
+  {
+    "id": "grv-000063",
+    "tracking_code": "GRV-2026-000063",
+    "citizen_id": "cit-0754",
+    "category": "OTHER",
+    "status": "CLOSED",
+    "filed_at": "2026-06-15T10:00:00Z",
+    "escalation_level": "WARD"
+  },
+  {
+    "id": "grv-000064",
+    "tracking_code": "GRV-2026-000064",
+    "citizen_id": "cit-0761",
+    "category": "SERVICE_DELAY",
+    "status": "REFERRED_JUDICIAL",
+    "filed_at": "2026-06-15T10:00:00Z",
+    "escalation_level": "WARD"
+  },
+  {
+    "id": "grv-000065",
+    "tracking_code": "GRV-2026-000065",
+    "citizen_id": "cit-0780",
+    "category": "DOCUMENT_ERROR",
+    "status": "REFERRED_JUDICIAL",
+    "filed_at": "2026-06-15T10:00:00Z",
+    "escalation_level": "WARD"
+  },
+  {
+    "id": "grv-000066",
+    "tracking_code": "GRV-2026-000066",
+    "citizen_id": "cit-0888",
+    "category": "SERVICE_DELAY",
+    "status": "RECEIVED",
+    "filed_at": "2026-06-15T10:00:00Z",
+    "escalation_level": "WARD"
+  },
+  {
+    "id": "grv-000067",
+    "tracking_code": "GRV-2026-000067",
+    "citizen_id": "cit-0907",
+    "category": "OTHER",
+    "status": "IN_PROGRESS",
+    "filed_at": "2026-06-15T10:00:00Z",
+    "escalation_level": "WARD"
+  },
+  {
+    "id": "grv-000068",
+    "tracking_code": "GRV-2026-000068",
+    "citizen_id": "cit-0938",
+    "category": "DOCUMENT_ERROR",
+    "status": "REFERRED_JUDICIAL",
+    "filed_at": "2026-06-15T10:00:00Z",
+    "escalation_level": "WARD"
+  },
+  {
+    "id": "grv-000069",
+    "tracking_code": "GRV-2026-000069",
+    "citizen_id": "cit-0945",
+    "category": "BENEFIT_DENIAL",
+    "status": "IN_PROGRESS",
+    "filed_at": "2026-06-15T10:00:00Z",
+    "escalation_level": "WARD"
+  },
+  {
+    "id": "grv-000070",
+    "tracking_code": "GRV-2026-000070",
+    "citizen_id": "cit-0957",
+    "category": "OTHER",
+    "status": "REFERRED_JUDICIAL",
+    "filed_at": "2026-06-15T10:00:00Z",
+    "escalation_level": "WARD"
+  },
+  {
+    "id": "grv-000071",
+    "tracking_code": "GRV-2026-000071",
+    "citizen_id": "cit-0964",
+    "category": "SERVICE_DELAY",
+    "status": "RESOLVED_WARD",
+    "filed_at": "2026-06-15T10:00:00Z",
+    "escalation_level": "WARD"
+  },
+  {
+    "id": "grv-000072",
+    "tracking_code": "GRV-2026-000072",
+    "citizen_id": "cit-0969",
+    "category": "SERVICE_DELAY",
+    "status": "RECEIVED",
+    "filed_at": "2026-06-15T10:00:00Z",
+    "escalation_level": "WARD"
+  },
+  {
+    "id": "grv-000073",
+    "tracking_code": "GRV-2026-000073",
+    "citizen_id": "cit-0971",
+    "category": "DATA_INACCURACY",
+    "status": "RECEIVED",
+    "filed_at": "2026-06-15T10:00:00Z",
+    "escalation_level": "WARD"
+  },
+  {
+    "id": "grv-000074",
+    "tracking_code": "GRV-2026-000074",
+    "citizen_id": "cit-0976",
+    "category": "DATA_INACCURACY",
+    "status": "REFERRED_JUDICIAL",
+    "filed_at": "2026-06-15T10:00:00Z",
+    "escalation_level": "WARD"
+  },
+  {
+    "id": "grv-000075",
+    "tracking_code": "GRV-2026-000075",
+    "citizen_id": "cit-0983",
+    "category": "DOCUMENT_ERROR",
+    "status": "RESOLVED_WARD",
+    "filed_at": "2026-06-15T10:00:00Z",
+    "escalation_level": "WARD"
+  },
+  {
+    "id": "grv-000076",
+    "tracking_code": "GRV-2026-000076",
+    "citizen_id": "cit-0988",
+    "category": "DOCUMENT_ERROR",
+    "status": "RECEIVED",
+    "filed_at": "2026-06-15T10:00:00Z",
+    "escalation_level": "WARD"
+  },
+  {
+    "id": "grv-000077",
+    "tracking_code": "GRV-2026-000077",
+    "citizen_id": "cit-0990",
+    "category": "BENEFIT_DENIAL",
+    "status": "IN_PROGRESS",
+    "filed_at": "2026-06-15T10:00:00Z",
+    "escalation_level": "WARD"
+  },
+  {
+    "id": "grv-000078",
+    "tracking_code": "GRV-2026-000078",
+    "citizen_id": "cit-0995",
+    "category": "BENEFIT_DENIAL",
+    "status": "CLOSED",
+    "filed_at": "2026-06-15T10:00:00Z",
+    "escalation_level": "WARD"
+  },
+  {
+    "id": "grv-000079",
+    "tracking_code": "GRV-2026-000079",
+    "citizen_id": "cit-1018",
+    "category": "DOCUMENT_ERROR",
+    "status": "CLOSED",
+    "filed_at": "2026-06-15T10:00:00Z",
+    "escalation_level": "WARD"
+  },
+  {
+    "id": "grv-000080",
+    "tracking_code": "GRV-2026-000080",
+    "citizen_id": "cit-1037",
+    "category": "OTHER",
+    "status": "CLOSED",
+    "filed_at": "2026-06-15T10:00:00Z",
+    "escalation_level": "WARD"
+  },
+  {
+    "id": "grv-000081",
+    "tracking_code": "GRV-2026-000081",
+    "citizen_id": "cit-1044",
+    "category": "SERVICE_DELAY",
+    "status": "REFERRED_JUDICIAL",
+    "filed_at": "2026-06-15T10:00:00Z",
+    "escalation_level": "WARD"
+  },
+  {
+    "id": "grv-000082",
+    "tracking_code": "GRV-2026-000082",
+    "citizen_id": "cit-1049",
+    "category": "SERVICE_DELAY",
+    "status": "IN_PROGRESS",
+    "filed_at": "2026-06-15T10:00:00Z",
+    "escalation_level": "WARD"
+  },
+  {
+    "id": "grv-000083",
+    "tracking_code": "GRV-2026-000083",
+    "citizen_id": "cit-1056",
+    "category": "DATA_INACCURACY",
+    "status": "RECEIVED",
+    "filed_at": "2026-06-15T10:00:00Z",
+    "escalation_level": "WARD"
+  },
+  {
+    "id": "grv-000084",
+    "tracking_code": "GRV-2026-000084",
+    "citizen_id": "cit-1063",
+    "category": "DOCUMENT_ERROR",
+    "status": "REFERRED_JUDICIAL",
+    "filed_at": "2026-06-15T10:00:00Z",
+    "escalation_level": "WARD"
+  },
+  {
+    "id": "grv-000085",
+    "tracking_code": "GRV-2026-000085",
+    "citizen_id": "cit-1068",
+    "category": "DOCUMENT_ERROR",
+    "status": "IN_PROGRESS",
+    "filed_at": "2026-06-15T10:00:00Z",
+    "escalation_level": "WARD"
+  },
+  {
+    "id": "grv-000086",
+    "tracking_code": "GRV-2026-000086",
+    "citizen_id": "cit-1070",
+    "category": "BENEFIT_DENIAL",
+    "status": "RESOLVED_WARD",
+    "filed_at": "2026-06-15T10:00:00Z",
+    "escalation_level": "WARD"
+  },
+  {
+    "id": "grv-000087",
+    "tracking_code": "GRV-2026-000087",
+    "citizen_id": "cit-1075",
+    "category": "BENEFIT_DENIAL",
+    "status": "RECEIVED",
+    "filed_at": "2026-06-15T10:00:00Z",
+    "escalation_level": "WARD"
+  },
+  {
+    "id": "grv-000088",
+    "tracking_code": "GRV-2026-000088",
+    "citizen_id": "cit-1082",
+    "category": "OTHER",
+    "status": "REFERRED_JUDICIAL",
+    "filed_at": "2026-06-15T10:00:00Z",
+    "escalation_level": "WARD"
+  },
+  {
+    "id": "grv-000089",
+    "tracking_code": "GRV-2026-000089",
+    "citizen_id": "cit-1087",
+    "category": "OTHER",
+    "status": "IN_PROGRESS",
+    "filed_at": "2026-06-15T10:00:00Z",
+    "escalation_level": "WARD"
+  },
+  {
+    "id": "grv-000090",
+    "tracking_code": "GRV-2026-000090",
+    "citizen_id": "cit-1094",
+    "category": "SERVICE_DELAY",
+    "status": "RECEIVED",
+    "filed_at": "2026-06-15T10:00:00Z",
+    "escalation_level": "WARD"
+  },
+  {
+    "id": "grv-000091",
+    "tracking_code": "GRV-2026-000091",
+    "citizen_id": "cit-1101",
+    "category": "BENEFIT_DENIAL",
+    "status": "CLOSED",
+    "filed_at": "2026-06-15T10:00:00Z",
+    "escalation_level": "WARD"
+  },
+  {
+    "id": "grv-000092",
+    "tracking_code": "GRV-2026-000092",
+    "citizen_id": "cit-1106",
+    "category": "BENEFIT_DENIAL",
+    "status": "RESOLVED_WARD",
+    "filed_at": "2026-06-15T10:00:00Z",
+    "escalation_level": "WARD"
+  },
+  {
+    "id": "grv-000093",
+    "tracking_code": "GRV-2026-000093",
+    "citizen_id": "cit-1113",
+    "category": "OTHER",
+    "status": "IN_PROGRESS",
+    "filed_at": "2026-06-15T10:00:00Z",
+    "escalation_level": "WARD"
+  },
+  {
+    "id": "grv-000094",
+    "tracking_code": "GRV-2026-000094",
+    "citizen_id": "cit-1120",
+    "category": "SERVICE_DELAY",
+    "status": "RECEIVED",
+    "filed_at": "2026-06-15T10:00:00Z",
+    "escalation_level": "WARD"
+  },
+  {
+    "id": "grv-000095",
+    "tracking_code": "GRV-2026-000095",
+    "citizen_id": "cit-1125",
+    "category": "SERVICE_DELAY",
+    "status": "REFERRED_JUDICIAL",
+    "filed_at": "2026-06-15T10:00:00Z",
+    "escalation_level": "WARD"
+  },
+  {
+    "id": "grv-000096",
+    "tracking_code": "GRV-2026-000096",
+    "citizen_id": "cit-1132",
+    "category": "DATA_INACCURACY",
+    "status": "IN_PROGRESS",
+    "filed_at": "2026-06-15T10:00:00Z",
+    "escalation_level": "WARD"
+  },
+  {
+    "id": "grv-000097",
+    "tracking_code": "GRV-2026-000097",
+    "citizen_id": "cit-1163",
+    "category": "OTHER",
+    "status": "REFERRED_JUDICIAL",
+    "filed_at": "2026-06-15T10:00:00Z",
+    "escalation_level": "WARD"
+  },
+  {
+    "id": "grv-000098",
+    "tracking_code": "GRV-2026-000098",
+    "citizen_id": "cit-1170",
+    "category": "SERVICE_DELAY",
+    "status": "RESOLVED_WARD",
+    "filed_at": "2026-06-15T10:00:00Z",
+    "escalation_level": "WARD"
   }
 ]

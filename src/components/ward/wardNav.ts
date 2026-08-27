@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 
 export type WardViewId =
   | "dashboard"
+  | "analytics"
   | "citizens"
   | "map"
   | "services"
@@ -29,6 +30,7 @@ export const WARD_NAV: WardNavSection[] = [
     label: "Main",
     items: [
       { id: "dashboard", label: "Dashboard" },
+      { id: "analytics", label: "Analytics", hasMapTree: true, mapHref: "/ward/analytics" },
       { id: "citizens", label: "Citizens" },
       {
         id: "map",
@@ -53,6 +55,7 @@ export const WARD_NAV: WardNavSection[] = [
 
 export const WARD_VIEW_TITLES: Record<WardViewId, string> = {
   dashboard: "Dashboard",
+  analytics: "Analytics",
   citizens: "Citizens",
   map: "Ward Map",
   "national-map": "National Map",

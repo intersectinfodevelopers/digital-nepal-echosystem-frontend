@@ -1,5 +1,6 @@
 ﻿"use client";
 
+import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { loginUser, getCurrentSession, ROLE_HOME_ROUTE } from "@/services/auth.service";
@@ -24,7 +25,7 @@ export default function LoginPage() {
     }
   }, [router]);
 
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setServerError(null);
     setFieldErrors({});
@@ -48,21 +49,26 @@ export default function LoginPage() {
     }
 
     setIsSubmitting(true);
-    setTimeout(() => {
-      const session = loginUser(email, password);
+    try {
+      const session = await loginUser(email, password);
       if (session) {
         router.push(ROLE_HOME_ROUTE[session.role as keyof typeof ROLE_HOME_ROUTE]);
         router.refresh();
         return;
       }
+    } catch (error) {
       setIsSubmitting(false);
-      setServerError("Invalid credentials. Please check your email and password.");
-    }, 600);
+      setServerError(
+        error instanceof Error
+          ? error.message
+          : "Invalid credentials. Please check your email and password.",
+      );
+    }
   };
 
   return (
     <div className="min-h-screen bg-background px-4 py-6">
-      <div className="relative mx-auto flex min-h-[360px] max-w-2xl overflow-hidden rounded-[28px] shadow-[0_24px_50px_rgba(15,45,109,0.10)]">
+      <div className="relative mx-auto flex min-h-90 max-w-2xl overflow-hidden rounded-[28px] shadow-[0_24px_50px_rgba(15,45,109,0.10)]">
 
         {/* Left panel */}
         <aside
@@ -82,7 +88,13 @@ export default function LoginPage() {
           {/* Centered logo / title / subtitle */}
           <div className="flex flex-1 flex-col items-center justify-center text-center">
             <div className="mb-6 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-white shadow-[0_10px_30px_rgba(0,0,0,0.18)]">
-              <img src="/assets/Flag_of_Nepal.gif" alt="Nepal flag" className="h-7 w-auto" />
+              <Image
+                src="/assets/Flag_of_Nepal.gif"
+                alt="Nepal flag"
+                className="h-7 w-auto"
+                width={14}
+                height={14}
+              />
             </div>
             <h2 className="text-3xl font-bold tracking-tight">Digital Nepal</h2>
             <p className="mt-3 max-w-xs text-sm leading-6 text-white/75">

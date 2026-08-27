@@ -263,8 +263,8 @@ const DEFAULT_FORM_DATA: RegistrationFormData = {
 };
 
 const STEP_ROUTES: Record<number, string> = {
-  1: "/portal/personal",
-  2: "/portal/nid",
+  1: "/ward/dashboard/registercitizen",
+  2: "/ward/dashboard/registercitizen",
   3: "/portal/family",
   4: "/portal/employment",
   5: "/portal/household",

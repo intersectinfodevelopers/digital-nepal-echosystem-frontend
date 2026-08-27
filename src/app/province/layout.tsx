@@ -37,6 +37,8 @@ const PROVINCE_NAV: AdminNavSection[] = [
         id: "/province/analytics",
         label: "Analytics",
         icon: <BarChartOutlined sx={{ fontSize: 20 }} />,
+        hasMapTree: true,
+        mapHref: "/province/analytics",
       },
       {
         id: "/central/national-map",
@@ -143,7 +145,7 @@ export default function ProvinceLayout({ children }: ProvinceLayoutProps) {
             onGoProfile={() => router.push("/province/dashboard")}
           />
 
-          <main className="flex-1 px-4 pt-20 pb-6 sm:px-6 lg:px-8">
+          <main className="flex-1 px-4 pt-6 pb-6 sm:px-6 lg:px-8">
             {children}
           </main>
         </div>

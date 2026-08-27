@@ -1,5 +1,2232 @@
 [
-  { "id": "card-001", "citizen_id": "cit-001", "card_type": "FARMER", "status": "COLLECTED", "qr_hash": "abc123", "issued_at": "2026-05-15", "expires_at": "2031-05-15", "collected_at": "2026-05-20" },
-  { "id": "card-002", "citizen_id": "cit-003", "card_type": "SENIOR_CITIZEN", "status": "APPROVED", "qr_hash": "def456", "issued_at": "2026-06-01", "expires_at": "2031-06-01", "collected_at": null },
-  { "id": "card-003", "citizen_id": "cit-002", "card_type": "SINGLE_WOMAN", "status": "PENDING_APPROVAL", "qr_hash": "ghi789", "issued_at": null, "expires_at": null, "collected_at": null }
+  {
+    "id": "card-001",
+    "citizen_id": "cit-001",
+    "card_type": "FARMER",
+    "status": "COLLECTED",
+    "qr_hash": "abc123",
+    "issued_at": "2026-05-15",
+    "expires_at": "2031-05-15",
+    "collected_at": "2026-05-20"
+  },
+  {
+    "id": "card-002",
+    "citizen_id": "cit-003",
+    "card_type": "SENIOR_CITIZEN",
+    "status": "APPROVED",
+    "qr_hash": "def456",
+    "issued_at": "2026-06-01",
+    "expires_at": "2031-06-01",
+    "collected_at": null
+  },
+  {
+    "id": "card-003",
+    "citizen_id": "cit-002",
+    "card_type": "SINGLE_WOMAN",
+    "status": "PENDING_APPROVAL",
+    "qr_hash": "ghi789",
+    "issued_at": null,
+    "expires_at": null,
+    "collected_at": null
+  },
+  {
+    "id": "card-004",
+    "citizen_id": "cit-004",
+    "card_type": "DISABILITY",
+    "status": "COLLECTED",
+    "qr_hash": "qr-5d5d2ce",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0011",
+    "citizen_id": "cit-0011",
+    "card_type": "DISABILITY",
+    "status": "PENDING_APPROVAL",
+    "qr_hash": "qr-b4e486c6",
+    "issued_at": null,
+    "expires_at": null,
+    "collected_at": null
+  },
+  {
+    "id": "card-0013",
+    "citizen_id": "cit-0013",
+    "card_type": "FARMER",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e486c8",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0015",
+    "citizen_id": "cit-0015",
+    "card_type": "SINGLE_WOMAN",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e486ca",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0017",
+    "citizen_id": "cit-0017",
+    "card_type": "UNEMPLOYMENT",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e486cc",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0019",
+    "citizen_id": "cit-0019",
+    "card_type": "SENIOR_CITIZEN",
+    "status": "PENDING_APPROVAL",
+    "qr_hash": "qr-b4e486ce",
+    "issued_at": null,
+    "expires_at": null,
+    "collected_at": null
+  },
+  {
+    "id": "card-0042",
+    "citizen_id": "cit-0042",
+    "card_type": "SENIOR_CITIZEN",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e48724",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0044",
+    "citizen_id": "cit-0044",
+    "card_type": "DISABILITY",
+    "status": "PENDING_APPROVAL",
+    "qr_hash": "qr-b4e48726",
+    "issued_at": null,
+    "expires_at": null,
+    "collected_at": null
+  },
+  {
+    "id": "card-0046",
+    "citizen_id": "cit-0046",
+    "card_type": "FARMER",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e48728",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0048",
+    "citizen_id": "cit-0048",
+    "card_type": "SINGLE_WOMAN",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e4872a",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0061",
+    "citizen_id": "cit-0061",
+    "card_type": "SINGLE_WOMAN",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e48761",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0063",
+    "citizen_id": "cit-0063",
+    "card_type": "UNEMPLOYMENT",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e48763",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0065",
+    "citizen_id": "cit-0065",
+    "card_type": "SENIOR_CITIZEN",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e48765",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0079",
+    "citizen_id": "cit-0079",
+    "card_type": "FARMER",
+    "status": "PENDING_APPROVAL",
+    "qr_hash": "qr-b4e48788",
+    "issued_at": null,
+    "expires_at": null,
+    "collected_at": null
+  },
+  {
+    "id": "card-0090",
+    "citizen_id": "cit-0090",
+    "card_type": "DISABILITY",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e487bd",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0092",
+    "citizen_id": "cit-0092",
+    "card_type": "FARMER",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e487bf",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0094",
+    "citizen_id": "cit-0094",
+    "card_type": "SINGLE_WOMAN",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e487c1",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0096",
+    "citizen_id": "cit-0096",
+    "card_type": "UNEMPLOYMENT",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e487c3",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0098",
+    "citizen_id": "cit-0098",
+    "card_type": "SENIOR_CITIZEN",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e487c5",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0100",
+    "citizen_id": "cit-0100",
+    "card_type": "SENIOR_CITIZEN",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e48a67",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0102",
+    "citizen_id": "cit-0102",
+    "card_type": "DISABILITY",
+    "status": "PENDING_APPROVAL",
+    "qr_hash": "qr-b4e48a69",
+    "issued_at": null,
+    "expires_at": null,
+    "collected_at": null
+  },
+  {
+    "id": "card-0104",
+    "citizen_id": "cit-0104",
+    "card_type": "FARMER",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e48a6b",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0106",
+    "citizen_id": "cit-0106",
+    "card_type": "SINGLE_WOMAN",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e48a6d",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0108",
+    "citizen_id": "cit-0108",
+    "card_type": "UNEMPLOYMENT",
+    "status": "PENDING_APPROVAL",
+    "qr_hash": "qr-b4e48a6f",
+    "issued_at": null,
+    "expires_at": null,
+    "collected_at": null
+  },
+  {
+    "id": "card-0131",
+    "citizen_id": "cit-0131",
+    "card_type": "UNEMPLOYMENT",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e48ac5",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0133",
+    "citizen_id": "cit-0133",
+    "card_type": "SENIOR_CITIZEN",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e48ac7",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0135",
+    "citizen_id": "cit-0135",
+    "card_type": "DISABILITY",
+    "status": "PENDING_APPROVAL",
+    "qr_hash": "qr-b4e48ac9",
+    "issued_at": null,
+    "expires_at": null,
+    "collected_at": null
+  },
+  {
+    "id": "card-0137",
+    "citizen_id": "cit-0137",
+    "card_type": "FARMER",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e48acb",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0139",
+    "citizen_id": "cit-0139",
+    "card_type": "SINGLE_WOMAN",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e48acd",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0150",
+    "citizen_id": "cit-0150",
+    "card_type": "FARMER",
+    "status": "PENDING_APPROVAL",
+    "qr_hash": "qr-b4e48b02",
+    "issued_at": null,
+    "expires_at": null,
+    "collected_at": null
+  },
+  {
+    "id": "card-0152",
+    "citizen_id": "cit-0152",
+    "card_type": "SINGLE_WOMAN",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e48b04",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0160",
+    "citizen_id": "cit-0160",
+    "card_type": "FARMER",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e48b21",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0162",
+    "citizen_id": "cit-0162",
+    "card_type": "SINGLE_WOMAN",
+    "status": "PENDING_APPROVAL",
+    "qr_hash": "qr-b4e48b23",
+    "issued_at": null,
+    "expires_at": null,
+    "collected_at": null
+  },
+  {
+    "id": "card-0164",
+    "citizen_id": "cit-0164",
+    "card_type": "UNEMPLOYMENT",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e48b25",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0166",
+    "citizen_id": "cit-0166",
+    "card_type": "SENIOR_CITIZEN",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e48b27",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0168",
+    "citizen_id": "cit-0168",
+    "card_type": "DISABILITY",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e48b29",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0181",
+    "citizen_id": "cit-0181",
+    "card_type": "DISABILITY",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e48b60",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0183",
+    "citizen_id": "cit-0183",
+    "card_type": "FARMER",
+    "status": "PENDING_APPROVAL",
+    "qr_hash": "qr-b4e48b62",
+    "issued_at": null,
+    "expires_at": null,
+    "collected_at": null
+  },
+  {
+    "id": "card-0185",
+    "citizen_id": "cit-0185",
+    "card_type": "SINGLE_WOMAN",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e48b64",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0197",
+    "citizen_id": "cit-0197",
+    "card_type": "FARMER",
+    "status": "PENDING_APPROVAL",
+    "qr_hash": "qr-b4e48b85",
+    "issued_at": null,
+    "expires_at": null,
+    "collected_at": null
+  },
+  {
+    "id": "card-0199",
+    "citizen_id": "cit-0199",
+    "card_type": "SINGLE_WOMAN",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e48b87",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0205",
+    "citizen_id": "cit-0205",
+    "card_type": "FARMER",
+    "status": "PENDING_APPROVAL",
+    "qr_hash": "qr-b4e48e2d",
+    "issued_at": null,
+    "expires_at": null,
+    "collected_at": null
+  },
+  {
+    "id": "card-0207",
+    "citizen_id": "cit-0207",
+    "card_type": "SINGLE_WOMAN",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e48e2f",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0209",
+    "citizen_id": "cit-0209",
+    "card_type": "UNEMPLOYMENT",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e48e31",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0220",
+    "citizen_id": "cit-0220",
+    "card_type": "SINGLE_WOMAN",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e48e66",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0222",
+    "citizen_id": "cit-0222",
+    "card_type": "UNEMPLOYMENT",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e48e68",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0224",
+    "citizen_id": "cit-0224",
+    "card_type": "SENIOR_CITIZEN",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e48e6a",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0226",
+    "citizen_id": "cit-0226",
+    "card_type": "DISABILITY",
+    "status": "PENDING_APPROVAL",
+    "qr_hash": "qr-b4e48e6c",
+    "issued_at": null,
+    "expires_at": null,
+    "collected_at": null
+  },
+  {
+    "id": "card-0228",
+    "citizen_id": "cit-0228",
+    "card_type": "FARMER",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e48e6e",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0251",
+    "citizen_id": "cit-0251",
+    "card_type": "FARMER",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e48ec4",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0253",
+    "citizen_id": "cit-0253",
+    "card_type": "SINGLE_WOMAN",
+    "status": "PENDING_APPROVAL",
+    "qr_hash": "qr-b4e48ec6",
+    "issued_at": null,
+    "expires_at": null,
+    "collected_at": null
+  },
+  {
+    "id": "card-0255",
+    "citizen_id": "cit-0255",
+    "card_type": "UNEMPLOYMENT",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e48ec8",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0257",
+    "citizen_id": "cit-0257",
+    "card_type": "SENIOR_CITIZEN",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e48eca",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0259",
+    "citizen_id": "cit-0259",
+    "card_type": "DISABILITY",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e48ecc",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0270",
+    "citizen_id": "cit-0270",
+    "card_type": "SENIOR_CITIZEN",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e48f01",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0284",
+    "citizen_id": "cit-0284",
+    "card_type": "SENIOR_CITIZEN",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e48f24",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0286",
+    "citizen_id": "cit-0286",
+    "card_type": "SINGLE_WOMAN",
+    "status": "PENDING_APPROVAL",
+    "qr_hash": "qr-b4e48f26",
+    "issued_at": null,
+    "expires_at": null,
+    "collected_at": null
+  },
+  {
+    "id": "card-0288",
+    "citizen_id": "cit-0288",
+    "card_type": "UNEMPLOYMENT",
+    "status": "PENDING_APPROVAL",
+    "qr_hash": "qr-b4e48f28",
+    "issued_at": null,
+    "expires_at": null,
+    "collected_at": null
+  },
+  {
+    "id": "card-0311",
+    "citizen_id": "cit-0311",
+    "card_type": "SINGLE_WOMAN",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e49209",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0313",
+    "citizen_id": "cit-0313",
+    "card_type": "UNEMPLOYMENT",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e4920b",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0315",
+    "citizen_id": "cit-0315",
+    "card_type": "SENIOR_CITIZEN",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e4920d",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0325",
+    "citizen_id": "cit-0325",
+    "card_type": "SENIOR_CITIZEN",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e4922c",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0327",
+    "citizen_id": "cit-0327",
+    "card_type": "DISABILITY",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e4922e",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0329",
+    "citizen_id": "cit-0329",
+    "card_type": "FARMER",
+    "status": "PENDING_APPROVAL",
+    "qr_hash": "qr-b4e49230",
+    "issued_at": null,
+    "expires_at": null,
+    "collected_at": null
+  },
+  {
+    "id": "card-0340",
+    "citizen_id": "cit-0340",
+    "card_type": "DISABILITY",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e49265",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0342",
+    "citizen_id": "cit-0342",
+    "card_type": "FARMER",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e49267",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0344",
+    "citizen_id": "cit-0344",
+    "card_type": "SINGLE_WOMAN",
+    "status": "PENDING_APPROVAL",
+    "qr_hash": "qr-b4e49269",
+    "issued_at": null,
+    "expires_at": null,
+    "collected_at": null
+  },
+  {
+    "id": "card-0346",
+    "citizen_id": "cit-0346",
+    "card_type": "UNEMPLOYMENT",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e4926b",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0348",
+    "citizen_id": "cit-0348",
+    "card_type": "SENIOR_CITIZEN",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e4926d",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0371",
+    "citizen_id": "cit-0371",
+    "card_type": "SENIOR_CITIZEN",
+    "status": "PENDING_APPROVAL",
+    "qr_hash": "qr-b4e492c3",
+    "issued_at": null,
+    "expires_at": null,
+    "collected_at": null
+  },
+  {
+    "id": "card-0373",
+    "citizen_id": "cit-0373",
+    "card_type": "DISABILITY",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e492c5",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0375",
+    "citizen_id": "cit-0375",
+    "card_type": "FARMER",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e492c7",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0377",
+    "citizen_id": "cit-0377",
+    "card_type": "SINGLE_WOMAN",
+    "status": "PENDING_APPROVAL",
+    "qr_hash": "qr-b4e492c9",
+    "issued_at": null,
+    "expires_at": null,
+    "collected_at": null
+  },
+  {
+    "id": "card-0379",
+    "citizen_id": "cit-0379",
+    "card_type": "UNEMPLOYMENT",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e492cb",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0390",
+    "citizen_id": "cit-0390",
+    "card_type": "SINGLE_WOMAN",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e49300",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0410",
+    "citizen_id": "cit-0410",
+    "card_type": "FARMER",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e495c9",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0412",
+    "citizen_id": "cit-0412",
+    "card_type": "SINGLE_WOMAN",
+    "status": "PENDING_APPROVAL",
+    "qr_hash": "qr-b4e495cb",
+    "issued_at": null,
+    "expires_at": null,
+    "collected_at": null
+  },
+  {
+    "id": "card-0414",
+    "citizen_id": "cit-0414",
+    "card_type": "UNEMPLOYMENT",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e495cd",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0416",
+    "citizen_id": "cit-0416",
+    "card_type": "SENIOR_CITIZEN",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e495cf",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0418",
+    "citizen_id": "cit-0418",
+    "card_type": "DISABILITY",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e495d1",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0431",
+    "citizen_id": "cit-0431",
+    "card_type": "DISABILITY",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e49608",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0433",
+    "citizen_id": "cit-0433",
+    "card_type": "FARMER",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e4960a",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0435",
+    "citizen_id": "cit-0435",
+    "card_type": "SINGLE_WOMAN",
+    "status": "PENDING_APPROVAL",
+    "qr_hash": "qr-b4e4960c",
+    "issued_at": null,
+    "expires_at": null,
+    "collected_at": null
+  },
+  {
+    "id": "card-0447",
+    "citizen_id": "cit-0447",
+    "card_type": "UNEMPLOYMENT",
+    "status": "PENDING_APPROVAL",
+    "qr_hash": "qr-b4e4962d",
+    "issued_at": null,
+    "expires_at": null,
+    "collected_at": null
+  },
+  {
+    "id": "card-0449",
+    "citizen_id": "cit-0449",
+    "card_type": "SENIOR_CITIZEN",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e4962f",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0460",
+    "citizen_id": "cit-0460",
+    "card_type": "UNEMPLOYMENT",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e49664",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0462",
+    "citizen_id": "cit-0462",
+    "card_type": "SENIOR_CITIZEN",
+    "status": "PENDING_APPROVAL",
+    "qr_hash": "qr-b4e49666",
+    "issued_at": null,
+    "expires_at": null,
+    "collected_at": null
+  },
+  {
+    "id": "card-0464",
+    "citizen_id": "cit-0464",
+    "card_type": "DISABILITY",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e49668",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0466",
+    "citizen_id": "cit-0466",
+    "card_type": "FARMER",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e4966a",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0468",
+    "citizen_id": "cit-0468",
+    "card_type": "SINGLE_WOMAN",
+    "status": "PENDING_APPROVAL",
+    "qr_hash": "qr-b4e4966c",
+    "issued_at": null,
+    "expires_at": null,
+    "collected_at": null
+  },
+  {
+    "id": "card-0491",
+    "citizen_id": "cit-0491",
+    "card_type": "DISABILITY",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e496c2",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0493",
+    "citizen_id": "cit-0493",
+    "card_type": "UNEMPLOYMENT",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e496c4",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0495",
+    "citizen_id": "cit-0495",
+    "card_type": "SENIOR_CITIZEN",
+    "status": "PENDING_APPROVAL",
+    "qr_hash": "qr-b4e496c6",
+    "issued_at": null,
+    "expires_at": null,
+    "collected_at": null
+  },
+  {
+    "id": "card-0497",
+    "citizen_id": "cit-0497",
+    "card_type": "DISABILITY",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e496c8",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0499",
+    "citizen_id": "cit-0499",
+    "card_type": "FARMER",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e496ca",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0501",
+    "citizen_id": "cit-0501",
+    "card_type": "FARMER",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e4996c",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0503",
+    "citizen_id": "cit-0503",
+    "card_type": "SINGLE_WOMAN",
+    "status": "PENDING_APPROVAL",
+    "qr_hash": "qr-b4e4996e",
+    "issued_at": null,
+    "expires_at": null,
+    "collected_at": null
+  },
+  {
+    "id": "card-0505",
+    "citizen_id": "cit-0505",
+    "card_type": "UNEMPLOYMENT",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e49970",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0507",
+    "citizen_id": "cit-0507",
+    "card_type": "SENIOR_CITIZEN",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e49972",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0509",
+    "citizen_id": "cit-0509",
+    "card_type": "DISABILITY",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e49974",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0520",
+    "citizen_id": "cit-0520",
+    "card_type": "SENIOR_CITIZEN",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e499a9",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0530",
+    "citizen_id": "cit-0530",
+    "card_type": "SENIOR_CITIZEN",
+    "status": "PENDING_APPROVAL",
+    "qr_hash": "qr-b4e499c8",
+    "issued_at": null,
+    "expires_at": null,
+    "collected_at": null
+  },
+  {
+    "id": "card-0532",
+    "citizen_id": "cit-0532",
+    "card_type": "DISABILITY",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e499ca",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0534",
+    "citizen_id": "cit-0534",
+    "card_type": "FARMER",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e499cc",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0536",
+    "citizen_id": "cit-0536",
+    "card_type": "SINGLE_WOMAN",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e499ce",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0538",
+    "citizen_id": "cit-0538",
+    "card_type": "UNEMPLOYMENT",
+    "status": "PENDING_APPROVAL",
+    "qr_hash": "qr-b4e499d0",
+    "issued_at": null,
+    "expires_at": null,
+    "collected_at": null
+  },
+  {
+    "id": "card-0551",
+    "citizen_id": "cit-0551",
+    "card_type": "UNEMPLOYMENT",
+    "status": "PENDING_APPROVAL",
+    "qr_hash": "qr-b4e49a07",
+    "issued_at": null,
+    "expires_at": null,
+    "collected_at": null
+  },
+  {
+    "id": "card-0553",
+    "citizen_id": "cit-0553",
+    "card_type": "SENIOR_CITIZEN",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e49a09",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0567",
+    "citizen_id": "cit-0567",
+    "card_type": "SENIOR_CITIZEN",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e49a2c",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0569",
+    "citizen_id": "cit-0569",
+    "card_type": "DISABILITY",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e49a2e",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0580",
+    "citizen_id": "cit-0580",
+    "card_type": "FARMER",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e49a63",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0582",
+    "citizen_id": "cit-0582",
+    "card_type": "SINGLE_WOMAN",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e49a65",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0584",
+    "citizen_id": "cit-0584",
+    "card_type": "UNEMPLOYMENT",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e49a67",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0586",
+    "citizen_id": "cit-0586",
+    "card_type": "SENIOR_CITIZEN",
+    "status": "PENDING_APPROVAL",
+    "qr_hash": "qr-b4e49a69",
+    "issued_at": null,
+    "expires_at": null,
+    "collected_at": null
+  },
+  {
+    "id": "card-0621",
+    "citizen_id": "cit-0621",
+    "card_type": "SENIOR_CITIZEN",
+    "status": "PENDING_APPROVAL",
+    "qr_hash": "qr-b4e49d6b",
+    "issued_at": null,
+    "expires_at": null,
+    "collected_at": null
+  },
+  {
+    "id": "card-0623",
+    "citizen_id": "cit-0623",
+    "card_type": "DISABILITY",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e49d6d",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0625",
+    "citizen_id": "cit-0625",
+    "card_type": "FARMER",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e49d6f",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0627",
+    "citizen_id": "cit-0627",
+    "card_type": "SINGLE_WOMAN",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e49d71",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0629",
+    "citizen_id": "cit-0629",
+    "card_type": "UNEMPLOYMENT",
+    "status": "PENDING_APPROVAL",
+    "qr_hash": "qr-b4e49d73",
+    "issued_at": null,
+    "expires_at": null,
+    "collected_at": null
+  },
+  {
+    "id": "card-0640",
+    "citizen_id": "cit-0640",
+    "card_type": "SINGLE_WOMAN",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e49da8",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0652",
+    "citizen_id": "cit-0652",
+    "card_type": "FARMER",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e49dc9",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0654",
+    "citizen_id": "cit-0654",
+    "card_type": "SINGLE_WOMAN",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e49dcb",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0656",
+    "citizen_id": "cit-0656",
+    "card_type": "DISABILITY",
+    "status": "PENDING_APPROVAL",
+    "qr_hash": "qr-b4e49dcd",
+    "issued_at": null,
+    "expires_at": null,
+    "collected_at": null
+  },
+  {
+    "id": "card-0658",
+    "citizen_id": "cit-0658",
+    "card_type": "FARMER",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e49dcf",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0671",
+    "citizen_id": "cit-0671",
+    "card_type": "FARMER",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e49e06",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0673",
+    "citizen_id": "cit-0673",
+    "card_type": "SINGLE_WOMAN",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e49e08",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0685",
+    "citizen_id": "cit-0685",
+    "card_type": "FARMER",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e49e29",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0687",
+    "citizen_id": "cit-0687",
+    "card_type": "SINGLE_WOMAN",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e49e2b",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0689",
+    "citizen_id": "cit-0689",
+    "card_type": "UNEMPLOYMENT",
+    "status": "PENDING_APPROVAL",
+    "qr_hash": "qr-b4e49e2d",
+    "issued_at": null,
+    "expires_at": null,
+    "collected_at": null
+  },
+  {
+    "id": "card-0710",
+    "citizen_id": "cit-0710",
+    "card_type": "UNEMPLOYMENT",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e4a10c",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0712",
+    "citizen_id": "cit-0712",
+    "card_type": "SENIOR_CITIZEN",
+    "status": "PENDING_APPROVAL",
+    "qr_hash": "qr-b4e4a10e",
+    "issued_at": null,
+    "expires_at": null,
+    "collected_at": null
+  },
+  {
+    "id": "card-0714",
+    "citizen_id": "cit-0714",
+    "card_type": "DISABILITY",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e4a110",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0716",
+    "citizen_id": "cit-0716",
+    "card_type": "FARMER",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e4a112",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0718",
+    "citizen_id": "cit-0718",
+    "card_type": "SINGLE_WOMAN",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e4a114",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0741",
+    "citizen_id": "cit-0741",
+    "card_type": "SINGLE_WOMAN",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e4a16a",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0743",
+    "citizen_id": "cit-0743",
+    "card_type": "UNEMPLOYMENT",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e4a16c",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0745",
+    "citizen_id": "cit-0745",
+    "card_type": "SENIOR_CITIZEN",
+    "status": "PENDING_APPROVAL",
+    "qr_hash": "qr-b4e4a16e",
+    "issued_at": null,
+    "expires_at": null,
+    "collected_at": null
+  },
+  {
+    "id": "card-0747",
+    "citizen_id": "cit-0747",
+    "card_type": "DISABILITY",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e4a170",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0749",
+    "citizen_id": "cit-0749",
+    "card_type": "FARMER",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e4a172",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0772",
+    "citizen_id": "cit-0772",
+    "card_type": "SENIOR_CITIZEN",
+    "status": "PENDING_APPROVAL",
+    "qr_hash": "qr-b4e4a1c8",
+    "issued_at": null,
+    "expires_at": null,
+    "collected_at": null
+  },
+  {
+    "id": "card-0774",
+    "citizen_id": "cit-0774",
+    "card_type": "DISABILITY",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e4a1ca",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0776",
+    "citizen_id": "cit-0776",
+    "card_type": "FARMER",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e4a1cc",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0778",
+    "citizen_id": "cit-0778",
+    "card_type": "SINGLE_WOMAN",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e4a1ce",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0791",
+    "citizen_id": "cit-0791",
+    "card_type": "SENIOR_CITIZEN",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e4a205",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0801",
+    "citizen_id": "cit-0801",
+    "card_type": "UNEMPLOYMENT",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e4a4af",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0803",
+    "citizen_id": "cit-0803",
+    "card_type": "SENIOR_CITIZEN",
+    "status": "PENDING_APPROVAL",
+    "qr_hash": "qr-b4e4a4b1",
+    "issued_at": null,
+    "expires_at": null,
+    "collected_at": null
+  },
+  {
+    "id": "card-0817",
+    "citizen_id": "cit-0817",
+    "card_type": "FARMER",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e4a4d4",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0819",
+    "citizen_id": "cit-0819",
+    "card_type": "SINGLE_WOMAN",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e4a4d6",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0830",
+    "citizen_id": "cit-0830",
+    "card_type": "FARMER",
+    "status": "PENDING_APPROVAL",
+    "qr_hash": "qr-b4e4a50b",
+    "issued_at": null,
+    "expires_at": null,
+    "collected_at": null
+  },
+  {
+    "id": "card-0832",
+    "citizen_id": "cit-0832",
+    "card_type": "SINGLE_WOMAN",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e4a50d",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0834",
+    "citizen_id": "cit-0834",
+    "card_type": "UNEMPLOYMENT",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e4a50f",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0836",
+    "citizen_id": "cit-0836",
+    "card_type": "SENIOR_CITIZEN",
+    "status": "PENDING_APPROVAL",
+    "qr_hash": "qr-b4e4a511",
+    "issued_at": null,
+    "expires_at": null,
+    "collected_at": null
+  },
+  {
+    "id": "card-0861",
+    "citizen_id": "cit-0861",
+    "card_type": "UNEMPLOYMENT",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e4a569",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0863",
+    "citizen_id": "cit-0863",
+    "card_type": "FARMER",
+    "status": "PENDING_APPROVAL",
+    "qr_hash": "qr-b4e4a56b",
+    "issued_at": null,
+    "expires_at": null,
+    "collected_at": null
+  },
+  {
+    "id": "card-0865",
+    "citizen_id": "cit-0865",
+    "card_type": "SINGLE_WOMAN",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e4a56d",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0867",
+    "citizen_id": "cit-0867",
+    "card_type": "UNEMPLOYMENT",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e4a56f",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0869",
+    "citizen_id": "cit-0869",
+    "card_type": "SENIOR_CITIZEN",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e4a571",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0890",
+    "citizen_id": "cit-0890",
+    "card_type": "FARMER",
+    "status": "PENDING_APPROVAL",
+    "qr_hash": "qr-b4e4a5c5",
+    "issued_at": null,
+    "expires_at": null,
+    "collected_at": null
+  },
+  {
+    "id": "card-0892",
+    "citizen_id": "cit-0892",
+    "card_type": "SINGLE_WOMAN",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e4a5c7",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0894",
+    "citizen_id": "cit-0894",
+    "card_type": "UNEMPLOYMENT",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e4a5c9",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0896",
+    "citizen_id": "cit-0896",
+    "card_type": "SENIOR_CITIZEN",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e4a5cb",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0898",
+    "citizen_id": "cit-0898",
+    "card_type": "DISABILITY",
+    "status": "PENDING_APPROVAL",
+    "qr_hash": "qr-b4e4a5cd",
+    "issued_at": null,
+    "expires_at": null,
+    "collected_at": null
+  },
+  {
+    "id": "card-0900",
+    "citizen_id": "cit-0900",
+    "card_type": "SINGLE_WOMAN",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e4a86f",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0902",
+    "citizen_id": "cit-0902",
+    "card_type": "UNEMPLOYMENT",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e4a871",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0904",
+    "citizen_id": "cit-0904",
+    "card_type": "SENIOR_CITIZEN",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e4a873",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0906",
+    "citizen_id": "cit-0906",
+    "card_type": "DISABILITY",
+    "status": "PENDING_APPROVAL",
+    "qr_hash": "qr-b4e4a875",
+    "issued_at": null,
+    "expires_at": null,
+    "collected_at": null
+  },
+  {
+    "id": "card-0908",
+    "citizen_id": "cit-0908",
+    "card_type": "FARMER",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e4a877",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0921",
+    "citizen_id": "cit-0921",
+    "card_type": "FARMER",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e4a8ae",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0923",
+    "citizen_id": "cit-0923",
+    "card_type": "SINGLE_WOMAN",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e4a8b0",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0935",
+    "citizen_id": "cit-0935",
+    "card_type": "FARMER",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e4a8d1",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0937",
+    "citizen_id": "cit-0937",
+    "card_type": "SINGLE_WOMAN",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e4a8d3",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0939",
+    "citizen_id": "cit-0939",
+    "card_type": "UNEMPLOYMENT",
+    "status": "PENDING_APPROVAL",
+    "qr_hash": "qr-b4e4a8d5",
+    "issued_at": null,
+    "expires_at": null,
+    "collected_at": null
+  },
+  {
+    "id": "card-0950",
+    "citizen_id": "cit-0950",
+    "card_type": "SENIOR_CITIZEN",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e4a90a",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0952",
+    "citizen_id": "cit-0952",
+    "card_type": "DISABILITY",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e4a90c",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0954",
+    "citizen_id": "cit-0954",
+    "card_type": "FARMER",
+    "status": "PENDING_APPROVAL",
+    "qr_hash": "qr-b4e4a90e",
+    "issued_at": null,
+    "expires_at": null,
+    "collected_at": null
+  },
+  {
+    "id": "card-0956",
+    "citizen_id": "cit-0956",
+    "card_type": "SINGLE_WOMAN",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e4a910",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0968",
+    "citizen_id": "cit-0968",
+    "card_type": "FARMER",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e4a931",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0981",
+    "citizen_id": "cit-0981",
+    "card_type": "FARMER",
+    "status": "PENDING_APPROVAL",
+    "qr_hash": "qr-b4e4a968",
+    "issued_at": null,
+    "expires_at": null,
+    "collected_at": null
+  },
+  {
+    "id": "card-0983",
+    "citizen_id": "cit-0983",
+    "card_type": "SINGLE_WOMAN",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e4a96a",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0985",
+    "citizen_id": "cit-0985",
+    "card_type": "UNEMPLOYMENT",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e4a96c",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0987",
+    "citizen_id": "cit-0987",
+    "card_type": "SENIOR_CITIZEN",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e4a96e",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-0989",
+    "citizen_id": "cit-0989",
+    "card_type": "DISABILITY",
+    "status": "PENDING_APPROVAL",
+    "qr_hash": "qr-b4e4a970",
+    "issued_at": null,
+    "expires_at": null,
+    "collected_at": null
+  },
+  {
+    "id": "card-1000",
+    "citizen_id": "cit-1000",
+    "card_type": "DISABILITY",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e4fb05",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-1002",
+    "citizen_id": "cit-1002",
+    "card_type": "FARMER",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e4fb07",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-1004",
+    "citizen_id": "cit-1004",
+    "card_type": "SINGLE_WOMAN",
+    "status": "PENDING_APPROVAL",
+    "qr_hash": "qr-b4e4fb09",
+    "issued_at": null,
+    "expires_at": null,
+    "collected_at": null
+  },
+  {
+    "id": "card-1006",
+    "citizen_id": "cit-1006",
+    "card_type": "UNEMPLOYMENT",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e4fb0b",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-1008",
+    "citizen_id": "cit-1008",
+    "card_type": "SENIOR_CITIZEN",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e4fb0d",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-1031",
+    "citizen_id": "cit-1031",
+    "card_type": "SINGLE_WOMAN",
+    "status": "PENDING_APPROVAL",
+    "qr_hash": "qr-b4e4fb63",
+    "issued_at": null,
+    "expires_at": null,
+    "collected_at": null
+  },
+  {
+    "id": "card-1033",
+    "citizen_id": "cit-1033",
+    "card_type": "UNEMPLOYMENT",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e4fb65",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-1035",
+    "citizen_id": "cit-1035",
+    "card_type": "SENIOR_CITIZEN",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e4fb67",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-1037",
+    "citizen_id": "cit-1037",
+    "card_type": "DISABILITY",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e4fb69",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-1039",
+    "citizen_id": "cit-1039",
+    "card_type": "FARMER",
+    "status": "PENDING_APPROVAL",
+    "qr_hash": "qr-b4e4fb6b",
+    "issued_at": null,
+    "expires_at": null,
+    "collected_at": null
+  },
+  {
+    "id": "card-1050",
+    "citizen_id": "cit-1050",
+    "card_type": "SINGLE_WOMAN",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e4fba0",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-1062",
+    "citizen_id": "cit-1062",
+    "card_type": "FARMER",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e4fbc1",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-1064",
+    "citizen_id": "cit-1064",
+    "card_type": "SINGLE_WOMAN",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e4fbc3",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-1066",
+    "citizen_id": "cit-1066",
+    "card_type": "UNEMPLOYMENT",
+    "status": "PENDING_APPROVAL",
+    "qr_hash": "qr-b4e4fbc5",
+    "issued_at": null,
+    "expires_at": null,
+    "collected_at": null
+  },
+  {
+    "id": "card-1068",
+    "citizen_id": "cit-1068",
+    "card_type": "SENIOR_CITIZEN",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e4fbc7",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-1081",
+    "citizen_id": "cit-1081",
+    "card_type": "SENIOR_CITIZEN",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e4fbfe",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-1083",
+    "citizen_id": "cit-1083",
+    "card_type": "DISABILITY",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e4fc00",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-1085",
+    "citizen_id": "cit-1085",
+    "card_type": "FARMER",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e4fc02",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-1087",
+    "citizen_id": "cit-1087",
+    "card_type": "SINGLE_WOMAN",
+    "status": "PENDING_APPROVAL",
+    "qr_hash": "qr-b4e4fc04",
+    "issued_at": null,
+    "expires_at": null,
+    "collected_at": null
+  },
+  {
+    "id": "card-1099",
+    "citizen_id": "cit-1099",
+    "card_type": "UNEMPLOYMENT",
+    "status": "PENDING_APPROVAL",
+    "qr_hash": "qr-b4e4fc25",
+    "issued_at": null,
+    "expires_at": null,
+    "collected_at": null
+  },
+  {
+    "id": "card-1107",
+    "citizen_id": "cit-1107",
+    "card_type": "FARMER",
+    "status": "PENDING_APPROVAL",
+    "qr_hash": "qr-b4e4fecd",
+    "issued_at": null,
+    "expires_at": null,
+    "collected_at": null
+  },
+  {
+    "id": "card-1109",
+    "citizen_id": "cit-1109",
+    "card_type": "SINGLE_WOMAN",
+    "status": "PENDING_APPROVAL",
+    "qr_hash": "qr-b4e4fecf",
+    "issued_at": null,
+    "expires_at": null,
+    "collected_at": null
+  },
+  {
+    "id": "card-1120",
+    "citizen_id": "cit-1120",
+    "card_type": "FARMER",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e4ff04",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-1122",
+    "citizen_id": "cit-1122",
+    "card_type": "SINGLE_WOMAN",
+    "status": "PENDING_APPROVAL",
+    "qr_hash": "qr-b4e4ff06",
+    "issued_at": null,
+    "expires_at": null,
+    "collected_at": null
+  },
+  {
+    "id": "card-1124",
+    "citizen_id": "cit-1124",
+    "card_type": "UNEMPLOYMENT",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e4ff08",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-1126",
+    "citizen_id": "cit-1126",
+    "card_type": "SENIOR_CITIZEN",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e4ff0a",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-1128",
+    "citizen_id": "cit-1128",
+    "card_type": "DISABILITY",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e4ff0c",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-1151",
+    "citizen_id": "cit-1151",
+    "card_type": "DISABILITY",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e4ff62",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-1153",
+    "citizen_id": "cit-1153",
+    "card_type": "FARMER",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e4ff64",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-1155",
+    "citizen_id": "cit-1155",
+    "card_type": "SINGLE_WOMAN",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e4ff66",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-1157",
+    "citizen_id": "cit-1157",
+    "card_type": "UNEMPLOYMENT",
+    "status": "PENDING_APPROVAL",
+    "qr_hash": "qr-b4e4ff68",
+    "issued_at": null,
+    "expires_at": null,
+    "collected_at": null
+  },
+  {
+    "id": "card-1159",
+    "citizen_id": "cit-1159",
+    "card_type": "SENIOR_CITIZEN",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e4ff6a",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-1170",
+    "citizen_id": "cit-1170",
+    "card_type": "UNEMPLOYMENT",
+    "status": "PENDING_APPROVAL",
+    "qr_hash": "qr-b4e4ff9f",
+    "issued_at": null,
+    "expires_at": null,
+    "collected_at": null
+  },
+  {
+    "id": "card-1172",
+    "citizen_id": "cit-1172",
+    "card_type": "SENIOR_CITIZEN",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e4ffa1",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-1182",
+    "citizen_id": "cit-1182",
+    "card_type": "SENIOR_CITIZEN",
+    "status": "PENDING_APPROVAL",
+    "qr_hash": "qr-b4e4ffc0",
+    "issued_at": null,
+    "expires_at": null,
+    "collected_at": null
+  },
+  {
+    "id": "card-1184",
+    "citizen_id": "cit-1184",
+    "card_type": "DISABILITY",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e4ffc2",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-1186",
+    "citizen_id": "cit-1186",
+    "card_type": "FARMER",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e4ffc4",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  },
+  {
+    "id": "card-1188",
+    "citizen_id": "cit-1188",
+    "card_type": "SINGLE_WOMAN",
+    "status": "COLLECTED",
+    "qr_hash": "qr-b4e4ffc6",
+    "issued_at": "2026-08-26",
+    "expires_at": "2031-08-26",
+    "collected_at": "2026-08-26"
+  }
 ]

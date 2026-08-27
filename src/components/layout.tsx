@@ -4,7 +4,7 @@ import React from "react";
 import Image from "next/image";
 import { Box, Container, ThemeProvider, Typography } from "@mui/material";
 import theme from "@/lib/theme";
-import { PortalSidebar } from "./Sidebar";
+import { DashboardSidebar } from "./Sidebar";
 
 interface PortalLayoutProps {
   children: React.ReactNode;
@@ -14,7 +14,7 @@ export function PortalLayout({ children }: PortalLayoutProps) {
   return (
     <ThemeProvider theme={theme}>
       <Box className="flex min-h-screen bg-[#F8FAFC]">
-        <PortalSidebar />
+        <DashboardSidebar />
         <Box className="flex flex-1 flex-col">
           <Box
             component="header"

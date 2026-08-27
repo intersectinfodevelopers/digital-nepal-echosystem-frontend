@@ -315,7 +315,7 @@ export default function Sidebar({
 
   return (
     <aside
-      aria-label="Portal Navigation Sidebar"
+      aria-label="Dashboard Sidebar"
       className={`h-dvh sticky top-0 flex flex-col justify-between overflow-hidden p-4 bg-[#0B3067] text-white ${theme.border} ${isCollapsed ? "w-20" : "w-64"} transition-all duration-300 select-none`}
     >
       <button

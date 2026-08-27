@@ -20,10 +20,9 @@ import {
   LogoutOutlined,
   MyLocation,
   ShieldOutlined,
+
 } from "@mui/icons-material";
-import { PortalSidebar } from "@/components/Sidebar";
 import { PortalStepper } from "@/components/Stepper";
-import { PortalHeader } from "@/components/ui";
 import { HOUSEHOLD_OWNERSHIP_OPTIONS } from "@/constants";
 import {
   formatScNumber,
@@ -422,7 +421,7 @@ function BottomNavigation({
   onNext: () => void;
 }) {
   return (
-    <footer className="fixed bottom-0 left-[270px] right-0 z-30 flex h-[76px] items-center justify-between border-t border-[#E5E7EB] bg-white px-6 md:px-10">
+    <footer className="registration-footer sticky bottom-0 z-30 flex h-19 items-center justify-between border-t border-[#E5E7EB] bg-white px-4 sm:px-6 md:px-10">
       <button
         type="button"
         onClick={onBack}
@@ -450,16 +449,15 @@ export function HouseholdStep() {
 
   const handleNext = () => {
     if (form.attemptProceed()) {
-      router.push("/portal/disability");
+      router.push("/ward/dashboard/registercitizen/disability");
     }
   };
 
   return (
     <div className="flex min-h-screen bg-[#F8FAFC]">
-      <PortalSidebar activeLabel="Household" />
 
       <div className="flex min-w-0 flex-1 flex-col">
-        <PortalHeader />
+        
 
         <main className="mx-auto w-full max-w-[1440px] flex-1 px-6 py-8 pb-40 md:px-10">
           <PortalStepper currentStep={5} />
@@ -467,7 +465,7 @@ export function HouseholdStep() {
           <div className="flex flex-col gap-6 xl:flex-row">
             <div className="min-w-0 flex-1">
               <section className="rounded-[12px] border border-[#E5E7EB] bg-white p-8 shadow-[0_1px_3px_rgba(15,23,42,0.06)] md:p-10">
-                <h2 className="font-poppins text-[38px] font-bold leading-tight tracking-tight text-[#0E3A8A]">
+                <h2 className="registration-title font-poppins text-[38px] font-bold leading-tight tracking-tight text-[#0E3A8A]">
                   Household Details
                 </h2>
                 <p className="mt-2 font-poppins text-[16px] text-[#64748B]">
@@ -557,9 +555,8 @@ export function HouseholdStep() {
             </aside>
           </div>
         </main>
-
         <BottomNavigation
-          onBack={() => router.push("/portal/employment")}
+          onBack={() => router.push("/ward/dashboard/registercitizen/employment")}
           onNext={handleNext}
         />
       </div>

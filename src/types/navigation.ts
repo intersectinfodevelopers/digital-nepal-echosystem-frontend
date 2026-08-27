@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 
 export type WardViewId =
   | "dashboard"
+  | "analytics"
   | "citizens"
   | "map"
   | "national-map"
@@ -24,6 +25,8 @@ export interface AdminNavItem {
   id: string;
   label: string;
   icon?: ReactNode;
+  hasMapTree?: boolean;
+  mapHref?: string;
 }
 
 export type AdminNavSection =

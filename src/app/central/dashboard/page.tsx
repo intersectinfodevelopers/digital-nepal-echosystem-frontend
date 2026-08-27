@@ -10,14 +10,7 @@ import {
   MapOutlined,
   AnalyticsOutlined,
   NotificationsNone,
-  PersonOutlined,
   WarningAmberOutlined,
-  ShieldOutlined,
-  PsychologyOutlined,
-  FactCheckOutlined,
-  FileDownloadOutlined,
-  FolderZipOutlined,
-  ChevronRight,
 } from "@mui/icons-material";
 
 import citizens from "../../../../data/citizens.json";
@@ -109,7 +102,6 @@ export default function CentralDashboardPage() {
     const educationProfiles = education ? education.length : 0;
     const disabilityProfiles = disability ? disability.filter((d) => d.disability_type !== null).length : 0;
 
-    // Foreign employment corridor map
     const corridorMap: Record<string, { name: string; visa: string; count: number }> = {
       AE: { name: "United Arab Emirates", visa: "Gov. Works Contract Permit", count: 0 },
       QA: { name: "State of Qatar Territory", visa: "Work Clearance Visa", count: 0 },
@@ -126,7 +118,6 @@ export default function CentralDashboardPage() {
       }
     });
 
-    // Dynamic Employment categories breakdown
     const categoryCounts: Record<string, number> = {};
     (employment || []).forEach((item) => {
       if (item.category) {
@@ -134,7 +125,6 @@ export default function CentralDashboardPage() {
       }
     });
 
-    // Province Rows Data Matrix 
     const provinceRows = (provinces || []).map((province, idx) => {
       const cCount = provCitizensCount.get(province.id) ?? 0;
       const mCount = provMunisCount.get(province.id) ?? 0;
@@ -173,7 +163,6 @@ export default function CentralDashboardPage() {
 
   return (
     <div className="space-y-6 pb-12 text-slate-800 antialiased">
-      {/* 2. HEADER / BREADCRUMB SECTION */}
       <div className="flex flex-col justify-between gap-4 border-b border-slate-200/80 pb-5 sm:flex-row sm:items-center">
         <div>
           <div className="flex items-center gap-1.5 text-sm font-semibold text-slate-500">
@@ -220,9 +209,7 @@ export default function CentralDashboardPage() {
         </div>
       </div>
 
-      {/* 3. TOP KPI CARD GRID (6 Cards) */}
       <div className="grid grid-cols-1 gap-4.5 sm:grid-cols-2 lg:grid-cols-3">
-        {/* Card 1 — Total Citizens */}
         <div className="rounded-xl border border-slate-200/90 bg-white p-4.5 shadow-2xs">
           <div className="flex items-center justify-between">
             <span className="text-sm font-semibold text-slate-600">Total Citizens Nationally</span>
@@ -240,7 +227,6 @@ export default function CentralDashboardPage() {
           </div>
         </div>
 
-        {/* Card 2 — Total Federal Provinces */}
         <div className="rounded-xl border border-slate-200/90 bg-white p-4.5 shadow-2xs">
           <div className="flex items-center justify-between">
             <span className="text-sm font-semibold text-slate-600">Total Federal Provinces</span>
@@ -259,7 +245,6 @@ export default function CentralDashboardPage() {
           </div>
         </div>
 
-        {/* Card 3 — Total Municipalities */}
         <div className="rounded-xl border border-slate-200/90 bg-white p-4.5 shadow-2xs">
           <div className="flex items-center justify-between">
             <span className="text-sm font-semibold text-slate-600">Total Municipalities</span>
@@ -278,7 +263,6 @@ export default function CentralDashboardPage() {
           </div>
         </div>
 
-        {/* Card 4 — National Wards Synced */}
         <div className="rounded-xl border border-slate-200/90 bg-white p-4.5 shadow-2xs">
           <div className="flex items-center justify-between">
             <span className="text-sm font-semibold text-slate-600">National Wards Synced</span>
@@ -296,7 +280,6 @@ export default function CentralDashboardPage() {
           </div>
         </div>
 
-        {/* Card 5 — ID Cards Issued */}
         <div className="rounded-xl border border-slate-200/90 bg-white p-4.5 shadow-2xs">
           <div className="flex items-center justify-between">
             <span className="text-sm font-semibold text-slate-600">ID Cards Issued</span>
@@ -315,7 +298,6 @@ export default function CentralDashboardPage() {
           </div>
         </div>
 
-        {/* Card 6 — Active Grievances Open */}
         <div className="rounded-xl border border-slate-200/90 bg-white p-4.5 shadow-2xs">
           <div className="flex items-center justify-between">
             <span className="text-sm font-semibold text-slate-600">Active Grievances Open</span>
@@ -334,13 +316,11 @@ export default function CentralDashboardPage() {
         </div>
       </div>
 
-      {/* 4. SOCIAL REGISTRATION PROFILES SECTION */}
       <div>
         <h2 className="text-base font-bold tracking-tight text-slate-900">
           Social Registration Profiles
         </h2>
         <div className="mt-3 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {/* Household Card */}
           <div className="rounded-xl border border-slate-200/90 bg-white p-4.5 shadow-2xs flex items-center justify-between">
             <div>
               <div className="text-xs font-medium text-slate-600">Registered Households</div>
@@ -351,15 +331,8 @@ export default function CentralDashboardPage() {
                 {dataMetrics.registeredHouseholds > 0 ? `${dataMetrics.registeredHouseholds} Records` : "Not Available"}
               </div>
             </div>
-            <div className="relative h-14 w-14 shrink-0">
-              <svg className="h-full w-full" viewBox="0 0 36 36">
-                <path className="text-slate-100" strokeWidth="3.5" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
-                <path className="text-amber-500" strokeDasharray="33, 100" strokeWidth="3.5" strokeLinecap="round" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
-              </svg>
-            </div>
           </div>
 
-          {/* Employment Card */}
           <div className="rounded-xl border border-slate-200/90 bg-white p-4.5 shadow-2xs flex items-center justify-between">
             <div>
               <div className="text-xs font-medium text-slate-600">Employment Profiles</div>
@@ -370,15 +343,8 @@ export default function CentralDashboardPage() {
                 {dataMetrics.employmentProfiles > 0 ? `${dataMetrics.employmentProfiles} Records` : "Not Available"}
               </div>
             </div>
-            <div className="relative h-14 w-14 shrink-0">
-              <svg className="h-full w-full" viewBox="0 0 36 36">
-                <path className="text-slate-100" strokeWidth="3.5" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
-                <path className="text-blue-600" strokeDasharray="45, 100" strokeWidth="3.5" strokeLinecap="round" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
-              </svg>
-            </div>
           </div>
 
-          {/* Education Card */}
           <div className="rounded-xl border border-slate-200/90 bg-white p-4.5 shadow-2xs flex items-center justify-between">
             <div>
               <div className="text-xs font-medium text-slate-600">Education & Demographic</div>
@@ -389,15 +355,8 @@ export default function CentralDashboardPage() {
                 {dataMetrics.educationProfiles > 0 ? `${dataMetrics.educationProfiles} Records` : "Not Available"}
               </div>
             </div>
-            <div className="relative h-14 w-14 shrink-0">
-              <svg className="h-full w-full" viewBox="0 0 36 36">
-                <path className="text-slate-100" strokeWidth="3.5" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
-                <path className="text-indigo-500" strokeDasharray="25, 100" strokeWidth="3.5" strokeLinecap="round" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
-              </svg>
-            </div>
           </div>
 
-          {/* Disability Card */}
           <div className="rounded-xl border border-slate-200/90 bg-white p-4.5 shadow-2xs flex items-center justify-between">
             <div>
               <div className="text-xs font-medium text-slate-600">Disability Medical Profile</div>
@@ -408,17 +367,10 @@ export default function CentralDashboardPage() {
                 {dataMetrics.disabilityProfiles > 0 ? `${dataMetrics.disabilityProfiles} Active Records` : "Not Available"}
               </div>
             </div>
-            <div className="relative h-14 w-14 shrink-0">
-              <svg className="h-full w-full" viewBox="0 0 36 36">
-                <path className="text-slate-100" strokeWidth="3.5" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
-                <path className="text-rose-500" strokeDasharray="18, 100" strokeWidth="3.5" strokeLinecap="round" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
-              </svg>
-            </div>
           </div>
         </div>
       </div>
 
-      {/* 5. LIVE POLICY RECOMMENDATIONS & ENGINE OUTPUT */}
       <div>
         <div className="flex items-center gap-2">
           <span className="h-2.5 w-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
@@ -428,7 +380,6 @@ export default function CentralDashboardPage() {
         </div>
 
         <div className="mt-3 grid grid-cols-1 gap-4 lg:grid-cols-2">
-          {/* Card 1 — Priority Insight */}
           <div className="rounded-xl border border-amber-200 bg-amber-50/50 p-4.5 shadow-2xs">
             <div className="flex items-start justify-between">
               <div className="flex items-center gap-2.5">
@@ -445,12 +396,11 @@ export default function CentralDashboardPage() {
             </div>
             <p className="mt-2.5 text-sm leading-relaxed text-amber-900/90">
               {dataMetrics.employmentProfiles > 0
-                ? `Foreign employment records (${dataMetrics.corridorMap.AE.count + dataMetrics.corridorMap.QA.count} in Gulf corridor) loaded. Monitor provincial insurance provisions.`
+                ? `Foreign employment records loaded. Monitor provincial insurance provisions.`
                 : "Not Available"}
             </p>
           </div>
 
-          {/* Card 2 — Recalculation Task */}
           <div className="rounded-xl border border-indigo-200 bg-indigo-50/50 p-4.5 shadow-2xs">
             <div className="flex items-start justify-between">
               <div className="flex items-center gap-2.5">
@@ -474,7 +424,6 @@ export default function CentralDashboardPage() {
         </div>
       </div>
 
-      {/* 6. FEDERAL SUB-DIVISION BREAKDOWN DATA MATRIX */}
       <div>
         <h2 className="text-base font-bold tracking-tight text-slate-900">
           Federal Sub-Division Breakdown Data Matrix
@@ -490,7 +439,6 @@ export default function CentralDashboardPage() {
                 <th className="px-4.5 py-3.5">Pending Bags</th>
                 <th className="px-4.5 py-3.5">Active Cases</th>
                 <th className="px-4.5 py-3.5">ID Issuances</th>
-                <th className="px-4.5 py-3.5">Cluster Sync Health</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100 font-medium text-sm">
@@ -523,18 +471,6 @@ export default function CentralDashboardPage() {
                   <td className="px-4.5 py-3.5 text-slate-700">
                     {prov.idIssuances > 0 ? numberFormat.format(prov.idIssuances) : "0"}
                   </td>
-                  <td className="px-4.5 py-3.5 whitespace-nowrap">
-                    {prov.citizens > 0 ? (
-                      <span className="inline-flex items-center gap-1.5 rounded bg-emerald-50 px-2.5 py-1 text-xs font-bold text-emerald-600 border border-emerald-200/60">
-                        <span className="h-2 w-2 rounded-full bg-emerald-500"></span>
-                        Connected
-                      </span>
-                    ) : (
-                      <span className="inline-flex items-center gap-1.5 rounded bg-slate-100 px-2.5 py-1 text-xs font-medium text-slate-500">
-                        ● Sync Standby
-                      </span>
-                    )}
-                  </td>
                 </tr>
               ))}
             </tbody>
@@ -542,261 +478,6 @@ export default function CentralDashboardPage() {
         </div>
       </div>
 
-      {/* 7. LOWER ANALYTICS SECTION */}
-      <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-        {/* Left — National Employment Categorization Profile */}
-        <div className="rounded-xl border border-slate-200/90 bg-white p-4.5 shadow-2xs">
-          <div className="flex items-center justify-between border-b border-slate-100 pb-3">
-            <div>
-              <h3 className="text-sm font-bold text-slate-900">
-                National Employment Categorization Profile
-              </h3>
-              <p className="text-xs text-slate-400 mt-0.5">
-                Categorization from employment records.
-              </p>
-            </div>
-            <Link href="/central/analytics" className="text-xs font-bold text-blue-600 hover:underline">
-              Open Analytics →
-            </Link>
-          </div>
-
-          <div className="mt-4 space-y-4">
-            {Object.keys(dataMetrics.categoryCounts).length > 0 ? (
-              Object.entries(dataMetrics.categoryCounts).map(([cat, count]) => {
-                const percentage = dataMetrics.employmentProfiles > 0
-                  ? ((count / dataMetrics.employmentProfiles) * 100).toFixed(1)
-                  : "0";
-                return (
-                  <div key={cat}>
-                    <div className="flex justify-between text-sm font-semibold mb-1.5">
-                      <span className="text-slate-700">{cat}</span>
-                      <span className="text-blue-600 font-bold">{count} ({percentage}%)</span>
-                    </div>
-                    <div className="h-2.5 w-full overflow-hidden rounded-full bg-slate-100">
-                      <div className="h-full bg-blue-600 rounded-full" style={{ width: `${percentage}%` }}></div>
-                    </div>
-                  </div>
-                );
-              })
-            ) : (
-              <div className="py-6 text-center text-sm font-semibold text-slate-500">Not Available</div>
-            )}
-          </div>
-        </div>
-
-        {/* Right — Migrant Labor Channels Corridor Tracker */}
-        <div className="rounded-xl border border-slate-200/90 bg-white p-4.5 shadow-2xs">
-          <div className="border-b border-slate-100 pb-3">
-            <h3 className="text-sm font-bold text-slate-900">
-              Migrant Labor Channels Corridor Tracker
-            </h3>
-          </div>
-
-          <div className="mt-3.5 space-y-3">
-            {Object.entries(dataMetrics.corridorMap).map(([code, info]) => (
-              <div key={code} className="flex items-center justify-between rounded-lg border border-slate-100 bg-slate-50/50 p-3">
-                <div className="flex items-center gap-3">
-                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-sky-100 text-xs font-black text-sky-700">
-                    {code}
-                  </div>
-                  <div>
-                    <div className="text-sm font-bold text-slate-900">{info.name}</div>
-                    <div className="text-xs text-slate-400">{info.visa}</div>
-                  </div>
-                </div>
-                <div className="text-right">
-                  <span className="text-sm font-black text-slate-900">
-                    {info.count > 0 ? info.count : "Not Available"}
-                  </span>
-                  {info.count > 0 && <span className="ml-1 text-xs font-bold text-slate-400">Registered</span>}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* 8. THIRD ANALYTICS ROW */}
-      <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-        {/* Left — Migrant Deficit Internal Provincial Disparities */}
-        <div className="rounded-xl border border-slate-200/90 bg-white p-4.5 shadow-2xs">
-          <div className="border-b border-slate-100 pb-3">
-            <h3 className="text-sm font-bold text-slate-900">
-              Migrant Deficit Internal Provincial Disparities
-            </h3>
-            <p className="text-xs text-slate-400 mt-0.5">
-              Breakdown comparing volume inside local jurisdictions per sub-division boundaries.
-            </p>
-          </div>
-
-          <div className="mt-3.5 space-y-3 text-sm">
-            {dataMetrics.provinceRows.map((prov) => (
-              <div key={prov.id} className="flex items-center justify-between border-b border-slate-50 pb-2.5">
-                <span className="font-bold text-slate-900">{prov.name}</span>
-                <div className="text-right">
-                  <span className="text-slate-700 font-medium">
-                    {prov.citizens > 0 ? `${prov.citizens} Registered Citizens` : "Not Available"}
-                  </span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Right — Unemployment Stress Area Hotspot Array Map */}
-        <div className="rounded-xl border border-slate-200/90 bg-white p-4.5 shadow-2xs">
-          <div className="border-b border-slate-100 pb-3">
-            <h3 className="text-sm font-bold text-slate-900">
-              Unemployment Stress Area Hotspot Array Map
-            </h3>
-            <p className="text-xs text-slate-400 mt-0.5">
-              Macro-regional clustering denoting local municipality non-activity.
-            </p>
-          </div>
-
-          <div className="mt-3.5 space-y-3">
-            {municipalities && municipalities.length > 0 ? (
-              municipalities.slice(0, 3).map((muni) => (
-                <div key={muni.id} className="flex items-center justify-between rounded-lg border border-slate-100 bg-slate-50/50 p-2.5 text-sm">
-                  <div>
-                    <div className="font-bold text-slate-900">{muni.name_en}</div>
-                    <div className="text-xs text-slate-400">District ID: {muni.district_id}</div>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <span className="rounded bg-sky-100 px-2 py-0.5 text-xs font-bold text-sky-700">Active Node</span>
-                  </div>
-                </div>
-              ))
-            ) : (
-              <div className="py-6 text-center text-sm font-semibold text-slate-500">Not Available</div>
-            )}
-          </div>
-        </div>
-      </div>
-
-      {/* 9. BOTTOM ALERT / ACTION CARDS */}
-      <div className="grid grid-cols-1 gap-3.5 sm:grid-cols-2 lg:grid-cols-4">
-        {/* Action 1 */}
-        <Link
-          href="/central/audit-log"
-          className="group flex flex-col justify-between rounded-xl border border-slate-200/90 bg-white p-4 shadow-2xs hover:border-blue-300 hover:shadow-xs transition-all"
-        >
-          <div className="flex items-center justify-between">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-teal-50 text-teal-600">
-              <PersonOutlined sx={{ fontSize: 20 }} />
-            </div>
-            <ChevronRight sx={{ fontSize: 18 }} className="text-slate-400 group-hover:text-blue-600 transition-colors" />
-          </div>
-          <div className="mt-3.5">
-            <h4 className="text-sm font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
-              Zero-PB Secure Citizen Lookup Registry
-            </h4>
-            <p className="mt-1 text-xs text-slate-400 leading-tight">
-              Search household records without viewing safety codes or data links.
-            </p>
-            <span className="mt-2.5 block text-xs font-bold text-blue-600">
-              Open Lookup Search Node
-            </span>
-          </div>
-        </Link>
-
-        {/* Action 2 */}
-        <Link
-          href="/central/audit-log"
-          className="group flex flex-col justify-between rounded-xl border border-slate-200/90 bg-white p-4 shadow-2xs hover:border-blue-300 hover:shadow-xs transition-all"
-        >
-          <div className="flex items-center justify-between">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-50 text-indigo-600">
-              <ShieldOutlined sx={{ fontSize: 20 }} />
-            </div>
-            <ChevronRight sx={{ fontSize: 18 }} className="text-slate-400 group-hover:text-blue-600 transition-colors" />
-          </div>
-          <div className="mt-3.5">
-            <h4 className="text-sm font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
-              Cross-Tier Law Compliance Investigations Core Hub
-            </h4>
-            <p className="mt-1 text-xs text-slate-400 leading-tight">
-              Direct channel to administrator boards matching repetition tagging.
-            </p>
-            <span className="mt-2.5 block text-xs font-bold text-blue-600">
-              Access System Auditing
-            </span>
-          </div>
-        </Link>
-
-        {/* Action 3 */}
-        <Link
-          href="/central/flag-anomaly"
-          className="group flex flex-col justify-between rounded-xl border border-slate-200/90 bg-white p-4 shadow-2xs hover:border-blue-300 hover:shadow-xs transition-all"
-        >
-          <div className="flex items-center justify-between">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-rose-50 text-rose-500">
-              <ReportProblemOutlined sx={{ fontSize: 20 }} />
-            </div>
-            <ChevronRight sx={{ fontSize: 18 }} className="text-slate-400 group-hover:text-blue-600 transition-colors" />
-          </div>
-          <div className="mt-3.5">
-            <h4 className="text-sm font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
-              Anomalous Activity Alert Internal Flag Raised Rule
-            </h4>
-            <p className="mt-1 text-xs text-slate-400 leading-tight">
-              Execute emergency freeze on state records that standard integrity-flagged.
-            </p>
-            <span className="mt-2.5 block text-xs font-bold text-rose-600">
-              Trigger Anomaly Incident Path
-            </span>
-          </div>
-        </Link>
-
-        {/* Action 4 */}
-        <Link
-          href="/central/eligibility-rules"
-          className="group flex flex-col justify-between rounded-xl border border-slate-200/90 bg-white p-4 shadow-2xs hover:border-blue-300 hover:shadow-xs transition-all"
-        >
-          <div className="flex items-center justify-between">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50 text-blue-600">
-              <SyncOutlined sx={{ fontSize: 20 }} />
-            </div>
-            <ChevronRight sx={{ fontSize: 18 }} className="text-slate-400 group-hover:text-blue-600 transition-colors" />
-          </div>
-          <div className="mt-3.5">
-            <h4 className="text-sm font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
-              Central Identity Sync Admin Control Room Mapping Area
-            </h4>
-            <p className="mt-1 text-xs text-slate-400 leading-tight">
-              Establish shared ties and general permissions for provincial level control.
-            </p>
-            <span className="mt-2.5 block text-xs font-bold text-blue-600">
-              Direct Management View Set
-            </span>
-          </div>
-        </Link>
-      </div>
-
-      {/* 10. BOTTOM STATUS PILLS */}
-      <div className="flex flex-wrap items-center justify-center gap-2.5 pt-2 text-xs font-semibold text-slate-600">
-        <div className="flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3.5 py-1.5 shadow-2xs">
-          <FactCheckOutlined sx={{ fontSize: 16 }} className="text-slate-500" />
-          <span>Open Governance Audit Log System Access Control</span>
-        </div>
-
-        <div className="flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3.5 py-1.5 shadow-2xs">
-          <PsychologyOutlined sx={{ fontSize: 16 }} className="text-slate-500" />
-          <span>Verify Retarget Criteria Eligibility Policy Data Engine</span>
-        </div>
-
-        <div className="flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3.5 py-1.5 shadow-2xs">
-          <FolderZipOutlined sx={{ fontSize: 16 }} className="text-slate-500" />
-          <span>Full Analytics Model Export Mapping</span>
-        </div>
-
-        <div className="flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-3.5 py-1.5 text-blue-700 shadow-2xs">
-          <FileDownloadOutlined sx={{ fontSize: 16 }} />
-          <span>Execute Structured Data PDF Extraction Tool Download (Standard Protocol)</span>
-        </div>
-      </div>
-
-      {/* 11. FOOTER */}
       <div className="pt-4 text-center text-xs font-semibold tracking-wider text-slate-400 uppercase">
         AUTHERIZED SECURE LATTICE ALL AUDITS APPEND-ONLY LEDGER THREE WAY VERIFIED.
       </div>

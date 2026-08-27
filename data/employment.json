@@ -2,7 +2,11 @@
   {
     "citizen_id": "cit-001",
     "category": "FARMER",
-    "sub_fields": { "land_ropani": 2.5, "crop": "rice", "irrigation": "canal" },
+    "sub_fields": {
+      "land_ropani": 2.5,
+      "crop": "rice",
+      "irrigation": "canal"
+    },
     "income_band": "25K_50K"
   },
   {
@@ -14,7 +18,12 @@
   {
     "citizen_id": "cit-003",
     "category": "UNEMPLOYED",
-    "sub_fields": { "duration_months": 6, "skills": ["carpentry"] },
+    "sub_fields": {
+      "duration_months": 6,
+      "skills": [
+        "carpentry"
+      ]
+    },
     "income_band": "UNDER_5K"
   },
   {
@@ -26,5 +35,7429 @@
       "employer_name": "Dubai Const."
     },
     "income_band": "50K_100K"
+  },
+  {
+    "citizen_id": "cit-005",
+    "category": "STUDENT",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0006",
+    "category": "FARMER",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0007",
+    "category": "SELF_EMPLOYED",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0008",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0009",
+    "category": "GOVERNMENT",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0010",
+    "category": "UNEMPLOYED",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0011",
+    "category": "RETIRED",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0012",
+    "category": "FARMER",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0013",
+    "category": "SELF_EMPLOYED",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0014",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0015",
+    "category": "GOVERNMENT",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0016",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "OVER_100K",
+    "sub_fields": {
+      "country_code": "QA"
+    }
+  },
+  {
+    "citizen_id": "cit-0017",
+    "category": "STUDENT",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0018",
+    "category": "HOMEMAKER",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0019",
+    "category": "UNEMPLOYED",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0020",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0021",
+    "category": "GOVERNMENT",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0022",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "50K_100K",
+    "sub_fields": {
+      "country_code": "KR"
+    }
+  },
+  {
+    "citizen_id": "cit-0023",
+    "category": "STUDENT",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0024",
+    "category": "HOMEMAKER",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0025",
+    "category": "UNEMPLOYED",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0026",
+    "category": "RETIRED",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0027",
+    "category": "FARMER",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0028",
+    "category": "SELF_EMPLOYED",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0029",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0030",
+    "category": "HOMEMAKER",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0031",
+    "category": "UNEMPLOYED",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0032",
+    "category": "RETIRED",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0033",
+    "category": "FARMER",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0034",
+    "category": "SELF_EMPLOYED",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0035",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0036",
+    "category": "GOVERNMENT",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0037",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "50K_100K",
+    "sub_fields": {
+      "country_code": "KR"
+    }
+  },
+  {
+    "citizen_id": "cit-0038",
+    "category": "STUDENT",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0039",
+    "category": "HOMEMAKER",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0040",
+    "category": "SELF_EMPLOYED",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0041",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0042",
+    "category": "GOVERNMENT",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0043",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "OVER_100K",
+    "sub_fields": {
+      "country_code": "QA"
+    }
+  },
+  {
+    "citizen_id": "cit-0044",
+    "category": "STUDENT",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0045",
+    "category": "HOMEMAKER",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0046",
+    "category": "UNEMPLOYED",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0047",
+    "category": "RETIRED",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0048",
+    "category": "FARMER",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0049",
+    "category": "SELF_EMPLOYED",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0050",
+    "category": "STUDENT",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0051",
+    "category": "HOMEMAKER",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0052",
+    "category": "UNEMPLOYED",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0053",
+    "category": "RETIRED",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0054",
+    "category": "FARMER",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0055",
+    "category": "SELF_EMPLOYED",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0056",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0057",
+    "category": "GOVERNMENT",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0058",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "OVER_100K",
+    "sub_fields": {
+      "country_code": "QA"
+    }
+  },
+  {
+    "citizen_id": "cit-0059",
+    "category": "STUDENT",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0060",
+    "category": "FARMER",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0061",
+    "category": "SELF_EMPLOYED",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0062",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0063",
+    "category": "GOVERNMENT",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0064",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "UNDER_5K",
+    "sub_fields": {
+      "country_code": "KR"
+    }
+  },
+  {
+    "citizen_id": "cit-0065",
+    "category": "STUDENT",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0066",
+    "category": "HOMEMAKER",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0067",
+    "category": "UNEMPLOYED",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0068",
+    "category": "RETIRED",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0069",
+    "category": "FARMER",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0070",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "5K_10K",
+    "sub_fields": {
+      "country_code": "QA"
+    }
+  },
+  {
+    "citizen_id": "cit-0071",
+    "category": "STUDENT",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0072",
+    "category": "HOMEMAKER",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0073",
+    "category": "UNEMPLOYED",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0074",
+    "category": "RETIRED",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0075",
+    "category": "FARMER",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0076",
+    "category": "SELF_EMPLOYED",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0077",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0078",
+    "category": "GOVERNMENT",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0079",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "50K_100K",
+    "sub_fields": {
+      "country_code": "KR"
+    }
+  },
+  {
+    "citizen_id": "cit-0080",
+    "category": "RETIRED",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0081",
+    "category": "FARMER",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0082",
+    "category": "SELF_EMPLOYED",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0083",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0084",
+    "category": "GOVERNMENT",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0085",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "OVER_100K",
+    "sub_fields": {
+      "country_code": "QA"
+    }
+  },
+  {
+    "citizen_id": "cit-0086",
+    "category": "STUDENT",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0087",
+    "category": "HOMEMAKER",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0088",
+    "category": "UNEMPLOYED",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0089",
+    "category": "RETIRED",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0090",
+    "category": "GOVERNMENT",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0091",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "UNDER_5K",
+    "sub_fields": {
+      "country_code": "KR"
+    }
+  },
+  {
+    "citizen_id": "cit-0092",
+    "category": "STUDENT",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0093",
+    "category": "HOMEMAKER",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0094",
+    "category": "UNEMPLOYED",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0095",
+    "category": "RETIRED",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0096",
+    "category": "FARMER",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0097",
+    "category": "SELF_EMPLOYED",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0098",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0099",
+    "category": "GOVERNMENT",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0100",
+    "category": "SELF_EMPLOYED",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0101",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0102",
+    "category": "GOVERNMENT",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0103",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "50K_100K",
+    "sub_fields": {
+      "country_code": "KR"
+    }
+  },
+  {
+    "citizen_id": "cit-0104",
+    "category": "STUDENT",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0105",
+    "category": "HOMEMAKER",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0106",
+    "category": "UNEMPLOYED",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0107",
+    "category": "RETIRED",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0108",
+    "category": "FARMER",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0109",
+    "category": "SELF_EMPLOYED",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0110",
+    "category": "STUDENT",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0111",
+    "category": "HOMEMAKER",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0112",
+    "category": "UNEMPLOYED",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0113",
+    "category": "RETIRED",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0114",
+    "category": "FARMER",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0115",
+    "category": "SELF_EMPLOYED",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0116",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0117",
+    "category": "GOVERNMENT",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0118",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "10K_25K",
+    "sub_fields": {
+      "country_code": "KR"
+    }
+  },
+  {
+    "citizen_id": "cit-0119",
+    "category": "STUDENT",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0120",
+    "category": "FARMER",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0121",
+    "category": "SELF_EMPLOYED",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0122",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0123",
+    "category": "GOVERNMENT",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0124",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "25K_50K",
+    "sub_fields": {
+      "country_code": "QA"
+    }
+  },
+  {
+    "citizen_id": "cit-0125",
+    "category": "STUDENT",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0126",
+    "category": "HOMEMAKER",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0127",
+    "category": "UNEMPLOYED",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0128",
+    "category": "RETIRED",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0129",
+    "category": "FARMER",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0130",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "50K_100K",
+    "sub_fields": {
+      "country_code": "KR"
+    }
+  },
+  {
+    "citizen_id": "cit-0131",
+    "category": "STUDENT",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0132",
+    "category": "HOMEMAKER",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0133",
+    "category": "UNEMPLOYED",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0134",
+    "category": "RETIRED",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0135",
+    "category": "FARMER",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0136",
+    "category": "SELF_EMPLOYED",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0137",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0138",
+    "category": "GOVERNMENT",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0139",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "25K_50K",
+    "sub_fields": {
+      "country_code": "QA"
+    }
+  },
+  {
+    "citizen_id": "cit-0140",
+    "category": "RETIRED",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0141",
+    "category": "FARMER",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0142",
+    "category": "SELF_EMPLOYED",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0143",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0144",
+    "category": "GOVERNMENT",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0145",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "50K_100K",
+    "sub_fields": {
+      "country_code": "KR"
+    }
+  },
+  {
+    "citizen_id": "cit-0146",
+    "category": "STUDENT",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0147",
+    "category": "HOMEMAKER",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0148",
+    "category": "UNEMPLOYED",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0149",
+    "category": "RETIRED",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0150",
+    "category": "GOVERNMENT",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0151",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "OVER_100K",
+    "sub_fields": {
+      "country_code": "QA"
+    }
+  },
+  {
+    "citizen_id": "cit-0152",
+    "category": "STUDENT",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0153",
+    "category": "HOMEMAKER",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0154",
+    "category": "UNEMPLOYED",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0155",
+    "category": "RETIRED",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0156",
+    "category": "FARMER",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0157",
+    "category": "SELF_EMPLOYED",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0158",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0159",
+    "category": "GOVERNMENT",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0160",
+    "category": "UNEMPLOYED",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0161",
+    "category": "RETIRED",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0162",
+    "category": "FARMER",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0163",
+    "category": "SELF_EMPLOYED",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0164",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0165",
+    "category": "GOVERNMENT",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0166",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "25K_50K",
+    "sub_fields": {
+      "country_code": "QA"
+    }
+  },
+  {
+    "citizen_id": "cit-0167",
+    "category": "STUDENT",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0168",
+    "category": "HOMEMAKER",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0169",
+    "category": "UNEMPLOYED",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0170",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0171",
+    "category": "GOVERNMENT",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0172",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "50K_100K",
+    "sub_fields": {
+      "country_code": "KR"
+    }
+  },
+  {
+    "citizen_id": "cit-0173",
+    "category": "STUDENT",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0174",
+    "category": "HOMEMAKER",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0175",
+    "category": "UNEMPLOYED",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0176",
+    "category": "RETIRED",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0177",
+    "category": "FARMER",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0178",
+    "category": "SELF_EMPLOYED",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0179",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0180",
+    "category": "HOMEMAKER",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0181",
+    "category": "UNEMPLOYED",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0182",
+    "category": "RETIRED",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0183",
+    "category": "FARMER",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0184",
+    "category": "SELF_EMPLOYED",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0185",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0186",
+    "category": "GOVERNMENT",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0187",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "50K_100K",
+    "sub_fields": {
+      "country_code": "KR"
+    }
+  },
+  {
+    "citizen_id": "cit-0188",
+    "category": "STUDENT",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0189",
+    "category": "HOMEMAKER",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0190",
+    "category": "SELF_EMPLOYED",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0191",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0192",
+    "category": "GOVERNMENT",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0193",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "OVER_100K",
+    "sub_fields": {
+      "country_code": "QA"
+    }
+  },
+  {
+    "citizen_id": "cit-0194",
+    "category": "STUDENT",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0195",
+    "category": "HOMEMAKER",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0196",
+    "category": "UNEMPLOYED",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0197",
+    "category": "RETIRED",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0198",
+    "category": "FARMER",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0199",
+    "category": "SELF_EMPLOYED",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0200",
+    "category": "RETIRED",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0201",
+    "category": "FARMER",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0202",
+    "category": "SELF_EMPLOYED",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0203",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0204",
+    "category": "GOVERNMENT",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0205",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "5K_10K",
+    "sub_fields": {
+      "country_code": "QA"
+    }
+  },
+  {
+    "citizen_id": "cit-0206",
+    "category": "STUDENT",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0207",
+    "category": "HOMEMAKER",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0208",
+    "category": "UNEMPLOYED",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0209",
+    "category": "RETIRED",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0210",
+    "category": "GOVERNMENT",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0211",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "10K_25K",
+    "sub_fields": {
+      "country_code": "KR"
+    }
+  },
+  {
+    "citizen_id": "cit-0212",
+    "category": "STUDENT",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0213",
+    "category": "HOMEMAKER",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0214",
+    "category": "UNEMPLOYED",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0215",
+    "category": "RETIRED",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0216",
+    "category": "FARMER",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0217",
+    "category": "SELF_EMPLOYED",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0218",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0219",
+    "category": "GOVERNMENT",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0220",
+    "category": "UNEMPLOYED",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0221",
+    "category": "RETIRED",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0222",
+    "category": "FARMER",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0223",
+    "category": "SELF_EMPLOYED",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0224",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0225",
+    "category": "GOVERNMENT",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0226",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "10K_25K",
+    "sub_fields": {
+      "country_code": "KR"
+    }
+  },
+  {
+    "citizen_id": "cit-0227",
+    "category": "STUDENT",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0228",
+    "category": "HOMEMAKER",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0229",
+    "category": "UNEMPLOYED",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0230",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0231",
+    "category": "GOVERNMENT",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0232",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "25K_50K",
+    "sub_fields": {
+      "country_code": "QA"
+    }
+  },
+  {
+    "citizen_id": "cit-0233",
+    "category": "STUDENT",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0234",
+    "category": "HOMEMAKER",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0235",
+    "category": "UNEMPLOYED",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0236",
+    "category": "RETIRED",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0237",
+    "category": "FARMER",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0238",
+    "category": "SELF_EMPLOYED",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0239",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0240",
+    "category": "HOMEMAKER",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0241",
+    "category": "UNEMPLOYED",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0242",
+    "category": "RETIRED",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0243",
+    "category": "FARMER",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0244",
+    "category": "SELF_EMPLOYED",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0245",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0246",
+    "category": "GOVERNMENT",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0247",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "25K_50K",
+    "sub_fields": {
+      "country_code": "QA"
+    }
+  },
+  {
+    "citizen_id": "cit-0248",
+    "category": "STUDENT",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0249",
+    "category": "HOMEMAKER",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0250",
+    "category": "SELF_EMPLOYED",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0251",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0252",
+    "category": "GOVERNMENT",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0253",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "50K_100K",
+    "sub_fields": {
+      "country_code": "KR"
+    }
+  },
+  {
+    "citizen_id": "cit-0254",
+    "category": "STUDENT",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0255",
+    "category": "HOMEMAKER",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0256",
+    "category": "UNEMPLOYED",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0257",
+    "category": "RETIRED",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0258",
+    "category": "FARMER",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0259",
+    "category": "SELF_EMPLOYED",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0260",
+    "category": "STUDENT",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0261",
+    "category": "HOMEMAKER",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0262",
+    "category": "UNEMPLOYED",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0263",
+    "category": "RETIRED",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0264",
+    "category": "FARMER",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0265",
+    "category": "SELF_EMPLOYED",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0266",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0267",
+    "category": "GOVERNMENT",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0268",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "10K_25K",
+    "sub_fields": {
+      "country_code": "KR"
+    }
+  },
+  {
+    "citizen_id": "cit-0269",
+    "category": "STUDENT",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0270",
+    "category": "FARMER",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0271",
+    "category": "SELF_EMPLOYED",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0272",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0273",
+    "category": "GOVERNMENT",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0274",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "25K_50K",
+    "sub_fields": {
+      "country_code": "QA"
+    }
+  },
+  {
+    "citizen_id": "cit-0275",
+    "category": "STUDENT",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0276",
+    "category": "HOMEMAKER",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0277",
+    "category": "UNEMPLOYED",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0278",
+    "category": "RETIRED",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0279",
+    "category": "FARMER",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0280",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "50K_100K",
+    "sub_fields": {
+      "country_code": "KR"
+    }
+  },
+  {
+    "citizen_id": "cit-0281",
+    "category": "STUDENT",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0282",
+    "category": "HOMEMAKER",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0283",
+    "category": "UNEMPLOYED",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0284",
+    "category": "RETIRED",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0285",
+    "category": "FARMER",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0286",
+    "category": "SELF_EMPLOYED",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0287",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0288",
+    "category": "GOVERNMENT",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0289",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "25K_50K",
+    "sub_fields": {
+      "country_code": "QA"
+    }
+  },
+  {
+    "citizen_id": "cit-0290",
+    "category": "RETIRED",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0291",
+    "category": "FARMER",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0292",
+    "category": "SELF_EMPLOYED",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0293",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0294",
+    "category": "GOVERNMENT",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0295",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "50K_100K",
+    "sub_fields": {
+      "country_code": "KR"
+    }
+  },
+  {
+    "citizen_id": "cit-0296",
+    "category": "STUDENT",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0297",
+    "category": "HOMEMAKER",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0298",
+    "category": "UNEMPLOYED",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0299",
+    "category": "RETIRED",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0300",
+    "category": "HOMEMAKER",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0301",
+    "category": "UNEMPLOYED",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0302",
+    "category": "RETIRED",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0303",
+    "category": "FARMER",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0304",
+    "category": "SELF_EMPLOYED",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0305",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0306",
+    "category": "GOVERNMENT",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0307",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "UNDER_5K",
+    "sub_fields": {
+      "country_code": "KR"
+    }
+  },
+  {
+    "citizen_id": "cit-0308",
+    "category": "STUDENT",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0309",
+    "category": "HOMEMAKER",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0310",
+    "category": "SELF_EMPLOYED",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0311",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0312",
+    "category": "GOVERNMENT",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0313",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "5K_10K",
+    "sub_fields": {
+      "country_code": "QA"
+    }
+  },
+  {
+    "citizen_id": "cit-0314",
+    "category": "STUDENT",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0315",
+    "category": "HOMEMAKER",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0316",
+    "category": "UNEMPLOYED",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0317",
+    "category": "RETIRED",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0318",
+    "category": "FARMER",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0319",
+    "category": "SELF_EMPLOYED",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0320",
+    "category": "STUDENT",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0321",
+    "category": "HOMEMAKER",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0322",
+    "category": "UNEMPLOYED",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0323",
+    "category": "RETIRED",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0324",
+    "category": "FARMER",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0325",
+    "category": "SELF_EMPLOYED",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0326",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0327",
+    "category": "GOVERNMENT",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0328",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "5K_10K",
+    "sub_fields": {
+      "country_code": "QA"
+    }
+  },
+  {
+    "citizen_id": "cit-0329",
+    "category": "STUDENT",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0330",
+    "category": "FARMER",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0331",
+    "category": "SELF_EMPLOYED",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0332",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0333",
+    "category": "GOVERNMENT",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0334",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "10K_25K",
+    "sub_fields": {
+      "country_code": "KR"
+    }
+  },
+  {
+    "citizen_id": "cit-0335",
+    "category": "STUDENT",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0336",
+    "category": "HOMEMAKER",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0337",
+    "category": "UNEMPLOYED",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0338",
+    "category": "RETIRED",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0339",
+    "category": "FARMER",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0340",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "25K_50K",
+    "sub_fields": {
+      "country_code": "QA"
+    }
+  },
+  {
+    "citizen_id": "cit-0341",
+    "category": "STUDENT",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0342",
+    "category": "HOMEMAKER",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0343",
+    "category": "UNEMPLOYED",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0344",
+    "category": "RETIRED",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0345",
+    "category": "FARMER",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0346",
+    "category": "SELF_EMPLOYED",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0347",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0348",
+    "category": "GOVERNMENT",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0349",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "UNDER_5K",
+    "sub_fields": {
+      "country_code": "KR"
+    }
+  },
+  {
+    "citizen_id": "cit-0350",
+    "category": "RETIRED",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0351",
+    "category": "FARMER",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0352",
+    "category": "SELF_EMPLOYED",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0353",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0354",
+    "category": "GOVERNMENT",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0355",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "5K_10K",
+    "sub_fields": {
+      "country_code": "QA"
+    }
+  },
+  {
+    "citizen_id": "cit-0356",
+    "category": "STUDENT",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0357",
+    "category": "HOMEMAKER",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0358",
+    "category": "UNEMPLOYED",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0359",
+    "category": "RETIRED",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0360",
+    "category": "GOVERNMENT",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0361",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "10K_25K",
+    "sub_fields": {
+      "country_code": "KR"
+    }
+  },
+  {
+    "citizen_id": "cit-0362",
+    "category": "STUDENT",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0363",
+    "category": "HOMEMAKER",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0364",
+    "category": "UNEMPLOYED",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0365",
+    "category": "RETIRED",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0366",
+    "category": "FARMER",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0367",
+    "category": "SELF_EMPLOYED",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0368",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0369",
+    "category": "GOVERNMENT",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0370",
+    "category": "UNEMPLOYED",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0371",
+    "category": "RETIRED",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0372",
+    "category": "FARMER",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0373",
+    "category": "SELF_EMPLOYED",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0374",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0375",
+    "category": "GOVERNMENT",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0376",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "10K_25K",
+    "sub_fields": {
+      "country_code": "KR"
+    }
+  },
+  {
+    "citizen_id": "cit-0377",
+    "category": "STUDENT",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0378",
+    "category": "HOMEMAKER",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0379",
+    "category": "UNEMPLOYED",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0380",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0381",
+    "category": "GOVERNMENT",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0382",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "25K_50K",
+    "sub_fields": {
+      "country_code": "QA"
+    }
+  },
+  {
+    "citizen_id": "cit-0383",
+    "category": "STUDENT",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0384",
+    "category": "HOMEMAKER",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0385",
+    "category": "UNEMPLOYED",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0386",
+    "category": "RETIRED",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0387",
+    "category": "FARMER",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0388",
+    "category": "SELF_EMPLOYED",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0389",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0390",
+    "category": "HOMEMAKER",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0391",
+    "category": "UNEMPLOYED",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0392",
+    "category": "RETIRED",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0393",
+    "category": "FARMER",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0394",
+    "category": "SELF_EMPLOYED",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0395",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0396",
+    "category": "GOVERNMENT",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0397",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "5K_10K",
+    "sub_fields": {
+      "country_code": "QA"
+    }
+  },
+  {
+    "citizen_id": "cit-0398",
+    "category": "STUDENT",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0399",
+    "category": "HOMEMAKER",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0400",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "UNDER_5K",
+    "sub_fields": {
+      "country_code": "KR"
+    }
+  },
+  {
+    "citizen_id": "cit-0401",
+    "category": "STUDENT",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0402",
+    "category": "HOMEMAKER",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0403",
+    "category": "UNEMPLOYED",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0404",
+    "category": "RETIRED",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0405",
+    "category": "FARMER",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0406",
+    "category": "SELF_EMPLOYED",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0407",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0408",
+    "category": "GOVERNMENT",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0409",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "OVER_100K",
+    "sub_fields": {
+      "country_code": "QA"
+    }
+  },
+  {
+    "citizen_id": "cit-0410",
+    "category": "RETIRED",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0411",
+    "category": "FARMER",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0412",
+    "category": "SELF_EMPLOYED",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0413",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0414",
+    "category": "GOVERNMENT",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0415",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "UNDER_5K",
+    "sub_fields": {
+      "country_code": "KR"
+    }
+  },
+  {
+    "citizen_id": "cit-0416",
+    "category": "STUDENT",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0417",
+    "category": "HOMEMAKER",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0418",
+    "category": "UNEMPLOYED",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0419",
+    "category": "RETIRED",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0420",
+    "category": "GOVERNMENT",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0421",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "5K_10K",
+    "sub_fields": {
+      "country_code": "QA"
+    }
+  },
+  {
+    "citizen_id": "cit-0422",
+    "category": "STUDENT",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0423",
+    "category": "HOMEMAKER",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0424",
+    "category": "UNEMPLOYED",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0425",
+    "category": "RETIRED",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0426",
+    "category": "FARMER",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0427",
+    "category": "SELF_EMPLOYED",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0428",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0429",
+    "category": "GOVERNMENT",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0430",
+    "category": "UNEMPLOYED",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0431",
+    "category": "RETIRED",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0432",
+    "category": "FARMER",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0433",
+    "category": "SELF_EMPLOYED",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0434",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0435",
+    "category": "GOVERNMENT",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0436",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "OVER_100K",
+    "sub_fields": {
+      "country_code": "QA"
+    }
+  },
+  {
+    "citizen_id": "cit-0437",
+    "category": "STUDENT",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0438",
+    "category": "HOMEMAKER",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0439",
+    "category": "UNEMPLOYED",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0440",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0441",
+    "category": "GOVERNMENT",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0442",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "UNDER_5K",
+    "sub_fields": {
+      "country_code": "KR"
+    }
+  },
+  {
+    "citizen_id": "cit-0443",
+    "category": "STUDENT",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0444",
+    "category": "HOMEMAKER",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0445",
+    "category": "UNEMPLOYED",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0446",
+    "category": "RETIRED",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0447",
+    "category": "FARMER",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0448",
+    "category": "SELF_EMPLOYED",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0449",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0450",
+    "category": "HOMEMAKER",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0451",
+    "category": "UNEMPLOYED",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0452",
+    "category": "RETIRED",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0453",
+    "category": "FARMER",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0454",
+    "category": "SELF_EMPLOYED",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0455",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0456",
+    "category": "GOVERNMENT",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0457",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "UNDER_5K",
+    "sub_fields": {
+      "country_code": "KR"
+    }
+  },
+  {
+    "citizen_id": "cit-0458",
+    "category": "STUDENT",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0459",
+    "category": "HOMEMAKER",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0460",
+    "category": "SELF_EMPLOYED",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0461",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0462",
+    "category": "GOVERNMENT",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0463",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "5K_10K",
+    "sub_fields": {
+      "country_code": "QA"
+    }
+  },
+  {
+    "citizen_id": "cit-0464",
+    "category": "STUDENT",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0465",
+    "category": "HOMEMAKER",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0466",
+    "category": "UNEMPLOYED",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0467",
+    "category": "RETIRED",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0468",
+    "category": "FARMER",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0469",
+    "category": "SELF_EMPLOYED",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0470",
+    "category": "STUDENT",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0471",
+    "category": "HOMEMAKER",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0472",
+    "category": "UNEMPLOYED",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0473",
+    "category": "RETIRED",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0474",
+    "category": "FARMER",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0475",
+    "category": "SELF_EMPLOYED",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0476",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0477",
+    "category": "GOVERNMENT",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0478",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "5K_10K",
+    "sub_fields": {
+      "country_code": "QA"
+    }
+  },
+  {
+    "citizen_id": "cit-0479",
+    "category": "STUDENT",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0480",
+    "category": "FARMER",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0481",
+    "category": "SELF_EMPLOYED",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0482",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0483",
+    "category": "GOVERNMENT",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0484",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "10K_25K",
+    "sub_fields": {
+      "country_code": "KR"
+    }
+  },
+  {
+    "citizen_id": "cit-0485",
+    "category": "STUDENT",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0486",
+    "category": "HOMEMAKER",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0487",
+    "category": "UNEMPLOYED",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0488",
+    "category": "RETIRED",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0489",
+    "category": "FARMER",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0490",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "25K_50K",
+    "sub_fields": {
+      "country_code": "QA"
+    }
+  },
+  {
+    "citizen_id": "cit-0491",
+    "category": "STUDENT",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0492",
+    "category": "HOMEMAKER",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0493",
+    "category": "UNEMPLOYED",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0494",
+    "category": "RETIRED",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0495",
+    "category": "FARMER",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0496",
+    "category": "SELF_EMPLOYED",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0497",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0498",
+    "category": "GOVERNMENT",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0499",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "UNDER_5K",
+    "sub_fields": {
+      "country_code": "KR"
+    }
+  },
+  {
+    "citizen_id": "cit-0500",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0501",
+    "category": "GOVERNMENT",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0502",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "OVER_100K",
+    "sub_fields": {
+      "country_code": "QA"
+    }
+  },
+  {
+    "citizen_id": "cit-0503",
+    "category": "STUDENT",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0504",
+    "category": "HOMEMAKER",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0505",
+    "category": "UNEMPLOYED",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0506",
+    "category": "RETIRED",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0507",
+    "category": "FARMER",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0508",
+    "category": "SELF_EMPLOYED",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0509",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0510",
+    "category": "HOMEMAKER",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0511",
+    "category": "UNEMPLOYED",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0512",
+    "category": "RETIRED",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0513",
+    "category": "FARMER",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0514",
+    "category": "SELF_EMPLOYED",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0515",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0516",
+    "category": "GOVERNMENT",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0517",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "OVER_100K",
+    "sub_fields": {
+      "country_code": "QA"
+    }
+  },
+  {
+    "citizen_id": "cit-0518",
+    "category": "STUDENT",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0519",
+    "category": "HOMEMAKER",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0520",
+    "category": "SELF_EMPLOYED",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0521",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0522",
+    "category": "GOVERNMENT",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0523",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "UNDER_5K",
+    "sub_fields": {
+      "country_code": "KR"
+    }
+  },
+  {
+    "citizen_id": "cit-0524",
+    "category": "STUDENT",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0525",
+    "category": "HOMEMAKER",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0526",
+    "category": "UNEMPLOYED",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0527",
+    "category": "RETIRED",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0528",
+    "category": "FARMER",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0529",
+    "category": "SELF_EMPLOYED",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0530",
+    "category": "STUDENT",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0531",
+    "category": "HOMEMAKER",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0532",
+    "category": "UNEMPLOYED",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0533",
+    "category": "RETIRED",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0534",
+    "category": "FARMER",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0535",
+    "category": "SELF_EMPLOYED",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0536",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0537",
+    "category": "GOVERNMENT",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0538",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "50K_100K",
+    "sub_fields": {
+      "country_code": "KR"
+    }
+  },
+  {
+    "citizen_id": "cit-0539",
+    "category": "STUDENT",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0540",
+    "category": "FARMER",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0541",
+    "category": "SELF_EMPLOYED",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0542",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0543",
+    "category": "GOVERNMENT",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0544",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "OVER_100K",
+    "sub_fields": {
+      "country_code": "QA"
+    }
+  },
+  {
+    "citizen_id": "cit-0545",
+    "category": "STUDENT",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0546",
+    "category": "HOMEMAKER",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0547",
+    "category": "UNEMPLOYED",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0548",
+    "category": "RETIRED",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0549",
+    "category": "FARMER",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0550",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "UNDER_5K",
+    "sub_fields": {
+      "country_code": "KR"
+    }
+  },
+  {
+    "citizen_id": "cit-0551",
+    "category": "STUDENT",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0552",
+    "category": "HOMEMAKER",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0553",
+    "category": "UNEMPLOYED",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0554",
+    "category": "RETIRED",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0555",
+    "category": "FARMER",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0556",
+    "category": "SELF_EMPLOYED",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0557",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0558",
+    "category": "GOVERNMENT",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0559",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "OVER_100K",
+    "sub_fields": {
+      "country_code": "QA"
+    }
+  },
+  {
+    "citizen_id": "cit-0560",
+    "category": "RETIRED",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0561",
+    "category": "FARMER",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0562",
+    "category": "SELF_EMPLOYED",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0563",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0564",
+    "category": "GOVERNMENT",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0565",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "UNDER_5K",
+    "sub_fields": {
+      "country_code": "KR"
+    }
+  },
+  {
+    "citizen_id": "cit-0566",
+    "category": "STUDENT",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0567",
+    "category": "HOMEMAKER",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0568",
+    "category": "UNEMPLOYED",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0569",
+    "category": "RETIRED",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0570",
+    "category": "GOVERNMENT",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0571",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "5K_10K",
+    "sub_fields": {
+      "country_code": "QA"
+    }
+  },
+  {
+    "citizen_id": "cit-0572",
+    "category": "STUDENT",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0573",
+    "category": "HOMEMAKER",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0574",
+    "category": "UNEMPLOYED",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0575",
+    "category": "RETIRED",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0576",
+    "category": "FARMER",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0577",
+    "category": "SELF_EMPLOYED",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0578",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0579",
+    "category": "GOVERNMENT",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0580",
+    "category": "UNEMPLOYED",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0581",
+    "category": "RETIRED",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0582",
+    "category": "FARMER",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0583",
+    "category": "SELF_EMPLOYED",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0584",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0585",
+    "category": "GOVERNMENT",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0586",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "OVER_100K",
+    "sub_fields": {
+      "country_code": "QA"
+    }
+  },
+  {
+    "citizen_id": "cit-0587",
+    "category": "STUDENT",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0588",
+    "category": "HOMEMAKER",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0589",
+    "category": "UNEMPLOYED",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0590",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0591",
+    "category": "GOVERNMENT",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0592",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "UNDER_5K",
+    "sub_fields": {
+      "country_code": "KR"
+    }
+  },
+  {
+    "citizen_id": "cit-0593",
+    "category": "STUDENT",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0594",
+    "category": "HOMEMAKER",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0595",
+    "category": "UNEMPLOYED",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0596",
+    "category": "RETIRED",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0597",
+    "category": "FARMER",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0598",
+    "category": "SELF_EMPLOYED",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0599",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0600",
+    "category": "FARMER",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0601",
+    "category": "SELF_EMPLOYED",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0602",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0603",
+    "category": "GOVERNMENT",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0604",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "50K_100K",
+    "sub_fields": {
+      "country_code": "KR"
+    }
+  },
+  {
+    "citizen_id": "cit-0605",
+    "category": "STUDENT",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0606",
+    "category": "HOMEMAKER",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0607",
+    "category": "UNEMPLOYED",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0608",
+    "category": "RETIRED",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0609",
+    "category": "FARMER",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0610",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "OVER_100K",
+    "sub_fields": {
+      "country_code": "QA"
+    }
+  },
+  {
+    "citizen_id": "cit-0611",
+    "category": "STUDENT",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0612",
+    "category": "HOMEMAKER",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0613",
+    "category": "UNEMPLOYED",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0614",
+    "category": "RETIRED",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0615",
+    "category": "FARMER",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0616",
+    "category": "SELF_EMPLOYED",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0617",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0618",
+    "category": "GOVERNMENT",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0619",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "10K_25K",
+    "sub_fields": {
+      "country_code": "KR"
+    }
+  },
+  {
+    "citizen_id": "cit-0620",
+    "category": "RETIRED",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0621",
+    "category": "FARMER",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0622",
+    "category": "SELF_EMPLOYED",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0623",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0624",
+    "category": "GOVERNMENT",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0625",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "25K_50K",
+    "sub_fields": {
+      "country_code": "QA"
+    }
+  },
+  {
+    "citizen_id": "cit-0626",
+    "category": "STUDENT",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0627",
+    "category": "HOMEMAKER",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0628",
+    "category": "UNEMPLOYED",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0629",
+    "category": "RETIRED",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0630",
+    "category": "GOVERNMENT",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0631",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "50K_100K",
+    "sub_fields": {
+      "country_code": "KR"
+    }
+  },
+  {
+    "citizen_id": "cit-0632",
+    "category": "STUDENT",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0633",
+    "category": "HOMEMAKER",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0634",
+    "category": "UNEMPLOYED",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0635",
+    "category": "RETIRED",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0636",
+    "category": "FARMER",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0637",
+    "category": "SELF_EMPLOYED",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0638",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0639",
+    "category": "GOVERNMENT",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0640",
+    "category": "UNEMPLOYED",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0641",
+    "category": "RETIRED",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0642",
+    "category": "FARMER",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0643",
+    "category": "SELF_EMPLOYED",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0644",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0645",
+    "category": "GOVERNMENT",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0646",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "50K_100K",
+    "sub_fields": {
+      "country_code": "KR"
+    }
+  },
+  {
+    "citizen_id": "cit-0647",
+    "category": "STUDENT",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0648",
+    "category": "HOMEMAKER",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0649",
+    "category": "UNEMPLOYED",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0650",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0651",
+    "category": "GOVERNMENT",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0652",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "OVER_100K",
+    "sub_fields": {
+      "country_code": "QA"
+    }
+  },
+  {
+    "citizen_id": "cit-0653",
+    "category": "STUDENT",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0654",
+    "category": "HOMEMAKER",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0655",
+    "category": "UNEMPLOYED",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0656",
+    "category": "RETIRED",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0657",
+    "category": "FARMER",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0658",
+    "category": "SELF_EMPLOYED",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0659",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0660",
+    "category": "HOMEMAKER",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0661",
+    "category": "UNEMPLOYED",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0662",
+    "category": "RETIRED",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0663",
+    "category": "FARMER",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0664",
+    "category": "SELF_EMPLOYED",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0665",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0666",
+    "category": "GOVERNMENT",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0667",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "OVER_100K",
+    "sub_fields": {
+      "country_code": "QA"
+    }
+  },
+  {
+    "citizen_id": "cit-0668",
+    "category": "STUDENT",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0669",
+    "category": "HOMEMAKER",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0670",
+    "category": "SELF_EMPLOYED",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0671",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0672",
+    "category": "GOVERNMENT",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0673",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "UNDER_5K",
+    "sub_fields": {
+      "country_code": "KR"
+    }
+  },
+  {
+    "citizen_id": "cit-0674",
+    "category": "STUDENT",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0675",
+    "category": "HOMEMAKER",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0676",
+    "category": "UNEMPLOYED",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0677",
+    "category": "RETIRED",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0678",
+    "category": "FARMER",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0679",
+    "category": "SELF_EMPLOYED",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0680",
+    "category": "STUDENT",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0681",
+    "category": "HOMEMAKER",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0682",
+    "category": "UNEMPLOYED",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0683",
+    "category": "RETIRED",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0684",
+    "category": "FARMER",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0685",
+    "category": "SELF_EMPLOYED",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0686",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0687",
+    "category": "GOVERNMENT",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0688",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "50K_100K",
+    "sub_fields": {
+      "country_code": "KR"
+    }
+  },
+  {
+    "citizen_id": "cit-0689",
+    "category": "STUDENT",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0690",
+    "category": "FARMER",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0691",
+    "category": "SELF_EMPLOYED",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0692",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0693",
+    "category": "GOVERNMENT",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0694",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "OVER_100K",
+    "sub_fields": {
+      "country_code": "QA"
+    }
+  },
+  {
+    "citizen_id": "cit-0695",
+    "category": "STUDENT",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0696",
+    "category": "HOMEMAKER",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0697",
+    "category": "UNEMPLOYED",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0698",
+    "category": "RETIRED",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0699",
+    "category": "FARMER",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0700",
+    "category": "UNEMPLOYED",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0701",
+    "category": "RETIRED",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0702",
+    "category": "FARMER",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0703",
+    "category": "SELF_EMPLOYED",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0704",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0705",
+    "category": "GOVERNMENT",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0706",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "25K_50K",
+    "sub_fields": {
+      "country_code": "QA"
+    }
+  },
+  {
+    "citizen_id": "cit-0707",
+    "category": "STUDENT",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0708",
+    "category": "HOMEMAKER",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0709",
+    "category": "UNEMPLOYED",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0710",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0711",
+    "category": "GOVERNMENT",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0712",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "50K_100K",
+    "sub_fields": {
+      "country_code": "KR"
+    }
+  },
+  {
+    "citizen_id": "cit-0713",
+    "category": "STUDENT",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0714",
+    "category": "HOMEMAKER",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0715",
+    "category": "UNEMPLOYED",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0716",
+    "category": "RETIRED",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0717",
+    "category": "FARMER",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0718",
+    "category": "SELF_EMPLOYED",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0719",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0720",
+    "category": "HOMEMAKER",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0721",
+    "category": "UNEMPLOYED",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0722",
+    "category": "RETIRED",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0723",
+    "category": "FARMER",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0724",
+    "category": "SELF_EMPLOYED",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0725",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0726",
+    "category": "GOVERNMENT",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0727",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "10K_25K",
+    "sub_fields": {
+      "country_code": "KR"
+    }
+  },
+  {
+    "citizen_id": "cit-0728",
+    "category": "STUDENT",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0729",
+    "category": "HOMEMAKER",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0730",
+    "category": "SELF_EMPLOYED",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0731",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0732",
+    "category": "GOVERNMENT",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0733",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "25K_50K",
+    "sub_fields": {
+      "country_code": "QA"
+    }
+  },
+  {
+    "citizen_id": "cit-0734",
+    "category": "STUDENT",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0735",
+    "category": "HOMEMAKER",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0736",
+    "category": "UNEMPLOYED",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0737",
+    "category": "RETIRED",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0738",
+    "category": "FARMER",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0739",
+    "category": "SELF_EMPLOYED",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0740",
+    "category": "STUDENT",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0741",
+    "category": "HOMEMAKER",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0742",
+    "category": "UNEMPLOYED",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0743",
+    "category": "RETIRED",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0744",
+    "category": "FARMER",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0745",
+    "category": "SELF_EMPLOYED",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0746",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0747",
+    "category": "GOVERNMENT",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0748",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "25K_50K",
+    "sub_fields": {
+      "country_code": "QA"
+    }
+  },
+  {
+    "citizen_id": "cit-0749",
+    "category": "STUDENT",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0750",
+    "category": "FARMER",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0751",
+    "category": "SELF_EMPLOYED",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0752",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0753",
+    "category": "GOVERNMENT",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0754",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "50K_100K",
+    "sub_fields": {
+      "country_code": "KR"
+    }
+  },
+  {
+    "citizen_id": "cit-0755",
+    "category": "STUDENT",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0756",
+    "category": "HOMEMAKER",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0757",
+    "category": "UNEMPLOYED",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0758",
+    "category": "RETIRED",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0759",
+    "category": "FARMER",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0760",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "OVER_100K",
+    "sub_fields": {
+      "country_code": "QA"
+    }
+  },
+  {
+    "citizen_id": "cit-0761",
+    "category": "STUDENT",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0762",
+    "category": "HOMEMAKER",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0763",
+    "category": "UNEMPLOYED",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0764",
+    "category": "RETIRED",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0765",
+    "category": "FARMER",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0766",
+    "category": "SELF_EMPLOYED",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0767",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0768",
+    "category": "GOVERNMENT",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0769",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "10K_25K",
+    "sub_fields": {
+      "country_code": "KR"
+    }
+  },
+  {
+    "citizen_id": "cit-0770",
+    "category": "RETIRED",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0771",
+    "category": "FARMER",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0772",
+    "category": "SELF_EMPLOYED",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0773",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0774",
+    "category": "GOVERNMENT",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0775",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "25K_50K",
+    "sub_fields": {
+      "country_code": "QA"
+    }
+  },
+  {
+    "citizen_id": "cit-0776",
+    "category": "STUDENT",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0777",
+    "category": "HOMEMAKER",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0778",
+    "category": "UNEMPLOYED",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0779",
+    "category": "RETIRED",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0780",
+    "category": "GOVERNMENT",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0781",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "50K_100K",
+    "sub_fields": {
+      "country_code": "KR"
+    }
+  },
+  {
+    "citizen_id": "cit-0782",
+    "category": "STUDENT",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0783",
+    "category": "HOMEMAKER",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0784",
+    "category": "UNEMPLOYED",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0785",
+    "category": "RETIRED",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0786",
+    "category": "FARMER",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0787",
+    "category": "SELF_EMPLOYED",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0788",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0789",
+    "category": "GOVERNMENT",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0790",
+    "category": "UNEMPLOYED",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0791",
+    "category": "RETIRED",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0792",
+    "category": "FARMER",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0793",
+    "category": "SELF_EMPLOYED",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0794",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0795",
+    "category": "GOVERNMENT",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0796",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "50K_100K",
+    "sub_fields": {
+      "country_code": "KR"
+    }
+  },
+  {
+    "citizen_id": "cit-0797",
+    "category": "STUDENT",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0798",
+    "category": "HOMEMAKER",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0799",
+    "category": "UNEMPLOYED",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0800",
+    "category": "STUDENT",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0801",
+    "category": "HOMEMAKER",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0802",
+    "category": "UNEMPLOYED",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0803",
+    "category": "RETIRED",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0804",
+    "category": "FARMER",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0805",
+    "category": "SELF_EMPLOYED",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0806",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0807",
+    "category": "GOVERNMENT",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0808",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "UNDER_5K",
+    "sub_fields": {
+      "country_code": "KR"
+    }
+  },
+  {
+    "citizen_id": "cit-0809",
+    "category": "STUDENT",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0810",
+    "category": "FARMER",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0811",
+    "category": "SELF_EMPLOYED",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0812",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0813",
+    "category": "GOVERNMENT",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0814",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "5K_10K",
+    "sub_fields": {
+      "country_code": "QA"
+    }
+  },
+  {
+    "citizen_id": "cit-0815",
+    "category": "STUDENT",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0816",
+    "category": "HOMEMAKER",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0817",
+    "category": "UNEMPLOYED",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0818",
+    "category": "RETIRED",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0819",
+    "category": "FARMER",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0820",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "10K_25K",
+    "sub_fields": {
+      "country_code": "KR"
+    }
+  },
+  {
+    "citizen_id": "cit-0821",
+    "category": "STUDENT",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0822",
+    "category": "HOMEMAKER",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0823",
+    "category": "UNEMPLOYED",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0824",
+    "category": "RETIRED",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0825",
+    "category": "FARMER",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0826",
+    "category": "SELF_EMPLOYED",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0827",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0828",
+    "category": "GOVERNMENT",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0829",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "5K_10K",
+    "sub_fields": {
+      "country_code": "QA"
+    }
+  },
+  {
+    "citizen_id": "cit-0830",
+    "category": "RETIRED",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0831",
+    "category": "FARMER",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0832",
+    "category": "SELF_EMPLOYED",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0833",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0834",
+    "category": "GOVERNMENT",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0835",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "10K_25K",
+    "sub_fields": {
+      "country_code": "KR"
+    }
+  },
+  {
+    "citizen_id": "cit-0836",
+    "category": "STUDENT",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0837",
+    "category": "HOMEMAKER",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0838",
+    "category": "UNEMPLOYED",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0839",
+    "category": "RETIRED",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0840",
+    "category": "GOVERNMENT",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0841",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "25K_50K",
+    "sub_fields": {
+      "country_code": "QA"
+    }
+  },
+  {
+    "citizen_id": "cit-0842",
+    "category": "STUDENT",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0843",
+    "category": "HOMEMAKER",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0844",
+    "category": "UNEMPLOYED",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0845",
+    "category": "RETIRED",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0846",
+    "category": "FARMER",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0847",
+    "category": "SELF_EMPLOYED",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0848",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0849",
+    "category": "GOVERNMENT",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0850",
+    "category": "UNEMPLOYED",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0851",
+    "category": "RETIRED",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0852",
+    "category": "FARMER",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0853",
+    "category": "SELF_EMPLOYED",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0854",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0855",
+    "category": "GOVERNMENT",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0856",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "5K_10K",
+    "sub_fields": {
+      "country_code": "QA"
+    }
+  },
+  {
+    "citizen_id": "cit-0857",
+    "category": "STUDENT",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0858",
+    "category": "HOMEMAKER",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0859",
+    "category": "UNEMPLOYED",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0860",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0861",
+    "category": "GOVERNMENT",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0862",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "10K_25K",
+    "sub_fields": {
+      "country_code": "KR"
+    }
+  },
+  {
+    "citizen_id": "cit-0863",
+    "category": "STUDENT",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0864",
+    "category": "HOMEMAKER",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0865",
+    "category": "UNEMPLOYED",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0866",
+    "category": "RETIRED",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0867",
+    "category": "FARMER",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0868",
+    "category": "SELF_EMPLOYED",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0869",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0870",
+    "category": "HOMEMAKER",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0871",
+    "category": "UNEMPLOYED",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0872",
+    "category": "RETIRED",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0873",
+    "category": "FARMER",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0874",
+    "category": "SELF_EMPLOYED",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0875",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0876",
+    "category": "GOVERNMENT",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0877",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "10K_25K",
+    "sub_fields": {
+      "country_code": "KR"
+    }
+  },
+  {
+    "citizen_id": "cit-0878",
+    "category": "STUDENT",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0879",
+    "category": "HOMEMAKER",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0880",
+    "category": "SELF_EMPLOYED",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0881",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0882",
+    "category": "GOVERNMENT",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0883",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "25K_50K",
+    "sub_fields": {
+      "country_code": "QA"
+    }
+  },
+  {
+    "citizen_id": "cit-0884",
+    "category": "STUDENT",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0885",
+    "category": "HOMEMAKER",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0886",
+    "category": "UNEMPLOYED",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0887",
+    "category": "RETIRED",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0888",
+    "category": "FARMER",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0889",
+    "category": "SELF_EMPLOYED",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0890",
+    "category": "STUDENT",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0891",
+    "category": "HOMEMAKER",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0892",
+    "category": "UNEMPLOYED",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0893",
+    "category": "RETIRED",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0894",
+    "category": "FARMER",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0895",
+    "category": "SELF_EMPLOYED",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0896",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0897",
+    "category": "GOVERNMENT",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0898",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "25K_50K",
+    "sub_fields": {
+      "country_code": "QA"
+    }
+  },
+  {
+    "citizen_id": "cit-0899",
+    "category": "STUDENT",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0900",
+    "category": "GOVERNMENT",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0901",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "10K_25K",
+    "sub_fields": {
+      "country_code": "KR"
+    }
+  },
+  {
+    "citizen_id": "cit-0902",
+    "category": "STUDENT",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0903",
+    "category": "HOMEMAKER",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0904",
+    "category": "UNEMPLOYED",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0905",
+    "category": "RETIRED",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0906",
+    "category": "FARMER",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0907",
+    "category": "SELF_EMPLOYED",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0908",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0909",
+    "category": "GOVERNMENT",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0910",
+    "category": "UNEMPLOYED",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0911",
+    "category": "RETIRED",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0912",
+    "category": "FARMER",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0913",
+    "category": "SELF_EMPLOYED",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0914",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0915",
+    "category": "GOVERNMENT",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0916",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "UNDER_5K",
+    "sub_fields": {
+      "country_code": "KR"
+    }
+  },
+  {
+    "citizen_id": "cit-0917",
+    "category": "STUDENT",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0918",
+    "category": "HOMEMAKER",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0919",
+    "category": "UNEMPLOYED",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0920",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0921",
+    "category": "GOVERNMENT",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0922",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "5K_10K",
+    "sub_fields": {
+      "country_code": "QA"
+    }
+  },
+  {
+    "citizen_id": "cit-0923",
+    "category": "STUDENT",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0924",
+    "category": "HOMEMAKER",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0925",
+    "category": "UNEMPLOYED",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0926",
+    "category": "RETIRED",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0927",
+    "category": "FARMER",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0928",
+    "category": "SELF_EMPLOYED",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0929",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0930",
+    "category": "HOMEMAKER",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0931",
+    "category": "UNEMPLOYED",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0932",
+    "category": "RETIRED",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0933",
+    "category": "FARMER",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0934",
+    "category": "SELF_EMPLOYED",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0935",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0936",
+    "category": "GOVERNMENT",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0937",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "5K_10K",
+    "sub_fields": {
+      "country_code": "QA"
+    }
+  },
+  {
+    "citizen_id": "cit-0938",
+    "category": "STUDENT",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0939",
+    "category": "HOMEMAKER",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0940",
+    "category": "SELF_EMPLOYED",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0941",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0942",
+    "category": "GOVERNMENT",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0943",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "10K_25K",
+    "sub_fields": {
+      "country_code": "KR"
+    }
+  },
+  {
+    "citizen_id": "cit-0944",
+    "category": "STUDENT",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0945",
+    "category": "HOMEMAKER",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0946",
+    "category": "UNEMPLOYED",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0947",
+    "category": "RETIRED",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0948",
+    "category": "FARMER",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0949",
+    "category": "SELF_EMPLOYED",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0950",
+    "category": "STUDENT",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0951",
+    "category": "HOMEMAKER",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0952",
+    "category": "UNEMPLOYED",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0953",
+    "category": "RETIRED",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0954",
+    "category": "FARMER",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0955",
+    "category": "SELF_EMPLOYED",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0956",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0957",
+    "category": "GOVERNMENT",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0958",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "UNDER_5K",
+    "sub_fields": {
+      "country_code": "KR"
+    }
+  },
+  {
+    "citizen_id": "cit-0959",
+    "category": "STUDENT",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0960",
+    "category": "FARMER",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0961",
+    "category": "SELF_EMPLOYED",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0962",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0963",
+    "category": "GOVERNMENT",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0964",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "5K_10K",
+    "sub_fields": {
+      "country_code": "QA"
+    }
+  },
+  {
+    "citizen_id": "cit-0965",
+    "category": "STUDENT",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0966",
+    "category": "HOMEMAKER",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0967",
+    "category": "UNEMPLOYED",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0968",
+    "category": "RETIRED",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0969",
+    "category": "FARMER",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0970",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "10K_25K",
+    "sub_fields": {
+      "country_code": "KR"
+    }
+  },
+  {
+    "citizen_id": "cit-0971",
+    "category": "STUDENT",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0972",
+    "category": "HOMEMAKER",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0973",
+    "category": "UNEMPLOYED",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0974",
+    "category": "RETIRED",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0975",
+    "category": "FARMER",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0976",
+    "category": "SELF_EMPLOYED",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0977",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0978",
+    "category": "GOVERNMENT",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0979",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "5K_10K",
+    "sub_fields": {
+      "country_code": "QA"
+    }
+  },
+  {
+    "citizen_id": "cit-0980",
+    "category": "RETIRED",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0981",
+    "category": "FARMER",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0982",
+    "category": "SELF_EMPLOYED",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0983",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0984",
+    "category": "GOVERNMENT",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0985",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "10K_25K",
+    "sub_fields": {
+      "country_code": "KR"
+    }
+  },
+  {
+    "citizen_id": "cit-0986",
+    "category": "STUDENT",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0987",
+    "category": "HOMEMAKER",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0988",
+    "category": "UNEMPLOYED",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0989",
+    "category": "RETIRED",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0990",
+    "category": "GOVERNMENT",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0991",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "25K_50K",
+    "sub_fields": {
+      "country_code": "QA"
+    }
+  },
+  {
+    "citizen_id": "cit-0992",
+    "category": "STUDENT",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0993",
+    "category": "HOMEMAKER",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0994",
+    "category": "UNEMPLOYED",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0995",
+    "category": "RETIRED",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0996",
+    "category": "FARMER",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0997",
+    "category": "SELF_EMPLOYED",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0998",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-0999",
+    "category": "GOVERNMENT",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1000",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "5K_10K",
+    "sub_fields": {
+      "country_code": "QA"
+    }
+  },
+  {
+    "citizen_id": "cit-1001",
+    "category": "STUDENT",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1002",
+    "category": "HOMEMAKER",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1003",
+    "category": "UNEMPLOYED",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1004",
+    "category": "RETIRED",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1005",
+    "category": "FARMER",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1006",
+    "category": "SELF_EMPLOYED",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1007",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1008",
+    "category": "GOVERNMENT",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1009",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "UNDER_5K",
+    "sub_fields": {
+      "country_code": "KR"
+    }
+  },
+  {
+    "citizen_id": "cit-1010",
+    "category": "RETIRED",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1011",
+    "category": "FARMER",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1012",
+    "category": "SELF_EMPLOYED",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1013",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1014",
+    "category": "GOVERNMENT",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1015",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "5K_10K",
+    "sub_fields": {
+      "country_code": "QA"
+    }
+  },
+  {
+    "citizen_id": "cit-1016",
+    "category": "STUDENT",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1017",
+    "category": "HOMEMAKER",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1018",
+    "category": "UNEMPLOYED",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1019",
+    "category": "RETIRED",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1020",
+    "category": "GOVERNMENT",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1021",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "10K_25K",
+    "sub_fields": {
+      "country_code": "KR"
+    }
+  },
+  {
+    "citizen_id": "cit-1022",
+    "category": "STUDENT",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1023",
+    "category": "HOMEMAKER",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1024",
+    "category": "UNEMPLOYED",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1025",
+    "category": "RETIRED",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1026",
+    "category": "FARMER",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1027",
+    "category": "SELF_EMPLOYED",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1028",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1029",
+    "category": "GOVERNMENT",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1030",
+    "category": "UNEMPLOYED",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1031",
+    "category": "RETIRED",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1032",
+    "category": "FARMER",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1033",
+    "category": "SELF_EMPLOYED",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1034",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1035",
+    "category": "GOVERNMENT",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1036",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "UNDER_5K",
+    "sub_fields": {
+      "country_code": "KR"
+    }
+  },
+  {
+    "citizen_id": "cit-1037",
+    "category": "STUDENT",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1038",
+    "category": "HOMEMAKER",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1039",
+    "category": "UNEMPLOYED",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1040",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1041",
+    "category": "GOVERNMENT",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1042",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "5K_10K",
+    "sub_fields": {
+      "country_code": "QA"
+    }
+  },
+  {
+    "citizen_id": "cit-1043",
+    "category": "STUDENT",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1044",
+    "category": "HOMEMAKER",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1045",
+    "category": "UNEMPLOYED",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1046",
+    "category": "RETIRED",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1047",
+    "category": "FARMER",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1048",
+    "category": "SELF_EMPLOYED",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1049",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1050",
+    "category": "HOMEMAKER",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1051",
+    "category": "UNEMPLOYED",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1052",
+    "category": "RETIRED",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1053",
+    "category": "FARMER",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1054",
+    "category": "SELF_EMPLOYED",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1055",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1056",
+    "category": "GOVERNMENT",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1057",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "5K_10K",
+    "sub_fields": {
+      "country_code": "QA"
+    }
+  },
+  {
+    "citizen_id": "cit-1058",
+    "category": "STUDENT",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1059",
+    "category": "HOMEMAKER",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1060",
+    "category": "SELF_EMPLOYED",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1061",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1062",
+    "category": "GOVERNMENT",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1063",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "10K_25K",
+    "sub_fields": {
+      "country_code": "KR"
+    }
+  },
+  {
+    "citizen_id": "cit-1064",
+    "category": "STUDENT",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1065",
+    "category": "HOMEMAKER",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1066",
+    "category": "UNEMPLOYED",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1067",
+    "category": "RETIRED",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1068",
+    "category": "FARMER",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1069",
+    "category": "SELF_EMPLOYED",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1070",
+    "category": "STUDENT",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1071",
+    "category": "HOMEMAKER",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1072",
+    "category": "UNEMPLOYED",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1073",
+    "category": "RETIRED",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1074",
+    "category": "FARMER",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1075",
+    "category": "SELF_EMPLOYED",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1076",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1077",
+    "category": "GOVERNMENT",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1078",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "UNDER_5K",
+    "sub_fields": {
+      "country_code": "KR"
+    }
+  },
+  {
+    "citizen_id": "cit-1079",
+    "category": "STUDENT",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1080",
+    "category": "FARMER",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1081",
+    "category": "SELF_EMPLOYED",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1082",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1083",
+    "category": "GOVERNMENT",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1084",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "5K_10K",
+    "sub_fields": {
+      "country_code": "QA"
+    }
+  },
+  {
+    "citizen_id": "cit-1085",
+    "category": "STUDENT",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1086",
+    "category": "HOMEMAKER",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1087",
+    "category": "UNEMPLOYED",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1088",
+    "category": "RETIRED",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1089",
+    "category": "FARMER",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1090",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "10K_25K",
+    "sub_fields": {
+      "country_code": "KR"
+    }
+  },
+  {
+    "citizen_id": "cit-1091",
+    "category": "STUDENT",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1092",
+    "category": "HOMEMAKER",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1093",
+    "category": "UNEMPLOYED",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1094",
+    "category": "RETIRED",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1095",
+    "category": "FARMER",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1096",
+    "category": "SELF_EMPLOYED",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1097",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1098",
+    "category": "GOVERNMENT",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1099",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "5K_10K",
+    "sub_fields": {
+      "country_code": "QA"
+    }
+  },
+  {
+    "citizen_id": "cit-1100",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1101",
+    "category": "GOVERNMENT",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1102",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "UNDER_5K",
+    "sub_fields": {
+      "country_code": "KR"
+    }
+  },
+  {
+    "citizen_id": "cit-1103",
+    "category": "STUDENT",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1104",
+    "category": "HOMEMAKER",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1105",
+    "category": "UNEMPLOYED",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1106",
+    "category": "RETIRED",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1107",
+    "category": "FARMER",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1108",
+    "category": "SELF_EMPLOYED",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1109",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1110",
+    "category": "HOMEMAKER",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1111",
+    "category": "UNEMPLOYED",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1112",
+    "category": "RETIRED",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1113",
+    "category": "FARMER",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1114",
+    "category": "SELF_EMPLOYED",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1115",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1116",
+    "category": "GOVERNMENT",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1117",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "50K_100K",
+    "sub_fields": {
+      "country_code": "KR"
+    }
+  },
+  {
+    "citizen_id": "cit-1118",
+    "category": "STUDENT",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1119",
+    "category": "HOMEMAKER",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1120",
+    "category": "SELF_EMPLOYED",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1121",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1122",
+    "category": "GOVERNMENT",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1123",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "OVER_100K",
+    "sub_fields": {
+      "country_code": "QA"
+    }
+  },
+  {
+    "citizen_id": "cit-1124",
+    "category": "STUDENT",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1125",
+    "category": "HOMEMAKER",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1126",
+    "category": "UNEMPLOYED",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1127",
+    "category": "RETIRED",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1128",
+    "category": "FARMER",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1129",
+    "category": "SELF_EMPLOYED",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1130",
+    "category": "STUDENT",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1131",
+    "category": "HOMEMAKER",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1132",
+    "category": "UNEMPLOYED",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1133",
+    "category": "RETIRED",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1134",
+    "category": "FARMER",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1135",
+    "category": "SELF_EMPLOYED",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1136",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1137",
+    "category": "GOVERNMENT",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1138",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "OVER_100K",
+    "sub_fields": {
+      "country_code": "QA"
+    }
+  },
+  {
+    "citizen_id": "cit-1139",
+    "category": "STUDENT",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1140",
+    "category": "FARMER",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1141",
+    "category": "SELF_EMPLOYED",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1142",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1143",
+    "category": "GOVERNMENT",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1144",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "UNDER_5K",
+    "sub_fields": {
+      "country_code": "KR"
+    }
+  },
+  {
+    "citizen_id": "cit-1145",
+    "category": "STUDENT",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1146",
+    "category": "HOMEMAKER",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1147",
+    "category": "UNEMPLOYED",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1148",
+    "category": "RETIRED",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1149",
+    "category": "FARMER",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1150",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "5K_10K",
+    "sub_fields": {
+      "country_code": "QA"
+    }
+  },
+  {
+    "citizen_id": "cit-1151",
+    "category": "STUDENT",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1152",
+    "category": "HOMEMAKER",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1153",
+    "category": "UNEMPLOYED",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1154",
+    "category": "RETIRED",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1155",
+    "category": "FARMER",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1156",
+    "category": "SELF_EMPLOYED",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1157",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1158",
+    "category": "GOVERNMENT",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1159",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "UNDER_5K",
+    "sub_fields": {
+      "country_code": "KR"
+    }
+  },
+  {
+    "citizen_id": "cit-1160",
+    "category": "RETIRED",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1161",
+    "category": "FARMER",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1162",
+    "category": "SELF_EMPLOYED",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1163",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1164",
+    "category": "GOVERNMENT",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1165",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "5K_10K",
+    "sub_fields": {
+      "country_code": "QA"
+    }
+  },
+  {
+    "citizen_id": "cit-1166",
+    "category": "STUDENT",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1167",
+    "category": "HOMEMAKER",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1168",
+    "category": "UNEMPLOYED",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1169",
+    "category": "RETIRED",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1170",
+    "category": "GOVERNMENT",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1171",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "10K_25K",
+    "sub_fields": {
+      "country_code": "KR"
+    }
+  },
+  {
+    "citizen_id": "cit-1172",
+    "category": "STUDENT",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1173",
+    "category": "HOMEMAKER",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1174",
+    "category": "UNEMPLOYED",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1175",
+    "category": "RETIRED",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1176",
+    "category": "FARMER",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1177",
+    "category": "SELF_EMPLOYED",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1178",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1179",
+    "category": "GOVERNMENT",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1180",
+    "category": "UNEMPLOYED",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1181",
+    "category": "RETIRED",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1182",
+    "category": "FARMER",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1183",
+    "category": "SELF_EMPLOYED",
+    "income_band": "5K_10K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1184",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1185",
+    "category": "GOVERNMENT",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1186",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "UNDER_5K",
+    "sub_fields": {
+      "country_code": "KR"
+    }
+  },
+  {
+    "citizen_id": "cit-1187",
+    "category": "STUDENT",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1188",
+    "category": "HOMEMAKER",
+    "income_band": "50K_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1189",
+    "category": "UNEMPLOYED",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1190",
+    "category": "PRIVATE_SECTOR",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1191",
+    "category": "GOVERNMENT",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1192",
+    "category": "FOREIGN_ABROAD",
+    "income_band": "5K_10K",
+    "sub_fields": {
+      "country_code": "QA"
+    }
+  },
+  {
+    "citizen_id": "cit-1193",
+    "category": "STUDENT",
+    "income_band": "10K_25K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1194",
+    "category": "HOMEMAKER",
+    "income_band": "OVER_100K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1195",
+    "category": "UNEMPLOYED",
+    "income_band": "UNDER_5K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1196",
+    "category": "RETIRED",
+    "income_band": "25K_50K",
+    "sub_fields": {}
+  },
+  {
+    "citizen_id": "cit-1197",
+    "category": "FARMER",
+    "income_band": "50K_100K",
+    "sub_fields": {}
   }
 ]
