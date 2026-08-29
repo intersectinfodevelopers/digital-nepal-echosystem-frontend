@@ -1,15 +1,7 @@
 "use client";
 
-import { useEffect } from "react";
-import { useRouter } from "next/navigation";
-import { PersonalStep } from "@/components/PersonalStep";
+import { UnifiedCitizenRegistration } from "@/components/UnifiedCitizenRegistration";
 
 export default function WardRegisterCitizenPage() {
-  const router = useRouter();
-
-  useEffect(() => {
-    router.replace("/ward/dashboard/registercitizen");
-  }, [router]);
-
-  return <PersonalStep />;
+  return <UnifiedCitizenRegistration />;
 }

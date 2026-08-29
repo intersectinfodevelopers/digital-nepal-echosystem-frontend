@@ -21,7 +21,7 @@ export function PortalLayout({ children }: PortalLayoutProps) {
             className="h-[72px] bg-[#0B2D6B] flex sticky top-0 z-10 items-center justify-between shrink-0 px-10"
           >
             <Typography className="font-poppins font-bold text-[22px] text-white tracking-[0.5px]">
-              Prapti
+              Citizen Registration
             </Typography>
             <Box
               className="cursor-pointer w-9 h-9 rounded-full border-2 border-white/60 flex items-center justify-center"

@@ -7,7 +7,10 @@ import {
   ArrowForward,
 } from "@mui/icons-material";
 import { PortalStepper } from "@/components/Stepper";
-import { registerCitizen } from "@/services/citizenService";
+import {
+  registerCitizen,
+  LATEST_SUBMISSION_KEY,
+} from "@/services/citizenService";
 import type { RegistrationFormData } from "@/types/citizen";
 
 
@@ -114,12 +117,20 @@ export function ReviewSubmitStep({
     if (!isConfirmed) return;
     setIsSubmitting(true);
 
-    // Persist the citizen record so it appears on the citizens page
+    // Persist the citizen record so it appears on the citizens page and in the
+    // device-local dataset that can be inspected from browser devtools/localStorage.
     try {
+      let submittedCitizen;
       if (formData) {
-        registerCitizen(formData);
+        submittedCitizen = registerCitizen(formData);
       }
       if (typeof window !== "undefined") {
+        const payload = {
+          submittedAt: new Date().toISOString(),
+          registrationNumber: `REG-${Date.now().toString(36).toUpperCase()}`,
+          citizenId: submittedCitizen?.id ?? null,
+          formData,
+        };
         window.localStorage.setItem(
           "prapti_registration_v1",
           JSON.stringify(formData),
@@ -127,6 +138,10 @@ export function ReviewSubmitStep({
         window.localStorage.setItem(
           "prapti_submitted_at",
           new Date().toISOString(),
+        );
+        window.localStorage.setItem(
+          LATEST_SUBMISSION_KEY,
+          JSON.stringify(payload),
         );
       }
     } catch {
