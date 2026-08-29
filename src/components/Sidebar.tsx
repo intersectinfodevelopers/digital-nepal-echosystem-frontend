@@ -46,7 +46,7 @@ export function DashboardSidebar({ activeLabel, onSaveExit }: DashboardSidebarPr
       {/* Logo */}
       <div className="pt-[28px] px-7 pb-8">
         <p className="font-poppins font-bold text-[30px] text-white leading-tight tracking-tight">
-          PRAPTI Portal
+          Registration
         </p>
       </div>
 

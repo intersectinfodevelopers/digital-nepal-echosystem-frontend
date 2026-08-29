@@ -17,6 +17,8 @@ import citizensStatic from '../../data/citizens.json';
 
 const STORAGE_KEY = 'citizens_registered';
 const PROFILE_STORAGE_KEY = 'citizen_profiles_registered';
+export const DATASET_STORAGE_KEY = 'digital_nepal_citizen_dataset_v1';
+export const LATEST_SUBMISSION_KEY = 'digital_nepal_latest_submission_v1';
 
 /* ------------------------------------------------------------------ */
 /* Portal draft keys used to reassemble a registration payload          */
@@ -49,7 +51,16 @@ function getStored(): Citizen[] {
 
 function setStored(citizens: Citizen[]): void {
   try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(citizens));
+    const records = Array.isArray(citizens) ? citizens : [];
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(records));
+    localStorage.setItem(
+      DATASET_STORAGE_KEY,
+      JSON.stringify({
+        savedAt: new Date().toISOString(),
+        total: records.length,
+        records,
+      }),
+    );
   } catch {
     console.error('Failed to save to localStorage');
   }
@@ -453,6 +464,17 @@ export function registerCitizen(formData: RegistrationFormData): Citizen {
   const stored = getStored();
   stored.push(storedCitizen);
   setStored(stored);
+
+  if (typeof window !== 'undefined') {
+    window.localStorage.setItem(
+      LATEST_SUBMISSION_KEY,
+      JSON.stringify({
+        savedAt: new Date().toISOString(),
+        citizenId: citizen.id,
+        registration: formData,
+      }),
+    );
+  }
 
   const profiles = getProfiles();
   profiles.push({ citizenId: citizen.id, data: formData });
