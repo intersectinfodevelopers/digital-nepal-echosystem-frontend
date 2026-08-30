@@ -175,18 +175,18 @@ export default function CentralDashboardPage() {
       {/* 2. HEADER / BREADCRUMB SECTION */}
       <div className="flex flex-col justify-between gap-4 border-b border-slate-200/80 pb-5 sm:flex-row sm:items-center">
         <div>
-          <div className="flex items-center gap-1.5 text-xs font-semibold text-slate-500">
+          <div className="flex items-center gap-1.5 text-sm font-semibold text-slate-500">
             <span>Central Portal</span>
             <span>&gt;</span>
             <span className="text-slate-900 font-bold">Dashboard</span>
           </div>
-          <div className="mt-1 text-[11px] font-bold tracking-widest text-slate-400 uppercase">
+          <div className="mt-1 text-xs font-bold tracking-widest text-slate-400 uppercase">
             CENTRAL_ADMIN
           </div>
-          <h1 className="mt-1 text-2xl font-black tracking-tight text-slate-900 sm:text-3xl">
+          <h1 className="mt-1 text-3xl font-black tracking-tight text-slate-900 sm:text-4xl">
             National Dashboard
           </h1>
-          <p className="mt-1 text-xs font-medium text-slate-500 max-w-3xl">
+          <p className="mt-1 text-sm font-medium text-slate-500 max-w-3xl">
             National overview of citizens, administrative divisions, ID cards, and grievances — aggregated across all 7 provinces.
           </p>
         </div>
@@ -194,17 +194,17 @@ export default function CentralDashboardPage() {
         <div className="flex flex-wrap items-center gap-2">
           <Link
             href="/central/national-map"
-            className="inline-flex items-center gap-1.5 rounded-lg border border-blue-600/40 bg-white px-3 py-1.5 text-xs font-bold text-blue-600 shadow-xs hover:bg-blue-50 transition-colors"
+            className="inline-flex items-center gap-1.5 rounded-lg border border-blue-600/40 bg-white px-3.5 py-2 text-sm font-bold text-blue-600 shadow-xs hover:bg-blue-50 transition-colors"
           >
-            <MapOutlined sx={{ fontSize: 16 }} />
+            <MapOutlined sx={{ fontSize: 18 }} />
             <span>View Map</span>
           </Link>
 
           <Link
             href="/central/analytics"
-            className="inline-flex items-center gap-1.5 rounded-lg bg-blue-600 px-3.5 py-1.5 text-xs font-bold text-white shadow-xs hover:bg-blue-700 transition-colors"
+            className="inline-flex items-center gap-1.5 rounded-lg bg-blue-600 px-4 py-2 text-sm font-bold text-white shadow-xs hover:bg-blue-700 transition-colors"
           >
-            <AnalyticsOutlined sx={{ fontSize: 16 }} />
+            <AnalyticsOutlined sx={{ fontSize: 18 }} />
             <span>Open Analytics</span>
           </Link>
 
@@ -224,17 +224,17 @@ export default function CentralDashboardPage() {
         {/* Card 1 — Total Citizens */}
         <div className="rounded-xl border border-slate-200/90 bg-white p-4 shadow-2xs">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold text-slate-500">Total Citizens Nationally</span>
-            <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-emerald-50 text-emerald-600">
-              <PeopleOutlined sx={{ fontSize: 18 }} />
+            <span className="text-sm font-semibold text-slate-500">Total Citizens Nationally</span>
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-50 text-emerald-600">
+              <PeopleOutlined sx={{ fontSize: 20 }} />
             </div>
           </div>
           <div className="mt-3 flex items-baseline justify-between">
-            <span className="text-2xl sm:text-3xl font-black tracking-tight text-slate-900">
+            <span className="text-3xl sm:text-4xl font-black tracking-tight text-slate-900">
               {dataMetrics.totalCitizens > 0 ? numberFormat.format(dataMetrics.totalCitizens) : "Not Available"}
             </span>
           </div>
-          <div className="mt-3 flex items-center justify-between text-[11px] font-semibold">
+          <div className="mt-3 flex items-center justify-between text-xs font-semibold">
             <span className="inline-flex items-center text-emerald-600 font-bold">
               ↑ Active System Records
             </span>
@@ -245,18 +245,18 @@ export default function CentralDashboardPage() {
         {/* Card 2 — Total Federal Provinces */}
         <div className="rounded-xl border border-slate-200/90 bg-white p-4 shadow-2xs">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold text-slate-500">Total Federal Provinces</span>
-            <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-indigo-50 text-indigo-600">
-              <AccountBalanceOutlined sx={{ fontSize: 18 }} />
+            <span className="text-sm font-semibold text-slate-500">Total Federal Provinces</span>
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-50 text-indigo-600">
+              <AccountBalanceOutlined sx={{ fontSize: 20 }} />
             </div>
           </div>
           <div className="mt-3 flex items-baseline justify-between">
-            <span className="text-2xl sm:text-3xl font-black tracking-tight text-slate-900">
+            <span className="text-3xl sm:text-4xl font-black tracking-tight text-slate-900">
               {dataMetrics.totalProvinces > 0 ? dataMetrics.totalProvinces : "Not Available"}
             </span>
-            {dataMetrics.totalProvinces > 0 && <span className="text-xs font-bold text-slate-600">active</span>}
+            {dataMetrics.totalProvinces > 0 && <span className="text-sm font-bold text-slate-600">active</span>}
           </div>
-          <div className="mt-3 flex items-center text-[11px] font-semibold text-indigo-600">
+          <div className="mt-3 flex items-center text-xs font-semibold text-indigo-600">
             <span>{dataMetrics.totalProvinces > 0 ? `✓ All ${dataMetrics.totalProvinces} Verified` : "Not Available"}</span>
           </div>
         </div>
@@ -264,18 +264,18 @@ export default function CentralDashboardPage() {
         {/* Card 3 — Total Municipalities */}
         <div className="rounded-xl border border-slate-200/90 bg-white p-4 shadow-2xs">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold text-slate-500">Total Municipalities</span>
-            <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-sky-50 text-sky-600">
-              <LocationCityOutlined sx={{ fontSize: 18 }} />
+            <span className="text-sm font-semibold text-slate-500">Total Municipalities</span>
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-sky-50 text-sky-600">
+              <LocationCityOutlined sx={{ fontSize: 20 }} />
             </div>
           </div>
           <div className="mt-3 flex items-baseline justify-between">
-            <span className="text-2xl sm:text-3xl font-black tracking-tight text-slate-900">
+            <span className="text-3xl sm:text-4xl font-black tracking-tight text-slate-900">
               {dataMetrics.totalMunicipalities > 0 ? numberFormat.format(dataMetrics.totalMunicipalities) : "Not Available"}
             </span>
-            {dataMetrics.totalMunicipalities > 0 && <span className="text-xs font-bold text-slate-600">captured</span>}
+            {dataMetrics.totalMunicipalities > 0 && <span className="text-sm font-bold text-slate-600">captured</span>}
           </div>
-          <div className="mt-3 flex items-center text-[11px] font-semibold text-sky-600">
+          <div className="mt-3 flex items-center text-xs font-semibold text-sky-600">
             <span>{dataMetrics.totalMunicipalities > 0 ? `● Active ${dataMetrics.totalMunicipalities} Local Bodies` : "Not Available"}</span>
           </div>
         </div>
@@ -283,17 +283,17 @@ export default function CentralDashboardPage() {
         {/* Card 4 — National Wards Synced */}
         <div className="rounded-xl border border-slate-200/90 bg-white p-4 shadow-2xs">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold text-slate-500">National Wards Synced</span>
-            <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-emerald-50 text-emerald-600">
-              <SyncOutlined sx={{ fontSize: 18 }} />
+            <span className="text-sm font-semibold text-slate-500">National Wards Synced</span>
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-50 text-emerald-600">
+              <SyncOutlined sx={{ fontSize: 20 }} />
             </div>
           </div>
           <div className="mt-3 flex items-baseline justify-between">
-            <span className="text-2xl sm:text-3xl font-black tracking-tight text-slate-900">
+            <span className="text-3xl sm:text-4xl font-black tracking-tight text-slate-900">
               {dataMetrics.syncedWards > 0 ? numberFormat.format(dataMetrics.syncedWards) : "Not Available"}
             </span>
           </div>
-          <div className="mt-3 flex items-center text-[11px] font-semibold text-emerald-600">
+          <div className="mt-3 flex items-center text-xs font-semibold text-emerald-600">
             <span>{dataMetrics.syncedWards > 0 ? `★ ${dataMetrics.syncedWards} Wards Synced` : "Not Available"}</span>
           </div>
         </div>
@@ -301,18 +301,18 @@ export default function CentralDashboardPage() {
         {/* Card 5 — ID Cards Issued */}
         <div className="rounded-xl border border-slate-200/90 bg-white p-4 shadow-2xs">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold text-slate-500">ID Cards Issued</span>
-            <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-teal-50 text-teal-600">
-              <BadgeOutlined sx={{ fontSize: 18 }} />
+            <span className="text-sm font-semibold text-slate-500">ID Cards Issued</span>
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-teal-50 text-teal-600">
+              <BadgeOutlined sx={{ fontSize: 20 }} />
             </div>
           </div>
           <div className="mt-3 flex items-baseline gap-2">
-            <span className="text-2xl sm:text-3xl font-black tracking-tight text-slate-900">
+            <span className="text-3xl sm:text-4xl font-black tracking-tight text-slate-900">
               {dataMetrics.issuedCardsCount > 0 ? numberFormat.format(dataMetrics.issuedCardsCount) : "Not Available"}
             </span>
-            {dataMetrics.issuedCardsCount > 0 && <span className="text-xs font-semibold text-slate-400">Total Cards</span>}
+            {dataMetrics.issuedCardsCount > 0 && <span className="text-sm font-semibold text-slate-400">Total Cards</span>}
           </div>
-          <div className="mt-3 flex items-center text-[11px] font-semibold text-teal-600">
+          <div className="mt-3 flex items-center text-xs font-semibold text-teal-600">
             <span>{dataMetrics.issuedCardsCount > 0 ? "Verified Issued Cards" : "Not Available"}</span>
           </div>
         </div>
@@ -320,17 +320,17 @@ export default function CentralDashboardPage() {
         {/* Card 6 — Active Grievances Open */}
         <div className="rounded-xl border border-slate-200/90 bg-white p-4 shadow-2xs">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold text-slate-500">Active Grievances Open</span>
-            <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-rose-50 text-rose-500">
-              <ReportProblemOutlined sx={{ fontSize: 18 }} />
+            <span className="text-sm font-semibold text-slate-500">Active Grievances Open</span>
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-rose-50 text-rose-500">
+              <ReportProblemOutlined sx={{ fontSize: 20 }} />
             </div>
           </div>
           <div className="mt-3 flex items-baseline justify-between">
-            <span className="text-2xl sm:text-3xl font-black tracking-tight text-rose-600">
+            <span className="text-3xl sm:text-4xl font-black tracking-tight text-rose-600">
               {dataMetrics.activeGrievancesCount > 0 ? numberFormat.format(dataMetrics.activeGrievancesCount) : "0"}
             </span>
           </div>
-          <div className="mt-3 flex items-center text-[11px] font-semibold text-rose-600">
+          <div className="mt-3 flex items-center text-xs font-semibold text-rose-600">
             <span>{dataMetrics.activeGrievancesCount > 0 ? `${dataMetrics.activeGrievancesCount} Active Open Cases` : "No Open Grievances"}</span>
           </div>
         </div>
@@ -338,18 +338,18 @@ export default function CentralDashboardPage() {
 
       {/* 4. SOCIAL REGISTRATION PROFILES SECTION */}
       <div>
-        <h2 className="text-sm font-bold tracking-tight text-slate-900">
+        <h2 className="text-base font-bold tracking-tight text-slate-900">
           Social Registration Profiles
         </h2>
         <div className="mt-3 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {/* Household Card */}
           <div className="rounded-xl border border-slate-200/90 bg-white p-4 shadow-2xs flex items-center justify-between">
             <div>
-              <div className="text-[11px] font-medium text-slate-500">Registered Households</div>
-              <div className="mt-1 text-2xl font-black text-slate-900">
+              <div className="text-xs font-medium text-slate-500">Registered Households</div>
+              <div className="mt-1 text-3xl font-black text-slate-900">
                 {dataMetrics.registeredHouseholds > 0 ? numberFormat.format(dataMetrics.registeredHouseholds) : "Not Available"}
               </div>
-              <div className="mt-2 text-[10px] text-slate-400">
+              <div className="mt-2 text-[11px] text-slate-400">
                 {dataMetrics.registeredHouseholds > 0 ? `${dataMetrics.registeredHouseholds} Active Records` : "Not Available"}
               </div>
             </div>
@@ -364,11 +364,11 @@ export default function CentralDashboardPage() {
           {/* Employment Card */}
           <div className="rounded-xl border border-slate-200/90 bg-white p-4 shadow-2xs flex items-center justify-between">
             <div>
-              <div className="text-[11px] font-medium text-slate-500">Employment Profiles</div>
-              <div className="mt-1 text-2xl font-black text-slate-900">
+              <div className="text-xs font-medium text-slate-500">Employment Profiles</div>
+              <div className="mt-1 text-3xl font-black text-slate-900">
                 {dataMetrics.employmentProfiles > 0 ? numberFormat.format(dataMetrics.employmentProfiles) : "Not Available"}
               </div>
-              <div className="mt-2 text-[10px] text-slate-400">
+              <div className="mt-2 text-[11px] text-slate-400">
                 {dataMetrics.employmentProfiles > 0 ? `${dataMetrics.employmentProfiles} Active Records` : "Not Available"}
               </div>
             </div>
@@ -383,11 +383,11 @@ export default function CentralDashboardPage() {
           {/* Education Card */}
           <div className="rounded-xl border border-slate-200/90 bg-white p-4 shadow-2xs flex items-center justify-between">
             <div>
-              <div className="text-[11px] font-medium text-slate-500">Education & Demographic</div>
-              <div className="mt-1 text-2xl font-black text-slate-900">
+              <div className="text-xs font-medium text-slate-500">Education & Demographic</div>
+              <div className="mt-1 text-3xl font-black text-slate-900">
                 {dataMetrics.educationProfiles > 0 ? numberFormat.format(dataMetrics.educationProfiles) : "Not Available"}
               </div>
-              <div className="mt-2 text-[10px] text-slate-400">
+              <div className="mt-2 text-[11px] text-slate-400">
                 {dataMetrics.educationProfiles > 0 ? `${dataMetrics.educationProfiles} Active Records` : "Not Available"}
               </div>
             </div>
@@ -402,11 +402,11 @@ export default function CentralDashboardPage() {
           {/* Disability Card */}
           <div className="rounded-xl border border-slate-200/90 bg-white p-4 shadow-2xs flex items-center justify-between">
             <div>
-              <div className="text-[11px] font-medium text-slate-500">Disability Medical Profile</div>
-              <div className="mt-1 text-2xl font-black text-slate-900">
+              <div className="text-xs font-medium text-slate-500">Disability Medical Profile</div>
+              <div className="mt-1 text-3xl font-black text-slate-900">
                 {dataMetrics.disabilityProfiles > 0 ? numberFormat.format(dataMetrics.disabilityProfiles) : "Not Available"}
               </div>
-              <div className="mt-2 text-[10px] text-slate-400">
+              <div className="mt-2 text-[11px] text-slate-400">
                 {dataMetrics.disabilityProfiles > 0 ? `${dataMetrics.disabilityProfiles} Active Medical Profiles` : "Not Available"}
               </div>
             </div>
@@ -424,7 +424,7 @@ export default function CentralDashboardPage() {
       <div>
         <div className="flex items-center gap-2">
           <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
-          <h2 className="text-sm font-bold tracking-tight text-slate-900">
+          <h2 className="text-base font-bold tracking-tight text-slate-900">
             Live Policy Recommendations & Engine Output
           </h2>
         </div>
@@ -437,15 +437,15 @@ export default function CentralDashboardPage() {
                 <div className="flex h-6 w-6 items-center justify-center rounded-md bg-amber-100 text-amber-700">
                   <WarningAmberOutlined sx={{ fontSize: 16 }} />
                 </div>
-                <h3 className="text-xs font-bold text-amber-950">
+                <h3 className="text-sm font-bold text-amber-950">
                   Koshi Province - Remittance Fragility Alert
                 </h3>
               </div>
-              <span className="rounded bg-amber-100 px-2 py-0.5 text-[10px] font-bold text-amber-800">
+              <span className="rounded bg-amber-100 px-2.5 py-1 text-xs font-bold text-amber-800">
                 Action Required →
               </span>
             </div>
-            <p className="mt-2 text-xs leading-relaxed text-amber-900/90">
+            <p className="mt-2 text-sm leading-relaxed text-amber-900/90">
               {dataMetrics.employmentProfiles > 0
                 ? `Active worker registration indicates foreign labor corridor concentration in Gulf regions. Recommend establishing provincial welfare desk.`
                 : "Not Available"}
@@ -453,21 +453,21 @@ export default function CentralDashboardPage() {
           </div>
 
           {/* Card 2 — Recalculation Task */}
-          <div className="rounded-xl border border-indigo-200 bg-indigo-50/50 p-4 shadow-2xs">
+          <div className="rounded-xl border border-indigo-200 bg-indigo-50/50 p-5 shadow-2xs">
             <div className="flex items-start justify-between">
               <div className="flex items-center gap-2">
-                <div className="flex h-6 w-6 items-center justify-center rounded-md bg-indigo-100 text-indigo-700">
-                  <SyncOutlined sx={{ fontSize: 16 }} />
+                <div className="flex h-7 w-7 items-center justify-center rounded-md bg-indigo-100 text-indigo-700">
+                  <SyncOutlined sx={{ fontSize: 20 }} />
                 </div>
-                <h3 className="text-xs font-bold text-indigo-950">
+                <h3 className="text-base font-bold text-indigo-950">
                   National Benefit Eligibility Recalculation Engine
                 </h3>
               </div>
-              <span className="rounded bg-indigo-100 px-2 py-0.5 text-[10px] font-bold text-indigo-800">
+              <span className="rounded bg-indigo-100 px-3 py-1 text-sm font-bold text-indigo-800">
                 System Broadcast →
               </span>
             </div>
-            <p className="mt-2 text-xs leading-relaxed text-indigo-900/90">
+            <p className="mt-3 text-sm leading-relaxed text-indigo-900/90">
               {dataMetrics.disabilityProfiles > 0
                 ? `Automated rule logic synced ${dataMetrics.disabilityProfiles} active medical profiles across active local health gateways.`
                 : "Not Available"}
@@ -478,12 +478,12 @@ export default function CentralDashboardPage() {
 
       {/* 6. FEDERAL SUB-DIVISION BREAKDOWN DATA MATRIX */}
       <div>
-        <h2 className="text-sm font-bold tracking-tight text-slate-900">
+        <h2 className="text-base font-bold tracking-tight text-slate-900">
           Federal Sub-Division Breakdown Data Matrix
         </h2>
 
         <div className="mt-3 overflow-x-auto rounded-xl border border-slate-200 bg-white shadow-2xs">
-          <table className="w-full text-left text-xs">
+          <table className="w-full text-left text-sm">
             <thead className="border-b border-slate-100 bg-slate-50/80 font-bold text-slate-500">
               <tr>
                 <th className="px-4 py-3">Provincial Name Block</th>
@@ -523,13 +523,13 @@ export default function CentralDashboardPage() {
                     )}
                   </td>
                   <td className="px-4 py-3 text-slate-700">
-                    {prov.idIssuances > 0 ? numberFormat.format(prov.idIssuances) : "0 Cards"}
+                    {prov.idIssuances > 0 ? numberFormat.format(prov.idIssuances) : "0"}
                   </td>
                   <td className="px-4 py-3 whitespace-nowrap">
                     {prov.citizens > 0 ? (
                       <span className="inline-flex items-center gap-1 rounded bg-emerald-50 px-2 py-0.5 text-[11px] font-bold text-emerald-600 border border-emerald-200/60">
                         <span className="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
-                        99.8% System Live
+                        System Live
                       </span>
                     ) : (
                       <span className="inline-flex items-center gap-1 rounded bg-slate-100 px-2 py-0.5 text-[11px] font-medium text-slate-500">
@@ -550,14 +550,14 @@ export default function CentralDashboardPage() {
         <div className="rounded-xl border border-slate-200/90 bg-white p-4 shadow-2xs">
           <div className="flex items-center justify-between border-b border-slate-100 pb-3">
             <div>
-              <h3 className="text-xs font-bold text-slate-900">
+              <h3 className="text-sm font-bold text-slate-900">
                 National Employment Categorization Profile
               </h3>
-              <p className="text-[10px] text-slate-400">
+              <p className="text-xs text-slate-400">
                 Categorization overview across registered profiles.
               </p>
             </div>
-            <Link href="/central/analytics" className="text-[11px] font-bold text-blue-600 hover:underline">
+            <Link href="/central/analytics" className="text-xs font-bold text-blue-600 hover:underline">
               Extrapolated Data Analytics →
             </Link>
           </div>
@@ -570,7 +570,7 @@ export default function CentralDashboardPage() {
                   : "0";
                 return (
                   <div key={cat}>
-                    <div className="flex justify-between text-xs font-semibold mb-1">
+                    <div className="flex justify-between text-sm font-semibold mb-1">
                       <span className="text-slate-700">{cat}</span>
                       <span className="text-blue-600 font-bold">{count} ({percentage}%)</span>
                     </div>
@@ -589,7 +589,7 @@ export default function CentralDashboardPage() {
         {/* Right — Migrant Labor Channels Corridor Tracker */}
         <div className="rounded-xl border border-slate-200/90 bg-white p-4 shadow-2xs">
           <div className="border-b border-slate-100 pb-3">
-            <h3 className="text-xs font-bold text-slate-900">
+            <h3 className="text-sm font-bold text-slate-900">
               Migrant Labor Channels Corridor Tracker
             </h3>
           </div>
@@ -602,15 +602,15 @@ export default function CentralDashboardPage() {
                     {code}
                   </div>
                   <div>
-                    <div className="text-xs font-bold text-slate-900">{info.name}</div>
-                    <div className="text-[10px] text-slate-400">{info.visa}</div>
+                    <div className="text-sm font-bold text-slate-900">{info.name}</div>
+                    <div className="text-xs text-slate-400">{info.visa}</div>
                   </div>
                 </div>
                 <div className="text-right">
-                  <span className="text-xs font-black text-slate-900">
+                  <span className="text-sm font-black text-slate-900">
                     {info.count > 0 ? info.count : "Not Available"}
                   </span>
-                  {info.count > 0 && <span className="ml-1 text-[9px] font-bold text-slate-400">Registered</span>}
+                  {info.count > 0 && <span className="ml-1 text-xs font-bold text-slate-400">Registered</span>}
                 </div>
               </div>
             ))}
@@ -623,15 +623,15 @@ export default function CentralDashboardPage() {
         {/* Left — Migrant Deficit Internal Provincial Disparities */}
         <div className="rounded-xl border border-slate-200/90 bg-white p-4 shadow-2xs">
           <div className="border-b border-slate-100 pb-3">
-            <h3 className="text-xs font-bold text-slate-900">
+            <h3 className="text-sm font-bold text-slate-900">
               Migrant Deficit Internal Provincial Disparities
             </h3>
-            <p className="text-[10px] text-slate-400">
+            <p className="text-xs text-slate-400">
               Breakdown comparing volume inside local jurisdictions per sub-division boundaries.
             </p>
           </div>
 
-          <div className="mt-3 space-y-2.5 text-xs">
+          <div className="mt-3 space-y-2.5 text-sm">
             {dataMetrics.provinceRows.map((prov) => (
               <div key={prov.id} className="flex items-center justify-between border-b border-slate-50 pb-2">
                 <span className="font-bold text-slate-900">{prov.name}</span>
@@ -648,10 +648,10 @@ export default function CentralDashboardPage() {
         {/* Right — Unemployment Stress Area Hotspot Array Map */}
         <div className="rounded-xl border border-slate-200/90 bg-white p-4 shadow-2xs">
           <div className="border-b border-slate-100 pb-3">
-            <h3 className="text-xs font-bold text-slate-900">
+            <h3 className="text-sm font-bold text-slate-900">
               Unemployment Stress Area Hotspot Array Map
             </h3>
-            <p className="text-[10px] text-slate-400">
+            <p className="text-xs text-slate-400">
               Macro-regional clustering denoting local municipality non-activity.
             </p>
           </div>
@@ -659,10 +659,10 @@ export default function CentralDashboardPage() {
           <div className="mt-3 space-y-2.5">
             {municipalities && municipalities.length > 0 ? (
               municipalities.slice(0, 3).map((muni) => (
-                <div key={muni.id} className="flex items-center justify-between rounded-lg border border-slate-100 bg-slate-50/50 p-2 text-xs">
+                <div key={muni.id} className="flex items-center justify-between rounded-lg border border-slate-100 bg-slate-50/50 p-2.5 text-sm">
                   <div>
                     <div className="font-bold text-slate-900">{muni.name_en}</div>
-                    <div className="text-[10px] text-slate-400">District ID: {muni.district_id}</div>
+                    <div className="text-xs text-slate-400">District ID: {muni.district_id}</div>
                   </div>
                   <div className="flex items-center gap-2">
                     <span className="rounded bg-sky-100 px-1.5 py-0.5 text-[9px] font-bold text-sky-700">Active Node</span>
@@ -690,13 +690,13 @@ export default function CentralDashboardPage() {
             <ChevronRight sx={{ fontSize: 16 }} className="text-slate-400 group-hover:text-blue-600 transition-colors" />
           </div>
           <div className="mt-3">
-            <h4 className="text-xs font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
+            <h4 className="text-sm font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
               Zero-PB Secure Citizen Lookup Registry
             </h4>
-            <p className="mt-1 text-[10px] text-slate-400 leading-tight">
+            <p className="mt-1 text-xs text-slate-400 leading-tight">
               Search household records without viewing safety codes or data links.
             </p>
-            <span className="mt-2 block text-[10px] font-bold text-blue-600">
+            <span className="mt-2 block text-xs font-bold text-blue-600">
               Open Lookup Search Node
             </span>
           </div>
@@ -714,13 +714,13 @@ export default function CentralDashboardPage() {
             <ChevronRight sx={{ fontSize: 16 }} className="text-slate-400 group-hover:text-blue-600 transition-colors" />
           </div>
           <div className="mt-3">
-            <h4 className="text-xs font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
+            <h4 className="text-sm font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
               Cross-Tier Law Compliance Investigations Core Hub
             </h4>
-            <p className="mt-1 text-[10px] text-slate-400 leading-tight">
+            <p className="mt-1 text-xs text-slate-400 leading-tight">
               Direct channel to administrator boards matching repetition tagging.
             </p>
-            <span className="mt-2 block text-[10px] font-bold text-blue-600">
+            <span className="mt-2 block text-xs font-bold text-blue-600">
               Access System Auditing
             </span>
           </div>
@@ -738,13 +738,13 @@ export default function CentralDashboardPage() {
             <ChevronRight sx={{ fontSize: 16 }} className="text-slate-400 group-hover:text-blue-600 transition-colors" />
           </div>
           <div className="mt-3">
-            <h4 className="text-xs font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
+            <h4 className="text-sm font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
               Anomalous Activity Alert Internal Flag Raised Rule
             </h4>
-            <p className="mt-1 text-[10px] text-slate-400 leading-tight">
+            <p className="mt-1 text-xs text-slate-400 leading-tight">
               Execute emergency freeze on state records that standard integrity-flagged.
             </p>
-            <span className="mt-2 block text-[10px] font-bold text-rose-600">
+            <span className="mt-2 block text-xs font-bold text-rose-600">
               Trigger Anomaly Incident Path
             </span>
           </div>
@@ -762,13 +762,13 @@ export default function CentralDashboardPage() {
             <ChevronRight sx={{ fontSize: 16 }} className="text-slate-400 group-hover:text-blue-600 transition-colors" />
           </div>
           <div className="mt-3">
-            <h4 className="text-xs font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
+            <h4 className="text-sm font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
               Central Identity Sync Admin Control Room Mapping Area
             </h4>
-            <p className="mt-1 text-[10px] text-slate-400 leading-tight">
+            <p className="mt-1 text-xs text-slate-400 leading-tight">
               Establish shared ties and general permissions for provincial level control.
             </p>
-            <span className="mt-2 block text-[10px] font-bold text-blue-600">
+            <span className="mt-2 block text-xs font-bold text-blue-600">
               Direct Management View Set
             </span>
           </div>
@@ -776,7 +776,7 @@ export default function CentralDashboardPage() {
       </div>
 
       {/* 10. BOTTOM STATUS PILLS */}
-      <div className="flex flex-wrap items-center justify-center gap-2 pt-2 text-[11px] font-semibold text-slate-600">
+      <div className="flex flex-wrap items-center justify-center gap-2 pt-2 text-xs font-semibold text-slate-600">
         <div className="flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-3 py-1 shadow-2xs">
           <FactCheckOutlined sx={{ fontSize: 14 }} className="text-slate-500" />
           <span>Open Governance Audit Log System Access Control</span>
@@ -799,7 +799,7 @@ export default function CentralDashboardPage() {
       </div>
 
       {/* 11. FOOTER */}
-      <div className="pt-4 text-center text-[10px] font-semibold tracking-wider text-slate-400 uppercase">
+      <div className="pt-4 text-center text-xs font-semibold tracking-wider text-slate-400 uppercase">
         AUTHERIZED SECURE LATTICE ALL AUDITS APPEND-ONLY LEDGER THREE WAY VERIFIED.
       </div>
     </div>
