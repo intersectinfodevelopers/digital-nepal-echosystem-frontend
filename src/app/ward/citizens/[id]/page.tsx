@@ -2,8 +2,6 @@
 
 import { useState } from "react";
 import { useParams } from "next/navigation";
-import Link from "next/link";
-import { ArrowBack } from "@mui/icons-material";
 import { nanoid } from "nanoid";
 import citizensData from "../../../../../data/citizens.json";
 import employmentData from "../../../../../data/employment.json";
@@ -23,10 +21,35 @@ import type {
 import type { AuditLog } from "@/types/audit-log";
 import type { ApprovalEntry, FamilyRecord, IDCard } from "@/types/ward";
 import { getCitizenFormData } from "@/services/citizenService";
+import UnifiedCitizenProfile from "@/components/citizens/UnifiedCitizenProfile";
+import type { FormState as UnifiedRegistrationForm } from "@/components/UnifiedCitizenRegistration";
 
-import { Tabs, Modal } from "@/components/ui";
+import { Modal } from "@/components/ui";
 import { useEligibility } from "@/hooks/useEligibility";
-import { InputField, SelectField, SectionCard } from "@/components/ui";
+import { InputField, SelectField } from "@/components/ui";
+import type { ReactNode } from "react";
+
+/** Flat section: heading + optional description + content. No card / border box. */
+function SectionCard({
+  title,
+  description,
+  children,
+}: {
+  title: string;
+  description?: string;
+  children: ReactNode;
+  className?: string;
+}) {
+  return (
+    <section className="scroll-mt-24">
+      <div className="border-b border-gray-200 pb-2">
+        <h2 className="text-[13px] font-bold uppercase tracking-[0.08em] text-[#0A3E9E]">{title}</h2>
+        {description && <p className="mt-1 text-xs leading-5 text-gray-500">{description}</p>}
+      </div>
+      <div className="mt-4 space-y-5">{children}</div>
+    </section>
+  );
+}
 
 import { EMPLOYMENT_CATEGORIES, INCOME_BANDS, SEXES, DIGITAL_LITERACIES, BLOOD_GROUPS, CONSENT_CHANNELS } from "@/types/citizen";
 import {
@@ -168,18 +191,20 @@ function EligibilityPanel({
   const { eligible, age } = useEligibility(citizen, employmentRec, disabilityRec, householdRec);
 
   return (
-    <div className="bg-white rounded-2xl border border-gray-200 p-5">
-      <h3 className="text-base font-semibold text-gray-900 mb-1">Eligibility</h3>
-      <p className="text-xs text-gray-500 mb-4">
-        Age {age} &middot; {citizen.sex}
-      </p>
+    <section className="scroll-mt-24">
+      <div className="border-b border-gray-200 pb-2">
+        <h2 className="text-[13px] font-bold uppercase tracking-[0.08em] text-[#0A3E9E]">Eligibility</h2>
+        <p className="mt-1 text-xs text-gray-500">
+          Age {age} &middot; {citizen.sex}
+        </p>
+      </div>
 
       {eligible.length === 0 ? (
-        <div className="text-sm text-gray-400 py-4 text-center">
-          No benefits eligible based on current data
+        <div className="mt-4 text-sm text-gray-400">
+          No benefits eligible based on current data.
         </div>
       ) : (
-        <div className="space-y-3">
+        <div className="mt-4 grid gap-3 sm:grid-cols-2">
           {eligible.map((rule) => (
             <div
               key={rule.id}
@@ -196,7 +221,7 @@ function EligibilityPanel({
           ))}
         </div>
       )}
-    </div>
+    </section>
   );
 }
 
@@ -1351,10 +1376,7 @@ export default function CitizenDetailPage() {
 
   if (!citizen) {
     return (
-      <main className="p-6">
-        <Link href="/ward/citizens" className="inline-flex items-center gap-1 text-sm text-blue-600 hover:text-blue-800 mb-4">
-          <ArrowBack className="text-lg" /> Back to Citizens
-        </Link>
+      <main>
         <div className="text-center py-20">
           <h1 className="text-xl font-bold text-gray-900">Citizen not found</h1>
           <p className="text-sm text-gray-500 mt-1">No citizen matches ID: {idParam}</p>
@@ -1362,6 +1384,41 @@ export default function CitizenDetailPage() {
       </main>
     );
   }
+
+  // Citizens registered through the unified registration wizard carry the full
+  // form on `registration`. Render the complete read-only profile for them.
+  const unifiedForm = (citizen as unknown as { registration?: unknown }).registration;
+  const isUnified =
+    !!unifiedForm && typeof unifiedForm === "object" && "fullName" in (unifiedForm as Record<string, unknown>);
+
+  if (isUnified) {
+    const reg = unifiedForm as UnifiedRegistrationForm;
+    const cz = citizen as unknown as Record<string, unknown>;
+    return (
+      <main>
+        <div className="mb-6 flex items-center gap-3">
+          <div className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-100 text-lg font-bold text-blue-700">
+            {(citizen.name_en || reg.fullName || "?").charAt(0)}
+          </div>
+          <div className="min-w-0">
+            <h1 className="text-xl font-bold text-gray-900">{citizen.name_en || reg.fullName}</h1>
+            <p className="text-sm text-gray-500">
+              {[citizen.name_np, (cz.nid_masked as string) || reg.nidNumber, `Ward ${citizen.ward_id?.replace?.("ward-", "") ?? citizen.ward_id}`]
+                .filter(Boolean)
+                .join(" · ")}
+            </p>
+            <p className="mt-0.5 text-xs text-gray-400">
+              Citizen ID {citizen.id}
+              {cz.created_at ? ` · Registered ${String(cz.created_at).slice(0, 10)}` : ""}
+            </p>
+          </div>
+        </div>
+
+        <UnifiedCitizenProfile form={reg} />
+      </main>
+    );
+  }
+
   const profile = getCitizenFormData(citizen, registered);
 
   const hasEmployment = !!profile?.employment?.category;
@@ -1501,11 +1558,7 @@ export default function CitizenDetailPage() {
   ];
 
   return (
-    <main className="p-6">
-      <Link href="/ward/citizens" className="inline-flex items-center gap-1 text-sm text-blue-600 hover:text-blue-800 mb-4">
-        <ArrowBack className="text-lg" /> Back to Citizens
-      </Link>
-
+    <main>
       <div className="flex items-center gap-3 mb-6">
         <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center text-blue-700 font-bold text-lg">
           {citizen.name_en.charAt(0)}
@@ -1518,19 +1571,16 @@ export default function CitizenDetailPage() {
         </div>
       </div>
 
-      <div className="flex gap-6">
-        <div className="flex-1 min-w-0">
-          <Tabs tabs={tabs} />
-        </div>
-
-        <div className="w-80 shrink-0">
-          <EligibilityPanel
-            citizen={citizen}
-            employmentRec={employmentRec}
-            disabilityRec={disabilityRec}
-            householdRec={householdRec}
-          />
-        </div>
+      <div className="space-y-10">
+        {tabs.map((t) => (
+          <div key={t.label}>{t.content}</div>
+        ))}
+        <EligibilityPanel
+          citizen={citizen}
+          employmentRec={employmentRec}
+          disabilityRec={disabilityRec}
+          householdRec={householdRec}
+        />
       </div>
 
       {editModal === "identity" && (

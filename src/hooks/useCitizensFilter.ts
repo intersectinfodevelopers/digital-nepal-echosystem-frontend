@@ -5,11 +5,53 @@ import { WARD_ID } from "@/constants";
 
 const STATIC_CITIZENS = citizensStatic as unknown as Citizen[];
 
+const EMP_LABEL_TO_CATEGORY: Record<string, string> = {
+  "Government": "GOVERNMENT",
+  "Public enterprise / Semi-government": "GOVERNMENT",
+  "Private sector": "PRIVATE",
+  "Self-employed / Business owner": "BUSINESS",
+  "Freelance / Contract": "PRIVATE",
+  "Daily wage / Labour": "OTHER",
+  "Agriculture / Farming": "FARMER",
+  "Foreign employment": "FOREIGN_ABROAD",
+  "Unemployed": "UNEMPLOYED",
+  "Student": "STUDENT",
+  "Homemaker": "HOMEMAKER",
+  "Retired": "RETIRED",
+};
+
+// Records saved by the unified registration wizard may be missing the
+// list-shaped fields (name_np, nid_masked, employment_category). Backfill them
+// from the embedded `registration` payload so the table renders and filters.
+function normalizeRegistered(raw: unknown): Citizen {
+  const c = raw as Record<string, unknown>;
+  const reg = (c.registration ?? {}) as Record<string, unknown>;
+  const nidNumber = String(c.nid_number ?? reg.nidNumber ?? "");
+  const citizenshipNumber = String(c.citizenship_number ?? reg.citizenshipNumber ?? "");
+  const empStatus = String(
+    (Array.isArray(reg.employmentRecords) && (reg.employmentRecords[0] as Record<string, unknown> | undefined)?.status) || "",
+  );
+  return {
+    ...(c as unknown as Citizen),
+    name_en: String(c.name_en ?? reg.fullName ?? ""),
+    name_np: String(c.name_np ?? reg.fullNameDevnagari ?? c.name_en ?? reg.fullName ?? ""),
+    sex: (String(c.sex ?? reg.gender ?? "OTHER").toUpperCase() as Citizen["sex"]),
+    nid_masked: String(
+      c.nid_masked ??
+        (nidNumber ? `****${nidNumber.slice(-4)}` : citizenshipNumber ? `CTZ ${citizenshipNumber}` : "**********"),
+    ),
+    employment_category: (c.employment_category ??
+      EMP_LABEL_TO_CATEGORY[empStatus] ??
+      "OTHER") as Citizen["employment_category"],
+    nid_verified: Boolean(c.nid_verified),
+  };
+}
+
 export function useCitizensFilter() {
   const [registered] = useState<Citizen[]>(() => {
     try {
       const raw = localStorage.getItem("citizens_registered");
-      if (raw) return JSON.parse(raw) as Citizen[];
+      if (raw) return (JSON.parse(raw) as unknown[]).map(normalizeRegistered);
     } catch {
       // ignore
     }
