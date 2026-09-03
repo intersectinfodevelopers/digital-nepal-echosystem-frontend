@@ -94,7 +94,7 @@ export default function WardShell({ children }: { children: ReactNode }) {
           <WardSidebar
             active={activeView}
             onNavigate={handleNavigate}
-            wardId={"ward-001"}
+            wardId={wardId}
             collapsed={!sidebarOpen}
           />
         </div>
@@ -107,7 +107,7 @@ export default function WardShell({ children }: { children: ReactNode }) {
         <WardSidebar
           active={activeView}
           onNavigate={handleNavigate}
-          wardId={"ward-001"}
+          wardId={wardId}
           onClose={closeMobileDrawer}
         />
       </Drawer>
