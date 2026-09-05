@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { ArrowBack, ArrowForward, CheckCircle, UploadFile, MapOutlined } from "@mui/icons-material";
+import { ArrowBack, ArrowForward, CheckCircle, UploadFile, MapOutlined, ContentCopy } from "@mui/icons-material";
 import { LocationMap } from "@/components/LocationMap";
 
 const STEP_META = [
@@ -11,8 +11,11 @@ const STEP_META = [
   { id: 4, label: "Household" },
   { id: 5, label: "Employment" },
   { id: 6, label: "Education" },
-  { id: 7, label: "Submit" },
+  { id: 7, label: "Living standard" },
+  { id: 8, label: "Submit" },
 ] as const;
+
+const LAST_STEP = 8;
 
 type StepId = (typeof STEP_META)[number]["id"];
 
@@ -25,15 +28,36 @@ type FamilyMember = {
 };
 
 type EmploymentRecord = {
-  employer: string;
-  role: string;
+  // Core
   status: string;
-  incomeBand: string;
+  role: string; // occupation / job title
+  employmentType: string; // Full-time / Part-time / Seasonal / Contractual / Casual
   sector: string;
+  incomeBand: string;
+  primaryIncome: string; // "Yes" | "No" — is this the main household income source
+  currentlyWorking: string; // "Yes" | "No"
+  startYear: string;
+  yearsOfExperience: string;
+  // Paid employment
+  employer: string; // employer / organisation name
+  employerLocation: string;
+  // Self-employed / business owner
+  businessName: string;
+  businessType: string;
+  businessRegistration: string;
+  registrationNumber: string; // PAN / VAT / registration no.
+  businessEmployees: string;
+  businessStartYear: string;
+  // Foreign employment
   country: string;
   departureYear: string;
   workType: string;
   customWorkType: string;
+  employerAbroad: string;
+  remittanceRegular: string; // "Yes" | "No"
+  monthlyRemittance: string;
+  // Unemployed
+  seekingWork: string; // "Yes" | "No"
 };
 
 type EducationRecord = {
@@ -52,9 +76,214 @@ type ChildRecord = {
   dob: string;
   hasDisability: string;
   disabilityType: string;
+  disabilityCategory: string;
+  disabilitySeverityLevel: number;
+  disabilityCertificateIssued: boolean;
 };
 
-type FormState = {
+const DISABILITY_TYPE_OPTIONS = [
+  "Visual Impairment",
+  "Hearing Impairment",
+  "Physical Disability",
+  "Speech Impairment",
+  "Intellectual Disability",
+  "Mental / Psychosocial Disability",
+  "Multiple Disabilities",
+  "Other",
+];
+
+// Government of Nepal disability ID-card classification (Disability Rights Act 2074)
+const DISABILITY_CATEGORY_OPTIONS = [
+  "Ka – Red (Profound disability)",
+  "Kha – Blue (Severe disability)",
+  "Ga – Yellow (Moderate disability)",
+  "Gha – White (Mild disability)",
+];
+
+const DISABILITY_SEVERITY_LABELS = ["No impact", "Mild", "Moderate", "Severe", "Complete"];
+
+const NEPAL_PROVINCES = [
+  "Koshi",
+  "Madhesh",
+  "Bagmati",
+  "Gandaki",
+  "Lumbini",
+  "Karnali",
+  "Sudurpashchim",
+];
+
+const PURPOSE_OF_STAYING_OPTIONS = [
+  "Study / Education",
+  "Job / Employment",
+  "Business / Trade",
+  "Medical treatment",
+  "Family reasons",
+  "Training / Internship",
+  "Other",
+];
+
+const EMPLOYMENT_SECTOR_OPTIONS = [
+  "Public / Government",
+  "Semi-government / Public enterprise",
+  "Private sector",
+  "Own business / Self-employed",
+  "NGO / INGO",
+  "Cooperative",
+  "International organization / Diplomatic mission",
+  "Agriculture / Livestock",
+  "Informal sector / Daily wage",
+  "Other",
+];
+
+const EMPLOYMENT_STATUS_OPTIONS = [
+  "Government",
+  "Public enterprise / Semi-government",
+  "Private sector",
+  "Self-employed / Business owner",
+  "Freelance / Contract",
+  "Daily wage / Labour",
+  "Agriculture / Farming",
+  "Foreign employment",
+  "Unemployed",
+  "Student",
+  "Homemaker",
+  "Retired",
+];
+
+const EMPLOYMENT_TYPE_OPTIONS = ["Full-time", "Part-time", "Seasonal", "Contractual", "Casual / On-call"];
+
+const INCOME_BAND_OPTIONS = [
+  "No income",
+  "Below NPR 5,000",
+  "NPR 5,000 – 10,000",
+  "NPR 10,000 – 25,000",
+  "NPR 25,000 – 50,000",
+  "NPR 50,000 – 1,00,000",
+  "Above NPR 1,00,000",
+  "Above NPR 2,00,000",
+  "Above NPR 5,00,000",
+  "Above NPR 10,00,000",
+];
+
+const FOREIGN_WORK_TYPE_OPTIONS = ["Construction", "Hospitality", "Driving", "Agriculture", "Cleaning", "Security", "Factory work", "Care giving / Domestic", "Technical / Skilled", "Professional / White collar", "Other"];
+
+const BUSINESS_TYPE_OPTIONS = [
+  "Retail / Trade shop",
+  "Wholesale / Distribution",
+  "Manufacturing / Production",
+  "Agriculture / Agro-business",
+  "Livestock / Poultry / Dairy",
+  "Hotel / Restaurant / Hospitality",
+  "Construction / Contracting",
+  "Transport / Logistics",
+  "Personal services (salon, tailoring, repair)",
+  "IT / Digital services",
+  "Handicraft / Cottage industry",
+  "Import / Export",
+  "Consultancy / Professional practice",
+  "Education / Training institute",
+  "Healthcare / Pharmacy / Clinic",
+  "Tourism / Travel / Trekking",
+  "Other",
+];
+
+const BUSINESS_REGISTRATION_OPTIONS = [
+  "Registered — PAN / VAT",
+  "Registered — local body / ward only",
+  "Registered — Company Registrar / Cottage & Small Industries",
+  "Not registered",
+  "Registration in process",
+];
+
+const createEmploymentRecord = (overrides: Partial<EmploymentRecord> = {}): EmploymentRecord => ({
+  status: "Private sector",
+  role: "",
+  employmentType: "Full-time",
+  sector: "",
+  incomeBand: "NPR 25,000 – 50,000",
+  primaryIncome: "Yes",
+  currentlyWorking: "Yes",
+  startYear: "",
+  yearsOfExperience: "",
+  employer: "",
+  employerLocation: "",
+  businessName: "",
+  businessType: "",
+  businessRegistration: "",
+  registrationNumber: "",
+  businessEmployees: "",
+  businessStartYear: "",
+  country: "",
+  departureYear: "",
+  workType: "",
+  customWorkType: "",
+  employerAbroad: "",
+  remittanceRegular: "No",
+  monthlyRemittance: "",
+  seekingWork: "Yes",
+  ...overrides,
+});
+
+const EDUCATION_LEVEL_OPTIONS = [
+  "No formal education (illiterate)",
+  "Literate only (no formal schooling)",
+  "Primary (Grade 1–5)",
+  "Lower secondary (Grade 6–8)",
+  "Secondary / SEE (Grade 9–10)",
+  "Higher secondary / +2 (Grade 11–12)",
+  "Diploma / TSLC",
+  "Bachelor's degree",
+  "Master's degree",
+  "MPhil / PhD",
+];
+
+// Levels that don't need institution / subject / year detail
+const EDUCATION_NON_FORMAL = ["No formal education (illiterate)", "Literate only (no formal schooling)"];
+
+const LS_YESNO = ["Yes", "No"];
+const LS_ELECTRICITY_SOURCE = ["National grid", "Solar", "Micro-hydro", "Generator", "None"];
+const LS_DRINKING_WATER = ["Piped tap inside home", "Piped tap in yard", "Public tap / stand post", "Tube well / hand pump", "Covered well", "Uncovered well", "River / stream / pond", "Jar / tanker water", "Other"];
+const LS_TOILET = ["Flush toilet (connected)", "Flush toilet (septic tank)", "Ordinary / pit latrine", "Shared with other households", "No toilet / open defecation"];
+const LS_COOKING_FUEL = ["LPG gas", "Firewood", "Biogas", "Electricity", "Kerosene", "Cow dung / agri residue", "Other"];
+const LS_INTERNET_TYPE = ["Mobile data only", "Fixed broadband / fibre", "Both", "None"];
+const LS_WALK_DISTANCE = ["At the house / doorstep", "Under 15 min walk", "15–30 min walk", "30–60 min walk", "1–2 hours", "More than 2 hours"];
+const LS_FOOD_SUFFICIENCY = ["Enough round the year", "Enough for 9–12 months", "Enough for 6–9 months", "Enough for 3–6 months", "Less than 3 months", "Not applicable / no farming"];
+const LS_HOUSE_STRUCTURE = ["RCC (pillar) with concrete roof", "Cement-bonded brick / stone", "Mud-bonded brick / stone", "Wood / plank", "Bamboo / thatch / temporary", "Other"];
+const LS_SOCIAL_SECURITY_TYPE = ["Senior citizen allowance", "Single woman / widow allowance", "Disability allowance", "Child nutrition grant", "Endangered ethnicity allowance", "Dalit senior citizen allowance", "Other"];
+const LS_LAND_AREA = ["Below 1 kattha / ropani", "1–5 kattha / ropani", "5–10 kattha / ropani", "10 kattha – 1 bigha", "1–5 bigha", "Above 5 bigha"];
+
+const emptyLivingStandard = {
+  houseStructure: "",
+  landOwnership: "No",
+  landArea: "",
+  electricity: "Yes",
+  electricitySource: "National grid",
+  drinkingWater: "",
+  toilet: "",
+  cookingFuel: "",
+  internet: "No",
+  internetType: "None",
+  mobilePhones: "",
+  ownsVehicle: "No",
+  twoWheelers: "",
+  fourWheelers: "",
+  bicycles: "",
+  bankAccount: "No",
+  bankAccountCount: "",
+  livestock: "No",
+  healthInsurance: "No",
+  socialSecurity: "No",
+  socialSecurityType: "",
+  migrantMember: "No",
+  roadAccess: "Yes",
+  roadDistance: "",
+  marketDistance: "",
+  healthFacilityDistance: "",
+  schoolDistance: "",
+  foodSufficiency: "",
+};
+
+export type FormState = {
   firstName: string;
   middleName: string;
   lastName: string;
@@ -90,10 +319,10 @@ type FormState = {
   disability: {
     hasDisability: string;
     disabilityType: string;
+    disabilityCategory: string;
     types: string[];
     severity: string;
     severityLevel: number;
-    affectedAreas: string[];
     certificateIssued: boolean;
     support: string;
   };
@@ -101,8 +330,19 @@ type FormState = {
   thumbPrint: string;
   signature: string;
   retinaScan: string;
-  currentlyInNepal: string;
+  // Permanent address (always in Nepal)
+  permanentProvince: string;
+  permanentDistrict: string;
+  permanentMunicipality: string;
+  permanentWard: string;
+  permanentStreet: string;
+  permanentHouseNo: string;
+  // Temporary / current address
+  currentResidence: string; // "Nepal" | "Abroad"
+  purposeOfStaying: string; // shown when the current address differs from the permanent one
   countryOfResidence: string;
+  cityOfResidence: string;
+  visaType: string;
   province: string;
   district: string;
   municipality: string;
@@ -112,9 +352,11 @@ type FormState = {
   yearsAtResidence: string;
   roomCount: string;
   address: string;
+  houseNo: string;
   lat: string;
   lng: string;
   placeName: string;
+  livingStandard: typeof emptyLivingStandard;
 };
 
 const createLinkedCitizenId = (relationship: string, index: number) => {
@@ -157,7 +399,7 @@ const emptyForm: FormState = {
     { id: "FAM-MOTHER-001", relationship: "Mother", name: "", citizenId: "", status: "Linked" },
   ],
   employmentRecords: [
-    { employer: "", role: "", status: "Government", incomeBand: "NPR 25,000 – 50,000", sector: "Public Service", country: "", departureYear: "", workType: "", customWorkType: "" },
+    createEmploymentRecord({ status: "Government", sector: "Public / Government" }),
   ],
   educationRecords: [
     { level: "", institution: "", subject: "", year: "", status: "Completed" },
@@ -165,10 +407,10 @@ const emptyForm: FormState = {
   disability: {
     hasDisability: "No",
     disabilityType: "",
+    disabilityCategory: "",
     types: [],
     severity: "Mild",
     severityLevel: 0,
-    affectedAreas: [],
     certificateIssued: true,
     support: "None",
   },
@@ -176,8 +418,17 @@ const emptyForm: FormState = {
   thumbPrint: "",
   signature: "",
   retinaScan: "",
-  currentlyInNepal: "Yes",
-  countryOfResidence: "Nepal",
+  permanentProvince: "",
+  permanentDistrict: "",
+  permanentMunicipality: "",
+  permanentWard: "",
+  permanentStreet: "",
+  permanentHouseNo: "",
+  currentResidence: "Nepal",
+  purposeOfStaying: "",
+  countryOfResidence: "",
+  cityOfResidence: "",
+  visaType: "",
   province: "",
   district: "",
   municipality: "",
@@ -187,9 +438,11 @@ const emptyForm: FormState = {
   yearsAtResidence: "",
   roomCount: "",
   address: "",
+  houseNo: "",
   lat: "",
   lng: "",
   placeName: "",
+  livingStandard: emptyLivingStandard,
 };
 
 function saveJSON(key: string, value: unknown) {
@@ -315,6 +568,9 @@ export function UnifiedCitizenRegistration() {
           dob: "",
           hasDisability: "No",
           disabilityType: "",
+          disabilityCategory: "",
+          disabilitySeverityLevel: 0,
+          disabilityCertificateIssued: true,
         };
       });
 
@@ -326,27 +582,35 @@ export function UnifiedCitizenRegistration() {
     });
   };
 
-  const addEmploymentRecord = () => {
-    setForm((prev) => ({
-      ...prev,
-      employmentRecords: [
-        ...prev.employmentRecords,
-        { employer: "", role: "", status: "Private", incomeBand: "NPR 10,000 – 25,000", sector: "", country: "", departureYear: "", workType: "", customWorkType: "" },
-      ],
-    }));
+  const updateChild = (index: number, patch: Partial<ChildRecord>) => {
+    setForm((prev) => {
+      const children = [...prev.children];
+      children[index] = { ...children[index], ...patch };
+      return { ...prev, children };
+    });
   };
 
-  const addEducationRecord = () => {
-    setForm((prev) => ({
-      ...prev,
-      educationRecords: [
-        ...prev.educationRecords,
-        { level: "", institution: "", subject: "", year: "", status: "Completed" },
-      ],
-    }));
+  const updateJob = (patch: Partial<EmploymentRecord>) => {
+    setForm((prev) => {
+      const employmentRecords = [...prev.employmentRecords];
+      employmentRecords[0] = { ...(employmentRecords[0] ?? createEmploymentRecord()), ...patch };
+      return { ...prev, employmentRecords };
+    });
   };
 
-  const nextStep = () => setStep((prev) => Math.min(prev + 1, 7) as StepId);
+  const updateEducation = (patch: Partial<EducationRecord>) => {
+    setForm((prev) => {
+      const educationRecords = [...prev.educationRecords];
+      educationRecords[0] = { ...(educationRecords[0] ?? { level: "", institution: "", subject: "", year: "", status: "Completed" }), ...patch };
+      return { ...prev, educationRecords };
+    });
+  };
+
+  const updateLiving = (patch: Partial<typeof emptyLivingStandard>) => {
+    setForm((prev) => ({ ...prev, livingStandard: { ...prev.livingStandard, ...patch } }));
+  };
+
+  const nextStep = () => setStep((prev) => Math.min(prev + 1, LAST_STEP) as StepId);
   const prevStep = () => setStep((prev) => Math.max(prev - 1, 1) as StepId);
 
   const handleUseCurrentLocation = () => {
@@ -474,14 +738,45 @@ export function UnifiedCitizenRegistration() {
       }
     })();
 
+    const empStatus = form.employmentRecords[0]?.status ?? "";
+    const empCategoryMap: Record<string, string> = {
+      "Government": "GOVERNMENT",
+      "Public enterprise / Semi-government": "GOVERNMENT",
+      "Private sector": "PRIVATE",
+      "Self-employed / Business owner": "BUSINESS",
+      "Freelance / Contract": "PRIVATE",
+      "Daily wage / Labour": "OTHER",
+      "Agriculture / Farming": "FARMER",
+      "Foreign employment": "FOREIGN_ABROAD",
+      "Unemployed": "UNEMPLOYED",
+      "Student": "STUDENT",
+      "Homemaker": "HOMEMAKER",
+      "Retired": "RETIRED",
+    };
+
     const payload = {
       id: citizenId,
+      source: "unified",
       name_en: form.fullName,
+      name_np: form.fullNameDevnagari || form.fullName,
       dob: form.dob,
-      sex: form.gender || "OTHER",
+      sex: (form.gender || "OTHER").toUpperCase(),
       marital_status: form.maritalStatus,
       citizenship_number: form.citizenshipNumber,
       nid_number: form.nidNumber,
+      nid_masked: form.nidNumber
+        ? `****${form.nidNumber.slice(-4)}`
+        : form.citizenshipNumber
+          ? `CTZ ${form.citizenshipNumber}`
+          : "**********",
+      employment_category: empCategoryMap[empStatus] ?? "OTHER",
+      tole: form.permanentStreet || form.address || "",
+      nid_verified: false,
+      is_active: true,
+      sync_status: "pending",
+      latitude: form.lat ? Number(form.lat) : undefined,
+      longitude: form.lng ? Number(form.lng) : undefined,
+      place_name: form.placeName || undefined,
       created_at: new Date().toISOString(),
       registration: form,
       ward_id: "ward-004",
@@ -499,6 +794,26 @@ export function UnifiedCitizenRegistration() {
   };
 
   const childCount = form.familyMembers.filter((member) => /child|son|daughter/i.test(member.relationship)).length;
+
+  const copyPermanentToCurrent = () => {
+    setForm((prev) => ({
+      ...prev,
+      province: prev.permanentProvince,
+      district: prev.permanentDistrict,
+      municipality: prev.permanentMunicipality,
+      ward: prev.permanentWard,
+      address: prev.permanentStreet,
+      houseNo: prev.permanentHouseNo,
+    }));
+  };
+
+  const currentMatchesPermanent =
+    form.province === form.permanentProvince &&
+    form.district === form.permanentDistrict &&
+    form.municipality === form.permanentMunicipality &&
+    form.ward === form.permanentWard &&
+    form.address === form.permanentStreet &&
+    form.houseNo === form.permanentHouseNo;
 
   const renderStep = () => {
     switch (step) {
@@ -655,17 +970,40 @@ export function UnifiedCitizenRegistration() {
                           updateField("children", next);
                         }} />
                         <SelectField label="Disabled" value={child.hasDisability} onChange={(v) => {
-                          const next = [...form.children];
-                          next[index] = { ...next[index], hasDisability: v };
-                          updateField("children", next);
+                          updateChild(index, v === "Yes"
+                            ? { hasDisability: v }
+                            : { hasDisability: v, disabilityType: "", disabilityCategory: "", disabilitySeverityLevel: 0, disabilityCertificateIssued: true });
                         }} options={["No", "Yes"]} />
                         {child.hasDisability === "Yes" && (
-                          <div className="md:col-span-3">
-                            <Field label="Disability details" value={child.disabilityType} onChange={(v) => {
-                              const next = [...form.children];
-                              next[index] = { ...next[index], disabilityType: v };
-                              updateField("children", next);
-                            }} placeholder="Describe disability type" />
+                          <div className="md:col-span-3 rounded-2xl border border-slate-200 bg-slate-50 p-4">
+                            <p className="mb-4 text-sm font-semibold text-slate-900">Disability details</p>
+                            <div className="grid gap-5 md:grid-cols-2">
+                              <SelectField label="Disability type" value={child.disabilityType} onChange={(v) => updateChild(index, { disabilityType: v, hasDisability: v ? "Yes" : child.hasDisability })} options={DISABILITY_TYPE_OPTIONS} />
+                              <SelectField label="Disability category (ID card)" value={child.disabilityCategory} onChange={(v) => updateChild(index, { disabilityCategory: v })} options={DISABILITY_CATEGORY_OPTIONS} />
+                              <div className="space-y-3">
+                                <p className="text-sm font-semibold text-slate-900">Severity level</p>
+                                <input type="range" min={0} max={4} step={1} value={child.disabilitySeverityLevel ?? 0} onChange={(e) => updateChild(index, { disabilitySeverityLevel: Number(e.target.value) })} className="h-2 w-full cursor-pointer accent-[#0A2D6D]" />
+                                <div className="flex justify-between text-[11px] text-slate-500">
+                                  {DISABILITY_SEVERITY_LABELS.map((label, idx) => (
+                                    <span key={label} className={(child.disabilitySeverityLevel ?? 0) === idx ? "font-semibold text-[#0A2D6D]" : ""}>{idx}</span>
+                                  ))}
+                                </div>
+                              </div>
+
+                              <div className="md:col-span-2">
+                                <p className="mb-3 text-sm font-semibold text-slate-900">Government disability certificate issued?</p>
+                                <div className="flex items-center gap-6">
+                                  <label className="flex items-center gap-2 text-sm text-slate-700">
+                                    <input type="radio" name={`child-certificate-issued-${index}`} checked={child.disabilityCertificateIssued ?? true} onChange={() => updateChild(index, { disabilityCertificateIssued: true })} className="h-4 w-4 accent-[#0A2D6D]" />
+                                    Yes
+                                  </label>
+                                  <label className="flex items-center gap-2 text-sm text-slate-700">
+                                    <input type="radio" name={`child-certificate-issued-${index}`} checked={!(child.disabilityCertificateIssued ?? true)} onChange={() => updateChild(index, { disabilityCertificateIssued: false })} className="h-4 w-4 accent-[#0A2D6D]" />
+                                    No
+                                  </label>
+                                </div>
+                              </div>
+                            </div>
                           </div>
                         )}
                       </div>
@@ -678,32 +1016,15 @@ export function UnifiedCitizenRegistration() {
             <div className="mt-6 rounded-3xl border border-slate-200 bg-slate-50 p-4">
               <p className="mb-4 text-sm font-semibold text-slate-900">Disability details</p>
               <div className="grid gap-5 md:grid-cols-2">
-                <SelectField label="Disability type" value={form.disability.disabilityType} onChange={(v) => updateField("disability", { ...form.disability, disabilityType: v, hasDisability: v ? "Yes" : "No" })} options={["Visual Impairment", "Hearing Impairment", "Physical Disability", "Speech Impairment", "Intellectual Disability", "Mental / Psychosocial Disability", "Multiple Disabilities", "Other"]} />
+                <SelectField label="Disability type" value={form.disability.disabilityType} onChange={(v) => updateField("disability", { ...form.disability, disabilityType: v, hasDisability: v ? "Yes" : "No" })} options={DISABILITY_TYPE_OPTIONS} />
+                <SelectField label="Disability category (ID card)" value={form.disability.disabilityCategory} onChange={(v) => updateField("disability", { ...form.disability, disabilityCategory: v })} options={DISABILITY_CATEGORY_OPTIONS} />
                 <div className="space-y-3">
                   <p className="text-sm font-semibold text-slate-900">Severity level</p>
-                  <input type="range" min={0} max={4} step={1} value={form.disability.severityLevel} onChange={(e) => updateField("disability", { ...form.disability, severityLevel: Number(e.target.value), severity: ["No impact", "Mild", "Moderate", "Severe", "Complete"][Number(e.target.value)] })} className="h-2 w-full cursor-pointer accent-[#0A2D6D]" />
+                  <input type="range" min={0} max={4} step={1} value={form.disability.severityLevel} onChange={(e) => updateField("disability", { ...form.disability, severityLevel: Number(e.target.value), severity: DISABILITY_SEVERITY_LABELS[Number(e.target.value)] })} className="h-2 w-full cursor-pointer accent-[#0A2D6D]" />
                   <div className="flex justify-between text-[11px] text-slate-500">
-                    {["No impact", "Mild", "Moderate", "Severe", "Complete"].map((label, idx) => (
+                    {DISABILITY_SEVERITY_LABELS.map((label, idx) => (
                       <span key={label} className={form.disability.severityLevel === idx ? "font-semibold text-[#0A2D6D]" : ""}>{idx}</span>
                     ))}
-                  </div>
-                </div>
-
-                <div className="md:col-span-2">
-                  <p className="mb-3 text-sm font-semibold text-slate-900">Affected area</p>
-                  <div className="grid gap-3 md:grid-cols-3">
-                    {["Body Function", "Activity Limitation", "Participation Restriction"].map((area) => {
-                      const checked = form.disability.affectedAreas.includes(area);
-                      return (
-                        <label key={area} className="flex items-center gap-3 rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm text-slate-700">
-                          <input type="checkbox" checked={checked} onChange={() => {
-                            const next = checked ? form.disability.affectedAreas.filter((item) => item !== area) : [...form.disability.affectedAreas, area];
-                            updateField("disability", { ...form.disability, affectedAreas: next, hasDisability: next.length ? "Yes" : form.disability.hasDisability });
-                          }} className="h-4 w-4 accent-[#0A2D6D]" />
-                          <span>{area}</span>
-                        </label>
-                      );
-                    })}
                   </div>
                 </div>
 
@@ -748,6 +1069,7 @@ export function UnifiedCitizenRegistration() {
         );
 
       case 4: {
+        const isAbroad = form.currentResidence === "Abroad";
         const latNum = Number(form.lat);
         const lngNum = Number(form.lng);
         const hasResidencePin =
@@ -756,130 +1078,538 @@ export function UnifiedCitizenRegistration() {
           Number.isFinite(latNum) &&
           Number.isFinite(lngNum);
 
+        const residenceLocationCard = (
+          <div className="md:col-span-2 rounded-3xl border border-cyan-100 bg-cyan-50 p-4">
+            <p className="text-sm font-semibold text-cyan-900">Residence location</p>
+            <div className="mt-4 grid gap-5 md:grid-cols-2">
+              <Field label="Latitude" value={form.lat} onChange={(v) => updateField("lat", v)} placeholder="27.7172" />
+              <Field label="Longitude" value={form.lng} onChange={(v) => updateField("lng", v)} placeholder="85.3240" />
+              <div className="md:col-span-2"><Field label="Selected place" value={form.placeName} onChange={(v) => updateField("placeName", v)} placeholder="Baneshwor, Kathmandu" /></div>
+            </div>
+            <div className="mt-4 rounded-2xl border border-dashed border-sky-300 bg-white/60 p-4">
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <div className="flex min-w-0 items-center gap-2.5">
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-sky-100 text-sky-700"><MapOutlined sx={{ fontSize: 22 }} /></span>
+                  <div className="min-w-0">
+                    <p className="text-sm font-semibold text-slate-900">Locate residence on map</p>
+                    <p className="mt-0.5 truncate text-xs text-slate-600">
+                      {hasResidencePin
+                        ? `${latNum.toFixed(5)}° N, ${lngNum.toFixed(5)}° E`
+                        : form.placeName || form.address || "No location selected yet"}
+                    </p>
+                  </div>
+                </div>
+                <button type="button" onClick={handleUseCurrentLocation} className="rounded-xl bg-[#0A2D6D] px-4 py-2 text-xs font-semibold text-white hover:bg-[#082257]">Use current location</button>
+              </div>
+              <div className="mt-4">
+                <LocationMap latitude={form.lat} longitude={form.lng} accuracy={null} onSelect={handleMapSelect} />
+              </div>
+              <p className="mt-3 text-center font-poppins text-[10px] font-semibold uppercase tracking-[0.12em] text-[#94A3B8]">
+                Click the map to set the residence location, or capture it with your device
+              </p>
+            </div>
+          </div>
+        );
+
+        const householdFields = (
+          <>
+            <SelectField label="House type" value={form.houseType} onChange={(v) => updateField("houseType", v)} options={["Owned", "Rented", "Family owned", "Government provided", "Other"]} />
+            <SelectField label="Ownership status" value={form.ownershipStatus} onChange={(v) => updateField("ownershipStatus", v)} options={["Owned", "Rented", "Family owned", "Government allocated", "Other"]} />
+            <Field label="Years at residence" value={form.yearsAtResidence} onChange={(v) => updateField("yearsAtResidence", v)} placeholder="Years" />
+            <Field label="Number of rooms" value={form.roomCount} onChange={(v) => updateField("roomCount", v)} placeholder="3" />
+          </>
+        );
+
         return (
           <div className="space-y-6">
-            <div className="text-sm text-slate-600">Primary address, household details, and geographic location are essential for registration, service access, and residence verification.</div>
-            <div className="grid gap-5 md:grid-cols-2">
-              <SelectField label="Currently residing in Nepal" value={form.currentlyInNepal} onChange={(v) => updateField("currentlyInNepal", v)} options={["Yes", "No"]} />
-              {form.currentlyInNepal === "No" && <Field label="Country of residence" value={form.countryOfResidence} onChange={(v) => updateField("countryOfResidence", v)} placeholder="Enter country name" />}
-              <Field label="Province" value={form.province} onChange={(v) => updateField("province", v)} placeholder="Province" />
-              <Field label="District" value={form.district} onChange={(v) => updateField("district", v)} placeholder="District" />
-              <Field label="Municipality / Rural municipality" value={form.municipality} onChange={(v) => updateField("municipality", v)} placeholder="Municipality" />
-              <Field label="Ward" value={form.ward} onChange={(v) => updateField("ward", v)} placeholder="Ward" />
-              <SelectField label="House type" value={form.houseType} onChange={(v) => updateField("houseType", v)} options={["Owned", "Rented", "Family owned", "Government provided", "Other"]} />
-              <SelectField label="Ownership status" value={form.ownershipStatus} onChange={(v) => updateField("ownershipStatus", v)} options={["Owned", "Rented", "Family owned", "Government allocated", "Other"]} />
-              <Field label="Years at residence" value={form.yearsAtResidence} onChange={(v) => updateField("yearsAtResidence", v)} placeholder="Years" />
-              <Field label="Number of rooms" value={form.roomCount} onChange={(v) => updateField("roomCount", v)} placeholder="3" />
-              <div className="md:col-span-2"><Field label="Primary address" value={form.address} onChange={(v) => updateField("address", v)} placeholder="House no, street, village, locality" /></div>
-              <div className="md:col-span-2 rounded-3xl border border-cyan-100 bg-cyan-50 p-4">
-                <p className="text-sm font-semibold text-cyan-900">Residence location</p>
-                <div className="mt-4 grid gap-5 md:grid-cols-2">
-                  <Field label="Latitude" value={form.lat} onChange={(v) => updateField("lat", v)} placeholder="27.7172" />
-                  <Field label="Longitude" value={form.lng} onChange={(v) => updateField("lng", v)} placeholder="85.3240" />
-                  <div className="md:col-span-2"><Field label="Selected place" value={form.placeName} onChange={(v) => updateField("placeName", v)} placeholder="Baneshwor, Kathmandu" /></div>
+            <div className="text-sm text-slate-600">Record the permanent address (always in Nepal) and the current / temporary address. The temporary address may be inside or outside Nepal &mdash; declare that first.</div>
+
+            <div className="rounded-3xl border border-slate-200 bg-slate-50 p-4">
+              <p className="mb-4 text-sm font-semibold text-slate-900">Permanent address (Nepal)</p>
+              <div className="grid gap-5 md:grid-cols-2">
+                <SelectField label="Province" value={form.permanentProvince} onChange={(v) => updateField("permanentProvince", v)} options={NEPAL_PROVINCES} />
+                <Field label="District" value={form.permanentDistrict} onChange={(v) => updateField("permanentDistrict", v)} placeholder="District" />
+                <Field label="Municipality / Rural municipality" value={form.permanentMunicipality} onChange={(v) => updateField("permanentMunicipality", v)} placeholder="Municipality" />
+                <Field label="Ward" value={form.permanentWard} onChange={(v) => updateField("permanentWard", v)} placeholder="Ward" />
+                <Field label="Street / tole" value={form.permanentStreet} onChange={(v) => updateField("permanentStreet", v)} placeholder="Street, tole, village, locality" />
+                <Field label="House no." value={form.permanentHouseNo} onChange={(v) => updateField("permanentHouseNo", v)} placeholder="e.g. 42" />
+              </div>
+            </div>
+
+            <div className="rounded-3xl border border-slate-200 bg-slate-50 p-4">
+              <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
+                <p className="text-sm font-semibold text-slate-900">Temporary / current address</p>
+                {!isAbroad && (
+                  <button type="button" onClick={copyPermanentToCurrent} className="inline-flex items-center gap-1.5 rounded-xl border border-[#d7deea] bg-white px-3 py-1.5 text-xs font-semibold text-[#0A2D6D] transition hover:bg-[#f4f8ff]">
+                    <ContentCopy sx={{ fontSize: 15 }} />
+                    Copy from permanent
+                  </button>
+                )}
+              </div>
+              <div className="grid gap-5 md:grid-cols-2">
+                <SelectField label="Where does the citizen currently reside?" value={form.currentResidence} onChange={(v) => updateField("currentResidence", v)} options={["Nepal", "Abroad"]} />
+              </div>
+
+              {isAbroad ? (
+                <div className="mt-5 grid gap-5 md:grid-cols-2">
+                  <Field label="Country of residence" value={form.countryOfResidence} onChange={(v) => updateField("countryOfResidence", v)} placeholder="e.g. Australia" />
+                  <Field label="City of residence" value={form.cityOfResidence} onChange={(v) => updateField("cityOfResidence", v)} placeholder="e.g. Sydney" />
+                  <Field label="Visa type" value={form.visaType} onChange={(v) => updateField("visaType", v)} placeholder="e.g. Student, Work, PR" />
+                  <Field label="Years abroad" value={form.yearsAtResidence} onChange={(v) => updateField("yearsAtResidence", v)} placeholder="Years" />
+                  <SelectField label="Purpose of staying" value={form.purposeOfStaying} onChange={(v) => updateField("purposeOfStaying", v)} options={PURPOSE_OF_STAYING_OPTIONS} />
+                  <div className="md:col-span-2"><Field label="Address abroad" value={form.address} onChange={(v) => updateField("address", v)} placeholder="Street, suburb, postal / zip code" /></div>
                 </div>
-                <div className="mt-4 rounded-2xl border border-dashed border-sky-300 bg-white/60 p-4">
-                  <div className="flex flex-wrap items-center justify-between gap-3">
-                    <div className="flex min-w-0 items-center gap-2.5">
-                      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-sky-100 text-sky-700"><MapOutlined sx={{ fontSize: 22 }} /></span>
-                      <div className="min-w-0">
-                        <p className="text-sm font-semibold text-slate-900">Locate residence on map</p>
-                        <p className="mt-0.5 truncate text-xs text-slate-600">
-                          {hasResidencePin
-                            ? `${latNum.toFixed(5)}° N, ${lngNum.toFixed(5)}° E`
-                            : form.placeName || form.address || "No location selected yet"}
-                        </p>
-                      </div>
+              ) : (
+                <div className="mt-5 grid gap-5 md:grid-cols-2">
+                  <SelectField label="Province" value={form.province} onChange={(v) => updateField("province", v)} options={NEPAL_PROVINCES} />
+                  <Field label="District" value={form.district} onChange={(v) => updateField("district", v)} placeholder="District" />
+                  <Field label="Municipality / Rural municipality" value={form.municipality} onChange={(v) => updateField("municipality", v)} placeholder="Municipality" />
+                  <Field label="Ward" value={form.ward} onChange={(v) => updateField("ward", v)} placeholder="Ward" />
+                  {householdFields}
+                  <Field label="Street / tole" value={form.address} onChange={(v) => updateField("address", v)} placeholder="Street, tole, village, locality" />
+                  <Field label="House no." value={form.houseNo} onChange={(v) => updateField("houseNo", v)} placeholder="e.g. 42" />
+                  {!currentMatchesPermanent && (
+                    <div className="md:col-span-2">
+                      <SelectField label="Purpose of staying (current address differs from permanent)" value={form.purposeOfStaying} onChange={(v) => updateField("purposeOfStaying", v)} options={PURPOSE_OF_STAYING_OPTIONS} />
                     </div>
-                    <button type="button" onClick={handleUseCurrentLocation} className="rounded-xl bg-[#0A2D6D] px-4 py-2 text-xs font-semibold text-white hover:bg-[#082257]">Use current location</button>
-                  </div>
-                  <div className="mt-4">
-                    <LocationMap latitude={form.lat} longitude={form.lng} accuracy={null} onSelect={handleMapSelect} />
-                  </div>
-                  <p className="mt-3 text-center font-poppins text-[10px] font-semibold uppercase tracking-[0.12em] text-[#94A3B8]">
-                    Click the map to set the residence location, or capture it with your device
-                  </p>
+                  )}
+                  {residenceLocationCard}
                 </div>
+              )}
+            </div>
+          </div>
+        );
+      }
+
+      case 5: {
+        const job = form.employmentRecords[0] ?? createEmploymentRecord();
+        const isUnemployed = job.status === "Unemployed";
+        const isInactive = isUnemployed || job.status === "Student" || job.status === "Homemaker" || job.status === "Retired";
+        const isBusiness = job.status === "Self-employed / Business owner" || job.status === "Agriculture / Farming";
+        const isForeign = job.status === "Foreign employment";
+        const showEmployer = !isBusiness && !isForeign && !isInactive;
+
+        return (
+          <div className="space-y-6">
+            <div>
+              <h3 className="text-xl font-bold text-slate-900">Employment & income</h3>
+              <p className="mt-1 text-sm text-slate-500">Record the citizen&rsquo;s current / main work and income.</p>
+            </div>
+
+            <div className="rounded-3xl border border-slate-200 bg-slate-50 p-4">
+              <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+                <SelectField label="Employment status" value={job.status} onChange={(v) => updateJob({ status: v })} options={EMPLOYMENT_STATUS_OPTIONS} />
+                <Field label="Occupation / job title" value={job.role} onChange={(v) => updateJob({ role: v })} placeholder="e.g. Teacher, Shopkeeper, Driver" />
+                <SelectField label="Sector" value={job.sector} onChange={(v) => updateJob({ sector: v })} options={EMPLOYMENT_SECTOR_OPTIONS} />
+                {!isInactive && <SelectField label="Employment type" value={job.employmentType} onChange={(v) => updateJob({ employmentType: v })} options={EMPLOYMENT_TYPE_OPTIONS} />}
+                <SelectField label="Monthly income band" value={job.incomeBand} onChange={(v) => updateJob({ incomeBand: v })} options={INCOME_BAND_OPTIONS} />
+                <SelectField label="Main source of income?" value={job.primaryIncome} onChange={(v) => updateJob({ primaryIncome: v })} options={LS_YESNO} />
+                {!isInactive && <SelectField label="Currently active in this work?" value={job.currentlyWorking} onChange={(v) => updateJob({ currentlyWorking: v })} options={LS_YESNO} />}
+                {!isInactive && <Field label="Started (year)" type="number" value={job.startYear} onChange={(v) => updateJob({ startYear: v })} placeholder="2019" />}
+                {!isInactive && <Field label="Total experience (years)" type="number" value={job.yearsOfExperience} onChange={(v) => updateJob({ yearsOfExperience: v })} placeholder="e.g. 6" />}
+              </div>
+
+              {showEmployer && (
+                <div className="mt-5 rounded-2xl border border-slate-200 bg-white p-4">
+                  <p className="mb-3 text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">Employer details</p>
+                  <div className="grid gap-5 md:grid-cols-2">
+                    <Field label="Employer / organisation name" value={job.employer} onChange={(v) => updateJob({ employer: v })} placeholder="Organisation or person you work for" />
+                    <Field label="Employer location" value={job.employerLocation} onChange={(v) => updateJob({ employerLocation: v })} placeholder="City / district" />
+                  </div>
+                </div>
+              )}
+              {isBusiness && (
+                <div className="mt-5 rounded-2xl border border-slate-200 bg-white p-4">
+                  <p className="mb-3 text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">Business / enterprise details</p>
+                  <div className="grid gap-5 md:grid-cols-2">
+                    <Field label="Business / enterprise name" value={job.businessName} onChange={(v) => updateJob({ businessName: v })} placeholder="Registered or trading name" />
+                    <SelectField label="Type of business" value={job.businessType} onChange={(v) => updateJob({ businessType: v })} options={BUSINESS_TYPE_OPTIONS} />
+                    <SelectField label="Registration status" value={job.businessRegistration} onChange={(v) => updateJob({ businessRegistration: v })} options={BUSINESS_REGISTRATION_OPTIONS} />
+                    {job.businessRegistration.startsWith("Registered") && (
+                      <Field label="PAN / VAT / registration no." value={job.registrationNumber} onChange={(v) => updateJob({ registrationNumber: v })} placeholder="e.g. 301234567" />
+                    )}
+                    <Field label="People employed (incl. self)" type="number" value={job.businessEmployees} onChange={(v) => updateJob({ businessEmployees: v })} placeholder="e.g. 3" />
+                    <Field label="Business started (year)" type="number" value={job.businessStartYear} onChange={(v) => updateJob({ businessStartYear: v })} placeholder="2018" />
+                  </div>
+                </div>
+              )}
+
+              {isForeign && (
+                <div className="mt-5 rounded-2xl border border-slate-200 bg-white p-4">
+                  <p className="mb-3 text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">Foreign employment details</p>
+                  <div className="grid gap-5 md:grid-cols-2">
+                    <Field label="Country" value={job.country} onChange={(v) => updateJob({ country: v })} placeholder="e.g. UAE" />
+                    <Field label="Year went abroad" type="number" value={job.departureYear} onChange={(v) => updateJob({ departureYear: v })} placeholder="2023" />
+                    <SelectField label="Work type" value={job.workType} onChange={(v) => updateJob({ workType: v })} options={FOREIGN_WORK_TYPE_OPTIONS} />
+                    {job.workType === "Other" && <Field label="Name of work" value={job.customWorkType} onChange={(v) => updateJob({ customWorkType: v })} placeholder="Mention exact work type" />}
+                    <Field label="Employer abroad" value={job.employerAbroad} onChange={(v) => updateJob({ employerAbroad: v })} placeholder="Company / sponsor" />
+                    <SelectField label="Sends remittance regularly?" value={job.remittanceRegular} onChange={(v) => updateJob({ remittanceRegular: v })} options={LS_YESNO} />
+                    {job.remittanceRegular === "Yes" && <SelectField label="Approx. monthly remittance" value={job.monthlyRemittance} onChange={(v) => updateJob({ monthlyRemittance: v })} options={INCOME_BAND_OPTIONS} />}
+                  </div>
+                </div>
+              )}
+
+              {isUnemployed && (
+                <div className="mt-5 rounded-2xl border border-slate-200 bg-white p-4">
+                  <p className="mb-3 text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">Job-seeking status</p>
+                  <div className="grid gap-5 md:grid-cols-2">
+                    <SelectField label="Actively seeking work?" value={job.seekingWork} onChange={(v) => updateJob({ seekingWork: v })} options={LS_YESNO} />
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        );
+      }
+
+      case 6: {
+        const edu = form.educationRecords[0] ?? { level: "", institution: "", subject: "", year: "", status: "Completed" };
+        const nonFormal = EDUCATION_NON_FORMAL.includes(edu.level);
+        return (
+          <div className="space-y-6">
+            <div>
+              <h3 className="text-xl font-bold text-slate-900">Education</h3>
+              <p className="mt-1 text-sm text-slate-500">Record the highest / most recent level of education attained.</p>
+            </div>
+            <div className="rounded-3xl border border-slate-200 bg-slate-50 p-4">
+              <div className="grid gap-5 md:grid-cols-2">
+                <SelectField label="Highest level of education" value={edu.level} onChange={(v) => updateEducation({ level: v })} options={EDUCATION_LEVEL_OPTIONS} />
+                {!nonFormal && edu.level && (
+                  <>
+                    <SelectField label="Status" value={edu.status} onChange={(v) => updateEducation({ status: v })} options={["Completed", "In progress", "Dropped out"]} />
+                    <Field label="Institution / school / college" value={edu.institution} onChange={(v) => updateEducation({ institution: v })} placeholder="Name of institution" />
+                    <Field label="Faculty / subject / stream" value={edu.subject} onChange={(v) => updateEducation({ subject: v })} placeholder="e.g. Science, Management, Education" />
+                    <Field label="Passing / current year" value={edu.year} onChange={(v) => updateEducation({ year: v })} placeholder="e.g. 2019" />
+                  </>
+                )}
+              </div>
+              {nonFormal && (
+                <p className="mt-4 rounded-xl border border-amber-200 bg-amber-50 px-3 py-2 text-xs leading-5 text-amber-700">
+                  No formal schooling recorded. Institution, subject and year are not required for this level.
+                </p>
+              )}
+            </div>
+          </div>
+        );
+      }
+
+      case 7: {
+        const ls = form.livingStandard;
+        return (
+          <div className="space-y-6">
+            <div>
+              <h3 className="text-xl font-bold text-slate-900">Living standard & household access</h3>
+              <p className="mt-1 text-sm text-slate-500">Socio-economic profile of the household &mdash; assets, services, and access to facilities.</p>
+            </div>
+
+            <div className="rounded-3xl border border-slate-200 bg-slate-50 p-4">
+              <p className="mb-4 text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">House &amp; land</p>
+              <div className="grid gap-5 md:grid-cols-2">
+                <SelectField label="House construction type" value={ls.houseStructure} onChange={(v) => updateLiving({ houseStructure: v })} options={LS_HOUSE_STRUCTURE} />
+                <SelectField label="Does the household own agricultural land?" value={ls.landOwnership} onChange={(v) => updateLiving({ landOwnership: v })} options={LS_YESNO} />
+                {ls.landOwnership === "Yes" && <SelectField label="Approx. land holding" value={ls.landArea} onChange={(v) => updateLiving({ landArea: v })} options={LS_LAND_AREA} />}
+              </div>
+            </div>
+
+            <div className="rounded-3xl border border-slate-200 bg-slate-50 p-4">
+              <p className="mb-4 text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">Utilities &amp; services</p>
+              <div className="grid gap-5 md:grid-cols-2">
+                <SelectField label="Electricity connection?" value={ls.electricity} onChange={(v) => updateLiving({ electricity: v })} options={LS_YESNO} />
+                {ls.electricity === "Yes" && <SelectField label="Electricity source" value={ls.electricitySource} onChange={(v) => updateLiving({ electricitySource: v })} options={LS_ELECTRICITY_SOURCE} />}
+                <SelectField label="Main source of drinking water" value={ls.drinkingWater} onChange={(v) => updateLiving({ drinkingWater: v })} options={LS_DRINKING_WATER} />
+                <SelectField label="Toilet facility" value={ls.toilet} onChange={(v) => updateLiving({ toilet: v })} options={LS_TOILET} />
+                <SelectField label="Main cooking fuel" value={ls.cookingFuel} onChange={(v) => updateLiving({ cookingFuel: v })} options={LS_COOKING_FUEL} />
+                <SelectField label="Internet access at home?" value={ls.internet} onChange={(v) => updateLiving({ internet: v })} options={LS_YESNO} />
+                {ls.internet === "Yes" && <SelectField label="Internet type" value={ls.internetType} onChange={(v) => updateLiving({ internetType: v })} options={LS_INTERNET_TYPE} />}
+              </div>
+            </div>
+
+            <div className="rounded-3xl border border-slate-200 bg-slate-50 p-4">
+              <p className="mb-4 text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">Assets &amp; finance</p>
+              <div className="grid gap-5 md:grid-cols-2">
+                <Field label="Number of mobile phones in household" type="number" value={ls.mobilePhones} onChange={(v) => updateLiving({ mobilePhones: v })} placeholder="e.g. 3" />
+                <SelectField label="Does the household own any vehicle?" value={ls.ownsVehicle} onChange={(v) => updateLiving({ ownsVehicle: v })} options={LS_YESNO} />
+                {ls.ownsVehicle === "Yes" && <Field label="Two-wheelers (motorcycle / scooter)" type="number" value={ls.twoWheelers} onChange={(v) => updateLiving({ twoWheelers: v })} placeholder="0" />}
+                {ls.ownsVehicle === "Yes" && <Field label="Four-wheelers (car / jeep / van)" type="number" value={ls.fourWheelers} onChange={(v) => updateLiving({ fourWheelers: v })} placeholder="0" />}
+                {ls.ownsVehicle === "Yes" && <Field label="Bicycles / rickshaw / cart" type="number" value={ls.bicycles} onChange={(v) => updateLiving({ bicycles: v })} placeholder="0" />}
+                <SelectField label="Does any member have a bank / financial account?" value={ls.bankAccount} onChange={(v) => updateLiving({ bankAccount: v })} options={LS_YESNO} />
+                {ls.bankAccount === "Yes" && <Field label="Number of accounts in household" type="number" value={ls.bankAccountCount} onChange={(v) => updateLiving({ bankAccountCount: v })} placeholder="e.g. 2" />}
+                <SelectField label="Does the household keep livestock / poultry?" value={ls.livestock} onChange={(v) => updateLiving({ livestock: v })} options={LS_YESNO} />
+                <SelectField label="Covered by health insurance?" value={ls.healthInsurance} onChange={(v) => updateLiving({ healthInsurance: v })} options={LS_YESNO} />
+                <SelectField label="Receives any social security allowance?" value={ls.socialSecurity} onChange={(v) => updateLiving({ socialSecurity: v })} options={LS_YESNO} />
+                {ls.socialSecurity === "Yes" && <SelectField label="Type of allowance" value={ls.socialSecurityType} onChange={(v) => updateLiving({ socialSecurityType: v })} options={LS_SOCIAL_SECURITY_TYPE} />}
+                <SelectField label="Any member migrated for work in the last 12 months?" value={ls.migrantMember} onChange={(v) => updateLiving({ migrantMember: v })} options={LS_YESNO} />
+              </div>
+            </div>
+
+            <div className="rounded-3xl border border-slate-200 bg-slate-50 p-4">
+              <p className="mb-4 text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">Access &amp; distance</p>
+              <div className="grid gap-5 md:grid-cols-2">
+                <SelectField label="Motorable road access to the house?" value={ls.roadAccess} onChange={(v) => updateLiving({ roadAccess: v })} options={LS_YESNO} />
+                {ls.roadAccess === "Yes" && <SelectField label="Distance to nearest motorable road" value={ls.roadDistance} onChange={(v) => updateLiving({ roadDistance: v })} options={LS_WALK_DISTANCE} />}
+                <SelectField label="Distance to nearest market / haat bazaar" value={ls.marketDistance} onChange={(v) => updateLiving({ marketDistance: v })} options={LS_WALK_DISTANCE} />
+                <SelectField label="Distance to nearest health facility" value={ls.healthFacilityDistance} onChange={(v) => updateLiving({ healthFacilityDistance: v })} options={LS_WALK_DISTANCE} />
+                <SelectField label="Distance to nearest school" value={ls.schoolDistance} onChange={(v) => updateLiving({ schoolDistance: v })} options={LS_WALK_DISTANCE} />
+                <SelectField label="Food sufficiency from own production" value={ls.foodSufficiency} onChange={(v) => updateLiving({ foodSufficiency: v })} options={LS_FOOD_SUFFICIENCY} />
               </div>
             </div>
           </div>
         );
       }
 
-      case 5:
+      case 8: {
+        const job = form.employmentRecords[0] ?? createEmploymentRecord();
+        const edu = form.educationRecords[0] ?? { level: "", institution: "", subject: "", year: "", status: "" };
+        const ls = form.livingStandard;
+        const jobIsBusiness = job.status === "Self-employed / Business owner" || job.status === "Agriculture / Farming";
+        const jobIsForeign = job.status === "Foreign employment";
+        const jobIsUnemployed = job.status === "Unemployed";
+        const jobIsInactive = jobIsUnemployed || job.status === "Student" || job.status === "Homemaker" || job.status === "Retired";
+        const eduFormal = Boolean(edu.level) && !EDUCATION_NON_FORMAL.includes(edu.level);
+        const spouseName = [form.spouseFirstName, form.spouseMiddleName, form.spouseLastName].filter(Boolean).join(" ");
+
         return (
-          <div className="space-y-6">
-            <div className="flex items-center justify-between gap-3">
-              <div>
-                <h3 className="text-xl font-bold text-slate-900">Employment & income</h3>
-                <p className="mt-1 text-sm text-slate-500">Add multiple employment entries and salary ranges as needed with new records for each role.</p>
-              </div>
-              <button type="button" onClick={addEmploymentRecord} className="rounded-xl bg-[#0A2D6D] px-3 py-2 text-xs font-semibold text-white">+ Add record</button>
+          <div className="space-y-5">
+            <div>
+              <h3 className="text-xl font-bold text-slate-900">Review &amp; submit</h3>
+              <p className="mt-1 text-sm text-slate-500">Everything captured for this citizen is listed below. Use &ldquo;Edit&rdquo; on any section to change it, then confirm and submit.</p>
             </div>
 
-            <div className="space-y-4">
-              {form.employmentRecords.map((job, index) => (
-                <div key={`${job.employer || "employment"}-${index}`} className="grid gap-3 rounded-3xl border border-slate-200 bg-slate-50 p-4 md:grid-cols-2 xl:grid-cols-3">
-                  <SelectField label="Status" value={job.status} onChange={(v) => { const next = [...form.employmentRecords]; next[index] = { ...next[index], status: v }; updateField("employmentRecords", next); }} options={["Government", "Private", "Business", "Unemployed", "Student", "Foreign employment"]} />
-                  <Field label="Employer" value={job.employer} onChange={(v) => { const next = [...form.employmentRecords]; next[index] = { ...next[index], employer: v }; updateField("employmentRecords", next); }} />
-                  <Field label="Role" value={job.role} onChange={(v) => { const next = [...form.employmentRecords]; next[index] = { ...next[index], role: v }; updateField("employmentRecords", next); }} />
-                  <SelectField label="Salary band" value={job.incomeBand} onChange={(v) => { const next = [...form.employmentRecords]; next[index] = { ...next[index], incomeBand: v }; updateField("employmentRecords", next); }} options={["Below NPR 5,000", "NPR 5,000 – 10,000", "NPR 10,000 – 25,000", "NPR 25,000 – 50,000", "Above NPR 50,000", "Not disclosed"]} />
-                  <Field label="Sector" value={job.sector} onChange={(v) => { const next = [...form.employmentRecords]; next[index] = { ...next[index], sector: v }; updateField("employmentRecords", next); }} />
-                  {job.status === "Foreign employment" && (
-                    <>
-                      <Field label="Country" value={job.country} onChange={(v) => { const next = [...form.employmentRecords]; next[index] = { ...next[index], country: v }; updateField("employmentRecords", next); }} placeholder="e.g. UAE" />
-                      <Field label="Year went abroad" type="number" value={job.departureYear} onChange={(v) => { const next = [...form.employmentRecords]; next[index] = { ...next[index], departureYear: v }; updateField("employmentRecords", next); }} placeholder="2023" />
-                      <SelectField label="Work type" value={job.workType} onChange={(v) => { const next = [...form.employmentRecords]; next[index] = { ...next[index], workType: v }; updateField("employmentRecords", next); }} options={["Construction", "Hospitality", "Driving", "Agriculture", "Cleaning", "Security", "Factory work", "Other"]} />
-                      {job.workType === "Other" && <Field label="Name of work" value={job.customWorkType} onChange={(v) => { const next = [...form.employmentRecords]; next[index] = { ...next[index], customWorkType: v }; updateField("employmentRecords", next); }} placeholder="Mention exact work type if not listed" />}
-                    </>
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
-        );
-      case 6:
-        return (
-          <div className="space-y-6">
-            <div className="flex items-center justify-between gap-3">
-              <div>
-                <h3 className="text-xl font-bold text-slate-900">Education</h3>
-                <p className="mt-1 text-sm text-slate-500">Add detailed education history with institution, subject, year, and status.</p>
-              </div>
-              <button type="button" onClick={addEducationRecord} className="rounded-xl bg-[#0A2D6D] px-3 py-2 text-xs font-semibold text-white">+ Add education</button>
-            </div>
-            <div className="space-y-4">
-              {form.educationRecords.map((education, index) => (
-                <div key={`${education.level || "education"}-${index}`} className="grid gap-3 rounded-3xl border border-slate-200 bg-slate-50 p-4 md:grid-cols-5">
-                  <Field label="Level" value={education.level} onChange={(v) => { const next = [...form.educationRecords]; next[index] = { ...next[index], level: v }; updateField("educationRecords", next); }} />
-                  <Field label="Institution" value={education.institution} onChange={(v) => { const next = [...form.educationRecords]; next[index] = { ...next[index], institution: v }; updateField("educationRecords", next); }} />
-                  <Field label="Subject" value={education.subject} onChange={(v) => { const next = [...form.educationRecords]; next[index] = { ...next[index], subject: v }; updateField("educationRecords", next); }} />
-                  <Field label="Passing year" value={education.year} onChange={(v) => { const next = [...form.educationRecords]; next[index] = { ...next[index], year: v }; updateField("educationRecords", next); }} />
-                  <SelectField label="Status" value={education.status} onChange={(v) => { const next = [...form.educationRecords]; next[index] = { ...next[index], status: v }; updateField("educationRecords", next); }} options={["Completed", "In progress", "Dropped out", "Not applicable"]} />
-                </div>
-              ))}
-            </div>
-          </div>
-        );
+            <ReviewSection title="NID / Citizenship" onEdit={() => setStep(1)}>
+              <ReviewRows rows={[
+                ["Citizenship type", form.citizenshipType],
+                ["Citizenship number", form.citizenshipNumber],
+                ["NID number", form.nidNumber],
+                ["Citizenship — front", form.citizenshipFront],
+                ["Citizenship — back", form.citizenshipBack],
+                ["NID — front", form.nidFront],
+                ["NID — back", form.nidBack],
+              ]} />
+            </ReviewSection>
 
-      case 7:
-        return (
-          <div className="space-y-6">
-            <div className="text-sm text-slate-600">Final review before submission. Confirm the record is final and then submit to the local registration dataset.</div>
-            <div className="grid gap-4 md:grid-cols-2">
-              <SummaryCard title="NID / citizenship" onEdit={() => setStep(1)} lines={[form.citizenshipNumber || "Citizenship no. missing", form.nidNumber || "NID no. missing", form.citizenshipType || "Type pending"]} />
-              <SummaryCard title="Personal" onEdit={() => setStep(2)} lines={[form.fullName || "Name missing", form.dob || "DOB missing", form.gender || "Gender missing", form.maritalStatus || "Marital status not entered"]} />
-              <SummaryCard title="Photo" onEdit={() => setStep(3)} lines={[form.photo || "Photo not uploaded", form.signature || "Signature not uploaded", form.retinaScan || "Retina scan pending"]} />
-              <SummaryCard title="Household" onEdit={() => setStep(4)} lines={[form.address || "Address missing", `${form.roomCount || 0} rooms`, form.placeName || "Location not selected"]} />
-              <SummaryCard title="Employment" onEdit={() => setStep(5)} lines={[`${form.employmentRecords.length} employment record(s)`, form.employmentRecords[0]?.role || "No role entered", form.employmentRecords[0]?.incomeBand || "No salary range"]} />
-              <SummaryCard title="Education" onEdit={() => setStep(6)} lines={[form.educationRecords[0]?.level || "Education not entered", form.educationRecords[0]?.institution || "No institution", form.educationRecords[0]?.status || "Status pending"]} />
-            </div>
+            <ReviewSection title="Personal" onEdit={() => setStep(2)}>
+              <ReviewRows rows={[
+                ["First name", form.firstName],
+                ["Middle name", form.middleName],
+                ["Last name", form.lastName],
+                ["Full name (Devanagari)", form.fullNameDevnagari],
+                ["Date of birth", form.dob],
+                ["Gender", form.gender],
+                ["Marital status", form.maritalStatus],
+                ["Father's name", form.fatherName],
+                ["Mother's name", form.motherName],
+                ["Spouse name", form.maritalStatus === "Married" ? spouseName : ""],
+                ["Spouse relationship", form.maritalStatus === "Married" ? form.spouseRelationship : ""],
+                ["Number of children", form.numberOfChildren],
+              ]} />
+              {form.children.map((c, i) => (
+                <div key={`review-child-${i}`} className="rounded-xl border border-slate-100 bg-slate-50 p-3">
+                  <p className="mb-2 text-xs font-semibold text-slate-700">Child {i + 1}</p>
+                  <ReviewRows rows={[
+                    ["Name", [c.firstName, c.middleName, c.lastName].filter(Boolean).join(" ")],
+                    ["Date of birth", c.dob],
+                    ["Citizenship no.", c.citizenshipNumber],
+                    ["Has disability", c.hasDisability],
+                    ["Disability type", c.hasDisability === "Yes" ? c.disabilityType : ""],
+                    ["Disability category", c.hasDisability === "Yes" ? c.disabilityCategory : ""],
+                    ["Severity level", c.hasDisability === "Yes" ? String(c.disabilitySeverityLevel ?? "") : ""],
+                    ["Govt. certificate", c.hasDisability === "Yes" ? ((c.disabilityCertificateIssued ?? true) ? "Yes" : "No") : ""],
+                  ]} />
+                </div>
+              ))}
+              <div className="rounded-xl border border-slate-100 bg-slate-50 p-3">
+                <p className="mb-2 text-xs font-semibold text-slate-700">Disability (self)</p>
+                <ReviewRows rows={[
+                  ["Has disability", form.disability.hasDisability],
+                  ["Type", form.disability.hasDisability === "Yes" ? form.disability.disabilityType : ""],
+                  ["Category (ID card)", form.disability.hasDisability === "Yes" ? form.disability.disabilityCategory : ""],
+                  ["Severity level", form.disability.hasDisability === "Yes" ? String(form.disability.severityLevel ?? "") : ""],
+                  ["Govt. certificate issued", form.disability.hasDisability === "Yes" ? (form.disability.certificateIssued ? "Yes" : "No") : ""],
+                ]} />
+              </div>
+            </ReviewSection>
+
+            <ReviewSection title="Photo & biometrics" onEdit={() => setStep(3)}>
+              <ReviewRows rows={[
+                ["Photo", form.photo],
+                ["Thumb print", form.thumbPrint],
+                ["Signature", form.signature],
+                ["Retina scan", form.retinaScan],
+              ]} />
+            </ReviewSection>
+
+            <ReviewSection title="Household" onEdit={() => setStep(4)}>
+              <div className="rounded-xl border border-slate-100 bg-slate-50 p-3">
+                <p className="mb-2 text-xs font-semibold text-slate-700">Permanent address</p>
+                <ReviewRows rows={[
+                  ["Province", form.permanentProvince],
+                  ["District", form.permanentDistrict],
+                  ["Municipality / RM", form.permanentMunicipality],
+                  ["Ward", form.permanentWard],
+                  ["Street / tole", form.permanentStreet],
+                  ["House no.", form.permanentHouseNo],
+                ]} />
+              </div>
+              <div className="rounded-xl border border-slate-100 bg-slate-50 p-3">
+                <p className="mb-2 text-xs font-semibold text-slate-700">Current / temporary address</p>
+                {form.currentResidence === "Abroad" ? (
+                  <ReviewRows rows={[
+                    ["Currently residing", "Abroad"],
+                    ["Country", form.countryOfResidence],
+                    ["City", form.cityOfResidence],
+                    ["Visa type", form.visaType],
+                    ["Years abroad", form.yearsAtResidence],
+                    ["Address abroad", form.address],
+                    ["Purpose of staying", form.purposeOfStaying],
+                  ]} />
+                ) : currentMatchesPermanent ? (
+                  <ReviewRows rows={[
+                    ["Currently residing", "Nepal"],
+                    ["Current address", "Same as permanent address"],
+                    ["House type", form.houseType],
+                    ["Ownership status", form.ownershipStatus],
+                    ["Years at residence", form.yearsAtResidence],
+                    ["Number of rooms", form.roomCount],
+                  ]} />
+                ) : (
+                  <ReviewRows rows={[
+                    ["Currently residing", "Nepal"],
+                    ["Province", form.province],
+                    ["District", form.district],
+                    ["Municipality / RM", form.municipality],
+                    ["Ward", form.ward],
+                    ["House type", form.houseType],
+                    ["Ownership status", form.ownershipStatus],
+                    ["Years at residence", form.yearsAtResidence],
+                    ["Number of rooms", form.roomCount],
+                    ["Street / tole", form.address],
+                    ["House no.", form.houseNo],
+                    ["Purpose of staying", form.purposeOfStaying],
+                  ]} />
+                )}
+              </div>
+              <ReviewRows optional rows={[
+                ["Latitude", form.lat],
+                ["Longitude", form.lng],
+                ["Selected place", form.placeName],
+              ]} />
+            </ReviewSection>
+
+            <ReviewSection title="Employment & income" onEdit={() => setStep(5)}>
+              <ReviewRows rows={[
+                ["Status", job.status],
+                ["Occupation / job title", job.role],
+                ["Sector", job.sector],
+                ["Employment type", jobIsInactive ? "" : job.employmentType],
+                ["Monthly income band", job.incomeBand],
+                ["Main source of income", job.primaryIncome],
+                ["Currently active", jobIsInactive ? "" : job.currentlyWorking],
+                ["Started (year)", jobIsInactive ? "" : job.startYear],
+                ["Experience (years)", jobIsInactive ? "" : job.yearsOfExperience],
+              ]} />
+              {!jobIsBusiness && !jobIsForeign && !jobIsInactive && (
+                <ReviewRows optional rows={[
+                  ["Employer / organisation", job.employer],
+                  ["Employer location", job.employerLocation],
+                ]} />
+              )}
+              {jobIsBusiness && (
+                <div className="rounded-xl border border-slate-100 bg-slate-50 p-3">
+                  <p className="mb-2 text-xs font-semibold text-slate-700">Business / enterprise</p>
+                  <ReviewRows rows={[
+                    ["Business name", job.businessName],
+                    ["Type of business", job.businessType],
+                    ["Registration status", job.businessRegistration],
+                    ["PAN / registration no.", job.registrationNumber],
+                    ["People employed", job.businessEmployees],
+                    ["Business started (year)", job.businessStartYear],
+                  ]} />
+                </div>
+              )}
+              {jobIsForeign && (
+                <div className="rounded-xl border border-slate-100 bg-slate-50 p-3">
+                  <p className="mb-2 text-xs font-semibold text-slate-700">Foreign employment</p>
+                  <ReviewRows rows={[
+                    ["Country", job.country],
+                    ["Year went abroad", job.departureYear],
+                    ["Work type", job.workType === "Other" ? job.customWorkType : job.workType],
+                    ["Employer abroad", job.employerAbroad],
+                    ["Sends remittance regularly", job.remittanceRegular],
+                    ["Approx. monthly remittance", job.monthlyRemittance],
+                  ]} />
+                </div>
+              )}
+              {jobIsUnemployed && <ReviewRows rows={[["Actively seeking work", job.seekingWork]]} />}
+            </ReviewSection>
+
+            <ReviewSection title="Education" onEdit={() => setStep(6)}>
+              <ReviewRows rows={[
+                ["Highest level", edu.level],
+                ["Status", eduFormal ? edu.status : ""],
+                ["Institution", eduFormal ? edu.institution : ""],
+                ["Faculty / subject", eduFormal ? edu.subject : ""],
+                ["Passing / current year", eduFormal ? edu.year : ""],
+              ]} />
+            </ReviewSection>
+
+            <ReviewSection title="Living standard & household access" onEdit={() => setStep(7)}>
+              <div className="rounded-xl border border-slate-100 bg-slate-50 p-3">
+                <p className="mb-2 text-xs font-semibold text-slate-700">House &amp; land</p>
+                <ReviewRows rows={[
+                  ["House construction type", ls.houseStructure],
+                  ["Owns agricultural land", ls.landOwnership],
+                  ["Land holding", ls.landOwnership === "Yes" ? ls.landArea : ""],
+                ]} />
+              </div>
+              <div className="rounded-xl border border-slate-100 bg-slate-50 p-3">
+                <p className="mb-2 text-xs font-semibold text-slate-700">Utilities &amp; services</p>
+                <ReviewRows rows={[
+                  ["Electricity", ls.electricity],
+                  ["Electricity source", ls.electricity === "Yes" ? ls.electricitySource : ""],
+                  ["Drinking water", ls.drinkingWater],
+                  ["Toilet", ls.toilet],
+                  ["Cooking fuel", ls.cookingFuel],
+                  ["Internet at home", ls.internet],
+                  ["Internet type", ls.internet === "Yes" ? ls.internetType : ""],
+                ]} />
+              </div>
+              <div className="rounded-xl border border-slate-100 bg-slate-50 p-3">
+                <p className="mb-2 text-xs font-semibold text-slate-700">Assets &amp; finance</p>
+                <ReviewRows rows={[
+                  ["Mobile phones", ls.mobilePhones],
+                  ["Owns a vehicle", ls.ownsVehicle],
+                  ["Two-wheelers", ls.ownsVehicle === "Yes" ? ls.twoWheelers : ""],
+                  ["Four-wheelers", ls.ownsVehicle === "Yes" ? ls.fourWheelers : ""],
+                  ["Bicycles / cart", ls.ownsVehicle === "Yes" ? ls.bicycles : ""],
+                  ["Bank / financial account", ls.bankAccount],
+                  ["Number of accounts", ls.bankAccount === "Yes" ? ls.bankAccountCount : ""],
+                  ["Livestock / poultry", ls.livestock],
+                  ["Health insurance", ls.healthInsurance],
+                  ["Social security allowance", ls.socialSecurity],
+                  ["Allowance type", ls.socialSecurity === "Yes" ? ls.socialSecurityType : ""],
+                  ["Member migrated for work (12 mo)", ls.migrantMember],
+                ]} />
+              </div>
+              <div className="rounded-xl border border-slate-100 bg-slate-50 p-3">
+                <p className="mb-2 text-xs font-semibold text-slate-700">Access &amp; distance</p>
+                <ReviewRows rows={[
+                  ["Motorable road access", ls.roadAccess],
+                  ["Distance to road", ls.roadAccess === "Yes" ? ls.roadDistance : ""],
+                  ["Distance to market", ls.marketDistance],
+                  ["Distance to health facility", ls.healthFacilityDistance],
+                  ["Distance to school", ls.schoolDistance],
+                  ["Food sufficiency", ls.foodSufficiency],
+                ]} />
+              </div>
+            </ReviewSection>
+
             <label className="flex items-start gap-3 rounded-2xl border border-slate-200 bg-slate-50 p-4 text-sm text-slate-700">
               <input type="checkbox" checked={isFinalReview} onChange={(e) => setIsFinalReview(e.target.checked)} className="mt-1 h-4 w-4 rounded border-slate-300 text-[#0A2D6D] focus:ring-[#0A2D6D]" />
               <span>I confirm that the information above is complete, accurate, and ready for final registration.</span>
             </label>
           </div>
         );
+      }
 
       default:
         return null;
@@ -888,7 +1618,7 @@ export function UnifiedCitizenRegistration() {
 
   if (isSubmitted) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-[#edf3f9] p-6">
+      <div className="flex min-h-[60vh] items-center justify-center py-6">
         <div className="w-full max-w-xl rounded-[28px] border border-[#dfe6ee] bg-white p-8 text-center shadow-[0_18px_48px_rgba(15,43,90,0.08)]">
           <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-[#eafaf0] text-[#1aa35f]"><CheckCircle sx={{ fontSize: 42 }} /></div>
           <h2 className="mt-6 text-3xl font-extrabold text-[#0A2D6D]">Registration complete</h2>
@@ -899,7 +1629,7 @@ export function UnifiedCitizenRegistration() {
           </div>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <button type="button" onClick={() => { setIsSubmitted(false); setForm(emptyForm); setStep(1); }} className="flex-1 rounded-xl bg-[#0A2D6D] px-4 py-3 font-semibold text-white">New entry</button>
-            <button type="button" onClick={() => { setIsSubmitted(false); setStep(7); }} className="flex-1 rounded-xl border border-[#d7deea] bg-white px-4 py-3 font-semibold text-[#0A2D6D]">Review record</button>
+            <button type="button" onClick={() => { setIsSubmitted(false); setStep(LAST_STEP); }} className="flex-1 rounded-xl border border-[#d7deea] bg-white px-4 py-3 font-semibold text-[#0A2D6D]">Review record</button>
           </div>
         </div>
       </div>
@@ -907,63 +1637,61 @@ export function UnifiedCitizenRegistration() {
   }
 
   return (
-    <div className="min-h-screen bg-[#edf3f9] px-4 py-5 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-[1200px]">
-        <div className="pb-5">
-          <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-            <div>
-              <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#7a8599]">Citizen registration</p>
-              <h1 className="mt-2 text-2xl font-black tracking-tight text-[#0A2D6D] md:text-[32px]">{STEP_META[step - 1].label}</h1>
-            </div>
-
-            <div className="inline-flex items-center gap-2 rounded-full border border-[#dfe6ee] bg-[#f4f8ff] px-3 py-2 text-xs font-semibold text-[#0f4db8]">
-              <span className="h-2.5 w-2.5 rounded-full bg-[#21b26a]" />
-              {draftStatus}
-            </div>
+    <>
+      <div className="pb-5">
+        <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+          <div>
+            <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#7a8599]">Citizen registration</p>
+            <h1 className="mt-2 text-2xl font-black tracking-tight text-[#0A2D6D] md:text-[28px]">{STEP_META[step - 1].label}</h1>
           </div>
 
-          <div className="relative mt-8">
-            <div className="absolute left-0 right-0 top-[20px] h-[2px] bg-[#dfe6ee]" />
-            <div className="relative flex flex-wrap items-start justify-between gap-3">
-              {STEP_META.map(({ id, label }) => {
-                const active = step === id;
-                const complete = id < step;
-                const circleClasses = active ? "bg-[#3f1b5f] text-white border-[#3f1b5f] shadow-[0_6px_18px_rgba(63,27,95,0.35)]" : complete ? "bg-[#1aa35f] text-white border-[#1aa35f]" : "bg-white text-[#6b7280] border-[#dfe6ee]";
-
-                return (
-                  <button key={id} type="button" onClick={() => setStep(id)} className="flex min-w-[84px] flex-1 flex-col items-center justify-center text-center">
-                    <span className={`relative z-10 flex h-10 w-10 items-center justify-center rounded-full border text-sm font-bold ${circleClasses}`}>{complete ? "✓" : id}</span>
-                    <span className={`mt-2 text-[11px] font-medium leading-tight ${active ? "text-[#1f2430]" : "text-[#6b7280]"}`}>{label}</span>
-                  </button>
-                );
-              })}
-            </div>
+          <div className="inline-flex items-center gap-2 rounded-full border border-[#dfe6ee] bg-[#f4f8ff] px-3 py-2 text-xs font-semibold text-[#0f4db8]">
+            <span className="h-2.5 w-2.5 rounded-full bg-[#21b26a]" />
+            {draftStatus}
           </div>
         </div>
 
-        <div className="mt-6">{renderStep()}</div>
+        <div className="relative mt-8">
+          <div className="absolute left-0 right-0 top-[20px] h-[2px] bg-[#dfe6ee]" />
+          <div className="relative flex flex-wrap items-start justify-between gap-3">
+            {STEP_META.map(({ id, label }) => {
+              const active = step === id;
+              const complete = id < step;
+              const circleClasses = active ? "bg-[#3f1b5f] text-white border-[#3f1b5f] shadow-[0_6px_18px_rgba(63,27,95,0.35)]" : complete ? "bg-[#1aa35f] text-white border-[#1aa35f]" : "bg-white text-[#6b7280] border-[#dfe6ee]";
 
-        <footer className="mt-8 flex flex-col-reverse gap-3 border-t border-[#e7edf4] pt-5 sm:flex-row sm:items-center sm:justify-between">
-          <button type="button" onClick={prevStep} className="inline-flex items-center justify-center gap-2 rounded-xl border border-[#d7deea] bg-white px-5 py-3 text-sm font-semibold text-[#1F2A44]">
-            <ArrowBack sx={{ fontSize: 18 }} />
-            Back
-          </button>
-
-          <div className="flex flex-col gap-3 sm:flex-row">
-            {step < 7 ? (
-              <button type="button" onClick={nextStep} className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#0A2D6D] px-5 py-3 text-sm font-semibold text-white">
-                Save & continue
-                <ArrowForward sx={{ fontSize: 18 }} />
-              </button>
-            ) : (
-              <button type="button" disabled={!isFinalReview} onClick={handleSubmit} className={`inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold text-white ${isFinalReview ? "bg-[#0A2D6D]" : "cursor-not-allowed bg-slate-300"}`}>
-                Finalize registration
-              </button>
-            )}
+              return (
+                <button key={id} type="button" onClick={() => setStep(id)} className="flex min-w-[84px] flex-1 flex-col items-center justify-center text-center">
+                  <span className={`relative z-10 flex h-10 w-10 items-center justify-center rounded-full border text-sm font-bold ${circleClasses}`}>{complete ? "✓" : id}</span>
+                  <span className={`mt-2 text-[11px] font-medium leading-tight ${active ? "text-[#1f2430]" : "text-[#6b7280]"}`}>{label}</span>
+                </button>
+              );
+            })}
           </div>
-        </footer>
+        </div>
       </div>
-    </div>
+
+      <div className="mt-6">{renderStep()}</div>
+
+      <footer className="mt-8 flex flex-col-reverse gap-3 border-t border-[#e7edf4] pt-5 sm:flex-row sm:items-center sm:justify-between">
+        <button type="button" onClick={prevStep} className="inline-flex items-center justify-center gap-2 rounded-xl border border-[#d7deea] bg-white px-5 py-3 text-sm font-semibold text-[#1F2A44]">
+          <ArrowBack sx={{ fontSize: 18 }} />
+          Back
+        </button>
+
+        <div className="flex flex-col gap-3 sm:flex-row">
+          {step < LAST_STEP ? (
+            <button type="button" onClick={nextStep} className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#0A2D6D] px-5 py-3 text-sm font-semibold text-white">
+              Save & continue
+              <ArrowForward sx={{ fontSize: 18 }} />
+            </button>
+          ) : (
+            <button type="button" disabled={!isFinalReview} onClick={handleSubmit} className={`inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold text-white ${isFinalReview ? "bg-[#0A2D6D]" : "cursor-not-allowed bg-slate-300"}`}>
+              Finalize registration
+            </button>
+          )}
+        </div>
+      </footer>
+    </>
   );
 }
 
@@ -1148,23 +1876,38 @@ function SampleDocumentCard({ label, tone }: { label: string; tone: "light" | "w
   );
 }
 
-function SummaryCard({ title, lines, onEdit }: { title: string; lines: string[]; onEdit?: () => void }) {
+function ReviewSection({ title, onEdit, children }: { title: string; onEdit: () => void; children: React.ReactNode }) {
   return (
-    <div className="rounded-2xl border border-[#e4ebf5] bg-[#f8fafc] p-4">
-      <div className="flex items-center justify-between gap-3">
-        <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#73809a]">{title}</p>
-        {onEdit && (
-          <button type="button" onClick={onEdit} className="text-xs font-semibold text-[#0A2D6D] underline-offset-2 hover:underline">
-            Edit
-          </button>
-        )}
+    <div className="rounded-2xl border border-[#e4ebf5] bg-white p-4">
+      <div className="flex items-center justify-between gap-3 border-b border-slate-100 pb-3">
+        <h4 className="text-sm font-bold text-[#0A2D6D]">{title}</h4>
+        <button
+          type="button"
+          onClick={onEdit}
+          className="shrink-0 rounded-lg border border-[#d7deea] px-2.5 py-1 text-xs font-semibold text-[#0A2D6D] transition hover:bg-[#f4f8ff]"
+        >
+          Edit
+        </button>
       </div>
-      <ul className="mt-3 space-y-2 text-sm text-[#465266]">
-        {lines.map((line, index) => (
-          <li key={`${title}-${index}-${line || "empty"}`} className="rounded-lg bg-white px-2.5 py-2">{line || "—"}</li>
-        ))}
-      </ul>
+      <div className="mt-3 space-y-3">{children}</div>
     </div>
+  );
+}
+
+function ReviewRows({ rows, optional = false }: { rows: Array<[string, string | number | null | undefined]>; optional?: boolean }) {
+  const visible = rows.filter(([, v]) => v !== null && v !== undefined && String(v).trim() !== "");
+  if (visible.length === 0) {
+    return optional ? null : <p className="text-sm text-slate-400">Nothing entered in this section.</p>;
+  }
+  return (
+    <dl className="grid gap-x-6 gap-y-2.5 sm:grid-cols-2">
+      {visible.map(([label, value], index) => (
+        <div key={`${label}-${index}`} className="min-w-0">
+          <dt className="text-[10px] font-semibold uppercase tracking-[0.1em] text-slate-400">{label}</dt>
+          <dd className="break-words text-sm text-slate-800">{String(value)}</dd>
+        </div>
+      ))}
+    </dl>
   );
 }
 
