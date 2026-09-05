@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { ArrowBack, ArrowForward, CheckCircle, UploadFile, MapOutlined } from "@mui/icons-material";
+import { LocationMap } from "@/components/LocationMap";
 
 const STEP_META = [
   { id: 1, label: "NID" },
@@ -364,6 +365,15 @@ export function UnifiedCitizenRegistration() {
       },
       { enableHighAccuracy: true, timeout: 10000 }
     );
+  };
+
+  /** Sets the residence coordinates from a click on the map. */
+  const handleMapSelect = (lat: number, lng: number) => {
+    setForm((prev) => ({
+      ...prev,
+      lat: String(lat),
+      lng: String(lng),
+    }));
   };
 
   const validateDocumentType = (fileName: string, fieldName: "citizenshipFront" | "citizenshipBack" | "nidFront" | "nidBack" | "photo") => {
@@ -737,7 +747,15 @@ export function UnifiedCitizenRegistration() {
           </div>
         );
 
-      case 4:
+      case 4: {
+        const latNum = Number(form.lat);
+        const lngNum = Number(form.lng);
+        const hasResidencePin =
+          form.lat.trim() !== "" &&
+          form.lng.trim() !== "" &&
+          Number.isFinite(latNum) &&
+          Number.isFinite(lngNum);
+
         return (
           <div className="space-y-6">
             <div className="text-sm text-slate-600">Primary address, household details, and geographic location are essential for registration, service access, and residence verification.</div>
@@ -760,16 +778,33 @@ export function UnifiedCitizenRegistration() {
                   <Field label="Longitude" value={form.lng} onChange={(v) => updateField("lng", v)} placeholder="85.3240" />
                   <div className="md:col-span-2"><Field label="Selected place" value={form.placeName} onChange={(v) => updateField("placeName", v)} placeholder="Baneshwor, Kathmandu" /></div>
                 </div>
-                <div className="mt-4 rounded-2xl border border-dashed border-sky-300 bg-white/60 p-4 text-center">
-                  <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-sky-100 text-sky-700"><MapOutlined sx={{ fontSize: 28 }} /></div>
-                  <p className="mt-3 text-sm font-semibold text-slate-900">Location selected</p>
-                  <p className="mt-1 text-xs text-slate-600">{form.placeName || form.address || "No place selected yet"}</p>
-                  <button type="button" onClick={handleUseCurrentLocation} className="mt-3 rounded-xl bg-[#0A2D6D] px-4 py-2 text-xs font-semibold text-white">Use current location</button>
+                <div className="mt-4 rounded-2xl border border-dashed border-sky-300 bg-white/60 p-4">
+                  <div className="flex flex-wrap items-center justify-between gap-3">
+                    <div className="flex min-w-0 items-center gap-2.5">
+                      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-sky-100 text-sky-700"><MapOutlined sx={{ fontSize: 22 }} /></span>
+                      <div className="min-w-0">
+                        <p className="text-sm font-semibold text-slate-900">Locate residence on map</p>
+                        <p className="mt-0.5 truncate text-xs text-slate-600">
+                          {hasResidencePin
+                            ? `${latNum.toFixed(5)}° N, ${lngNum.toFixed(5)}° E`
+                            : form.placeName || form.address || "No location selected yet"}
+                        </p>
+                      </div>
+                    </div>
+                    <button type="button" onClick={handleUseCurrentLocation} className="rounded-xl bg-[#0A2D6D] px-4 py-2 text-xs font-semibold text-white hover:bg-[#082257]">Use current location</button>
+                  </div>
+                  <div className="mt-4">
+                    <LocationMap latitude={form.lat} longitude={form.lng} accuracy={null} onSelect={handleMapSelect} />
+                  </div>
+                  <p className="mt-3 text-center font-poppins text-[10px] font-semibold uppercase tracking-[0.12em] text-[#94A3B8]">
+                    Click the map to set the residence location, or capture it with your device
+                  </p>
                 </div>
               </div>
             </div>
           </div>
         );
+      }
 
       case 5:
         return (
@@ -803,7 +838,6 @@ export function UnifiedCitizenRegistration() {
             </div>
           </div>
         );
-
       case 6:
         return (
           <div className="space-y-6">
