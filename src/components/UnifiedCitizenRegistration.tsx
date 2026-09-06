@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { ArrowBack, ArrowForward, CheckCircle, UploadFile, MapOutlined, ContentCopy } from "@mui/icons-material";
+import { LocationMap } from "@/components/LocationMap";
 
 const STEP_META = [
   { id: 1, label: "NID" },
@@ -630,6 +631,15 @@ export function UnifiedCitizenRegistration() {
     );
   };
 
+  /** Sets the residence coordinates from a click on the map. */
+  const handleMapSelect = (lat: number, lng: number) => {
+    setForm((prev) => ({
+      ...prev,
+      lat: String(lat),
+      lng: String(lng),
+    }));
+  };
+
   const validateDocumentType = (fileName: string, fieldName: "citizenshipFront" | "citizenshipBack" | "nidFront" | "nidBack" | "photo") => {
     const normalized = (fileName || "").trim().toLowerCase();
 
@@ -1060,15 +1070,13 @@ export function UnifiedCitizenRegistration() {
 
       case 4: {
         const isAbroad = form.currentResidence === "Abroad";
-
-        const householdFields = (
-          <>
-            <SelectField label="House type" value={form.houseType} onChange={(v) => updateField("houseType", v)} options={["Owned", "Rented", "Family owned", "Government provided", "Other"]} />
-            <SelectField label="Ownership status" value={form.ownershipStatus} onChange={(v) => updateField("ownershipStatus", v)} options={["Owned", "Rented", "Family owned", "Government allocated", "Other"]} />
-            <Field label="Years at residence" value={form.yearsAtResidence} onChange={(v) => updateField("yearsAtResidence", v)} placeholder="Years" />
-            <Field label="Number of rooms" value={form.roomCount} onChange={(v) => updateField("roomCount", v)} placeholder="3" />
-          </>
-        );
+        const latNum = Number(form.lat);
+        const lngNum = Number(form.lng);
+        const hasResidencePin =
+          form.lat.trim() !== "" &&
+          form.lng.trim() !== "" &&
+          Number.isFinite(latNum) &&
+          Number.isFinite(lngNum);
 
         const residenceLocationCard = (
           <div className="md:col-span-2 rounded-3xl border border-cyan-100 bg-cyan-50 p-4">
@@ -1078,13 +1086,38 @@ export function UnifiedCitizenRegistration() {
               <Field label="Longitude" value={form.lng} onChange={(v) => updateField("lng", v)} placeholder="85.3240" />
               <div className="md:col-span-2"><Field label="Selected place" value={form.placeName} onChange={(v) => updateField("placeName", v)} placeholder="Baneshwor, Kathmandu" /></div>
             </div>
-            <div className="mt-4 rounded-2xl border border-dashed border-sky-300 bg-white/60 p-4 text-center">
-              <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-sky-100 text-sky-700"><MapOutlined sx={{ fontSize: 28 }} /></div>
-              <p className="mt-3 text-sm font-semibold text-slate-900">Location selected</p>
-              <p className="mt-1 text-xs text-slate-600">{form.placeName || form.address || "No place selected yet"}</p>
-              <button type="button" onClick={handleUseCurrentLocation} className="mt-3 rounded-xl bg-[#0A2D6D] px-4 py-2 text-xs font-semibold text-white">Use current location</button>
+            <div className="mt-4 rounded-2xl border border-dashed border-sky-300 bg-white/60 p-4">
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <div className="flex min-w-0 items-center gap-2.5">
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-sky-100 text-sky-700"><MapOutlined sx={{ fontSize: 22 }} /></span>
+                  <div className="min-w-0">
+                    <p className="text-sm font-semibold text-slate-900">Locate residence on map</p>
+                    <p className="mt-0.5 truncate text-xs text-slate-600">
+                      {hasResidencePin
+                        ? `${latNum.toFixed(5)}° N, ${lngNum.toFixed(5)}° E`
+                        : form.placeName || form.address || "No location selected yet"}
+                    </p>
+                  </div>
+                </div>
+                <button type="button" onClick={handleUseCurrentLocation} className="rounded-xl bg-[#0A2D6D] px-4 py-2 text-xs font-semibold text-white hover:bg-[#082257]">Use current location</button>
+              </div>
+              <div className="mt-4">
+                <LocationMap latitude={form.lat} longitude={form.lng} accuracy={null} onSelect={handleMapSelect} />
+              </div>
+              <p className="mt-3 text-center font-poppins text-[10px] font-semibold uppercase tracking-[0.12em] text-[#94A3B8]">
+                Click the map to set the residence location, or capture it with your device
+              </p>
             </div>
           </div>
+        );
+
+        const householdFields = (
+          <>
+            <SelectField label="House type" value={form.houseType} onChange={(v) => updateField("houseType", v)} options={["Owned", "Rented", "Family owned", "Government provided", "Other"]} />
+            <SelectField label="Ownership status" value={form.ownershipStatus} onChange={(v) => updateField("ownershipStatus", v)} options={["Owned", "Rented", "Family owned", "Government allocated", "Other"]} />
+            <Field label="Years at residence" value={form.yearsAtResidence} onChange={(v) => updateField("yearsAtResidence", v)} placeholder="Years" />
+            <Field label="Number of rooms" value={form.roomCount} onChange={(v) => updateField("roomCount", v)} placeholder="3" />
+          </>
         );
 
         return (
@@ -1150,10 +1183,10 @@ export function UnifiedCitizenRegistration() {
 
       case 5: {
         const job = form.employmentRecords[0] ?? createEmploymentRecord();
-        const isBusiness = job.status === "Self-employed / Business owner" || job.status === "Agriculture / Farming";
-        const isForeign = job.status === "Foreign employment";
         const isUnemployed = job.status === "Unemployed";
         const isInactive = isUnemployed || job.status === "Student" || job.status === "Homemaker" || job.status === "Retired";
+        const isBusiness = job.status === "Self-employed / Business owner" || job.status === "Agriculture / Farming";
+        const isForeign = job.status === "Foreign employment";
         const showEmployer = !isBusiness && !isForeign && !isInactive;
 
         return (
@@ -1185,7 +1218,6 @@ export function UnifiedCitizenRegistration() {
                   </div>
                 </div>
               )}
-
               {isBusiness && (
                 <div className="mt-5 rounded-2xl border border-slate-200 bg-white p-4">
                   <p className="mb-3 text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">Business / enterprise details</p>
