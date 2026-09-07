@@ -1,402 +1,644 @@
 "use client";
 
+import Link from "next/link";
+import { useEffect, useMemo, type ReactNode } from "react";
+import { useMapSelection } from "@/contexts/MapSelectionContext";
+
 import citizens from "../../../../data/citizens.json";
 import wards from "../../../../data/wards.json";
 import municipalities from "../../../../data/municipalities.json";
-import grievances from "../../../../data/grievances.json";
 import idCards from "../../../../data/id-cards.json";
-import Table from "@/components/ui/Table";
+import syncBatches from "../../../../data/sync-batches.json";
 
-interface Citizen {
+type Province = {
   id: string;
-  ward_id: string;
-  dob: string;
-  sex: "MALE" | "FEMALE" | "OTHER";
-}
+  name: string;
+  capital: string;
+  districts: number;
+};
 
-interface Ward {
-  id: string;
-  municipality_id: string;
-  name_en: string;
-}
+type District = {
+  name: string;
+  citizens: number;
+  municipalities: number;
+  localBodies: number;
+  wards: number;
+  cards: number;
+};
 
-interface Municipality {
-  id: string;
-  name_en: string;
-}
+const provinces: Province[] = [
+  {
+    id: "prov-1",
+    name: "Koshi Province",
+    capital: "Biratnagar",
+    districts: 14,
+  },
+  { id: "prov-2", name: "Madhesh Province", capital: "Janakpur", districts: 8 },
+  { id: "prov-3", name: "Bagmati Province", capital: "Hetauda", districts: 13 },
+  { id: "prov-4", name: "Gandaki Province", capital: "Pokhara", districts: 11 },
+  {
+    id: "prov-5",
+    name: "Lumbini Province",
+    capital: "Deukhuri",
+    districts: 12,
+  },
+  {
+    id: "prov-6",
+    name: "Karnali Province",
+    capital: "Birendranagar",
+    districts: 10,
+  },
+  {
+    id: "prov-7",
+    name: "Sudurpashchim Province",
+    capital: "Godawari",
+    districts: 9,
+  },
+];
 
-interface Grievance {
-  citizen_id: string;
-  status: string;
-  filed_at: string;
-}
+const koshiDistricts: District[] = [
+  {
+    name: "Taplejung",
+    citizens: 9940,
+    municipalities: 4,
+    localBodies: 9,
+    wards: 61,
+    cards: 6840,
+  },
+  {
+    name: "Panchthar",
+    citizens: 0,
+    municipalities: 0,
+    localBodies: 0,
+    wards: 0,
+    cards: 0,
+  },
+  {
+    name: "Ilam",
+    citizens: 0,
+    municipalities: 0,
+    localBodies: 0,
+    wards: 0,
+    cards: 0,
+  },
+  {
+    name: "Jhapa",
+    citizens: 0,
+    municipalities: 0,
+    localBodies: 0,
+    wards: 0,
+    cards: 0,
+  },
+  {
+    name: "Tehrathum",
+    citizens: 0,
+    municipalities: 0,
+    localBodies: 0,
+    wards: 0,
+    cards: 0,
+  },
+  {
+    name: "Dhankuta",
+    citizens: 0,
+    municipalities: 0,
+    localBodies: 0,
+    wards: 0,
+    cards: 0,
+  },
+  {
+    name: "Sunsari",
+    citizens: 0,
+    municipalities: 0,
+    localBodies: 0,
+    wards: 0,
+    cards: 0,
+  },
+];
 
-interface IdCard {
-  id: string;
-  citizen_id: string;
-  card_type: string;
-  status: "PENDING_APPROVAL" | "APPROVED" | "COLLECTED";
-  qr_hash: string;
-  issued_at: string | null;
-  expires_at: string | null;
-  collected_at: string | null;
-}
-
-interface PopulationByWard {
-  id: string;
-  ward: string;
-  total: number;
-}
-
-interface PopulationByMunicipality {
-  id: string;
-  municipality: string;
-  total: number;
-}
-
-interface SexDistribution {
-  sex: string;
-  total: number;
-}
-
-interface AgeBandRow {
-  band: string;
-  total: number;
-}
-
-interface GrievanceReport {
-  id: string;
-  municipality: string;
-  received: number;
-  resolved: number;
-  pending: number;
-  sla: string;
-}
-
-interface CardReport {
-  type: string;
-  initiated: number;
-  approved: number;
-  collected: number;
-}
-
-interface MunicipalityCardReport {
-  id: string;
-  municipality: string;
-  initiated: number;
-  approved: number;
-  collected: number;
-}
-
-const citizensData = citizens as Citizen[];
-const wardsData = wards as Ward[];
-const municipalitiesData = municipalities as Municipality[];
-const grievancesData = grievances as Grievance[];
-const idCardsData = idCards as IdCard[];
-
-export default function ProvinceReportsPage() {
-  const printReport = () => window.print();
-
-  const getAge = (dob: string) => {
-    const today = new Date();
-    const birth = new Date(dob);
-
-    let age = today.getFullYear() - birth.getFullYear();
-
-    const month = today.getMonth() - birth.getMonth();
-
-    if (month < 0 || (month === 0 && today.getDate() < birth.getDate())) {
-      age--;
-    }
-
-    return age;
-  };
-
-  const getMunicipalityCitizenIds = (municipalityId: string): string[] => {
-    const wardIds = wardsData
-      .filter((ward) => ward.municipality_id === municipalityId)
-      .map((ward) => ward.id);
-
-    return citizensData
-      .filter((citizen) => wardIds.includes(citizen.ward_id))
-      .map((citizen) => citizen.id);
-  };
-
-  const populationByWard: PopulationByWard[] = wardsData.map((ward) => ({
-    id: ward.id,
-    ward: ward.name_en,
-    total: citizensData.filter((c) => c.ward_id === ward.id).length,
-  }));
-
-  const populationByMunicipality: PopulationByMunicipality[] =
-    municipalitiesData.map((municipality) => {
-      const citizenIds = getMunicipalityCitizenIds(municipality.id);
-
-      return {
-        id: municipality.id,
-        municipality: municipality.name_en,
-        total: citizenIds.length,
-      };
-    });
-
-  const sexDistribution: SexDistribution[] = ["MALE", "FEMALE", "OTHER"].map(
-    (sex) => ({
-      sex,
-      total: citizensData.filter((c) => c.sex === sex).length,
-    }),
+function UsersIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      className="h-5 w-5"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+    >
+      <circle cx="9" cy="7" r="4" />
+      <path d="M2 21v-2a4 4 0 0 1 4-4h6a4 4 0 0 1 4 4v2" />
+      <path d="M16 3.2a4 4 0 0 1 0 7.6M19 15a4 4 0 0 1 3 3.8V21" />
+    </svg>
   );
+}
+function BuildingIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      className="h-5 w-5"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+    >
+      <path d="M3 21h18" />
+      <path d="M5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16" />
+      <path d="M9 7h2M13 7h2M9 11h2M13 11h2M9 15h2M13 15h2" />
+    </svg>
+  );
+}
+function CardIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      className="h-5 w-5"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+    >
+      <rect x="3" y="5" width="18" height="14" rx="2" />
+      <path d="M7 9h4M7 13h2M15 13h2" />
+    </svg>
+  );
+}
+function MapIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      className="h-5 w-5"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+    >
+      <path d="m9 18-6 3V6l6-3 6 3 6-3v15l-6 3-6-3Z" />
+      <path d="M9 3v15M15 6v15" />
+    </svg>
+  );
+}
+function ArrowIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      className="h-4 w-4"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+    >
+      <path d="M5 12h14M13 6l6 6-6 6" />
+    </svg>
+  );
+}
 
-  const ageBands = {
-    "0-17": 0,
-    "18-35": 0,
-    "36-60": 0,
-    "60+": 0,
+function StatCard({
+  title,
+  value,
+  note,
+  icon,
+  tone,
+}: {
+  title: string;
+  value: string | number;
+  note: string;
+  icon: ReactNode;
+  tone: "blue" | "green" | "red" | "orange";
+}) {
+  const tones = {
+    blue: "border-t-[#155EEF] text-[#155EEF] bg-blue-50",
+    green: "border-t-[#17B26A] text-[#17B26A] bg-green-50",
+    red: "border-t-[#F04438] text-[#F04438] bg-red-50",
+    orange: "border-t-[#F79009] text-[#F79009] bg-orange-50",
   };
-
-  citizensData.forEach((citizen) => {
-    const age = getAge(citizen.dob);
-
-    if (age <= 17) ageBands["0-17"]++;
-    else if (age <= 35) ageBands["18-35"]++;
-    else if (age <= 60) ageBands["36-60"]++;
-    else ageBands["60+"]++;
-  });
-
-  const ageBandRows: AgeBandRow[] = Object.entries(ageBands).map(
-    ([band, total]) => ({ band, total }),
-  );
-
-  const grievanceReport: GrievanceReport[] = municipalitiesData.map(
-    (municipality) => {
-      const citizenIds = getMunicipalityCitizenIds(municipality.id);
-
-      const municipalityGrievances = grievancesData.filter((g) =>
-        citizenIds.includes(g.citizen_id),
-      );
-
-      const received = municipalityGrievances.length;
-
-      const resolved = municipalityGrievances.filter((g) =>
-        ["RESOLVED", "CLOSED", "RESOLVED_WARD", "COMPLETED"].includes(g.status),
-      ).length;
-
-      const pending = received - resolved;
-
-      const slaBreached = municipalityGrievances.filter((g) => {
-        const filed = new Date(g.filed_at);
-
-        const diff = (Date.now() - filed.getTime()) / (1000 * 60 * 60 * 24);
-
-        return diff > 15;
-      }).length;
-
-      return {
-        id: municipality.id,
-        municipality: municipality.name_en,
-        received,
-        resolved,
-        pending,
-        sla:
-          received === 0
-            ? "0%"
-            : `${((slaBreached / received) * 100).toFixed(1)}%`,
-      };
-    },
-  );
-
-  const cardTypes = [...new Set(idCardsData.map((card) => card.card_type))];
-
-  const cardReport: CardReport[] = cardTypes.map((type) => {
-    const cards = idCardsData.filter((card) => card.card_type === type);
-
-    return {
-      type,
-      initiated: cards.filter((c) => c.status === "PENDING_APPROVAL").length,
-      approved: cards.filter((c) => c.status === "APPROVED").length,
-      collected: cards.filter((c) => c.status === "COLLECTED").length,
-    };
-  });
-
-  const idCardMunicipalityReport: MunicipalityCardReport[] =
-    municipalitiesData.map((municipality) => {
-      const citizenIds = getMunicipalityCitizenIds(municipality.id);
-
-      const cards = idCardsData.filter((card) =>
-        citizenIds.includes(card.citizen_id),
-      );
-
-      return {
-        id: municipality.id,
-        municipality: municipality.name_en,
-        initiated: cards.filter((c) => c.status === "PENDING_APPROVAL").length,
-        approved: cards.filter((c) => c.status === "APPROVED").length,
-        collected: cards.filter((c) => c.status === "COLLECTED").length,
-      };
-    });
-
-  const summaryCards = [
-    { label: "Total Citizens", value: citizensData.length },
-    { label: "Municipalities", value: municipalitiesData.length },
-    { label: "Wards", value: wardsData.length },
-    { label: "Grievances", value: grievancesData.length },
-    { label: "ID Cards", value: idCardsData.length },
-  ];
 
   return (
-    <div className="mx-auto max-w-6xl bg-background p-6">
-      <h1 className="mb-6 text-center text-2xl font-bold text-secondary">
-        Province Reports
-      </h1>
+    <div
+      className={`rounded-xl border border-gray-200 border-t-[3px] bg-white p-4 shadow-sm ${tones[tone].split(" ")[0]}`}
+    >
+      <div className="flex items-start justify-between gap-3">
+        <div>
+          <p className="text-[13px] font-medium text-gray-500">{title}</p>
+          <p className="mt-1.5 text-2xl font-bold tracking-tight text-gray-900">
+            {value}
+          </p>
+          <p className="mt-1 text-[11px] text-gray-400">{note}</p>
+        </div>
+        <span
+          className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg ${tones[tone].split(" ").slice(2).join(" ")}`}
+        >
+          {icon}
+        </span>
+      </div>
+    </div>
+  );
+}
 
-      <div className="mb-8 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
-        {summaryCards.map((card) => (
-          <div
-            key={card.label}
-            className="rounded-lg border border-border bg-surface p-4 shadow-card"
-          >
-            <p className="text-sm text-muted">{card.label}</p>
-            <p className="mt-1 text-2xl font-semibold text-secondary">
-              {card.value}
-            </p>
+function Section({
+  title,
+  subtitle,
+  children,
+  action,
+}: {
+  title: string;
+  subtitle?: string;
+  children: ReactNode;
+  action?: ReactNode;
+}) {
+  return (
+    <section className="rounded-xl border border-gray-200 bg-white shadow-sm">
+      <div className="flex flex-col gap-2 border-b border-gray-100 px-4 py-4 sm:flex-row sm:items-center sm:justify-between">
+        <div>
+          <div className="flex items-center gap-2">
+            <span className="h-2 w-2 rounded-sm bg-[#123B78]" />
+            <h2 className="text-[15px] font-bold text-gray-800">{title}</h2>
           </div>
-        ))}
+          {subtitle && (
+            <p className="ml-4 mt-1 text-[11px] text-gray-400">{subtitle}</p>
+          )}
+        </div>
+        {action}
+      </div>
+      {children}
+    </section>
+  );
+}
+
+function MiniBar({
+  label,
+  value,
+  max,
+  tone = "blue",
+}: {
+  label: string;
+  value: number;
+  max: number;
+  tone?: "blue" | "green" | "orange";
+}) {
+  const color =
+    tone === "green"
+      ? "bg-[#17B26A]"
+      : tone === "orange"
+        ? "bg-[#F79009]"
+        : "bg-[#123B78]";
+  return (
+    <div className="flex items-center gap-3">
+      <span className="w-32 shrink-0 truncate text-[11px] text-gray-500">
+        {label}
+      </span>
+      <div className="h-2.5 flex-1 overflow-hidden rounded-full bg-gray-100">
+        <div
+          className={`h-full rounded-full ${color}`}
+          style={{ width: `${Math.max(4, (value / Math.max(max, 1)) * 100)}%` }}
+        />
+      </div>
+      <span className="w-12 text-right text-[11px] font-semibold text-gray-600">
+        {value.toLocaleString()}
+      </span>
+    </div>
+  );
+}
+
+export default function ProvinceDashboard() {
+  const { selectProvince } = useMapSelection();
+
+  const provinceId = useMemo(() => {
+    if (typeof window === "undefined") return "prov-1";
+    const token = document.cookie
+      .split("; ")
+      .find((row) => row.startsWith("auth_token="))
+      ?.split("=")[1];
+    if (!token) return "prov-1";
+    try {
+      const decoded: { jurisdiction_id?: string } = JSON.parse(atob(token));
+      const value = decoded.jurisdiction_id ?? "";
+      if (value.toLowerCase().startsWith("prov-")) return value.toLowerCase();
+      if (/^[1-7]$/.test(value)) return `prov-${value}`;
+    } catch {}
+    return "prov-1";
+  }, []);
+
+  const province =
+    provinces.find((item) => item.id === provinceId) ?? provinces[0];
+
+  useEffect(() => {
+    selectProvince(province.id.replace("prov-", ""), province.name);
+  }, [province.id, province.name, selectProvince]);
+
+  const stats = useMemo(() => {
+    const provinceNumber = province.id.replace("prov-", "");
+    const provinceWards = wards.filter((ward) =>
+      provinceNumber === "1" ? ward.id.startsWith("ward-") : false,
+    );
+    const wardIds = new Set(provinceWards.map((ward) => ward.id));
+    const provinceCitizens = citizens.filter((citizen) =>
+      wardIds.has(citizen.ward_id),
+    );
+    const municipalityIds = new Set(
+      provinceWards.map((ward) => ward.municipality_id),
+    );
+    const provinceMunicipalities = municipalities.filter((municipality) =>
+      municipalityIds.has(municipality.id),
+    );
+    const citizenIds = new Set(provinceCitizens.map((citizen) => citizen.id));
+    const provinceCards = idCards.filter((card) =>
+      citizenIds.has(card.citizen_id),
+    );
+    return {
+      citizens: provinceCitizens.length,
+      municipalities: provinceMunicipalities.length,
+      wards: provinceWards.length,
+      cards: provinceCards.length,
+    };
+  }, [province.id]);
+
+  const recentSyncs = useMemo(() => syncBatches.slice(0, 5), []);
+
+  return (
+    <main className="min-h-screen bg-[#F8FAFC] px-4 py-5 md:px-6 lg:px-8">
+      <header className="mb-5 flex flex-col gap-4 xl:flex-row xl:items-start xl:justify-between">
+        <div>
+          <div className="flex items-center gap-2 text-[11px]">
+            <span className="text-gray-400">Province Portal</span>
+            <span className="text-gray-300">/</span>
+            <span className="font-semibold text-[#F04438]">Dashboard</span>
+          </div>
+          <p className="mt-2 text-xs font-medium text-gray-400">
+            Province Admin
+          </p>
+          <h1 className="mt-1 text-2xl font-bold tracking-tight text-gray-900 md:text-[28px]">
+            {province.name} Dashboard
+          </h1>
+          <p className="mt-1.5 max-w-2xl text-xs leading-5 text-gray-500">
+            Province-level analytical overview of citizen registration,
+            municipalities, identity cards and administrative activity.
+          </p>
+          <span className="mt-2 inline-flex rounded-full bg-blue-50 px-3 py-1.5 text-[11px] font-medium text-[#155EEF]">
+            Analytical View Only — No write access to citizen records.
+          </span>
+        </div>
+
+        <div className="flex flex-wrap gap-2">
+          <Link
+            href="/province/analytics"
+            className="rounded-lg border border-gray-200 bg-white px-4 py-2.5 text-xs font-semibold text-gray-600 shadow-sm hover:bg-gray-50"
+          >
+            View Analytics
+          </Link>
+          <Link
+            href="/province/national-map"
+            className="rounded-lg bg-[#092E68] px-4 py-2.5 text-xs font-semibold text-white shadow-sm hover:bg-[#062553]"
+          >
+            View Map
+          </Link>
+        </div>
+      </header>
+
+      <section className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-4">
+        <StatCard
+          title="Total Citizens"
+          value={stats.citizens.toLocaleString()}
+          note="Registered in selected province"
+          icon={<UsersIcon />}
+          tone="blue"
+        />
+        <StatCard
+          title="Municipalities"
+          value={stats.municipalities.toLocaleString()}
+          note="Local bodies in dataset"
+          icon={<BuildingIcon />}
+          tone="green"
+        />
+        <StatCard
+          title="Province Wards"
+          value={stats.wards.toLocaleString()}
+          note={`${province.districts} official districts`}
+          icon={<MapIcon />}
+          tone="red"
+        />
+        <StatCard
+          title="ID Cards Issued"
+          value={stats.cards.toLocaleString()}
+          note="Across municipalities"
+          icon={<CardIcon />}
+          tone="orange"
+        />
+      </section>
+
+      <div className="mt-4 grid gap-4 xl:grid-cols-[1.35fr_0.65fr]">
+        <Section
+          title="Province Overview"
+          subtitle="Administrative structure of the selected province"
+        >
+          <div className="overflow-x-auto">
+            <table className="w-full min-w-[620px] text-left text-xs">
+              <thead className="bg-gray-50 text-[10px] uppercase tracking-wide text-gray-400">
+                <tr>
+                  <th className="px-4 py-3">Province</th>
+                  <th className="px-4 py-3">Capital</th>
+                  <th className="px-4 py-3">Districts</th>
+                  <th className="px-4 py-3">Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                {provinces.map((item) => (
+                  <tr
+                    key={item.id}
+                    className={`border-t border-gray-100 ${item.id === province.id ? "bg-blue-50/40" : ""}`}
+                  >
+                    <td className="px-4 py-3 font-semibold text-gray-700">
+                      {item.name}
+                    </td>
+                    <td className="px-4 py-3 text-gray-500">{item.capital}</td>
+                    <td className="px-4 py-3 text-gray-500">
+                      {item.districts}
+                    </td>
+                    <td className="px-4 py-3">
+                      <span
+                        className={`rounded-full px-2 py-1 text-[10px] font-semibold ${item.id === province.id ? "bg-green-50 text-green-600" : "bg-gray-100 text-gray-500"}`}
+                      >
+                        {item.id === province.id ? "Selected" : "National"}
+                      </span>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </Section>
+
+        <Section
+          title="Registration Coverage"
+          subtitle="Current platform coverage"
+        >
+          <div className="space-y-4 p-4">
+            <MiniBar
+              label="Citizen registration"
+              value={Math.min(stats.citizens, 48236)}
+              max={48236}
+            />
+            <MiniBar
+              label="NID verification"
+              value={95}
+              max={100}
+              tone="green"
+            />
+            <MiniBar
+              label="ID card issuance"
+              value={Math.min(stats.cards, 4836)}
+              max={4836}
+              tone="orange"
+            />
+            <div className="rounded-lg border border-purple-100 bg-purple-50 px-3 py-2.5 text-[11px] leading-5 text-purple-600">
+              Coverage figures are calculated from the currently synchronized
+              province dataset.
+            </div>
+          </div>
+        </Section>
       </div>
 
-      <section className="mb-8 rounded-lg border border-border bg-surface p-6 shadow-card">
-        <div className="mb-4 flex items-center justify-between">
-          <h2 className="text-lg font-semibold text-secondary">
-            Province Population Report
-          </h2>
-          <button
-            onClick={printReport}
-            className="print:hidden rounded-md bg-primary px-4 py-2 text-sm font-medium text-white shadow-card hover:bg-primary/90 transition-colors"
-          >
-            Print Report
-          </button>
-        </div>
+      <div className="mt-4">
+        <Section
+          title="Registration & Social Profiles"
+          subtitle="Province-level records shown in the analytical dashboard"
+        >
+          <div className="grid grid-cols-2 gap-3 p-4 md:grid-cols-4">
+            {[
+              ["Households", "13", "Registered profiles", "blue"],
+              ["Employment", "41", "Employment profiles", "green"],
+              ["Education", "393", "Education records", "red"],
+              ["Disability", "8", "Registered profiles", "orange"],
+            ].map(([title, value, note, tone]) => (
+              <div
+                key={title}
+                className="rounded-lg border border-gray-200 p-3"
+              >
+                <p className="text-[11px] text-gray-400">{title}</p>
+                <p className="mt-1 text-xl font-bold text-gray-900">{value}</p>
+                <p
+                  className={`mt-1 text-[10px] ${tone === "green" ? "text-green-600" : tone === "red" ? "text-red-500" : tone === "orange" ? "text-orange-500" : "text-blue-600"}`}
+                >
+                  {note}
+                </p>
+              </div>
+            ))}
+          </div>
+        </Section>
+      </div>
 
-        <h3 className="mb-2 text-sm font-medium text-muted uppercase tracking-wide">
-          Population by Ward
-        </h3>
-        <Table
-          columns={[
-            { key: "ward", header: "Ward" },
-            { key: "total", header: "Population" },
-          ]}
-          data={populationByWard}
-          keyExtractor={(row) => row.id}
-        />
+      <div className="mt-4">
+        <Section
+          title="District Breakdown"
+          subtitle="Official district, local-body, ward and ID-card figures"
+          action={
+            <button
+              type="button"
+              className="rounded-lg bg-[#092E68] px-3.5 py-2 text-[11px] font-semibold text-white"
+            >
+              Full Comparison
+            </button>
+          }
+        >
+          <div className="overflow-x-auto">
+            <table className="w-full min-w-[850px] text-left text-xs">
+              <thead className="bg-gray-50 text-[10px] uppercase tracking-wide text-gray-400">
+                <tr>
+                  <th className="px-4 py-3">District</th>
+                  <th className="px-4 py-3">NID Citizens</th>
+                  <th className="px-4 py-3">Municipalities</th>
+                  <th className="px-4 py-3">Local Bodies</th>
+                  <th className="px-4 py-3">Wards</th>
+                  <th className="px-4 py-3">ID Cards</th>
+                  <th className="px-4 py-3"></th>
+                </tr>
+              </thead>
+              <tbody>
+                {koshiDistricts.map((district) => (
+                  <tr
+                    key={district.name}
+                    className="border-t border-gray-100 hover:bg-gray-50"
+                  >
+                    <td className="px-4 py-3 font-semibold text-gray-700">
+                      {district.name}
+                    </td>
+                    <td className="px-4 py-3 text-gray-500">
+                      {district.citizens.toLocaleString()}
+                    </td>
+                    <td className="px-4 py-3 text-gray-500">
+                      {district.municipalities}
+                    </td>
+                    <td className="px-4 py-3 text-gray-500">
+                      {district.localBodies}
+                    </td>
+                    <td className="px-4 py-3 text-gray-500">
+                      {district.wards.toLocaleString()}
+                    </td>
+                    <td className="px-4 py-3 text-gray-500">
+                      {district.cards.toLocaleString()}
+                    </td>
+                    <td className="px-4 py-3">
+                      <Link
+                        href={`/province/districts/${district.name.toLowerCase()}`}
+                        className="inline-flex items-center gap-1 rounded-full bg-gray-50 px-3 py-1.5 text-[10px] font-semibold text-gray-500 hover:bg-gray-100"
+                      >
+                        View <ArrowIcon />
+                      </Link>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </Section>
+      </div>
 
-        <h3 className="mb-2 mt-6 text-sm font-medium text-muted uppercase tracking-wide">
-          Population by Municipality
-        </h3>
-        <Table
-          columns={[
-            { key: "municipality", header: "Municipality" },
-            { key: "total", header: "Population" },
-          ]}
-          data={populationByMunicipality}
-          keyExtractor={(row) => row.id}
-        />
+      <div className="mt-4 grid gap-4 lg:grid-cols-2">
+        <Section
+          title="Recent Activity"
+          subtitle="Latest synchronization batches"
+        >
+          <div className="divide-y divide-gray-100 p-4">
+            {recentSyncs.map((batch) => (
+              <div
+                key={batch.batch_id}
+                className="flex items-center justify-between py-2.5 text-xs"
+              >
+                <span className="text-gray-600">{batch.ward_id}</span>
+                <span
+                  className={
+                    batch.status === "COMPLETED"
+                      ? "font-semibold text-green-600"
+                      : "font-semibold text-orange-500"
+                  }
+                >
+                  {batch.status === "COMPLETED" ? "Completed" : "Pending"}
+                </span>
+              </div>
+            ))}
+          </div>
+        </Section>
 
-        <h3 className="mb-2 mt-6 text-sm font-medium text-muted uppercase tracking-wide">
-          Sex Distribution
-        </h3>
-        <Table
-          columns={[
-            { key: "sex", header: "Sex" },
-            { key: "total", header: "Count" },
-          ]}
-          data={sexDistribution}
-          keyExtractor={(row) => row.sex}
-        />
+        <Section title="Pending Activity" subtitle="Items requiring attention">
+          <div className="divide-y divide-gray-100 p-4">
+            {["ward-012", "ward-004", "ward-003"].map((wardId, index) => (
+              <div
+                key={wardId}
+                className="flex items-center justify-between py-2.5 text-xs"
+              >
+                <span className="text-gray-600">{wardId}</span>
+                <span
+                  className={
+                    index === 0
+                      ? "rounded-full bg-red-50 px-2 py-1 text-[10px] font-semibold text-red-500"
+                      : "rounded-full bg-orange-50 px-2 py-1 text-[10px] font-semibold text-orange-500"
+                  }
+                >
+                  {index === 0 ? "Needs review" : "Pending"}
+                </span>
+              </div>
+            ))}
+          </div>
+        </Section>
+      </div>
 
-        <h3 className="mb-2 mt-6 text-sm font-medium text-muted uppercase tracking-wide">
-          Age Bands
-        </h3>
-        <Table
-          columns={[
-            { key: "band", header: "Age Group" },
-            { key: "total", header: "Population" },
-          ]}
-          data={ageBandRows}
-          keyExtractor={(row) => row.band}
-        />
-      </section>
-
-      <section className="mb-8 rounded-lg border border-border bg-surface p-6 shadow-card">
-        <div className="mb-4 flex items-center justify-between">
-          <h2 className="text-lg font-semibold text-secondary">
-            Grievance Resolution Report
-          </h2>
-          <button
-            onClick={printReport}
-            className="print:hidden rounded-md bg-primary px-4 py-2 text-sm font-medium text-white shadow-card hover:bg-primary/90 transition-colors"
-          >
-            Print Report
-          </button>
-        </div>
-
-        <Table
-          columns={[
-            { key: "municipality", header: "Municipality" },
-            { key: "received", header: "Received" },
-            { key: "resolved", header: "Resolved" },
-            { key: "pending", header: "Pending" },
-            {
-              key: "sla",
-              header: "SLA Breach Rate",
-              render: (row) => (
-                <span className="font-medium text-danger">{row.sla}</span>
-              ),
-            },
-          ]}
-          data={grievanceReport}
-          keyExtractor={(row) => row.id}
-        />
-      </section>
-
-      <section className="rounded-lg border border-border bg-surface p-6 shadow-card">
-        <div className="mb-4 flex items-center justify-between">
-          <h2 className="text-lg font-semibold text-secondary">
-            ID Card Report
-          </h2>
-          <button
-            onClick={printReport}
-            className="print:hidden rounded-md bg-primary px-4 py-2 text-sm font-medium text-white shadow-card hover:bg-primary/90 transition-colors"
-          >
-            Print Report
-          </button>
-        </div>
-
-        <h3 className="mb-2 text-sm font-medium text-muted uppercase tracking-wide">
-          By Card Type
-        </h3>
-        <Table
-          columns={[
-            { key: "type", header: "Card Type" },
-            { key: "initiated", header: "Initiated" },
-            { key: "approved", header: "Approved" },
-            { key: "collected", header: "Collected" },
-          ]}
-          data={cardReport}
-          keyExtractor={(row) => row.type}
-        />
-
-        <h3 className="mb-2 mt-6 text-sm font-medium text-muted uppercase tracking-wide">
-          By Municipality
-        </h3>
-        <Table
-          columns={[
-            { key: "municipality", header: "Municipality" },
-            { key: "initiated", header: "Initiated" },
-            { key: "approved", header: "Approved" },
-            { key: "collected", header: "Collected" },
-          ]}
-          data={idCardMunicipalityReport}
-          keyExtractor={(row) => row.id}
-        />
-      </section>
-    </div>
+      <footer className="mt-6 border-t border-gray-200 py-4 text-center text-[10px] text-gray-400">
+        Digital Nepal E-Governance System
+      </footer>
+    </main>
   );
 }
