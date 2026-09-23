@@ -1,114 +1,673 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo } from "react";
+import { useEffect, useMemo, type ReactNode } from "react";
+import { useMapSelection } from "@/contexts/MapSelectionContext";
 
-import provinceData from "../../../../data/province-dashboard.json";
-import districtData from "../../../../data/district.json";
-import LocalLevelStructure from "@/components/dashboard/LocalLevelStructure";
+import citizens from "../../../../data/citizens.json";
+import wards from "../../../../data/wards.json";
+import municipalities from "../../../../data/municipalities.json";
+import idCards from "../../../../data/id-cards.json";
+import syncBatches from "../../../../data/sync-batches.json";
 
-type ProvinceDashboardData = (typeof provinceData)[number];
-type Accent = "navy" | "blue" | "purple" | "orange" | "teal" | "green" | "red";
-
-const accentStyles: Record<Accent, { line: string; icon: string; iconBg: string }> = {
-  navy: { line: "#0B3067", icon: "#0B3067", iconBg: "#EAF0FB" },
-  blue: { line: "#4565E8", icon: "#4565E8", iconBg: "#EAF0FB" },
-  purple: { line: "#A100F2", icon: "#A100F2", iconBg: "#F1E8FD" },
-  orange: { line: "#EC7600", icon: "#EC7600", iconBg: "#FDF0E4" },
-  teal: { line: "#009B8E", icon: "#009B8E", iconBg: "#E6F7F5" },
-  green: { line: "#00B86B", icon: "#00B86B", iconBg: "#E7F8EF" },
-  red: { line: "#F0002E", icon: "#F0002E", iconBg: "#FDEDEC" },
+type Province = {
+  id: string;
+  name: string;
+  capital: string;
+  districts: number;
 };
 
-function getProvinceId(): string {
-  if (typeof document === "undefined") return "prov-1";
-  const token = document.cookie.split("; ").find((row) => row.startsWith("auth_token="))?.split("=")[1];
-  try {
-    const payload = token ? JSON.parse(atob(token)) : null;
-    return typeof payload?.jurisdiction_id === "string" ? payload.jurisdiction_id : "prov-1";
-  } catch {
-    return "prov-1";
-  }
-}
+type District = {
+  name: string;
+  citizens: number;
+  municipalities: number;
+  localBodies: number;
+  wards: number;
+  cards: number;
+};
 
-const number = (value: number) => value.toLocaleString("en-US");
+const provinces: Province[] = [
+  {
+    id: "prov-1",
+    name: "Koshi Province",
+    capital: "Biratnagar",
+    districts: 14,
+  },
+  { id: "prov-2", name: "Madhesh Province", capital: "Janakpur", districts: 8 },
+  { id: "prov-3", name: "Bagmati Province", capital: "Hetauda", districts: 13 },
+  { id: "prov-4", name: "Gandaki Province", capital: "Pokhara", districts: 11 },
+  {
+    id: "prov-5",
+    name: "Lumbini Province",
+    capital: "Deukhuri",
+    districts: 12,
+  },
+  {
+    id: "prov-6",
+    name: "Karnali Province",
+    capital: "Birendranagar",
+    districts: 10,
+  },
+  {
+    id: "prov-7",
+    name: "Sudurpashchim Province",
+    capital: "Godawari",
+    districts: 9,
+  },
+];
 
-export default function ProvinceDashboard() {
-  const province = useMemo<ProvinceDashboardData>(() => {
-    const id = getProvinceId();
-    return provinceData.find((item) => item.id === id) ?? provinceData[0];
-  }, []);
-  const totalLocalLevels = province.structure.total_local_levels;
-  const provinceDistricts = districtData.filter((district) => district.province_id === province.id);
+const koshiDistricts: District[] = [
+  {
+    name: "Taplejung",
+    citizens: 9940,
+    municipalities: 4,
+    localBodies: 9,
+    wards: 61,
+    cards: 6840,
+  },
+  {
+    name: "Panchthar",
+    citizens: 0,
+    municipalities: 0,
+    localBodies: 0,
+    wards: 0,
+    cards: 0,
+  },
+  {
+    name: "Ilam",
+    citizens: 0,
+    municipalities: 0,
+    localBodies: 0,
+    wards: 0,
+    cards: 0,
+  },
+  {
+    name: "Jhapa",
+    citizens: 0,
+    municipalities: 0,
+    localBodies: 0,
+    wards: 0,
+    cards: 0,
+  },
+  {
+    name: "Tehrathum",
+    citizens: 0,
+    municipalities: 0,
+    localBodies: 0,
+    wards: 0,
+    cards: 0,
+  },
+  {
+    name: "Dhankuta",
+    citizens: 0,
+    municipalities: 0,
+    localBodies: 0,
+    wards: 0,
+    cards: 0,
+  },
+  {
+    name: "Sunsari",
+    citizens: 0,
+    municipalities: 0,
+    localBodies: 0,
+    wards: 0,
+    cards: 0,
+  },
+];
 
+function Icon({ children }: { children: ReactNode }) {
   return (
-    <main className="mx-auto w-full max-w-380 px-0 pb-12">
-      <header className="flex flex-wrap items-end justify-between gap-5">
-        <div>
-          <p className="flex items-center gap-2 text-[12px] font-bold uppercase tracking-[0.08em] text-[#F0002E]"><span className="h-2 w-2 rounded-sm bg-[#F0002E]" />Province Administration</p>
-          <h1 className="mt-2 text-[29px] font-extrabold tracking-tight text-[#101828]">{province.name_en} Dashboard</h1>
-          <p className="mt-1.5 max-w-180 text-sm leading-relaxed text-[#667085]">Province overview of citizens, administrative divisions, ID cards, and grievances across {province.structure.districts} districts.</p>
-        </div>
-        <div className="flex gap-2.5 pb-0.5">
-          <Link href="/province/map" className="inline-flex items-center gap-2 rounded-lg border border-[#D0D5DD] bg-white px-4 py-2.5 text-[13px] font-semibold text-[#101828] hover:bg-[#FAFBFC]"><MapIcon />View Map</Link>
-          <Link href="/province/analytics" className="inline-flex items-center gap-2 rounded-lg bg-[#281078] px-4 py-2.5 text-[13px] font-semibold text-white hover:bg-[#1D0B5D]"><ChartIcon />Open Full Analytics</Link>
-        </div>
-      </header>
-
-      <Section title="Province Statistics" subtitle="Official administrative structure + live platform counts" />
-      <div className="grid gap-3.5 sm:grid-cols-2 xl:grid-cols-4">
-        <Metric label="Total Citizens" value={number(province.summary.citizens)} foot="▲ 6.4% this month" accent="navy" icon={<PersonIcon />} />
-        <Metric label="Total Districts" value={province.structure.districts} foot="Official district count" accent="blue" icon={<DistrictIcon />} />
-        <Metric label="Total Local Levels" value={totalLocalLevels} foot={`${province.structure.municipalities} municipalities`} accent="purple" icon={<BuildingIcon />} />
-        <Metric label="Total Wards" value={number(province.structure.wards)} foot="Official ward count" accent="orange" icon={<WardIcon />} />
-      </div>
-
-      <Section title="Province Level Structure" subtitle="District headquarters and local-level composition for this province" />
-      <div className="grid gap-5 lg:grid-cols-[1.3fr_1fr]">
-        <Panel>
-          <div className="overflow-x-auto"><table className="w-full min-w-140 border-collapse text-[13px]"><thead><tr><th className="header-cell text-left">District Name</th><th className="header-cell text-left">District Headquarters</th><th className="header-cell text-left">District Code</th></tr></thead><tbody>{provinceDistricts.map((district) => <tr key={district.id} className="hover:bg-[#FAFBFC]"><td className="table-cell font-bold">{district.name_en}</td><td className="table-cell font-semibold">{district.headquarters}</td><td className="table-cell text-[#667085]">{district.id.replace("dist-", "")}</td></tr>)}</tbody></table></div>
-        </Panel>
-      </div>
-
-      <LocalLevelStructure structure={province.structure} />
-
-      <Section title="Registration Coverage" subtitle={`What municipalities have captured across ${province.name_en}`} />
-      <div className="grid gap-3.5 sm:grid-cols-2 xl:grid-cols-4">
-        <Metric label="Households Registered" value={number(province.summary.households)} foot="Province household records" accent="orange" icon={<HomeIcon />} />
-        <Metric label="Active Municipalities" value={province.summary.active_municipalities} foot="Reporting in this cycle" accent="blue" icon={<BuildingIcon />} />
-        <Metric label="ID Cards Pending" value={number(province.summary.id_cards_pending)} foot="Requires processing" accent="purple" icon={<CardIcon />} />
-        <Metric label="Resolved Grievances" value={number(province.summary.grievances_resolved)} foot="Province total" accent="green" icon={<CheckIcon />} />
-      </div>
-
-      <Section title="Quick Actions" subtitle="Frequently used Province tools" />
-      <div className="grid gap-3.5 sm:grid-cols-2 xl:grid-cols-4">
-        <Action href="/province/municipalities" title="Municipality Directory" desc="Review municipalities, local levels, wards, and reporting status." cta="Open Directory →" accent="navy" icon={<BuildingIcon />} />
-        <Action href="/province/analytics" title="Province Analytics" desc="Compare citizen registration, ID cards, and coverage trends." cta="Open Analytics →" accent="purple" icon={<ChartIcon />} />
-        <Action href="/province/reports" title="Province Reports" desc="Generate province-level population and service reports." cta="View Reports →" accent="orange" icon={<ReportIcon />} />
-        <Action href="/province/municipalities" title="Sync Monitoring" desc="Monitor municipality sync health and resolve conflicts." cta="Check Sync Status →" accent="red" icon={<SyncIcon />} />
-      </div>
-
-      <Section title="Municipality Breakdown" subtitle="Live platform figures and sync health within this province" />
-      <Panel className="p-0"><div className="overflow-x-auto"><table className="w-full min-w-190 border-collapse text-[13px]"><thead><tr>{["Municipality", "Type", "Wards", "Citizens", "ID Cards Issued", "Sync Status"].map((head) => <th key={head} className="header-cell text-left">{head}</th>)}</tr></thead><tbody>{province.municipalities.map((municipality) => <tr key={municipality.id} className="hover:bg-[#FAFBFC]"><td className="table-cell font-bold">{municipality.name}</td><td className="table-cell text-[#667085]">{municipality.type}</td><td className="table-cell font-semibold">{municipality.wards}</td><td className="table-cell font-semibold">{number(municipality.citizens)}</td><td className="table-cell font-semibold">{number(municipality.id_cards_issued)}</td><td className="table-cell"><span className={`rounded-full px-2.5 py-1 text-[11px] font-bold ${municipality.sync_status === "SYNCED" ? "bg-[#E7F8EF] text-[#087443]" : municipality.sync_status === "CONFLICT" ? "bg-[#FDEDEC] text-[#C01F38]" : "bg-[#FEF3E2] text-[#B54708]"}`}>{municipality.sync_status}</span></td></tr>)}</tbody></table></div></Panel>
-
-      <footer className="mt-5 flex flex-wrap justify-between gap-2 border-t border-[#EAECF0] pt-4 text-[11.5px] text-[#98A2B3]"><span>{province.name_en} Province Portal · Data refreshed every 15 minutes</span><span>Analytical view only · No write access to citizen records</span></footer>
-    </main>
+    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-blue-50 text-[#123b78]">
+      {children}
+    </span>
   );
 }
 
-function Section({ title, subtitle }: { title: string; subtitle: string }) { return <div className="mb-3 mt-7"><h2 className="flex items-center gap-2 text-lg font-bold text-[#101828]"><span className="h-2 w-2 rounded-sm bg-[#F0002E]" />{title}</h2><p className="mt-1 text-sm text-[#98A2B3]">{subtitle}</p></div>; }
-function Panel({ children, className = "" }: { children: React.ReactNode; className?: string }) { return <div className={`rounded-[10px] border border-[#DDE2EA] bg-white shadow-[0_1px_3px_rgba(16,24,40,0.08)] ${className}`}>{children}</div>; }
-function Metric({ label, value, foot, accent, icon }: { label: string; value: string | number; foot: string; accent: Accent; icon: React.ReactNode }) { const style = accentStyles[accent]; return <div className="relative min-h-38 overflow-hidden rounded-[10px] border border-[#DDE2EA] bg-white px-4.5 py-4.5 shadow-[0_2px_5px_rgba(16,24,40,0.10)]"><div className="absolute inset-x-0 top-0 h-0.75 rounded-t-[10px]" style={{ backgroundColor: style.line }} /><div className="flex items-start justify-between gap-2"><p className="max-w-32 text-[12px] font-semibold leading-[1.35] text-[#667085]">{label}</p><span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-lg font-bold" style={{ backgroundColor: style.iconBg, color: style.icon }}>{icon}</span></div><p className="mt-4 text-[29px] font-extrabold leading-none tracking-tight text-[#101828]">{value}</p><p className="mt-3.5 text-[11.5px] font-medium leading-4 text-[#98A2B3]">{foot}</p></div>; }
-function Action({ href, title, desc, cta, accent, icon }: { href: string; title: string; desc: string; cta: string; accent: Accent; icon: React.ReactNode }) { const style = accentStyles[accent]; return <Link href={href} className="flex min-h-43.5 flex-col rounded-[10px] border border-[#DDE2EA] bg-white p-4 shadow-[0_1px_3px_rgba(16,24,40,0.08)] transition hover:-translate-y-0.5 hover:shadow-md"><span className="flex h-9 w-9 items-center justify-center rounded-lg text-lg font-bold" style={{ backgroundColor: style.iconBg, color: style.icon }}>{icon}</span><p className="mt-3 text-[13.5px] font-bold text-[#101828]">{title}</p><p className="mt-2 text-[11.5px] leading-snug text-[#98A2B3]">{desc}</p><p className="mt-auto pt-4 text-[11.5px] font-bold text-[#F0002E]">{cta}</p></Link>; }
-function PersonIcon() { return <span aria-hidden="true">♙</span>; }
-function HomeIcon() { return <span aria-hidden="true">⌂</span>; }
-function CardIcon() { return <span aria-hidden="true">▣</span>; }
-function FlagIcon() { return <span aria-hidden="true">⚑</span>; }
-function BuildingIcon() { return <span aria-hidden="true">▥</span>; }
-function WardIcon() { return <span aria-hidden="true">▤</span>; }
-function CheckIcon() { return <span aria-hidden="true">✓</span>; }
-function ReportIcon() { return <span aria-hidden="true">▤</span>; }
-function SyncIcon() { return <span aria-hidden="true">↻</span>; }
-function DistrictIcon() { return <span aria-hidden="true">⌘</span>; }
-function MapIcon() { return <span aria-hidden="true">⌖</span>; }
-function ChartIcon() { return <span aria-hidden="true">▥</span>; }
+function UsersIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      className="h-5 w-5"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+    >
+      <circle cx="9" cy="7" r="4" />
+      <path d="M2 21v-2a4 4 0 0 1 4-4h6a4 4 0 0 1 4 4v2" />
+      <path d="M16 3.2a4 4 0 0 1 0 7.6" />
+      <path d="M19 15a4 4 0 0 1 3 3.8V21" />
+    </svg>
+  );
+}
+function BuildingIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      className="h-5 w-5"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+    >
+      <path d="M3 21h18" />
+      <path d="M5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16" />
+      <path d="M9 7h2M13 7h2M9 11h2M13 11h2M9 15h2M13 15h2" />
+    </svg>
+  );
+}
+function CardIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      className="h-5 w-5"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+    >
+      <rect x="3" y="5" width="18" height="14" rx="2" />
+      <path d="M7 9h4M7 13h2M15 13h2" />
+    </svg>
+  );
+}
+function FlagIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      className="h-5 w-5"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+    >
+      <path d="M5 21V4" />
+      <path d="M5 5c4-3 7 3 14 0v10c-7 3-10-3-14 0" />
+    </svg>
+  );
+}
+
+function StatCard({
+  title,
+  value,
+  subtitle,
+  icon,
+  accent,
+}: {
+  title: string;
+  value: string | number;
+  subtitle: string;
+  icon: ReactNode;
+  accent: string;
+}) {
+  return (
+    <div
+      className={`rounded-xl border border-gray-200 border-l-4 ${accent} bg-white p-4 shadow-sm`}
+    >
+      <div className="flex items-start justify-between gap-3">
+        <div>
+          <p className="text-sm font-medium text-gray-500">{title}</p>
+          <p className="mt-1 text-2xl font-bold text-gray-900">{value}</p>
+          <p className="mt-1 text-xs text-gray-400">{subtitle}</p>
+        </div>
+        <Icon>{icon}</Icon>
+      </div>
+    </div>
+  );
+}
+
+function SectionTitle({
+  title,
+  subtitle,
+  action,
+}: {
+  title: string;
+  subtitle?: string;
+  action?: ReactNode;
+}) {
+  return (
+    <div className="mb-3 flex items-end justify-between gap-3">
+      <div>
+        <div className="flex items-center gap-2">
+          <span className="h-2 w-2 rounded-sm bg-[#123b78]" />
+          <h2 className="text-base font-bold text-gray-800">{title}</h2>
+        </div>
+        {subtitle && (
+          <p className="ml-4 mt-1 text-xs text-gray-400">{subtitle}</p>
+        )}
+      </div>
+      {action}
+    </div>
+  );
+}
+
+function ProgressRow({
+  label,
+  percentage,
+  className,
+}: {
+  label: string;
+  percentage: number;
+  className: string;
+}) {
+  return (
+    <div className="flex items-center gap-3">
+      <span className="w-36 text-xs text-gray-500">{label}</span>
+      <div className="h-2.5 flex-1 overflow-hidden rounded-full bg-gray-100">
+        <div
+          className={`h-full rounded-full ${className}`}
+          style={{ width: `${percentage}%` }}
+        />
+      </div>
+      <span className="w-10 text-right text-xs font-semibold text-gray-500">
+        {percentage}%
+      </span>
+    </div>
+  );
+}
+
+function QuickAction({
+  title,
+  value,
+  subtitle,
+  href,
+  icon,
+}: {
+  title: string;
+  value: string | number;
+  subtitle?: string;
+  href: string;
+  icon: ReactNode;
+}) {
+  return (
+    <Link
+      href={href}
+      className="rounded-xl border border-gray-200 border-l-4 border-l-[#123b78] bg-white p-4 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+    >
+      <div className="flex items-center gap-3">
+        <Icon>{icon}</Icon>
+        <div>
+          <p className="text-sm font-semibold text-gray-700">{title}</p>
+          <p className="mt-1 text-xl font-bold text-gray-900">{value}</p>
+          {subtitle && <p className="mt-1 text-xs text-red-400">{subtitle}</p>}
+        </div>
+      </div>
+    </Link>
+  );
+}
+
+function normalizeProvinceId(value: string | null): string {
+  if (!value) return "prov-1";
+  const normalized = value.toLowerCase().trim();
+  if (normalized.startsWith("prov-")) return normalized;
+  if (/^[1-7]$/.test(normalized)) return `prov-${normalized}`;
+  return "prov-1";
+}
+
+export default function ProvinceDashboard() {
+  const { selectProvince } = useMapSelection();
+
+  const provinceId = useMemo(() => {
+    if (typeof window === "undefined") return "prov-1";
+
+    const token = document.cookie
+      .split("; ")
+      .find((row) => row.startsWith("auth_token="))
+      ?.split("=")[1];
+
+    if (!token) return "prov-1";
+
+    try {
+      const decoded: { jurisdiction_id?: string } = JSON.parse(atob(token));
+      return normalizeProvinceId(
+        typeof decoded.jurisdiction_id === "string"
+          ? decoded.jurisdiction_id
+          : null,
+      );
+    } catch {
+      return "prov-1";
+    }
+  }, []);
+
+  const province =
+    provinces.find((item) => item.id === provinceId) ?? provinces[0];
+
+  useEffect(() => {
+    selectProvince(province.id.replace("prov-", ""), province.name);
+  }, [province.id, province.name, selectProvince]);
+
+  const stats = useMemo(() => {
+    const provinceNumber = province.id.replace("prov-", "");
+    const provinceWards = wards.filter((ward) =>
+      provinceNumber === "1" ? ward.id.startsWith("ward-") : false,
+    );
+    const wardIds = new Set(provinceWards.map((ward) => ward.id));
+    const provinceCitizens = citizens.filter((citizen) =>
+      wardIds.has(citizen.ward_id),
+    );
+    const municipalityIds = new Set(
+      provinceWards.map((ward) => ward.municipality_id),
+    );
+    const provinceMunicipalities = municipalities.filter((municipality) =>
+      municipalityIds.has(municipality.id),
+    );
+    const citizenIds = new Set(provinceCitizens.map((citizen) => citizen.id));
+    const provinceCards = idCards.filter((card) =>
+      citizenIds.has(card.citizen_id),
+    );
+
+    return {
+      citizens: provinceCitizens.length,
+      municipalities: provinceMunicipalities.length,
+      wards: provinceWards.length,
+      cards: provinceCards.length,
+    };
+  }, [province.id]);
+
+  const recentSyncs = useMemo(() => syncBatches.slice(0, 4), []);
+
+  return (
+    <main className="min-h-screen bg-[#fafafa] px-4 py-5 md:px-6 lg:px-8">
+      <header className="mb-5 flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+        <div>
+          <div className="flex items-center gap-2 text-xs">
+            <span className="text-gray-400">Province Portal</span>
+            <span className="text-gray-300">/</span>
+            <span className="font-semibold text-red-500">Dashboard</span>
+          </div>
+          <p className="mt-2 text-sm text-gray-400">Province Admin</p>
+          <h1 className="mt-1 text-2xl font-bold text-gray-900">
+            Koshi Province Dashboard
+          </h1>
+          <span className="mt-2 inline-flex rounded-full bg-blue-50 px-3 py-1.5 text-xs font-medium text-blue-600">
+            Province Admin — Analytical View Only. No write access to citizen
+            records.
+          </span>
+        </div>
+
+        <div className="flex gap-2">
+          <Link
+            href="/province/analytics"
+            className="rounded-lg border border-gray-200 bg-white px-4 py-2.5 text-sm font-semibold text-gray-600 shadow-sm hover:bg-gray-50"
+          >
+            View Analytics
+          </Link>
+          <Link
+            href="/province/national-map"
+            className="rounded-lg bg-[#092e68] px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-[#062553]"
+          >
+            View Map
+          </Link>
+        </div>
+      </header>
+
+      <section className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-4">
+        <StatCard
+          title="Total Citizens"
+          value={stats.citizens.toLocaleString()}
+          subtitle="↑ 5% this week"
+          icon={<UsersIcon />}
+          accent="border-l-blue-500"
+        />
+        <StatCard
+          title="Total Provinces"
+          value="7"
+          subtitle="Across Nepal"
+          icon={<BuildingIcon />}
+          accent="border-l-green-500"
+        />
+        <StatCard
+          title="Province Districts"
+          value={province.districts}
+          subtitle="Official districts"
+          icon={<FlagIcon />}
+          accent="border-l-pink-500"
+        />
+        <StatCard
+          title="ID Cards Issued"
+          value={stats.cards.toLocaleString()}
+          subtitle="Across municipalities"
+          icon={<CardIcon />}
+          accent="border-l-orange-500"
+        />
+      </section>
+
+      <section className="mt-6">
+        <SectionTitle
+          title="Province Level Structure"
+          subtitle="प्रदेश संरचनाको विवरण"
+        />
+        <div className="grid gap-4 lg:grid-cols-[1.15fr_0.85fr]">
+          <div className="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
+            <div className="grid grid-cols-[1.5fr_1fr_0.7fr] bg-gray-50 px-4 py-3 text-xs font-semibold uppercase text-gray-400">
+              <span>Province Name</span>
+              <span>Capital</span>
+              <span>Districts</span>
+            </div>
+            {provinces.map((item) => (
+              <div
+                key={item.id}
+                className="grid grid-cols-[1.5fr_1fr_0.7fr] border-t border-gray-100 px-4 py-3 text-sm"
+              >
+                <span className="font-semibold text-gray-700">{item.name}</span>
+                <span className="font-medium text-gray-600">
+                  {item.capital}
+                </span>
+                <span className="text-gray-600">{item.districts}</span>
+              </div>
+            ))}
+          </div>
+
+          <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
+            <p className="mb-5 text-xs font-semibold uppercase tracking-wide text-gray-400">
+              Composition
+            </p>
+            <div className="space-y-5">
+              <ProgressRow
+                label="Metropolitan City"
+                percentage={1}
+                className="bg-blue-300"
+              />
+              <ProgressRow
+                label="Sub-Metropolitan City"
+                percentage={1}
+                className="bg-blue-300"
+              />
+              <ProgressRow
+                label="Municipality"
+                percentage={37}
+                className="bg-purple-500"
+              />
+              <ProgressRow
+                label="Rural Municipality"
+                percentage={61}
+                className="bg-green-500"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="mt-6">
+        <SectionTitle
+          title="Registration Coverage"
+          subtitle="Aggregated registration coverage for the selected province"
+        />
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-4">
+          <StatCard
+            title="Households Registered"
+            value="13"
+            subtitle="26.1% below target"
+            icon={<UsersIcon />}
+            accent="border-l-blue-500"
+          />
+          <StatCard
+            title="Employment Profiles"
+            value="41"
+            subtitle="Across municipalities"
+            icon={<BuildingIcon />}
+            accent="border-l-green-500"
+          />
+          <StatCard
+            title="Education Records"
+            value="393"
+            subtitle="4% dropout rate"
+            icon={<CardIcon />}
+            accent="border-l-pink-500"
+          />
+          <StatCard
+            title="Disability Profiles"
+            value="8"
+            subtitle="6.8% of population"
+            icon={<FlagIcon />}
+            accent="border-l-orange-500"
+          />
+        </div>
+      </section>
+
+      <section className="mt-6">
+        <SectionTitle
+          title="Quick Action"
+          subtitle="Frequently used province tools"
+        />
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-4">
+          <QuickAction
+            title="Citizen Lookup"
+            value="13"
+            href="/province/citizens"
+            icon={<UsersIcon />}
+          />
+          <QuickAction
+            title="Investigation Requests"
+            value="41"
+            href="/province/investigations"
+            icon={<BuildingIcon />}
+          />
+          <QuickAction
+            title="Flag Anomaly"
+            value="393"
+            subtitle="4% dropout rate"
+            href="/province/anomalies"
+            icon={<FlagIcon />}
+          />
+          <QuickAction
+            title="Province Admins"
+            value="8"
+            subtitle="6.8% of population"
+            href="/province/admins"
+            icon={<UsersIcon />}
+          />
+        </div>
+      </section>
+
+      <section className="mt-6">
+        <SectionTitle
+          title="District Breakdown — Administrative Structure"
+          subtitle="Official district, local-body and ward counts with platform figures"
+          action={
+            <button
+              type="button"
+              className="rounded-lg bg-[#092e68] px-4 py-2 text-xs font-semibold text-white"
+            >
+              Full Comparison
+            </button>
+          }
+        />
+        <div className="overflow-x-auto rounded-xl border border-gray-200 bg-white shadow-sm">
+          <table className="w-full min-w-[850px] text-left text-sm">
+            <thead className="bg-gray-50 text-xs uppercase text-gray-400">
+              <tr>
+                <th className="px-4 py-3">District Name</th>
+                <th className="px-4 py-3">NID Citizens</th>
+                <th className="px-4 py-3">Municipalities</th>
+                <th className="px-4 py-3">Total Local Bodies</th>
+                <th className="px-4 py-3">Wards</th>
+                <th className="px-4 py-3">ID Cards</th>
+                <th className="px-4 py-3" />
+              </tr>
+            </thead>
+            <tbody>
+              {koshiDistricts.map((district) => (
+                <tr key={district.name} className="border-t border-gray-100">
+                  <td className="px-4 py-3 font-semibold text-gray-700">
+                    {district.name}
+                  </td>
+                  <td className="px-4 py-3 text-gray-600">
+                    {district.citizens.toLocaleString()}
+                  </td>
+                  <td className="px-4 py-3 text-gray-600">
+                    {district.municipalities}
+                  </td>
+                  <td className="px-4 py-3 text-gray-600">
+                    {district.localBodies}
+                  </td>
+                  <td className="px-4 py-3 text-gray-600">
+                    {district.wards.toLocaleString()}
+                  </td>
+                  <td className="px-4 py-3 text-gray-600">
+                    {district.cards.toLocaleString()}
+                  </td>
+                  <td className="px-4 py-3">
+                    <Link
+                      href={`/province/districts/${district.name.toLowerCase()}`}
+                      className="rounded-full bg-gray-50 px-3 py-1.5 text-xs font-medium text-gray-500 hover:bg-gray-100"
+                    >
+                      View →
+                    </Link>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section className="mt-6 grid gap-4 lg:grid-cols-2">
+        <div className="rounded-xl border border-gray-200 bg-white shadow-sm">
+          <div className="border-b border-gray-100 px-4 py-4">
+            <h3 className="text-sm font-bold text-gray-800">Recent Activity</h3>
+            <p className="mt-1 text-xs text-gray-400">Recent sync batches</p>
+          </div>
+          <div className="space-y-3 p-4">
+            {recentSyncs.map((batch) => (
+              <div
+                key={batch.batch_id}
+                className="flex items-center justify-between text-sm"
+              >
+                <span className="text-gray-600">{batch.ward_id}</span>
+                <span
+                  className={
+                    batch.status === "COMPLETED"
+                      ? "font-semibold text-green-500"
+                      : "font-semibold text-orange-400"
+                  }
+                >
+                  {batch.status === "COMPLETED" ? "Completed" : "Pending"}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="rounded-xl border border-gray-200 bg-white shadow-sm">
+          <div className="border-b border-gray-100 px-4 py-4">
+            <h3 className="text-sm font-bold text-gray-800">
+              Pending Activity
+            </h3>
+            <p className="mt-1 text-xs text-gray-400">
+              Items requiring attention
+            </p>
+          </div>
+          <div className="space-y-3 p-4 text-sm">
+            {["ward-012", "ward-004", "ward-003"].map((wardId) => (
+              <div key={wardId} className="flex items-center justify-between">
+                <span className="text-gray-600">{wardId}</span>
+                <span className="font-semibold text-orange-400">Pending</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <footer className="mt-8 border-t border-gray-200 py-4 text-center text-xs text-gray-400">
+        Digital Nepal E-Governance System
+      </footer>
+    </main>
+  );
+}

@@ -41,11 +41,11 @@ const PROVINCE_NAV: AdminNavSection[] = [
         mapHref: "/province/analytics",
       },
       {
-        id: "/central/national-map",
+        id: "/province/national-map",
         label: "National Map",
         icon: <PublicOutlined sx={{ fontSize: 20 }} />,
         hasMapTree: true,
-        mapHref: "/central/national-map",
+        mapHref: "/province/national-map",
       },
       {
         id: "/province/reports",
@@ -57,12 +57,22 @@ const PROVINCE_NAV: AdminNavSection[] = [
 ];
 
 function getActiveView(pathname: string) {
-  if (pathname.startsWith("/province/municipalities"))
+  if (pathname.startsWith("/province/municipalities")) {
     return "/province/municipalities";
-  if (pathname.startsWith("/province/analytics")) return "/province/analytics";
-  if (pathname.startsWith("/province/reports")) return "/province/reports";
-  if (pathname.startsWith("/central/national-map"))
-    return "/central/national-map";
+  }
+
+  if (pathname.startsWith("/province/analytics")) {
+    return "/province/analytics";
+  }
+
+  if (pathname.startsWith("/province/national-map")) {
+    return "/province/national-map";
+  }
+
+  if (pathname.startsWith("/province/reports")) {
+    return "/province/reports";
+  }
+
   return "/province/dashboard";
 }
 
@@ -73,9 +83,12 @@ interface ProvinceLayoutProps {
 export default function ProvinceLayout({ children }: ProvinceLayoutProps) {
   const pathname = usePathname();
   const router = useRouter();
+
   const [mobileOpen, setMobileOpen] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(true);
+
   const isDesktop = useMediaQuery("(min-width:1024px)");
+
   const session = getCurrentSession();
   const activeItem = getActiveView(pathname);
 
@@ -84,7 +97,10 @@ export default function ProvinceLayout({ children }: ProvinceLayoutProps) {
     router.push(href);
   };
 
-  const handleToggleDesktopSidebar = () => setSidebarOpen((prev) => !prev);
+  const handleToggleDesktopSidebar = () => {
+    setSidebarOpen((prev) => !prev);
+  };
+
   const handleOpenSidebar = () => {
     if (isDesktop) {
       handleToggleDesktopSidebar();
@@ -94,6 +110,7 @@ export default function ProvinceLayout({ children }: ProvinceLayoutProps) {
   };
 
   const provinceName = session?.province_name ?? "Province";
+
   const activeLabel =
     getNavItems(PROVINCE_NAV).find((item) => item.id === activeItem)?.label ??
     "Dashboard";
@@ -101,6 +118,7 @@ export default function ProvinceLayout({ children }: ProvinceLayoutProps) {
   return (
     <RouteGuard requiredRole="PROVINCE_ADMIN">
       <div className="flex min-h-screen bg-[#f5f7fb]">
+        {/* Desktop Sidebar */}
         <div className="hidden lg:block">
           <div className="fixed inset-y-0 left-0 z-40">
             <WardSidebar
@@ -115,10 +133,18 @@ export default function ProvinceLayout({ children }: ProvinceLayoutProps) {
           </div>
         </div>
 
+        {/* Mobile Sidebar */}
         <Drawer
           open={mobileOpen && !isDesktop}
           onClose={() => setMobileOpen(false)}
-          slotProps={{ paper: { sx: { borderRadius: 0, width: 260 } } }}
+          slotProps={{
+            paper: {
+              sx: {
+                borderRadius: 0,
+                width: 260,
+              },
+            },
+          }}
         >
           <WardSidebar
             active={activeItem}
@@ -131,8 +157,11 @@ export default function ProvinceLayout({ children }: ProvinceLayoutProps) {
           />
         </Drawer>
 
+        {/* Main Content */}
         <div
-          className={`flex min-w-0 flex-1 flex-col ${sidebarOpen ? "lg:pl-65" : "lg:pl-18"}`}
+          className={`flex min-w-0 flex-1 flex-col ${
+            sidebarOpen ? "lg:pl-65" : "lg:pl-18"
+          }`}
         >
           <WardTopbar
             sectionLabel="Province Portal"
