@@ -50,7 +50,7 @@ export default function SyncHistoryPage() {
           new Date(b.submitted_at).getTime() -
           new Date(a.submitted_at).getTime(),
       );
-  }, [search, statusFilter, wardFilter]);
+  }, [batches, search, statusFilter, wardFilter]);
 
   const totalRecords = batches.reduce(
     (total, batch) => total + batch.record_count,

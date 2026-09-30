@@ -30,7 +30,7 @@ let nextDistrict = nextId(districts, "dist");
 let nextMunicipality = nextId(municipalities, "mun");
 let nextWard = nextId(wards, "ward");
 
-for (const [provinceId, [provinceName, districtName, municipalityNames]] of Object.entries(provinceNames)) {
+for (const [provinceId, [, districtName, municipalityNames]] of Object.entries(provinceNames)) {
   if (!districts.some((district) => district.province_id === provinceId)) {
     districts.push({ id: `dist-${String(nextDistrict).padStart(2, "0")}`, province_id: provinceId, name_np: districtName, name_en: districtName });
     nextDistrict += 1;

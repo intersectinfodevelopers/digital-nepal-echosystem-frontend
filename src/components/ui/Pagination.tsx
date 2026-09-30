@@ -17,19 +17,20 @@ export function Pagination({
   onPageSizeChange,
   totalItems,
 }: PaginationProps) {
-  if (totalPages <= 1) return null;
+  // Always render the controls (spec: Previous/1/Next visible even with one page).
   const getVisiblePages = (): (number | "...")[] => {
     const pages: (number | "...")[] = [];
+    const safeTotal = Math.max(1, totalPages);
     const delta = 2;
     const left = Math.max(2, currentPage - delta);
-    const right = Math.min(totalPages - 1, currentPage + delta);
+    const right = Math.min(safeTotal - 1, currentPage + delta);
     pages.push(1);
     if (left > 2) pages.push("...");
     for (let i = left; i <= right; i++) {
       pages.push(i);
     }
-    if (right < totalPages - 1) pages.push("...");
-    if (totalPages > 1) pages.push(totalPages);
+    if (right < safeTotal - 1) pages.push("...");
+    if (safeTotal > 1) pages.push(safeTotal);
     return pages;
   };
   return (
@@ -55,11 +56,11 @@ export function Pagination({
       </div>
       <div className="flex items-center gap-1">
         <button
-          disabled={currentPage === 1}
+          disabled={currentPage <= 1}
           onClick={() => onPageChange(currentPage - 1)}
-          className="px-3 py-1.5 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-700 hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+          className="px-3 py-1.5 text-sm font-medium rounded-md border border-[#DCE3EC] bg-white text-[#667085] hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
         >
-          Prev
+          Previous
         </button>
         {getVisiblePages().map((page, index) =>
           page === "..." ? (
@@ -70,10 +71,10 @@ export function Pagination({
             <button
               key={page}
               onClick={() => onPageChange(page)}
-              className={`px-3 py-1.5 text-sm font-medium rounded-lg border transition-colors ${
+              className={`h-8 w-8 text-sm font-medium rounded-md border transition-colors ${
                 currentPage === page
-                  ? "bg-blue-600 text-white border-blue-600"
-                  : "bg-white text-gray-700 border-gray-200 hover:bg-gray-50"
+                  ? "bg-[#4174C8] text-white border-[#4174C8]"
+                  : "bg-white text-[#667085] border-[#DCE3EC] hover:bg-gray-50"
               }`}
             >
               {page}
@@ -81,9 +82,9 @@ export function Pagination({
           )
         )}
         <button
-          disabled={currentPage === totalPages}
+          disabled={currentPage >= totalPages}
           onClick={() => onPageChange(currentPage + 1)}
-          className="px-3 py-1.5 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-700 hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+          className="px-3 py-1.5 text-sm font-medium rounded-md border border-[#DCE3EC] bg-white text-[#667085] hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
         >
           Next
         </button>

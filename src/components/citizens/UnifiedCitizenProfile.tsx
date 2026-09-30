@@ -243,6 +243,7 @@ export default function UnifiedCitizenProfile({ form }: { form: FormState }) {
           ["Faculty / subject", eduFormal ? edu?.subject : ""],
           ["Passing / current year", eduFormal ? edu?.year : ""],
         ]} />
+        
       </Section>
 
       <Section title="Living standard & household access">
