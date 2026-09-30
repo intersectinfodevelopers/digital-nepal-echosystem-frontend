@@ -48,7 +48,7 @@ function normalizeRegistered(raw: unknown): Citizen {
 }
 
 export function useCitizensFilter() {
-  const [registered] = useState<Citizen[]>(() => {
+  const [registered, setRegistered] = useState<Citizen[]>(() => {
     try {
       const raw = localStorage.getItem("citizens_registered");
       if (raw) return (JSON.parse(raw) as unknown[]).map(normalizeRegistered);
@@ -58,11 +58,22 @@ export function useCitizensFilter() {
     return [];
   });
 
+  // Static seed records are read-only, so deletions are tracked as tombstones.
+  const [deletedIds, setDeletedIds] = useState<Set<string>>(() => {
+    try {
+      const raw = localStorage.getItem("citizens_deleted");
+      if (raw) return new Set(JSON.parse(raw) as string[]);
+    } catch {
+      // ignore
+    }
+    return new Set();
+  });
+
   const wardCitizens = useMemo(() => {
     return [...STATIC_CITIZENS, ...registered].filter(
-      (c) => c.ward_id === WARD_ID,
+      (c) => c.ward_id === WARD_ID && !deletedIds.has(c.id),
     );
-  }, [registered]);
+  }, [registered, deletedIds]);
 
   const [search, setSearch] = useState("");
   const [nidSearch, setNidSearch] = useState("");
@@ -74,10 +85,15 @@ export function useCitizensFilter() {
     return wardCitizens.filter((c: Citizen) => {
       if (search) {
         const q = search.toLowerCase();
-        if (
-          !c.name_np.toLowerCase().includes(q) &&
-          !c.name_en.toLowerCase().includes(q)
-        ) {
+        const haystack = [
+          c.name_np,
+          c.name_en,
+          c.nid_masked,
+          c.citizenship_number ?? "",
+        ]
+          .join(" ")
+          .toLowerCase();
+        if (!haystack.includes(q)) {
           return false;
         }
       }
@@ -107,7 +123,46 @@ export function useCitizensFilter() {
     verifiedFilter,
   ]);
 
+  const clearFilters = () => {
+    setSearch("");
+    setNidSearch("");
+    setEmploymentFilter("");
+    setSexFilter("");
+    setVerifiedFilter("");
+  };
+
+  const deleteCitizen = (id: string) => {
+    const isRegistered = registered.some((c) => c.id === id);
+    if (isRegistered) {
+      try {
+        const raw = localStorage.getItem("citizens_registered");
+        const list = raw ? (JSON.parse(raw) as unknown[]) : [];
+        localStorage.setItem(
+          "citizens_registered",
+          JSON.stringify(
+            list.filter((c) => (c as { id?: string }).id !== id),
+          ),
+        );
+      } catch {
+        // ignore
+      }
+      setRegistered((prev) => prev.filter((c) => c.id !== id));
+    } else {
+      try {
+        const raw = localStorage.getItem("citizens_deleted");
+        const ids: string[] = raw ? (JSON.parse(raw) as string[]) : [];
+        if (!ids.includes(id)) {
+          localStorage.setItem("citizens_deleted", JSON.stringify([...ids, id]));
+        }
+      } catch {
+        // ignore
+      }
+      setDeletedIds((prev) => new Set(prev).add(id));
+    }
+  };
+
   return {
+    citizens: wardCitizens,
     filtered,
     search,
     setSearch,
@@ -119,5 +174,7 @@ export function useCitizensFilter() {
     setSexFilter,
     verifiedFilter,
     setVerifiedFilter,
+    clearFilters,
+    deleteCitizen,
   };
 }

@@ -34,8 +34,9 @@ export async function POST(request: Request) {
       );
     }
 
-    const { password: _password, ...publicUser } = user;
-    return createLoginResponse(publicUser, "mock-token");
+    const publicUser: Partial<User> = { ...user };
+    delete publicUser.password;
+    return createLoginResponse(publicUser as User, "mock-token");
   }
 
   if (!apiBaseUrl) {

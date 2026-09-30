@@ -89,7 +89,7 @@ export default function WardSidebar({
     useMapSelection();
 
   // Override states — undefined means "derive from selection"
-  const [mapExpandedOverride, setMapExpandedOverride] = useState<boolean | null>(null);
+  const [mapExpandedOverride] = useState<boolean | null>(null);
   const [expandedProvinceIdOverride, setExpandedProvinceIdOverride] = useState<string | null | undefined>(undefined);
   const [expandedDistrictKeyOverride, setExpandedDistrictKeyOverride] = useState<string | null | undefined>(undefined);
 
@@ -112,11 +112,6 @@ export default function WardSidebar({
     return selection.level !== "country";
   }, [mapExpandedOverride, selection.level]);
 
-  // Keep setExpandedMap for the toggle button (wraps the override)
-  const setExpandedMapToggle = () =>
-    setMapExpandedOverride((v) => !(v ?? selection.level !== "country"));
-
-
   const isMapItemActive = (item: AdminNavItem) => {
     const navItem = item as WardNavItem;
     if (!navItem.hasMapTree && item.id !== "national-map") return false;
@@ -129,8 +124,6 @@ export default function WardSidebar({
       active.startsWith(`${href}/`)
     );
   };
-
-  const toggleMap = setExpandedMapToggle;
 
   const goToMap = (item: WardNavItem | AdminNavItem, scopeId?: string) => {
     const href = (item as WardNavItem).mapHref ?? "/ward/map";
@@ -173,24 +166,24 @@ export default function WardSidebar({
 
   return (
     <aside
-      className={`flex h-full shrink-0 flex-col bg-[#0B3067] text-white shadow-lg ${collapsed ? "w-18" : "w-65"}`}
+      className={`flex h-full shrink-0 flex-col bg-[#063574] text-white shadow-lg ${collapsed ? "w-18" : "w-62"}`}
     >
       <div
-        className={`flex h-16 shrink-0 items-center gap-3 border-b border-white/10 ${collapsed ? "justify-center px-3" : "justify-between px-4"}`}
+        className={`flex h-[72px] shrink-0 items-center gap-3 border-b border-white/10 ${collapsed ? "justify-center px-3" : "justify-between px-4"}`}
       >
         <div
           className={`flex items-center gap-3 ${collapsed ? "justify-center" : ""}`}
         >
-          <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-white/10 bg-white/10 text-white shadow-sm">
+          <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-[10px] border border-white/10 bg-white/10 text-white shadow-sm">
             <AccountBalanceOutlined sx={{ fontSize: 21 }} />
           </span>
           {!collapsed ? (
             <div className="min-w-0">
-              <p className="text-[13px] font-bold text-white">{headerTitle}</p>
-              <p className="truncate text-xs font-medium text-[#A0B3D6]">
+              <p className="text-[14px] font-bold leading-tight text-white">{headerTitle}</p>
+              <p className="truncate text-xs font-medium text-[#AFC3E4]">
                 {headerSubtitle}
               </p>
-              <p className="text-[11px] text-[#A0C8FF]">
+              <p className="text-[11px] leading-tight text-[#7E9CC9]">
                 {entityMeta ?? defaultEntityMeta}
               </p>
             </div>
@@ -211,7 +204,7 @@ export default function WardSidebar({
 
       {/* Navigation */}
       <nav
-        className={`sidebar-scrollbar flex-1 overflow-y-auto ${collapsed ? "px-1 py-3" : "px-3 py-4"}`}
+        className={`sidebar-scrollbar flex-1 overflow-y-auto ${collapsed ? "px-1.5 py-3" : "px-3 py-4"}`}
       >
         {sections.map((section, i) => {
           if (section.type === "divider") {
@@ -225,11 +218,11 @@ export default function WardSidebar({
           return (
             <div key={section.label} className={collapsed ? "mb-1" : "mb-4"}>
               {!collapsed ? (
-                <p className="mb-1.5 px-3 text-[10px] font-bold uppercase tracking-[0.14em] text-[#A0C8FF]">
+                <p className="mb-1.5 px-3 text-[10px] font-bold uppercase tracking-[0.15em] text-[#7E9CC9]">
                   {section.label}
                 </p>
               ) : null}
-              <div className={collapsed ? "space-y-1" : "space-y-0.5"}>
+              <div className={collapsed ? "space-y-1" : "space-y-1"}>
                 {section.items.map((item) => {
                   const navItem = item as WardNavItem;
                   const isActive = item.id === active || isMapItemActive(item);
@@ -244,47 +237,22 @@ export default function WardSidebar({
                         onNavigate(navItem.mapHref ?? item.id);
                       }}
                       aria-expanded={hasTree ? derivedMapExpanded : undefined}
-                      className={`flex ${collapsed ? "w-full justify-center" : "w-full items-center gap-3"} rounded-2xl px-3 py-2.5 text-left text-[13.5px] font-medium transition-colors ${
+                      className={`flex h-11 ${collapsed ? "w-full justify-center rounded-xl" : "w-full items-center gap-3 rounded-[22px] px-4"} text-left text-sm font-medium transition-colors ${
                         isActive
-                          ? "bg-white/15 text-white font-semibold shadow-sm"
-                          : "text-white/70 hover:bg-white/10 hover:text-white"
+                          ? "bg-[#315D99] font-semibold text-white shadow-sm"
+                          : "text-[#AFC3E4] hover:bg-white/10 hover:text-white"
                       }`}
                     >
                       <span
-                        className={isActive ? "text-white" : "text-white/70"}
+                        className={isActive ? "text-white" : "text-[#AFC3E4]"}
                       >
                         {item.icon ?? ICONS[item.id]}
                       </span>
                       {!collapsed ? (
                         <>
                           <span className="flex-1 truncate">{item.label}</span>
-                          {hasTree ? (
-                            <span
-                              role="button"
-                              tabIndex={0}
-                              aria-label="Toggle map dropdown"
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                toggleMap();
-                              }}
-                              onKeyDown={(e) => {
-                                if (e.key === "Enter" || e.key === " ") {
-                                  e.stopPropagation();
-                                  toggleMap();
-                                }
-                              }}
-                              className="flex items-center justify-center p-1 rounded-lg hover:bg-white/20 transition-colors"
-                            >
-                              <KeyboardArrowRight
-                                sx={{
-                                  fontSize: 18,
-                                  transition: "transform 150ms",
-                                  transform: derivedMapExpanded
-                                    ? "rotate(90deg)"
-                                    : "rotate(0deg)",
-                                }}
-                              />
-                            </span>
+                          {(hasTree || item.id === "analytics" || item.id === "map") && !isActive ? (
+                            <KeyboardArrowRight sx={{ fontSize: 18, color: "rgba(175,195,228,0.7)" }} />
                           ) : null}
                         </>
                       ) : null}
@@ -335,7 +303,7 @@ export default function WardSidebar({
         className={`border-t border-white/10 ${collapsed ? "px-2 py-2" : "px-5 py-3"}`}
       >
         {!collapsed ? (
-          <p className="text-[11px] text-[#A0B3D6]">{footerLabel}</p>
+          <p className="text-[11px] text-[#7E9CC9]">{footerLabel}</p>
         ) : (
           <div className="h-10 flex items-center justify-center">
             <span className="text-[11px] text-white/60">
