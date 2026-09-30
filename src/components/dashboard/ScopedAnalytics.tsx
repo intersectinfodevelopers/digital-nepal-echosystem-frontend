@@ -71,7 +71,7 @@ export default function ScopedAnalytics({ scope: requestedScope }: { scope: Excl
       return all.filter((item) => item.id === rootId || (item.type === "district" && item.parentId === rootId) || (item.type === "municipality" && districtIds.has(item.parentId ?? "")) || (item.type === "ward" && municipalityIds.has(item.parentId ?? "")));
     }
     return all;
-  }, [effectiveSelectedId, requestedScope]);
+  }, [effectiveSelectedId, requestedScope, session?.province_id, session?.municipality_id, session?.ward_id]);
 
   const scope = useMemo(() => {
     const selected = options.find((item) => item.id === effectiveSelectedId) ?? options[0];

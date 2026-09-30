@@ -103,7 +103,6 @@ function Action({ href, title, desc, cta, accent, icon }: { href: string; title:
 function PersonIcon() { return <span aria-hidden="true">♙</span>; }
 function HomeIcon() { return <span aria-hidden="true">⌂</span>; }
 function CardIcon() { return <span aria-hidden="true">▣</span>; }
-function FlagIcon() { return <span aria-hidden="true">⚑</span>; }
 function BuildingIcon() { return <span aria-hidden="true">▥</span>; }
 function WardIcon() { return <span aria-hidden="true">▤</span>; }
 function CheckIcon() { return <span aria-hidden="true">✓</span>; }

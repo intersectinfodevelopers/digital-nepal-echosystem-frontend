@@ -112,11 +112,12 @@ export default function WardShell({ children }: { children: ReactNode }) {
         />
       </Drawer>
       <div
-        className={`flex min-w-0 flex-1 flex-col ${sidebarOpen ? "lg:pl-65" : "lg:pl-18"}`}
+        className={`flex min-w-0 flex-1 flex-col ${sidebarOpen ? "lg:pl-62" : "lg:pl-18"}`}
       >
         <WardTopbar
-          sectionLabel={`Ward ${wardNumber}`}
+          sectionLabel={`Koshi Province / Sunsari District / Kummayak Rural Municipality`}
           subtitle={WARD_VIEW_TITLES[activeView]}
+          wardBadge={`Ward ${wardNumber}`}
           icon={VIEW_ICONS[activeView]}
           userName={session?.full_name ?? "Ward Admin"}
           userRole={session?.role ?? "Ward Admin"}
@@ -126,8 +127,8 @@ export default function WardShell({ children }: { children: ReactNode }) {
           onOpenSidebar={handleOpenSidebar}
           onGoProfile={() => router.push("/ward/dashboard")}
         />
-        <main className="flex-1 px-4 pt-6 pb-6 sm:px-6 lg:px-8">
-          <div className="mb-4">
+        <main className="flex-1 px-4 pt-5 pb-6 sm:px-6 lg:px-[54px] lg:pr-[60px]">
+          <div className="mb-1">
             <Breadcrumbs />
           </div>
           {children}

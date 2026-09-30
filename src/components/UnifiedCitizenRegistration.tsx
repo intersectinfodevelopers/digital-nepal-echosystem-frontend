@@ -1,8 +1,20 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { useRouter, useSearchParams } from "next/navigation";
 import { ArrowBack, ArrowForward, CheckCircle, UploadFile, MapOutlined, ContentCopy } from "@mui/icons-material";
 import { LocationMap } from "@/components/LocationMap";
+import {
+  DEFAULT_DISABILITY,
+  DEFAULT_EDUCATION,
+  DEFAULT_EMPLOYMENT,
+  DEFAULT_HOUSEHOLD,
+  getCitizenProfile,
+} from "@/services/citizenService";
+import type { Citizen, EmploymentData, RegistrationFormData } from "@/types/citizen";
+import citizensSeed from "../../data/citizens.json";
 
 const STEP_META = [
   { id: 1, label: "NID" },
@@ -49,7 +61,7 @@ type EmploymentRecord = {
   businessEmployees: string;
   businessStartYear: string;
   // Foreign employment
-  country: string;
+  country: string;  
   departureYear: string;
   workType: string;
   customWorkType: string;
@@ -359,11 +371,6 @@ export type FormState = {
   livingStandard: typeof emptyLivingStandard;
 };
 
-const createLinkedCitizenId = (relationship: string, index: number) => {
-  const safe = relationship.replace(/\s+/g, "-").toUpperCase();
-  return `FAM-${safe}-${String(index + 1).padStart(3, "0")}`;
-};
-
 const emptyForm: FormState = {
   firstName: "",
   middleName: "",
@@ -450,13 +457,491 @@ function saveJSON(key: string, value: unknown) {
   window.localStorage.setItem(key, JSON.stringify(value));
 }
 
+/* ------------------------------------------------------------------ */
+/* Edit mode: load existing citizen data into / save it from the wizard */
+/* ------------------------------------------------------------------ */
+
+const STATUS_TO_CATEGORY: Record<string, string> = {
+  "Government": "GOVERNMENT",
+  "Public enterprise / Semi-government": "GOVERNMENT",
+  "Private sector": "PRIVATE",
+  "Self-employed / Business owner": "BUSINESS",
+  "Freelance / Contract": "PRIVATE",
+  "Daily wage / Labour": "OTHER",
+  "Agriculture / Farming": "FARMER",
+  "Foreign employment": "FOREIGN_ABROAD",
+  "Unemployed": "UNEMPLOYED",
+  "Student": "STUDENT",
+  "Homemaker": "HOMEMAKER",
+  "Retired": "RETIRED",
+};
+
+const CATEGORY_TO_STATUS: Record<string, string> = {
+  GOVERNMENT: "Government",
+  PRIVATE: "Private sector",
+  BUSINESS: "Self-employed / Business owner",
+  FARMER: "Agriculture / Farming",
+  FOREIGN_ABROAD: "Foreign employment",
+  UNEMPLOYED: "Unemployed",
+  STUDENT: "Student",
+  HOMEMAKER: "Homemaker",
+  RETIRED: "Retired",
+};
+
+const INCOME_TO_CODE: Record<string, string> = {
+  "Below NPR 5,000": "UNDER_5K",
+  "NPR 5,000 – 10,000": "5K_10K",
+  "NPR 10,000 – 25,000": "10K_25K",
+  "NPR 25,000 – 50,000": "25K_50K",
+  "NPR 50,000 – 1,00,000": "50K_100K",
+  "Above NPR 1,00,000": "OVER_100K",
+  "Above NPR 2,00,000": "OVER_100K",
+  "Above NPR 5,00,000": "OVER_100K",
+  "Above NPR 10,00,000": "OVER_100K",
+};
+
+const CODE_TO_INCOME: Record<string, string> = {
+  UNDER_5K: "Below NPR 5,000",
+  "5K_10K": "NPR 5,000 – 10,000",
+  "10K_25K": "NPR 10,000 – 25,000",
+  "25K_50K": "NPR 25,000 – 50,000",
+  "50K_100K": "NPR 50,000 – 1,00,000",
+  OVER_100K: "Above NPR 1,00,000",
+};
+
+const HOUSE_TO_CODE: Record<string, string> = {
+  "Owned": "OWNED",
+  "Rented": "RENTED",
+  "Family owned": "RELATIVE",
+  "Government provided": "GOVERNMENT",
+  "Other": "OTHER",
+};
+
+const CODE_TO_HOUSE: Record<string, string> = {
+  OWNED: "Owned",
+  RENTED: "Rented",
+  RELATIVE: "Family owned",
+  GOVERNMENT: "Government provided",
+  OTHER: "Other",
+};
+
+const CODE_TO_EDU_LEVEL: Record<string, string> = {
+  PRIMARY: "Primary (Grade 1–5)",
+  LOWER_SECONDARY: "Lower secondary (Grade 6–8)",
+  SECONDARY: "Secondary / SEE (Grade 9–10)",
+  HIGHER_SECONDARY: "Higher secondary / +2 (Grade 11–12)",
+  BACHELORS: "Bachelor's degree",
+  MASTERS: "Master's degree",
+  PHD: "MPhil / PhD",
+};
+
+type CitizenRow = Citizen & Record<string, unknown>;
+
+function readRegisteredCitizens(): CitizenRow[] {
+  if (typeof window === "undefined") return [];
+  try {
+    const raw = window.localStorage.getItem("citizens_registered");
+    const parsed = raw ? JSON.parse(raw) : [];
+    return Array.isArray(parsed) ? (parsed as CitizenRow[]) : [];
+  } catch {
+    return [];
+  }
+}
+
+function isWizardForm(value: unknown): value is Partial<FormState> {
+  return (
+    typeof value === "object" &&
+    value !== null &&
+    "fullName" in value &&
+    !("name_en" in value)
+  );
+}
+
+function isSnakeRegistration(value: unknown): value is Partial<RegistrationFormData> {
+  return typeof value === "object" && value !== null && "name_en" in value;
+}
+
+function splitName(full: string): { first: string; middle: string; last: string } {
+  const parts = full.trim().split(/\s+/).filter(Boolean);
+  if (parts.length === 0) return { first: "", middle: "", last: "" };
+  if (parts.length === 1) return { first: parts[0], middle: "", last: "" };
+  return { first: parts[0], middle: parts.slice(1, -1).join(" "), last: parts[parts.length - 1] };
+}
+
+function mapSexToGender(value: unknown): string {
+  const s = String(value ?? "").toUpperCase();
+  if (s === "MALE") return "Male";
+  if (s === "FEMALE") return "Female";
+  if (s === "OTHER") return "Other";
+  return "";
+}
+
+function mapGenderToSex(value: string): RegistrationFormData["sex"] {
+  if (value === "Male") return "MALE";
+  if (value === "Female") return "FEMALE";
+  if (value === "Other") return "OTHER";
+  return "";
+}
+
+/** Builds wizard form state from a RegistrationFormData payload + citizen row. */
+function registrationToFormState(
+  reg: Partial<RegistrationFormData>,
+  row: CitizenRow,
+): FormState {
+  const form: FormState = {
+    ...emptyForm,
+    disability: { ...emptyForm.disability },
+    livingStandard: { ...emptyLivingStandard },
+  };
+
+  const fullName = reg.name_en || String(row.name_en ?? "");
+  form.fullName = fullName;
+  form.fullNameDevnagari = reg.name_np || String(row.name_np ?? "");
+  const nameParts = splitName(fullName);
+  form.firstName = nameParts.first;
+  form.middleName = nameParts.middle;
+  form.lastName = nameParts.last;
+  form.dob = reg.dob || String(row.dob ?? "");
+  form.gender = mapSexToGender(reg.sex || row.sex);
+  form.citizenshipNumber = reg.citizenship_number || String(row.citizenship_number ?? "");
+  form.nidNumber = reg.nid_number || "";
+  form.permanentStreet = reg.tole || String(row.tole ?? "");
+  form.address = form.permanentStreet;
+
+  if (reg.father) {
+    const p = splitName(reg.father.name_en);
+    form.fatherFirstName = p.first;
+    form.fatherMiddleName = p.middle;
+    form.fatherLastName = p.last;
+    form.fatherName = [p.first, p.middle, p.last].filter(Boolean).join(" ");
+  }
+  if (reg.mother) {
+    const p = splitName(reg.mother.name_en);
+    form.motherFirstName = p.first;
+    form.motherMiddleName = p.middle;
+    form.motherLastName = p.last;
+    form.motherName = [p.first, p.middle, p.last].filter(Boolean).join(" ");
+  }
+  if (reg.spouse) {
+    const p = splitName(reg.spouse.name_en);
+    form.maritalStatus = "Married";
+    form.spouseFirstName = p.first;
+    form.spouseMiddleName = p.middle;
+    form.spouseLastName = p.last;
+    form.spouseRelationship = "Spouse";
+  }
+
+  form.numberOfChildren = String(reg.children?.length ?? 0);
+  form.children = (reg.children ?? []).map((c) => {
+    const p = splitName(String(c.name_en ?? ""));
+    return {
+      firstName: p.first,
+      middleName: p.middle,
+      lastName: p.last,
+      citizenshipNumber: c.citizenship_number ?? "",
+      dob: "",
+      hasDisability: "No",
+      disabilityType: "",
+      disabilityCategory: "",
+      disabilitySeverityLevel: 0,
+      disabilityCertificateIssued: true,
+    };
+  });
+
+  const emp = reg.employment;
+  if (emp) {
+    const job = createEmploymentRecord();
+    job.status = CATEGORY_TO_STATUS[emp.category ?? ""] ?? "";
+    job.incomeBand = CODE_TO_INCOME[emp.income_band ?? ""] ?? "";
+    if (emp.category === "GOVERNMENT") job.employer = emp.gov_ministry ?? "";
+    if (emp.category === "STUDENT") job.employer = emp.student_institution ?? "";
+    if (emp.category === "FOREIGN_ABROAD") {
+      job.country = emp.foreign_country ?? "";
+      job.workType = emp.foreign_visa_type ?? "";
+      job.employerAbroad = emp.foreign_employer_name ?? "";
+    }
+    form.employmentRecords = [job];
+  }
+
+  const edu = reg.education;
+  if (edu && (edu.level || edu.institution_name)) {
+    const levelRaw = String(edu.level ?? "");
+    form.educationRecords = [
+      {
+        level: CODE_TO_EDU_LEVEL[levelRaw] ?? levelRaw,
+        institution: edu.institution_name ?? "",
+        subject: "",
+        year: "",
+        status: edu.is_dropout ? "Dropped out" : "Completed",
+      },
+    ];
+  }
+
+  const hh = reg.household;
+  if (hh) {
+    const houseRaw = String(hh.house_type ?? "");
+    const ownershipRaw = String(hh.ownership_status ?? "");
+    form.houseType = CODE_TO_HOUSE[houseRaw] ?? houseRaw;
+    form.ownershipStatus = CODE_TO_HOUSE[ownershipRaw] ?? ownershipRaw;
+    form.roomCount = hh.room_count ? String(hh.room_count) : "";
+    form.yearsAtResidence = String(hh.years_at_residence ?? "");
+    if (hh.address) form.address = hh.address;
+  }
+
+  const gps = reg.gps;
+  if (gps && (gps.latitude || gps.longitude || gps.place_name)) {
+    form.lat = String(gps.latitude ?? "");
+    form.lng = String(gps.longitude ?? "");
+    form.placeName = String(gps.place_name ?? "");
+  } else if (row.latitude != null) {
+    form.lat = String(row.latitude);
+    form.lng = String(row.longitude ?? "");
+    form.placeName = String(row.place_name ?? "");
+  }
+
+  return form;
+}
+
+/** Loads an existing citizen (registered or seed) into wizard form state. */
+function loadCitizenForEdit(id: string): { citizen: CitizenRow; form: FormState } | null {
+  if (typeof window === "undefined") return null;
+  const registered = readRegisteredCitizens();
+  const row: CitizenRow | undefined =
+    registered.find((c) => c.id === id) ??
+    (citizensSeed as unknown as CitizenRow[]).find((c) => c.id === id);
+  if (!row) return null;
+
+  const embedded = (row as { registration?: unknown }).registration;
+  if (isWizardForm(embedded)) {
+    return {
+      citizen: row,
+      form: {
+        ...emptyForm,
+        ...embedded,
+        disability: { ...emptyForm.disability, ...(embedded.disability ?? {}) },
+        livingStandard: { ...emptyLivingStandard, ...(embedded.livingStandard ?? {}) },
+      } as FormState,
+    };
+  }
+
+  const profile = getCitizenProfile(id);
+  const snake = profile ?? (isSnakeRegistration(embedded) ? embedded : null);
+  return { citizen: row, form: registrationToFormState(snake ?? {}, row) };
+}
+
+/** Converts wizard form state into the stored RegistrationFormData shape. */
+function formStateToRegistration(form: FormState): RegistrationFormData {
+  const job = form.employmentRecords[0] ?? createEmploymentRecord();
+  const edu = form.educationRecords[0];
+  const category = (STATUS_TO_CATEGORY[job.status] ?? "OTHER") as EmploymentData["category"];
+  const incomeCode = (INCOME_TO_CODE[job.incomeBand] ?? "") as EmploymentData["income_band"];
+  const join = (...parts: string[]) => parts.filter((p) => p && p.trim()).join(" ").trim();
+
+  const toMember = (relationship: "FATHER" | "MOTHER" | "SPOUSE", first: string, middle: string, last: string) => ({
+    id: `mem-${relationship.toLowerCase()}-${Date.now().toString(36)}`,
+    relationship,
+    name_np: "",
+    name_en: join(first, middle, last),
+    citizenship_number: "",
+    link_status: "pending" as const,
+  });
+
+  const spouseName = join(form.spouseFirstName, form.spouseMiddleName, form.spouseLastName);
+
+  return {
+    name_np: form.fullNameDevnagari || form.fullName,
+    name_en: form.fullName,
+    dob: form.dob,
+    sex: mapGenderToSex(form.gender),
+    blood_group: "",
+    religion: "",
+    ethnicity: "",
+    mother_tongue: "",
+    tole: form.permanentStreet || form.address,
+    digital_literacy: "",
+    has_smartphone: false,
+    nid_number: form.nidNumber,
+    nid_verified: false,
+    citizenship_number: form.citizenshipNumber,
+    citizenship_front: null,
+    citizenship_back: null,
+    consent_channel: "PORTAL",
+    consent_recorded_at: new Date().toISOString(),
+    photo: form.photo || null,
+    father: form.fatherName
+      ? toMember("FATHER", form.fatherFirstName, form.fatherMiddleName, form.fatherLastName)
+      : null,
+    mother: form.motherName
+      ? toMember("MOTHER", form.motherFirstName, form.motherMiddleName, form.motherLastName)
+      : null,
+    spouse:
+      form.maritalStatus === "Married" && spouseName
+        ? toMember("SPOUSE", form.spouseFirstName, form.spouseMiddleName, form.spouseLastName)
+        : null,
+    children: form.children.map((c, i) => ({
+      id: `mem-child-${i + 1}-${Date.now().toString(36)}`,
+      relationship: "CHILD" as const,
+      name_np: "",
+      name_en: join(c.firstName, c.middleName, c.lastName),
+      citizenship_number: c.citizenshipNumber,
+      link_status: "pending" as const,
+      age: c.dob || undefined,
+    })),
+    employment: {
+      ...DEFAULT_EMPLOYMENT,
+      category,
+      income_band: incomeCode,
+      foreign_country: job.country,
+      foreign_visa_type: job.workType === "Other" ? job.customWorkType : job.workType,
+      foreign_employer_name: job.employerAbroad,
+      gov_ministry: job.employer,
+      student_institution: job.employer,
+    },
+    disability: {
+      ...DEFAULT_DISABILITY,
+      disability_type: form.disability.hasDisability === "Yes" ? form.disability.disabilityType : "",
+    },
+    education: {
+      ...DEFAULT_EDUCATION,
+      level: edu?.level ?? "",
+      institution_name: edu?.institution ?? "",
+      is_dropout: edu?.status === "Dropped out",
+    },
+    household: {
+      ...DEFAULT_HOUSEHOLD,
+      house_type: HOUSE_TO_CODE[form.houseType] ?? form.houseType,
+      ownership_status: HOUSE_TO_CODE[form.ownershipStatus] ?? form.ownershipStatus,
+      room_count: Number(form.roomCount) || 0,
+      monthly_income_band: incomeCode,
+      years_at_residence: form.yearsAtResidence,
+      address: form.address,
+    },
+    gps: {
+      latitude: form.lat,
+      longitude: form.lng,
+      place_name: form.placeName,
+    },
+  };
+}
+
+/** Persists wizard edits onto the existing citizen record (no new record). */
+function saveCitizenEdits(form: FormState, citizenId: string): void {
+  if (typeof window === "undefined") return;
+  const registration = formStateToRegistration(form);
+
+  const registered = readRegisteredCitizens();
+  const idx = registered.findIndex((c) => c.id === citizenId);
+  if (idx >= 0) {
+    const original = registered[idx];
+    registered[idx] = {
+      ...original,
+      name_en: registration.name_en || original.name_en,
+      name_np: registration.name_np || original.name_np,
+      dob: registration.dob || original.dob,
+      sex: (registration.sex || original.sex) as Citizen["sex"],
+      citizenship_number: registration.citizenship_number || original.citizenship_number,
+      nid_masked: registration.nid_number
+        ? `****${registration.nid_number.slice(-4)}`
+        : original.nid_masked,
+      tole: registration.tole || original.tole,
+      employment_category: (registration.employment.category ||
+        original.employment_category) as Citizen["employment_category"],
+      latitude: registration.gps.latitude ? Number(registration.gps.latitude) : original.latitude,
+      longitude: registration.gps.longitude ? Number(registration.gps.longitude) : original.longitude,
+      place_name: registration.gps.place_name || original.place_name,
+      registration,
+    };
+    try {
+      window.localStorage.setItem("citizens_registered", JSON.stringify(registered));
+      window.localStorage.setItem(
+        "digital_nepal_citizen_dataset_v1",
+        JSON.stringify({
+          savedAt: new Date().toISOString(),
+          total: registered.length,
+          records: registered,
+        }),
+      );
+      // Drop stale flat overrides so they don't shadow the updated row.
+      const rawEdits = window.localStorage.getItem("citizen_edits");
+      if (rawEdits) {
+        const edits = JSON.parse(rawEdits) as Record<string, Record<string, unknown>>;
+        if (edits[citizenId]) {
+          delete edits[citizenId];
+          window.localStorage.setItem("citizen_edits", JSON.stringify(edits));
+        }
+      }
+    } catch {
+      // ignore
+    }
+  } else {
+    // Seed citizen: persist flat field overrides (detail page merges these).
+    try {
+      const rawEdits = window.localStorage.getItem("citizen_edits");
+      const edits = rawEdits
+        ? (JSON.parse(rawEdits) as Record<string, Record<string, unknown>>)
+        : {};
+      edits[citizenId] = {
+        ...(edits[citizenId] ?? {}),
+        name_en: registration.name_en,
+        name_np: registration.name_np,
+        dob: registration.dob,
+        sex: registration.sex,
+        tole: registration.tole,
+        ...(registration.employment.category
+          ? { employment_category: registration.employment.category }
+          : {}),
+        ...(registration.gps.latitude ? { latitude: Number(registration.gps.latitude) } : {}),
+        ...(registration.gps.longitude ? { longitude: Number(registration.gps.longitude) } : {}),
+        ...(registration.gps.place_name ? { place_name: registration.gps.place_name } : {}),
+      };
+      window.localStorage.setItem("citizen_edits", JSON.stringify(edits));
+    } catch {
+      // ignore
+    }
+  }
+
+  // Upsert the full profile so the detail page renders every updated section.
+  try {
+    const rawProfiles = window.localStorage.getItem("citizen_profiles_registered");
+    const profiles = rawProfiles
+      ? (JSON.parse(rawProfiles) as Array<{ citizenId: string; data: RegistrationFormData }>)
+      : [];
+    const entry = { citizenId, data: registration };
+    const pIdx = profiles.findIndex((p) => p.citizenId === citizenId);
+    if (pIdx >= 0) profiles[pIdx] = entry;
+    else profiles.push(entry);
+    window.localStorage.setItem("citizen_profiles_registered", JSON.stringify(profiles));
+    window.localStorage.setItem(
+      "digital_nepal_latest_submission_v1",
+      JSON.stringify({ savedAt: new Date().toISOString(), citizenId, form }),
+    );
+  } catch {
+    // ignore
+  }
+}
+
 export function UnifiedCitizenRegistration() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const editId = searchParams.get("edit");
   const [step, setStep] = useState<StepId>(1);
   const [draftStatus, setDraftStatus] = useState("Auto-saved");
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [recordId, setRecordId] = useState("");
   const [isFinalReview, setIsFinalReview] = useState(false);
+  const [editSaved, setEditSaved] = useState(false);
+
+  /* Load the existing citizen's data when arriving in edit mode (?edit=<id>). */
+  const [editLoad] = useState(() =>
+    editId && typeof window !== "undefined" ? loadCitizenForEdit(editId) : null,
+  );
+  const [editCitizenMeta] = useState<{ id: string; name: string } | null>(() =>
+    editLoad
+      ? { id: editLoad.citizen.id, name: String(editLoad.citizen.name_en || editLoad.citizen.name_np || "") }
+      : null,
+  );
   const [form, setForm] = useState<FormState>(() => {
+    if (editLoad) return editLoad.form;
     if (typeof window === "undefined") return emptyForm;
 
     const localDraft = window.localStorage.getItem("prapti_registration_v1");
@@ -484,22 +969,8 @@ export function UnifiedCitizenRegistration() {
     photo: { valid: false, message: "Awaiting portrait upload." },
   });
 
-  const totalFieldScore = useMemo(() => {
-    const checks = [
-      form.fullName,
-      form.dob,
-      form.gender,
-      form.citizenshipNumber || form.nidNumber,
-      form.employmentRecords.some((item) => item.employer || item.role),
-      form.address,
-      form.disability.hasDisability,
-      form.photo || form.thumbPrint || form.signature || form.retinaScan,
-      form.placeName || form.lat || form.lng,
-    ];
-    return checks.filter(Boolean).length;
-  }, [form]);
-
   useEffect(() => {
+    if (isSubmitted) return;
     const timer = window.setTimeout(() => {
       setDraftStatus("Saving...");
       saveJSON("prapti_registration_v1", {
@@ -507,16 +978,19 @@ export function UnifiedCitizenRegistration() {
         step,
         form,
       });
-      saveJSON("digital_nepal_citizen_dataset_v1", {
-        savedAt: new Date().toISOString(),
-        total: 1,
-        records: [{ id: recordId || "draft", form }],
-      });
+      /* In edit mode, don't clobber the full citizen dataset with a draft. */
+      if (!editCitizenMeta) {
+        saveJSON("digital_nepal_citizen_dataset_v1", {
+          savedAt: new Date().toISOString(),
+          total: 1,
+          records: [{ id: recordId || "draft", form }],
+        });
+      }
       setDraftStatus("Auto-saved");
     }, 250);
 
     return () => window.clearTimeout(timer);
-  }, [form, step, recordId]);
+  }, [form, step, recordId, isSubmitted, editCitizenMeta]);
 
   const updateField = <K extends keyof FormState>(field: K, value: FormState[K]) => {
     setForm((prev) => {
@@ -726,6 +1200,18 @@ export function UnifiedCitizenRegistration() {
   };
 
   const handleSubmit = () => {
+    /* Edit mode: update the existing citizen record instead of creating one. */
+    if (editCitizenMeta) {
+      saveCitizenEdits(form, editCitizenMeta.id);
+      if (typeof window !== "undefined") {
+        window.localStorage.removeItem("prapti_registration_v1");
+      }
+      setRecordId(editCitizenMeta.id);
+      setEditSaved(true);
+      setIsSubmitted(true);
+      return;
+    }
+
     const citizenId = `CIT-${new Date().getFullYear()}-${String(Math.floor(Math.random() * 90000) + 10000)}`;
     setRecordId(citizenId);
 
@@ -821,13 +1307,13 @@ export function UnifiedCitizenRegistration() {
         return (
           <div className="space-y-6">
             <div className="grid gap-5 md:grid-cols-2">
-              <UploadDocumentCard title="Front Side" subtitle="JPG, PNG or PDF, Max file size 5MB." value={form.citizenshipFront} onSelect={(event) => handleDocumentSelection("citizenshipFront", event.target.files?.[0] ?? null)} onChangeText={(v) => updateField("citizenshipFront", v)} previewUrl={documentPreviews.citizenshipFront} verification={documentVerification.citizenshipFront} />
-              <UploadDocumentCard title="Back Side" subtitle="Ensure the MRZ or barcode is clearly visible." value={form.citizenshipBack} onSelect={(event) => handleDocumentSelection("citizenshipBack", event.target.files?.[0] ?? null)} onChangeText={(v) => updateField("citizenshipBack", v)} previewUrl={documentPreviews.citizenshipBack} verification={documentVerification.citizenshipBack} />
+              <UploadDocumentCard title="Front Side" subtitle="JPG, PNG or PDF, Max file size 5MB." value={form.citizenshipFront} onSelect={(event) => handleDocumentSelection("citizenshipFront", event.target.files?.[0] ?? null)} previewUrl={documentPreviews.citizenshipFront} verification={documentVerification.citizenshipFront} />
+              <UploadDocumentCard title="Back Side" subtitle="Ensure the MRZ or barcode is clearly visible." value={form.citizenshipBack} onSelect={(event) => handleDocumentSelection("citizenshipBack", event.target.files?.[0] ?? null)} previewUrl={documentPreviews.citizenshipBack} verification={documentVerification.citizenshipBack} />
             </div>
 
             <div className="mt-6 grid gap-5 md:grid-cols-2">
-              <UploadDocumentCard title="NID Front" subtitle="Upload the front side of the national ID card." value={form.nidFront} onSelect={(event) => handleDocumentSelection("nidFront", event.target.files?.[0] ?? null)} onChangeText={(v) => updateField("nidFront", v)} previewUrl={documentPreviews.nidFront} verification={documentVerification.nidFront} compact />
-              <UploadDocumentCard title="NID Back" subtitle="Upload the back side of the national ID card." value={form.nidBack} onSelect={(event) => handleDocumentSelection("nidBack", event.target.files?.[0] ?? null)} onChangeText={(v) => updateField("nidBack", v)} previewUrl={documentPreviews.nidBack} verification={documentVerification.nidBack} compact />
+              <UploadDocumentCard title="NID Front" subtitle="Upload the front side of the national ID card." value={form.nidFront} onSelect={(event) => handleDocumentSelection("nidFront", event.target.files?.[0] ?? null)} previewUrl={documentPreviews.nidFront} verification={documentVerification.nidFront} compact />
+              <UploadDocumentCard title="NID Back" subtitle="Upload the back side of the national ID card." value={form.nidBack} onSelect={(event) => handleDocumentSelection("nidBack", event.target.files?.[0] ?? null)} previewUrl={documentPreviews.nidBack} verification={documentVerification.nidBack} compact />
             </div>
 
             <div className="rounded-[20px] border border-[#dfe6ee] bg-[#f3f1ff] p-4 text-[#3f1b5f]">
@@ -875,7 +1361,6 @@ export function UnifiedCitizenRegistration() {
                 subtitle="Take a live capture or upload a passport-style portrait."
                 value={form.photo}
                 onSelect={(event) => handleDocumentSelection("photo", event.target.files?.[0] ?? null)}
-                onChangeText={(v) => updateField("photo", v)}
                 previewUrl={documentPreviews.photo}
                 verification={documentVerification.photo}
                 capture="user"
@@ -1621,14 +2106,14 @@ export function UnifiedCitizenRegistration() {
       <div className="flex min-h-[60vh] items-center justify-center py-6">
         <div className="w-full max-w-xl rounded-[28px] border border-[#dfe6ee] bg-white p-8 text-center shadow-[0_18px_48px_rgba(15,43,90,0.08)]">
           <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-[#eafaf0] text-[#1aa35f]"><CheckCircle sx={{ fontSize: 42 }} /></div>
-          <h2 className="mt-6 text-3xl font-extrabold text-[#0A2D6D]">Registration complete</h2>
-          <p className="mt-3 text-sm text-slate-600">Citizen record has been saved on this device and is ready for verification.</p>
+          <h2 className="mt-6 text-3xl font-extrabold text-[#0A2D6D]">{editSaved ? "Changes saved" : "Registration complete"}</h2>
+          <p className="mt-3 text-sm text-slate-600">{editSaved ? "The citizen's existing record was updated with your changes." : "Citizen record has been saved on this device and is ready for verification."}</p>
           <div className="mt-6 rounded-2xl border border-[#dde7f3] bg-[#f7faff] p-4">
             <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[#6b7b95]">Citizen ID</p>
             <p className="mt-2 text-2xl font-black text-[#0A2D6D]">{recordId || "CIT-2026-0001"}</p>
           </div>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <button type="button" onClick={() => { setIsSubmitted(false); setForm(emptyForm); setStep(1); }} className="flex-1 rounded-xl bg-[#0A2D6D] px-4 py-3 font-semibold text-white">New entry</button>
+            <button type="button" onClick={() => router.push(`/ward/citizens/${editCitizenMeta?.id ?? ""}`)} className="flex-1 rounded-xl bg-[#0A2D6D] px-4 py-3 font-semibold text-white">{editSaved ? "Back to profile" : "New entry"}</button>
             <button type="button" onClick={() => { setIsSubmitted(false); setStep(LAST_STEP); }} className="flex-1 rounded-xl border border-[#d7deea] bg-white px-4 py-3 font-semibold text-[#0A2D6D]">Review record</button>
           </div>
         </div>
@@ -1643,6 +2128,13 @@ export function UnifiedCitizenRegistration() {
           <div>
             <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#7a8599]">Citizen registration</p>
             <h1 className="mt-2 text-2xl font-black tracking-tight text-[#0A2D6D] md:text-[28px]">{STEP_META[step - 1].label}</h1>
+            {editCitizenMeta && (
+              <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1.5 rounded-xl border border-amber-200 bg-amber-50 px-3.5 py-2.5 text-sm text-amber-800">
+                <span className="font-semibold">Editing existing citizen:</span>
+                <span className="max-w-[220px] truncate font-medium">{editCitizenMeta.name || editCitizenMeta.id}</span>
+                <Link href={`/ward/citizens/${editCitizenMeta.id}`} className="ml-auto text-xs font-semibold text-[#0A2D6D] underline underline-offset-2 hover:no-underline">Cancel &amp; back to profile</Link>
+              </div>
+            )}
           </div>
 
           <div className="inline-flex items-center gap-2 rounded-full border border-[#dfe6ee] bg-[#f4f8ff] px-3 py-2 text-xs font-semibold text-[#0f4db8]">
@@ -1686,7 +2178,7 @@ export function UnifiedCitizenRegistration() {
             </button>
           ) : (
             <button type="button" disabled={!isFinalReview} onClick={handleSubmit} className={`inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold text-white ${isFinalReview ? "bg-[#0A2D6D]" : "cursor-not-allowed bg-slate-300"}`}>
-              Finalize registration
+              {editCitizenMeta ? "Save changes" : "Finalize registration"}
             </button>
           )}
         </div>
@@ -1780,7 +2272,6 @@ function UploadDocumentCard({
   subtitle,
   value,
   onSelect,
-  onChangeText,
   compact = false,
   previewUrl,
   verification,
@@ -1791,7 +2282,6 @@ function UploadDocumentCard({
   subtitle: string;
   value: string;
   onSelect: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  onChangeText: (value: string) => void;
   compact?: boolean;
   previewUrl?: string;
   verification?: { valid: boolean; message: string };
@@ -1826,7 +2316,7 @@ function UploadDocumentCard({
       >
         {previewUrl ? (
           <div className="relative h-52 w-full overflow-hidden bg-white">
-            <img src={previewUrl} alt={`${title} preview`} className="h-full w-full object-cover" />
+            <Image src={previewUrl} alt={`${title} preview`} fill unoptimized className="object-cover" />
             <div className="absolute inset-x-0 bottom-0 flex items-center justify-between bg-linear-to-t from-slate-900/75 to-transparent px-3 py-2 text-left text-[11px] font-medium text-white">
               <span>{title}</span>
               <span className="rounded-full bg-white/20 px-2 py-1">Uploaded</span>

@@ -8,8 +8,6 @@ const writeJson = (file, value) => fs.writeFileSync(path.join(root, file), `${JS
 
 const citizens = readJson("data/citizens.json");
 const wards = readJson("data/wards.json");
-const municipalities = new Map(readJson("data/municipalities.json").map((item) => [item.id, item]));
-const districts = new Map(readJson("data/district.json").map((item) => [item.id, item]));
 
 const names = [
   ["Ram", "Bahadur", "Thapa"],
@@ -25,8 +23,6 @@ for (const citizen of citizens) {
 
 let nextNumber = citizens.length + 1;
 for (const ward of wards) {
-  const municipality = municipalities.get(ward.municipality_id);
-  const district = municipality ? districts.get(municipality.district_id) : null;
   const existing = existingByWard.get(ward.id) || 0;
   const needed = Math.max(0, 3 - existing);
 
